@@ -59,18 +59,6 @@ public:
 		}
 	}
 
-	void toi8(){
-	
-
-		const int question_kazu = 10;
-		for (int i = 0; i < question_kazu; i++)
-		{
-
-		}
-		printf("");
-
-	}
-
 };
 
 
