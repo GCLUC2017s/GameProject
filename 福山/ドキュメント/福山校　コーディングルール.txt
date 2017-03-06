@@ -1,0 +1,30 @@
+クラス名　C Case
+
+メソッド名 Camel Case
+(ただし，
+更新処理はupdate();
+表示処理はrender();
+これを基本とする.)
+
+基本命名　Do That
+
+変数名に一文字物は使わない。
+ただしループ変数やテンポラリポインタにおいて
+i, j, k, t, p, x, y ,z, w
+など広く使われているものは許可する
+
+利用者に向けたコメントはヘッダー中に記述。
+
+メンバーは'mCamelCase'で作る
+
+ヘッダーには常にインクルードガードを
+
+"#ifndef INCLUDE_HEADER_HPP_
+#define INCLUDE_HEADER_HPP_
+～snip～
+#endif"
+
+マジックナンバーは使わない
+
+
+
