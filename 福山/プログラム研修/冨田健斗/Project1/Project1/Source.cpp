@@ -75,7 +75,8 @@ int main(){
 
 	question[0].v = question[0].v0 + question[0].g * question[0].t;
 
-	printf("問1.答え %f\n\n", question[0].v);
+	printf("問1.\n初速度 5.0m / s でボールを放り上げたとき、2.5 秒後のボールの速度は？\n");
+	printf("\n答え %f\n\n", question[0].v);
 	/*終了*/
 
 
@@ -84,7 +85,8 @@ int main(){
 
 	question[1].t = -question[1].v0 / question[1].g;
 
-	printf("問2.答え %f\n\n", question[1].t);
+	printf("問2.\n初速度 12.0m / s でボールを放り上げたとき、何秒後にボールは落下し始めるか？\n");
+	printf("\n答え %f\n\n", question[1].t);
 	/*終了*/
 
 
@@ -94,7 +96,8 @@ int main(){
 
 	question[2].g = (question[2].v - question[2].v0) / question[2].t;
 
-	printf("問3.答え %f\n\n", question[2].g);
+	printf("問3.\nある異世界において、初速度 16.0 m / s でボールを放り上げた時に,\n5.0 秒後のボールの速度は 6.0 m / sでまだ上昇中だという。\nこの異世界での重力を求めよ。\n");
+	printf("\n答え %f\n\n", question[2].g);
 	/*終了*/
 
 
@@ -103,7 +106,8 @@ int main(){
 
 	question[3].t = sqrt(-question[3].y / (question[3].g / 2)); //sprt平方根を求める
 
-	printf("問4.答え %f\n\n", question[3].t);
+	printf("問4.\n地上100mのビルからそっとボールを落下させたとき(初速度 0.0m / s)、\n何秒後に地上にボールが到達するか？\n");
+	printf("\n答え %f\n\n", question[3].t);
 	/*終了*/
 
 
@@ -114,7 +118,8 @@ int main(){
 
 	question[4].y = question[4].y0 + question[4].v0*question[4].t + (question[4].g / 2) * question[4].t*question[4].t;
 
-	printf("問5.答え %f\n\n", question[4].y);
+	printf("問5.\n地上10mの高さから、初速度 20.0m / s でボールを放り上げた時。\n3.5秒後のボールの高さを求めよ．\n");
+	printf("\n答え %f\n\n", question[4].y);
 	/*終了*/
 
 
@@ -123,7 +128,8 @@ int main(){
 
 	question[5].v0 = (question[5].g / 2 * question[5].t*question[5].t) / -question[5].t;
 
-	printf("問6.答え %f\n\n", question[5].v0);
+	printf("問6.\nボールを真上に放り投げたとき、4.0 秒後に同じ位置に戻ってきたという。\n初速度いくらで放り投げたのだろうか？\n");
+	printf("\n答え %f\n\n", question[5].v0);
 	/*終了*/
 
 	/*問7*/
@@ -140,22 +146,23 @@ int main(){
 	question[6].v0 = v0x + v0y + v0z;
 	question[6].v0 = abs(question[6].v0);
 
-	printf("問7.答え %f\n\n", question[6].v0);
+	printf("問7.\n３次元空間での問題です。\n位置P0 = (2.0, 3.0, 4.0)\n位置P1 = (10.0, 5.0, -8.5)\nP0からボールを打ち上げて5.0秒後にP1に到達するための\nボールの初速度を求めよ。\n");
+	printf("\n答え %f\n\n", question[6].v0);
 	/*終了*/
 
 	/*問8*/
+	printf("問8.\n問7の問題のP0, P1, 経過時間を１０種類用意して、それらの答えが次々に表示されるプログラムを書いてください\n\n");
 	const int x = 0, y = 1, z = 2;
 	for (int i = 0; i < xyz_kazu; i++)
 	{
-		question[7].p0[x][i] = rand() % 10;
-		question[7].p0[y][i] = rand() % 10;
-		question[7].p0[z][i] = rand() % 10;
+		question[7].p0[x][i] = rand() % 21 - 10;
+		question[7].p0[y][i] = rand() % 21 - 10;
+		question[7].p0[z][i] = rand() % 21 - 10;
 
-		question[7].p1[x][i] = rand() % 10;
-		question[7].p1[y][i] = rand() % 10;
-		question[7].p1[z][i] = rand() % 10;
+		question[7].p1[x][i] = rand() % 21 - 10;
+		question[7].p1[y][i] = rand() % 21 - 10;
+		question[7].p1[z][i] = rand() % 21 - 10;
 
-		printf("問8.\n");
 		printf("p0の xは%f,yは%f,zは%f\n", question[7].p0[x][i], question[7].p0[y][i], question[7].p0[z][i]);
 		printf("p1の xは%f,yは%f,zは%f\n", question[7].p1[x][i], question[7].p1[y][i], question[7].p1[z][i]);
 
@@ -183,7 +190,7 @@ int main(){
 		question[7].v0 = v0x + v0y + v0z;
 		question[7].v0 = abs(question[7].v0);
 
-		printf("答え %f\n\n", question[7].v0);
+		printf("\n答え %f\n\n", question[7].v0);
 	}
 
 	/*終了*/
