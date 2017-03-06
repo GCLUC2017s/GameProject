@@ -2,8 +2,8 @@
 
 メソッド名 Camel Case
 (ただし，
-更新処理はupdate();
-表示処理はrender();
+更新処理はUpdate();
+表示処理はRender();
 これを基本とする.)
 
 基本命名　Do That
@@ -17,12 +17,7 @@ i, j, k, t, p, x, y ,z, w
 
 メンバーは'mCamelCase'で作る
 
-ヘッダーには常にインクルードガードを
-
-"#ifndef INCLUDE_HEADER_HPP_
-#define INCLUDE_HEADER_HPP_
-～snip～
-#endif"
+ヘッダーには常にインクルードガードを"#pragma once"で統一
 
 マジックナンバーは使わない
 
