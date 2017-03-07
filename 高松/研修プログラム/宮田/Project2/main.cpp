@@ -170,7 +170,8 @@ void main(){
 	T_Point pos =dataArray[0].p0 ;
 	T_Point speed = Answer(dataArray[0]);
 
-	for (float t = 0.0f; t <= 300; t ++) {
+	for (float t = 0.0f; t <= 5.0; t ++) {
+		t += 1.0 / 60;
 		pos.x += speed.x/60;
 		pos.y += speed.y/60;
 		speed.y += l_grabity/60;
