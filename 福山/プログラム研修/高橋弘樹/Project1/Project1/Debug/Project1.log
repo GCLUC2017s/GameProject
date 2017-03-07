@@ -1,3 +1,2 @@
 ﻿  Source.cpp
-c:\users\onsokunogyoniku\desktop\xeenインターン\gameproject\福山\プログラム研修\高橋弘樹\project1\project1\source.cpp(84): warning C4244: '=' : 'double' から 'float' への変換です。データが失われる可能性があります。
   Project1.vcxproj -> C:\Users\onsokunogyoniku\Desktop\xeenインターン\GameProject\福山\プログラム研修\高橋弘樹\Project1\Debug\Project1.exe
