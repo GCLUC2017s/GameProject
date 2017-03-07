@@ -90,6 +90,17 @@ public:
 struct Vector3
 {
 	float x, y, z;
+
+
+	void operator+=(const Vector3 &v){
+		x += v.x;
+		y += v.y;
+		z += v.z;
+	}
+
+	void operator/=(float f){ 
+		x /= f; y /= f; z /= f;
+	}
 };
 
 struct Data
@@ -142,6 +153,8 @@ Vector3  function(const Data &data)
 	return ret_val;
 	
 };
+
+
 
 void toi8(){
 	for (int i = 0; i < ARRAY_SIZE(question_data); ++i) {
@@ -275,9 +288,8 @@ int main(){
 	/*–â9*/
 
 #define FPS  60
-#define ONE_F 1/FPS
-#define ARRAY_SIZE9 FPS*5
-	Vector3 pos0, pos1;
+#define ARRAY_SIZE9 5
+	Vector3 pos0, pos1,speed3;
 
 	pos0.x = 2.0f;
 	pos0.y = 3.0f;
@@ -288,17 +300,17 @@ int main(){
 	pos1.z = -8.5f;
 
 
-	float speedx = v0x / FPS;
-	float speedy = v0y / FPS;
-	float speedz = v0z / FPS;
+	speed3.x = v0x;
+	speed3.y = v0y;
+	speed3.z = v0z;
 
 
-	for (float i = 0; i <= ARRAY_SIZE9; i++)
+	for (float t = 0.0f; t <= ARRAY_SIZE9; t += 1.0f / FPS)
 	{
-		pos0.x += speedx;
-		pos0.y += speedy;
-		pos0.z += speedz;
+		pos0 += speed3;
+		po
 
+		speed3.y += -gravity / FPS;
 	}
 	printf("‚T•bŒã‚ÌˆÊ’u = (%f,%f,%f)", pos0.x, pos0.y, pos0.z);
 
