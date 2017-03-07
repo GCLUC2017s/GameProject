@@ -53,20 +53,20 @@ int g_startPosQ5 = START_POSQ5;
 
 float g_endPosQ5 = 0.0;		//到達位置
 
-//座標位置のメンバを持つ構造体
+//座標のメンバを持つ構造体
 struct T_Vector3
 {
 	float x, y, z;	
 };
-
-struct Data
+//初期位置、到達位置、時間のメンバを持つ構造体
+struct T_Data
 {
 	T_Vector3 p0;
 	T_Vector3 p1;
 	float time;
 };
 //関数のプロトタイプ宣言
-T_Vector3 RenderVelocity(Data data);
+T_Vector3 RenderVelocity(T_Data data);
 
 void main()
 {
@@ -84,7 +84,7 @@ void main()
 	g_velocityQ6 = -g_gravity / (g_timeQ6 / 2);
 	//問7.8
 	//構造体データの中身を設定
-	Data dataArray[ARRAY_MAX] =
+	T_Data dataArray[ARRAY_MAX] =
 	{
 		{ { 2.0, 3.0, 4.0 },{ 10.0, 5.0, -8.5 }, 5.0 },
 		{ { 0.0, 5.0, 5.0 },{  8.0, 7.0, -5.0 }, 3.5 },
@@ -114,7 +114,7 @@ void main()
 	getchar();
 }
 
-T_Vector3 RenderVelocity(Data data)
+T_Vector3 RenderVelocity(T_Data data)
 {
 	T_Vector3 ret_ans;
 
