@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include <math.h>
+
 /*
 ※全て、重力加速度は下方向へ 9.8m / s とする。
 ※全ての問題で空気抵抗は無視する。
@@ -36,9 +37,59 @@ P0からボールを打ち上げて5.0秒後にP1に到達するための
 */
 
 
+
+//座標の構造体
+struct Vector3{	//タグ名１
+
+	float x, y, z;	//メンバ名
+};
+
+struct Data
+{
+	Vector3 P0;
+	Vector3 P1;
+	float    time;
+};
+Data    question_data[] = {
+	//		P0				P1				 time
+	{ { 2.0, 4.0, 4.0 }, { 10.0, 6.0, -8.5 }, 5.0f },
+	{ { 2.0, 2.0, 6.0 }, { 9.0, 4.0, -7.5 }, 2.0f },
+	{ { 3.0, 7.0, 4.0 }, { 3.0, 3.0, -6.5 }, 1.0f },
+	{ { 3.0, 3.0, 8.0 }, { 7.0, 6.0, -4.5 }, 7.0f },
+	{ { 2.0, 4.0, 4.0 }, { 18.0, 7.0, -3.5 }, 3.0f },
+	{ { 5.0, 3.0, 3.0 }, { 12.0, 8.0, -6.5 }, 4.0f },
+	{ { 7.0, 2.0, 2.0 }, { 7.0, 9.0, 8.5 }, 2.0f },
+	{ { 3.0, 0.0, 4.0 }, { 9.0, 7.0, -1.5 }, 9.0f },
+	{ { 6.0, 9.0, 4.0 }, { 12.0, 9.0, -8.0 }, 8.0f },
+	{ { 1.0, 7.0, 4.0 }, { 18.0, 5.0, -2.5 }, 10.0f },
+	
+};
+
+// 問題を解くための関数
+Vector3 function(Data data)
+{
+	
+	data.P0.x;
+	data.P0.y;
+	data.P0.z;
+
+	data.P1.x;
+	data.P1.y;
+	data.P1.z;
+	data.time;
+
+	Vector3 ret_val;
+		ret_val.x = (data.P1.x - data.P0.x) / data.time;
+
+		ret_val.y = (data.P0.y + (-9.8 / 2 * data.time*data.time) - data.P1.y) / data.time;
+		
+		ret_val.z = (data.P1.z - data.P0.z) / data.time;
+		
+		return ret_val;
+};
+
+
 void main(){
-
-
 
 	double v;//速度
 	double g;//重力加速度
@@ -57,14 +108,14 @@ void main(){
 	t = 2.5;
 
 	v = v0 + (-g*t);
-	printf("問1:%f\n", v);
+	printf("答1:%f\n", v);
 
 	printf("問2\n初速度 12.0m / s でボールを放り上げたとき、何秒後にボールは落下し始めるか？\n");
 	//問2
 	v0 = 12.0;
 
 	t = v0 / g;
-	printf("問2:%f\n", t);
+	printf("答2:%f\n", t);
 
 
 	printf("問3\nある異世界において、初速度 16.0 m / s でボールを放り上げた時に、5.0 秒後のボールの速度は 6.0 m / s でまだ上昇中だという。この異世界での重力を求めよ。\n");
@@ -74,7 +125,7 @@ void main(){
 	v = 6.0;
 	g = (v0 - v) / -t;
 
-	printf("問3:%f\n", g);
+	printf("答3:%f\n", g);
 
 	g = 9.8;//表示後に重力の値をもとに戻す
 
@@ -86,7 +137,7 @@ void main(){
 	t = sqrt(y0 / (g / 2.0));
 
 
-	printf("問4:%f\n", t);
+	printf("答4:%f\n", t);
 
 
 	printf("問5\n地上10mの高さから、初速度 20.0m / s でボールを放り上げた時。3.5秒後のボールの高さを求めよ。\n");
@@ -98,7 +149,7 @@ void main(){
 
 	y = y0 + (v0*t) + (-g / 2 * t*t);
 
-	printf("問5:%f\n", y);
+	printf("答5:%f\n", y);
 
 
 	printf("問6\nボールを真上に放り投げたとき、4.0 秒後に同じ位置に戻ってきたという。初速度いくらで放り投げたのだろうか？\n");
@@ -106,24 +157,39 @@ void main(){
 	t = 4.0;
 
 	v0 = (g/2*t*t)/t;
-	printf("問6:%f\n", v0);
+
+	printf("答え6:%f\n", v0);
 
 
 	printf("問7\n３次元空間での問題です。位置P0 = (2.0, 3.0, 4.0)位置P1 = (10.0, 5.0, -8.5)P0からボールを打ち上げて5.0秒後にP1に到達するためのボールの初速度を求めよ。\n");
 	//問7
 
 	double p0x = 2.0, p0y = 3.0, p0z = 4.0;
-	double p1x = 2.0, p1y = 3.0, p1z = 4.0;
+	double p1x = 10.0, p1y = 5.0, p1z = -8.5;
 	double v0x, v0y, v0z;
+	t = 5;
+
+	v0x = (p1x - p0x)/5;
+	v0z = (p1z - p0z)/5;
+	
+	v0y = (p0y + (-g / 2 * t*t) - p1y) / t;
 
 
-	printf("問7:%f\n");
+	printf("答7x:%f", v0x);
+	printf(" y:%f", v0y);
+	printf(" z:%f\n", v0z);
+
+	printf("問8\n問７の問題のP0, P1, 経過時間を１０種類用意して、それらの答えが次々に表示されるプログラムを書いてください。\n");
 
 
 	//問8
+	for (int i = 0; i < 10; ++i) {
 
+		Vector3 answer = function(question_data[i]);
 
-	printf("問8:%f\n");
+		printf("答 x=%f y=%f z=%f\n" ,answer.x,answer.y,answer.z);
+	}
 
 	getchar();
 };
+
