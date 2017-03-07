@@ -22,14 +22,14 @@
 #define TIME_Q5   3.5
 #define TIME_Q6   4.0
 #define TIME_Q7   5.0
-#define TIME_Q9 300.0
+#define TIME_Q9   5.0
 
 #define START_POSQ4 100		//èâä˙à íu
 #define START_POSQ5  10
 
 #define ARRAY_MAX 10			//îzóÒç≈ëÂíl
 
-#define FPS 60
+#define FPS 60.0
 
 float g_gravity    = GRAVITY;
 float g_gravityQ3  = 0.0;
@@ -154,7 +154,7 @@ void main()
 	T_Vector3 pos = dataArray[0].p0;
 	T_Vector3 speed = RenderVelocity(dataArray[0]);
 
-	for (float t = 0.0f; t <= TIME_Q9; t++)
+	for (float t = 0.0f; t <= TIME_Q9; t += 1.0f / FPS)
 	{
 		pos.x += speed.x / FPS;
 		pos.y += speed.y / FPS;
