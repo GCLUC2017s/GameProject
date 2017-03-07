@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <windows.h>
 #include <math.h>
-const float gravity = 9.8f;
+const float gravity = -9.8f;
 /*
 ※全て、重力加速度は下方向へ 9.8m / s とする。
 ※全ての問題で空気抵抗は無視する。
@@ -214,7 +214,7 @@ int main(){
 
 	v0x = (p1x - p0x) / question[6].t; //重力がかからない
 
-	v0y = (p0y + -question[6].g / 2 * question[6].t * question[6].t- p1y) / question[6].t; //重力かかる
+	v0y = (p0y + question[6].g / 2 * question[6].t * question[6].t- p1y) / question[6].t; //重力かかる
 
 	v0z = (p1z - p0z) / question[6].t; //重力がかからない
 
