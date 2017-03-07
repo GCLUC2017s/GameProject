@@ -1,2 +1,2 @@
 ﻿  Source.cpp
-  Project1.vcxproj -> C:\Users\tomi-\Desktop\GameProject\福山\プログラム研修\冨田健斗\Project1\Debug\Project1.exe
+c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\project1\project1\source.cpp(310): error C2676: 二項演算子 '/' : 'Vector3' は、この演算子または定義済の演算子に適切な型への変換の定義を行いません。(新しい動作; ヘルプを参照)
