@@ -79,6 +79,15 @@ T_Point Answer(T_Data data);
 
 
 
+/*struct AAA
+{
+	short a1;
+	short a2;
+};
+sizeof(AAA)
+printf("AAA=%d"sizeof(AAA));
+*/
+
 void main(){
 	float l_grabity = -9.8;//èdóÕ
 	float l_time = 2.5;//éûä‘
@@ -86,6 +95,9 @@ void main(){
 	float l_speed;
 	float l_haigh = 100.0;
 	float l_haigh2;
+
+	
+
 
 	
 
@@ -174,3 +186,18 @@ T_Point Answer(T_Data data) {
 	ret_ans.z = data.p1.z - data.p0.z/5;
 	return ret_ans;
 }
+
+
+/*
+É}ÉNÉç
+#define ARRY_SIZE(a)(size(a)/sizeof(a[0]))
+#define TASIZAN(a,b)(a+b)
+printf("5+3=",TASIZAN(5,3))
+
+
+
+#define ARRY_SIZE(a)(size(a)/sizeof(a[0]))
+ARRAY_SIZE(aaa_array)
+(sizeof(a)/sizeof(aaa_array[0]))
+ARRAY_SIZE(aaa_array)
+*/
