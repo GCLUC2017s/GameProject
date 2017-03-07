@@ -35,6 +35,7 @@
 P0からボールを打ち上げて5.0秒後にP1に到達するための
 ボールの初速度を求めよ。
 */
+double y;
 
 const int xyz = 3;
 const int xyz_kazu = 10;
