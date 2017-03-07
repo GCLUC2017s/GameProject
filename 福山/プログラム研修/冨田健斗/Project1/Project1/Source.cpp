@@ -73,7 +73,7 @@ int main(){
 	question[0].v0 = 5.0f;
 	question[0].t = 2.5f;
 
-	question[0].v = question[0].v0 + question[0].g * question[0].t;
+	question[0].v = question[0].v0 + -question[0].g * question[0].t;
 
 	printf("問1.\n初速度 5.0m / s でボールを放り上げたとき、2.5 秒後のボールの速度は？\n");
 	printf("\n答え %f\n\n", question[0].v);
@@ -83,7 +83,7 @@ int main(){
 	/*問２*/
 	question[1].v0 = 12.0f;
 
-	question[1].t = -question[1].v0 / question[1].g;
+	question[1].t = question[1].v0 / -question[1].g;
 
 	printf("問2.\n初速度 12.0m / s でボールを放り上げたとき、何秒後にボールは落下し始めるか？\n");
 	printf("\n答え %f\n\n", question[1].t);
@@ -93,8 +93,9 @@ int main(){
 	/*問3*/
 	question[2].v0 = 16.0f;
 	question[2].t = 5.0f;
+	question[2].v = 6.0f;
 
-	question[2].g = (question[2].v - question[2].v0) / question[2].t;
+	question[2].g = (question[2].v0 - question[2].v) / -question[2].t;
 
 	printf("問3.\nある異世界において、初速度 16.0 m / s でボールを放り上げた時に,\n5.0 秒後のボールの速度は 6.0 m / sでまだ上昇中だという。\nこの異世界での重力を求めよ。\n");
 	printf("\n答え %f\n\n", question[2].g);
@@ -102,9 +103,9 @@ int main(){
 
 
 	/*問4*/
-	question[3].y = 100.0f;
+	question[3].y0 = 100.0f;
 
-	question[3].t = sqrt(-question[3].y / (question[3].g / 2)); //sprt平方根を求める
+	question[3].t = sqrt(-question[3].y0 / (question[3].g / 2)); //sprt平方根を求める
 
 	printf("問4.\n地上100mのビルからそっとボールを落下させたとき(初速度 0.0m / s)、\n何秒後に地上にボールが到達するか？\n");
 	printf("\n答え %f\n\n", question[3].t);
@@ -126,7 +127,7 @@ int main(){
 	/*問6*/
 	question[5].t = 4.0f;
 
-	question[5].v0 = (question[5].g / 2 * question[5].t*question[5].t) / -question[5].t;
+	question[5].v0 = (-question[5].g / 2 * question[5].t*question[5].t) / question[5].t;
 
 	printf("問6.\nボールを真上に放り投げたとき、4.0 秒後に同じ位置に戻ってきたという。\n初速度いくらで放り投げたのだろうか？\n");
 	printf("\n答え %f\n\n", question[5].v0);
