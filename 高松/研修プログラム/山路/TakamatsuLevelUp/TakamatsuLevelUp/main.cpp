@@ -17,16 +17,19 @@
 
 #define SPEED_Q3 6.0		//速度
 
-#define TIME_Q1 2.5			//時間
-#define TIME_Q3 5.0
-#define TIME_Q5 3.5
-#define TIME_Q6 4.0
-#define TIME_Q7 5.0
+#define TIME_Q1   2.5			//時間
+#define TIME_Q3   5.0
+#define TIME_Q5   3.5
+#define TIME_Q6   4.0
+#define TIME_Q7   5.0
+#define TIME_Q9 300.0
 
 #define START_POSQ4 100		//初期位置
 #define START_POSQ5  10
 
 #define ARRAY_MAX 10			//配列最大値
+
+#define FPS 60
 
 float g_gravity    = GRAVITY;
 float g_gravityQ3  = 0.0;
@@ -65,7 +68,7 @@ struct T_Data
 	T_Vector3 p1;
 	float time;
 };
-//関数のプロトタイプ宣言
+//関数のプロトタイプ宣言  参照渡し
 T_Vector3 RenderVelocity(T_Data data);
 
 void main()
@@ -84,7 +87,7 @@ void main()
 	g_velocityQ6 = -g_gravity / (g_timeQ6 / 2);
 	//問7.8
 	//構造体データの中身を設定
-	T_Data dataArray[ARRAY_MAX] =
+	T_Data dataArray[] =
 	{
 		{ { 2.0, 3.0, 4.0 },{ 10.0, 5.0, -8.5 }, 5.0 },
 		{ { 0.0, 5.0, 5.0 },{  8.0, 7.0, -5.0 }, 3.5 },
@@ -97,6 +100,42 @@ void main()
 		{ { 1.0, 5.0, 5.0 },{  5.0, 8.0, -3.0 }, 1.5 },
 		{ { 1.0, 3.0, 7.0 },{ 12.0, 8.0, -3.0 }, 2.5 },
 	};
+	/*
+	#define ARRAY_MAX 
+	//型の大きさ（バイト数）
+	sizeof(dataArray);
+	*/
+	/*
+	char     1
+	short    2 
+	long     4
+	int      4
+	longlong 8
+
+	float  4
+	double 8
+
+	sizeof(int)   4
+	sizeof(float) 4
+
+	struct AAA
+	{
+		short a1;
+		short a2;
+	};
+
+	AAA aaa_array[] =
+	{
+		{ 1, 2 },{ 2, 3 }
+	};
+
+	sizeof(aaa_array);
+	sizeof(aaa_array[0]);
+	
+	sizeof(AAA);
+
+#define ARRAY_SIZE(aaa_array)(sizeof(a)/sizeof(a[0]))
+	*/
 	
 	//解答の表示
 	printf("A1 %f\n", g_speedQ1);
@@ -109,8 +148,22 @@ void main()
 	for (int i = 0; i < ARRAY_MAX; i++)
 	{  
 		T_Vector3 answer = RenderVelocity(dataArray[i]);
-		printf("A7&8 X%f,Y%f,Z%f\n", answer.x, answer.y, answer.z);
+		printf("A7&8 X=%f,Y=%f,Z=%f\n", answer.x, answer.y, answer.z);
 	}
+
+	T_Vector3 pos = dataArray[0].p0;
+	T_Vector3 speed = RenderVelocity(dataArray[0]);
+
+	for (float t = 0.0f; t <= TIME_Q9; t++)
+	{
+		pos.x += speed.x / FPS;
+		pos.y += speed.y / FPS;
+		pos.z += speed.z / FPS;
+		speed.y += g_gravity / FPS;
+	}
+
+	printf("A9 x=%f,y=%f,z=%f\n", pos.x, pos.y, pos.z);
+	
 	getchar();
 }
 
