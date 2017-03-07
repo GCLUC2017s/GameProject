@@ -87,6 +87,20 @@ T_Point Answer(T_Data data);
 sizeof(AAA)
 printf("AAA=%d"sizeof(AAA));
 */
+T_Data dataArray[]{
+	{ { 2.0f,3.0f,4.0f, },{ 10.0f,5.0f,-8.5f, },5.0f },
+	{ { 2.0f,5.0f,6.0f, },{ 1.0f,3.0f,1.0f, },6.5f },
+	{ { 3.0f,1.0f,5.0f, },{ 2.0f,2.0f,4.0f, },2.5f },
+	{ { 5.0f,3.0f,6.0f, },{ 1.0f,1.0f,2.0f, },1.5f },
+	{ { 4.0f,2.0f,3.0f, },{ 2.0f,1.0f,6.0f, },2.5f },
+	{ { 7.0f,1.0f,3.0f, },{ 2.0f,3.0f,4.0f, },3.3f },
+	{ { 7.0f,2.0f,1.0f, },{ 1.0f,3.0f,2.0f, },1.3f },
+	{ { 3.0f,1.0f,3.0f, },{ 3.0f,3.0f,4.0f, },3.0f },
+	{ { 4.0f,1.0f,1.0f, },{ 2.0f,1.0f,2.0f, },2.3f },
+	{ { 2.0f,3.0f,1.0f, },{ 2.0f,2.0f,4.0f, },4.0f },
+
+};
+float g_grabity = -9.8;//重力
 
 void main(){
 	float l_grabity = -9.8;//重力
@@ -96,7 +110,7 @@ void main(){
 	float l_haigh = 100.0;
 	float l_haigh2;
 
-	
+
 
 
 	
@@ -134,7 +148,7 @@ void main(){
 	l_time = 4.0;
 	printf("%f\n",(l_grabity*(l_time*l_time))/2/l_time);
 
-
+	
 	/*問７ ３次元空間での問題です。位置P0 = ( 2.0, 3.0, 4.0 )位置P1 = ( 10.0, 5.0, -8.5 )
 	P0からボールを打ち上げて5.0秒後にP1に到達するためのボールの初速度を求めよ。*/
 	float x = 2.0;//３次元のｘ座標
@@ -146,25 +160,36 @@ void main(){
 	float z1 = -8.5;
 	l_grabity = -9.8;
 	l_time = 5.0;
+	
 
 	float x3 = (x1 - x)/5;
 	float z3 = (z1 - z) / 5;
 	float y3 = ((l_grabity*(l_time*l_time)) / -2 + y1 - y) / l_time;
+
+
+	T_Point pos =dataArray[0].p0 ;
+	T_Point speed = Answer(dataArray[0]);
+
+	for (float t = 0.0f; t <= 5.0; t ++) {
+		t += 1.0 / 60;
+		pos.x += speed.x/60;
+		pos.y += speed.y/60;
+		speed.y += l_grabity/60;
+		pos.z += speed.z/60;
+		
+
+
+	}
+	printf("5秒後の位置=%f,%f,%f\n",pos.x,pos.y,pos.z);
+
+
 	printf("%f,%f,%f\n",x3,y3,z3);
 	
-	T_Data dataArray[]{
-		{ { 1.0f,2.0f,3.0f, },{ 2.0f,4.0f,2.0f, },3.5f },
-		{ { 2.0f,5.0f,6.0f, },{ 1.0f,3.0f,1.0f, },6.5f },
-		{ { 3.0f,1.0f,5.0f, },{ 2.0f,2.0f,4.0f, },2.5f },
-		{ { 5.0f,3.0f,6.0f, },{ 1.0f,1.0f,2.0f, },1.5f },
-		{ { 4.0f,2.0f,3.0f, },{ 2.0f,1.0f,6.0f, },2.5f },
-		{ { 7.0f,1.0f,3.0f, },{ 2.0f,3.0f,4.0f, },3.3f },
-		{ { 7.0f,2.0f,1.0f, },{ 1.0f,3.0f,2.0f, },1.3f },
-		{ { 3.0f,1.0f,3.0f, },{ 3.0f,3.0f,4.0f, },3.0f },
-		{ { 4.0f,1.0f,1.0f, },{ 2.0f,1.0f,2.0f, },2.3f },
-		{ { 2.0f,3.0f,1.0f, },{ 2.0f,2.0f,4.0f, },4.0f },
 
-	};
+
+
+
+	
 
 	//問８は、問７の問題のP0,P1,経過時間を１０種類用意して、それらの答えが次々に表示されるプログラムを書いてください。
 	
@@ -177,16 +202,18 @@ void main(){
 
 
 
+
+
 	getchar();
 }
+
 T_Point Answer(T_Data data) {
 	T_Point ret_ans;
-	ret_ans.x = data.p1.x - data.p0.x/5;
-	ret_ans.y = data.p1.y - data.p0.y;
-	ret_ans.z = data.p1.z - data.p0.z/5;
+	ret_ans.x = data.p1.x - data.p0.x / data.time;
+	ret_ans.y = data.p1.y - data.p0.y + g_grabity * pow(data.time, 2) / -2 / data.time;
+	ret_ans.z = data.p1.z - data.p0.z / data.time;
 	return ret_ans;
-}
-
+};
 
 /*
 マクロ
