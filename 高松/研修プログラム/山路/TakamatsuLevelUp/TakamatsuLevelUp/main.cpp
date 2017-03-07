@@ -37,7 +37,6 @@ float g_velocityQ3 = VELOCITY_Q3;
 float g_velocityQ4 = 0.0;
 float g_velocityQ5 = VELOCITY_Q5;
 float g_velocityQ6 = 0.0;
-float g_velocityQ7_Q8 = 0.0;
 
 float g_speedQ1 = 0.0;
 float g_speedQ3 = SPEED_Q3;
@@ -57,13 +56,17 @@ float g_endPosQ5 = 0.0;		//到達位置
 //座標位置のメンバを持つ構造体
 struct T_Vector3
 {
-	float x;
-	float y;
-	float z;
+	float x, y, z;	
 };
 
+struct Data
+{
+	T_Vector3 p0;
+	T_Vector3 p1;
+	float time;
+};
 //関数のプロトタイプ宣言
-void RenderVelocity(struct T_Vector3 spos, struct T_Vector3 epos, float time);
+T_Vector3 RenderVelocity(Data data);
 
 void main()
 {
@@ -80,53 +83,21 @@ void main()
 	//問6
 	g_velocityQ6 = -g_gravity / (g_timeQ6 / 2);
 	//問7.8
-	//構造体メンバの中身を設定
-	struct T_Vector3 startPosArray[ARRAY_MAX] =
+	//構造体データの中身を設定
+	Data dataArray[ARRAY_MAX] =
 	{
-		{ 2.0, 3.0, 4.0 },
-		{ 0.0, 5.0, 5.0 },
-		{ 3.0, 4.0, 5.0 },
-		{ 2.0, 3.0, 4.0 },
-		{ 1.0, 3.0, 5.0 },
-		{ 0.0, 5.0, 5.0 },
-		{ 5.0, 8.0, 9.5 },
-		{ 0.5, 4.5, 7.5 },
-		{ 1.0, 5.0, 5.0 },
-		{ 1.0, 3.0, 7.0 },
+		{ { 2.0, 3.0, 4.0 },{ 10.0, 5.0, -8.5 }, 5.0 },
+		{ { 0.0, 5.0, 5.0 },{  8.0, 7.0, -5.0 }, 3.5 },
+		{ { 3.0, 4.0, 5.0 },{  7.0, 9.0, -4.0 }, 4.5 },
+		{ { 2.0, 3.0, 4.0 },{  6.0, 9.0, -7.5 }, 4.0 },
+		{ { 1.0, 3.0, 5.0 },{  5.0, 8.0, -3.5 }, 3.0 },
+		{ { 0.0, 5.0, 5.0 },{  9.5, 8.5, -5.5 }, 5.5 },
+		{ { 5.0, 8.0, 9.5 },{ 15.0, 9.5, -3.0 }, 6.0 },
+		{ { 0.5, 4.5, 7.5 },{  8.0, 7.5, -3.0 }, 2.0 },
+		{ { 1.0, 5.0, 5.0 },{  5.0, 8.0, -3.0 }, 1.5 },
+		{ { 1.0, 3.0, 7.0 },{ 12.0, 8.0, -3.0 }, 2.5 },
 	};
-
-	struct T_Vector3 endPosArray[ARRAY_MAX] =
-	{
-		{ 10.0, 5.0, -8.5 },
-		{  8.0, 7.0, -5.0 },
-		{  7.0, 9.0, -4.0 },
-		{  6.0, 9.0, -7.5 },
-		{  5.0, 8.0, -3.5 },
-		{  9.5, 8.5, -5.5 },
-		{ 15.0, 9.5, -3.0 },
-		{  8.0, 7.5, -3.0 },
-		{  5.0, 8.0, -3.0 },
-		{ 12.0, 8.0, -3.0 },
-	};
-
-	float timeArray[ARRAY_MAX] =
-	{
-		{ 5.0 },
-		{ 3.0 },
-		{ 7.5 },
-		{ 4.5 },
-		{ 3.5 },
-		{ 2.0 },
-		{ 7.0 },
-		{ 9.0 },
-		{ 8.0 },
-		{ 6.5 },
-	};
-	//配列の中身を引数から繰り返し取得
-	for (int i = 0; i < ARRAY_MAX; i++)
-	{
-		RenderVelocity(startPosArray[i], endPosArray[i], timeArray[i]);
-	}
+	
 	//解答の表示
 	printf("A1 %f\n", g_speedQ1);
 	printf("A2 %f\n", g_timeQ2);
@@ -134,16 +105,22 @@ void main()
 	printf("A4 %f\n", g_timeQ4);
 	printf("A5 %f\n", g_endPosQ5);
 	printf("A6 %f\n", g_velocityQ6);
-
+	//配列の中身を引数から繰り返し取得
+	for (int i = 0; i < ARRAY_MAX; i++)
+	{  
+		T_Vector3 answer = RenderVelocity(dataArray[i]);
+		printf("A7&8 X%f,Y%f,Z%f\n", answer.x, answer.y, answer.z);
+	}
 	getchar();
 }
-//Q7.8の解答を繰り返し表示する関数
-void RenderVelocity(struct T_Vector3 spos, struct T_Vector3 epos, float time)
-{
-	//初期位置から到達位置への直線距離
-	float length = (epos.x - spos.x, epos.y - spos.y, epos.z - spos.z);
-	//1秒ごとに進む速度
-	float  speed = length / time;
 
-	printf("A7.8 %f\n");
+T_Vector3 RenderVelocity(Data data)
+{
+	T_Vector3 ret_ans;
+
+	ret_ans.x = (data.p1.x - data.p0.x) / data.time;
+	ret_ans.y = (data.p1.y - data.p0.y + g_gravity * pow(data.time, 2) / -2) / data.time;
+	ret_ans.z = (data.p1.z - data.p0.z) / data.time;
+
+	return ret_ans;
 }
