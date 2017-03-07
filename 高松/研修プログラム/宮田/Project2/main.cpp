@@ -9,28 +9,74 @@
 //V=Vo+g*t←重力計算①
 //y＝yo+Vo*t+g/2*t2
 
-struct T_point
+/*struct Vector3
 {
-	float x = 2.0;
-	float y = 3.0;
-	float z = 4.0;
-	float P0 = (x, y, z);
+	float x, y, z;
+};
+struct  Data
+{
+	Vector3 P0;
+	Vector3 P1;
+	float time;
+};
+Data  question8_data[] = {
+	{ { 1.0f,2.0f,3.0f, },{ 2.0f,4.0f,2.0f, },3.5f },
+	{ { 2.0f,5.0f,6.0f, },{ 1.0f,3.0f,1.0f, },6.5f },
+	{ { 3.0f,1.0f,5.0f, },{ 2.0f,2.0f,4.0f, },2.5f },
+	{ { 5.0f,3.0f,6.0f, },{ 1.0f,1.0f,2.0f, },1.5f },
+	{ { 4.0f,2.0f,3.0f, },{ 2.0f,1.0f,6.0f, },2.5f },
+	{ { 7.0f,1.0f,3.0f, },{ 2.0f,3.0f,4.0f, },3.3f },
+	{ { 7.0f,2.0f,1.0f, },{ 1.0f,3.0f,2.0f, },1.3f },
+	{ { 3.0f,1.0f,3.0f, },{ 3.0f,3.0f,4.0f, },3.0f },
+	{ { 4.0f,1.0f,1.0f, },{ 2.0f,1.0f,2.0f, },2.3f },
+	{ { 2.0f,3.0f,1.0f, },{ 2.0f,2.0f,4.0f, },4.0f },
 
-	float x1 = 10.0;
-	float y1 = 5.0;
-	float z1 = -8.5;
-	float P1 = (x1, y1, z1);
-	float lenght = pow(pow((x - x1), 2) + pow((y - y1), 2) + pow((z - z1), 2),0.5);
-		
 };
 
-/*struct T_point1
+
+
+Vector3 function(Data data) {
+	data.P0.x;
+	data.P1.y;
+	data.time;
+
+	Vector3 return_value;
+	return_value.x=;
+	return_value.y;
+	return_value.z;
+	return return_value;
+
+	
+}
+void Vector() {
+	for (int i = 0; i < 6; ++i) {
+		Vector = function(question8_data[i]);
+		printf("答え");
+	}
+}
+struct T_point1
 {
 	float x1 = 10.0;
 	float y1 = 5.0;
 	float z1 = -8.5;
 	float P1 = (x1, y1, z1);
-};*/
+};
+*/
+
+struct T_Point
+{
+	float x, y, z;
+
+};
+struct T_Data
+{
+	T_Point p0;
+	T_Point p1;
+	float time;
+};
+T_Point Answer(T_Data data);
+
+
 
 
 void main(){
@@ -39,17 +85,8 @@ void main(){
 	float l_vector = 5.0;//初速度
 	float l_speed;
 	float l_haigh = 100.0;
+	float l_haigh2;
 
-	float x = 2.0;
-	float y = 3.0;
-	float z = 4.0;
-	//float P0 = (x, y, z);
-
-	float x1 = 10.0;
-	float y1 = 5.0;
-	float z1 = -8.5;
-	//float P1 = (x1, y1, z1);
-	float l_lenght = pow(pow((x - x1), 2) + pow((y - y1), 2) + pow((z - z1), 2), 0.5);
 	
 
 	printf("hellow world\n");
@@ -88,14 +125,52 @@ void main(){
 
 	/*問７ ３次元空間での問題です。位置P0 = ( 2.0, 3.0, 4.0 )位置P1 = ( 10.0, 5.0, -8.5 )
 	P0からボールを打ち上げて5.0秒後にP1に到達するためのボールの初速度を求めよ。*/
-	l_grabity = 9.8;
+	float x = 2.0;//３次元のｘ座標
+	float y = 3.0;//３次元のｙ座標
+	float z = 4.0;//３次元のｚ座標
+				  
+	float x1 = 10.0;
+	float y1 = 5.0;
+	float z1 = -8.5;
+	l_grabity = -9.8;
 	l_time = 5.0;
+
+	float x3 = (x1 - x)/5;
+	float z3 = (z1 - z) / 5;
+	float y3 = ((l_grabity*(l_time*l_time)) / -2 + y1 - y) / l_time;
+	printf("%f,%f,%f\n",x3,y3,z3);
 	
-	printf("%f\n", (l_lenght+ l_grabity*(l_time*l_time)) / 2 / l_time);
-	
-	
+	T_Data dataArray[]{
+		{ { 1.0f,2.0f,3.0f, },{ 2.0f,4.0f,2.0f, },3.5f },
+		{ { 2.0f,5.0f,6.0f, },{ 1.0f,3.0f,1.0f, },6.5f },
+		{ { 3.0f,1.0f,5.0f, },{ 2.0f,2.0f,4.0f, },2.5f },
+		{ { 5.0f,3.0f,6.0f, },{ 1.0f,1.0f,2.0f, },1.5f },
+		{ { 4.0f,2.0f,3.0f, },{ 2.0f,1.0f,6.0f, },2.5f },
+		{ { 7.0f,1.0f,3.0f, },{ 2.0f,3.0f,4.0f, },3.3f },
+		{ { 7.0f,2.0f,1.0f, },{ 1.0f,3.0f,2.0f, },1.3f },
+		{ { 3.0f,1.0f,3.0f, },{ 3.0f,3.0f,4.0f, },3.0f },
+		{ { 4.0f,1.0f,1.0f, },{ 2.0f,1.0f,2.0f, },2.3f },
+		{ { 2.0f,3.0f,1.0f, },{ 2.0f,2.0f,4.0f, },4.0f },
+
+	};
 
 	//問８は、問７の問題のP0,P1,経過時間を１０種類用意して、それらの答えが次々に表示されるプログラムを書いてください。
 	
+	for (int i = 0; i < 10; ++i) {
+		T_Point answer = Answer(dataArray[i]);
+
+		printf("答え%f,%f,%f\n",answer.x,answer.y,answer.z);
+	}
+
+
+
+
 	getchar();
+}
+T_Point Answer(T_Data data) {
+	T_Point ret_ans;
+	ret_ans.x = data.p1.x - data.p0.x/5;
+	ret_ans.y = data.p1.y - data.p0.y;
+	ret_ans.z = data.p1.z - data.p0.z/5;
+	return ret_ans;
 }
