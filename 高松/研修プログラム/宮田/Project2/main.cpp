@@ -77,7 +77,7 @@ struct T_Data
 T_Point Answer(T_Data data);
 
 
-
+#define FPS 60
 
 /*struct AAA
 {
@@ -170,12 +170,12 @@ void main(){
 	T_Point pos =dataArray[0].p0 ;
 	T_Point speed = Answer(dataArray[0]);
 
-	for (float t = 0.0f; t <= 5.0; t ++) {
-		t += 1.0 / 60;
-		pos.x += speed.x/60;
-		pos.y += speed.y/60;
-		speed.y += l_grabity/60;
-		pos.z += speed.z/60;
+	for (float t = 0.0f; t <= 5.0f; t += 1.0f / FPS) {
+		
+		pos.x += speed.x/FPS;
+		pos.y += speed.y/FPS;
+		speed.y += l_grabity/FPS;
+		pos.z += speed.z/FPS;
 		
 
 
@@ -209,9 +209,9 @@ void main(){
 
 T_Point Answer(T_Data data) {
 	T_Point ret_ans;
-	ret_ans.x = data.p1.x - data.p0.x / data.time;
-	ret_ans.y = data.p1.y - data.p0.y + g_grabity * pow(data.time, 2) / -2 / data.time;
-	ret_ans.z = data.p1.z - data.p0.z / data.time;
+	ret_ans.x = (data.p1.x - data.p0.x) / data.time;
+	ret_ans.y = (data.p1.y - data.p0.y + g_grabity * pow(data.time, 2) / -2) / data.time;
+	ret_ans.z = (data.p1.z - data.p0.z) / data.time;
 	return ret_ans;
 };
 
@@ -228,3 +228,7 @@ ARRAY_SIZE(aaa_array)
 (sizeof(a)/sizeof(aaa_array[0]))
 ARRAY_SIZE(aaa_array)
 */
+
+
+
+//オペレーター演算式
