@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include <math.h>
 /*
 ※全て、重力加速度は下方向へ 9.8m / s とする。
 ※全ての問題で空気抵抗は無視する。
@@ -33,48 +34,58 @@
 P0からボールを打ち上げて5.0秒後にP1に到達するための
 ボールの初速度を求めよ。
 */
-double v;//速度
-double g;//重力加速度
-double t;//時間
-double v0;//初速
-double y0;//はじめの高さ
-double y;//高さ
+
 
 void main(){
+
+
+
+	double v;//速度
+	double g;//重力加速度
+	double t;//時間
+	double v0;//初速
+	double y0;//はじめの高さ
+	double y;//高さ
+
+
+
+
+
 	//問1
 	g = 9.8;
 	v0 = 5.0;
 	t = 2.5;
 
 	v = v0 + (-g*t);
-	printf("問1:%f\n",v);
+	printf("問1:%f\n", v);
 
 	//問2
 	v0 = 12.0;
 
-	t = v0 + (-g);
+	t = v0 / g;
 	printf("問2:%f\n", t);
-	
+
 	//問3
 	v0 = 16.0;
 	t = 5.0;
 	v = 6.0;
-	g = (v0 +t ) / v;
+	g = (v0 - v) / -t;
 
 	printf("問3:%f\n", g);
-	
+
 	g = 9.8;//表示後に重力の値をもとに戻す
 
 	//問4
-	y0 = 100;
+	y0 = 100.0;
 
-	t = y0 / g;
+	t = sqrt(y0 / (g / 2.0));
+
 
 	printf("問4:%f\n", t);
-	
+
 	//問5
-	y0 = 10;
-	v0 = 20;
+	y0 = 10.0;
+	v0 = 20.0;
 	t = 3.5;
 
 	y = y0 + (v0*t) + (-g / 2 * t*t);
@@ -82,7 +93,7 @@ void main(){
 	printf("問5:%f\n", y);
 
 	//問6
-	t = 4;
+	t = 4.0;
 
 	v0 = g*t;
 	printf("問6:%f\n", v0);
@@ -90,5 +101,12 @@ void main(){
 
 
 	printf("問7:%f\n", v0);
+
+
+	//問8
+
+
+	printf("問8:%f\n", v0);
+
 	getchar();
 };
