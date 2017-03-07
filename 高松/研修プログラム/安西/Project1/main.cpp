@@ -19,9 +19,7 @@ float g_height5 = 10.0f;
 
 struct T_Vector3
 {
-	float x;
-	float y;
-	float z;
+	float x, y, z;
 };
 
 void RenderVelocity(struct T_Vector3 spos, struct  T_Vector3 epos, float time);
@@ -41,48 +39,28 @@ void main()
 位置P1 = ( 10.0, 5.0, -8.5 )
 P0からボールを打ち上げて5.0秒後にP1に到達するための
 ボールの初速度を求めよ。*/
-	struct T_Vector3 startPosArray[ARRAY_MAX]
+	struct T_Data
 	{
-		{ 2.0, 3.0, 4.0 },
-		{ 3.0, 4.0, 5.0 },
-		{ 4.0, 5.0, 6.0 },
-		{ 5.0, 6.0, 7.0 },
-		{ 6.0, 7.0, 8.0 },
-		{ 7.0, 8.0, 9.0 },
-		{ 8.0, 9.0, 10.0 },
-		{ 9.0, 10.0, 11.0 },
-		{ 10.0, 11.0, 12.0 },
-		{ 11.0, 12.0, 13.0 }
+		T_Vector3 P0;
+		T_Vector3 P1;
+		float time;
 	};
-	struct T_Vector3 endPosArray[ARRAY_MAX]
+	T_Data T_QuestionData[]=
 	{
-		{ 10.0, 5.0, -8.5 },
-		{ 8.0, 6.0, -10.0 },
-		{ 9.0, 7.0, -16.0 },
-		{ 12.0, 10.0, -13.0 },
-		{ 16.0, 17.0, -18.0 },
-		{ 13.0, 14.0, -14.0 },
-		{ 18.0, 22.0, -17.0 },
-		{ 15.0, 20.0, -20.0 },
-		{ 22.0, 21.0, -12.0 },
-		{ 20.0, 25.0, -22.0 }
-	};
-	float timeArray[ARRAY_MAX]
-	{
-		{ 5.0 },
-		{ 11.0 },
-		{ 7.0 },
-		{ 8.0 },
-		{ 1.0 },
-		{ 4.0 },
-		{ 10.0 },
-		{ 2.0 },
-		{ 3.0 },
-		{ 6.0 },
+		{ { 2.0, 3.0, 4.0 },{ 10.0, 5.0, -8.5 },5.0 },
+		{ { 3.0, 4.0, 5.0 },{ 8.0, 6.0, -10.0 },11.0 },
+		{ { 4.0, 5.0, 6.0 },{ 9.0, 7.0, -16.0 }, 7.0 },
+		{ { 5.0, 6.0, 7.0 },{ 12.0, 10.0, -13.0 }, 8.0 },
+		{ { 6.0, 7.0, 8.0 },{ 16.0, 17.0, -18.0 }, 1.0 },
+		{ { 7.0, 8.0, 9.0 },{ 13.0, 14.0, -14.0 }, 4.0 },
+		{ { 8.0, 9.0, 10.0 },{ 8.0, 9.0, 10.0 }, 10.0 },
+		{ { 9.0, 10.0, 11.0 },{ 15.0, 20.0, -20.0 }, 2.0 },
+		{ { 10.0, 11.0, 12.0 },{ 22.0, 21.0, -12.0 }, 3.0 },
+		{ { 11.0, 12.0, 13.0 },{ 20.0, 25.0, -22.0 }, 6.0 }
 	};
 	for (int i = 0; i < ARRAY_MAX; i++)
 	{
-		RenderVelocity(startPosArray[i],endPosArray[i],timeArray[i]);
+		RenderVelocity(T_QuestionData[i].P0,T_QuestionData[i].P1,T_QuestionData[i].time);
 	}
 	getchar();
 }
@@ -92,11 +70,10 @@ void RenderVelocity(struct T_Vector3 spos, struct  T_Vector3 epos, float time)
 	T_Vector3 answerArray;
 	T_Vector3 oneSecondSpeed;
 	answerArray.x = epos.x - spos.x;
-	answerArray.y = epos.y - spos.y;
 	answerArray.z = epos.z - spos.z;
 
 	oneSecondSpeed.x = answerArray.x / time;
-	oneSecondSpeed.y = answerArray.y / time;
+	oneSecondSpeed.y = (epos.y - spos.y + g_gravity * pow(time, 2) / -2) / time;
 	oneSecondSpeed.z = answerArray.z / time;
-	printf("P0[%d,%d,%d]から打ち上げたボールがP1[%d,%d,%d]まで%d秒で到達するために必要な初速度は%fm/s\n", (int)spos.x, (int)spos.y, (int)spos.z, (int)epos.x, (int)epos.y, (int)epos.z, (int)time,oneSecondSpeed.z);
+	printf("P0[%d,%d,%d]から打ち上げたボールがP1[%d,%d,%d]まで%d秒で到達するために必要な初速度は(X方向に%fm/s,Y方向に%fm/s,Z方向に%fm/s)\n", (int)spos.x, (int)spos.y, (int)spos.z, (int)epos.x, (int)epos.y, (int)epos.z, (int)time,oneSecondSpeed.x, oneSecondSpeed.y, oneSecondSpeed.z);
 }
