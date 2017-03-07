@@ -352,20 +352,20 @@ void main(){
 	float speedx, speedy, speedz;
 
 
-	speedx = v0x / FPS;		//‰‘¬
-	speedy = v0y / FPS;
-	speedz = v0z / FPS;
+	speedx = v0x;		//‰‘¬
+	speedy = v0y;
+	speedz = v0z;
 
-	for (float t = 0.0f; t <= 5.0f; t += FPS )
+	for (float t = 0.0f; t <= 5.0f; t += 1.0f/FPS )
 	{
-		posx += speedx;
-		speedx += (1/FPS);
+		posx += speedx/FPS;
+	//	speedx += 0.0;
 		
-		posy += speedy;
-		speedy += (g / 2)*(1/FPS);
+		posy += speedy/FPS;
+		speedy += g/FPS ;
 
-		posz += speedz;
-		speedz += (1/FPS);
+		posz += speedz/FPS;
+	//	speedz += (1.0f/FPS);
 
 	}
 	
