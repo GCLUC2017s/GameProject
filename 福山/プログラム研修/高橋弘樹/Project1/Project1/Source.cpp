@@ -317,7 +317,7 @@ void main(){
 	v0x = (p1x - p0x)/5;
 	v0z = (p1z - p0z)/5;
 	
-	v0y = (p0y + (-g / 2 * t*t) - p1y) / t;
+	v0y = (p0y + (-g / 2 * (t*t) - p1y)) / -t;
 
 
 	printf("“š7x:%f", v0x);
@@ -346,8 +346,8 @@ void main(){
 	posy = 3.0f;
 	posz = 4.0f;
 
-	t = 5;
-
+	t = 5.0f;
+	g = 9.8f;
 
 	float speedx, speedy, speedz;
 
@@ -360,12 +360,10 @@ void main(){
 	{
 		posx += speedx/FPS;
 	//	speedx += 0.0;
-		
-		posy += speedy/FPS;
-		speedy += g/FPS ;
-
+		posy += speedy / FPS;
 		posz += speedz/FPS;
-	//	speedz += (1.0f/FPS);
+
+		speedy += -g / FPS;
 
 	}
 	
