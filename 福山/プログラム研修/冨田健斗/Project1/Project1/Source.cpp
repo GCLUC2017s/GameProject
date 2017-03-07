@@ -114,10 +114,26 @@ Data question_data[] = {
 	{{ 3.0f, -2.0f, 1.0f }, { 1.0f, -2.0f, 3.0f }, 3.5f },//10
 };
 
+#define  ARRAY_SIZE(a)  (sizeof(a)/sizeof(a[0])) //型のバイト数をとる
+/*
+整数型
+
+char 1バイト
+short 2バイト
+int 4バイト
+long 4バイト
+longlong 8バイト
+
+浮動小数点
+
+float 4バイト
+double 8バイト
+
+*/
 
 
 // 問題を解くための関数
-Vector3  function(Data data)
+Vector3  function(const Data &data)
 {
 	Vector3 ret_val;
 	ret_val.x = (data.P1.x - data.P0.x) / data.time;
@@ -128,19 +144,31 @@ Vector3  function(Data data)
 };
 
 void toi8(){
-	for (int i = 0; i < 10; ++i) {
+	for (int i = 0; i < ARRAY_SIZE(question_data); ++i) {
 		Vector3 answer = function(question_data[i]);
 		printf("答え (%f,%f,%f)\n ",answer.x,answer.y,answer.z);
 	}
 }
 
 int main(){
+	struct AAA
+	{
+		short a1;
+		short a2;
+	};
+
+	AAA aaa_array[] = {
+		{ 1, 2 }, { 2, 3 }
+	};
+
+#define ARRAY_SIZE(a) (sizeof(a)/sizeof(a[0]))
+	printf("%d\n", ARRAY_SIZE(aaa_array));
 
 	CQuestion question[8];
 
 	printf("Hello world\n\n");
 
-	
+
 	/*問1*/
 	question[0].v0 = 5.0f;
 	question[0].t = 2.5f;
@@ -214,20 +242,69 @@ int main(){
 
 	v0x = (p1x - p0x) / question[6].t; //重力がかからない
 
-	v0y = (p0y + question[6].g / 2 * question[6].t * question[6].t- p1y) / question[6].t; //重力かかる
+	v0y = (p0y + question[6].g / 2 * question[6].t * question[6].t - p1y) / question[6].t; //重力かかる
 
 	v0z = (p1z - p0z) / question[6].t; //重力がかからない
 
 
 	printf("問7.\n３次元空間での問題です。\n位置P0 = (2.0, 3.0, 4.0)\n位置P1 = (10.0, 5.0, -8.5)\nP0からボールを打ち上げて5.0秒後にP1に到達するための\nボールの初速度を求めよ。\n");
-	printf("\n答え (%f,%f,%f)\n\n", v0x,v0y,v0z );
+	printf("\n答え (%f,%f,%f)\n\n", v0x, v0y, v0z);
 	/*終了*/
 
 	/*問8*/
-	printf("問8.\n問7の問題のP0, P1, 経過時間を１０種類用意して、それらの答えが次々に表示されるプログラムを書いてください\n\n");
-	
+	printf("問8.\n問7の問題のP0, P1, 経過時間を１０種類用意して、それらの答えが次々に表示されるプログラムを書いてください\n");
+
 	toi8();
 
 	/*終了*/
+
+	/*
+	Vector3 pos = p0;
+	for (float t = 0.0f; t <= ５秒; t += ? ? ? )
+	{
+	pos += スピード
+	スピード += 毎フレームの重力
+	}
+	printf("５秒後の位置 = " pos);
+
+	[4:16]
+	位置P1 = (10.0, 5.0, -8.5)
+	*/
+
+
+	/*問9*/
+
+#define FPS  60
+#define ONE_F 1/FPS
+#define ARRAY_SIZE9 FPS*5
+	Vector3 pos0, pos1;
+
+	pos0.x = 2.0f;
+	pos0.y = 3.0f;
+	pos0.z = 4.0f;
+
+	pos1.x = 10.0f;
+	pos1.y = 5.0f;
+	pos1.z = -8.5f;
+
+
+	float speedx = v0x / FPS;
+	float speedy = v0y / FPS;
+	float speedz = v0z / FPS;
+
+
+	for (float i = 0; i <= ARRAY_SIZE9; i++)
+	{
+		pos0.x += speedx;
+		pos0.y += speedy;
+		pos0.z += speedz;
+
+	}
+	printf("５秒後の位置 = (%f,%f,%f)", pos0.x, pos0.y, pos0.z);
+
+
+
+	/*終了*/
+
 	getchar();
 }
