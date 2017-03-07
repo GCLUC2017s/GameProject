@@ -141,7 +141,7 @@ int main(){
 
 	question[6].t = 5.0f;
 
-	v0x = (p0x + question[6].g / 2 * question[6].t *question[6].t) / p1x;
+	v0x = (p0x + question[6].g / 2 * question[6].t * question[6].t) / p1x;
 	v0y = (p0y + question[6].g / 2 * question[6].t * question[6].t) / p1y;
 	v0z = (p0z + question[6].g / 2 * question[6].t * question[6].t) / p1z;
 
@@ -149,7 +149,7 @@ int main(){
 	question[6].v0 = abs(question[6].v0);
 
 	printf("問7.\n３次元空間での問題です。\n位置P0 = (2.0, 3.0, 4.0)\n位置P1 = (10.0, 5.0, -8.5)\nP0からボールを打ち上げて5.0秒後にP1に到達するための\nボールの初速度を求めよ。\n");
-	printf("\n答え %f\n\n", question[6].v0);
+	printf("\n答え %f\n\n", question[6].v0 );
 	/*終了*/
 
 	/*問8*/
