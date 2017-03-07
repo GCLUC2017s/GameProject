@@ -98,8 +98,10 @@ struct Vector3
 		z += v.z;
 	}
 
-	void operator/=(float f){ 
-		x /= f; y /= f; z /= f;
+	const Vector3  operator / (float f){
+		Vector3 v = *this;
+		v.x /= f; v.y /= f; v.z /= f;
+		return v;
 	}
 };
 
@@ -255,7 +257,7 @@ int main(){
 
 	v0x = (p1x - p0x) / question[6].t; //重力がかからない
 
-	v0y = (p0y + question[6].g / 2 * question[6].t * question[6].t - p1y) / question[6].t; //重力かかる
+	v0y = (p0y + question[6].g / 2 * question[6].t * question[6].t - p1y) / -question[6].t; //重力かかる
 
 	v0z = (p1z - p0z) / question[6].t; //重力がかからない
 
@@ -288,7 +290,8 @@ int main(){
 	/*問9*/
 
 #define FPS  60
-#define ARRAY_SIZE9 5
+#define SECOND 5
+#define ARRAY_SIZE9 FPS * SECOND
 	Vector3 pos0, pos1,speed3;
 
 	pos0.x = 2.0f;
@@ -300,17 +303,17 @@ int main(){
 	pos1.z = -8.5f;
 
 
-	speed3.x = v0x;
-	speed3.y = v0y;
-	speed3.z = v0z;
+	speed3.x =  v0x;
+	speed3.y =  v0y;
+	speed3.z =  v0z;
 
 
-	for (float t = 0.0f; t <= ARRAY_SIZE9; t += 1.0f / FPS)
+	for (int t = 0.0f; t <= ARRAY_SIZE9; t++)
 	{
-		pos0 += speed3;
-		po
+		pos0 += speed3 / FPS;
 
-		speed3.y += -gravity / FPS;
+		speed3.y += gravity / FPS;
+		printf("%f\n", pos0.y);
 	}
 	printf("５秒後の位置 = (%f,%f,%f)", pos0.x, pos0.y, pos0.z);
 
