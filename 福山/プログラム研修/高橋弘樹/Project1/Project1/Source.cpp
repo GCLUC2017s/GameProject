@@ -78,10 +78,14 @@ Vector3 function(Data data)
 	data.P1.z;
 	data.time;
 
+	double g;
+
+	g = 9.8; //d—Í
+
 	Vector3 ret_val;
 		ret_val.x = (data.P1.x - data.P0.x) / data.time;
 
-		ret_val.y = (data.P0.y + (-9.8 / 2 * data.time*data.time) - data.P1.y) / data.time;
+		ret_val.y = (data.P0.y + (-g / 2 * data.time*data.time) - data.P1.y) / data.time;
 		
 		ret_val.z = (data.P1.z - data.P0.z) / data.time;
 		
