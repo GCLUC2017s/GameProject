@@ -9,6 +9,29 @@
 //V=Vo+g*t←重力計算①
 //y＝yo+Vo*t+g/2*t2
 
+struct T_point
+{
+	float x = 2.0;
+	float y = 3.0;
+	float z = 4.0;
+	float P0 = (x, y, z);
+
+	float x1 = 10.0;
+	float y1 = 5.0;
+	float z1 = -8.5;
+	float P1 = (x1, y1, z1);
+	float lenght = pow(pow((x - x1), 2) + pow((y - y1), 2) + pow((z - z1), 2),0.5);
+		
+};
+
+/*struct T_point1
+{
+	float x1 = 10.0;
+	float y1 = 5.0;
+	float z1 = -8.5;
+	float P1 = (x1, y1, z1);
+};*/
+
 
 void main(){
 	float l_grabity = -9.8;//重力
@@ -16,8 +39,18 @@ void main(){
 	float l_vector = 5.0;//初速度
 	float l_speed;
 	float l_haigh = 100.0;
-	
 
+	float x = 2.0;
+	float y = 3.0;
+	float z = 4.0;
+	//float P0 = (x, y, z);
+
+	float x1 = 10.0;
+	float y1 = 5.0;
+	float z1 = -8.5;
+	//float P1 = (x1, y1, z1);
+	float l_lenght = pow(pow((x - x1), 2) + pow((y - y1), 2) + pow((z - z1), 2), 0.5);
+	
 
 	printf("hellow world\n");
 	
@@ -50,9 +83,19 @@ void main(){
 	//問６ボールを真上に放り投げたとき、4.0 秒後に同じ位置に戻ってきたという。初速度いくらで放り投げたのだろうか？
 	l_grabity = 9.8;
 	l_time = 4.0;
-	printf("%f\n");
+	printf("%f\n",(l_grabity*(l_time*l_time))/2/l_time);
 
 
-	//問７ ３次元空間での問題です。位置P0 = ( 2.0, 3.0, 4.0 )位置P1 = ( 10.0, 5.0, -8.5 )P0からボールを打ち上げて5.0秒後にP1に到達するためのボールの初速度を求めよ。
+	/*問７ ３次元空間での問題です。位置P0 = ( 2.0, 3.0, 4.0 )位置P1 = ( 10.0, 5.0, -8.5 )
+	P0からボールを打ち上げて5.0秒後にP1に到達するためのボールの初速度を求めよ。*/
+	l_grabity = 9.8;
+	l_time = 5.0;
+	
+	printf("%f\n", (l_lenght+ l_grabity*(l_time*l_time)) / 2 / l_time);
+	
+	
+
+	//問８は、問７の問題のP0,P1,経過時間を１０種類用意して、それらの答えが次々に表示されるプログラムを書いてください。
+	
 	getchar();
 }
