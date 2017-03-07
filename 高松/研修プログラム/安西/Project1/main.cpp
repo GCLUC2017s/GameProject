@@ -16,7 +16,6 @@ float g_time6 = 4.0f;
 float g_speed = 6.0f;
 float g_height4 = 100.0f;
 float g_height5 = 10.0f;
-
 struct T_Vector3
 {
 	float x, y, z;
@@ -75,5 +74,5 @@ void RenderVelocity(struct T_Vector3 spos, struct  T_Vector3 epos, float time)
 	oneSecondSpeed.x = answerArray.x / time;
 	oneSecondSpeed.y = (epos.y - spos.y + g_gravity * pow(time, 2) / -2) / time;
 	oneSecondSpeed.z = answerArray.z / time;
-	printf("P0[%d,%d,%d]から打ち上げたボールがP1[%d,%d,%d]まで%d秒で到達するために必要な初速度は(X方向に%fm/s,Y方向に%fm/s,Z方向に%fm/s)\n", (int)spos.x, (int)spos.y, (int)spos.z, (int)epos.x, (int)epos.y, (int)epos.z, (int)time,oneSecondSpeed.x, oneSecondSpeed.y, oneSecondSpeed.z);
+	printf("P0[%d,%d,%d]から打ち上げたボールがP1[%d,%d,%f]まで%d秒で到達するために必要な初速度は(X方向に%fm/s,Y方向に%fm/s,Z方向に%fm/s)\n", (int)spos.x, (int)spos.y, (int)spos.z, (int)epos.x, (int)epos.y, epos.z, (int)time,oneSecondSpeed.x, oneSecondSpeed.y, oneSecondSpeed.z);
 }
