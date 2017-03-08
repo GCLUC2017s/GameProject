@@ -2,6 +2,9 @@
 #include "CPlayer.h"
 #include "CTaskManager.h"
 #include <Windows.h>
+#define ENEMYE_ARRAY_SIZE 5 //エネミー数
+#define PLAYER_ARRAY_SIZE 2 //プレイヤー数
+
 
 
 int main(){
@@ -10,35 +13,36 @@ int main(){
 		CTask *task;
 		CTaskManager taskmanger;
 
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < ENEMYE_ARRAY_SIZE; i++)
 		{
 			task = new CEnemy;
 			taskmanger.Add(task);
 		}
 
-		
-		CTask *delete_task; //消したいタスクを入れる 
-		delete_task = taskmanger.root;
-		printf("%p\n", delete_task);
-
-		taskmanger.Kill(delete_task);
-		taskmanger.Kill(delete_task);
-		taskmanger.Kill(delete_task);
-		taskmanger.Kill(delete_task);
-		printf("%p\n", delete_task);
-		
-		
+		for (int i = 0; i < PLAYER_ARRAY_SIZE; i++)
+		{
+			
+			task = new CPlayer;
+			task->mHitPoint = 10;
+			taskmanger.Add(task);
+		}
 
 
-		task = new CPlayer;
-		taskmanger.Add(task);
 
+	
 
-		task = taskmanger.root;
+		task = taskmanger.mRoot;
 
 		while (task != 0)
 		{
-			task->Update();
+			if (task->mHitPoint == 0) //ヒットポイントがないものを消す
+			{
+				taskmanger.Kill(&task);
+			}
+			else{ //あればアップデート
+				task->Update();
+			}
+			
 			task = task->next;
 		}
 	
