@@ -1,4 +1,2 @@
-﻿  Task.cpp
-c:\users\onsokunogyoniku\desktop\xeenインターン\gameproject\福山\プログラム研修\高橋弘樹\project2\project2\task.cpp(8): error C2535: 'void Test::Update(void)' : メンバー関数は、既に定義または宣言されています。
-          c:\users\onsokunogyoniku\desktop\xeenインターン\gameproject\福山\プログラム研修\高橋弘樹\project2\project2\task.cpp(7) : 'Test::Update' の宣言を確認してください。
-c:\users\onsokunogyoniku\desktop\xeenインターン\gameproject\福山\プログラム研修\高橋弘樹\project2\project2\task.cpp(32): error C3867: 'Test::Update': 関数呼び出しには引数リストがありません。メンバーへのポインターを作成するために '&Test::Update' を使用してください
+﻿  Main.cpp
+c:\users\onsokunogyoniku\desktop\xeenインターン\gameproject\福山\プログラム研修\高橋弘樹\project2\project2\main.cpp(59): error C3867: 'Task::Update': 関数呼び出しには引数リストがありません。メンバーへのポインターを作成するために '&Task::Update' を使用してください
