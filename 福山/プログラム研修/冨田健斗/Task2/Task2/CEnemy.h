@@ -12,7 +12,7 @@ class  CEnemy : public CTask
 public:
 
 	void Update(){
-		printf("enemyのアドレス%pです\n",this);
+		printf("僕は悪い子です\n");
 	};
 
 };

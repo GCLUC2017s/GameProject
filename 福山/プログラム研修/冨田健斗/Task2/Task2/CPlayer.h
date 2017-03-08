@@ -10,7 +10,7 @@ class  CPlayer : public CTask{
 public:
 	CPlayer(){}
 	void Update(){
-		printf("playerのアドレス%pです\n",this);
+		printf("僕は正義です\n");
 	}
 
 };

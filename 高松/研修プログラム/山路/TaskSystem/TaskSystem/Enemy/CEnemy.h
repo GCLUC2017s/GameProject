@@ -17,4 +17,12 @@ public:
 	void Update();
 };
 
+class CEnemyManager : public CTaskManager
+{
+public:
+	CEnemyManager();
+	~CEnemyManager();
+	void Update();
+};
+
 #endif

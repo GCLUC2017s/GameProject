@@ -11,11 +11,26 @@
 void main()
 {
 	CTaskManager task;
-	for (;;)
+	CTask           *p;
+	for (int i = 0; i < 5; i++)
 	{
-		task.Add(new CPlayer());
-		task.Add(new CEnemy());
-		//task.Destroy(delete CPlayer());
-		//task.Destroy(delete CEnemy());
+		task.Add(new CEnemy(i));
 	}
+	for (int i = 0; i < 5; i++)
+	{
+		p = new CEnemy(i);
+		task.Add(p);
+	}
+	for(;;)
+	{
+		if (flame % 10 == 0)
+		{
+			task.Add(new CEnemy());
+		}
+		task.Update();
+		task.Render();
+		printf("ƒtƒŒ[ƒ€"flame);
+	}
+
+
 }
