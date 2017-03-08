@@ -1,16 +1,17 @@
 
-#ifndef INCLUDEGAURD
-#define INCLUDEGAURD
+#ifndef CPLAYER_GAURD
+#define CPLAYER_GAURD
 #include<stdio.h>
 #include"CTask.h"
-#endif // !INCLUDEGAURD
-class CPlayerTask :public CTask {
 
+class CPlayerTask  {
+public:
 
-
-	CPlayerTask(){}
+	CPlayerTask(){
+		printf("CPlayerのコンストラクト");
+	}
 	~CPlayerTask() {
-	
+		printf("CPlayerのデストラクト");
 	
 	}
 
@@ -22,3 +23,4 @@ class CPlayerTask :public CTask {
 
 
 };
+#endif // !INCLUDEGAURD

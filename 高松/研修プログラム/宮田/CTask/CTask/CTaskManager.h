@@ -1,5 +1,5 @@
-#ifndef INCLUDEGAURD
-#define INCLUDEGAURD
+#ifndef CTASK_EGAURD
+#define CTASK_EGAURD
 #include<stdio.h>
 #include"CTask.h"
 
@@ -26,10 +26,8 @@ class CTaskManeger:public CTask {
 		}
 	}
 	void Kill(CTask *p) {
-		CTask *t=
-		while (p)
-		{
-
+		if (p != m_start) {
+			delete p;
 		}
 	}
 }; 
