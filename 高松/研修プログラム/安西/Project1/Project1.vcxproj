@@ -123,13 +123,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CPlayer.cpp" />
-    <ClCompile Include="CTask.cpp" />
+    <ClCompile Include="Game\CEnemy.cpp" />
+    <ClCompile Include="Game\CPlayer.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="System\CTask.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CPlayer.h" />
-    <ClInclude Include="CTask.h" />
+    <ClInclude Include="Game\CEnemy.h" />
+    <ClInclude Include="Game\CPlayer.h" />
+    <ClInclude Include="System\CTask.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
