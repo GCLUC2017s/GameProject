@@ -9,52 +9,34 @@
 #include <vector>
 
 #define GRAVITY -9.8		//重力
-
-#define VELOCITY_Q1  5.0	//初速度
-#define VELOCITY_Q2 12.0	
-#define VELOCITY_Q3 16.0
-#define VELOCITY_Q5 20.0
-
-#define SPEED_Q3 6.0		//速度
-
-#define TIME_Q1   2.5			//時間
-#define TIME_Q3   5.0
-#define TIME_Q5   3.5
-#define TIME_Q6   4.0
-#define TIME_Q7   5.0
-#define TIME_Q9   5.0
-
-#define START_POSQ4 100		//初期位置
-#define START_POSQ5  10
-
-#define ARRAY_MAX 10			//配列最大値
-
 #define FPS 60.0
+#define ARRAY_SIZE(a)(sizeof(a)/sizeof(a[0]))	//配列数を追加に応じて合わせる
 
 float g_gravity    = GRAVITY;
-float g_gravityQ3  = 0.0;
-
-float g_velocityQ1 = VELOCITY_Q1;
-float g_velocityQ2 = VELOCITY_Q2;
-float g_velocityQ3 = VELOCITY_Q3;
+float g_gravityQ3 = 0.0;
+//初速度
+float g_velocityQ1 = 5.0;
+float g_velocityQ2 = 12.0;
+float g_velocityQ3 = 16.0;
 float g_velocityQ4 = 0.0;
-float g_velocityQ5 = VELOCITY_Q5;
+float g_velocityQ5 = 20.0;
 float g_velocityQ6 = 0.0;
-
+//速度
 float g_speedQ1 = 0.0;
-float g_speedQ3 = SPEED_Q3;
-
-float g_timeQ1 = TIME_Q1;
+float g_speedQ3 = 6.0;
+//時間
+float g_timeQ1 = 2.5;
 float g_timeQ2 = 0.0;
-float g_timeQ3 = TIME_Q3;
+float g_timeQ3 = 5.0;
 float g_timeQ4 = 0.0;
-float g_timeQ5 = TIME_Q5;
-float g_timeQ6 = TIME_Q6; 
-
-int g_startPosQ4 = START_POSQ4;
-int g_startPosQ5 = START_POSQ5;
-
-float g_endPosQ5 = 0.0;		//到達位置
+float g_timeQ5 = 3.5;
+float g_timeQ6 = 4.0;
+float g_timeQ9 = 5.0;
+//初期位置
+int g_startPosQ4 = 100;
+int g_startPosQ5 = 10;
+//到達位置
+float g_endPosQ5 = 0.0;
 
 //座標のメンバを持つ構造体
 struct T_Vector3
@@ -64,12 +46,12 @@ struct T_Vector3
 //初期位置、到達位置、時間のメンバを持つ構造体
 struct T_Data
 {
-	T_Vector3 p0;
-	T_Vector3 p1;
-	float time;
+	T_Vector3 p0;	//初期位置
+	T_Vector3 p1;	//到達位置
+	float time;		//時間
 };
-//関数のプロトタイプ宣言  参照渡し
-T_Vector3 RenderVelocity(T_Data data);
+//関数のプロトタイプ宣言 書き換え不可 参照渡し
+T_Vector3 RenderVelocity(const T_Data &data);
 
 void main()
 {
@@ -100,42 +82,7 @@ void main()
 		{ { 1.0, 5.0, 5.0 },{  5.0, 8.0, -3.0 }, 1.5 },
 		{ { 1.0, 3.0, 7.0 },{ 12.0, 8.0, -3.0 }, 2.5 },
 	};
-	/*
-	#define ARRAY_MAX 
-	//型の大きさ（バイト数）
-	sizeof(dataArray);
-	*/
-	/*
-	char     1
-	short    2 
-	long     4
-	int      4
-	longlong 8
-
-	float  4
-	double 8
-
-	sizeof(int)   4
-	sizeof(float) 4
-
-	struct AAA
-	{
-		short a1;
-		short a2;
-	};
-
-	AAA aaa_array[] =
-	{
-		{ 1, 2 },{ 2, 3 }
-	};
-
-	sizeof(aaa_array);
-	sizeof(aaa_array[0]);
-	
-	sizeof(AAA);
-
-#define ARRAY_SIZE(aaa_array)(sizeof(a)/sizeof(a[0]))
-	*/
+	ARRAY_SIZE(dataArray);
 	
 	//解答の表示
 	printf("A1 %f\n", g_speedQ1);
@@ -144,17 +91,21 @@ void main()
 	printf("A4 %f\n", g_timeQ4);
 	printf("A5 %f\n", g_endPosQ5);
 	printf("A6 %f\n", g_velocityQ6);
+
 	//配列の中身を引数から繰り返し取得
-	for (int i = 0; i < ARRAY_MAX; i++)
+	for (int i = 0; i < ARRAY_SIZE(dataArray); i++)
 	{  
 		T_Vector3 answer = RenderVelocity(dataArray[i]);
 		printf("A7&8 X=%f,Y=%f,Z=%f\n", answer.x, answer.y, answer.z);
 	}
 
+	//配列0番目のp0座標を格納
 	T_Vector3 pos = dataArray[0].p0;
+	//配列0番目の速度を関数で受け取り格納
 	T_Vector3 speed = RenderVelocity(dataArray[0]);
 
-	for (float t = 0.0f; t <= TIME_Q9; t += 1.0f / FPS)
+	//FPSに応じて
+	for (float t = 0.0f; t <= g_timeQ9; t += 1.0f / FPS)
 	{
 		pos.x += speed.x / FPS;
 		pos.y += speed.y / FPS;
@@ -166,14 +117,50 @@ void main()
 	
 	getchar();
 }
-
-T_Vector3 RenderVelocity(T_Data data)
+//それぞれの初速度を返す関数
+T_Vector3 RenderVelocity(const T_Data &data)
 {
 	T_Vector3 ret_ans;
 
 	ret_ans.x = (data.p1.x - data.p0.x) / data.time;
+	//y軸にのみ重力がかかる
 	ret_ans.y = (data.p1.y - data.p0.y + g_gravity * pow(data.time, 2) / -2) / data.time;
 	ret_ans.z = (data.p1.z - data.p0.z) / data.time;
 
 	return ret_ans;
 }
+
+/*
+#define ARRAY_MAX
+//型の大きさ（バイト数）
+sizeof(dataArray);
+*/
+/*
+char     1
+short    2
+long     4
+int      4
+longlong 8
+
+float  4
+double 8
+
+sizeof(int)   4
+sizeof(float) 4
+
+struct AAA
+{
+short a1;
+short a2;
+};
+
+AAA aaa_array[] =
+{
+{ 1, 2 },{ 2, 3 }
+};
+
+sizeof(aaa_array);
+sizeof(aaa_array[0]);
+
+sizeof(AAA);
+*/
