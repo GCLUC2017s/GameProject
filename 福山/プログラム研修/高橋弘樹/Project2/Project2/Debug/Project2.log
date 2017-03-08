@@ -1,0 +1,2 @@
+﻿  Main.cpp
+c:\users\onsokunogyoniku\desktop\xeenインターン\gameproject\福山\プログラム研修\高橋弘樹\project2\project2\main.cpp(13): error C3867: 'Task::Update': 関数呼び出しには引数リストがありません。メンバーへのポインターを作成するために '&Task::Update' を使用してください
