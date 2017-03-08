@@ -11,10 +11,11 @@
 #include "../System/CTask.h"
 
 
-class CEnemy : CTask
+class CEnemy : public CTask
 {
 public:
 	CEnemy();
+	CEnemy(int i);
 	~CEnemy();
 	void Update();
 	void Render();
