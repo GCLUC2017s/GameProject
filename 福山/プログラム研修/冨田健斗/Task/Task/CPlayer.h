@@ -1,12 +1,16 @@
-#ifndef INCLUDE_HEADER_HPP_
-#define INCLUDE_HEADER_HPP_
+/*
+*プレイヤーのプログラム
+*担当者　冨田健斗
+*/
+#ifndef PLAYER_HPP
+#define PLAYER_HPP
 #include "CTask.h"
 
 class  CPlayer : public CTask{
 public:
-	 
+	CPlayer(){}
 	void Update(){
-		printf("player%fです\n",next);
+		printf("playerのアドレス%pです\n",this);
 	}
 
 };

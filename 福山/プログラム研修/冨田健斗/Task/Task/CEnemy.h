@@ -1,15 +1,18 @@
-#ifndef INCLUDE_HEADER_HPP_CEnemy
-#define INCLUDE_HEADER_HPP_CEnemy
+/*
+*エネミーのプログラム
+*担当者 冨田健斗
+*/
+#ifndef ENEMY_HPP
+#define ENEMY_HPP
 #include "CTask.h"
 
 
 class  CEnemy : public CTask
 {
 public:
-	CEnemy(){};
 
 	void Update(){
-		printf("enemy%fです\n",next);
+		printf("enemyのアドレス%pです\n",this);
 	};
 
 };
