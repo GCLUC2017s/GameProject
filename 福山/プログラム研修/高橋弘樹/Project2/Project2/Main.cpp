@@ -25,7 +25,6 @@ void main(){
 
 		p->mPrev = taskmanager->mTail;
 
-
 		taskmanager->mTail->mNext = p;
 
 		taskmanager->mTail = p;
