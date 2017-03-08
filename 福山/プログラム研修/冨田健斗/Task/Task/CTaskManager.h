@@ -56,20 +56,14 @@ public:
 
 	*/
 	void Kill(CTask *t){
-		//CTask *T; //‡”Ô‚ðŒ©‚é
+		CTask *T; //‡”Ô‚ðŒ©‚é
 
 		if (t == root){  //Žn‚Ü‚è
 			root = root->next;
 			root->prev = 0;
 			delete t;
+			t = root;
 		}
-		/*	}
-			else if (t == tail){
-
-			}
-			else{
-
-			}*/
 		
 	}
 

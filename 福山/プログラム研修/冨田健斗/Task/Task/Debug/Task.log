@@ -1,2 +1,3 @@
 ﻿  main.cpp
+c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task\task\ctaskmanager.h(59): warning C4101: 'T' : ローカル変数は 1 度も使われていません。
   Task.vcxproj -> C:\Users\tomi-\Desktop\GameProject\福山\プログラム研修\冨田健斗\Task\Debug\Task.exe

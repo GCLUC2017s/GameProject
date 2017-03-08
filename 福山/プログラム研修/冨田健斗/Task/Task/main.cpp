@@ -18,11 +18,14 @@ int main(){
 
 		
 		CTask *delete_task; //Á‚µ‚½‚¢ƒ^ƒXƒN‚ğ“ü‚ê‚é 
+		delete_task = taskmanger.root;
+		printf("%p\n", delete_task);
 
 		taskmanger.Kill(delete_task);
 		taskmanger.Kill(delete_task);
 		taskmanger.Kill(delete_task);
 		taskmanger.Kill(delete_task);
+		printf("%p\n", delete_task);
 		
 		
 
