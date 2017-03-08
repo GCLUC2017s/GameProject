@@ -33,9 +33,7 @@ T_Vector3 RenderVelocity(const T_Data &data);
 
 void main()
 {
-	CTaskManager l_taskManager;
-//	l_taskManager.Add(new );
-	/*
+
 	printf("HelloWorld!\n");
 	printf("問1.ボールの速度は%fm/s \n",g_velocity1 + g_gravity * g_time1);
 	printf("問2.ボールが落下し始めるのは%f秒後 \n", -g_velocity2 / g_gravity);
@@ -43,12 +41,12 @@ void main()
 	printf("問4.ボールが地上に到達するのは%f秒後 \n", (float)sqrt(-g_height4 / g_gravity * 2.0f));
 	printf("問5.3、5秒後のボールの高さは%fm \n", g_height5 + g_velocity5 * g_time5 + g_gravity * pow(g_time5,2) / 2);
 	printf("問6.初速度%fm/sで放り投げた \n", g_gravity * g_time6 / -2);
-問７
+/*問７
 ３次元空間での問題です。
 位置P0 = ( 2.0, 3.0, 4.0 )
 位置P1 = ( 10.0, 5.0, -8.5 )
 P0からボールを打ち上げて5.0秒後にP1に到達するための
-ボールの初速度を求めよ。
+ボールの初速度を求めよ。*/
 	T_Data T_QuestionData[]=
 	{
 		{ { 2.0, 3.0, 4.0 },{ 10.0, 5.0, -8.5 },5.0 },
@@ -66,7 +64,7 @@ P0からボールを打ち上げて5.0秒後にP1に到達するための
 
 	sizeof(T_QuestionData);
 
-	型の大きさ(byte数)
+/*	型の大きさ(byte数)
 	整数型
 		char		1byte
 		short		2byte
@@ -88,7 +86,7 @@ P0からボールを打ち上げて5.0秒後にP1に到達するための
 
 	printf("AAA = %d"sizeof(AAA));
 	
-
+	*/
 	for (int i = 0; i < ARRAY_MAX; i++)
 	{
 		RenderVelocity(T_QuestionData[i]);
@@ -130,7 +128,7 @@ P0からボールを打ち上げて5.0秒後にP1に到達するための
 		speed.y += g_gravity / FPS;
 	}
 	printf("5秒後の位置 = (%f,%f,%f)", pos.x, pos.y, pos.z);
-	*/
+	
 	getchar();
 }
 
