@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<math.h>
+#include"CTask.h"
 
 
 
@@ -185,9 +186,7 @@ void main(){
 
 	printf("%f,%f,%f\n",x3,y3,z3);
 	
-
-
-
+	
 
 	
 
@@ -200,7 +199,7 @@ void main(){
 	}
 
 
-
+	
 
 
 
