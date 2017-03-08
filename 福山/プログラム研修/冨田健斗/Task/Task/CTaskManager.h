@@ -24,7 +24,13 @@ public:
 		}
 	}
 
-	/*追加処理*/
+	/*
+	追加処理
+	後ろに追加していく形
+	処理手順
+	root == 0 が　何もないとき
+	root != 0 が  あるとき
+	*/
 	void Add(CTask  *t){
 		if (root == 0){
 			root = t;
@@ -38,11 +44,33 @@ public:
 		}
 	}
 
-	/*デリート処理*/
+	/*
+	デリート処理
+	プログラムの順番
+
+	Taskのアドレスが始まりの時
+				↓
+	Taskのアドレスが終わりの時
+				↓
+	Taskのアドレスが中間の時
+
+	*/
 	void Kill(CTask *t){
-		root = root->next;
-		root->prev = 0;
-		delete t;
+		//CTask *T; //順番を見る
+
+		if (t == root){  //始まり
+			root = root->next;
+			root->prev = 0;
+			delete t;
+		}
+		/*	}
+			else if (t == tail){
+
+			}
+			else{
+
+			}*/
+		
 	}
 
 	void Update(){}

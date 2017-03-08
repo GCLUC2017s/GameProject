@@ -9,17 +9,21 @@ int main(){
 	
 		CTask *task;
 		CTaskManager taskmanger;
-		
+
 		for (int i = 0; i < 10; i++)
 		{
 			task = new CEnemy;
 			taskmanger.Add(task);
 		}
 
-		for (int i = 0; i < 1; i++)
-		{
-			taskmanger.Kill(task);
-		}
+		
+		CTask *delete_task; //Á‚µ‚½‚¢ƒ^ƒXƒN‚ğ“ü‚ê‚é 
+
+		taskmanger.Kill(delete_task);
+		taskmanger.Kill(delete_task);
+		taskmanger.Kill(delete_task);
+		taskmanger.Kill(delete_task);
+		
 		
 
 
