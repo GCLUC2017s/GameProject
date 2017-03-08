@@ -98,8 +98,6 @@ AAA aaa_aray[] = {
 	{ 1, 2 }, {2,3},
 };
 
-
-
 //座標の構造体
 struct Vector3{	//タグ名１
 
@@ -228,6 +226,13 @@ m_a あたいが入れられない
 		
 		return ret_val;
 };
+
+
+
+
+
+
+
 
 
 void main(){
