@@ -66,6 +66,12 @@
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Task.h" />
+    <ClInclude Include="Taskmanager.h" />
+    <ClInclude Include="Text.h" />
+    <ClInclude Include="Text2.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
