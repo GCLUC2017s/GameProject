@@ -5,13 +5,14 @@
 
 class Task{
 public:
-	virtual void Update();
 
 	Task *Prev;
 	Task *Next;
 
 	Task() :Prev(0), Next(0){};
 	~Task();
+
+	virtual void Update();
 
 };
 
@@ -51,8 +52,11 @@ public:
 
 
 int Main(){
-	
+	Task *task;
 
+	task = new Text;
+
+	task->Update;
 
 
 }
