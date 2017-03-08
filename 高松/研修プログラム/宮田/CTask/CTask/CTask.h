@@ -1,6 +1,7 @@
 /* タスクシステム　宮田*/
 #include<stdio.h>
-
+#ifndef CTask_GAURD
+#define CTask_GAURD
 class CTask {
 public:
 	virtual void Update() {};
@@ -22,7 +23,7 @@ public:
 	friend class CtaskManager;
 
 };
-
+#endif // !INCLUDEGAURD
 
 
 

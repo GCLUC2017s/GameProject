@@ -1,62 +1,44 @@
+//メイン処理
+//高橋弘樹
 #include <stdio.h>
+#include "Taskmanager.h"
+#include "Task.h"
+#include "Text.h"
+#include "Text2.h"
+
+Taskmanager *taskmanager;
+
+void main(){
+	Task *n;//場所
 
 
+	while (n != 0)//始まり番地が０以外の時
+	{
+		n->Update();
 
-
-class Task{
-public:
-
-	Task *Prev;
-	Task *Next;
-
-	Task() :Prev(0), Next(0){};
-	~Task();
-
-	virtual void Update();
-
-};
-
-class Text :public Task{
-public:
-
-	void Update(){
-		
-		printf("testone");
-
+		n = n->mNext;
 	}
-	
 
-};
+	if (GetKeyState('A') & 0x8000){
+		Task *p = new Task();
 
-class Text2 :public Task{
-public:
 
-	void Update(){
+		p->mPrev = taskmanager->mTail;
 
-		printf("testtwo");
+		taskmanager->mTail->mNext = p;
+
+		taskmanager->mTail = p;
+
+
+
 
 	}
 
-};
-
-class Taskmanager:public Task{
-public:
-	Task *Root;
-	Task *Tail;
 
 
 
-
-	void Update(){};
-};
-
-
-int Main(){
-	Task *task;
-
-	task = new Text;
-
-	task->Update;
-
-
+	getchar();
 }
+
+
+
