@@ -12,4 +12,9 @@ CEnemy::~CEnemy()
 
 void CEnemy::Update()
 {
+	if (m_life <= 0)
+	{
+		Destroy();
+		return;
+	}
 }

@@ -21,6 +21,15 @@ public:
 	~CTask();
 	//‰¼‘zŠÖ” Œp³æ‚ÌXVˆ—‚ğ—Dæ
 	virtual void Update();
+	void Kill()
+	{
+		.Kill(this);
+	}
+
+	static void Kill()
+	{
+		task.Kill(this);
+	}
 	friend class CTaskManager;
 };
 
