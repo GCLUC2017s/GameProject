@@ -1,18 +1,17 @@
 /* タスクシステム　宮田*/
-#ifndef INCLUDEGAURD
-#define INCLUDEGAURD
 #include<stdio.h>
-#endif // !INCLUDEGAURD
+
 class CTask {
 public:
 	virtual void Update() {};
-	char  m_name;
+	char  m_name[32];
 	int  m_type;
 	CTask *m_next;
+
 	virtual void Print() {
-		printf("%s");
+		printf("%s,%d",m_name,m_type);
 	}
-	CTask() :m_name(0), m_type(0), m_next() {
+	CTask() :m_name(), m_type(0), m_next() {
 		printf("CTaskのコンストラクタ\n");
 	}
 
@@ -20,10 +19,10 @@ public:
 		printf("CTaskのデストラクタ\n");
 	}
 
-
+	friend class CtaskManager;
 
 };
-CTask *p = new CTask();
+
 
 
 
