@@ -1,6 +1,5 @@
 
-#ifndef CMAIN_GAURD
-#define CMAIN_EGAURD
+
 #include<stdio.h>
 #include"CTask.h"
 #include"CPlayer.h"
@@ -18,4 +17,3 @@ int main() {
 
 
 
-#endif
