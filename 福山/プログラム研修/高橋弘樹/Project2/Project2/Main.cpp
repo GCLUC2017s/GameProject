@@ -1,47 +1,58 @@
 #include <stdio.h>
-#include"Test.h"
-#include"Main.h"
-
-Test *test;
-Test test;
 
 
-class Task:public Test
-{
+
+
+class Task{
 public:
 	virtual void Update();
 
-	Task *Next;
 	Task *Prev;
+	Task *Next;
+
+	Task() :Prev(0), Next(0){};
+	~Task();
 
 };
 
-Task *Root;
-Task *Tail;
+class Text :public Task{
+public:
 
+	void Update(){
+		
+		printf("testone");
 
-void init(){
-	Task *t = new Task();
-
-	test.Update;
+	}
 	
-	Root = t;
-	Tail = t;
 
-}
+};
 
-void Kill(){
-	Task *n;
-	n = Root;
+class Text2 :public Task{
+public:
 
-}
+	void Update(){
 
-void Main(){
-	Task *n;
-	n = Root;
+		printf("testtwo");
+
+	}
+
+};
+
+class Taskmanager:public Task{
+public:
+	Task *Root;
+	Task *Tail;
 
 
 
+
+	void Update(){};
+};
+
+
+int Main(){
 	
+
+
 
 }
