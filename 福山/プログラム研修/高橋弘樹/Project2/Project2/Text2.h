@@ -4,7 +4,6 @@
 #define TEXT2_HPP
 #include "Task.h"
 class Text2 :public Task{
-public:
 	void Update(){
 		printf("testtwo");
 	}
