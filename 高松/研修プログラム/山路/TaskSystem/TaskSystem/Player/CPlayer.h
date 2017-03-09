@@ -14,6 +14,7 @@ public:
 	CPlayer();
 	~CPlayer();
 	void Update();
+	void Render();
 };
 
 #endif 

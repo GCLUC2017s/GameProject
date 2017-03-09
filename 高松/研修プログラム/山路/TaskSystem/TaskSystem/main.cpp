@@ -11,26 +11,19 @@
 void main()
 {
 	CTaskManager task;
-	CTask           *p;
+
 	for (int i = 0; i < 5; i++)
 	{
-		task.Add(new CEnemy(i));
+		//エネミーオブジェクト追加
+		task.Add(new CEnemy());
 	}
 	for (int i = 0; i < 5; i++)
 	{
-		p = new CEnemy(i);
-		task.Add(p);
+		//プレイヤーオブジェクト追加
+		task.Add(new CPlayer());
 	}
-	for(;;)
-	{
-		if (flame % 10 == 0)
-		{
-			task.Add(new CEnemy());
-		}
-		task.Update();
-		task.Render();
-		printf("フレーム"flame);
-	}
-
-
+	
+	getchar();
+	//task.ListUpdate();
+	//task.ListRender();
 }
