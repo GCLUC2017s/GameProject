@@ -65,7 +65,26 @@ public:
 
 	
 	*/
+	//ŒŸõŒ‹‰Ê
+	//ASC ¸‡ DESC ~‡ 
+	void ASC(CTask *t){
+	
+	}
 
+	void DESC(CTask *t){
+		CTask *save_t; //‰‚ß‚Ì‚Ù‚¤
+		CTask *task; //
+ 
+		while (true)
+		{
+			while (true)
+			{
+
+			}
+
+		}
+	
+	}
 
 	void Kill(CTask **t){
 
