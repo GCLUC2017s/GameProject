@@ -5,11 +5,18 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 #include "CTask.h"
+#include "CTaskManager.h"
 
 class  CPlayer : public CTask{
 public:
-	CPlayer(){}
+	CPlayer(){
+		mPriorityR = 0;
+		mPriorityU = 0;
+		mHitPoint = 10;
+	}
+
 	void Update(){
+
 		printf("ñlÇÕê≥ã`Ç≈Ç∑\n");
 	}
 
