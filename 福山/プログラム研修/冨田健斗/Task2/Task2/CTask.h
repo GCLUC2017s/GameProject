@@ -14,6 +14,8 @@ public:
 	float mHitPoint;
 	CTask *next;
 	CTask *prev;
+	int mPriorityR; //Rander()のナンバー
+	int mPriorityU;//Update()のナンバー
 
 	CTask() :next(0), prev(0),mHitPoint(0){};
 	~CTask(){};

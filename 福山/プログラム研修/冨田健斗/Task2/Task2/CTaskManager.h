@@ -11,8 +11,9 @@ class  CTaskManager
 public:
 	CTask *mRoot;
 	CTask *mTail;
+	int k;
 
-	CTaskManager(){}
+	CTaskManager(){ k = 0; }
 
 
 	~CTaskManager(){
@@ -36,6 +37,8 @@ public:
 	void Add(CTask  *t){
 		if (mRoot == 0){
 			mRoot = t;
+			mRoot->prev = 0;
+			mRoot->next = t;
 			mTail = t;
 		}
 		else{
@@ -43,6 +46,7 @@ public:
 			t->prev = mTail;
 			mTail->next = t;
 			mTail = t;
+
 		}
 	}
 
@@ -59,8 +63,12 @@ public:
 				↓
 	Taskのアドレスが中間の時
 
+	
 	*/
+
+
 	void Kill(CTask **t){
+
 
 		CTask temp; //仮に作るもの
 		CTask *T = &temp; //順番を見る
@@ -69,32 +77,33 @@ public:
 		while (T != mTail)
 		{
 			T = T->next;
-			if (*t == mRoot){  //始まり
-				mRoot = mRoot->next;
-				mRoot->prev = 0;
-				delete *t;
-				*t = mRoot;
-				break;
-			}
-		   if (*t == mTail){ //終わり
-				mTail = mTail->prev;
-				mTail->next = 0;
-				delete *t;
-				*t = mTail;
-				break;
-			}
-		   if (*t == T){ //中間
-			   CTask *save_T; //仮の保存場所
+			if (*t == T){ //Tとあっているとき
+				if (T->prev == 0){  //始まり
+					mRoot = mRoot->next;
+					mRoot->prev = 0;
+					delete *t;
+					*t = mRoot;
+					break;
+				}
+				else if (T->next == 0){ //終わり
+					mTail = mTail->prev;
+					mTail->next = 0;
+					delete *t;
+					*t = mTail;
+					break;
+				}
+				else{ //中間
+					CTask *save_T; //仮の保存場所
 
-			   			T->prev->next = T->next;
-						T->next->prev = T->prev;
+					T->prev->next = T->next;
+					T->next->prev = T->prev;
 
-			   			save_T = T->prev;
-			   			delete *t;
-			   			*t = save_T;
-			   
-			   break;
-		   }
+					save_T = T->prev;
+					delete *t;
+					*t = save_T;
+					break;
+				}
+			}
 
 		}
 		

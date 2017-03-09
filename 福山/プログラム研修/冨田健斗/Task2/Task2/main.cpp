@@ -17,15 +17,15 @@ int main(){
 	{
 		task = new CEnemy;
 		taskmanger.Add(task);
-		if (i < 5){ task->mHitPoint = 10; }
 	}
 
 	for (int i = 0; i < PLAYER_ARRAY_SIZE; i++)
 	{
 
 		task = new CPlayer;
-		task->mHitPoint = 10;
 		taskmanger.Add(task);
+		if (i == 1){ task->mHitPoint = 0; }//はじめ以外はヒットポイントを0にする
+
 	}
 
 
@@ -36,17 +36,18 @@ int main(){
 	for (int frame = 0; true; frame++) {
 		task = taskmanger.mRoot;
 
+		if (frame % 10 == 0) { //フレームごとに一体増やす
+			task = new CPlayer;
+			taskmanger.Add(task);
+			task = new CEnemy;
+			taskmanger.Add(task);
+		}
 		while (task != 0)
 		{
-			if (frame % 10 == 0) { //フレームごとに一体増やす
-				task = new CPlayer;
-				taskmanger.Add(task);
-			}
-			if (task->mHitPoint == 0) //ヒットポイントがないものを消す
-			{
+			if (task->mHitPoint == 0){ //HPが0の時消す
 				taskmanger.Kill(&task);
 			}
-			else{ //あればアップデート
+			else{
 				task->Update();
 			}
 
