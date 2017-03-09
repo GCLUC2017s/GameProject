@@ -1,0 +1,26 @@
+/**
+* @file		CPlayer.h
+* @brief	éÂêlåˆÇÃã@î\
+*
+* @author	ryoji anzai
+*/
+
+#ifndef PLAYER_GUARD
+#define PLAYER_GUARD
+
+#include "../../System/Task/CTask.h"
+
+
+
+class CPlayer : public CTask
+{
+
+public:
+	CPlayer();
+	~CPlayer();
+	void Update();
+	void Render();
+
+};
+
+#endif // !PLAYER_GUARD
