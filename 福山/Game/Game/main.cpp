@@ -10,21 +10,22 @@
 int main(){
 
 
-	CTask *task;
+	CTask *taskR;
+	CTask *taskU;
 	CTaskManager taskmanger;
 
 	for (int i = 0; i < ENEMYE_ARRAY_SIZE; i++)
 	{
-		task = new CEnemy;
-		taskmanger.Add(task);
+		taskR = new CEnemy;
+		taskmanger.Add(taskR);
 	}
 
 	for (int i = 0; i < PLAYER_ARRAY_SIZE; i++)
 	{
 
-		task = new CPlayer;
-		taskmanger.Add(task);
-		if (i == 1){ task->mHitPoint = 0; }//はじめ以外はヒットポイントを0にする
+		taskR = new CPlayer;
+		taskmanger.Add(taskR);
+		if (i == 1){ taskR->mHitPoint = 0; }//はじめ以外はヒットポイントを0にする
 
 	}
 
@@ -34,24 +35,24 @@ int main(){
 
 
 	for (int frame = 0; true; frame++) {
-		task = taskmanger.mRoot;
+		taskR = taskmanger.mRoot;
 
 		if (frame % 10 == 0) { //フレームごとに一体増やす
-			task = new CPlayer;
-			taskmanger.Add(task);
-			task = new CEnemy;
-			taskmanger.Add(task);
+			taskR = new CPlayer;
+			taskmanger.Add(taskR);
+			taskR = new CEnemy;
+			taskmanger.Add(taskR);
 		}
-		while (task != 0)
+		while (taskR != 0)
 		{
-			if (task->mHitPoint == 0){ //HPが0の時消す
-				taskmanger.Kill(&task);
+			if (taskR->mHitPoint == 0){ //HPが0の時消す
+				taskmanger.Kill(&taskR);
 			}
 			else{
-				task->Update();
+				taskR->Update();
 			}
 
-			task = task->next;
+			taskR = taskR->next;
 		}
 		   printf( "%dレーム目\n", frame );
 	}

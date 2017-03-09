@@ -67,7 +67,21 @@ public:
 	*/
 	//ŒŸõŒ‹‰Ê
 	//ASC ¸‡ DESC ~‡ 
-	void ASC(CTask *t){
+	void ASC(){
+		CTask temp;
+		CTask *task = &temp; //ˆÚ“®—p
+		CTask *save; //ŒÅ’è—p
+		task->next = mRoot;
+		save->next = mRoot->next;
+
+		while (save == mTail){
+			save = save->next;
+			task = save->next;
+			while (task == mTail){
+				task = task->next;
+				if (save->mPriorityR)
+			}
+		}
 	
 	}
 

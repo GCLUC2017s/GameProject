@@ -49,6 +49,40 @@ public:
 
 		}
 	}
+	//検索結果
+	//ASC 昇順 DESC 降順 
+	//void ASC(){
+	//	CTask temp;
+	//	CTask *task = &temp; //移動用
+	//	CTask *save; //固定用
+	//	task->next = mRoot;
+	//	save->next = mRoot->next;
+
+	//	while (save == mTail){
+	//		save = save->next;
+	//		task = save->next;
+	//		while (task == mTail){
+	//			task = task->next;
+	//			if (save->mPriorityR)
+	//		}
+	//	}
+
+	//}
+
+	void DESC(CTask *t){
+		CTask *save_t; //初めのほう
+		CTask *task; //
+
+		while (true)
+		{
+			while (true)
+			{
+
+			}
+
+		}
+
+	}
 
 	/*
 	デリート処理
@@ -65,26 +99,6 @@ public:
 
 	
 	*/
-	//検索結果
-	//ASC 昇順 DESC 降順 
-	void ASC(CTask *t){
-	
-	}
-
-	void DESC(CTask *t){
-		CTask *save_t; //初めのほう
-		CTask *task; //
- 
-		while (true)
-		{
-			while (true)
-			{
-
-			}
-
-		}
-	
-	}
 
 	void Kill(CTask **t){
 
