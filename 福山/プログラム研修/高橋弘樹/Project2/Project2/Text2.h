@@ -5,7 +5,7 @@
 #include "Task.h"
 class Text2 :public Task{
 	void Update(){
-		printf("testtwo");
+		printf("testtwo\n");
 	}
 };
 #endif
