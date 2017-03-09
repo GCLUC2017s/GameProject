@@ -4,6 +4,7 @@
 #define TASKMANAGER_HPP
 #include "Task.h"
 #include <Windows.h>
+
 class Taskmanager{
 public:
 	Task *mRoot;
@@ -20,5 +21,18 @@ public:
 			mTail = p;
 		}
 	}
+
+
+	void Destroy(){
+		Task *n;
+		n = mRoot;
+		while (n != 0){
+			mRoot = n->mNext;
+			delete n;
+			n = mRoot;
+		}
+	}
+
+
 };
 #endif
