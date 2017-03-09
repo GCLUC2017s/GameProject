@@ -38,6 +38,10 @@ int main(){
 
 		while (task != 0)
 		{
+			if (frame % 10 == 0) { //フレームごとに一体増やす
+				task = new CPlayer;
+				taskmanger.Add(task);
+			}
 			if (task->mHitPoint == 0) //ヒットポイントがないものを消す
 			{
 				taskmanger.Kill(&task);
