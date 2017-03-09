@@ -4,23 +4,14 @@
 #include<stdio.h>
 #include"CTask.h"
 
-class CPlayerTask  {
+class CPlayerTask : public CTask {
 public:
 
-	CPlayerTask(){
-		printf("CPlayerのコンストラクト");
-	}
-	~CPlayerTask() {
-		printf("CPlayerのデストラクト");
+	CPlayerTask();
+	~CPlayerTask();
+
+	virtual	void Update();
+	virtual void Draw();
 	
-	}
-
-	void Update(){
-	
-	
-	}
-
-
-
 };
 #endif // !INCLUDEGAURD

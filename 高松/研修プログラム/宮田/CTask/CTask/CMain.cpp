@@ -4,12 +4,16 @@
 #include"CTask.h"
 #include"CPlayer.h"
 
-CtaskManager g_task;
+
 int main() {
-	CTask *task;
+	CTask l_task;
+
 	for (int i; i < 5; i++) {
-		
-		
+		l_task.Add(new CTask());
+		l_task.Add (new CPlayerTask());
+	}
+	for (; true;) {
+		l_task.Update();
 	}
 
 	getchar();
