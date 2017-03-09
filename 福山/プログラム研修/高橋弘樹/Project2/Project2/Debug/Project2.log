@@ -1,3 +1,2 @@
 ﻿  Main.cpp
-Main.obj : error LNK2001: 外部シンボル ""public: virtual void __thiscall Task::Update(void)" (?Update@Task@@UAEXXZ)" は未解決です。
-C:\Users\onsokunogyoniku\Desktop\xeenインターン\GameProject\福山\プログラム研修\高橋弘樹\Project2\Debug\Project2.exe : fatal error LNK1120: 1 件の未解決の外部参照
+c:\users\onsokunogyoniku\desktop\xeenインターン\gameproject\福山\プログラム研修\高橋弘樹\project2\project2\taskmanager.h(26): error C4700: 初期化されていないローカル変数 't' が使用されます

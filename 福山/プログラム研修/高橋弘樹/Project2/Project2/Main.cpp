@@ -7,31 +7,41 @@
 #include "Text.h"
 #include "Text2.h"
 
-Taskmanager *taskmanager;
 
-
-
-void main(){
-	Task *n;
-	n = taskmanager->mRoot;
-	while (n != 0)
+int main(){
+	Task *task;
+	Taskmanager taskmanger;
+	for (int i = 0; i < 10; i++)
 	{
-		n->Update();
-
-		n = n->mNext;
+	task = new Text;
+	taskmanger.Add(task);
 	}
+	for (int i = 0; i < 10; i++)
+	{
+	task = new Text2;
+	taskmanger.Add(task);
+	}
+	for (int i = 0; true; i++) {
+	task = taskmanger.mRoot;
+		if (i % 10 == 0) {
+		task = new Text;
+		taskmanger.Add(task);
 
-Task *p = new Task();
-
-
-		p->mPrev = taskmanager->mTail;
-
-		taskmanager->mTail->mNext = p;
-
-		taskmanager->mTail = p;
-	
+		task = new Text2;
+		taskmanger.Add(task);
+		
+		}
+		while (task != 0)
+		{
+		task->Update();
+		task = task->mNext;
+		}
+		printf("%d\n", i);
+	}
 
 	getchar();
 }
+
+
 
 
