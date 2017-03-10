@@ -14,7 +14,7 @@ CEnemy::~CEnemy()
 }
 void CEnemy::Update()
 {
-
+	m_kill = true;
 }
 void CEnemy::Render()
 {

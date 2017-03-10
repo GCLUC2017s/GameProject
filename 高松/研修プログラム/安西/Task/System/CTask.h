@@ -13,26 +13,28 @@
 class CTask
 {
 protected:
-	CTask *m_head;		//現在のアドレスと前のアドレスを繋ぐためのポインター
-	CTask *m_tail;		//現在のアドレスと次のアドレスを繋ぐためのポインター
+	bool m_kill;
 	CTask *m_prev;					//前のアドレスを格納するポインター
 	CTask *m_next;					//次のアドレスを格納するポインター
 public:
 	CTask();						//CTaskクラスのコンストラクタ
-	~CTask();						//CTaskクラスのデストラクタ
+	virtual ~CTask();						//CTaskクラスのデストラクタ
 	virtual void Update();			//派生先クラスでの更新を行う関数
 	virtual void Render();			//派生先クラスでの描写を行う関数
 	friend class CTaskManager;
 };
 
-class CTaskManager : public CTask
+class CTaskManager
 {
 protected:
+	CTask *m_head;				
+	CTask *m_tail;				
 public:
 	CTaskManager();
 	~CTaskManager();
 	void Add(CTask *p);
-	void Kill();
+	void Kill(CTask *p);
+	void KillCheck();
 	void AllUpdate();
 	void AllRender();
 };

@@ -4,29 +4,24 @@
 #include "Game\CPlayer.h"
 #include "Game\CEnemy.h"
 
+CTask *p;
 CTaskManager g_taskManager;
 
 void main()
 {
 
-	g_taskManager.Add(new CTask());
-	g_taskManager.Add(new CPlayer());
+	p = new CPlayer();
+	g_taskManager.Add(p);
+	g_taskManager.Add(new CEnemy());
 	for (int i = 0; i < 5; i++)
 	{
-		g_taskManager.Add(new CEnemy());
+		g_taskManager.Add(new CTask());
 	}
 
-	for (int frame;true;frame++)
-	{
-		//10フレームに1回、Enemyを増やす。
-		if (frame % 10 == 0)
-		{
-			//l_taskManager.Add(new );
-		}
-		g_taskManager.AllUpdate();	//登録済みのタスクの全実行
-		g_taskManager.AllRender();	//登録済みのタスクの全描画
-		printf("%dフレーム目\n", frame);
-	}
+			g_taskManager.AllUpdate();	//登録済みのタスクの全実行
+			g_taskManager.KillCheck();
+			g_taskManager.AllRender();	//登録済みのタスクの全描画
+		
 	
 
 	getchar();
