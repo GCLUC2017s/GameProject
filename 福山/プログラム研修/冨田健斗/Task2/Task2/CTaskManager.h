@@ -57,24 +57,38 @@ public:
 	UはUpdate用
 	*/
 
-	void AbsR(CTask **t){
-		CTask temp;
-		CTask *MoveTask = &temp; //移動用
-		MoveTask->next = mRoot;
+	void AbsR(){
+			/*バブルソート*/
+			CTask temp;
+			CTask *back_t = &temp;//後ろ用
+			CTask *before_t;//前用
 
-			while (MoveTask != mTail){
-					MoveTask = MoveTask->next;
-				if (MoveTask != (*t)	&& 
-					MoveTask->next	!=	0	&&
-					MoveTask->prev	!=	0	&&
-					MoveTask->mPriorityR	<	(*t)->mPriorityR	<	MoveTask->next->mPriorityR){
+			temp.next = mRoot;
+			back_t->next = temp.next;
+			before_t = temp.next;
+			
 
-						(*t)->prev = MoveTask->next;
-						(*t)->next = MoveTask->next->prev;
-						MoveTask->next = (*t);
-						MoveTask->next->prev =(*t);
-						break;
-				}
+			while (before_t != mTail){ //後ろのタスク
+				back_t = back_t->next;
+
+
+				if (back_t != mTail){ //前のタスク
+					before_t = before_t->next;
+
+					if (back_t->mPriorityR < before_t->mPriorityR){
+						CTask *save0;
+						//Before側のセーブ
+						save0 = before_t;
+						before_t->prev = back_t->prev;
+						save0 = back_t->next->next;
+						save0->next = back_t;
+						back_t->prev = before_t;
+						back_t->next = before_t->next;
+						before_t->next->prev = back_t;
+						mRoot = before_t;
+
+					}
+			}
 		}
 
 	}

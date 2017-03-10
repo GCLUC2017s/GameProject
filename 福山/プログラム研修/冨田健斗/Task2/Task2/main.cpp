@@ -14,19 +14,7 @@ int main(){
 	CTaskManager taskmanger;
 	CTask *task = taskmanger.mRoot;
 
-	for (int i = 0; i < ENEMYE_ARRAY_SIZE; i++)
-	{
-		taskmanger.Add(new CPlayer);
-	}
-
-	for (int i = 0; i < PLAYER_ARRAY_SIZE; i++)
-	{
-		task = new CPlayer;
-		taskmanger.Add(task);
-		if (i == 0){ task->mHitPoint = 10; }//はじめ以外はヒットポイントを0にする
-
-	}
-
+	
 
 
 	for (int frame = 0; true; frame++) {
@@ -36,20 +24,20 @@ int main(){
 			taskmanger.Add(new CPlayer);
 			taskmanger.Add(new CEnemy);
 		}
+		taskmanger.AbsR();
+
 		while (task != 0)
 		{
 			if (task->mHitPoint == 0){ //HPが0の時消す
 				taskmanger.Kill(&task);
 			}
 			else{
-
-			//	taskmanger.AbsR(&task);
-
 				task->Render();
 			}
 
 			task = task->next;
 		}
+
 		   printf( "%dレーム目\n", frame );
 	}
 
