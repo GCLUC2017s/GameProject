@@ -35,6 +35,7 @@ int main(){
 
 	for (int frame = 0; true; frame++) {
 		task = taskmanger.mRoot;
+		taskmanger.AbsR();
 
 		if (frame % 10 == 0) { //ƒtƒŒ[ƒ€‚²‚Æ‚Éˆê‘Ì‘‚â‚·
 			task = new CPlayer;
@@ -48,7 +49,7 @@ int main(){
 				taskmanger.Kill(&task);
 			}
 			else{
-				task->Update();
+				task->Render();
 			}
 
 			task = task->next;
