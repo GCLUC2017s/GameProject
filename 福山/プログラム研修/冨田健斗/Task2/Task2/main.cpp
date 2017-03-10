@@ -10,38 +10,31 @@
 int main(){
 
 
-	CTask *task;
+	
 	CTaskManager taskmanger;
+	CTask *task = taskmanger.mRoot;
 
 	for (int i = 0; i < ENEMYE_ARRAY_SIZE; i++)
 	{
-		task = new CEnemy;
-		taskmanger.Add(task);
+		taskmanger.Add(new CPlayer);
 	}
 
 	for (int i = 0; i < PLAYER_ARRAY_SIZE; i++)
 	{
-
 		task = new CPlayer;
 		taskmanger.Add(task);
-		if (i == 1){ task->mHitPoint = 0; }//はじめ以外はヒットポイントを0にする
+		if (i == 0){ task->mHitPoint = 10; }//はじめ以外はヒットポイントを0にする
 
 	}
-
-
-
 
 
 
 	for (int frame = 0; true; frame++) {
 		task = taskmanger.mRoot;
-		taskmanger.AbsR();
 
 		if (frame % 10 == 0) { //フレームごとに一体増やす
-			task = new CPlayer;
-			taskmanger.Add(task);
-			task = new CEnemy;
-			taskmanger.Add(task);
+			taskmanger.Add(new CPlayer);
+			taskmanger.Add(new CEnemy);
 		}
 		while (task != 0)
 		{
@@ -49,6 +42,9 @@ int main(){
 				taskmanger.Kill(&task);
 			}
 			else{
+
+			//	taskmanger.AbsR(&task);
+
 				task->Render();
 			}
 

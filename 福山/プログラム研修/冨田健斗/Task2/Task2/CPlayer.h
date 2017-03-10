@@ -12,7 +12,7 @@ public:
 	CPlayer(){
 		mPriorityR = 1;
 		mPriorityU = 0;
-		mHitPoint = 10;
+		mHitPoint = 0;
 	}
 
 	void Render(){
