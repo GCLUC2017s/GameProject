@@ -68,15 +68,16 @@ public:
 				MoveTask = MoveTask->next;
 				if (StopTask->mPriorityR > MoveTask->mPriorityR){
 					if (MoveTask->prev == 0){//Žn‚Ü‚è
-						CTask *Save; //•Û‘¶—p Stop‚ð•Û‘¶
+						CTask *Save; //•Û‘¶—p Move‚ð•Û‘¶
 
-						Save->prev = StopTask->prev;
+						Save = MoveTask; 
+
+						Save->prev = StopTask->prev; //•Û‘¶move->prev 
 						Save->next = StopTask->next;
 
 						StopTask->prev = MoveTask;
 						StopTask->next = MoveTask->next;
 
-						Save = MoveTask;
 						MoveTask = StopTask;
 						StopTask = Save;
 

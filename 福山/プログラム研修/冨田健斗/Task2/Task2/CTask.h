@@ -4,7 +4,6 @@
 */
 #ifndef TASK_HPP
 #define TASK_HPP
-#include "CTaskManager.h"
 #include <stdio.h>
 
 
