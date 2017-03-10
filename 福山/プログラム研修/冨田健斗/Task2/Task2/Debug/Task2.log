@@ -1,4 +1,6 @@
 ﻿  main.cpp
-c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(91): warning C4101: 'task' : ローカル変数は 1 度も使われていません。
-c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(90): warning C4101: 'save_t' : ローカル変数は 1 度も使われていません。
+c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(70): warning C4804: '<' : 演算中の 'bool' 型の使用方法が安全ではありません
+c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(84): warning C4101: 'task' : ローカル変数は 1 度も使われていません。
+c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(83): warning C4101: 'save_t' : ローカル変数は 1 度も使われていません。
+cl : コマンド ライン warning D9028: 簡易リビルド時のエラーです、通常のビルドに戻します
   Task2.vcxproj -> C:\Users\tomi-\Desktop\GameProject\福山\プログラム研修\冨田健斗\Task2\Debug\Task2.exe
