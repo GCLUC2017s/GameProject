@@ -31,16 +31,19 @@ int main(){
 			task = taskmanger.mRoot;
 			if (i % 60 == 0) {
 				task = new Text;
+				taskmanger.Add(task);
+				task->Update();
 				task = new Text2;
 				taskmanger.Add(task);
-
+				task->Update();
 			}
 			while (task != 0)
 			{
-					task->Update();
-				}
+				printf("%d\n", i);
+			
+			}
 
-			printf("%d\n", i);
+		
 
 			if (i > 50){
 				break;
