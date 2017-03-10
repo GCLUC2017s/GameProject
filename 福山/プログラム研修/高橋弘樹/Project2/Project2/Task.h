@@ -9,12 +9,10 @@ public:
 	Task *mPrev;
 	Task *mNext;
 
-	float Matuda;
-
 	Task() :mPrev(0), mNext(0){};
-	~Task();
+	~Task(){};
 
-	virtual void Update();
+	virtual void Update(){}
 
 
 };

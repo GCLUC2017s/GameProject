@@ -1,0 +1,5 @@
+BackGround(”wŒi‚È‚Ç)
+BGM(‰¹Šy)
+Enemy(“G)
+Player(ålŒö)
+SE(Œø‰Ê‰¹)

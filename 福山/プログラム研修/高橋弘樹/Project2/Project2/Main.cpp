@@ -15,30 +15,39 @@ int main(){
 	{
 	task = new Text;
 	taskmanger.Add(task);
+
+
 	}
 	for (int i = 0; i < 10; i++)
 	{
 	task = new Text2;
 	taskmanger.Add(task);
+
 	}
+	
 	for (int i = 0; true; i++) {
-	task = taskmanger.mRoot;
-		if (i % 10 == 0) {
-		task = new Text;
-		taskmanger.Add(task);
+		int v=0;
 
-		task = new Text2;
-		taskmanger.Add(task);
-		
-		}
-		while (task != 0)
-		{
-		task->Update();
-		task = task->mNext;
-		}
-		printf("%d\n", i);
-	}
+			task = taskmanger.mRoot;
+			if (i % 60 == 0) {
+				task = new Text;
+				task = new Text2;
+				taskmanger.Add(task);
 
+			}
+			while (task != 0)
+			{
+					task->Update();
+				}
+
+			printf("%d\n", i);
+
+			if (i > 50){
+				break;
+			}
+
+		}
+	
 	getchar();
 }
 

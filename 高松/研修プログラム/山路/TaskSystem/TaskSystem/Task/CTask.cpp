@@ -1,9 +1,6 @@
 #include "../Task/CTask.h"
-#include "../Enemy/CEnemy.h"
-#include "../Player/CPlayer.h"
 
-
-CTask::CTask() : mp_head(nullptr), mp_tail(nullptr), mp_prev(nullptr), mp_next(nullptr)
+CTask::CTask() : mp_prev(nullptr), mp_next(nullptr), m_udPriority(0), m_rdPriority(0)
 {
 	printf("CTaskコンストラクタ呼び出し\n");
 }
@@ -16,6 +13,26 @@ CTask::~CTask()
 void CTask::Update()
 {
 	//継承先で定義
+}
+
+CTaskManager::CTaskManager() : mp_head(nullptr), mp_tail(nullptr)
+{
+}
+
+void CTaskManager::ListUpdate()
+{
+	for (;;)
+	{
+		printf("リスト更新");
+	}
+}
+
+void CTaskManager::ListRender()
+{
+	for (;;)
+	{
+		printf("リスト描画");
+	}
 }
 
 void CTaskManager::Add(CTask *p)
@@ -46,11 +63,7 @@ void CTaskManager::Add(CTask *p)
 	}
 }
 
-void CTaskManager::Destroy(CTask *p)
+void CTaskManager::Destroy()
 {
-	//要素が存在していれば
-	if (p)
-	{
-		delete p;
-	}
+
 }
