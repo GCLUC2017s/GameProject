@@ -8,6 +8,9 @@
 #include "stdafx.h"
 #include "Global.h"
 
+//テスト用
+CImage* g_backGround=nullptr;
+CImage* g_life = nullptr;
 
 void display(void) {
 	//各バッファーをクリア
@@ -23,8 +26,11 @@ void display(void) {
 	//---------------------------------------
 
 
+	//テスト用　表示
+	g_backGround->Draw();
+	g_life->Draw();
 
-
+	//----------------------------------
 
 	glutSwapBuffers();
 
@@ -72,6 +78,16 @@ void init(void)
 									CVector3D(0,10,0),
 									CVector3D(0.0, 1.0, 0.0));
 	
+
+	//テスト用　読み込み
+	//CResourceManagerで一括管理(前はCImageManagerだったもの)
+	CResourceManager::GetInstance()->Add("BackGround",CImage::LoadImage("BackGround/Background_M 01.png"));
+	CResourceManager::GetInstance()->Add("Life",CImage::LoadImage("Player/Life1.png"));
+
+	//テスト用　読み込んだ画像の取得
+	g_backGround = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("BackGround"));
+	g_life = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Life"));
+
 
 
 }
