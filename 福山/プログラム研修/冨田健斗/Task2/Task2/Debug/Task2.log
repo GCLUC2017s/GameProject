@@ -1,4 +1,4 @@
 ﻿  main.cpp
-c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(107): warning C4101: 'task' : ローカル変数は 1 度も使われていません。
-c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(106): warning C4101: 'save_t' : ローカル変数は 1 度も使われていません。
+c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(91): warning C4101: 'task' : ローカル変数は 1 度も使われていません。
+c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(90): warning C4101: 'save_t' : ローカル変数は 1 度も使われていません。
   Task2.vcxproj -> C:\Users\tomi-\Desktop\GameProject\福山\プログラム研修\冨田健斗\Task2\Debug\Task2.exe

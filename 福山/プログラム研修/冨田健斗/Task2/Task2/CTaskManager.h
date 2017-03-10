@@ -57,46 +57,29 @@ public:
 	void AbsR(){
 		CTask temp;
 		CTask *MoveTask = &temp; //移動用
-		CTask *StopTask; //固定用
-		MoveTask->next = mRoot;
-		StopTask->next = mRoot->next;
+		CTask *StopTask = &temp; //固定用
+		StopTask->next = mRoot;
+		MoveTask->next = mRoot->next;
 
-		while (StopTask == mTail){
+		while (StopTask != mTail){
 			StopTask = StopTask->next;
 			MoveTask = StopTask->next;
-			while (MoveTask == mTail){
+			while (MoveTask != mTail){
 				MoveTask = MoveTask->next;
 				if (StopTask->mPriorityR > MoveTask->mPriorityR){
-					if (MoveTask->prev == 0){//始まり
 						CTask *Save; //保存用 Moveを保存
 
-						Save = MoveTask; 
-
-						Save->prev = StopTask->prev; //保存move->prev 
-						Save->next = StopTask->next;
-
-						StopTask->prev = MoveTask;
-						StopTask->next = MoveTask->next;
-
-						MoveTask = StopTask;
-						StopTask = Save;
-
-					}
-					else if(MoveTask->next == 0){ //終わり
-						CTask *Save; //保存用
-
-						MoveTask->prev = 0;
-						MoveTask->next = StopTask;
-						StopTask->prev = MoveTask;
-						StopTask->next = MoveTask->next;
-
 						Save = MoveTask;
+
+						Save->prev = StopTask->prev; 
+						Save->next = StopTask->next; 
+
+						StopTask->prev = MoveTask->prev;
+						StopTask->next = MoveTask->next;
+
 						MoveTask = StopTask;
 						StopTask = Save;
-					}
-					else{ //中間
 					
-					}
 				}
 			}
 		}
