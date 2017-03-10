@@ -41,17 +41,21 @@ void CTaskManager::Add(CTask *p)
 
 	m_tail = p;
 }
-CTask* CTaskManager::Kill(CTask *p)
+void CTaskManager::Kill(CTask *p)
 {
+	//削除するタスクの「前タスクの次の位置」を削除するタスクの「次タスクの位置」に繋ぐ。
+	p->m_prev->m_next = p->m_next;
+	//削除するタスクの「次タスクの前の位置」を削除するタスクの「前タスクの位置」に繋ぐ。
+	p->m_next->m_prev = p->m_prev;
+	//その後、指定した特定のタスクを削除する。
 	delete p;
-	return next;
 }
 void CTaskManager::KillCheck()
 {
 	CTask *t = m_head;
 	while (t)
 	{
-		if (t->m_kill) t=Kill(t);
+		if (t->m_kill) Kill(t);
 		else t = t->m_next;
 	}
 }
