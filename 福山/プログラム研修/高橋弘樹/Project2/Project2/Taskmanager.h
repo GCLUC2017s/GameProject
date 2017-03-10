@@ -10,7 +10,8 @@ public:
 	Task *mRoot;
 	Task *mTail;
 	void Update(){}
-	Taskmanager(){};
+	Taskmanager(){
+	};
 	~Taskmanager(){
 		Task temp;
 		Task *c;

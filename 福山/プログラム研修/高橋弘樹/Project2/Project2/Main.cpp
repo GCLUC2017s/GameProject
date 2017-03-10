@@ -11,45 +11,48 @@
 int main(){
 	Task *task;
 	Taskmanager taskmanger;
-	for (int i = 0; i < 10; i++)
+
+	
+	for (int i = 0; i < 1; i++)
 	{
 	task = new Text;
 	taskmanger.Add(task);
-
+	task->Update();
 
 	}
-	for (int i = 0; i < 10; i++)
+
+	for (int i = 0; i < 5; i++)
 	{
 	task = new Text2;
 	taskmanger.Add(task);
-
+	task->Update();
 	}
-	
+	/*
 	for (int i = 0; true; i++) {
 		int v=0;
 
 			task = taskmanger.mRoot;
+			
 			if (i % 60 == 0) {
+				
 				task = new Text;
 				taskmanger.Add(task);
 				task->Update();
+
 				task = new Text2;
 				taskmanger.Add(task);
 				task->Update();
 			}
 			while (task != 0)
 			{
-				printf("%d\n", i);
-			
+				task->Update();
+				task = task->mNext;
 			}
-
+		}
+		*/
 		
 
-			if (i > 50){
-				break;
-			}
-
-		}
+		
 	
 	getchar();
 }
