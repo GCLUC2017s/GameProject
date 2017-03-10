@@ -50,34 +50,27 @@ public:
 		}
 	}
 	/*
-	Abs 昇順 Decs 降順 
-	Abs
+	使い方
+	並び替えしたい CTaskを引数として入れる
+	Absは昇順　Descは降順
+	RはRebder用
+	UはUpdate用
 	*/
 
-	void AbsR(){
+	void AbsR(CTask *Task){
 		CTask temp;
 		CTask *MoveTask = &temp; //移動用
-		CTask *StopTask = &temp; //固定用
-		StopTask->next = mRoot;
 		MoveTask->next = mRoot->next;
 
-		while (StopTask != mTail){
-			StopTask = StopTask->next;
-			MoveTask = StopTask->next;
+		while (MoveTask!= mTail){
+			MoveTask = MoveTask->next;
 			while (MoveTask != mTail){
 				MoveTask = MoveTask->next;
-				if (StopTask->mPriorityR > MoveTask->mPriorityR){
+				if  (MoveTask->mPriorityR < Task->mPriorityR < MoveTask->next->mPriorityR){
 						CTask *Save; //保存用 Moveを保存
 
-						Save = MoveTask;
-
-						Save->prev = StopTask->prev; 
-						Save->next = StopTask->next; 
-
-						StopTask->prev = MoveTask->prev;
-						StopTask->next = MoveTask->next;
-
-						MoveTask = StopTask;
+						Save = Task;
+						MoveTask = Save;
 						StopTask = Save;
 					
 				}
