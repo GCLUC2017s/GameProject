@@ -5,11 +5,13 @@
 */
 
 #include "../TaskSystem/Task/CTask.h"
+#include "../TaskSystem/TaskManager/CTaskManager.h"
 #include "Player\CPlayer.h"
 #include "Enemy\CEnemy.h"
 
 void main()
 {
+	//ƒ‹[ƒv‚³‚¹‚éI
 	CTaskManager task;
 
 	for (int i = 0; i < 5; i++)
@@ -23,7 +25,9 @@ void main()
 		task.Add(new CPlayer());
 	}
 	
-	getchar();
-	//task.ListUpdate();
-	//task.ListRender();
+	for (;;)
+	{
+		task.ListUpdate();
+		task.ListRender();
+	}
 }
