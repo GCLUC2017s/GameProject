@@ -1,5 +1,5 @@
 #pragma once
-#include "stdafx.h"
+#include "../stdafx.h"
 #define MAP_WIDTH 80
 #define MAP_HEIGHT 24
 

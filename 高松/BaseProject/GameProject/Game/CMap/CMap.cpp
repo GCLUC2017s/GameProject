@@ -1,5 +1,5 @@
 #include "CMap.h"
-#include "CImageManager.h"
+#include "../CImageManager.h"
 #include "Global.h"
 #include"CEnemy.h"
 

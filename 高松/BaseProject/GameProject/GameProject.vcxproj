@@ -87,10 +87,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Game\CMap\CMap.h" />
     <ClInclude Include="Global.h" />
+    <ClInclude Include="System\Base\CBase.h" />
+    <ClInclude Include="System\CTaskManager\CTaskManager.h" />
+    <ClInclude Include="System\CTask\CTask.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Game\CMap\CMap.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="System\Base\CBase.cpp" />
+    <ClCompile Include="System\CTaskManager\CTaskManager.cpp" />
+    <ClCompile Include="System\CTask\CTask.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
