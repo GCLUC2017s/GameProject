@@ -16,11 +16,13 @@ private:
 	//符号無しの整数型
 	unsigned int m_udPriority;  //更新優先順位格納
 	unsigned int m_rdPriority;  //描画優先順位格納
+	bool m_pauseflg;			//更新停止フラグ
 public:
 	CTask();
-	~CTask();
+	virtual ~CTask();
 	//仮想関数 継承先の更新処理を優先
 	virtual void Update();
+	virtual void Render();
 	//更新順位設定関数
 	void SetUDPriority(int udPriority)
 	{
@@ -42,23 +44,6 @@ public:
 		return m_udPriority;
 	}
 	friend class CTaskManager;
-};
-
-class CTaskManager
-{
-private:
-	CTask *mp_head;			//先頭要素を指すポインタ
-	CTask *mp_tail;			//末尾要素を指すポインタ
-public:
-	CTaskManager();
-	//リスト更新関数
-	void ListUpdate();
-	//リスト描画関数
-	void ListRender();
-	//リスト追加関数
-	void Add(CTask *p);
-	//リスト削除関数
-	void Destroy();
 };
 
 #endif
