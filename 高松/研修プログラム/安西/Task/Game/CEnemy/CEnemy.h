@@ -8,7 +8,7 @@
 #ifndef ENEMY_GUARD
 #define ENEMY_GUARD
 
-#include "../System/CTask.h"
+#include "../../System/CTask/CTask.h"
 
 
 class CEnemy : public CTask

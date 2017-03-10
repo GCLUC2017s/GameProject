@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <math.h>
-#include "System\CTask.h"
-#include "Game\CPlayer.h"
-#include "Game\CEnemy.h"
+#include "System\CTask\CTask.h"
+#include "Game\CPlayer\CPlayer.h"
+#include "Game\CEnemy\CEnemy.h"
 
 CTask *p;
 CTaskManager g_taskManager;
@@ -17,10 +17,12 @@ void main()
 	{
 		g_taskManager.Add(new CTask());
 	}
-
-			g_taskManager.AllUpdate();	//登録済みのタスクの全実行
-			g_taskManager.KillCheck();
-			g_taskManager.AllRender();	//登録済みのタスクの全描画
+	for (; true;) 
+	{
+		g_taskManager.AllUpdate();	//登録済みのタスクの全実行
+		g_taskManager.KillCheck();
+		g_taskManager.AllRender();	//登録済みのタスクの全描画
+	}
 		
 	
 
