@@ -51,30 +51,30 @@ public:
 	}
 	/*
 	使い方
-	並び替えしたい CTaskを引数として入れる
+	並び替えしたい CTask *tを &t の形で，引数として入れる
 	Absは昇順　Descは降順
 	RはRebder用
 	UはUpdate用
 	*/
 
-	void AbsR(CTask *Task){
+	void AbsR(CTask **t){
 		CTask temp;
 		CTask *MoveTask = &temp; //移動用
-		MoveTask->next = mRoot->next;
+		MoveTask->next = mRoot;
 
-		while (MoveTask!= mTail){
-			MoveTask = MoveTask->next;
 			while (MoveTask != mTail){
-				MoveTask = MoveTask->next;
-				if  (MoveTask->mPriorityR < Task->mPriorityR < MoveTask->next->mPriorityR){
-						CTask *Save; //保存用 Moveを保存
+					MoveTask = MoveTask->next;
+				if (MoveTask != (*t)	&& 
+					MoveTask->next	!=	0	&&
+					MoveTask->prev	!=	0	&&
+					MoveTask->mPriorityR	<	(*t)->mPriorityR	<	MoveTask->next->mPriorityR){
 
-						Save = Task;
-						MoveTask = Save;
-						StopTask = Save;
-					
+						(*t)->prev = MoveTask->next;
+						(*t)->next = MoveTask->next->prev;
+						MoveTask->next = (*t);
+						MoveTask->next->prev =(*t);
+						break;
 				}
-			}
 		}
 
 	}
