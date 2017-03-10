@@ -49,27 +49,60 @@ public:
 
 		}
 	}
-	//検索結果
-	//ASC 昇順 DESC 降順 
-	//void ASC(){
-	//	CTask temp;
-	//	CTask *task = &temp; //移動用
-	//	CTask *save; //固定用
-	//	task->next = mRoot;
-	//	save->next = mRoot->next;
+	/*
+	Abs 昇順 Decs 降順 
+	Abs
+	*/
 
-	//	while (save == mTail){
-	//		save = save->next;
-	//		task = save->next;
-	//		while (task == mTail){
-	//			task = task->next;
-	//			if (save->mPriorityR)
-	//		}
-	//	}
+	void AbsR(){
+		CTask temp;
+		CTask *MoveTask = &temp; //移動用
+		CTask *StopTask; //固定用
+		MoveTask->next = mRoot;
+		StopTask->next = mRoot->next;
 
-	//}
+		while (StopTask == mTail){
+			StopTask = StopTask->next;
+			MoveTask = StopTask->next;
+			while (MoveTask == mTail){
+				MoveTask = MoveTask->next;
+				if (StopTask->mPriorityR > MoveTask->mPriorityR){
+					if (MoveTask->prev == 0){//始まり
+						CTask *Save; //保存用 Stopを保存
 
-	void DESC(CTask *t){
+						Save->prev = StopTask->prev;
+						Save->next = StopTask->next;
+
+						StopTask->prev = MoveTask;
+						StopTask->next = MoveTask->next;
+
+						Save = MoveTask;
+						MoveTask = StopTask;
+						StopTask = Save;
+
+					}
+					else if(MoveTask->next == 0){ //終わり
+						CTask *Save; //保存用
+
+						MoveTask->prev = 0;
+						MoveTask->next = StopTask;
+						StopTask->prev = MoveTask;
+						StopTask->next = MoveTask->next;
+
+						Save = MoveTask;
+						MoveTask = StopTask;
+						StopTask = Save;
+					}
+					else{ //中間
+					
+					}
+				}
+			}
+		}
+
+	}
+
+	void DecsR(CTask *t){
 		CTask *save_t; //初めのほう
 		CTask *task; //
 

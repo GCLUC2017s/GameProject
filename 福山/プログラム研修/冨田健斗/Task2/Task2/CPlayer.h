@@ -10,14 +10,17 @@
 class  CPlayer : public CTask{
 public:
 	CPlayer(){
-		mPriorityR = 0;
+		mPriorityR = 1;
 		mPriorityU = 0;
 		mHitPoint = 10;
 	}
 
-	void Update(){
+	void Render(){
+		printf("僕は正義のRender()です\n");
+	}
 
-		printf("僕は正義です\n");
+	void Update(){
+		printf("僕は正義のUpdate()です\n");
 	}
 
 };

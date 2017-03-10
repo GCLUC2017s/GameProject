@@ -4,7 +4,7 @@
 */
 #ifndef TASK_HPP
 #define TASK_HPP
-
+#include "CTaskManager.h"
 #include <stdio.h>
 
 
@@ -21,6 +21,7 @@ public:
 	~CTask(){};
 
 	virtual void Update(){};
+	virtual void Render(){};
 
 };
 

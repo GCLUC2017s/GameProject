@@ -14,15 +14,17 @@ public:
 
 	CEnemy(){
 		mPriorityR = 0;
-		mPriorityU = 0;
+		mPriorityU = 1;
 		mHitPoint = 10;
 	}
 
 	void Update(){
-
-		printf("僕は悪い子です\n");
+		printf("僕は悪い子Update()です\n");
 		
-	};
+	}
+	void Render(){
+		printf("僕は悪い子Render()です\n");
+	}
 
 };
 

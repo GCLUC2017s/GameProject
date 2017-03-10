@@ -1,4 +1,14 @@
 ﻿  main.cpp
-c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(74): warning C4101: 'task' : ローカル変数は 1 度も使われていません。
-c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(73): warning C4101: 'save_t' : ローカル変数は 1 度も使われていません。
-  Task2.vcxproj -> C:\Users\tomi-\Desktop\GameProject\福山\プログラム研修\冨田健斗\Task2\Debug\Task2.exe
+c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(12): error C2143: 構文エラー : ';' が '*' の前にありません。
+c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(12): error C4430: 型指定子がありません - int と仮定しました。メモ: C++ は int を既定値としてサポートしていません
+c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(13): error C2143: 構文エラー : ';' が '*' の前にありません。
+c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(13): error C4430: 型指定子がありません - int と仮定しました。メモ: C++ は int を既定値としてサポートしていません
+c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(37): error C2061: 構文エラー : 識別子 'CTask'
+c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(105): error C2061: 構文エラー : 識別子 'CTask'
+c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(136): error C2061: 構文エラー : 識別子 'CTask'
+c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(20): error C2065: 'CTask' : 定義されていない識別子です。
+c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(20): error C2065: 't' : 定義されていない識別子です。
+c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(21): error C2065: 't' : 定義されていない識別子です。
+c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(21): error C2065: 'mRoot' : 定義されていない識別子です。
+c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(22): error C2065: 't' : 定義されていない識別子です。
+c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(22): fatal error C1903: 直前のエラーを修復できません。コンパイルを中止します。
