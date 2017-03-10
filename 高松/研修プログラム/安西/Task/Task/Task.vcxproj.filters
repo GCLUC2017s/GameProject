@@ -19,30 +19,39 @@
     <Filter Include="ソース ファイル\System">
       <UniqueIdentifier>{f7e0a295-5474-4c08-ba2f-27e1b43cf236}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Game\CPlayer">
+      <UniqueIdentifier>{26269bd9-5654-4339-8a52-f51eb23503f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Game\CEnemy">
+      <UniqueIdentifier>{8919f00d-0b66-4680-9ead-75f5ed80bdbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\System\CTask">
+      <UniqueIdentifier>{709fc72e-9a32-40d6-b590-454734fa3b06}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="..\Game\CEnemy.cpp">
-      <Filter>ソース ファイル\Game</Filter>
+    <ClCompile Include="..\System\CTask\CTask.cpp">
+      <Filter>ソース ファイル\System\CTask</Filter>
     </ClCompile>
-    <ClCompile Include="..\Game\CPlayer.cpp">
-      <Filter>ソース ファイル\Game</Filter>
+    <ClCompile Include="..\Game\CEnemy\CEnemy.cpp">
+      <Filter>ソース ファイル\Game\CEnemy</Filter>
     </ClCompile>
-    <ClCompile Include="..\System\CTask.cpp">
-      <Filter>ソース ファイル\System</Filter>
+    <ClCompile Include="..\Game\CPlayer\CPlayer.cpp">
+      <Filter>ソース ファイル\Game\CPlayer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Game\CEnemy.h">
-      <Filter>ソース ファイル\Game</Filter>
+    <ClInclude Include="..\System\CTask\CTask.h">
+      <Filter>ソース ファイル\System\CTask</Filter>
     </ClInclude>
-    <ClInclude Include="..\Game\CPlayer.h">
-      <Filter>ソース ファイル\Game</Filter>
+    <ClInclude Include="..\Game\CEnemy\CEnemy.h">
+      <Filter>ソース ファイル\Game\CEnemy</Filter>
     </ClInclude>
-    <ClInclude Include="..\System\CTask.h">
-      <Filter>ソース ファイル\System</Filter>
+    <ClInclude Include="..\Game\CPlayer\CPlayer.h">
+      <Filter>ソース ファイル\Game\CPlayer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
