@@ -10,56 +10,56 @@ CTaskManager::~CTaskManager()
 }
 void CTaskManager::Add(CTask *p)
 {
-	if (!m_head)
+	if (!mp_head)
 	{
-		m_head = p;
+		mp_head = p;
 	}
 	else
 	{
-		p->m_prev = m_tail;
-		m_tail->m_next = p;
+		p->mp_prev = mp_tail;
+		mp_tail->mp_next = p;
 	}
 
-	m_tail = p;
+	mp_tail = p;
 }
-void CTaskManager::Kill(CTask *p)
+CTask* CTaskManager::Kill(CTask *p)
 {
+	CTask *next = p->mp_next;
+	CTask *prev = p->mp_prev;
 	//削除するタスクの「前タスクの次の位置」を削除するタスクの「次タスクの位置」に繋ぐ。
-	p->m_prev->m_next = p->m_next;
+	if(prev)prev->mp_next = next;
 	//削除するタスクの「次タスクの前の位置」を削除するタスクの「前タスクの位置」に繋ぐ。
-	p->m_next->m_prev = p->m_prev;
+	if(next)next->mp_prev = prev;
 	//その後、指定した特定のタスクを削除する。
 	delete p;
-}
-void CTaskManager::AllKill(CTask * p)
-{
+	return next;
 }
 void CTaskManager::KillCheck()
 {
-	CTask *t = m_head;
+	CTask *t = mp_head;
 	while (t)
 	{
 		if (t->m_kill) Kill(t);
-		else t = t->m_next;
+		else t = t->mp_next;
 	}
 }
 void CTaskManager::AllUpdate()
 {
-	CTask *t = m_head;
+	CTask *t = mp_head;
 	while (t)
 	{
 		t->Update();
-		t = t->m_next;
+		t = t->mp_next;
 	}
 
 }
 void CTaskManager::AllRender()
 {
-	CTask *t = m_head;
+	CTask *t = mp_head;
 	while (t)
 	{
 		t->Render();
-		t = t->m_next;
+		t = t->mp_next;
 	}
 	printf("これはCTaskManagerクラスの描画処理です。\n");
 }

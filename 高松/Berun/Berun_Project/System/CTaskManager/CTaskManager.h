@@ -14,17 +14,16 @@
 class CTaskManager
 {
 protected:
-	CTask *m_head;		//先頭要素を指すポインタ
-	CTask *m_tail;		//末尾要素を指すポインタ
+	CTask *mp_head;		//先頭要素を指すポインタ
+	CTask *mp_tail;		//末尾要素を指すポインタ
 public:
 	CTaskManager();
 	~CTaskManager();
 	//リスト追加関数
 	void Add(CTask *p);
 	//リスト内削除関数
-	void Kill(CTask *p);
+	CTask* Kill(CTask *p);
 	//リスト内全削除関数
-	void AllKill(CTask *p);
 	void KillCheck();
 	//リスト更新関数
 	void AllUpdate();

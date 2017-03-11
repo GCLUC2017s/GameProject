@@ -18,8 +18,8 @@ protected:
 	//符号無しの整数型
 	unsigned int m_udPriority;  //更新優先順位格納
 	unsigned int m_rdPriority;  //描画優先順位格納
-	CTask *m_prev;					//前のアドレスを格納するポインター
-	CTask *m_next;					//次のアドレスを格納するポインター
+	CTask *mp_prev;					//前のアドレスを格納するポインタ
+	CTask *mp_next;					//次のアドレスを格納するポインタ
 public:
 	CTask();						//CTaskクラスのコンストラクタ
 	virtual ~CTask();				//CTaskクラスのデストラクタ

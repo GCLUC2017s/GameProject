@@ -1,6 +1,7 @@
 #include "CTask.h"
+#include "../CTaskManager/CTaskManager.h"
 
-CTask::CTask() : m_kill(false),m_prev(nullptr),m_next(nullptr)
+CTask::CTask() : m_kill(false),mp_prev(nullptr),mp_next(nullptr)
 {
 	printf("これはCTaskクラスのコンストラクタです。\n");
 }
