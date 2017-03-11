@@ -70,6 +70,7 @@
     <ClInclude Include="CTaskManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CTask.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

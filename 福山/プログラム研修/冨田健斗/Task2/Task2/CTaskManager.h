@@ -5,7 +5,7 @@
 #ifndef TASKMANAGER_HPP
 #define TASKMANAGER_HPP
 #include "CTask.h"
-
+#include <assert.h> 
 class  CTaskManager
 {
 public:
@@ -57,56 +57,232 @@ public:
 	UはUpdate用
 	*/
 
+	void SwapTask(CTask **p, CTask **n){ //入れ替え処理
+		CTask *s = *n;
+		*n = *p;
+		*p = s;
+
+	}
+
 	void AbsR(){
-			/*バブルソート*/
-			CTask temp;
-			CTask *back_t = &temp;//後ろ用
-			CTask *before_t;//前用
+		/*バブルソート*/
+		CTask temp;
+		CTask *p = &temp;//後ろ用
+		CTask *n = &temp;//前用
 
-			temp.next = mRoot;
-			back_t->next = temp.next;
-			before_t = temp.next;
-			
+		p->next = mRoot;
+		n->next = mRoot;
+	
 
-			while (before_t != mTail){ //後ろのタスク
-				back_t = back_t->next;
+		while (p->next != mTail){ //後ろのタスク
+			p = p->next;
+			n = p->next;
+			if (p->mPriorityR > n->mPriorityR){
+				CTask sp, sn;
+				printf("nは%dです\n", n->mBirthday_No);
+				printf("入れ替え\n");
+				SwapTask(&p, &n);
 
-
-				if (back_t != mTail){ //前のタスク
-					before_t = before_t->next;
-
-					if (back_t->mPriorityR < before_t->mPriorityR){
-						CTask *save0;
-						//Before側のセーブ
-						save0 = before_t;
-						before_t->prev = back_t->prev;
-						save0 = back_t->next->next;
-						save0->next = back_t;
-						back_t->prev = before_t;
-						back_t->next = before_t->next;
-						before_t->next->prev = back_t;
-						mRoot = before_t;
-
-					}
+				/*保存*/
+				sp.prev = p->prev;
+				sp.next = p->next;
+				sn.prev = n->prev;
+				sn.next = n->next;
+				/*左回りに順番を変える*/
+				p->prev = sn.prev;
+				p->next = sp.prev;
+				n->next = sp.next;
+				n->prev = sn.next;
+				/*前後の順番を変える*/
+				if (p->prev == 0){
+					mRoot = p;
+				}
+				if (n->next == 0){	//入れ替えが終わりに行われた時
+					mTail = n;
+				}
+				/*入れ替えが中間の時*/
+				if (p->prev != 0){
+					p->prev->next = p;
+				}
+				if (p->next != 0){
+					p->next->prev = p;
+				}
+				if (n->prev != 0){
+					n->prev->next = n;
+				}
+				if (n->next != 0){
+					n->next->prev = n;
+				}
+				p = mRoot;
 			}
 		}
-
 	}
 
-	void DecsR(CTask *t){
-		CTask *save_t; //初めのほう
-		CTask *task; //
 
-		while (true)
-		{
-			while (true)
-			{
+	void DescR(){
+		/*バブルソート*/
+		CTask temp;
+		CTask *p = &temp;//後ろ用
+		CTask *n = &temp;//前用
 
+		p->next = mRoot;
+		n->next = mRoot;
+
+
+		while (p->next != mTail){ //後ろのタスク
+			p = p->next;
+			n = p->next;
+			if (p->mPriorityR < n->mPriorityR){
+				CTask sp, sn;
+				printf("nは%dです\n", n->mBirthday_No);
+				printf("入れ替え\n");
+				SwapTask(&p, &n);
+
+				/*保存*/
+				sp.prev = p->prev;
+				sp.next = p->next;
+				sn.prev = n->prev;
+				sn.next = n->next;
+				/*左回りに順番を変える*/
+				p->prev = sn.prev;
+				p->next = sp.prev;
+				n->next = sp.next;
+				n->prev = sn.next;
+				/*前後の順番を変える*/
+				if (p->prev == 0){
+					mRoot = p;
+				}
+				if (n->next == 0){	//入れ替えが終わりに行われた時
+					mTail = n;
+				}
+				/*入れ替えが中間の時*/
+				if (p->prev != 0){
+					p->prev->next = p;
+				}
+				if (p->next != 0){
+					p->next->prev = p;
+				}
+				if (n->prev != 0){
+					n->prev->next = n;
+				}
+				if (n->next != 0){
+					n->next->prev = n;
+				}
+				p = mRoot;
 			}
-
 		}
-
 	}
+
+	void AbsU(){
+		/*バブルソート*/
+		CTask temp;
+		CTask *p = &temp;//後ろ用
+		CTask *n = &temp;//前用
+
+		p->next = mRoot;
+		n->next = mRoot;
+
+
+		while (p->next != mTail){ //後ろのタスク
+			p = p->next;
+			n = p->next;
+
+			if (p->mPriorityU > n->mPriorityU){
+
+				CTask sp, sn;
+				SwapTask(&p, &n);
+
+				/*保存*/
+				sp.prev = p->prev;
+				sp.next = p->next;
+				sn.prev = n->prev;
+				sn.next = n->next;
+				/*左回りに順番を変える*/
+				p->prev = sn.prev;
+				p->next = sp.prev;
+				n->next = sp.next;
+				n->prev = sn.next;
+				/*前後の順番を変える*/
+				if (p->prev == 0){
+					mRoot = p;
+				}
+				if (n->next == 0){	//入れ替えが終わりに行われた時
+					mTail = n;
+				}
+				/*入れ替えが中間の時*/
+				if (p->prev != 0){
+					p->prev->next = p;
+				}
+				if (p->next != 0){
+					p->next->prev = p;
+				}
+				if (n->prev != 0){
+					n->prev->next = n;
+				}
+				if (n->next != 0){
+					n->next->prev = n;
+				}
+				p = mRoot;
+			}
+		}
+	}
+
+
+	void DescU(){
+		/*バブルソート*/
+		CTask temp;
+		CTask *p = &temp;//後ろ用
+		CTask *n = &temp;//前用
+
+		p->next = mRoot;
+		n->next = mRoot;
+
+
+		while (p->next != mTail){ //後ろのタスク
+			p = p->next;
+			n = p->next;
+			if (p->mPriorityU < n->mPriorityU){
+				CTask sp, sn;
+				printf("nは%dです\n", n->mBirthday_No);
+				printf("入れ替え\n");
+				SwapTask(&p, &n);
+
+				/*保存*/
+				sp.prev = p->prev;
+				sp.next = p->next;
+				sn.prev = n->prev;
+				sn.next = n->next;
+				/*左回りに順番を変える*/
+				p->prev = sn.prev;
+				p->next = sp.prev;
+				n->next = sp.next;
+				n->prev = sn.next;
+				/*前後の順番を変える*/
+				if (p->prev == 0){
+					mRoot = p;
+				}
+				if (n->next == 0){	//入れ替えが終わりに行われた時
+					mTail = n;
+				}
+				/*入れ替えが中間の時*/
+				if (p->prev != 0){
+					p->prev->next = p;
+				}
+				if (p->next != 0){
+					p->next->prev = p;
+				}
+				if (n->prev != 0){
+					n->prev->next = n;
+				}
+				if (n->next != 0){
+					n->next->prev = n;
+				}
+				p = mRoot;
+			}
+		}
+	}
+
+	
 
 	/*
 	デリート処理

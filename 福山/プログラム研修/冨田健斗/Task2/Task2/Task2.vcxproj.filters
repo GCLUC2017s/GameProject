@@ -39,5 +39,8 @@
     <ClCompile Include="main.cpp">
       <Filter>main</Filter>
     </ClCompile>
+    <ClCompile Include="CTask.cpp">
+      <Filter>Task</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

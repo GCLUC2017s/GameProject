@@ -1,4 +1,4 @@
 ﻿  main.cpp
-c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(98): warning C4101: 'task' : ローカル変数は 1 度も使われていません。
-c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\ctaskmanager.h(97): warning C4101: 'save_t' : ローカル変数は 1 度も使われていません。
+c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\cenemy.h(19): warning C4244: '=' : 'float' から 'int' への変換です。データが失われる可能性があります。
+c:\users\tomi-\desktop\gameproject\福山\プログラム研修\冨田健斗\task2\task2\cplayer.h(17): warning C4244: '=' : 'float' から 'int' への変換です。データが失われる可能性があります。
   Task2.vcxproj -> C:\Users\tomi-\Desktop\GameProject\福山\プログラム研修\冨田健斗\Task2\Debug\Task2.exe

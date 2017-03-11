@@ -13,14 +13,16 @@ public:
 		mPriorityR = 1;
 		mPriorityU = 0;
 		mHitPoint = 10;
-	}
-
-	void Render(){
-		printf("僕は正義のRender()です\n");
+		count += 1;
+		mBirthday_No = count;
 	}
 
 	void Update(){
 		printf("僕は正義のUpdate()です\n");
+	}
+
+	void Render(){
+		printf("僕は正義のRender()です,僕は%d番目に生まれました\n", mBirthday_No);
 	}
 
 };
