@@ -1,13 +1,14 @@
 #include "CTask.h"
 #include "../CTaskManager/CTaskManager.h"
 
-CTask::CTask() : m_kill(false),mp_prev(nullptr),mp_next(nullptr)
+CTask::CTask() : m_destroyFlg(false),m_pauseFlg(false),m_udPriority(0),m_rdPriority(0),mp_prev(nullptr),mp_next(nullptr)
 {
-	printf("これはCTaskクラスのコンストラクタです。\n");
+	//タスク作成後、自動でManagerに登録
+	CTaskManager::GetInstance()->Add(this);
 }
 CTask::~CTask()
 {
-	printf("これはCTaskクラスのデストラクタです。\n");
+	
 }
 void CTask::Update()
 {
@@ -15,5 +16,5 @@ void CTask::Update()
 }
 void CTask::Render()
 {
-	printf("これはCTaskクラスの描画関数です。\n");
+	
 }

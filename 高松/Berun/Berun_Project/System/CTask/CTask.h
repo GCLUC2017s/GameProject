@@ -1,7 +1,6 @@
 /**
 * @file		CTask.h
-* @brief	TaskSystem
-*
+* @brief	タスクシステム元クラス
 * @author	ryoji anzai,yuki yamaji
 */
 
@@ -13,8 +12,8 @@
 class CTask
 {
 protected:
-	bool m_kill;
-	bool m_pauseflg;			//更新停止フラグ
+	bool m_destroyFlg;			//削除フラグ
+	bool m_pauseFlg;			//更新停止フラグ
 	//符号無しの整数型
 	unsigned int m_udPriority;  //更新優先順位格納
 	unsigned int m_rdPriority;  //描画優先順位格納
@@ -48,4 +47,4 @@ public:
 	friend class CTaskManager;
 };
 
-#endif // !TASK_GUARD
+#endif

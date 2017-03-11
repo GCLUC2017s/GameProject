@@ -7,10 +7,19 @@
 
 #include "stdafx.h"
 #include "Global.h"
+#include "CTaskManager\CTaskManager.h"
 
 //テスト用
 CImage* g_backGround=nullptr;
 CImage* g_life = nullptr;
+
+void main()
+{
+	CTaskManager::GetInstance()->AllUpdate();
+	CTaskManager::GetInstance()->AllRender();
+	CTaskManager::GetInstance()->AllDestroy();
+	CTaskManager::GetInstance()->ClearInstance();
+}
 
 void display(void) {
 	//各バッファーをクリア
