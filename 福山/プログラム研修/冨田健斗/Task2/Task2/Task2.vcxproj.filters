@@ -42,5 +42,8 @@
     <ClCompile Include="CTask.cpp">
       <Filter>Task</Filter>
     </ClCompile>
+    <ClCompile Include="CTaskManager.cpp">
+      <Filter>TaskManager</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

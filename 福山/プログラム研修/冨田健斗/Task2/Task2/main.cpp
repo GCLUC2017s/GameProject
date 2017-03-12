@@ -20,8 +20,6 @@ int main(){
 
 		if (frame % 10 == 0) { //ƒtƒŒ[ƒ€‚²‚Æ‚Éˆê‘Ì‘‚â‚·
 			taskmanger.Add(new CPlayer);
-			taskmanger.Add(new CPlayer);
-			taskmanger.Add(new CEnemy);
 			taskmanger.Add(new CEnemy);
 
 		}

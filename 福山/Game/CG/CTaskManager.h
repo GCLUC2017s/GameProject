@@ -5,7 +5,7 @@
 #ifndef TASKMANAGER_HPP
 #define TASKMANAGER_HPP
 #include "CTask.h"
-
+#include <assert.h> 
 class  CTaskManager
 {
 public:
@@ -49,6 +49,240 @@ public:
 
 		}
 	}
+	/*
+	使い方
+	並び替えしたい CTask *tを &t の形で，引数として入れる
+	Absは昇順　Descは降順
+	RはRebder用
+	UはUpdate用
+	*/
+
+	void SwapTask(CTask **p, CTask **n){ //入れ替え処理
+		CTask *s = *n;
+		*n = *p;
+		*p = s;
+
+	}
+
+	void AbsR(){
+		/*バブルソート*/
+		CTask temp;
+		CTask *p = &temp;//後ろ用
+		CTask *n = &temp;//前用
+
+		p->next = mRoot;
+		n->next = mRoot;
+	
+
+		while (p->next != mTail){ //後ろのタスク
+			p = p->next;
+			n = p->next;
+			if (p->mPriorityR > n->mPriorityR){
+				CTask sp, sn;
+				printf("nは%dです\n", n->mBirthday_No);
+				printf("入れ替え\n");
+				SwapTask(&p, &n);
+
+				/*保存*/
+				sp.prev = p->prev;
+				sp.next = p->next;
+				sn.prev = n->prev;
+				sn.next = n->next;
+				/*左回りに順番を変える*/
+				p->prev = sn.prev;
+				p->next = sp.prev;
+				n->next = sp.next;
+				n->prev = sn.next;
+				/*前後の順番を変える*/
+				if (p->prev == 0){
+					mRoot = p;
+				}
+				if (n->next == 0){	//入れ替えが終わりに行われた時
+					mTail = n;
+				}
+				/*入れ替えが中間の時*/
+				if (p->prev != 0){
+					p->prev->next = p;
+				}
+				if (p->next != 0){
+					p->next->prev = p;
+				}
+				if (n->prev != 0){
+					n->prev->next = n;
+				}
+				if (n->next != 0){
+					n->next->prev = n;
+				}
+				p = mRoot;
+			}
+		}
+	}
+
+
+	void DescR(){
+		/*バブルソート*/
+		CTask temp;
+		CTask *p = &temp;//後ろ用
+		CTask *n = &temp;//前用
+
+		p->next = mRoot;
+		n->next = mRoot;
+
+
+		while (p->next != mTail){ //後ろのタスク
+			p = p->next;
+			n = p->next;
+			if (p->mPriorityR < n->mPriorityR){
+				CTask sp, sn;
+				printf("nは%dです\n", n->mBirthday_No);
+				printf("入れ替え\n");
+				SwapTask(&p, &n);
+
+				/*保存*/
+				sp.prev = p->prev;
+				sp.next = p->next;
+				sn.prev = n->prev;
+				sn.next = n->next;
+				/*左回りに順番を変える*/
+				p->prev = sn.prev;
+				p->next = sp.prev;
+				n->next = sp.next;
+				n->prev = sn.next;
+				/*前後の順番を変える*/
+				if (p->prev == 0){
+					mRoot = p;
+				}
+				if (n->next == 0){	//入れ替えが終わりに行われた時
+					mTail = n;
+				}
+				/*入れ替えが中間の時*/
+				if (p->prev != 0){
+					p->prev->next = p;
+				}
+				if (p->next != 0){
+					p->next->prev = p;
+				}
+				if (n->prev != 0){
+					n->prev->next = n;
+				}
+				if (n->next != 0){
+					n->next->prev = n;
+				}
+				p = mRoot;
+			}
+		}
+	}
+
+	void AbsU(){
+		/*バブルソート*/
+		CTask temp;
+		CTask *p = &temp;//後ろ用
+		CTask *n = &temp;//前用
+
+		p->next = mRoot;
+		n->next = mRoot;
+
+
+		while (p->next != mTail){ //後ろのタスク
+			p = p->next;
+			n = p->next;
+
+			if (p->mPriorityU > n->mPriorityU){
+
+				CTask sp, sn;
+				SwapTask(&p, &n);
+
+				/*保存*/
+				sp.prev = p->prev;
+				sp.next = p->next;
+				sn.prev = n->prev;
+				sn.next = n->next;
+				/*左回りに順番を変える*/
+				p->prev = sn.prev;
+				p->next = sp.prev;
+				n->next = sp.next;
+				n->prev = sn.next;
+				/*前後の順番を変える*/
+				if (p->prev == 0){
+					mRoot = p;
+				}
+				if (n->next == 0){	//入れ替えが終わりに行われた時
+					mTail = n;
+				}
+				/*入れ替えが中間の時*/
+				if (p->prev != 0){
+					p->prev->next = p;
+				}
+				if (p->next != 0){
+					p->next->prev = p;
+				}
+				if (n->prev != 0){
+					n->prev->next = n;
+				}
+				if (n->next != 0){
+					n->next->prev = n;
+				}
+				p = mRoot;
+			}
+		}
+	}
+
+
+	void DescU(){
+		/*バブルソート*/
+		CTask temp;
+		CTask *p = &temp;//後ろ用
+		CTask *n = &temp;//前用
+
+		p->next = mRoot;
+		n->next = mRoot;
+
+
+		while (p->next != mTail){ //後ろのタスク
+			p = p->next;
+			n = p->next;
+			if (p->mPriorityU < n->mPriorityU){
+				CTask sp, sn;
+				printf("nは%dです\n", n->mBirthday_No);
+				printf("入れ替え\n");
+				SwapTask(&p, &n);
+
+				/*保存*/
+				sp.prev = p->prev;
+				sp.next = p->next;
+				sn.prev = n->prev;
+				sn.next = n->next;
+				/*左回りに順番を変える*/
+				p->prev = sn.prev;
+				p->next = sp.prev;
+				n->next = sp.next;
+				n->prev = sn.next;
+				/*前後の順番を変える*/
+				if (p->prev == 0){
+					mRoot = p;
+				}
+				if (n->next == 0){	//入れ替えが終わりに行われた時
+					mTail = n;
+				}
+				/*入れ替えが中間の時*/
+				if (p->prev != 0){
+					p->prev->next = p;
+				}
+				if (p->next != 0){
+					p->next->prev = p;
+				}
+				if (n->prev != 0){
+					n->prev->next = n;
+				}
+				if (n->next != 0){
+					n->next->prev = n;
+				}
+				p = mRoot;
+			}
+		}
+	}
+
+	
 
 	/*
 	デリート処理
@@ -65,40 +299,6 @@ public:
 
 	
 	*/
-	//検索結果
-	//ASC 昇順 DESC 降順 
-	void ASC(){
-		CTask temp;
-		CTask *task = &temp; //移動用
-		CTask *save; //固定用
-		task->next = mRoot;
-		save->next = mRoot->next;
-
-		while (save == mTail){
-			save = save->next;
-			task = save->next;
-			while (task == mTail){
-				task = task->next;
-				if (save->mPriorityR){}
-			}
-		}
-	
-	}
-
-	void DESC(CTask *t){
-		CTask *save_t; //初めのほう
-		CTask *task; //
- 
-		while (true)
-		{
-			while (true)
-			{
-
-			}
-
-		}
-	
-	}
 
 	void Kill(CTask **t){
 
