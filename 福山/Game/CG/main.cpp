@@ -1,20 +1,11 @@
-#include "CEnemy.h"
+#include "CGameMain.h"
 #include "define.h"
-#include "CPlayer.h"
-#include "glut.h"
-#include "CTaskManager.h"
 #include <Windows.h>
-
-class CGameMain{
-public:
-
-	void Update(){
-}
-
-};
+#define JUMP_FIRST_SPEED 0.2
+#define ENEMYE_ARRAY_SIZE 10 //エネミー数
+#define PLAYER_ARRAY_SIZE 10 //プレイヤー数
 
 CGameMain gamemain;
-
 
 /* display関数
 1秒間に60回実行される
@@ -22,7 +13,6 @@ CGameMain gamemain;
 void display() {
 	//画面のクリア
 	glClear(GL_COLOR_BUFFER_BIT);
-	//ここにシーン管理のプログラムを書く
 	gamemain.Update();
 	//画面に表示
 	glutSwapBuffers();
@@ -37,7 +27,7 @@ void main(int argc, char* argv[]) {
 	//ウィンドウの設定
 	glutInitWindowSize(WINDOW_PIXEL_H, WINDOW_PIXEL_V);	//ウィンドウサイズ設定
 	glutInitDisplayMode(GLUT_RGBA | GL_DOUBLE);	//ディスプレイモード設定
-	glutCreateWindow("Game");	//ウィンドウ作成
+	glutCreateWindow("はらぺこのベル");	//ウィンドウ作成
 	glClearColor(0.5f, 0.5f, 0.5f, 1.f);	//クリア色をグレーに設定
 
 	//各種関数設定

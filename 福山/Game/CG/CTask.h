@@ -6,7 +6,6 @@
 #define TASK_HPP
 #include <stdio.h>
 
-
 class  CTask
 {
 public:
@@ -22,6 +21,7 @@ public:
 	CTask() :next(0), prev(0), mHitPoint(0){};
 	virtual ~CTask(){};
 
+	virtual void Init(){};
 	virtual void Update(){};
 	virtual void Render(){};
 

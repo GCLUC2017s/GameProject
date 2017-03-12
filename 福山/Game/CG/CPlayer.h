@@ -10,25 +10,42 @@
 #include "CRectangle.h"
 #include "define.h"
 #define JUMP_FIRST_SPEED 0.2
+#define ANIME_PLAYER 6
 
-class  CPlayer : public CBase{
+class CPlayer : public CBase {
 public:
-	CPlayer(){
-		mPriorityR = 1;
-		mPriorityU = 0;
-		mHitPoint = 10;
-		count += 1;
-		mBirthday_No = count;
-	}
 
-	void Update(){
-		printf("僕は正義のUpdate()です\n");
-	}
+	CRectangle	mPlayer;
+	float		mVelocity;
+	CTexture	*mStay_tex[ANIME_PLAYER];
+	CTexture	*mWalk_tex[ANIME_PLAYER];
 
-	void Render(){
-		printf("僕は正義のRender()です,僕は%d番目に生まれました\n", mBirthday_No);
-	}
+
+	CPlayer();
+	~CPlayer();
+
+	int status;
+	int sttime;
+	int framecnt;
+	int framecnt2;
+	int toumeiframe;
+
+	bool enabled_jump;//ジャンプいている
+	float speed_jump; //ジャンプのスピード
+
+	CVector2 mTarget;
+	CVector2 suve_mpos;//元いた位置の保存
+
+	void Jump(); 
+	void Init();
+
+	void Render();
+
+	void Update();
+
+	void SetPos(int row, int col);
+	void SetPos();
 
 };
-
 #endif
+

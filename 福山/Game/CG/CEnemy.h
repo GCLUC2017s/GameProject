@@ -5,7 +5,6 @@
 #ifndef ENEMY_HPP
 #define ENEMY_HPP
 #include "CBase.h"
-#include "CTaskManager.h"
 
 
 class  CEnemy : public CBase
@@ -21,14 +20,9 @@ public:
 	}
 
 
-	void Render(){
-		printf("僕は悪い子Render()です,僕は%d番目に生まれました\n", mBirthday_No);
-	}
+	void Render();
 
-	void Update(){
-		printf("僕は悪い子Update()です\n");
-
-	}
+	void Update();
 
 };
 

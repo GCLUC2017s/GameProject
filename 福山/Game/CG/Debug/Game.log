@@ -1,3 +1,4 @@
 ﻿  main.cpp
-c:\users\tomi-\desktop\gameproject\福山\game\cg\cenemy.h(19): warning C4244: '=' : 'float' から 'int' への変換です。データが失われる可能性があります。
+  CGameMain.cpp
+  コードを生成中...
   Game.vcxproj -> C:\Users\tomi-\Desktop\GameProject\福山\Game\Debug\Game.exe
