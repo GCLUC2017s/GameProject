@@ -74,9 +74,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CBase.h" />
+    <ClInclude Include="CCamera.h" />
     <ClInclude Include="CEnemy.h" />
     <ClInclude Include="CGameMain.h" />
     <ClInclude Include="CKey.h" />
+    <ClInclude Include="CMap.h" />
+    <ClInclude Include="CMyNumber.h" />
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CRectangle.h" />
     <ClInclude Include="CStringtexture.h" />
@@ -89,9 +92,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CBase.cpp" />
+    <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CEnemy.cpp" />
     <ClCompile Include="CGameMain.cpp" />
     <ClCompile Include="CKey.cpp" />
+    <ClCompile Include="CMap.cpp" />
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CRectangle.cpp" />
     <ClCompile Include="CStringtexture.cpp" />

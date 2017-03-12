@@ -13,7 +13,9 @@ CGameMain gamemain;
 void display() {
 	//画面のクリア
 	glClear(GL_COLOR_BUFFER_BIT);
+
 	gamemain.Update();
+
 	//画面に表示
 	glutSwapBuffers();
 }
@@ -25,7 +27,7 @@ void idle();
 void main(int argc, char* argv[]) {
 	glutInit(&argc, argv);
 	//ウィンドウの設定
-	glutInitWindowSize(WINDOW_PIXEL_H, WINDOW_PIXEL_V);	//ウィンドウサイズ設定
+	glutInitWindowSize(WINDOW_PIXEL_X, WINDOW_PIXEL_Y);	//ウィンドウサイズ設定
 	glutInitDisplayMode(GLUT_RGBA | GL_DOUBLE);	//ディスプレイモード設定
 	glutCreateWindow("はらぺこのベル");	//ウィンドウ作成
 	glClearColor(0.5f, 0.5f, 0.5f, 1.f);	//クリア色をグレーに設定
@@ -48,10 +50,6 @@ height:画面高さ
 */
 void reshape(int width, int height) {
 	glViewport(0, 0, width, height);	//画面の描画エリアの指定
-	//	glMatrixMode(GL_PROJECTION);		//行列をプロジェクションモードへ変更
-	//	gluOrtho2D(-XMAX, XMAX, -YMAX, YMAX);	//画面の座標系を設定
-	//	gluOrtho2D(-5, 5, -5, 5);	//画面の座標系を設定
-	glMatrixMode(GL_MODELVIEW);		//行列をモデルビューモードへ変更
 	glLoadIdentity();	//行列を初期化
 }
 
