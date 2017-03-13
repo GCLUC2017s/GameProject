@@ -11,13 +11,11 @@
 class CScene 
 {
 public:
-	CScene()
+	CScene() 
 	{
-
 	}
 	virtual ~CScene() 
 	{
-
 	}
 	virtual void Update() = 0;
 	virtual void Draw() = 0;

@@ -1,5 +1,8 @@
 #include "CSceneManager.h"
 #include "CCamera.h"
+#include "../CLogo/CLogo.h"
+#include "../CTitle/CTitle.h"
+#include "../CCharaSelect/CCharaSelect.h"
 
 CSceneManager* CSceneManager::mp_sceneManager = nullptr;
 
@@ -91,22 +94,27 @@ void CSceneManager::ChangeScene(E_Scene scene)
 
 	m_sceneNum = scene;
 
-	/*
 	switch(m_sceneNum)
 	{
+	case eSceneLogo:
+		mp_scene = new CLogo();
 	case eSceneTitle:
-		p_scene = new CTitle();
+		mp_scene = new CTitle();
 		break;
-	case eSceneGame:
-		p_scene = new CGame();
+	case eSceneCharaSelect:
+		mp_scene = new CCharaSelect();
+		break;
+		/*
+	case eSceneChara:
+		mp_scene = new CGame();
 		break;
 	case eSceneScenario:
-		p_scene = new CScenario();
+		mp_scene = new CScenario();
 		break;
+		*/
 	default:
 		break;
 	}
-	*/
 
 	m_quit = false;
 	m_quitCnt = 0;

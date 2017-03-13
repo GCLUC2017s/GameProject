@@ -23,7 +23,7 @@ public:
 	CTask();						//CTaskクラスのコンストラクタ
 	virtual ~CTask();				//CTaskクラスのデストラクタ
 	virtual void Update();			//派生先クラスでの更新を行う関数
-	virtual void Render();			//派生先クラスでの描写を行う関数
+	virtual void Draw();			//派生先クラスでの描写を行う関数
 	//更新順位設定関数
 	void SetUDPriority(int udPriority)
 	{

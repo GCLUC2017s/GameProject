@@ -14,7 +14,7 @@ void CTask::Update()
 {
 	//”h¶æ‚Å’è‹`
 }
-void CTask::Render()
+void CTask::Draw()
 {
 	
 }
