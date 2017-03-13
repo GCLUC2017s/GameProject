@@ -88,6 +88,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CMap.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="System\Base\CBase.h" />
     <ClInclude Include="System\CCharaSelect\CCharaSelect.h" />
@@ -97,6 +98,7 @@
     <ClInclude Include="System\CTitle\CTitle.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CMap.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="System\Base\CBase.cpp" />
     <ClCompile Include="System\CCharaSelect\CCharaSelect.cpp" />
