@@ -8,11 +8,26 @@
     <ClCompile Include="System\CTask\CTask.cpp">
       <Filter>System\CTask</Filter>
     </ClCompile>
-    <ClCompile Include="Game\CMap\CMap.cpp">
-      <Filter>Game\CMap</Filter>
-    </ClCompile>
     <ClCompile Include="System\CTaskManager\CTaskManager.cpp">
       <Filter>System\CTaskManager</Filter>
+    </ClCompile>
+    <ClCompile Include="System\CTitle\CTitle.cpp">
+      <Filter>System\CTitle</Filter>
+    </ClCompile>
+    <ClCompile Include="System\CCharaSelect\CCharaSelect.cpp">
+      <Filter>System\CCharaSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="System\CLogo\CLogo.cpp">
+      <Filter>System\CLogo</Filter>
+    </ClCompile>
+    <ClCompile Include="System\CScene\CScene.cpp">
+      <Filter>System\CSeane</Filter>
+    </ClCompile>
+    <ClCompile Include="System\CSceneChangeAnimation\CSceneChangeAnimation.cpp">
+      <Filter>System\CSeaneChangeAnimation</Filter>
+    </ClCompile>
+    <ClCompile Include="System\CSceneManager\CSceneManager.cpp">
+      <Filter>System\CSeaneManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -23,11 +38,26 @@
     <ClInclude Include="System\CTask\CTask.h">
       <Filter>System\CTask</Filter>
     </ClInclude>
-    <ClInclude Include="Game\CMap\CMap.h">
-      <Filter>Game\CMap</Filter>
-    </ClInclude>
     <ClInclude Include="System\CTaskManager\CTaskManager.h">
       <Filter>System\CTaskManager</Filter>
+    </ClInclude>
+    <ClInclude Include="System\CTitle\CTitle.h">
+      <Filter>System\CTitle</Filter>
+    </ClInclude>
+    <ClInclude Include="System\CCharaSelect\CCharaSelect.h">
+      <Filter>System\CCharaSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="System\CLogo\CLogo.h">
+      <Filter>System\CLogo</Filter>
+    </ClInclude>
+    <ClInclude Include="System\CScene\CScene.h">
+      <Filter>System\CSeane</Filter>
+    </ClInclude>
+    <ClInclude Include="System\CSceneChangeAnimation\CSceneChangeAnimation.h">
+      <Filter>System\CSeaneChangeAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="System\CSceneManager\CSceneManager.h">
+      <Filter>System\CSeaneManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -46,8 +76,23 @@
     <Filter Include="System\CTaskManager">
       <UniqueIdentifier>{33cd060b-d3bb-4ad2-bea3-3b94f2fa3116}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game\CMap">
-      <UniqueIdentifier>{f9dd4204-3a5a-4ad2-8407-670d4f5f772d}</UniqueIdentifier>
+    <Filter Include="System\CTitle">
+      <UniqueIdentifier>{231435c2-1ec3-40db-8b2a-3ed546861cd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\CCharaSelect">
+      <UniqueIdentifier>{e684c462-ae12-4339-aa8d-50e7ef720abb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\CLogo">
+      <UniqueIdentifier>{3e4630d2-7fc8-4e48-ae86-9b81de1e4b32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\CSeane">
+      <UniqueIdentifier>{49cfbbce-4a8d-4e8c-a7fa-4a271fad24a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\CSeaneChangeAnimation">
+      <UniqueIdentifier>{0fa62798-1623-4da6-93eb-697ffeacb59a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\CSeaneManager">
+      <UniqueIdentifier>{36403947-ec4b-475b-ad31-81df358eb2e6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
