@@ -9,7 +9,7 @@
 #define CTITLE_INCLUDE_GUARD
 #include "../Global.h"
 
-class CTitle
+class CTitle : public CScene
 {
 	CImage *m_black;
 	CImage *m_titleImage;
@@ -195,7 +195,7 @@ public:
 	CTitle();
 	~CTitle();
 	void Update();
-	void Render();
+	void Draw();
 };
 
 #endif

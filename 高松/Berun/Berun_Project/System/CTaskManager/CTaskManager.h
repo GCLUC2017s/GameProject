@@ -7,7 +7,6 @@
 #ifndef TASKMANAGER_GUARD
 #define TASKMANAGER_GUARD
 
-#include <stdio.h>
 #include "../CTask/CTask.h"
 
 class CTaskManager
@@ -24,14 +23,16 @@ public:
 	void Add(CTask *p);
 	//リスト内削除関数
 	CTask* Destroy(CTask *p);
+	//リスト内指定削除関数
+	void DestroyAppoint();
 	//リスト内全削除関数
 	void DestroyAll();
 	//リスト更新関数
 	void UpdateAll();
 	//リスト描画関数
 	void DrawAll();
-	//更新停止関数
-	void Pause();
+	//更新停止関数 trueでpause falseで解除
+	void Pause(bool flg);
 	//CTaskManagerを生成して変数に格納
 	static CTaskManager* GetInstance();
 	//格納されているものを削除

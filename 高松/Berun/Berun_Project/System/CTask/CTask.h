@@ -7,8 +7,6 @@
 #ifndef TASK_GUARD
 #define TASK_GUARD
 
-#include<stdio.h>
-
 class CTask
 {
 protected:
@@ -21,6 +19,7 @@ protected:
 	CTask *mp_next;					//次のアドレスを格納するポインタ
 public:
 	CTask();						//CTaskクラスのコンストラクタ
+	CTask(int priority);
 	virtual ~CTask();				//CTaskクラスのデストラクタ
 	virtual void Update();			//派生先クラスでの更新を行う関数
 	virtual void Draw();			//派生先クラスでの描写を行う関数

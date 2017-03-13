@@ -13,12 +13,12 @@
 
 enum E_Scene
 {
-	eSceneLogo,			//ロゴシーン
-	eSceneTitle,		//タイトルシーン
-	eSceneCharaSelect,	//キャラセレクトシーン
-	eSceneGame,			//ゲームシーン
-	eSceneResult,		//リザルトシーン
-	eSceneNone,			//シーン無し
+	eLogo,			//ロゴシーン
+	eTitle,			//タイトルシーン
+	eCharaSelect,	//キャラセレクトシーン
+	eGame,			//ゲームシーン
+	eResult,		//リザルトシーン
+	eNone,			//シーン無し
 };
 
 class CSceneManager
@@ -37,8 +37,8 @@ private:
 public:
 	CSceneManager();
 	void ChangeScene();
-	void Update();
-	void Draw();
+	virtual void Update();
+	virtual void Draw();
 
 	static CSceneManager *GetInstance()
 	{

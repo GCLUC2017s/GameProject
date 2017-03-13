@@ -9,7 +9,7 @@
 #define CCHARASELECT_INCLUDE_GUARD
 #include "../Global.h"
 
-class CCharaSelect
+class CCharaSelect : public CScene
 {
 	CImage *m_black;
 	CImage *m_charaSelectBackGround;
@@ -124,7 +124,7 @@ public:
 	CCharaSelect();
 	~CCharaSelect();
 	void Update();
-	void Render();
+	void Draw();
 };
 
 #endif

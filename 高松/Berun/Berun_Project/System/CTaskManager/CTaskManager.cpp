@@ -38,6 +38,16 @@ CTask* CTaskManager::Destroy(CTask *p)
 	delete p;
 	return next;
 }
+void CTaskManager::DestroyAppoint()
+{
+	CTask *p = mp_head;
+	while (p)
+	{
+		p->Destroy(p);
+		p = p->mp_next;
+	}
+}
+//別で全てのタスクを削除するものが必要↓
 void CTaskManager::DestroyAll()
 {
 	//先頭から順に削除フラグが真のタスクを削除していく

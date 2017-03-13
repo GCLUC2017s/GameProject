@@ -9,7 +9,7 @@
 #define CLOGO_INCLUDE_GUARD
 #include "../Global.h"
 
-class CLogo
+class CLogo : public CScene
 {
 	CImage *m_black;
 	CImage *m_blackSecond;
@@ -37,7 +37,7 @@ public:
 	CLogo();
 	~CLogo();
 	void Update();
-	void Render();
+	void Draw();
 };
 
 #endif

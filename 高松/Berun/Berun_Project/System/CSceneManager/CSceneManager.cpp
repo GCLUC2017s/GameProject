@@ -12,7 +12,7 @@ CSceneManager::CSceneManager() :
 	m_quitTime(0),
 	m_inCnt(0),
 	m_inTime(0),
-	m_sceneNum(eSceneNone),
+	m_sceneNum(eNone),
 	mp_scene(nullptr)
 {
 	ChangeScene();
@@ -24,22 +24,22 @@ void CSceneManager::ChangeScene()
 	switch(m_sceneNum)
 	{
 	//現在のシーンがタイトルの場合
-	case eSceneTitle:
-		ChangeScene(eSceneCharaSelect);
+	case eTitle:
+		ChangeScene(eCharaSelect);
 		break;
 	//現在のシーンがキャラセレクトの場合
-	case eSceneCharaSelect:
-		ChangeScene(eSceneGame);
+	case eCharaSelect:
+		ChangeScene(eGame);
 		break;
 	//現在のシーンがゲームの場合
-	case eSceneGame:
-		ChangeScene(eSceneResult);
+	case eGame:
+		ChangeScene(eResult);
 		//ChangeScene(eSceneTitle);
 		break;
 	//シーンが設定されていない場合
 	default:
 		//タイトルシーンへ
-		ChangeScene(eSceneTitle);
+		ChangeScene(eTitle);
 		break;
 	}
 }
@@ -96,20 +96,20 @@ void CSceneManager::ChangeScene(E_Scene scene)
 
 	switch(m_sceneNum)
 	{
-	case eSceneLogo:
+	case eLogo:
 		mp_scene = new CLogo();
-	case eSceneTitle:
+	case eTitle:
 		mp_scene = new CTitle();
 		break;
-	case eSceneCharaSelect:
+	case eCharaSelect:
 		mp_scene = new CCharaSelect();
 		break;
 		/*
-	case eSceneChara:
+	case eGame:
 		mp_scene = new CGame();
 		break;
-	case eSceneScenario:
-		mp_scene = new CScenario();
+	case eResult:
+		mp_scene = new CResult();
 		break;
 		*/
 	default:
