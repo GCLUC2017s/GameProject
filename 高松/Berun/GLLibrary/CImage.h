@@ -18,7 +18,7 @@ public:
 	float		m_ang;		//‰ñ“]’l
 	bool		m_flipH;	//¶‰E”½“]
 	CColorRGBA	m_color;	//F
-	
+	float r;
 
 public:
 	CVector2D	m_vPos;		//ˆÊ’u(pixel)
@@ -44,6 +44,9 @@ public:
 	}
 	void SetPos(CVector2D p) {
 		m_vPos = p;
+	}
+	CVector2D GetPos() {
+		return m_vPos;
 	}
 
 	CVector2D* GetPosPointer()
@@ -129,4 +132,66 @@ public:
 		@retval	–³‚µ
 	**/
 	void Draw();
+	bool MoveImage(CVector2D bPos, CVector2D aPos,CVector2D size, float m_moveTime)
+	{
+		CVector2D remnant;
+		CVector2D pos;
+
+
+		remnant = CVector2D(aPos - bPos);
+		pos = bPos + remnant * r;
+		r += 1 / m_moveTime / 60;
+		if (r >= 1)	r = 1;
+		SetPos(pos);
+		SetSize(size);
+		Draw();
+		if (r >= 1)
+		{
+			return	true;
+		}
+		else return	false;
+	}
+
+	void ResetMove()
+	{
+		r = 0;
+	}
+
+	bool MoveStamp(CVector2D pos, CVector2D size, int volume, int speed) 
+	{
+		static int m_wordSizeMinus = 0;
+		//”ä—¦‚ðŠi”[‚·‚é•Ï”
+		static float ratio = 0;
+		static CVector2D volumeSize = size * volume;
+		static CVector2D volumePos;
+		bool m_firstFlag;
+		bool m_se;
+
+		volumePos = (pos)-(volumeSize - size) / 2;
+		SetPos(volumePos);
+		SetSize(volumeSize);
+		Draw();
+
+		ratio = size.y / size.x;
+		//•¶Žš‚Ì‰Á‘¬ˆ—
+		m_wordSizeMinus += speed;
+		if (volumeSize.x > size.x)
+		{
+			if (volumeSize.x - m_wordSizeMinus > size.x)
+			{
+				volumeSize.x -= m_wordSizeMinus;
+				volumeSize.y = volumeSize.x * ratio;
+			}
+			else
+			{
+				volumeSize.x -= volumeSize.x - size.x;
+				volumeSize.y = volumeSize.x * ratio;
+			}
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
 };
