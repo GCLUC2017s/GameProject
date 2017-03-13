@@ -102,10 +102,7 @@ void init(void)
 	//テスト用　読み込み
 	//CResourceManagerで一括管理(前はCImageManagerだったもの)
 	CResourceManager::GetInstance()->Add("BackGround",CImage::LoadImage("BackGround/Background_M 01.png"));
-	CResourceManager::GetInstance()->Add("Life",CImage::LoadImage("Background_E 03.png"));
-
-	CResourceManager::GetInstance()->Add("Background", CImage::LoadImage("Player/Life1.png"));
-
+	CResourceManager::GetInstance()->Add("Life",CImage::LoadImage("Player/Life1.png"));
 
 	CResourceManager::GetInstance()->Add("Black", CImage::LoadImage("Title/Black.png"));
 	CResourceManager::GetInstance()->Add("BlackSecond", CImage::LoadImage("Title/Black.png"));
