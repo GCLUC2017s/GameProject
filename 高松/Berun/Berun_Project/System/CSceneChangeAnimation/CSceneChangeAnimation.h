@@ -23,6 +23,7 @@ private:
 	E_AnimType m_type;
 
 public:
+	//シーン切り替え時フェードアウト処理
 	CSceneChangeAnimation();
 	void SetType(E_AnimType type){m_type = type;} 
 	void Draw(float t);

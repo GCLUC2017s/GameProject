@@ -13,6 +13,7 @@
 
 enum E_Scene
 {
+	eSceneLogo,			//ロゴシーン
 	eSceneTitle,		//タイトルシーン
 	eSceneCharaSelect,	//キャラセレクトシーン
 	eSceneGame,			//ゲームシーン
@@ -23,12 +24,12 @@ enum E_Scene
 class CSceneManager
 {
 private:
-	bool m_quit;
-	int	 m_quitFlag;
-	int  m_quitCnt;
-	int  m_quitTime;
-	int  m_inCnt;
-	int  m_inTime;
+	bool m_quit;        //
+	int	 m_quitFlag;	//
+	int  m_quitCnt;		//
+	int  m_quitTime;	//
+	int  m_inCnt;		//
+	int  m_inTime;		//
 	E_Scene m_sceneNum;
 	CSceneChangeAnimation m_anim;
 	CScene *mp_scene;

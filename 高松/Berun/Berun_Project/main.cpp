@@ -11,19 +11,24 @@
 #include "../System/CTitle/CTitle.h"
 #include "../System/CLogo/CLogo.h"
 #include "../System/CCharaSelect/CCharaSelect.h"
+#include "../System/CSceneManager/CSceneManager.h"
 
 //テスト用
 CImage* g_backGround=nullptr;
 CImage* g_life = nullptr;
-/*
+
 void main()
 {
+	/*
 	CTaskManager::GetInstance()->AllUpdate();
-	CTaskManager::GetInstance()->AllRender();
+	CTaskManager::GetInstance()->AllDraw();
 	CTaskManager::GetInstance()->AllDestroy();
 	CTaskManager::GetInstance()->ClearInstance();
+	*/
+	CSceneManager::GetInstance()->Update();
+	CSceneManager::GetInstance()->Draw();
 }
-*/
+
 CTitle *g_title;
 CLogo *g_logo;
 CCharaSelect *g_charaSelect;

@@ -58,13 +58,13 @@ void CTaskManager::AllUpdate()
 		p = p->mp_next;
 	}
 }
-void CTaskManager::AllRender()
+void CTaskManager::AllDraw()
 {
 	//æ“ª‚©‚ç‡‚Éƒ^ƒXƒN‚ð•`‰æ‚µ‚Ä‚¢‚­
 	CTask *p = mp_head;
 	while (p)
 	{
-		p->Render();
+		p->Draw();
 		p = p->mp_next;
 	}
 }

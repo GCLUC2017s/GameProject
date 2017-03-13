@@ -29,7 +29,7 @@ public:
 	//リスト更新関数
 	void AllUpdate();
 	//リスト描画関数
-	void AllRender();
+	void AllDraw();
 	//更新停止関数
 	void Pause();
 	//CTaskManagerを生成して変数に格納
