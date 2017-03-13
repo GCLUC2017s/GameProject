@@ -40,7 +40,7 @@ void display(void) {
 	// •\¦
 	//---------------------------------------
 
-	if (!g_logo->flag)g_logo->Render();
+	if (!g_logo->flag) g_logo->Render();
 	else if (!g_title->flag) g_title->Render();
 	else if (g_title->flag) g_charaSelect->Render();
 
