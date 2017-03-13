@@ -4,24 +4,25 @@
 */
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
-#include "CBase.h"
-#include "CTaskManager.h"
-#include"CBase.h"
-#include "CRectangle.h"
-#include "define.h"
-#include "CMyNumber.h"
+#include "../Base/CBase.h"
+#include "../Task/CTaskManager.h"
+#include "../Graphic/CRectangle.h"
+#include "../Define/define.h"
+
+#define SIZE_PLAYER_Y 1 * 2 //プレイヤーのサイズ_Y
+#define SIZE_PLAYER_X 0.5 * 2//プレイヤーのサイズ_X
+
 #define JUMP_FIRST_SPEED 0.2
 #define FLAME_LIMIT 6 //フレーム数の上限
 
 class CPlayer : public CBase {
 public:
 
+	float mVelocity; //移動するときに使う
 	CRectangle	mPlayer;
 	CRectangle  mShadow;
-	float		mVelocity;
 	CTexture	*mStay_tex[FLAME_LIMIT];
 	CTexture	*mWalk_tex[FLAME_LIMIT];
-	CTexture	*mJump_tex[FLAME_LIMIT];
 	CTexture	*mRun_tex[FLAME_LIMIT];
 
 	CPlayer();
@@ -46,6 +47,7 @@ public:
 	*/
 	static float camera_x;
 	static float camera_y;
+
 
 	int mFlame_Count;		//フレーム数カウント用
 	int mAnime;		//アニメーションのフレーム数
