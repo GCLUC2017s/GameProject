@@ -20,8 +20,14 @@
     <ClCompile Include="System\CLogo\CLogo.cpp">
       <Filter>System\CLogo</Filter>
     </ClCompile>
-    <ClCompile Include="CMap.cpp">
-      <Filter>Game</Filter>
+    <ClCompile Include="System\CScene\CScene.cpp">
+      <Filter>System\CSeane</Filter>
+    </ClCompile>
+    <ClCompile Include="System\CSceneChangeAnimation\CSceneChangeAnimation.cpp">
+      <Filter>System\CSeaneChangeAnimation</Filter>
+    </ClCompile>
+    <ClCompile Include="System\CSceneManager\CSceneManager.cpp">
+      <Filter>System\CSeaneManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -44,8 +50,14 @@
     <ClInclude Include="System\CLogo\CLogo.h">
       <Filter>System\CLogo</Filter>
     </ClInclude>
-    <ClInclude Include="CMap.h">
-      <Filter>Game</Filter>
+    <ClInclude Include="System\CScene\CScene.h">
+      <Filter>System\CSeane</Filter>
+    </ClInclude>
+    <ClInclude Include="System\CSceneChangeAnimation\CSceneChangeAnimation.h">
+      <Filter>System\CSeaneChangeAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="System\CSceneManager\CSceneManager.h">
+      <Filter>System\CSeaneManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +84,15 @@
     </Filter>
     <Filter Include="System\CLogo">
       <UniqueIdentifier>{3e4630d2-7fc8-4e48-ae86-9b81de1e4b32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\CSeane">
+      <UniqueIdentifier>{49cfbbce-4a8d-4e8c-a7fa-4a271fad24a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\CSeaneChangeAnimation">
+      <UniqueIdentifier>{0fa62798-1623-4da6-93eb-697ffeacb59a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\CSeaneManager">
+      <UniqueIdentifier>{36403947-ec4b-475b-ad31-81df358eb2e6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
