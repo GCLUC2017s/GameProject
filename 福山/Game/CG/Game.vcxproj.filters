@@ -105,12 +105,6 @@
     <ClInclude Include="CScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="CTitle.h">
-      <Filter>Title</Filter>
-    </ClInclude>
-    <ClInclude Include="CTitleScene.h">
-      <Filter>Title</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CRectangle.cpp">
@@ -157,12 +151,6 @@
     </ClCompile>
     <ClCompile Include="CScene.cpp">
       <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="CTitle.cpp">
-      <Filter>Title</Filter>
-    </ClCompile>
-    <ClCompile Include="CTitleScene.cpp">
-      <Filter>Title</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
