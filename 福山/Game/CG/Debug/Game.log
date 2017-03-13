@@ -1,15 +1,18 @@
-﻿  CScene.cpp
-c:\users\tomi-\desktop\gameproject\福山\game\cg\titlescene.h(6): fatal error C1083: include ファイルを開けません。'CGoal.h':No such file or directory
+﻿  main.cpp
+  CVector2.cpp
+  CTriangle.cpp
+  CTaskManager.cpp
+  CTask.cpp
+  CStringtexture.cpp
+  CScene.cpp
+  CRectangle.cpp
   CPlayer.cpp
-  コードを生成中...
-  コンパイル中...
+  CMap.cpp
+  CKey.cpp
+c:\users\tomi-\desktop\gameproject\福山\game\cg\ckey.cpp(6): warning C4800: 'int' : ブール値を 'true' または 'false' に強制的に設定します (警告の処理)
   CGameMain.cpp
-c:\users\tomi-\desktop\gameproject\福山\game\cg\cgamemain.cpp : fatal error C1041: プログラム データベース 'c:\users\tomi-\desktop\gameproject\福山\game\cg\debug\vc120.idb' を開けません。複数の CL.EXE が同じ .PDB ファイルに書き込む場合、/FS を使用してください。
-  コードを生成中...
-  コンパイル中...
+  CEnemy.cpp
   CCamera.cpp
+  CBase.cpp
   コードを生成中...
-  コンパイル中...
-  main.cpp
-c:\users\tomi-\desktop\gameproject\福山\game\cg\main.cpp : fatal error C1041: プログラム データベース 'c:\users\tomi-\desktop\gameproject\福山\game\cg\debug\vc120.idb' を開けません。複数の CL.EXE が同じ .PDB ファイルに書き込む場合、/FS を使用してください。
-  コードを生成中...
+  Game.vcxproj -> C:\Users\tomi-\Desktop\GameProject\福山\Game\Debug\Game.exe
