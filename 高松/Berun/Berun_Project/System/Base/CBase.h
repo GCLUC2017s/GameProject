@@ -1,11 +1,11 @@
 /**
-*@file
+*@file	 CBase.h
 *@brief  基底クラス
 *@author 山路
 */
 
-#ifndef CBASE_GUARD
-#define CBASE_GUARD
+#ifndef BASE_GUARD
+#define BASE_GUARD
 
 //プレイヤーの構造体
 struct T_PlayerData

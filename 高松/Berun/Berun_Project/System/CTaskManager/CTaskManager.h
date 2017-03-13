@@ -1,5 +1,5 @@
 /**
-* @file		CTask.h
+* @file		CTaskManager.h
 * @brief	タスクシステム管理クラス
 * @author	ryoji anzai,yuki yamaji 
 */
