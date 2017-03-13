@@ -8,11 +8,14 @@
 #include "stdafx.h"
 #include "Global.h"
 #include "CTaskManager\CTaskManager.h"
+#include "../System/CTitle/CTitle.h"
+#include "../System/CLogo/CLogo.h"
+#include "../System/CCharaSelect/CCharaSelect.h"
 
 //テスト用
 CImage* g_backGround=nullptr;
 CImage* g_life = nullptr;
-
+/*
 void main()
 {
 	CTaskManager::GetInstance()->AllUpdate();
@@ -20,7 +23,10 @@ void main()
 	CTaskManager::GetInstance()->AllDestroy();
 	CTaskManager::GetInstance()->ClearInstance();
 }
-
+*/
+CTitle *g_title;
+CLogo *g_logo;
+CCharaSelect *g_charaSelect;
 void display(void) {
 	//各バッファーをクリア
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -34,10 +40,15 @@ void display(void) {
 	// 表示
 	//---------------------------------------
 
+	if (!g_logo->flag)g_logo->Render();
+	else if (!g_title->flag) g_title->Render();
+	else if (g_title->flag) g_charaSelect->Render();
 
 	//テスト用　表示
-	g_backGround->Draw();
-	g_life->Draw();
+//	g_backGround->Draw();
+//	g_life->Draw();
+
+
 
 	//----------------------------------
 
@@ -93,9 +104,34 @@ void init(void)
 	CResourceManager::GetInstance()->Add("BackGround",CImage::LoadImage("BackGround/Background_M 01.png"));
 	CResourceManager::GetInstance()->Add("Life",CImage::LoadImage("Player/Life1.png"));
 
+	CResourceManager::GetInstance()->Add("Black", CImage::LoadImage("Title/Black.png"));
+	CResourceManager::GetInstance()->Add("BlackSecond", CImage::LoadImage("Title/Black.png"));
+	CResourceManager::GetInstance()->Add("White", CImage::LoadImage("Title/White.png"));
+	CResourceManager::GetInstance()->Add("Logo", CImage::LoadImage("Title/Window.png"));
+	CResourceManager::GetInstance()->Add("Title", CImage::LoadImage("BackGround/Background_M 01.png"));
+	CResourceManager::GetInstance()->Add("PleaseEnter", CImage::LoadImage("Title/Enterkey.png"));
+	CResourceManager::GetInstance()->Add("TitleLogo", CImage::LoadImage("Title/Titlelogo.png"));
+	CResourceManager::GetInstance()->Add("Knife", CImage::LoadImage("Title/Knife.png"));
+	CResourceManager::GetInstance()->Add("Fork", CImage::LoadImage("Title/Fork.png"));
+	CResourceManager::GetInstance()->Add("Berun", CImage::LoadImage("Title/Baran.png"));
+	CResourceManager::GetInstance()->Add("Start", CImage::LoadImage("Title/Start.png"));
+	CResourceManager::GetInstance()->Add("Exit", CImage::LoadImage("Title/Exit.png"));
+	CResourceManager::GetInstance()->Add("PlayerM", CImage::LoadImage("Player/Player_m.png"));
+	CResourceManager::GetInstance()->Add("PlayerW", CImage::LoadImage("Player/Player_w.png"));
+	CResourceManager::GetInstance()->Add("PlayerMShadow", CImage::LoadImage("Player/Player_m2.png"));
+	CResourceManager::GetInstance()->Add("PlayerWShadow", CImage::LoadImage("Player/Player_w2.png"));
+	CResourceManager::GetInstance()->Add("CharaSelectBackGround", CImage::LoadImage("CharaSelect/Tutorial_background.png"));
+	CResourceManager::GetInstance()->Add("CharaSelectLogo", CImage::LoadImage("CharaSelect/Tutorial1.png"));
+	CResourceManager::GetInstance()->Add("PlayerMLogo", CImage::LoadImage("CharaSelect/Tutorial2.png"));
+	CResourceManager::GetInstance()->Add("PlayerWLogo", CImage::LoadImage("CharaSelect/Tutorial3.png"));
+
 	//テスト用　読み込んだ画像の取得
 	g_backGround = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("BackGround"));
 	g_life = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Life"));
+
+	g_title = new CTitle;
+	g_logo = new CLogo;
+	g_charaSelect = new CCharaSelect;
 
 
 
