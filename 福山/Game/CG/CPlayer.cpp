@@ -39,6 +39,8 @@ void CPlayer::Init() {
 	{
 		mStay_tex[i] = new CTexture(); //テクスチャクラスのインスタンス作成
 		mWalk_tex[i] = new CTexture(); //テクスチャクラスのインスタンス作成
+		mRun_tex[i] = new CTexture();
+
 	}
 
 	/*テクスチャファイル読み込み*/
@@ -56,6 +58,7 @@ void CPlayer::Init() {
 	mWalk_tex[4]->load("beru\\beru_walk\\beru_walk_04.tga");
 	mWalk_tex[5]->load("beru\\beru_walk\\beru_walk_05.tga");
 
+	mRun_tex[0]->load()
 
 	/*テクスチャを張る*/
 	mPlayer.SetUv(mStay_tex[0], 0, 0, 800,800);
@@ -98,11 +101,9 @@ void CPlayer::Jump(){ //ジャンプ処理メソッド
 	mPos.y += speed_jump; //飛ぶ処理
 	speed_jump -= gravity;//減速処理
 
-	mPlayer.SetColor(1.0f, 0.0f, 0.2f, 1.0f);
 
 	if (mPos.y < mAxis){//現在の軸についたとき
 		mPos.y = mAxis; //元いた地面の"Y"に戻す
-		mPlayer.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 		speed_jump = JUMP_FIRST_SPEED;
 		enabled_jump = false; //終了
 

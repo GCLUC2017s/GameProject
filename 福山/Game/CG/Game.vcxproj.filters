@@ -128,9 +128,6 @@
     <ClCompile Include="CGameMain.cpp">
       <Filter>GameMain</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
     <ClCompile Include="CPlayer.cpp">
       <Filter>Player</Filter>
     </ClCompile>
@@ -149,8 +146,8 @@
     <ClCompile Include="CMap.cpp">
       <Filter>Map</Filter>
     </ClCompile>
-    <ClCompile Include="CScene.cpp">
-      <Filter>Scene</Filter>
+    <ClCompile Include="main.cpp">
+      <Filter>Enemey</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
