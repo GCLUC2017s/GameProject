@@ -88,18 +88,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Game\CMap\CMap.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="System\Base\CBase.h" />
+    <ClInclude Include="System\CCharaSelect\CCharaSelect.h" />
+    <ClInclude Include="System\CLogo\CLogo.h" />
     <ClInclude Include="System\CTaskManager\CTaskManager.h" />
     <ClInclude Include="System\CTask\CTask.h" />
+    <ClInclude Include="System\CTitle\CTitle.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Game\CMap\CMap.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="System\Base\CBase.cpp" />
+    <ClCompile Include="System\CCharaSelect\CCharaSelect.cpp" />
+    <ClCompile Include="System\CLogo\CLogo.cpp" />
     <ClCompile Include="System\CTaskManager\CTaskManager.cpp" />
     <ClCompile Include="System\CTask\CTask.cpp" />
+    <ClCompile Include="System\CTitle\CTitle.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

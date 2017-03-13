@@ -7,7 +7,6 @@
 
 #ifndef CCHARASELECT_INCLUDE_GUARD
 #define CCHARASELECT_INCLUDE_GUARD
-#include "../GLLibrary/CImage.h"
 #include "../Global.h"
 
 class CCharaSelect
