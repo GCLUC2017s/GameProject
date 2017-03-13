@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GLLibrary", "GLLibrary\GLLibrary.vcxproj", "{F89696BE-A93C-43A6-92CE-A497B9308791}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BerunProject", "Berun_Project\BerunProject.vcxproj", "{20A22D78-DB28-4004-8D6A-1A8322334C21}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F89696BE-A93C-43A6-92CE-A497B9308791} = {F89696BE-A93C-43A6-92CE-A497B9308791}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
