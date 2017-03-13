@@ -249,13 +249,6 @@ void CPlayer::Update() {
 	case E_RUN_R:
 		mPlayer.SetUv(mStay_tex[mAnime], 0, 0, 800, 800);
 		break;
-		/*ジャンプ中*/
-	case E_JUMP_L:
-		mPlayer.SetUv(mStay_tex[mAnime], 0, 0, 800, 800);
-		break;
-	case E_JUMP_R:
-		mPlayer.SetUv(mStay_tex[mAnime], 0, 0, 800, 800);
-		break;
 	}
 
 }
@@ -263,11 +256,4 @@ void CPlayer::Update() {
 void CPlayer::Render(){
 	//プレイヤーの描画
 	mPlayer.Render();
-}
-
-//行と列から座標上の位置を設定する
-void CPlayer::SetPos(int row, int col) {
-	//行と列から座標上の位置を設定する
-	mPos = CVector2(0.0f,0.0f);
-	mTarget = mPos;
 }

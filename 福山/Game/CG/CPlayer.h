@@ -21,6 +21,7 @@ public:
 	float		mVelocity;
 	CTexture	*mStay_tex[FLAME_LIMIT];
 	CTexture	*mWalk_tex[FLAME_LIMIT];
+	CTexture	*mJump_tex[FLAME_LIMIT];
 
 	CPlayer();
 	~CPlayer();
@@ -62,7 +63,6 @@ public:
 
 	void Update();
 
-	void SetPos(int row, int col);
 	void SetPos();
 
 };
