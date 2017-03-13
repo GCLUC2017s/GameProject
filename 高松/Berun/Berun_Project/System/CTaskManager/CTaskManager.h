@@ -25,11 +25,11 @@ public:
 	//リスト内削除関数
 	CTask* Destroy(CTask *p);
 	//リスト内全削除関数
-	void AllDestroy();
+	void DestroyAll();
 	//リスト更新関数
-	void AllUpdate();
+	void UpdateAll();
 	//リスト描画関数
-	void AllDraw();
+	void DrawAll();
 	//更新停止関数
 	void Pause();
 	//CTaskManagerを生成して変数に格納

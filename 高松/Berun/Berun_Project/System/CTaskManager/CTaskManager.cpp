@@ -38,7 +38,7 @@ CTask* CTaskManager::Destroy(CTask *p)
 	delete p;
 	return next;
 }
-void CTaskManager::AllDestroy()
+void CTaskManager::DestroyAll()
 {
 	//先頭から順に削除フラグが真のタスクを削除していく
 	CTask *p = mp_head;
@@ -48,7 +48,7 @@ void CTaskManager::AllDestroy()
 		else p = p->mp_next;
 	}
 }
-void CTaskManager::AllUpdate()
+void CTaskManager::UpdateAll()
 {
 	//先頭から順にタスクを更新していく
 	CTask *p = mp_head;
@@ -58,7 +58,7 @@ void CTaskManager::AllUpdate()
 		p = p->mp_next;
 	}
 }
-void CTaskManager::AllDraw()
+void CTaskManager::DrawAll()
 {
 	//先頭から順にタスクを描画していく
 	CTask *p = mp_head;
