@@ -5,19 +5,14 @@
 #ifndef ENEMY_HPP
 #define ENEMY_HPP
 #include "CBase.h"
+#include "CMyNumber.h"
 
 
 class  CEnemy : public CBase
 {
 public:
 
-	CEnemy(){
-		mPriorityR = 0;
-		mPriorityU = 1;
-		count += 1;
-		mBirthday_No = count;
-		mHitPoint = 10;
-	}
+	CEnemy();
 
 
 	void Render();

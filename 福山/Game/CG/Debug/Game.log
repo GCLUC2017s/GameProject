@@ -1,4 +1,26 @@
 ﻿  main.cpp
+c:\users\onsokunogyoniku\desktop\game\cg\ctexture.h(4): fatal error C1083: include ファイルを開けません。'glut.h':No such file or directory
+  CVector2.cpp
+  CTriangle.cpp
+c:\users\onsokunogyoniku\desktop\game\cg\ctriangle.h(4): fatal error C1083: include ファイルを開けません。'glut.h':No such file or directory
+  CTaskManager.cpp
+  CTask.cpp
+  CStringtexture.cpp
+c:\users\onsokunogyoniku\desktop\game\cg\ctexture.h(4): fatal error C1083: include ファイルを開けません。'glut.h':No such file or directory
+  CRectangle.cpp
+c:\users\onsokunogyoniku\desktop\game\cg\ctriangle.h(4): fatal error C1083: include ファイルを開けません。'glut.h':No such file or directory
+  CPlayer.cpp
+c:\users\onsokunogyoniku\desktop\game\cg\ctexture.h(4): fatal error C1083: include ファイルを開けません。'glut.h':No such file or directory
+  CMap.cpp
+c:\users\onsokunogyoniku\desktop\game\cg\ctriangle.h(4): fatal error C1083: include ファイルを開けません。'glut.h':No such file or directory
+  CKey.cpp
+c:\users\onsokunogyoniku\desktop\game\cg\ckey.cpp(6): warning C4800: 'int' : ブール値を 'true' または 'false' に強制的に設定します (警告の処理)
   CGameMain.cpp
+c:\users\onsokunogyoniku\desktop\game\cg\ctexture.h(4): fatal error C1083: include ファイルを開けません。'glut.h':No such file or directory
+  CEnemy.cpp
+c:\users\onsokunogyoniku\desktop\game\cg\ctexture.h(4): fatal error C1083: include ファイルを開けません。'glut.h':No such file or directory
+  CCamera.cpp
+c:\users\onsokunogyoniku\desktop\game\cg\ctexture.h(4): fatal error C1083: include ファイルを開けません。'glut.h':No such file or directory
+  CBase.cpp
+c:\users\onsokunogyoniku\desktop\game\cg\ctexture.h(4): fatal error C1083: include ファイルを開けません。'glut.h':No such file or directory
   コードを生成中...
-  Game.vcxproj -> C:\Users\tomi-\Desktop\GameProject\福山\Game\Debug\Game.exe
