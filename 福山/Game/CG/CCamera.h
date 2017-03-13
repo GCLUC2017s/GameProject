@@ -1,5 +1,6 @@
 /*
 ƒJƒƒ‰‚ÌƒvƒƒOƒ‰ƒ€
+
 */
 #ifndef CAMERA_HPP
 #define CAMERA_HPP
