@@ -1,1 +1,18 @@
-﻿  Game.vcxproj -> C:\Users\tomi-\Desktop\GameProject\福山\Game\Debug\Game.exe
+﻿  main.cpp
+  CVector2.cpp
+  CTriangle.cpp
+  CTaskManager.cpp
+  CTask.cpp
+  CStringtexture.cpp
+  CScene.cpp
+  CRectangle.cpp
+  CPlayer.cpp
+  CMap.cpp
+  CKey.cpp
+c:\users\tomi-\desktop\gameproject\福山\game\cg\ckey.cpp(6): warning C4800: 'int' : ブール値を 'true' または 'false' に強制的に設定します (警告の処理)
+  CGameMain.cpp
+  CEnemy.cpp
+  CCamera.cpp
+  CBase.cpp
+  コードを生成中...
+  Game.vcxproj -> C:\Users\tomi-\Desktop\GameProject\福山\Game\Debug\Game.exe
