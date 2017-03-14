@@ -1,7 +1,7 @@
 #include"CMap.h"
 
 
-CMap::CMap() : CTask(0),
+CMap::CMap() : CTask(0,0),
 m_backgroundMorning(0),//‰Šú‰»
 m_backgroundAfternoon(0),
 m_backgroundEvenig(0),

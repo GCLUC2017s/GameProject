@@ -38,6 +38,18 @@
     <ClCompile Include="Game\Enemy\CEnemy.cpp">
       <Filter>Game\CEnemy</Filter>
     </ClCompile>
+    <ClCompile Include="Game\CPlayer\CPlayer.cpp">
+      <Filter>Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="System\CharaBase\CCharaBase.cpp">
+      <Filter>System\CharaBase</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Tutorial\CTutorial.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Test\CTest.cpp">
+      <Filter>Scene\Test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Global.h" />
@@ -80,6 +92,18 @@
     <ClInclude Include="Game\Enemy\CEnemy.h">
       <Filter>Game\CEnemy</Filter>
     </ClInclude>
+    <ClInclude Include="Game\CPlayer\CPlayer.h">
+      <Filter>Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="System\CharaBase\CCharaBase.h">
+      <Filter>System\CharaBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Tutorial\CTutorial.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Test\CTest.h">
+      <Filter>Scene\Test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -114,6 +138,15 @@
     </Filter>
     <Filter Include="Game\CEnemy">
       <UniqueIdentifier>{45f5f2fc-ba70-4872-9024-e914f6a70bb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Player">
+      <UniqueIdentifier>{7d2c0427-7ebe-441d-9a5a-b94516b97bf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\CharaBase">
+      <UniqueIdentifier>{33e74366-9285-4d17-8b40-1fbcc312084d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Test">
+      <UniqueIdentifier>{6a786dcd-2146-4b30-a76a-e38931379c80}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

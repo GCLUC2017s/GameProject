@@ -42,5 +42,5 @@ void CLogo::Draw()
 	m_blackSecond->SetPos(m_blackPosX, 0);
 	m_blackSecond->Draw();
 
-	if (CInput::GetState(0, CInput::ePush, CInput::eButton10)) CSceneManager::GetInstance()->Quit(0);
+	if (CInput::GetState(0, CInput::ePush, CInput::eButton10)) CSceneManager::GetInstance()->Quit(0, eTitle);
 }

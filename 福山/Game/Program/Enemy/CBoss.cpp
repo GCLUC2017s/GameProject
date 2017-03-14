@@ -1,9 +1,9 @@
-#include "CEnemy00.h"
+#include "CBoss.h"
 #include "../MyNumber/CMyNumber.h"
 #include "../Key/CKey.h" //挙動テスト時の操作用
 
-#define SIZE_ENEMY00_Y 1  //エネミー00のサイズ_Y
-#define SIZE_ENEMY00_X 1 //エネミー00のサイズ_X
+#define SIZE_ENEMY00_Y 3  //エネミー00のサイズ_Y
+#define SIZE_ENEMY00_X 3 //エネミー00のサイズ_X
 
 #define HITPOINT_ENEMY00 5					//エネミー00の体力
 #define FIRST_R_NO_PL 1						//初めのレンダーのポイント
@@ -14,17 +14,20 @@
 #define SIZE_TEX_ENEMY00_WALK_Y 800			//エネミーの歩く姿テクスチャサイズ Y
 #define SIZE_SHADOW							//影の表示
 #define SLOW_DOWN 0.001						//移動の減速スピード
-
-#define WALK_SPEED 0.05						//歩くスピード
+#define WALK_SPEED 0.04						//歩くスピード
 #define WALK_X 2							//歩くベクトルX
 #define WALK_Y 1							//歩くベクトルY
 
-void CEnemy00::SetPos(){
+#define ENEMY00_WALK "../CG\\enemy00\\enemy00_walk\\"
+#define ENEMY00_STAY "../CG\\enemy00\\enemy00_stay\\"
+
+
+void CBoss::SetPos(){
 	mPos = Enemy_first_pos;
 	mAxis = mPos.y;
 };
 
-void CEnemy00::Init(){
+void CBoss::Init(){
 	SetPos();
 	/*テクスチャ読み込み*/
 	for (int i = 0; i < FLAME_LIMIT; i++)
@@ -35,36 +38,36 @@ void CEnemy00::Init(){
 	}
 
 	/*テクスチャファイル読み込み*/
-	mStay_tex[0]->load("../CG\\enemy00\\enemy00_walk\\enemy00_walk_00.tga");
-	mStay_tex[1]->load("../CG\\enemy00\\enemy00_walk\\enemy00_walk_01.tga");
-	mStay_tex[2]->load("../CG\\enemy00\\enemy00_walk\\enemy00_walk_02.tga");
-	mStay_tex[3]->load("../CG\\enemy00\\enemy00_walk\\enemy00_walk_03.tga");
-	mStay_tex[4]->load("../CG\\enemy00\\enemy00_walk\\enemy00_walk_04.tga");
-	mStay_tex[5]->load("../CG\\enemy00\\enemy00_walk\\enemy00_walk_05.tga");
-			
+	mStay_tex[0]->load(ENEMY00_STAY"enemy00_stay_00.tga");
+	mStay_tex[1]->load(ENEMY00_STAY"enemy00_stay_01.tga");
+	mStay_tex[2]->load(ENEMY00_STAY"enemy00_stay_02.tga");
+	mStay_tex[3]->load(ENEMY00_STAY"enemy00_stay_03.tga");
+	mStay_tex[4]->load(ENEMY00_STAY"enemy00_stay_04.tga");
+	mStay_tex[5]->load(ENEMY00_STAY"enemy00_stay_05.tga");
 
 
-	mWalk_tex[0]->load("../CG\\enemy00\\enemy00_walk\\enemy00_walk_00.tga");
-	mWalk_tex[1]->load("../CG\\enemy00\\enemy00_walk\\enemy00_walk_01.tga");
-	mWalk_tex[2]->load("../CG\\enemy00\\enemy00_walk\\enemy00_walk_02.tga");
-	mWalk_tex[3]->load("../CG\\enemy00\\enemy00_walk\\enemy00_walk_03.tga");
-	mWalk_tex[4]->load("../CG\\enemy00\\enemy00_walk\\enemy00_walk_04.tga");
-	mWalk_tex[5]->load("../CG\\enemy00\\enemy00_walk\\enemy00_walk_05.tga");
+
+	mWalk_tex[0]->load(ENEMY00_WALK"enemy00_walk_00.tga");
+	mWalk_tex[1]->load(ENEMY00_WALK"enemy00_walk_01.tga");
+	mWalk_tex[2]->load(ENEMY00_WALK"enemy00_walk_02.tga");
+	mWalk_tex[3]->load(ENEMY00_WALK"enemy00_walk_03.tga");
+	mWalk_tex[4]->load(ENEMY00_WALK"enemy00_walk_04.tga");
+	mWalk_tex[5]->load(ENEMY00_WALK"enemy00_walk_05.tga");
 
 
 
 	/*テクスチャを張る*/
-	mEnemy00.SetUv(mStay_tex[0], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
+	mBoss.SetUv(mStay_tex[0], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
 	mForward = CVector2(1.0f, 0.0f);
 
 }
 
-CEnemy00::~CEnemy00(){
-//特に何もしない
+CBoss::~CBoss(){
+	//特に何もしない
 }
 
 //エネミー00描画
-CEnemy00::CEnemy00() : mVelocity(0), mFlameCount(0){
+CBoss::CBoss() : mVelocity(0), mFlameCount(0){
 
 	for (int i = 0; i < FLAME_LIMIT; i++)
 	{
@@ -77,15 +80,15 @@ CEnemy00::CEnemy00() : mVelocity(0), mFlameCount(0){
 	mMyNumber = E_ENEMY00;
 
 	//四角形の頂点設定
-	mEnemy00.SetVertex(-SIZE_ENEMY00_X, SIZE_ENEMY00_Y, SIZE_ENEMY00_X, -SIZE_ENEMY00_Y);
+	mBoss.SetVertex(-SIZE_ENEMY00_X, SIZE_ENEMY00_Y, SIZE_ENEMY00_X, -SIZE_ENEMY00_Y);
 	mShadow.SetVertex(-SIZE_ENEMY00_X, SIZE_ENEMY00_Y, SIZE_ENEMY00_X, -SIZE_ENEMY00_Y);
 	//四角形の色を設定
-	mEnemy00.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+	mBoss.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 }
 
 /*アニメのフレームを動かすメソッド*/ //エネミーによって違う場合があるので画像データ用参照
-void CEnemy00::AnimeFlame(){
+void CBoss::AnimeFlame(){
 
 	mFlameCount += 1;
 	if (mFlameCount % 5 == 0){ //フレーム数=mStay_tex[5]->load(".../.tga");
@@ -99,7 +102,7 @@ void CEnemy00::AnimeFlame(){
 }
 
 
-void CEnemy00::Update(){
+void CBoss::Update(){
 
 	AnimeFlame();
 	assert(mAnime <= FLAME_LIMIT); //フレーム数が七を超えるとダメ
@@ -107,14 +110,14 @@ void CEnemy00::Update(){
 	CTaskManager TaskManager;
 
 	//四角形の位置を設定
-	mEnemy00.position = mPos;
+	mBoss.position = mPos;
 
 
 	// 右移動
 	if (CKey::push('D')) {
-			eAnime = E_WALK_R;
-			mVelocity = WALK_SPEED;
-	
+		eAnime = E_WALK_R;
+		mVelocity = WALK_SPEED;
+
 		mForward = CVector2(WALK_X, 0.0f);
 		mPos += mForward * mVelocity;
 	}
@@ -134,10 +137,10 @@ void CEnemy00::Update(){
 
 	//左移動
 	if (CKey::push('A')) {
-		
-			eAnime = E_WALK_L;
-			mVelocity = WALK_SPEED;
-		
+
+		eAnime = E_WALK_L;
+		mVelocity = WALK_SPEED;
+
 		mForward = CVector2(-WALK_X, 0.0f);
 		mPos += mForward * mVelocity;
 
@@ -188,32 +191,32 @@ void CEnemy00::Update(){
 	}
 
 	if (mPos.x >= character_limit_right - SIZE_ENEMY00_X || mPos.x <= character_limit_left + SIZE_ENEMY00_X){ //マップ外に出ると元の位置に戻す(X)
-		mPos.x = mEnemy00.position.x;
+		mPos.x = mBoss.position.x;
 	}
 	/*あたり判定終了*/
 
-	mEnemy00.position = mPos;
+	mBoss.position = mPos;
 
 	/*アニメーションのステータス*/
 	switch (eAnime)
 	{
 		/*待機中*/
-	case E_STAY_R:
-		mEnemy00.SetUv(mStay_tex[mAnime], SIZE_TEX_ENEMY00_STAY_X, 0, 0, SIZE_TEX_ENEMY00_STAY_Y);
-		break;
 	case E_STAY_L:
-		mEnemy00.SetUv(mStay_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
+		mBoss.SetUv(mStay_tex[mAnime], SIZE_TEX_ENEMY00_STAY_X, 0, 0, SIZE_TEX_ENEMY00_STAY_Y);
+		break;
+	case E_STAY_R:
+		mBoss.SetUv(mStay_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
 		break;
 		/*歩き中*/
-	case E_WALK_R:
-		mEnemy00.SetUv(mWalk_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
-		break;
 	case E_WALK_L:
-		mEnemy00.SetUv(mWalk_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
+		mBoss.SetUv(mWalk_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
+		break;
+	case E_WALK_R:
+		mBoss.SetUv(mWalk_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
 		break;
 	}
 
 }
-void CEnemy00::Render(){
-	mEnemy00.Render();
+void CBoss::Render(){
+	mBoss.Render();
 }

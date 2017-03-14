@@ -92,6 +92,9 @@
     <ClCompile Include="Enemy\CEnemy00.cpp">
       <Filter>Enemey</Filter>
     </ClCompile>
+    <ClCompile Include="Scene\CScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\CBase.h">

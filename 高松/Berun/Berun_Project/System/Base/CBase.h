@@ -6,58 +6,26 @@
 
 #ifndef BASE_GUARD
 #define BASE_GUARD
+#include "../stdafx.h"
+#include "../Global.h"
+#include "../System/TaskSystem/CTask.h"
 
-//プレイヤーの構造体
-struct T_PlayerData
-{
-	int id;			//ID
-	int level;		//レベル
-	int maxHp;		//最大HP
-	int hp;			//現在HP
-	int maxSp;		//最大SP
-	int sp;			//現在SP
-	int power;		//攻撃力
-	int defense;	//防御力
-	int xp;			//取得経験値
-	int exp;		//必要経験値
-	float speed;	//移動速度
-	float jump;		//ジャンプ力
-};
-//敵の構造体
-struct T_EnemyData
-{
-	int m_id;		//ID
-	int maxHp;		//最大HP
-	int hp;			//現在HP
-	int power;		//攻撃力
-	int defense;	//防御力
-	int xp;			//経験値
-	float speed;	//移動速度
-};
 
-class CBase
+
+class CBase : public CTask
 {
-private:
-	T_PlayerData *mp_pData;
-	T_EnemyData  *mp_eData;
+protected:
+	//重力落下速度
+	float m_gravitySpeed;
+	//オブジェクトの座標を格納する変数
+	CVector3D m_pos;
+	//オブジェクトの大きさを格納する変数
+	CVector2D m_size;
+	//キャラクターのID
 	int   m_id;
-	int   m_level;
-	int   m_maxHp;
-	int   m_hp;
-	int   m_maxSp;
-	int   m_sp;
-	int   m_power;
-	int   m_defence;
-	int   m_xp;
-	int   m_exp;
-	float m_speed;
-	float m_jump;
 public:
 	CBase();
 	~CBase();
+	CVector2D GetScreenPos();
 };
-
-extern T_PlayerData g_playerData[];
-extern T_EnemyData g_enemyData[];
-
 #endif

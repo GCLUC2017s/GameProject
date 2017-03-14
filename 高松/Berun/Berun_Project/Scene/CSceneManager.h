@@ -10,6 +10,13 @@
 
 #include "CScene.h"
 #include "CSceneChangeAnimation.h"
+#include "CCamera.h"
+#include "../Scene/Logo/CLogo.h"
+#include "../Scene/Title/CTitle.h"
+#include "../Scene/CharaSelect/CCharaSelect.h"
+#include "../Game/CGame.h"
+#include "../System/TaskSystem/CTaskManager.h"
+#include "../Scene/Test/CTest.h"
 
 enum E_Scene
 {
@@ -18,6 +25,7 @@ enum E_Scene
 	eCharaSelect,	//キャラセレクトシーン
 	eGame,			//ゲームシーン
 	eResult,		//リザルトシーン
+	eTest,
 	eNone,			//シーン無し
 };
 
@@ -31,6 +39,7 @@ private:
 	int  m_inCnt;		//シーンインタイミング
 	int  m_inTime;		
 	E_Scene m_sceneNum;
+	E_Scene m_nextNum;
 	CSceneChangeAnimation m_anim;
 	CScene *mp_scene;
 	static CSceneManager *mp_sceneManager;
@@ -48,11 +57,12 @@ public:
 		}
 		return mp_sceneManager;
 	}
-
-	void Quit(int time)
+	//シーン切り替え（時間、次のシーン）
+	void Quit(int time, E_Scene scene)
 	{
 		m_quit = true;
 		m_quitTime = time;
+		m_nextNum = scene;
 	}
 
 	void SetQuitFlag(int flg) 

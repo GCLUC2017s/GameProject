@@ -247,6 +247,6 @@ void CCharaSelect::Draw()
 				if (CInput::GetState(0, CInput::ePush, CInput::eRight) || CInput::GetState(0, CInput::ePush, CInput::eLeft))		m_chara = false;
 			}
 		}
-		if (CInput::GetState(0, CInput::ePush, CInput::eButton10)) CSceneManager::GetInstance()->Quit(0);
+		if (CInput::GetState(0, CInput::ePush, CInput::eButton10)) CSceneManager::GetInstance()->Quit(0, eGame);
 	}
 }

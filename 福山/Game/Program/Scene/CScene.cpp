@@ -1,5 +1,5 @@
 //シーンのプログラミング（シーンマネージャー）
-//担当者　高橋弘樹
+//担当者　高橋弘樹				動作テスト　未実行
 #include "../Scene/CScene.h"
 #include "../Title/CTitleScene.h"
 
