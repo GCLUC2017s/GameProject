@@ -5,13 +5,13 @@
 #define SIZE_ENEMY00_Y 1  //エネミー00のサイズ_Y
 #define SIZE_ENEMY00_X 1 //エネミー00のサイズ_X
 
-#define HITPOINT_ENEMY00 10					//エネミー00の体力
+#define HITPOINT_ENEMY00 5					//エネミー00の体力
 #define FIRST_R_NO_PL 1						//初めのレンダーのポイント
 #define FIRST_U_NO_PL 1						//初めのアップデートのポイント
-#define SIZE_TEX_ENEMY00_STAY_X 800			//プレイヤーの待ち姿テクスチャサイズ X
-#define SIZE_TEX_ENEMY00_STAY_Y 800			//プレイヤーの待ち姿テクスチャサイズ Y
-#define SIZE_TEX_ENEMY00_WALK_X 800			//プレイヤーの歩くテクスチャサイズ Y
-#define SIZE_TEX_ENEMY00_WALK_Y 800			//プレイヤーの歩く姿テクスチャサイズ Y
+#define SIZE_TEX_ENEMY00_STAY_X 800			//エネミーの待ち姿テクスチャサイズ X
+#define SIZE_TEX_ENEMY00_STAY_Y 800			//エネミーの待ち姿テクスチャサイズ Y
+#define SIZE_TEX_ENEMY00_WALK_X 800			//エネミーの歩くテクスチャサイズ Y
+#define SIZE_TEX_ENEMY00_WALK_Y 800			//エネミーの歩く姿テクスチャサイズ Y
 #define SIZE_SHADOW							//影の表示
 #define SLOW_DOWN 0.001						//移動の減速スピード
 
@@ -63,7 +63,7 @@ CEnemy00::~CEnemy00(){
 //特に何もしない
 }
 
-//プレイヤー描画
+//エネミー00描画
 CEnemy00::CEnemy00() : mVelocity(0), mFlameCount(0){
 
 	for (int i = 0; i < FLAME_LIMIT; i++)
