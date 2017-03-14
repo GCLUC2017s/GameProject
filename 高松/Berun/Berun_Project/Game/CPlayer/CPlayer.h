@@ -7,14 +7,15 @@
 #ifndef CPLAYER_INCLUDE_GUARD
 #define CPLAYER_INCLUDE_GUARD
 #include "../Global.h"
-#include "../System/CharaBase/CCharaBase.h"
+#include "../../System/CharaBase/CCharaBase.h"
 
 #define PLAYER_MOVE 4
 
 class CPlayer : public CCharaBase
 {
 	T_PlayerData *mp_pData;
-	
+
+	void _key();
 public:
 	CPlayer(int type);
 	~CPlayer();

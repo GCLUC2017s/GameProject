@@ -1,8 +1,15 @@
 #include "CCharaBase.h"
+static T_CharacterData g_characterData[eCharacterMax] = {
+	{ "LittlePlayerM" },
+	{ "LittlePlayerM" },
+	{ "Carrot" },
+	
 
+};
 CCharaBase::CCharaBase(int type):m_state(eState_Idle)
 {
-	m_chara = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("LittlePlayerM"));
+	mp_eData = &g_characterData[type];
+	m_chara = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get(mp_eData->imageName));
 }
 CCharaBase::~CCharaBase() 
 {
@@ -11,6 +18,9 @@ CCharaBase::~CCharaBase()
 void CCharaBase::Animation()
 {
 
+}
+void CCharaBase::_key() {
+	m_right = false;
 }
 void CCharaBase::_idle(){
 
@@ -33,7 +43,7 @@ void CCharaBase::_idle(){
 		m_charaDirection = true;
 	}
 	//右キー(D)を入力した時の処理
-	if (CInput::GetState(0, CInput::eHold, CInput::eRight))
+	if (m_right)
 	{
 		//キャラのX座標にプラス値(右方向の値)を加算していく処理
 		m_pos.x += 4;
@@ -48,6 +58,7 @@ void CCharaBase::_idle(){
 }
 void CCharaBase::Update()
 {
+	_key();
 	switch (m_state)
 	{
 	case eState_Idle:
@@ -79,11 +90,3 @@ void CCharaBase::HitCheck()
 
 }
 
-#define P_ARRAY_SIZE(g_playerData);
-
-T_EnemyData g_enemyData[] =
-{
-	//ID,最大HP,現在HP,攻撃力,防御力,経験値,移動速度
-	{ 0,0,0,0,0,0,0.0f },
-};
-#define E_ARRAY_SIZE(g_enemyData);

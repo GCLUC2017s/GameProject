@@ -2,30 +2,27 @@
 
 
 
-
-CEnemy::CEnemy() :CTask(1),
-m_carrot(0),//‰Šú‰»
-m_enemytype(eCarrot)//‰Šú‰»
+T_EnemyData g_enemyData[] =
 {
-	m_enemytime = 0;
-	switch (m_enemytype)
-	{
-	case eCarrot:
-		
-		m_carrot = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Carrot"));
-	
-		break;
-	
-	}
-	
-	
-	
-	
-	
+	//ID,Å‘åHP,Œ»İHP,UŒ‚—Í,–hŒä—Í,ŒoŒ±’l,ˆÚ“®‘¬“x
+	{ 0,0,0,0,0,0,0.0f },
+};
+
+CEnemy::CEnemy(int type):CCharaBase(type)
+{
+	m_pos = CVector3D(120, 0,0);
 }
 CEnemy::~CEnemy() {
 
 }
+
+void CEnemy::_key() {
+	CCharaBase::_key();
+
+
+	m_right =true;
+}
+/*
 void CEnemy::Update() {
 	
 	if (m_enemytime < 200) {
@@ -42,8 +39,10 @@ void CEnemy::Update() {
 	
 	
 	
+	
 }
 void CEnemy::Draw(){
 	
 	m_vegetavelenemy->Draw();
 }
+*/
