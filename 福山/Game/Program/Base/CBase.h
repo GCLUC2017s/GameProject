@@ -2,15 +2,10 @@
 #define BASE_HPP
 #define SIZE_PLAYER_Y 1  //プレイヤーのサイズ_Y
 #define SIZE_PLAYER_X 0.5 //プレイヤーのサイズ_X
-
+#define SIZE_SHADOW_X 0.4 //影のサイズX
+#define SIZE_SHADOW_Y 0.4 //影のサイズY
 #include "../Task/CTask.h"
 #include "../Vector/CVector2.h"
-#include "../Define/define.h"
-
-const float character_limit_left = -MAP_LIMIT_X / 2;			//進める上限(左)
-const float character_limit_top = MAP_LIMIT_Y / 4;			   //進める上限(上)
-const float character_limit_right = MAP_LIMIT_X / 2;		 //進める上限(右)
-const float character_limit_bottom = -MAP_LIMIT_Y / 2;		//進める上限(下)
 
 
 /*
@@ -42,6 +37,7 @@ public:
 
 	}
 	virtual void Collision(CBase *b1, CBase *b2) {}
+
 
 	
 };
