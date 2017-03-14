@@ -6,22 +6,22 @@ CTask::CTask() :
 	m_destroyFlg(false),
 	m_pauseFlg(false),
 	m_udPriority(0),
-	m_rdPriority(0),
+	m_dwPriority(0),
 	mp_prev(nullptr),
 	mp_next(nullptr)
 {
 	//Manager‚É“o˜^‚³‚ê‚È‚¢
 }
-CTask::CTask(int priority) : 
+CTask::CTask(unsigned int udpriority, unsigned int dwpriority) :
 	m_destroyFlg(false), 
 	m_pauseFlg(false), 
-	m_udPriority(0), 
-	m_rdPriority(0), 
+	m_udPriority(udpriority),
+	m_dwPriority(dwpriority),
 	mp_prev(nullptr),
 	mp_next(nullptr)
 {
-	m_udPriority = priority;
-	m_rdPriority = priority;
+	m_udPriority = udpriority;
+	m_dwPriority = dwpriority;
 	//ƒ^ƒXƒNì¬ŒãAŽ©“®‚ÅManager‚É“o˜^
 	CTaskManager::GetInstance()->Add(this);
 }

@@ -24,11 +24,7 @@ void display(void) {
 	//---------------------------------------
 
 	CSceneManager::GetInstance()->Update();
-	CTaskManager::GetInstance()->UpdateAll();
 	CSceneManager::GetInstance()->Draw();
-	CTaskManager::GetInstance()->DrawAll();
-
-
 
 	//----------------------------------
 
