@@ -2,13 +2,13 @@
 
 static CFont *font = nullptr;
 
-CTutorial::CTutorial() : CTutorial(g_tutorialDataPath[g_tutorialNo])
+CTutorial::CTutorial() 
 {
 }
 
-CTutorial::CTutorial(char * file) : mp_file(nullptr),
+CTutorial::CTutorial(char * file) : CTask(0,0), mp_file(nullptr),
 									m_face(0),
-									m_end(0)
+									m_end(0), m_state(0)
 {
 	mp_img[0] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("PlayerM"));
 	mp_img[1] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("PlayerW"));
@@ -17,8 +17,6 @@ CTutorial::CTutorial(char * file) : mp_file(nullptr),
 	fopen_s(&mp_file, file, "r");
 	//ƒtƒ@ƒCƒ‹‚ª–³‚¯‚ê‚Î‰½‚à‚µ‚È‚¢
 	if (mp_file == nullptr) return;
-	fgets(m_str, WORD_MAX, mp_file);
-	sscanf_s(m_str, "%d");
 	GetText();
 }
 

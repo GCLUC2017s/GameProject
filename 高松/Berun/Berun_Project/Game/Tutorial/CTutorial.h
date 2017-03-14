@@ -26,6 +26,7 @@ private:
 	char    m_name[NAME_MAX];				//キャラ名
 	char    m_text[LINE_MAX][WORD_MAX];		//文章(行)(文字数）
 	char    m_str[WORD_MAX];				//表示文字列
+	int  m_state;
 public:
 	CTutorial();
 	CTutorial(char *file);
@@ -36,6 +37,5 @@ public:
 	void GetText();
 	//終了フラグ取得
 	bool GetEnd();
-	static bool m_isActive;
 };
 #endif

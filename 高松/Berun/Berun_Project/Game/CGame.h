@@ -8,6 +8,7 @@
 #define GAME_GUARD
 #include"Map/CMap.h"
 #include "../Scene/CScene.h"
+#include "../Game/Tutorial/CTutorial.h"
 
 class CGame : public CScene
 {
