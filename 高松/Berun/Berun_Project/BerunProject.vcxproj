@@ -89,12 +89,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Game\CGame.h" />
+    <ClInclude Include="Game\Enemy\CEnemy.h" />
+    <ClInclude Include="Game\Map\CMap.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="Scene\CharaSelect\CCharaSelect.h" />
     <ClInclude Include="Scene\CScene.h" />
     <ClInclude Include="Scene\CSceneChangeAnimation.h" />
     <ClInclude Include="Scene\CSceneManager.h" />
     <ClInclude Include="Scene\Logo\CLogo.h" />
+    <ClInclude Include="Scene\Result\CResult.h" />
     <ClInclude Include="Scene\Title\CTitle.h" />
     <ClInclude Include="System\Base\CBase.h" />
     <ClInclude Include="System\TaskSystem\CTask.h" />
@@ -102,11 +105,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\CGame.cpp" />
+    <ClCompile Include="Game\Enemy\CEnemy.cpp" />
+    <ClCompile Include="Game\Map\CMap.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scene\CharaSelect\CCharaSelect.cpp" />
     <ClCompile Include="Scene\CSceneChangeAnimation.cpp" />
     <ClCompile Include="Scene\CSceneManager.cpp" />
     <ClCompile Include="Scene\Logo\CLogo.cpp" />
+    <ClCompile Include="Scene\Result\CResult.cpp" />
     <ClCompile Include="Scene\Title\CTitle.cpp" />
     <ClCompile Include="System\Base\CBase.cpp" />
     <ClCompile Include="System\TaskSystem\CTask.cpp" />

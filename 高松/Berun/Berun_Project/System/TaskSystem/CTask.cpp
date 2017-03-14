@@ -2,7 +2,13 @@
 #include "CTaskManager.h"
 
 //デフォルトコンストラクタ
-CTask::CTask()
+CTask::CTask() :
+	m_destroyFlg(false),
+	m_pauseFlg(false),
+	m_udPriority(0),
+	m_rdPriority(0),
+	mp_prev(nullptr),
+	mp_next(nullptr)
 {
 	//Managerに登録されない
 }
