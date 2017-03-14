@@ -6,7 +6,6 @@ CTaskManager::CTaskManager() : mp_head(nullptr), mp_tail(nullptr)
 }
 CTaskManager::~CTaskManager()
 {
-	
 }
 void CTaskManager::Add(CTask *p)
 {
@@ -48,10 +47,10 @@ void CTaskManager::DestroyAppoint()
 		else p = p->mp_next;
 	}
 }
-//別で全てのタスクを削除するものが必要↓
+
 void CTaskManager::DestroyAll()
 {
-	//先頭から順に削除フラグが真のタスクを削除していく
+	//先頭からタスクを削除していく
 	CTask *p = mp_head;
 	while (p)
 	{
