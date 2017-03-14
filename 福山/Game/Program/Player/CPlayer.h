@@ -35,15 +35,16 @@ private:
 	自分がどのアニメーションか判断用
 	enum文
 	*/
-	enum MyEnum
+	enum EAnime
 	{
-		E_STAY_L,	E_STAY_R,
-		E_WALK_L,	E_WALK_R,
-		E_RUN_L,	E_RUN_R,
-		E_JUMP_L,	E_JUMP_R,
+		E_STAY_L,	E_JUMP_L,
+		E_WALK_L,	E_RUN_L,	
+		E_RUN_R,	E_JUMP_R,
+		E_WALK_R,	E_STAY_R,
 	};
 
-	MyEnum eAnime = E_STAY_R;
+	EAnime eAnime = E_STAY_R;
+	int AnimePattern = sizeof(EAnime);
 	int mSaveAnime; //直前のアニメが何か判断用
 
 	int mFlameCount;		//フレーム数カウント用
@@ -55,6 +56,7 @@ private:
 	CVector2 mTarget;
 	CVector2 mSuvePos;//元いた位置の保存
 
+	int DecisionRL(int i); //アニメーションの値を入れて,返り値で右左を判断
 	void Run_Walk();
 	void AnimeFlame();
 	void Jump(); 

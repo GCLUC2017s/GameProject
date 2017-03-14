@@ -2,6 +2,8 @@
 #define BASE_HPP
 #define SIZE_PLAYER_Y 1  //プレイヤーのサイズ_Y
 #define SIZE_PLAYER_X 0.5 //プレイヤーのサイズ_X
+#define SIZE_SHADOW_X 0.4 //影のサイズX
+#define SIZE_SHADOW_Y 0.4 //影のサイズY
 #include "../Task/CTask.h"
 #include "../Vector/CVector2.h"
 
@@ -35,6 +37,7 @@ public:
 
 	}
 	virtual void Collision(CBase *b1, CBase *b2) {}
+
 
 	
 };
