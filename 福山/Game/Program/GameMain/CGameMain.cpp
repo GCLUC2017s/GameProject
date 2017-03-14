@@ -4,9 +4,11 @@ CGameMain::CGameMain(){}
 
 void CGameMain::Init(){
 	taskmanger.Add(new CMap);
+
 	taskmanger.Add(new CCamera);
+
 	taskmanger.Add(new CPlayer);
-	taskmanger.Add(new CEnemy);
+
 }
 
 void CGameMain::Update(){
@@ -15,33 +17,12 @@ void CGameMain::Update(){
 	{
 	case E_INIT:
 		Init();
-
-		task = taskmanger.mRoot;
-		while (task != 0)
-		{
-			task->Init();
-			task = task->next;
-		}
+		taskmanger.AllInit();
 		status = E_MAIN;
-
 		break;
 	case E_MAIN:
-		task = taskmanger.mRoot;
-
-		taskmanger.AbsR();
-
-		/*‚·‚×‚Ä‚ÌRender•\Ž¦*/
-		while (task != 0)
-		{
-
-			task->Update();
-			task->Render();
-			task = task->next;
-
-		}
-
-
-
+		taskmanger.AllUpdate();
+		taskmanger.AllRender();
 		break;
 
 	}

@@ -7,9 +7,9 @@
 
 class CMap :public CBase{
 public:
-
 	CRectangle BGrect; //”wŒi‚Ìrect
 	CTexture *BackGround;
+
 
 	~CMap();
 	CMap();

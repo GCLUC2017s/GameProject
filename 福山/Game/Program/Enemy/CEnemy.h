@@ -14,7 +14,6 @@ public:
 
 	CEnemy();
 
-
 	void Render();
 
 	void Update();

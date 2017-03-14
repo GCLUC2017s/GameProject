@@ -2,7 +2,7 @@
 #include "../Key/CKey.h"
 
 
-CTitleScene::CTitleScene() :status(0), Alerttop(0.0f), Alertbottom(0.0f), Alertenabled(true){}
+CTitleScene::CTitleScene() :status(0){}
 
 void CTitleScene::Init() {
 
