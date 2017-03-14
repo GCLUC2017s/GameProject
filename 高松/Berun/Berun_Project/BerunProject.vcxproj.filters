@@ -29,6 +29,12 @@
     <ClCompile Include="Game\CGame.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Map\CMap.cpp">
+      <Filter>Game\CMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Enemy\CEnemy.cpp">
+      <Filter>Game\CEnemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Global.h" />
@@ -62,6 +68,12 @@
     <ClInclude Include="Game\CGame.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Map\CMap.h">
+      <Filter>Game\CMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Enemy\CEnemy.h">
+      <Filter>Game\CEnemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -87,6 +99,12 @@
     </Filter>
     <Filter Include="Scene\Title">
       <UniqueIdentifier>{231435c2-1ec3-40db-8b2a-3ed546861cd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\CMap">
+      <UniqueIdentifier>{a7c265ad-5cf0-4c62-bc24-7db539acf9e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\CEnemy">
+      <UniqueIdentifier>{45f5f2fc-ba70-4872-9024-e914f6a70bb8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

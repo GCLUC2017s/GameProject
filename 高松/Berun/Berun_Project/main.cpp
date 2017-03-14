@@ -35,11 +35,14 @@ void display(void) {
 	//---------------------------------------
 
 	CSceneManager::GetInstance()->Update();
+	CTaskManager::GetInstance()->UpdateAll();
 	CSceneManager::GetInstance()->Draw();
+	CTaskManager::GetInstance()->DrawAll();
 
-	if (!g_logo->flag) g_logo->Draw();
-	else if (!g_title->flag) g_title->Draw();
-	else if (g_title->flag) g_charaSelect->Draw();
+
+	//if (!g_logo->flag) g_logo->Draw();
+	//else if (!g_title->flag) g_title->Draw();
+	//else if (g_title->flag) g_charaSelect->Draw();
 
 	//テスト用　表示
 //	g_backGround->Draw();
@@ -121,6 +124,9 @@ void init(void)
 	CResourceManager::GetInstance()->Add("CharaSelectLogo", CImage::LoadImage("CharaSelect/Tutorial1.png"));
 	CResourceManager::GetInstance()->Add("PlayerMLogo", CImage::LoadImage("CharaSelect/Tutorial2.png"));
 	CResourceManager::GetInstance()->Add("PlayerWLogo", CImage::LoadImage("CharaSelect/Tutorial3.png"));
+
+	CResourceManager::GetInstance()->Add("Back", CImage::LoadImage("BackGround/Background_M 01.png"));
+	CResourceManager::GetInstance()->Add("Wood", CImage::LoadImage("BackGround/Wood_01.png"));
 
 	//テスト用　読み込んだ画像の取得
 	g_backGround = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("BackGround"));
