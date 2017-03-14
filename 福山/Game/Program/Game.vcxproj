@@ -21,6 +21,7 @@
     <ClCompile Include="Main\main.cpp" />
     <ClCompile Include="Map\CMap.cpp" />
     <ClCompile Include="Player\CPlayer.cpp" />
+    <ClCompile Include="Scene\CScene.cpp" />
     <ClCompile Include="Task\CTaskManager.cpp" />
     <ClCompile Include="Title\CTitle.cpp" />
     <ClCompile Include="Title\CTitleScene.cpp" />
