@@ -2,11 +2,7 @@
 //’S“–Ò ‚‹´O÷
 #ifndef CSCENE_HPP
 #define CSCENE_HPP
-<<<<<<< HEAD
-
 #include "../Define/define.h"
-=======
->>>>>>> 86b196553959a77e4bd3a019ed2d013854cfcbcd
 #include "glut.h"
 #include <stdio.h>
 
