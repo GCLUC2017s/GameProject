@@ -115,7 +115,11 @@ CTitle::~CTitle()
 }
 void CTitle::Update()
 {
-
+	if (CInput::GetState(0, CInput::ePush, CInput::eButton1))
+	{
+		CSceneManager::GetInstance()->ChangeScene();
+		CSceneManager::GetInstance()->Quit(0, eTest);
+	}
 }
 void CTitle::Draw()
 {
@@ -208,7 +212,7 @@ void CTitle::Draw()
 			m_exit->SetPos(m_exitPos);
 			m_exit->SetSize(m_exitSize);
 
-			if (CInput::GetState(0, CInput::ePush, CInput::eButton10))   CSceneManager::GetInstance()->Quit(0);
+			if (CInput::GetState(0, CInput::ePush, CInput::eButton10))   CSceneManager::GetInstance()->Quit(0,eCharaSelect);
 		}
 		else
 		{

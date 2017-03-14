@@ -24,11 +24,7 @@ void display(void) {
 	//---------------------------------------
 
 	CSceneManager::GetInstance()->Update();
-	CTaskManager::GetInstance()->UpdateAll();
 	CSceneManager::GetInstance()->Draw();
-	CTaskManager::GetInstance()->DrawAll();
-
-
 
 	//----------------------------------
 
@@ -112,9 +108,12 @@ void init(void)
 	CResourceManager::GetInstance()->Add("PlayerWLogoWord1", CImage::LoadImage("CharaSelect/PlayerWWord1.png"));
 	CResourceManager::GetInstance()->Add("PlayerWLogoWord2", CImage::LoadImage("CharaSelect/PlayerWWord2.png"));
 	CResourceManager::GetInstance()->Add("PlayerWLogoWord3", CImage::LoadImage("CharaSelect/PlayerWWord3.png"));
-	CResourceManager::GetInstance()->Add("BackGround", CImage::LoadImage("BackGround/Background_M01.png"));
-	CResourceManager::GetInstance()->Add("Wood", CImage::LoadImage("BackGround/Wood_01.png"));
+	CResourceManager::GetInstance()->Add("BackGround", CImage::LoadImage("BackGround/Game_Background/Background_M01.png"));
+	CResourceManager::GetInstance()->Add("BackGround2", CImage::LoadImage("BackGround/Game_Background/Background_M01.png"));
+	CResourceManager::GetInstance()->Add("Carrot", CImage::LoadImage("Enemy/Carrot_01.png"));
 
+//	CSound::GetInstance()->GetSound("BGM_BATTLE")->Load("BGM/battle.wav",1);
+//	CSound::GetInstance()->GetSound("BGM_BATTLE")->Play();
 
 }
 

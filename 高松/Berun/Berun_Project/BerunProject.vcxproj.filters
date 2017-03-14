@@ -47,6 +47,9 @@
     <ClCompile Include="Game\Tutorial\CTutorial.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="Scene\Test\CTest.cpp">
+      <Filter>Scene\Test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Global.h" />
@@ -98,6 +101,9 @@
     <ClInclude Include="Game\Tutorial\CTutorial.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\Test\CTest.h">
+      <Filter>Scene\Test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -138,6 +144,9 @@
     </Filter>
     <Filter Include="System\CharaBase">
       <UniqueIdentifier>{33e74366-9285-4d17-8b40-1fbcc312084d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Test">
+      <UniqueIdentifier>{6a786dcd-2146-4b30-a76a-e38931379c80}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

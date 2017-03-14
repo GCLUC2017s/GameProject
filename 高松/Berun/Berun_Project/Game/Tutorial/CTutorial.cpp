@@ -2,22 +2,21 @@
 
 static CFont *font = nullptr;
 
-CTutorial::CTutorial() : CTutorial(g_tutorialDataPath[g_tutorialNo]),
-						 mp_file(nullptr),
-						 m_face(0),
-						 m_textEnd(0),
-						 m_end(0)
+CTutorial::CTutorial() 
 {
 }
 
-CTutorial::CTutorial(char * file)
+CTutorial::CTutorial(char * file) : CTask(0,0), mp_file(nullptr),
+									m_face(0),
+									m_end(0), m_state(0)
 {
 	mp_img[0] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("PlayerM"));
 	mp_img[1] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("PlayerW"));
+	
+	//テキストファイルオープン
 	fopen_s(&mp_file, file, "r");
+	//ファイルが無ければ何もしない
 	if (mp_file == nullptr) return;
-	fgets(m_str, WORD_MAX, mp_file);
-	sscanf_s(m_str, "%d");
 	GetText();
 }
 
@@ -29,7 +28,9 @@ CTutorial::~CTutorial()
 void CTutorial::Update()
 {
 	if (!font) font = new CFont(L"HG丸ゴシックM-PRO", 40);
+	//エンターキーでチュートリアル進行
 	if (CInput::GetState(0, CInput::ePush, CInput::eButton10)) GetText();
+	//スペースキーでチュートリアルスキップ
 	if (CInput::GetState(0, CInput::ePush, CInput::eButton5)) m_end = -2;
 	if(g_tutorialNo == 1) mp_img[0]->SetPos(200, 250);
 	if(g_tutorialNo == 2) mp_img[1]->SetPos(200, 250);
@@ -37,6 +38,7 @@ void CTutorial::Update()
 
 void CTutorial::Draw()
 {
+	//チュートリアル操作表示
 	sprintf(m_str, "ENTER：進行");
 	font->Draw(800, 35, 1, 1, 1, m_str);
 	sprintf(m_str, "SPACE：スキップ");

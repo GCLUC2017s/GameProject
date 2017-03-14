@@ -1,9 +1,4 @@
 #include "CSceneManager.h"
-#include "CCamera.h"
-#include "../Scene/Logo/CLogo.h"
-#include "../Scene/Title/CTitle.h"
-#include "../Scene/CharaSelect/CCharaSelect.h"
-#include "../Game/CGame.h"
 
 CSceneManager* CSceneManager::mp_sceneManager = nullptr;
 
@@ -19,34 +14,6 @@ CSceneManager::CSceneManager() :
 	ChangeScene();
 }
 
-void CSceneManager::ChangeScene()
-{	
-	//シーン選択
-	switch(m_sceneNum)
-	{
-	case eLogo:
-		ChangeScene(eTitle);
-		break;
-	//現在のシーンがタイトルの場合
-	case eTitle:
-		ChangeScene(eCharaSelect);
-		break;
-	//現在のシーンがキャラセレクトの場合
-	case eCharaSelect:
-		ChangeScene(eGame);
-		break;
-	//現在のシーンがゲームの場合
-	case eGame:
-		//if(m_quitFlag = 0) ChangeScene(eResult);
-		//else if (m_quitFlag = 1)ChangeScene(eTitle);
-		break;
-	//シーンが設定されていない場合
-	default:
-		//タイトルシーンへ
-		ChangeScene(eLogo);
-		break;
-	}
-}
 
 void CSceneManager::Update()
 {
@@ -55,17 +22,21 @@ void CSceneManager::Update()
 		m_quitCnt++;
 		if(m_quitCnt > m_quitTime)
 		{
-			ChangeScene();
+			ChangeScene(m_nextNum);
 		}
 	}
 	//シーン更新処理
 	mp_scene->Update();
+	CTaskManager::GetInstance()->UpdateAll();
+	CTaskManager::GetInstance()->DestroyAppoint();
 }
 
 void CSceneManager::Draw()
 {
 	//シーン更新描画
 	mp_scene->Draw();
+
+	CTaskManager::GetInstance()->DrawAll();
 
 	if(m_quit)
 	{
@@ -100,6 +71,9 @@ void CSceneManager::ChangeScene(E_Scene scene)
 
 	switch(m_sceneNum)
 	{
+	case eTest:
+		mp_scene = new CTest();
+		break;
 	case eLogo:
 		mp_scene = new CLogo();
 		break;
@@ -109,7 +83,6 @@ void CSceneManager::ChangeScene(E_Scene scene)
 	case eCharaSelect:
 		mp_scene = new CCharaSelect();
 		break;
-		
 	case eGame:
 		mp_scene = new CGame();
 		break;
@@ -119,6 +92,8 @@ void CSceneManager::ChangeScene(E_Scene scene)
 		break;
 		*/
 	default:
+		//デバッグ
+		assert(false);
 		break;
 	}
 
