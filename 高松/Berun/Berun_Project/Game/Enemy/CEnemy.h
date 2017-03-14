@@ -1,9 +1,7 @@
 #ifndef CENEMY_GURAD
 #define CENEMY_GUARD
-#include"../System/Base/CBase.h"
 #include"../Global.h"
-#include "../Global.h"
-#include"../System/TaskSystem/CTaskManager.h"
+#include "../../System/CharaBase/CCharaBase.h"
 
 /**
 *@file	 CEnemy.h
@@ -13,8 +11,9 @@
 
 
 
-class CEnemy:public CTask {
+class CEnemy:public CCharaBase {
 private:
+	/*
 	//野菜・果物
 	CImage *m_carrot;
 	CImage *m_papurika;
@@ -33,36 +32,24 @@ private:
 	CImage *m_rice;
 	CImage *m_bread;
 	CImage *m_grainBoss;
-	
+	*/
 	enum E_Enemy 
 	{
-		eCarrot,//ニンジン
-		ePapurika,//ピーマン
-		eBerry,//イチゴサングラス空中
-		eStrawberry,//イチゴ地上
-		eVegetavelboss,//野菜ボス（ウサギ）
-		ePig,//豚
-		eBird,//鳥
-		eMeatboss,//肉ボス（鶏）
-		eSquid,//イカ
-		eFish,//魚
-		eFishboss,//魚介ボス（鮫）
-		eRice,//米
-		eBread,//パン
-		eGrainboss//穀物ボス（茶碗武士）
 	};
-	int m_enemytime;
+
 	E_Enemy m_enemytype;
+	//int m_enemytime;
+	void _key();
 public:
 		
-	CEnemy();
+	CEnemy(int type);
 	
 	~CEnemy();
-	
+	/*
 	void Update();
 	
 	void Draw();
-	
+	*/
 
 	/*void HitCallback(CBase *b);
 	static CEnemy* GetmainEnemy() { return mainEnemy; };

@@ -113,6 +113,7 @@
     <ClCompile Include="Game\Enemy\CEnemy.cpp" />
     <ClCompile Include="Game\Map\CMap.cpp" />
     <ClCompile Include="Game\Tutorial\CTutorial.cpp" />
+    <ClCompile Include="Global.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scene\CharaSelect\CCharaSelect.cpp" />
     <ClCompile Include="Scene\CSceneChangeAnimation.cpp" />

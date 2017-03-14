@@ -6,7 +6,7 @@ T_PlayerData g_playerData[] =
 	{ 0,1,0,0,0,0,0,0,0,0,0.0f,0.0f },
 	{ 1,1,0,0,0,0,0,0,0,0,0.0f,0.0f },
 };
-CPlayer::CPlayer(int type):CCharaBase(0)
+CPlayer::CPlayer(int type):CCharaBase(type)
 {
 	mp_pData = &g_playerData[type];
 	
@@ -18,4 +18,14 @@ CPlayer::~CPlayer()
 
 }
 
+void CPlayer::_key() {
+	CCharaBase::_key();
+
+	
+	
+	if (CInput::GetState(0, CInput::eHold, CInput::eRight))
+	{
+		m_right = true;
+	}
+}
 

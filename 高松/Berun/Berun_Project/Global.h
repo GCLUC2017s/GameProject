@@ -13,16 +13,12 @@
 #define SCREEN_SIZE CVector2D(SCREEN_WIDTH,SCREEN_HEIGHT)
 
 
-#define GRAVITY	0.98f
+#define GRAVITY	-0.98f
 #define TUTORIAL_MAX 2
 #define FILE_NAME 32
 
 
-extern char g_tutorialDataPath[TUTORIAL_MAX][FILE_NAME] =
-{
-	"TutorialM.txt",
-	"TutorialW.txt",
-};
-extern int  g_tutorialNo = 0;
+extern char g_tutorialDataPath[TUTORIAL_MAX][FILE_NAME];
+extern int  g_tutorialNo;
 
 #define BGM_BATTLE	"BGM_BATTLE"

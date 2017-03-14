@@ -50,6 +50,7 @@
     <ClCompile Include="Scene\Test\CTest.cpp">
       <Filter>Scene\Test</Filter>
     </ClCompile>
+    <ClCompile Include="Global.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Global.h" />

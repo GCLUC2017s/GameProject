@@ -70,6 +70,9 @@ public:
 	{
 		m_dwPriority = dwPriority;
 	}
+	void SetDestroyFlag(bool f) {
+		m_destroyFlg = f;
+	}
 	friend class CTaskManager;
 };
 
