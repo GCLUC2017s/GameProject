@@ -89,6 +89,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Game\CGame.h" />
+    <ClInclude Include="Game\CPlayer\CPlayer.h" />
     <ClInclude Include="Game\Enemy\CEnemy.h" />
     <ClInclude Include="Game\Map\CMap.h" />
     <ClInclude Include="Global.h" />
@@ -100,11 +101,13 @@
     <ClInclude Include="Scene\Result\CResult.h" />
     <ClInclude Include="Scene\Title\CTitle.h" />
     <ClInclude Include="System\Base\CBase.h" />
+    <ClInclude Include="System\CharaBase\CCharaBase.h" />
     <ClInclude Include="System\TaskSystem\CTask.h" />
     <ClInclude Include="System\TaskSystem\CTaskManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\CGame.cpp" />
+    <ClCompile Include="Game\CPlayer\CPlayer.cpp" />
     <ClCompile Include="Game\Enemy\CEnemy.cpp" />
     <ClCompile Include="Game\Map\CMap.cpp" />
     <ClCompile Include="main.cpp" />
@@ -115,6 +118,7 @@
     <ClCompile Include="Scene\Result\CResult.cpp" />
     <ClCompile Include="Scene\Title\CTitle.cpp" />
     <ClCompile Include="System\Base\CBase.cpp" />
+    <ClCompile Include="System\CharaBase\CCharaBase.cpp" />
     <ClCompile Include="System\TaskSystem\CTask.cpp" />
     <ClCompile Include="System\TaskSystem\CTaskManager.cpp" />
   </ItemGroup>
