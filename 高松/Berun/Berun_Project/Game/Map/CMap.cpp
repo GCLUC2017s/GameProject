@@ -1,7 +1,7 @@
 #include"CMap.h"
 
 
-CMap::CMap() : CTask(0){
+CMap::CMap() : CTask(0,1){
 	m_background = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Back"));
 	m_wood= dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Wood"));
 

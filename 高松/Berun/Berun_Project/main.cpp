@@ -111,6 +111,8 @@ void init(void)
 	CResourceManager::GetInstance()->Add("BackGround", CImage::LoadImage("BackGround/Background_M01.png"));
 	CResourceManager::GetInstance()->Add("Wood", CImage::LoadImage("BackGround/Wood_01.png"));
 
+//	CSound::GetInstance()->GetSound("BGM_BATTLE")->Load("BGM/battle.wav",1);
+//	CSound::GetInstance()->GetSound("BGM_BATTLE")->Play();
 
 }
 
