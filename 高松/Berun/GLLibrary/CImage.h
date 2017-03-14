@@ -106,7 +106,7 @@ public:
 
 	/*!
 		@brief	¶‰E”½“]ƒtƒ‰ƒO‚ğİ’è
-		@param	f		[in] true:’Êí false:…•½”½“]
+		@param	f		[in] true:…•½”½“] false:’Êí
 		@retval	–³‚µ
 	**/
 	void SetFlipH(bool f) {
@@ -155,6 +155,10 @@ public:
 	void ResetMove()
 	{
 		r = 0;
+	}
+	void SetMove(float l)
+	{
+		r = l;
 	}
 
 	bool MoveStamp(CVector2D pos, CVector2D size, int volume, int speed) 

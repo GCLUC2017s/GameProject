@@ -7,6 +7,7 @@
 
 #ifndef CCHARASELECT_INCLUDE_GUARD
 #define CCHARASELECT_INCLUDE_GUARD
+#include "../GLLibrary/CImage.h"
 #include "../Global.h"
 #include "../CScene.h"
 
@@ -15,8 +16,13 @@ class CCharaSelect : public CScene
 	CImage *m_black;
 	CImage *m_charaSelectBackGround;
 	CImage *m_charaSelectLogo;
-	CImage *m_playerMLogo;
-	CImage *m_playerWLogo;
+	CImage *m_playerMLogoWord1;
+	CImage *m_playerMLogoWord2;
+	CImage *m_playerMLogoWord3;
+	CImage *m_playerMLogoWord4;
+	CImage *m_playerWLogoWord1;
+	CImage *m_playerWLogoWord2;
+	CImage *m_playerWLogoWord3;
 	CImage *m_playerM;
 	CImage *m_playerW;
 	CImage *m_playerMShadow;
@@ -28,24 +34,57 @@ class CCharaSelect : public CScene
 	//以下、キャラセレクト画面のロゴサイズを格納する変数
 	int m_charaSelectLogoWidth;
 	int m_charaSelectLogoHeight;
-	//以下、男主人公ロゴの座標の初期値を格納する変数
-	int m_beforePlayerMLogoX;
-	int m_beforePlayerMLogoY;
-	//以下、男主人公ロゴの座標の目的地を格納する変数
-	int m_afterPlayerMLogoX;
-	int m_afterPlayerMLogoY;
-	//以下、男主人公ロゴの大きさを格納する変数
-	int m_playerMLogoWidth;
-	int m_playerMLogoHeight;
-	//以下、女主人公ロゴの座標の初期値を格納する変数
-	int m_beforePlayerWLogoX;
-	int m_beforePlayerWLogoY;
-	//以下、女主人公ロゴの座標の目的地を格納する変数
-	int m_afterPlayerWLogoX;
-	int m_afterPlayerWLogoY;
-	//以下、女主人公ロゴの大きさを格納する変数
-	int m_playerWLogoWidth;
-	int m_playerWLogoHeight;
+	//以下、キャラクターMのWord1の移動前の座標を格納する変数
+	int m_beforePlayerMLogoWord1X;
+	int m_beforePlayerMLogoWord1Y;
+	//以下、キャラクターMのWord1の目的地の座標を格納する変数
+	int m_afterPlayerMLogoWord1X;
+	int m_afterPlayerMLogoWord1Y;
+	//以下、キャラクターMのWord2の移動前の座標を格納する変数
+	int m_beforePlayerMLogoWord2X;
+	int m_beforePlayerMLogoWord2Y;
+	//以下、キャラクターMのWord2の目的地の座標を格納する変数
+	int m_afterPlayerMLogoWord2X;
+	int m_afterPlayerMLogoWord2Y;
+	//以下、キャラクターMのWord3の移動前の座標を格納する変数
+	int m_beforePlayerMLogoWord3X;
+	int m_beforePlayerMLogoWord3Y;
+	//以下、キャラクターMのWord3の目的地の座標を格納する変数
+	int m_afterPlayerMLogoWord3X;
+	int m_afterPlayerMLogoWord3Y;
+	//以下、キャラクターMのWord4の移動前の座標を格納する変数
+	int m_beforePlayerMLogoWord4X;
+	int m_beforePlayerMLogoWord4Y;
+	//以下、キャラクターMのWord4の目的地の座標を格納する変数
+	int m_afterPlayerMLogoWord4X;
+	int m_afterPlayerMLogoWord4Y;
+	//以下、キャラクターWのWord1の移動前の座標を格納する変数
+	int m_beforePlayerWLogoWord1X;
+	int m_beforePlayerWLogoWord1Y;
+	//以下、キャラクターWのWord1の目的地の座標を格納する変数
+	int m_afterPlayerWLogoWord1X;
+	int m_afterPlayerWLogoWord1Y;
+	//以下、キャラクターWのWord2の移動前の座標を格納する変数
+	int m_beforePlayerWLogoWord2X;
+	int m_beforePlayerWLogoWord2Y;
+	//以下、キャラクターWのWord2の目的地の座標を格納する変数
+	int m_afterPlayerWLogoWord2X;
+	int m_afterPlayerWLogoWord2Y;
+	//以下、キャラクターWのWord3の移動前の座標を格納する変数
+	int m_beforePlayerWLogoWord3X;
+	int m_beforePlayerWLogoWord3Y;
+	//以下、キャラクターWのWord3の目的地の座標を格納する変数
+	int m_afterPlayerWLogoWord3X;
+	int m_afterPlayerWLogoWord3Y;
+	//以下、キャラクターロゴの大きさを格納する変数
+	int m_playerLogoWordWidth;
+	int m_playerLogoWordHeight;
+	//以下、キャラクターロゴ2の大きさを格納する変数
+	int m_playerLogoWord2Width;
+	int m_playerLogoWord2Height;
+	//以下、キャラクターロゴ3の大きさを格納する変数
+	int m_playerLogoWord3Width;
+	int m_playerLogoWord3Height;
 	//以下、男主人公の座標の初期値を格納する変数
 	int m_beforePlayerMX;
 	int m_beforePlayerMY;
@@ -84,18 +123,40 @@ class CCharaSelect : public CScene
 	CVector2D m_charaSelectLogoPos;
 	//キャラセレクト画面のロゴサイズを纏める変数
 	CVector2D m_charaSelectLogoSize;
-	//男主人公ロゴの移動前の座標を纏める変数
-	CVector2D m_beforePlayerMLogoPos;
-	//男主人公ロゴの目的地の座標を纏める変数
-	CVector2D m_afterPlayerMLogoPos;
-	//男主人公ロゴの大きさを纏める変数
-	CVector2D m_playerMLogoSize;
-	//女主人公ロゴの移動前の座標を纏める変数
-	CVector2D m_beforePlayerWLogoPos;
-	//女主人公ロゴの目的地の座標を纏める変数
-	CVector2D m_afterPlayerWLogoPos;
-	//女主人公ロゴの大きさを纏める変数
-	CVector2D m_playerWLogoSize;
+	//男主人公ロゴ文字1の移動前の座標を纏める変数
+	CVector2D m_beforePlayerMLogoWord1Pos;
+	//男主人公ロゴ文字1の目的地の座標を纏める変数
+	CVector2D m_afterPlayerMLogoWord1Pos;
+	//男主人公ロゴ文字2の移動前の座標を纏める変数
+	CVector2D m_beforePlayerMLogoWord2Pos;
+	//男主人公ロゴ文字2の目的地の座標を纏める変数
+	CVector2D m_afterPlayerMLogoWord2Pos;
+	//男主人公ロゴ文字3の移動前の座標を纏める変数
+	CVector2D m_beforePlayerMLogoWord3Pos;
+	//男主人公ロゴ文字3の目的地の座標を纏める変数
+	CVector2D m_afterPlayerMLogoWord3Pos;
+	//男主人公ロゴ文字4の移動前の座標を纏める変数
+	CVector2D m_beforePlayerMLogoWord4Pos;
+	//男主人公ロゴ文字4の目的地の座標を纏める変数
+	CVector2D m_afterPlayerMLogoWord4Pos;
+	//女主人公ロゴ文字1の移動前の座標を纏める変数
+	CVector2D m_beforePlayerWLogoWord1Pos;
+	//女主人公ロゴ文字1の目的地の座標を纏める変数
+	CVector2D m_afterPlayerWLogoWord1Pos;
+	//女主人公ロゴ文字2の移動前の座標を纏める変数
+	CVector2D m_beforePlayerWLogoWord2Pos;
+	//女主人公ロゴ文字2の目的地の座標を纏める変数
+	CVector2D m_afterPlayerWLogoWord2Pos;
+	//女主人公ロゴ文字3の移動前の座標を纏める変数
+	CVector2D m_beforePlayerWLogoWord3Pos;
+	//女主人公ロゴ文字3の目的地の座標を纏める変数
+	CVector2D m_afterPlayerWLogoWord3Pos;
+	//主人公ロゴ文字の大きさを纏める変数
+	CVector2D m_playerLogoWord1Size;
+	//主人公ロゴ文字2の大きさを纏める変数
+	CVector2D m_playerLogoWord2Size;
+	//主人公ロゴ文字3の大きさを纏める変数
+	CVector2D m_playerLogoWord3Size;
 	//男主人公の移動前の座標を纏める変数
 	CVector2D m_beforePlayerMPos;
 	//男主人公の目的地の座標を纏める変数
