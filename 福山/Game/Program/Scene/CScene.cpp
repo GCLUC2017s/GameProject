@@ -1,27 +1,38 @@
 //シーンのプログラミング（シーンマネージャー）
+/*
+シーンとシーンマネージャーを合体
+*/
+
 //担当者　高橋弘樹				動作テスト　未実行
 #include "../Scene/CScene.h"
 #include "../Title/CTitleScene.h"
 
-CScene *m_currScene;
+CScene* CScene::mScene = 0;
 
-CScene *CScene::mScene = new CScene();
-
-void CScene::ChangeScene(eSceneNo no)
-{
-	mNextStatus = no;
+//GetInstance
+CScene* CScene::GetInstance() {
+	if (mScene == 0) {
+		mScene = new CScene();
+	}
+	return mScene;
 }
 
-void CScene::Update() {
+//KILL処理
+void CScene::DeleteScene(){
+	if	  (mScene)
+	delete mScene;
+	mScene = 0;
+}
 
-	delete(m_currScene);
+void CScene::ChangeScene(eSceneNo SceneNo) {
 
-	switch (mNextStatus) {
+	DeleteScene();		//KILL
+
+	switch (SceneNo) {
 
 		//タイトルの呼び出しを行う
 	case E_TITLE:
-		m_currScene = new CTitleScene;
-
+		mScene = new CTitleScene;
 
 		break;
 		//セレクト画面の呼び出しを行う
@@ -49,5 +60,16 @@ void CScene::Update() {
 
 
 	};
-
 }
+
+void CScene::Update(){	//とりあえずここに置いておく。
+	//初期シーンの指定
+	CScene::GetInstance()->ChangeScene(CScene::E_TITLE);
+
+	//シーンのアップデート
+	CScene::GetInstance()->Update();
+
+	//シーンのデリート
+	CScene::GetInstance()->DeleteScene();
+
+}	
