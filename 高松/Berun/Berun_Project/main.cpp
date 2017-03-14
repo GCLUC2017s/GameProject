@@ -8,19 +8,8 @@
 #include "stdafx.h"
 #include "Global.h"
 #include "../System/TaskSystem/CTaskManager.h"
-#include "../Scene/Title/CTitle.h"
-#include "../Scene/Logo/CLogo.h"
-#include "../Scene/CharaSelect/CCharaSelect.h"
 #include "../Scene/CSceneManager.h"
 
-//テスト用
-CImage* g_backGround=nullptr;
-CImage* g_life = nullptr;
-
-
-CTitle *g_title;
-CLogo *g_logo;
-CCharaSelect *g_charaSelect;
 void display(void) {
 	//各バッファーをクリア
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -38,15 +27,6 @@ void display(void) {
 	CTaskManager::GetInstance()->UpdateAll();
 	CSceneManager::GetInstance()->Draw();
 	CTaskManager::GetInstance()->DrawAll();
-
-
-	//if (!g_logo->flag) g_logo->Draw();
-	//else if (!g_title->flag) g_title->Draw();
-	//else if (g_title->flag) g_charaSelect->Draw();
-
-	//テスト用　表示
-//	g_backGround->Draw();
-//	g_life->Draw();
 
 
 
@@ -134,15 +114,6 @@ void init(void)
 	CResourceManager::GetInstance()->Add("PlayerWLogoWord3", CImage::LoadImage("CharaSelect/PlayerWWord3.png"));
 	CResourceManager::GetInstance()->Add("BackGround", CImage::LoadImage("BackGround/Background_M01.png"));
 	CResourceManager::GetInstance()->Add("Wood", CImage::LoadImage("BackGround/Wood_01.png"));
-
-	//テスト用　読み込んだ画像の取得
-	g_backGround = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("BackGround"));
-	g_life = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Life"));
-
-	g_title = new CTitle;
-	g_logo = new CLogo;
-	g_charaSelect = new CCharaSelect;
-
 
 
 }

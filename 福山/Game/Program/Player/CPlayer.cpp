@@ -11,21 +11,20 @@
 #define SIZE_TEX_PLAYER_WALK_Y 800			//プレイヤーの歩く姿テクスチャサイズ Y
 #define SIZE_TEX_PLAYER_RUN_X  800			//プレイヤーの走る姿テクスチャサイズ Y
 #define SIZE_TEX_PLAYER_RUN_Y  800			//プレイヤーの走る姿テクスチャサイズ Y
-#define SIZE_SHADOW
 #define SLOW_DOWN 0.001						//移動の減速スピード
 #define WALK_SPEED 0.05						//歩くスピード
 #define RUN_SPEED 0.1						//走るスピード
 #define WALK_X 2							//歩くベクトルX
 #define WALK_Y 1							//歩くベクトルY
-
-float CPlayer::camera_x; 
+#define PATTERN_R 1							//PATTERNの右
+#define PATTERN_L 2							//PATTERNの左
+float CPlayer::camera_x;
 float CPlayer::camera_y;
-
 
 
 void CPlayer::SetPos(){
 	mPos = first_pos;
-	mAxis = mPos.y;
+	mAxis = mPos.y - SIZE_PLAYER_Y;
 
 }
 
@@ -79,6 +78,15 @@ CPlayer::~CPlayer() {
 
 }
 
+int CPlayer::DecisionRL(int i){
+	if (i / 2  < AnimePattern){
+		return  PATTERN_R;
+	}
+	else
+	{
+		return	PATTERN_L;
+	}
+}
 
 
 //プレイヤー描画
@@ -96,7 +104,7 @@ CPlayer::CPlayer() : mVelocity(0), mSpeedJump(JUMP_FIRST_SPEED),mFlameCount(0){
 
 	//四角形の頂点設定
 	mPlayer.SetVertex(-SIZE_PLAYER_X, SIZE_PLAYER_Y, SIZE_PLAYER_X, -SIZE_PLAYER_Y);
-	mShadow.SetVertex(-SIZE_PLAYER_X, SIZE_PLAYER_Y, SIZE_PLAYER_X, -SIZE_PLAYER_Y);
+	mShadow.SetVertex(-SIZE_SHADOW_X, SIZE_SHADOW_Y, SIZE_SHADOW_X, -SIZE_SHADOW_Y);
 	//四角形の色を設定
 	mPlayer.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 
@@ -138,15 +146,27 @@ void CPlayer::AnimeFlame(){
 void CPlayer::Run_Walk(){
 	if (CKey::push(VK_CONTROL)){ //走る時
 		mVelocity = RUN_SPEED;
+		if (DecisionRL(eAnime) == PATTERN_L){
+			eAnime = E_RUN_L;
+		}
+		else{
+			eAnime = E_RUN_R;
+		}
 	}
 	else{					   //歩く時
+		if (DecisionRL(eAnime) == PATTERN_L){
+			eAnime = E_WALK_L;
+		}
+		else{
+			eAnime = E_WALK_R;
+		}
 		mVelocity = WALK_SPEED;
 	}
 }
 void CPlayer::Update() {
 	AnimeFlame();
 	assert(mAnime <= FLAME_LIMIT); //フレーム数が七を超えるとダメ
-	mPriorityR = mAxis;
+	mPriorityR = -mAxis;
 	CTaskManager TaskManager;
 	camera_x = mPos.x;
 	camera_y = mPos.y;
@@ -163,14 +183,7 @@ void CPlayer::Update() {
 
 	// 右移動
 	if (CKey::push(VK_RIGHT)) {		
-		if (CKey::push(VK_CONTROL)){ //走る時
-			eAnime = E_RUN_R;
-			mVelocity = RUN_SPEED;
-		}
-		else{					   //歩く時
-			eAnime = E_WALK_R;
-			mVelocity = WALK_SPEED;
-		}
+		Run_Walk();
 		mForward = CVector2(WALK_X, 0.0f);
 		mPos += mForward * mVelocity;
 	}
@@ -182,6 +195,7 @@ void CPlayer::Update() {
 		if (mVelocity > 0){
 			mVelocity -= SLOW_DOWN;
 			mPos += mForward * mVelocity;
+			mAxis += mForward.y * mVelocity;
 		}
 		else{
 			mVelocity = 0;
@@ -190,16 +204,10 @@ void CPlayer::Update() {
 
 	//左移動
 	if (CKey::push(VK_LEFT)) { 
-		if (CKey::push(VK_CONTROL)){ //走る時
-			eAnime = E_RUN_L;
-			mVelocity = RUN_SPEED;
-		}
-		else{					   //歩く時
-			eAnime = E_WALK_L;
-			mVelocity = WALK_SPEED;
-		}
+		Run_Walk();
 		mForward = CVector2(-WALK_X, 0.0f);
 		mPos += mForward * mVelocity;
+
 	
 	}else{ //移動していないとき
 		if (mSaveAnime == E_WALK_L ||
@@ -209,6 +217,7 @@ void CPlayer::Update() {
 		if (mVelocity > 0){ 
 			mVelocity -= SLOW_DOWN;
 			mPos += mForward * mVelocity;
+			mAxis += mForward.y * mVelocity;
 		}
 		else{
 			mVelocity = 0;
@@ -231,7 +240,6 @@ void CPlayer::Update() {
 		mForward = CVector2(0.0f, WALK_Y);
 		mPos += mForward * mVelocity;
 		mAxis += mForward.y * mVelocity;
-
 	}
 
 	//下移動
@@ -239,22 +247,19 @@ void CPlayer::Update() {
 		Run_Walk();
 		mForward = CVector2(0.0f, -WALK_Y);
 		mPos += mForward * mVelocity;
-		
 		mAxis += mForward.y * mVelocity;
-
 	}
-
 
 
 
 	/*あたり判定*/
 	if (mPos.y > player_limit_top - SIZE_PLAYER_Y&& !mEnabledJump){  //マップ外に出ると元の位置に戻す(軸)
 		mPos.y = player_limit_top - SIZE_PLAYER_Y;
-		mAxis = mPos.y; //軸をもとに戻す
+		mAxis = mPos.y - SIZE_PLAYER_Y; //軸をもとに戻す
 	}
 	if (mPos.y < player_limit_bottom + SIZE_PLAYER_Y){  //マップ外に出ると元の位置に戻す(軸)
 		mPos.y = player_limit_bottom + SIZE_PLAYER_Y;
-		mAxis = mPos.y; //軸をもとに戻す
+		mAxis = mPos.y - SIZE_PLAYER_Y; //軸をもとに戻す
 	}
 
 	if (mPos.x >= player_limit_right - SIZE_PLAYER_X || mPos.x <= player_limit_left + SIZE_PLAYER_X){ //マップ外に出ると元の位置に戻す(X)
@@ -263,6 +268,7 @@ void CPlayer::Update() {
 	/*あたり判定終了*/
 
 	mPlayer.position = mPos;
+	mShadow.position = CVector2(mPos.x,mAxis);
 
 	/*アニメーションのステータス*/
 	switch (eAnime)
@@ -294,5 +300,7 @@ void CPlayer::Update() {
 
 void CPlayer::Render(){
 	//プレイヤーの描画
+	mShadow.Render();
 	mPlayer.Render();
+
 }
