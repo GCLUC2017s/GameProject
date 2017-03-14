@@ -11,6 +11,7 @@
 #define SIZE_TEX_PLAYER_WALK_Y 800			//プレイヤーの歩く姿テクスチャサイズ Y
 #define SIZE_TEX_PLAYER_RUN_X  800			//プレイヤーの走る姿テクスチャサイズ Y
 #define SIZE_TEX_PLAYER_RUN_Y  800			//プレイヤーの走る姿テクスチャサイズ Y
+#define SIZE_SHADOW
 #define SLOW_DOWN 0.001						//移動の減速スピード
 #define WALK_SPEED 0.05						//歩くスピード
 #define RUN_SPEED 0.1						//走るスピード
@@ -95,6 +96,7 @@ CPlayer::CPlayer() : mVelocity(0), mSpeedJump(JUMP_FIRST_SPEED),mFlameCount(0){
 
 	//四角形の頂点設定
 	mPlayer.SetVertex(-SIZE_PLAYER_X, SIZE_PLAYER_Y, SIZE_PLAYER_X, -SIZE_PLAYER_Y);
+	mShadow.SetVertex(-SIZE_PLAYER_X, SIZE_PLAYER_Y, SIZE_PLAYER_X, -SIZE_PLAYER_Y);
 	//四角形の色を設定
 	mPlayer.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 
@@ -105,14 +107,14 @@ CPlayer::CPlayer() : mVelocity(0), mSpeedJump(JUMP_FIRST_SPEED),mFlameCount(0){
 
 void CPlayer::Jump(){ //ジャンプ処理メソッド
 
-	mPos.y += speed_jump; //飛ぶ処理
-	speed_jump -= gravity;//減速処理
+	mPos.y += mSpeedJump; //飛ぶ処理
+	mSpeedJump -= gravity;//減速処理
 
 
 	if (mPos.y < mAxis){//現在の軸についたとき
 		mPos.y = mAxis; //元いた地面の"Y"に戻す
-		speed_jump = JUMP_FIRST_SPEED;
-		enabled_jump = false; //終了
+		mSpeedJump = JUMP_FIRST_SPEED;
+		mEnabledJump = false; //終了
 
 	}
 
@@ -123,14 +125,14 @@ void CPlayer::Jump(){ //ジャンプ処理メソッド
 /*アニメのフレームを動かすメソッド*/
 void CPlayer::AnimeFlame(){
 
-	mFlame_Count += 1;
-	if (mFlame_Count % 5 == 0){ //フレーム数
+	mFlameCount += 1;
+	if (mFlameCount % 5 == 0){ //フレーム数
 		mAnime += 1;
 	}
-	if (mAnime >= FLAME_LIMIT || save_eAnime != eAnime){
+	if (mAnime >= FLAME_LIMIT || mSaveAnime != eAnime){
 		mAnime = 0;
 	}
-	save_eAnime = eAnime;
+	mSaveAnime = eAnime;
 
 }
 void CPlayer::Run_Walk(){
@@ -173,8 +175,8 @@ void CPlayer::Update() {
 		mPos += mForward * mVelocity;
 	}
 	else{
-		if (save_eAnime == E_WALK_R ||
-			save_eAnime == E_RUN_R){//待機中 直前が左の歩きでなければ
+		if (mSaveAnime == E_WALK_R ||
+			mSaveAnime == E_RUN_R){//待機中 直前が左の歩きでなければ
 			eAnime = E_STAY_R;
 		}
 		if (mVelocity > 0){
@@ -200,8 +202,8 @@ void CPlayer::Update() {
 		mPos += mForward * mVelocity;
 	
 	}else{ //移動していないとき
-		if (save_eAnime == E_WALK_L ||
-			save_eAnime == E_RUN_L){ //待機中 直前が右の歩きでなければ
+		if (mSaveAnime == E_WALK_L ||
+			mSaveAnime == E_RUN_L){ //待機中 直前が右の歩きでなければ
 			eAnime = E_STAY_L;
 		}
 		if (mVelocity > 0){ 
@@ -215,9 +217,9 @@ void CPlayer::Update() {
 	}
 
 	//ジャンプ
-	if (CKey::push(' ') || enabled_jump) {
-		if (!enabled_jump){ //ジャンプしていないとき
-			enabled_jump = true;
+	if (CKey::push(' ') || mEnabledJump) {
+		if (!mEnabledJump){ //ジャンプしていないとき
+			mEnabledJump = true;
 		}
 		Jump();
 	}
@@ -246,7 +248,7 @@ void CPlayer::Update() {
 
 
 	/*あたり判定*/
-	if (mPos.y > player_limit_top - SIZE_PLAYER_Y&& !enabled_jump){  //マップ外に出ると元の位置に戻す(軸)
+	if (mPos.y > player_limit_top - SIZE_PLAYER_Y&& !mEnabledJump){  //マップ外に出ると元の位置に戻す(軸)
 		mPos.y = player_limit_top - SIZE_PLAYER_Y;
 		mAxis = mPos.y; //軸をもとに戻す
 	}

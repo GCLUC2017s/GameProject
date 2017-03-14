@@ -44,7 +44,7 @@ private:
 	};
 
 	MyEnum eAnime = E_STAY_R;
-	int mSave_eAnime; //直前のアニメが何か判断用
+	int mSaveAnime; //直前のアニメが何か判断用
 
 	int mFlameCount;		//フレーム数カウント用
 	int mAnime;		//アニメーションのフレーム数

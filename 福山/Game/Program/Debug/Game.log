@@ -1,26 +1,3 @@
 ﻿  CPlayer.cpp
-c:\users\tomi-\desktop\gameproject\福山\game\program\player\cplayer.cpp(84): error C2614: 'CPlayer' : イニシャライズ リスト内のクラス 'mSpeed_Jump' が基底クラスでもメンバーでもありません。
-c:\users\tomi-\desktop\gameproject\福山\game\program\player\cplayer.cpp(84): error C2614: 'CPlayer' : イニシャライズ リスト内のクラス 'mFlame_Count' が基底クラスでもメンバーでもありません。
-c:\users\tomi-\desktop\gameproject\福山\game\program\player\cplayer.cpp(108): error C2065: 'speed_jump' : 定義されていない識別子です。
-c:\users\tomi-\desktop\gameproject\福山\game\program\player\cplayer.cpp(109): error C2065: 'speed_jump' : 定義されていない識別子です。
-c:\users\tomi-\desktop\gameproject\福山\game\program\player\cplayer.cpp(114): error C2065: 'speed_jump' : 定義されていない識別子です。
-c:\users\tomi-\desktop\gameproject\福山\game\program\player\cplayer.cpp(115): error C2065: 'enabled_jump' : 定義されていない識別子です。
-c:\users\tomi-\desktop\gameproject\福山\game\program\player\cplayer.cpp(126): error C2065: 'mFlame_Count' : 定義されていない識別子です。
-c:\users\tomi-\desktop\gameproject\福山\game\program\player\cplayer.cpp(127): error C2065: 'mFlame_Count' : 定義されていない識別子です。
-c:\users\tomi-\desktop\gameproject\福山\game\program\player\cplayer.cpp(130): error C2065: 'save_eAnime' : 定義されていない識別子です。
-c:\users\tomi-\desktop\gameproject\福山\game\program\player\cplayer.cpp(133): error C2065: 'save_eAnime' : 定義されていない識別子です。
-c:\users\tomi-\desktop\gameproject\福山\game\program\player\cplayer.cpp(176): error C2065: 'save_eAnime' : 定義されていない識別子です。
-c:\users\tomi-\desktop\gameproject\福山\game\program\player\cplayer.cpp(177): error C2065: 'save_eAnime' : 定義されていない識別子です。
-c:\users\tomi-\desktop\gameproject\福山\game\program\player\cplayer.cpp(203): error C2065: 'save_eAnime' : 定義されていない識別子です。
-c:\users\tomi-\desktop\gameproject\福山\game\program\player\cplayer.cpp(204): error C2065: 'save_eAnime' : 定義されていない識別子です。
-c:\users\tomi-\desktop\gameproject\福山\game\program\player\cplayer.cpp(218): error C2065: 'enabled_jump' : 定義されていない識別子です。
-c:\users\tomi-\desktop\gameproject\福山\game\program\player\cplayer.cpp(219): error C2065: 'enabled_jump' : 定義されていない識別子です。
-c:\users\tomi-\desktop\gameproject\福山\game\program\player\cplayer.cpp(220): error C2065: 'enabled_jump' : 定義されていない識別子です。
-c:\users\tomi-\desktop\gameproject\福山\game\program\player\cplayer.cpp(249): error C2065: 'enabled_jump' : 定義されていない識別子です。
-  コードを生成中...
-  コンパイル中...
-  CCamera.cpp
-  コードを生成中...
-  スキップ中... (関連する変更は検出されませんでした)
-  main.cpp
-  CGameMain.cpp
+cl : コマンド ライン warning D9028: 簡易リビルド時のエラーです、通常のビルドに戻します
+  Game.vcxproj -> C:\Users\tomi-\Desktop\GameProject\福山\Game\Debug\Game.exe
