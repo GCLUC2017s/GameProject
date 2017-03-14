@@ -2,7 +2,7 @@
 #define GAMEMAIN_HPP
 #include "../Task/CTask.h"
 #include "../Player/CPlayer.h"
-#include "../Enemy/CEnemy.h"
+#include "../Enemy/CEnemy00.h"
 #include "../Task/CTaskManager.h"
 #include "../Camera/CCamera.h"  
 #include "../Map/CMap.h"

@@ -53,9 +53,6 @@
     <ClCompile Include="Camera\CCamera.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy\CEnemy.cpp">
-      <Filter>Enemey</Filter>
-    </ClCompile>
     <ClCompile Include="GameMain\CGameMain.cpp">
       <Filter>GameMain</Filter>
     </ClCompile>
@@ -92,6 +89,9 @@
     <ClCompile Include="Vector\CVector2.cpp">
       <Filter>Vector</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy\CEnemy00.cpp">
+      <Filter>Enemey</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\CBase.h">
@@ -99,9 +99,6 @@
     </ClInclude>
     <ClInclude Include="Camera\CCamera.h">
       <Filter>Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy\CEnemy.h">
-      <Filter>Enemey</Filter>
     </ClInclude>
     <ClInclude Include="GameMain\CGameMain.h">
       <Filter>GameMain</Filter>
@@ -147,6 +144,9 @@
     </ClInclude>
     <ClInclude Include="Define\define.h">
       <Filter>Define</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\CEnemy00.h">
+      <Filter>Enemey</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
