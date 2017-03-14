@@ -88,28 +88,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Game\CGame.h" />
     <ClInclude Include="Global.h" />
+    <ClInclude Include="Scene\CharaSelect\CCharaSelect.h" />
+    <ClInclude Include="Scene\CScene.h" />
+    <ClInclude Include="Scene\CSceneChangeAnimation.h" />
+    <ClInclude Include="Scene\CSceneManager.h" />
+    <ClInclude Include="Scene\Logo\CLogo.h" />
+    <ClInclude Include="Scene\Title\CTitle.h" />
     <ClInclude Include="System\Base\CBase.h" />
-    <ClInclude Include="System\CCharaSelect\CCharaSelect.h" />
-    <ClInclude Include="System\CLogo\CLogo.h" />
-    <ClInclude Include="System\CSceneChangeAnimation\CSceneChangeAnimation.h" />
-    <ClInclude Include="System\CSceneManager\CSceneManager.h" />
-    <ClInclude Include="System\CScene\CScene.h" />
-    <ClInclude Include="System\CTaskManager\CTaskManager.h" />
-    <ClInclude Include="System\CTask\CTask.h" />
-    <ClInclude Include="System\CTitle\CTitle.h" />
+    <ClInclude Include="System\TaskSystem\CTask.h" />
+    <ClInclude Include="System\TaskSystem\CTaskManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Game\CGame.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Scene\CharaSelect\CCharaSelect.cpp" />
+    <ClCompile Include="Scene\CSceneChangeAnimation.cpp" />
+    <ClCompile Include="Scene\CSceneManager.cpp" />
+    <ClCompile Include="Scene\Logo\CLogo.cpp" />
+    <ClCompile Include="Scene\Title\CTitle.cpp" />
     <ClCompile Include="System\Base\CBase.cpp" />
-    <ClCompile Include="System\CCharaSelect\CCharaSelect.cpp" />
-    <ClCompile Include="System\CLogo\CLogo.cpp" />
-    <ClCompile Include="System\CSceneChangeAnimation\CSceneChangeAnimation.cpp" />
-    <ClCompile Include="System\CSceneManager\CSceneManager.cpp" />
-    <ClCompile Include="System\CScene\CScene.cpp" />
-    <ClCompile Include="System\CTaskManager\CTaskManager.cpp" />
-    <ClCompile Include="System\CTask\CTask.cpp" />
-    <ClCompile Include="System\CTitle\CTitle.cpp" />
+    <ClCompile Include="System\TaskSystem\CTask.cpp" />
+    <ClCompile Include="System\TaskSystem\CTaskManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
