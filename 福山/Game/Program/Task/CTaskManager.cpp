@@ -4,14 +4,7 @@ CTaskManager::CTaskManager(){}
 
 
 CTaskManager::~CTaskManager(){
-	CTask *t;
-	t = mRoot;
-	while (t != 0)
-	{
-		mRoot = t->next;
-		delete t;
-		t = mRoot;
-	}
+
 }
 /*
 追加処理
@@ -28,16 +21,42 @@ void CTaskManager::Add(CTask  *t){
 		mTail = t;
 	}
 	else{
-		CTask temp;/*
+		CTask temp;
 		CTask *p = &temp;
 		p->next = mRoot;
-		while (p->next != mTail)
-		{
 
-		}*/
-		t->prev = mTail;
-		mTail->next = t;
-		mTail = t;
+		while (p != mTail)
+		{
+			p = p->next;
+
+			if (p == mRoot && p->mPriorityR > t->mPriorityR){ //初め
+				mRoot = t;
+				mRoot->prev = 0;
+				p->prev = t;
+				if (p->next == 0){
+					mTail = p;
+				}
+
+				break;
+			}
+			else if (p == mTail){ //最後
+				t->prev = mTail;
+				mTail->next = t;
+				mTail = t;
+				mTail->next = 0;
+				break;
+			}
+			else if (p->mPriorityR <= t->mPriorityR <= p->next->mPriorityR){ //中間
+				t->next = p->next;
+				t->prev = p;
+				p->next->prev = t;
+
+				p->next = t;
+				break;
+			}
+
+		}
+
 
 	}
 }
@@ -55,7 +74,6 @@ void CTaskManager::SwapTask(CTask **p, CTask **n){ //入れ替え処理
 	*p = s;
 
 }
-
 void CTaskManager::AbsR(){
 	/*バブルソート*/
 	CTask temp;
@@ -109,57 +127,6 @@ void CTaskManager::AbsR(){
 }
 
 
-void CTaskManager::DescR(){
-	/*バブルソート*/
-	CTask temp;
-	CTask *p = &temp;//後ろ用
-	CTask *n = &temp;//前用
-
-	p->next = mRoot;
-	n->next = mRoot;
-
-
-	while (p->next != mTail){ //後ろのタスク
-		p = p->next;
-		n = p->next;
-		if (p->mPriorityR < n->mPriorityR){
-			CTask sp, sn;
-			SwapTask(&p, &n);
-
-			/*保存*/
-			sp.prev = p->prev;
-			sp.next = p->next;
-			sn.prev = n->prev;
-			sn.next = n->next;
-			/*左回りに順番を変える*/
-			p->prev = sn.prev;
-			p->next = sp.prev;
-			n->next = sp.next;
-			n->prev = sn.next;
-			/*前後の順番を変える*/
-			if (p->prev == 0){
-				mRoot = p;
-			}
-			if (n->next == 0){	//入れ替えが終わりに行われた時
-				mTail = n;
-			}
-			/*入れ替えが中間の時*/
-			if (p->prev != 0){
-				p->prev->next = p;
-			}
-			if (p->next != 0){
-				p->next->prev = p;
-			}
-			if (n->prev != 0){
-				n->prev->next = n;
-			}
-			if (n->next != 0){
-				n->next->prev = n;
-			}
-			p = mRoot;
-		}
-	}
-}
 
 void CTaskManager::AbsU(){
 	/*バブルソート*/
@@ -216,57 +183,7 @@ void CTaskManager::AbsU(){
 }
 
 
-void CTaskManager::DescU(){
-	/*バブルソート*/
-	CTask temp;
-	CTask *p = &temp;//後ろ用
-	CTask *n = &temp;//前用
 
-	p->next = mRoot;
-	n->next = mRoot;
-
-
-	while (p->next != mTail){ //後ろのタスク
-		p = p->next;
-		n = p->next;
-		if (p->mPriorityU < n->mPriorityU){
-			CTask sp, sn;
-			SwapTask(&p, &n);
-
-			/*保存*/
-			sp.prev = p->prev;
-			sp.next = p->next;
-			sn.prev = n->prev;
-			sn.next = n->next;
-			/*左回りに順番を変える*/
-			p->prev = sn.prev;
-			p->next = sp.prev;
-			n->next = sp.next;
-			n->prev = sn.next;
-			/*前後の順番を変える*/
-			if (p->prev == 0){
-				mRoot = p;
-			}
-			if (n->next == 0){	//入れ替えが終わりに行われた時
-				mTail = n;
-			}
-			/*入れ替えが中間の時*/
-			if (p->prev != 0){
-				p->prev->next = p;
-			}
-			if (p->next != 0){
-				p->next->prev = p;
-			}
-			if (n->prev != 0){
-				n->prev->next = n;
-			}
-			if (n->next != 0){
-				n->next->prev = n;
-			}
-			p = mRoot;
-		}
-	}
-}
 
 
 
@@ -325,5 +242,45 @@ void CTaskManager::Kill(CTask **t){
 		}
 
 	}
+
+}
+
+void CTaskManager::AllInit(){
+	CTask *task;
+	task = mRoot;
+	while (task != 0)
+	{
+		task->Init();
+		task = task->next;
+	}
+}
+
+void CTaskManager::AllUpdate(){
+	CTask *task;
+	task = mRoot;
+
+	/*すべてのRender表示*/
+	while (task != 0)
+	{
+		task->Update();
+		task = task->next;
+
+	}
+}
+
+void CTaskManager::AllRender(){
+	CTask *task;
+	task = mRoot;
+
+	/*すべてのRender表示*/
+	while (task != 0)
+	{
+		AbsR();
+		task->Render();
+		task = task->next;
+
+	}
+
+
 
 }

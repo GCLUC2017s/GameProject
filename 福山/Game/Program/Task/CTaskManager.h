@@ -8,12 +8,14 @@
 #include <assert.h> 
 class  CTaskManager
 {
-public:
+private:
 	CTask *mRoot;
 	CTask *mTail;
 
-	CTaskManager();
+	void SwapTask(CTask **p, CTask **n);
 
+public:
+	CTaskManager();
 
 	~CTaskManager();
 
@@ -25,26 +27,15 @@ public:
 	root != 0 が  あるとき
 	*/
 	void Add(CTask  *t);
+
 	/*
 	使い方
-	並び替えしたい CTask *tを &t の形で，引数として入れる
-	Absは昇順　Descは降順
+	Absは昇順　
 	RはRebder用
 	UはUpdate用
 	*/
 
-	void SwapTask(CTask **p, CTask **n);
 
-	void AbsR();
-
-	void DescR();
-
-	void AbsU();
-
-
-	void DescU();
-
-	
 
 	/*
 	デリート処理
@@ -59,10 +50,14 @@ public:
 				↓
 	Taskのアドレスが中間の時
 
-	
 	*/
 
+	void AbsR();
+	void AbsU();
 	void Kill(CTask **t);
+	void AllUpdate();
+	void AllRender();
+	void AllInit();
 	 
 };
 

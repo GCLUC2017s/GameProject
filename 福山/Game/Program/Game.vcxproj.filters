@@ -45,11 +45,11 @@
     <Filter Include="Main">
       <UniqueIdentifier>{23ac98fa-b688-44d0-bca0-1cebde3e6482}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Define">
+      <UniqueIdentifier>{8bff56c5-b153-4774-b31b-7f5e167014e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Base\CBase.cpp">
-      <Filter>Base</Filter>
-    </ClCompile>
     <ClCompile Include="Camera\CCamera.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
@@ -144,6 +144,9 @@
     </ClInclude>
     <ClInclude Include="Vector\CVector2.h">
       <Filter>Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Define\define.h">
+      <Filter>Define</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

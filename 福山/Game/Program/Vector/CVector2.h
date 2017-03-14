@@ -1,5 +1,6 @@
 #ifndef VECTOR2_HPP
 #define VECTOR2_HPP
+
 /* 2次元のベクトルクラスを作成する */
 class CVector2 {
 public:
@@ -30,11 +31,6 @@ public:
 	*/
 	void operator*=(const CVector2 &v);
 
-	float dot(const CVector2 &v);
-
-	const CVector2 normalize();
-
-	float length();
 };
 
 #endif

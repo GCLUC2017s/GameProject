@@ -12,11 +12,13 @@ public:
 
 	CTask *next;
 	CTask *prev;
-	int mPriorityR; //Rander()のナンバー
-	int mPriorityU;//Update()のナンバー
+
+	float mPriorityR; //Rander()のナンバー
+	float mPriorityU;//Update()のナンバー
+
 	int mMyNumber;	//種類判断のためのナンバー
 
-	CTask() :next(0), prev(0){};
+	CTask() :next(0), prev(0),mPriorityR(0.0f),mPriorityU(0.0f){};
 	virtual ~CTask(){};
 
 	virtual void Init(){};
