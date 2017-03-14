@@ -45,7 +45,7 @@ void CTaskManager::Add(CTask  *t){
 				mTail = t;
 				mTail->next = 0;
 				break;
-			}
+			} 
 			else if (p->mPriorityR <= t->mPriorityR <= p->next->mPriorityR){ //中間
 				t->next = p->next;
 				t->prev = p;
@@ -74,6 +74,14 @@ void CTaskManager::SwapTask(CTask **p, CTask **n){ //入れ替え処理
 	*p = s;
 
 }
+void CTaskManager::Sort(CTask **t){
+	CTask *n = new CTask();
+	n = *t;
+	Add(n);
+	Kill(t);
+
+}
+
 void CTaskManager::AbsR(){
 	/*バブルソート*/
 	CTask temp;
@@ -245,6 +253,17 @@ void CTaskManager::Kill(CTask **t){
 
 }
 
+void CTaskManager::AllKill(){
+	CTask *task;
+	task = mRoot;
+	while (task != 0)
+	{
+		Kill(&task);
+		task = task->next;
+	}
+}
+
+
 void CTaskManager::AllInit(){
 	CTask *task;
 	task = mRoot;
@@ -276,6 +295,7 @@ void CTaskManager::AllRender(){
 	while (task != 0)
 	{
 		AbsR();
+		//Sort(&task);
 		task->Render();
 		task = task->next;
 
