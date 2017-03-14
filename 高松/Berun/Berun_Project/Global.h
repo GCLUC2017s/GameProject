@@ -14,9 +14,18 @@
 
 
 #define GRAVITY	0.98f
+#define TUTORIAL_MAX 2
+#define FILE_NAME 32
 
-extern char giPAddress[128];
-extern int gserver;
+extern char g_iPAddress[128];
+extern char g_tutorialDataPath[TUTORIAL_MAX][FILE_NAME] =
+{
+	"TutorialM.txt",
+	"TutorialW.txt",
+};
+extern int  g_server;
+extern int  g_tutorialNo = 0;
+
 
 #define SE_SLASH	"SE_SLASH"
 #define SE_SLASH_S	"SE_SLASH_S"
