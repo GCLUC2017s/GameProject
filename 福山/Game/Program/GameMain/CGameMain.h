@@ -10,16 +10,17 @@
 
 class CGameMain{
 public:
+
 	CTaskManager taskmanger;
-	CTask *task = taskmanger.mRoot;
 
 	enum EStatus{
 		E_INIT,E_MAIN
 	};
 	EStatus status;
 
-	CGameMain();
 
+
+	CGameMain();
 	void Init();
 	void Update();
 };

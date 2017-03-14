@@ -29,8 +29,16 @@
     <ClCompile Include="Game\CGame.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Scene\Result\CResult.cpp">
       <Filter>Scene\Result</Filter>
+=======
+    <ClCompile Include="Game\Map\CMap.cpp">
+      <Filter>Game\CMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Enemy\CEnemy.cpp">
+      <Filter>Game\CEnemy</Filter>
+>>>>>>> 595261baf1e573088b0b1f3784fd29a2838b6168
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -65,8 +73,16 @@
     <ClInclude Include="Game\CGame.h">
       <Filter>Game</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Scene\Result\CResult.h">
       <Filter>Scene\Result</Filter>
+=======
+    <ClInclude Include="Game\Map\CMap.h">
+      <Filter>Game\CMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Enemy\CEnemy.h">
+      <Filter>Game\CEnemy</Filter>
+>>>>>>> 595261baf1e573088b0b1f3784fd29a2838b6168
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -94,8 +110,16 @@
     <Filter Include="Scene\Title">
       <UniqueIdentifier>{231435c2-1ec3-40db-8b2a-3ed546861cd8}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
     <Filter Include="Scene\Result">
       <UniqueIdentifier>{5dcc2d00-2f7e-4b4e-befb-d6b1d4f7b875}</UniqueIdentifier>
+=======
+    <Filter Include="Game\CMap">
+      <UniqueIdentifier>{a7c265ad-5cf0-4c62-bc24-7db539acf9e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\CEnemy">
+      <UniqueIdentifier>{45f5f2fc-ba70-4872-9024-e914f6a70bb8}</UniqueIdentifier>
+>>>>>>> 595261baf1e573088b0b1f3784fd29a2838b6168
     </Filter>
   </ItemGroup>
 </Project>

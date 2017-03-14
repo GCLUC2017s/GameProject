@@ -11,15 +11,3 @@ const CVector2 CVector2::operator+(const CVector2 &v) const { return CVector2(x 
 const CVector2 CVector2::operator-(const CVector2 &v) const { return CVector2(x - v.x, y - v.y); }
 const CVector2 CVector2::operator*(float f) const { return CVector2(x * f, y * f); }
 
-float CVector2::dot(const CVector2 &v) {
-	return x * v.x + y * v.y;
-}
-
-const CVector2 CVector2::normalize() {
-	float len = length();
-	return CVector2(x /= len, y /= len);
-}
-
-float CVector2::length() {
-	return sqrtf(x*x + y*y);
-}
