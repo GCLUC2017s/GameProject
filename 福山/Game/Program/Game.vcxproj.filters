@@ -92,9 +92,6 @@
     <ClCompile Include="Enemy\CEnemy00.cpp">
       <Filter>Enemey</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\CScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\CBase.h">
@@ -151,5 +148,8 @@
     <ClInclude Include="Enemy\CEnemy00.h">
       <Filter>Enemey</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\CG\beru\beru_flame\beru_flame_00.tga" />
   </ItemGroup>
 </Project>
