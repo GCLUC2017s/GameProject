@@ -45,7 +45,6 @@ private:
 	static CSceneManager *mp_sceneManager;
 public:
 	CSceneManager();
-	void ChangeScene();
 	virtual void Update();
 	virtual void Draw();
 

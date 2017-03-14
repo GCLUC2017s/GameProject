@@ -11,6 +11,29 @@
 
 #define ARRAY_SIZE(a)(sizeof(a)/sizeof(a[0]))
 
+//キャラクターの基礎構造体
+struct T_CharacterData {
+	char imageName[64];
+};
+enum {
+	ePlayerMan,	//プレイヤー男
+	ePlayerWoman,//プレイヤー女
+	eCarrot,//ニンジン
+	ePapurika,//ピーマン
+	eBerry,//イチゴサングラス空中
+	eStrawberry,//イチゴ地上
+	eVegetavelboss,//野菜ボス（ウサギ）
+	ePig,//豚
+	eBird,//鳥
+	eMeatboss,//肉ボス（鶏）
+	eSquid,//イカ
+	eFish,//魚
+	eFishboss,//魚介ボス（鮫）
+	eRice,//米
+	eBread,//パン
+	eGrainboss,//穀物ボス（茶碗武士）
+	eCharacterMax
+};
 //プレイヤーの構造体
 struct T_PlayerData
 {
@@ -48,7 +71,7 @@ protected:
 	ESTATE m_state;
 	CImage *m_chara;
 
-	T_EnemyData  *mp_eData;
+	T_CharacterData  *mp_eData;
 
 	//キャラクターのサイズを格納する変数
 	int m_charaWidth;
@@ -77,13 +100,16 @@ protected:
 	float m_jump;
 	//キャラクターの向きを格納するフラグ
 	bool m_charaDirection;
+
+	bool m_right;
+	virtual void _key();
+	void _idle();
 public:
 	CCharaBase(int type);
 	~CCharaBase();
 	void Animation();
 	void Update();
 	void Draw();
-	void _idle();
 	void HitCheck();
 };
 extern T_PlayerData g_playerData[];

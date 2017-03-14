@@ -33,15 +33,15 @@ CMap::~CMap() {
 void CMap::Update() {
 
 	m_backgroundMorning->SetRect(0,0,1280,768);
-	m_backgroundAfternoon->SetRect(0, 0, 1280, 768);
-	m_backgroundEvenig->SetRect(0, 0, 1280, 768);
-	m_backgroundNight->SetRect(0, 0, 1280, 768);
+//	m_backgroundAfternoon->SetRect(0, 0, 1280, 768);
+//	m_backgroundEvenig->SetRect(0, 0, 1280, 768);
+//	m_backgroundNight->SetRect(0, 0, 1280, 768);
 }
 
 void  CMap::Draw() {
 
 	m_backgroundMorning->Draw();
-	m_backgroundAfternoon->Draw();
-	m_backgroundEvenig->Draw();
-	m_backgroundNight->Draw();
+//	m_backgroundAfternoon->Draw();
+//	m_backgroundEvenig->Draw();
+//	m_backgroundNight->Draw();
 }

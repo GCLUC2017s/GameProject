@@ -10,6 +10,7 @@ CTutorial::CTutorial(char * file) : CTask(0,0), mp_file(nullptr),
 									m_face(0),
 									m_end(0), m_state(0)
 {
+	g_tutorialNo = 0;
 	mp_img[0] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("PlayerM"));
 	mp_img[1] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("PlayerW"));
 	
@@ -32,8 +33,8 @@ void CTutorial::Update()
 	if (CInput::GetState(0, CInput::ePush, CInput::eButton10)) GetText();
 	//スペースキーでチュートリアルスキップ
 	if (CInput::GetState(0, CInput::ePush, CInput::eButton5)) m_end = -2;
-	if(g_tutorialNo == 1) mp_img[0]->SetPos(200, 250);
-	if(g_tutorialNo == 2) mp_img[1]->SetPos(200, 250);
+	mp_img[g_tutorialNo]->SetPos(200, 250);
+	if (GetEnd()) SetDestroyFlag(true);
 }
 
 void CTutorial::Draw()
@@ -43,8 +44,7 @@ void CTutorial::Draw()
 	font->Draw(800, 35, 1, 1, 1, m_str);
 	sprintf(m_str, "SPACE：スキップ");
 	font->Draw(800, 75, 1, 1, 1, m_str);
-	if (g_tutorialNo == 1) mp_img[0]->Draw();
-	if (g_tutorialNo == 2) mp_img[1]->Draw();
+	mp_img[g_tutorialNo]->Draw();
 }
 
 void CTutorial::GetText()

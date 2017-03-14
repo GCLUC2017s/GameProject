@@ -117,8 +117,8 @@ void CTitle::Update()
 {
 	if (CInput::GetState(0, CInput::ePush, CInput::eButton1))
 	{
-		CSceneManager::GetInstance()->ChangeScene();
-		CSceneManager::GetInstance()->Quit(0, eTest);
+	//	CSceneManager::GetInstance()->ChangeScene();
+	//	CSceneManager::GetInstance()->Quit(0, eTest);
 	}
 }
 void CTitle::Draw()

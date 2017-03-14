@@ -6,7 +6,8 @@ CGame::CGame() {
 
 	new CMap();
 	new CTutorial(g_tutorialDataPath[g_tutorialNo]);
-	new CPlayer();
+	new CPlayer(ePlayerMan);
+	new CEnemy(eCarrot);
 }
 
 CGame::~CGame() {
