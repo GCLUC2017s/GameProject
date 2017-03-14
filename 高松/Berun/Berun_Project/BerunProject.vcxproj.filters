@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="System\Base\CBase.cpp">
+      <Filter>System\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="System\TaskSystem\CTask.cpp">
+      <Filter>System\TaskSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="System\TaskSystem\CTaskManager.cpp">
+      <Filter>System\TaskSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Title\CTitle.cpp">
+      <Filter>Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\Logo\CLogo.cpp">
+      <Filter>Scene\Logo</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\CharaSelect\CCharaSelect.cpp">
+      <Filter>Scene\CharaSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\CSceneChangeAnimation.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\CSceneManager.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Global.h" />
+    <ClInclude Include="System\Base\CBase.h">
+      <Filter>System\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="System\TaskSystem\CTask.h">
+      <Filter>System\TaskSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="System\TaskSystem\CTaskManager.h">
+      <Filter>System\TaskSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Title\CTitle.h">
+      <Filter>Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Logo\CLogo.h">
+      <Filter>Scene\Logo</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\CharaSelect\CCharaSelect.h">
+      <Filter>Scene\CharaSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\CScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\CSceneChangeAnimation.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\CSceneManager.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="System">
+      <UniqueIdentifier>{4d7e2225-3146-447a-b95e-fd8adb0fd8d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{71273fc7-98be-4cc0-b22f-26ea2595f03e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{4099ac29-87a9-4511-a21d-9bf8b9fc5336}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Base">
+      <UniqueIdentifier>{4745376d-4dbd-4fb9-af11-9513a2ff39c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\TaskSystem">
+      <UniqueIdentifier>{19270357-476a-462f-9323-4ac21475c34d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\CharaSelect">
+      <UniqueIdentifier>{e684c462-ae12-4339-aa8d-50e7ef720abb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Logo">
+      <UniqueIdentifier>{3e4630d2-7fc8-4e48-ae86-9b81de1e4b32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Title">
+      <UniqueIdentifier>{231435c2-1ec3-40db-8b2a-3ed546861cd8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

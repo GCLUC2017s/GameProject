@@ -8,6 +8,7 @@
 #ifndef CCHARASELECT_INCLUDE_GUARD
 #define CCHARASELECT_INCLUDE_GUARD
 #include "../Global.h"
+#include "../CScene.h"
 
 class CCharaSelect : public CScene
 {

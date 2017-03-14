@@ -27,7 +27,7 @@ void CLogo::Update()
 {
 
 }
-void CLogo::Render()
+void CLogo::Draw()
 {
 	//•–¡‚ð•\Ž¦
 	m_black->Draw();

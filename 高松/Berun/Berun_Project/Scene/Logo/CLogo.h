@@ -8,6 +8,7 @@
 #ifndef CLOGO_INCLUDE_GUARD
 #define CLOGO_INCLUDE_GUARD
 #include "../Global.h"
+#include "../CScene.h"
 
 class CLogo : public CScene
 {

@@ -11,23 +11,12 @@
 #include "../Scene/Title/CTitle.h"
 #include "../Scene/Logo/CLogo.h"
 #include "../Scene/CharaSelect/CCharaSelect.h"
-#include "../Scene/Scene/CSceneManager.h"
+#include "../Scene/CSceneManager.h"
 
 //テスト用
 CImage* g_backGround=nullptr;
 CImage* g_life = nullptr;
 
-void main()
-{
-	/*
-	CTaskManager::GetInstance()->AllUpdate();
-	CTaskManager::GetInstance()->AllDraw();
-	CTaskManager::GetInstance()->AllDestroy();
-	CTaskManager::GetInstance()->ClearInstance();
-	*/
-	CSceneManager::GetInstance()->Update();
-	CSceneManager::GetInstance()->Draw();
-}
 
 CTitle *g_title;
 CLogo *g_logo;
@@ -45,9 +34,12 @@ void display(void) {
 	// 表示
 	//---------------------------------------
 
-	if (!g_logo->flag) g_logo->Render();
-	else if (!g_title->flag) g_title->Render();
-	else if (g_title->flag) g_charaSelect->Render();
+	CSceneManager::GetInstance()->Update();
+	CSceneManager::GetInstance()->Draw();
+
+	if (!g_logo->flag) g_logo->Draw();
+	else if (!g_title->flag) g_title->Draw();
+	else if (g_title->flag) g_charaSelect->Draw();
 
 	//テスト用　表示
 //	g_backGround->Draw();
