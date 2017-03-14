@@ -7,7 +7,7 @@
 #ifndef TASKMANAGER_GUARD
 #define TASKMANAGER_GUARD
 
-#include "../CTask/CTask.h"
+#include "CTask.h"
 
 class CTaskManager
 {

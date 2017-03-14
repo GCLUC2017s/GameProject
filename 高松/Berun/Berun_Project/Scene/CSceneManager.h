@@ -8,8 +8,8 @@
 #ifndef SCENEMANAGER_GUARD
 #define SCENEMANAGER_GUARD
 
-#include "../CScene/CScene.h"
-#include "../CSceneChangeAnimation/CSceneChangeAnimation.h"
+#include "CScene.h"
+#include "CSceneChangeAnimation.h"
 
 enum E_Scene
 {

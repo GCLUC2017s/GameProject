@@ -80,7 +80,7 @@ void CCharaSelect::Update()
 {
 
 }
-void CCharaSelect::Render()
+void CCharaSelect::Draw()
 {
 	//•–¡‚Ì•\Ž¦
 	m_black->Draw();

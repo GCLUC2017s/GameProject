@@ -118,7 +118,7 @@ void CTitle::Update()
 {
 
 }
-void CTitle::Render()
+void CTitle::Draw()
 {
 	//•–¡‚Ì•\Ž¦
 	m_black->Draw();

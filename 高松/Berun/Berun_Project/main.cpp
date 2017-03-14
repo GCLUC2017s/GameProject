@@ -7,11 +7,11 @@
 
 #include "stdafx.h"
 #include "Global.h"
-#include "CTaskManager\CTaskManager.h"
-#include "../System/CTitle/CTitle.h"
-#include "../System/CLogo/CLogo.h"
-#include "../System/CCharaSelect/CCharaSelect.h"
-#include "../System/CSceneManager/CSceneManager.h"
+#include "../System/TaskSystem/CTaskManager.h"
+#include "../Scene/Title/CTitle.h"
+#include "../Scene/Logo/CLogo.h"
+#include "../Scene/CharaSelect/CCharaSelect.h"
+#include "../Scene/Scene/CSceneManager.h"
 
 //テスト用
 CImage* g_backGround=nullptr;

@@ -1,8 +1,8 @@
 #include "CSceneManager.h"
 #include "CCamera.h"
-#include "../CLogo/CLogo.h"
-#include "../CTitle/CTitle.h"
-#include "../CCharaSelect/CCharaSelect.h"
+#include "../Scene/Logo/CLogo.h"
+#include "../Scene/Title/CTitle.h"
+#include "../Scene/CharaSelect/CCharaSelect.h"
 
 CSceneManager* CSceneManager::mp_sceneManager = nullptr;
 

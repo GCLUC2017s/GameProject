@@ -8,6 +8,7 @@
 #ifndef CTITLE_INCLUDE_GUARD
 #define CTITLE_INCLUDE_GUARD
 #include "../Global.h"
+#include "../Scene/CScene.h"
 
 class CTitle : public CScene
 {

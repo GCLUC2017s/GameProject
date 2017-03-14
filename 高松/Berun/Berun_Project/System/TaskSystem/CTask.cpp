@@ -1,5 +1,5 @@
 #include "CTask.h"
-#include "../CTaskManager/CTaskManager.h"
+#include "CTaskManager.h"
 
 //デフォルトコンストラクタ
 CTask::CTask()
