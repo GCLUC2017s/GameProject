@@ -38,6 +38,9 @@
     <ClCompile Include="Game\Enemy\CEnemy.cpp">
       <Filter>Game\CEnemy</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Tutorial\CTutorial.cpp">
+      <Filter>Game\Tutorial</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Global.h" />
@@ -80,6 +83,9 @@
     <ClInclude Include="Game\Enemy\CEnemy.h">
       <Filter>Game\CEnemy</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Tutorial\CTutorial.h">
+      <Filter>Game\Tutorial</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -114,6 +120,9 @@
     </Filter>
     <Filter Include="Game\CEnemy">
       <UniqueIdentifier>{45f5f2fc-ba70-4872-9024-e914f6a70bb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Tutorial">
+      <UniqueIdentifier>{4f6bb6c2-6da9-4cd8-9bcc-511df395efdd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

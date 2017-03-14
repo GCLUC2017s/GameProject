@@ -91,6 +91,7 @@
     <ClInclude Include="Game\CGame.h" />
     <ClInclude Include="Game\Enemy\CEnemy.h" />
     <ClInclude Include="Game\Map\CMap.h" />
+    <ClInclude Include="Game\Tutorial\CTutorial.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="Scene\CharaSelect\CCharaSelect.h" />
     <ClInclude Include="Scene\CScene.h" />
@@ -107,6 +108,7 @@
     <ClCompile Include="Game\CGame.cpp" />
     <ClCompile Include="Game\Enemy\CEnemy.cpp" />
     <ClCompile Include="Game\Map\CMap.cpp" />
+    <ClCompile Include="Game\Tutorial\CTutorial.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scene\CharaSelect\CCharaSelect.cpp" />
     <ClCompile Include="Scene\CSceneChangeAnimation.cpp" />
