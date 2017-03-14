@@ -23,6 +23,9 @@ void CSceneManager::ChangeScene()
 	//シーン選択
 	switch(m_sceneNum)
 	{
+	case eLogo:
+		ChangeScene(eTitle);
+		break;
 	//現在のシーンがタイトルの場合
 	case eTitle:
 		ChangeScene(eCharaSelect);
@@ -33,13 +36,13 @@ void CSceneManager::ChangeScene()
 		break;
 	//現在のシーンがゲームの場合
 	case eGame:
-		ChangeScene(eResult);
-		//ChangeScene(eSceneTitle);
+		//if(m_quitFlag = 0) ChangeScene(eResult);
+		//else if (m_quitFlag = 1)ChangeScene(eTitle);
 		break;
 	//シーンが設定されていない場合
 	default:
 		//タイトルシーンへ
-		ChangeScene(eTitle);
+		ChangeScene(eLogo);
 		break;
 	}
 }
@@ -98,6 +101,7 @@ void CSceneManager::ChangeScene(E_Scene scene)
 	{
 	case eLogo:
 		mp_scene = new CLogo();
+		break;
 	case eTitle:
 		mp_scene = new CTitle();
 		break;

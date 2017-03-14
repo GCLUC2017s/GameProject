@@ -1,4 +1,5 @@
 #include "CLogo.h"
+#include "../CSceneManager.h"
 
 CLogo::CLogo()
 {
@@ -40,5 +41,5 @@ void CLogo::Draw()
 	m_blackSecond->SetPos(m_blackPosX, 0);
 	m_blackSecond->Draw();
 
-	if (CInput::GetState(0, CInput::ePush, CInput::eButton10)) flag = true;
+	if (CInput::GetState(0, CInput::ePush, CInput::eButton10)) CSceneManager::GetInstance()->Quit(0);
 }

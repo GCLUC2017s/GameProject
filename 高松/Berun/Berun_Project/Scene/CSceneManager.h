@@ -24,12 +24,12 @@ enum E_Scene
 class CSceneManager
 {
 private:
-	bool m_quit;        //
-	int	 m_quitFlag;	//
-	int  m_quitCnt;		//
-	int  m_quitTime;	//
-	int  m_inCnt;		//
-	int  m_inTime;		//
+	bool m_quit;        //シーン切り替えフラグ
+	int	 m_quitFlag;	//シーン切り替え分岐フラグ
+	int  m_quitCnt;		//シーンアウトタイミング
+	int  m_quitTime;	
+	int  m_inCnt;		//シーンインタイミング
+	int  m_inTime;		
 	E_Scene m_sceneNum;
 	CSceneChangeAnimation m_anim;
 	CScene *mp_scene;

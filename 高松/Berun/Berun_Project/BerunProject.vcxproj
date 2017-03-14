@@ -88,6 +88,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Game\CGame.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="Scene\CharaSelect\CCharaSelect.h" />
     <ClInclude Include="Scene\CScene.h" />
@@ -100,6 +101,7 @@
     <ClInclude Include="System\TaskSystem\CTaskManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Game\CGame.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scene\CharaSelect\CCharaSelect.cpp" />
     <ClCompile Include="Scene\CSceneChangeAnimation.cpp" />

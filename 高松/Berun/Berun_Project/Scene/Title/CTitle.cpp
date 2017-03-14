@@ -1,4 +1,5 @@
 #include "CTitle.h"
+#include "../CSceneManager.h"
 
 CTitle::CTitle()
 {
@@ -209,7 +210,7 @@ void CTitle::Draw()
 			m_exit->SetPos(m_exitPos);
 			m_exit->SetSize(m_exitSize);
 
-			if (CInput::GetState(0, CInput::ePush, CInput::eButton10))	flag = true;
+			if (CInput::GetState(0, CInput::ePush, CInput::eButton10))CSceneManager::GetInstance()->Quit(0);
 		}
 		else
 		{
