@@ -6,6 +6,14 @@
 #define SIZE_SHADOW_Y 0.4 //影のサイズY
 #include "../Task/CTask.h"
 #include "../Vector/CVector2.h"
+#include "../Define/define.h"
+
+const float character_limit_left = -MAP_LIMIT_X / 2;			//進める上限(左)
+const float character_limit_top = MAP_LIMIT_Y / 4;			   //進める上限(上)
+const float character_limit_right = MAP_LIMIT_X / 2;		 //進める上限(右)
+const float character_limit_bottom = -MAP_LIMIT_Y / 2;		//進める上限(下)
+
+
 
 
 /*

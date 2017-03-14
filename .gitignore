@@ -23,4 +23,16 @@
 /福山/Game/Program/Debug
 /福山/Game/Program/*.user
 /福山/Game/*.sln
+<<<<<<< HEAD
+/福山/Game/Debug
+/福山/Game/Debug
+/福山/Game/Program/*.vcxproj
+/福山/Game/Program/*.filters
+/福山/Game/Program/*.user
+/福山/Game/Program/*.dll
+/福山/Game/Program/*.dll
+/福山/Game/*.suo
+=======
 /福山/Game/Program/Debug
+>>>>>>> 71372c8d4b65545833a4077af36a36bd91f94b3c
+/福山/Game/*.suo
