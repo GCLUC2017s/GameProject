@@ -44,6 +44,9 @@
     <ClCompile Include="System\CharaBase\CCharaBase.cpp">
       <Filter>System\CharaBase</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Tutorial\CTutorial.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Global.h" />
@@ -91,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="System\CharaBase\CCharaBase.h">
       <Filter>System\CharaBase</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Tutorial\CTutorial.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

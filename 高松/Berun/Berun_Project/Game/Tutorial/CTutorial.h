@@ -22,7 +22,7 @@ private:
 	CImage *mp_img[IMAGE_MAX];
 	FILE   *mp_file;
 	int     m_face;
-	int     m_textend;
+	int     m_textEnd;
 	int     m_end;
 	char    m_name[NAME_MAX];
 	char    m_text[LINE_MAX][WORD_MAX];

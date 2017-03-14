@@ -15,6 +15,11 @@ const float character_limit_left = -MAP_LIMIT_X / 2;			//進める上限(左)
 const float character_limit_top = MAP_LIMIT_Y / 4;			   //進める上限(上)
 const float character_limit_right = MAP_LIMIT_X / 2;		 //進める上限(右)
 const float character_limit_bottom = -MAP_LIMIT_Y / 2;		//進める上限(下)
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 322de24f36482fb090167d78b99252571594afa9
 
 
 /*
