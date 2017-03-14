@@ -46,6 +46,9 @@
     <ClInclude Include="Title\CTitleScene.h" />
     <ClInclude Include="Vector\CVector2.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\CG\beru\beru_flame\beru_flame_00.tga" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DEF0B1B5-475F-48A2-B013-93957B30EC1F}</ProjectGuid>
     <RootNamespace>Game</RootNamespace>

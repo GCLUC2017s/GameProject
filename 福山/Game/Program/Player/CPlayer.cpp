@@ -18,9 +18,17 @@
 #define WALK_Y 0.5							//歩くベクトルY
 #define PATTERN_R 1							//PATTERNの右
 #define PATTERN_L 2							//PATTERNの左
-#define TEX_FILE_PLAYER_STAY "../CG\\beru\\beru_stay\\"  //プレイヤーのファイル場所　待ち
-#define TEX_FILE_PLAYER_WALK "../CG\\beru\\beru_walk\\"  //プレイヤーのファイル場所　待ち
-#define TEX_FILE_PLAYER_RUN "../CG\\beru\\beru_run\\"  //プレイヤーのファイル場所　待ち
+#define TEX_FILE_PLAYER_STAY			 "../CG\\beru\\beru_stay\\"		//プレイヤーのファイル場所　待ち
+#define TEX_FILE_PLAYER_WALK			 "../CG\\beru\\beru_walk\\"		//プレイヤーのファイル場所　待ち
+#define TEX_FILE_PLAYER_RUN				 "../CG\\beru\\beru_run\\"		//プレイヤーのファイル場所　待ち
+#define TEX_FILE_PLAYER_NormalATTACK_A	 "../CG\\beru\\beru_attackA\\"	//プレイヤーのファイル場所　通常攻撃A
+#define TEX_FILE_PLAYER_NormalATTACK_B	 "../CG\\beru\\beru_attackB\\"	//プレイヤーのファイル場所　通常攻撃B
+#define TEX_FILE_PLAYER_NormalATTACK_C	 "../CG\\beru\\beru_attackC\\"	//プレイヤーのファイル場所　通常攻撃C
+#define TEX_FILE_PLAYER_EX01			 "../CG\\beru\\beru_EX01\\"		//プレイヤーのファイル場所　消費
+#define TEX_FILE_PLAYER_EX02			 "../CG\\beru\\beru_EX02\\"		//プレイヤーのファイル場所　継続
+#define TEX_FILE_PLAYER_EAT				 "../CG\\beru\\beru_eat\\"		//プレイヤーのファイル場所　捕食
+#define TEX_FILE_PLAYER_FLAME			 "../CG\\beru\\beru_flame\\"	//プレイヤーのファイル場所　炎
+#define TEX_FILE_PLAYER_BRAKE			 "../CG\\beru\\beru_brake\\"	//プレイヤーのファイル場所　ブレーキ
 
 float CPlayer::camera_x; 
 float CPlayer::camera_y;
@@ -38,40 +46,111 @@ void CPlayer::Init() {
 	camera_x = mPos.x;
 	camera_y = mPos.y;
 	/*テクスチャ読み込み*/
-	for (int i = 0; i < FLAME_LIMIT; i++)
+	for (int i = 0; i < FRAME_LIMIT; i++)
 	{
-		mStay_tex[i] = new CTexture();		//テクスチャクラスのインスタンス作成
-		mWalk_tex[i] = new CTexture();		//テクスチャクラスのインスタンス作成
-		mRun_tex[i] = new CTexture();		//テクスチャクラスのインスタンス作成
+		mStayTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
+		mWalkTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
+		mRunTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
+		mEx01Tex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
+		mEx02Tex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
+		mEatTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
+		mFlameTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
+		mBrakeTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
+
+		for (int z = 0; z < NORMALATTACK_PATTERN; z++)
+		{
+			mNormalAttackTex[z][i] = new CTexture();	//テクスチャクラスのインスタンス作成
+		}
+		mEatTex[i] = new CTexture();
+
 	}
+	
+	mShadowTex = new CTexture();		//テクスチャクラスのインスタンス作成
 
 	/*テクスチャファイル読み込み*/
-	mStay_tex[0]->load(TEX_FILE_PLAYER_STAY"beru_stay_00.tga");
-	mStay_tex[1]->load(TEX_FILE_PLAYER_STAY"beru_stay_01.tga");
-	mStay_tex[2]->load(TEX_FILE_PLAYER_STAY"beru_stay_02.tga");
-	mStay_tex[3]->load(TEX_FILE_PLAYER_STAY"beru_stay_03.tga");
-	mStay_tex[4]->load(TEX_FILE_PLAYER_STAY"beru_stay_04.tga");
-	mStay_tex[5]->load(TEX_FILE_PLAYER_STAY"beru_stay_05.tga");
-
-	mWalk_tex[0]->load(TEX_FILE_PLAYER_WALK"beru_walk_00.tga");
-	mWalk_tex[1]->load(TEX_FILE_PLAYER_WALK"beru_walk_01.tga");
-	mWalk_tex[2]->load(TEX_FILE_PLAYER_WALK"beru_walk_02.tga");
-	mWalk_tex[3]->load(TEX_FILE_PLAYER_WALK"beru_walk_03.tga");
-	mWalk_tex[4]->load(TEX_FILE_PLAYER_WALK"beru_walk_04.tga");
-	mWalk_tex[5]->load(TEX_FILE_PLAYER_WALK"beru_walk_05.tga");
-
-	mRun_tex[0]->load(TEX_FILE_PLAYER_RUN"beru_run_00.tga");
-	mRun_tex[1]->load(TEX_FILE_PLAYER_RUN"beru_run_01.tga");
-	mRun_tex[2]->load(TEX_FILE_PLAYER_RUN"beru_run_02.tga");
-	mRun_tex[3]->load(TEX_FILE_PLAYER_RUN"beru_run_03.tga");
-	mRun_tex[4]->load(TEX_FILE_PLAYER_RUN"beru_run_04.tga");
-	mRun_tex[5]->load(TEX_FILE_PLAYER_RUN"beru_run_05.tga");
-
-
-
+	/*待ち*/
+	mStayTex[0]->load(TEX_FILE_PLAYER_STAY"beru_stay_00.tga");
+	mStayTex[1]->load(TEX_FILE_PLAYER_STAY"beru_stay_01.tga");
+	mStayTex[2]->load(TEX_FILE_PLAYER_STAY"beru_stay_02.tga");
+	mStayTex[3]->load(TEX_FILE_PLAYER_STAY"beru_stay_03.tga");
+	mStayTex[4]->load(TEX_FILE_PLAYER_STAY"beru_stay_04.tga");
+	mStayTex[5]->load(TEX_FILE_PLAYER_STAY"beru_stay_05.tga");
+	/*歩く*/
+	mWalkTex[0]->load(TEX_FILE_PLAYER_WALK"beru_walk_00.tga");
+	mWalkTex[1]->load(TEX_FILE_PLAYER_WALK"beru_walk_01.tga");
+	mWalkTex[2]->load(TEX_FILE_PLAYER_WALK"beru_walk_02.tga");
+	mWalkTex[3]->load(TEX_FILE_PLAYER_WALK"beru_walk_03.tga");
+	mWalkTex[4]->load(TEX_FILE_PLAYER_WALK"beru_walk_04.tga");
+	mWalkTex[5]->load(TEX_FILE_PLAYER_WALK"beru_walk_05.tga");
+	/*走る*/
+	mRunTex[0]->load(TEX_FILE_PLAYER_RUN"beru_run_00.tga");
+	mRunTex[1]->load(TEX_FILE_PLAYER_RUN"beru_run_01.tga");
+	mRunTex[2]->load(TEX_FILE_PLAYER_RUN"beru_run_02.tga");
+	mRunTex[3]->load(TEX_FILE_PLAYER_RUN"beru_run_03.tga");
+	mRunTex[4]->load(TEX_FILE_PLAYER_RUN"beru_run_04.tga");
+	mRunTex[5]->load(TEX_FILE_PLAYER_RUN"beru_run_05.tga");
+	/*通常A*/
+	mNormalAttackTex[0][0]->load(TEX_FILE_PLAYER_NormalATTACK_A"beru_attackA_00.tga");
+	mNormalAttackTex[0][1]->load(TEX_FILE_PLAYER_NormalATTACK_A"beru_attackA_01.tga");
+	mNormalAttackTex[0][2]->load(TEX_FILE_PLAYER_NormalATTACK_A"beru_attackA_02.tga");
+	mNormalAttackTex[0][3]->load(TEX_FILE_PLAYER_NormalATTACK_A"beru_attackA_03.tga");
+	mNormalAttackTex[0][4]->load(TEX_FILE_PLAYER_NormalATTACK_A"beru_attackA_04.tga");
+	mNormalAttackTex[0][5]->load(TEX_FILE_PLAYER_NormalATTACK_A"beru_attackA_05.tga");
+	/*通常B*/
+	mNormalAttackTex[1][0]->load(TEX_FILE_PLAYER_NormalATTACK_B"beru_attackB_00.tga");
+	mNormalAttackTex[1][1]->load(TEX_FILE_PLAYER_NormalATTACK_B"beru_attackB_01.tga");
+	mNormalAttackTex[1][2]->load(TEX_FILE_PLAYER_NormalATTACK_B"beru_attackB_02.tga");
+	mNormalAttackTex[1][3]->load(TEX_FILE_PLAYER_NormalATTACK_B"beru_attackB_03.tga");
+	mNormalAttackTex[1][4]->load(TEX_FILE_PLAYER_NormalATTACK_B"beru_attackB_04.tga");
+	mNormalAttackTex[1][5]->load(TEX_FILE_PLAYER_NormalATTACK_B"beru_attackB_05.tga");
+	/*通常C*/
+	mNormalAttackTex[2][0]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_00.tga");
+	mNormalAttackTex[2][1]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_01.tga");
+	mNormalAttackTex[2][2]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_02.tga");
+	mNormalAttackTex[2][3]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_03.tga");
+	mNormalAttackTex[2][4]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_04.tga");
+	mNormalAttackTex[2][5]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_05.tga");
+	/*捕食*/
+	mEatTex[0]->load(TEX_FILE_PLAYER_EAT"beru_eat_00.tga");
+	mEatTex[1]->load(TEX_FILE_PLAYER_EAT"beru_eat_01.tga");
+	mEatTex[2]->load(TEX_FILE_PLAYER_EAT"beru_eat_02.tga");
+	mEatTex[3]->load(TEX_FILE_PLAYER_EAT"beru_eat_03.tga");
+	mEatTex[4]->load(TEX_FILE_PLAYER_EAT"beru_eat_04.tga");
+	mEatTex[5]->load(TEX_FILE_PLAYER_EAT"beru_eat_05.tga");
+	/*必殺技(消費)*/
+	mEx01Tex[0]->load(TEX_FILE_PLAYER_EX01"beru_EX01_00.tga");
+	mEx01Tex[1]->load(TEX_FILE_PLAYER_EX01"beru_EX01_01.tga");
+	mEx01Tex[2]->load(TEX_FILE_PLAYER_EX01"beru_EX01_02.tga");
+	mEx01Tex[3]->load(TEX_FILE_PLAYER_EX01"beru_EX01_03.tga");
+	mEx01Tex[4]->load(TEX_FILE_PLAYER_EX01"beru_EX01_04.tga");
+	mEx01Tex[5]->load(TEX_FILE_PLAYER_EX01"beru_EX01_05.tga");
+	/*必殺技(継続)*/
+	mEx02Tex[0]->load(TEX_FILE_PLAYER_EX02"beru_EX02_00.tga");
+	mEx02Tex[1]->load(TEX_FILE_PLAYER_EX02"beru_EX02_01.tga");
+	mEx02Tex[2]->load(TEX_FILE_PLAYER_EX02"beru_EX02_02.tga");
+	mEx02Tex[3]->load(TEX_FILE_PLAYER_EX02"beru_EX02_03.tga");
+	mEx02Tex[4]->load(TEX_FILE_PLAYER_EX02"beru_EX02_04.tga");
+	mEx02Tex[5]->load(TEX_FILE_PLAYER_EX02"beru_EX02_05.tga");
+	/*ブレーキ*/
+	mBrakeTex[0]->load(TEX_FILE_PLAYER_BRAKE"beru_brake_00.tga");
+	mBrakeTex[1]->load(TEX_FILE_PLAYER_BRAKE"beru_brake_01.tga");
+	mBrakeTex[2]->load(TEX_FILE_PLAYER_BRAKE"beru_brake_02.tga");
+	mBrakeTex[3]->load(TEX_FILE_PLAYER_BRAKE"beru_brake_03.tga");
+	mBrakeTex[4]->load(TEX_FILE_PLAYER_BRAKE"beru_brake_04.tga");
+	mBrakeTex[5]->load(TEX_FILE_PLAYER_BRAKE"beru_brake_05.tga");
+	/*炎*/
+	mFlameTex[0]->load(TEX_FILE_PLAYER_FLAME"beru_flame_00.tga");
+	mFlameTex[1]->load(TEX_FILE_PLAYER_FLAME"beru_flame_01.tga");
+	mFlameTex[2]->load(TEX_FILE_PLAYER_FLAME"beru_flame_02.tga");
+	mFlameTex[3]->load(TEX_FILE_PLAYER_FLAME"beru_flame_03.tga");
+	mFlameTex[4]->load(TEX_FILE_PLAYER_FLAME"beru_flame_04.tga");
+	mFlameTex[5]->load(TEX_FILE_PLAYER_FLAME"beru_flame_05.tga");
+	/*影*/
+	mShadowTex->load(TEX_FILE_SHADOW"shadow.tga");
 
 	/*テクスチャを張る*/
-	mPlayer.SetUv(mStay_tex[0], 0, 0, SIZE_TEX_PLAYER_STAY_X,SIZE_TEX_PLAYER_STAY_Y);
+	mPlayer.SetUv(mStayTex[0], 0, 0, SIZE_TEX_PLAYER_STAY_X,SIZE_TEX_PLAYER_STAY_Y);
+	mShadow.SetUv(mShadowTex, 0, 0, SIZE_SHADOW_X, SHADOW_TEX_Y);
 	mForward = CVector2(1.0f, 0.0f);
 }
 
@@ -94,9 +173,9 @@ int CPlayer::DecisionRL(int i){
 //プレイヤー描画
 CPlayer::CPlayer() : mVelocity(0), mSpeedJump(JUMP_FIRST_SPEED),mFlameCount(0){
 
-	for (int i = 0; i < FLAME_LIMIT; i++)
+	for (int i = 0; i < FRAME_LIMIT; i++)
 	{
-		mStay_tex[i] = 0;
+		mStayTex[i] = 0;
 	}
 
 	mPriorityR = FIRST_R_NO_PL;			//Renderのナンバー 
@@ -109,6 +188,7 @@ CPlayer::CPlayer() : mVelocity(0), mSpeedJump(JUMP_FIRST_SPEED),mFlameCount(0){
 	mShadow.SetVertex(-SIZE_SHADOW_X, SIZE_SHADOW_Y, SIZE_SHADOW_X, -SIZE_SHADOW_Y);
 	//四角形の色を設定
 	mPlayer.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+	mShadow.SetColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 }
 
@@ -144,7 +224,7 @@ void CPlayer::AnimeFlame(){
 	if (mFlameCount % 5 == 0){ //フレーム数
 		mAnime += 1;
 	}
-	if (mAnime >= FLAME_LIMIT || mSaveAnime != eAnime){
+	if (mAnime >= FRAME_LIMIT || mSaveAnime != eAnime){
 		mAnime = 0;
 	}
 	mSaveAnime = eAnime;
@@ -172,7 +252,7 @@ void CPlayer::Run_Walk(){
 }
 void CPlayer::Update() {
 	AnimeFlame();
-	assert(mAnime <= FLAME_LIMIT); //フレーム数が七を超えるとダメ
+	assert(mAnime <= FRAME_LIMIT); //フレーム数が七を超えるとダメ
 	mPriorityR = -mAxis;
 	CTaskManager TaskManager;
 	camera_x = mPos.x;
@@ -278,24 +358,24 @@ void CPlayer::Update() {
 	{
 		/*待機中*/
 	case E_STAY_L:
-		mPlayer.SetUv(mStay_tex[mAnime],SIZE_TEX_PLAYER_STAY_X, 0, 0, SIZE_TEX_PLAYER_STAY_Y);
+		mPlayer.SetUv(mStayTex[mAnime],SIZE_TEX_PLAYER_STAY_X, 0, 0, SIZE_TEX_PLAYER_STAY_Y);
 		break;
 	case E_STAY_R:
-		mPlayer.SetUv(mStay_tex[mAnime], 0, 0, SIZE_TEX_PLAYER_STAY_X,SIZE_TEX_PLAYER_STAY_Y);
+		mPlayer.SetUv(mStayTex[mAnime], 0, 0, SIZE_TEX_PLAYER_STAY_X,SIZE_TEX_PLAYER_STAY_Y);
 		break;
 		/*歩き中*/
 	case E_WALK_L:
-		mPlayer.SetUv(mWalk_tex[mAnime], SIZE_TEX_PLAYER_WALK_X, 0, 0, SIZE_TEX_PLAYER_WALK_Y);
+		mPlayer.SetUv(mWalkTex[mAnime], SIZE_TEX_PLAYER_WALK_X, 0, 0, SIZE_TEX_PLAYER_WALK_Y);
 		break;
 	case E_WALK_R:
-		mPlayer.SetUv(mWalk_tex[mAnime], 0, 0, SIZE_TEX_PLAYER_WALK_X, SIZE_TEX_PLAYER_WALK_Y);
+		mPlayer.SetUv(mWalkTex[mAnime], 0, 0, SIZE_TEX_PLAYER_WALK_X, SIZE_TEX_PLAYER_WALK_Y);
 		break;
 		/*走り中*/
 	case E_RUN_L:
-		mPlayer.SetUv(mRun_tex[mAnime], SIZE_TEX_PLAYER_RUN_X, 0, 0, SIZE_TEX_PLAYER_RUN_Y);
+		mPlayer.SetUv(mRunTex[mAnime], SIZE_TEX_PLAYER_RUN_X, 0, 0, SIZE_TEX_PLAYER_RUN_Y);
 		break;
 	case E_RUN_R:
-		mPlayer.SetUv(mRun_tex[mAnime], 0, 0, SIZE_TEX_PLAYER_RUN_X, SIZE_TEX_PLAYER_RUN_Y);
+		mPlayer.SetUv(mRunTex[mAnime], 0, 0, SIZE_TEX_PLAYER_RUN_X, SIZE_TEX_PLAYER_RUN_Y);
 		break;
 	}
 

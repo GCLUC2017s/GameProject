@@ -10,8 +10,8 @@
 #include "../Task/CTaskManager.h"
 #include "../Define/define.h"
 
-#define FLAME_LIMIT 6 //フレーム数の上限
-
+#define FRAME_LIMIT 6				//フレーム数の上限
+#define NORMALATTACK_PATTERN 3		//通常攻撃のパターン
 
 const float gravity = 0.01;										//重力
 
@@ -24,9 +24,16 @@ private:
 	float mVelocity; //移動するときに使う
 	CRectangle	mPlayer;
 	CRectangle  mShadow;
-	CTexture	*mStay_tex[FLAME_LIMIT];
-	CTexture	*mWalk_tex[FLAME_LIMIT];
-	CTexture	*mRun_tex[FLAME_LIMIT];
+	CTexture	*mStayTex[FRAME_LIMIT];
+	CTexture	*mWalkTex[FRAME_LIMIT];
+	CTexture	*mRunTex[FRAME_LIMIT];
+	CTexture	*mNormalAttackTex[NORMALATTACK_PATTERN][FRAME_LIMIT];
+	CTexture	*mEatTex[FRAME_LIMIT];
+	CTexture	*mEx01Tex[FRAME_LIMIT];
+	CTexture	*mEx02Tex[FRAME_LIMIT];
+	CTexture	*mFlameTex[FRAME_LIMIT];
+	CTexture	*mBrakeTex[FRAME_LIMIT];
+	CTexture	*mShadowTex;
 
 	/*
 	自分がどのアニメーションか判断用
