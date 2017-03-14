@@ -55,7 +55,7 @@ void CEnemy00::Init(){
 
 	/*テクスチャを張る*/
 	mEnemy00.SetUv(mStay_tex[0], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
-	mForward = CVector2(0.0f, 1.0f);
+	mForward = CVector2(1.0f, 0.0f);
 
 }
 
@@ -198,17 +198,17 @@ void CEnemy00::Update(){
 	switch (eAnime)
 	{
 		/*待機中*/
-	case E_STAY_L:
+	case E_STAY_R:
 		mEnemy00.SetUv(mStay_tex[mAnime], SIZE_TEX_ENEMY00_STAY_X, 0, 0, SIZE_TEX_ENEMY00_STAY_Y);
 		break;
-	case E_STAY_R:
+	case E_STAY_L:
 		mEnemy00.SetUv(mStay_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
 		break;
 		/*歩き中*/
-	case E_WALK_L:
+	case E_WALK_R:
 		mEnemy00.SetUv(mWalk_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
 		break;
-	case E_WALK_R:
+	case E_WALK_L:
 		mEnemy00.SetUv(mWalk_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
 		break;
 	}
