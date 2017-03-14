@@ -3,6 +3,7 @@
 #include "../Scene/Logo/CLogo.h"
 #include "../Scene/Title/CTitle.h"
 #include "../Scene/CharaSelect/CCharaSelect.h"
+#include "../Game/CGame.h"
 
 CSceneManager* CSceneManager::mp_sceneManager = nullptr;
 
@@ -108,10 +109,11 @@ void CSceneManager::ChangeScene(E_Scene scene)
 	case eCharaSelect:
 		mp_scene = new CCharaSelect();
 		break;
-		/*
+		
 	case eGame:
 		mp_scene = new CGame();
 		break;
+		/*
 	case eResult:
 		mp_scene = new CResult();
 		break;

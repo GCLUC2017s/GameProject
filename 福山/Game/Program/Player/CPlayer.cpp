@@ -166,7 +166,7 @@ void CPlayer::Run_Walk(){
 void CPlayer::Update() {
 	AnimeFlame();
 	assert(mAnime <= FLAME_LIMIT); //ƒtƒŒ[ƒ€”‚ªŽµ‚ð’´‚¦‚é‚Æƒ_ƒ
-	mPriorityR = mAxis;
+	mPriorityR = -mAxis;
 	CTaskManager TaskManager;
 	camera_x = mPos.x;
 	camera_y = mPos.y;

@@ -1,5 +1,6 @@
 #include "CLogo.h"
 #include "../CSceneManager.h"
+#include "../CScene.h"
 
 CLogo::CLogo()
 {

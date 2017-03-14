@@ -7,6 +7,7 @@
 
 #ifndef CLOGO_INCLUDE_GUARD
 #define CLOGO_INCLUDE_GUARD
+#include "../GLLibrary/CImage.h"
 #include "../Global.h"
 #include "../CScene.h"
 

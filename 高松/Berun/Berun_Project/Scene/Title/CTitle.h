@@ -7,8 +7,9 @@
 
 #ifndef CTITLE_INCLUDE_GUARD
 #define CTITLE_INCLUDE_GUARD
+#include "../GLLibrary/CImage.h"
 #include "../Global.h"
-#include "../Scene/CScene.h"
+#include "../CScene.h"
 
 class CTitle : public CScene
 {
@@ -190,8 +191,6 @@ class CTitle : public CScene
 	//メニューのどちら側(START/EXIT)を選択しているかを格納するフラグ(false = START,true = EXIT)
 	bool m_titleMenu;
 public:
-	//簡易的にシーンを接続するためのフラグ
-	bool flag;
 
 	CTitle();
 	~CTitle();
