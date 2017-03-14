@@ -131,8 +131,9 @@ void init(void)
 	CResourceManager::GetInstance()->Add("PlayerWLogoWord1", CImage::LoadImage("CharaSelect/PlayerWWord1.png"));
 	CResourceManager::GetInstance()->Add("PlayerWLogoWord2", CImage::LoadImage("CharaSelect/PlayerWWord2.png"));
 	CResourceManager::GetInstance()->Add("PlayerWLogoWord3", CImage::LoadImage("CharaSelect/PlayerWWord3.png"));
-	CResourceManager::GetInstance()->Add("BackGround", CImage::LoadImage("BackGround/Background_M01.png"));
-	CResourceManager::GetInstance()->Add("Wood", CImage::LoadImage("BackGround/Wood_01.png"));
+	CResourceManager::GetInstance()->Add("BackGround", CImage::LoadImage("BackGround/Game_Background/Background_M01.png"));
+	CResourceManager::GetInstance()->Add("BackGround2", CImage::LoadImage("BackGround/Game_Background/Background_M01.png"));
+	CResourceManager::GetInstance()->Add("Carrot", CImage::LoadImage("Enemy/Carrot_01.png"));
 
 	//テスト用　読み込んだ画像の取得
 	g_backGround = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("BackGround"));

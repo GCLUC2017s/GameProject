@@ -4,6 +4,7 @@
 CGame::CGame() {
 
 	new CMap();
+	new CEnemy();
 }
 
 CGame::~CGame() {
