@@ -108,8 +108,6 @@ CTitle::CTitle()
 	m_firstMenu = false;
 	m_firstChara = false;
 	m_titleMenu = false;
-
-	flag = false;
 }
 CTitle::~CTitle()
 {
@@ -210,7 +208,7 @@ void CTitle::Draw()
 			m_exit->SetPos(m_exitPos);
 			m_exit->SetSize(m_exitSize);
 
-			if (CInput::GetState(0, CInput::ePush, CInput::eButton10))CSceneManager::GetInstance()->Quit(0);
+			if (CInput::GetState(0, CInput::ePush, CInput::eButton10))   CSceneManager::GetInstance()->Quit(0);
 		}
 		else
 		{

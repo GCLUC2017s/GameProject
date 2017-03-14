@@ -108,7 +108,7 @@ void init(void)
 	CResourceManager::GetInstance()->Add("BlackSecond", CImage::LoadImage("Title/Black.png"));
 	CResourceManager::GetInstance()->Add("White", CImage::LoadImage("Title/White.png"));
 	CResourceManager::GetInstance()->Add("Logo", CImage::LoadImage("Title/Window.png"));
-	CResourceManager::GetInstance()->Add("Title", CImage::LoadImage("BackGround/Background_M 01.png"));
+	CResourceManager::GetInstance()->Add("Title", CImage::LoadImage("BackGround/Background_M01.png"));
 	CResourceManager::GetInstance()->Add("PleaseEnter", CImage::LoadImage("Title/Enterkey.png"));
 	CResourceManager::GetInstance()->Add("TitleLogo", CImage::LoadImage("Title/Titlelogo.png"));
 	CResourceManager::GetInstance()->Add("Knife", CImage::LoadImage("Title/Knife.png"));
@@ -118,14 +118,20 @@ void init(void)
 	CResourceManager::GetInstance()->Add("Exit", CImage::LoadImage("Title/Exit.png"));
 	CResourceManager::GetInstance()->Add("PlayerM", CImage::LoadImage("Player/Player_m.png"));
 	CResourceManager::GetInstance()->Add("PlayerW", CImage::LoadImage("Player/Player_w.png"));
+	CResourceManager::GetInstance()->Add("LittlePlayerM", CImage::LoadImage("Player/LittlePlayerM.png"));
+	CResourceManager::GetInstance()->Add("LittlePlayerW", CImage::LoadImage("Player/LittlePlayerW.png"));
 	CResourceManager::GetInstance()->Add("PlayerMShadow", CImage::LoadImage("Player/Player_m2.png"));
 	CResourceManager::GetInstance()->Add("PlayerWShadow", CImage::LoadImage("Player/Player_w2.png"));
 	CResourceManager::GetInstance()->Add("CharaSelectBackGround", CImage::LoadImage("CharaSelect/Tutorial_background.png"));
 	CResourceManager::GetInstance()->Add("CharaSelectLogo", CImage::LoadImage("CharaSelect/Tutorial1.png"));
-	CResourceManager::GetInstance()->Add("PlayerMLogo", CImage::LoadImage("CharaSelect/Tutorial2.png"));
-	CResourceManager::GetInstance()->Add("PlayerWLogo", CImage::LoadImage("CharaSelect/Tutorial3.png"));
-
-	CResourceManager::GetInstance()->Add("Back", CImage::LoadImage("BackGround/Background_M 01.png"));
+	CResourceManager::GetInstance()->Add("PlayerMLogoWord1", CImage::LoadImage("CharaSelect/PlayerMWord1.png"));
+	CResourceManager::GetInstance()->Add("PlayerMLogoWord2", CImage::LoadImage("CharaSelect/PlayerMWord2.png"));
+	CResourceManager::GetInstance()->Add("PlayerMLogoWord3", CImage::LoadImage("CharaSelect/PlayerMWord3.png"));
+	CResourceManager::GetInstance()->Add("PlayerMLogoWord4", CImage::LoadImage("CharaSelect/PlayerMWord4.png"));
+	CResourceManager::GetInstance()->Add("PlayerWLogoWord1", CImage::LoadImage("CharaSelect/PlayerWWord1.png"));
+	CResourceManager::GetInstance()->Add("PlayerWLogoWord2", CImage::LoadImage("CharaSelect/PlayerWWord2.png"));
+	CResourceManager::GetInstance()->Add("PlayerWLogoWord3", CImage::LoadImage("CharaSelect/PlayerWWord3.png"));
+	CResourceManager::GetInstance()->Add("BackGround", CImage::LoadImage("BackGround/Background_M01.png"));
 	CResourceManager::GetInstance()->Add("Wood", CImage::LoadImage("BackGround/Wood_01.png"));
 
 	//テスト用　読み込んだ画像の取得
