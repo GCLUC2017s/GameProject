@@ -11,14 +11,18 @@
 #define SIZE_TEX_PLAYER_WALK_Y 800			//プレイヤーの歩く姿テクスチャサイズ Y
 #define SIZE_TEX_PLAYER_RUN_X  800			//プレイヤーの走る姿テクスチャサイズ Y
 #define SIZE_TEX_PLAYER_RUN_Y  800			//プレイヤーの走る姿テクスチャサイズ Y
-#define SLOW_DOWN 0.001						//移動の減速スピード
+#define SLOW_DOWN 0.02						//移動の減速スピード
 #define WALK_SPEED 0.05						//歩くスピード
 #define RUN_SPEED 0.1						//走るスピード
-#define WALK_X 2							//歩くベクトルX
-#define WALK_Y 1							//歩くベクトルY
+#define WALK_X 1							//歩くベクトルX
+#define WALK_Y 0.5							//歩くベクトルY
 #define PATTERN_R 1							//PATTERNの右
 #define PATTERN_L 2							//PATTERNの左
-float CPlayer::camera_x;
+#define TEX_FILE_PLAYER_STAY "../CG\\beru\\beru_stay\\"  //プレイヤーのファイル場所　待ち
+#define TEX_FILE_PLAYER_WALK "../CG\\beru\\beru_walk\\"  //プレイヤーのファイル場所　待ち
+#define TEX_FILE_PLAYER_RUN "../CG\\beru\\beru_run\\"  //プレイヤーのファイル場所　待ち
+
+float CPlayer::camera_x; 
 float CPlayer::camera_y;
 
 
@@ -42,28 +46,26 @@ void CPlayer::Init() {
 	}
 
 	/*テクスチャファイル読み込み*/
-	mStay_tex[0]->load("../CG\\beru\\beru_stay\\beru_stay_00.tga");
-	mStay_tex[1]->load("../CG\\beru\\beru_stay\\beru_stay_01.tga");
-	mStay_tex[2]->load("../CG\\beru\\beru_stay\\beru_stay_02.tga");
-	mStay_tex[3]->load("../CG\\beru\\beru_stay\\beru_stay_03.tga");
-	mStay_tex[4]->load("../CG\\beru\\beru_stay\\beru_stay_04.tga");
-	mStay_tex[5]->load("../CG\\beru\\beru_stay\\beru_stay_05.tga");
+	mStay_tex[0]->load(TEX_FILE_PLAYER_STAY"beru_stay_00.tga");
+	mStay_tex[1]->load(TEX_FILE_PLAYER_STAY"beru_stay_01.tga");
+	mStay_tex[2]->load(TEX_FILE_PLAYER_STAY"beru_stay_02.tga");
+	mStay_tex[3]->load(TEX_FILE_PLAYER_STAY"beru_stay_03.tga");
+	mStay_tex[4]->load(TEX_FILE_PLAYER_STAY"beru_stay_04.tga");
+	mStay_tex[5]->load(TEX_FILE_PLAYER_STAY"beru_stay_05.tga");
 
+	mWalk_tex[0]->load(TEX_FILE_PLAYER_WALK"beru_walk_00.tga");
+	mWalk_tex[1]->load(TEX_FILE_PLAYER_WALK"beru_walk_01.tga");
+	mWalk_tex[2]->load(TEX_FILE_PLAYER_WALK"beru_walk_02.tga");
+	mWalk_tex[3]->load(TEX_FILE_PLAYER_WALK"beru_walk_03.tga");
+	mWalk_tex[4]->load(TEX_FILE_PLAYER_WALK"beru_walk_04.tga");
+	mWalk_tex[5]->load(TEX_FILE_PLAYER_WALK"beru_walk_05.tga");
 
-
-	mWalk_tex[0]->load("../CG\\beru\\beru_walk\\beru_walk_00.tga");
-	mWalk_tex[1]->load("../CG\\beru\\beru_walk\\beru_walk_01.tga");
-	mWalk_tex[2]->load("../CG\\beru\\beru_walk\\beru_walk_02.tga");
-	mWalk_tex[3]->load("../CG\\beru\\beru_walk\\beru_walk_03.tga");
-	mWalk_tex[4]->load("../CG\\beru\\beru_walk\\beru_walk_04.tga");
-	mWalk_tex[5]->load("../CG\\beru\\beru_walk\\beru_walk_05.tga");
-
-	mRun_tex[0]->load("../CG/beru/beru_run/beru_run_00.tga");
-	mRun_tex[1]->load("../CG/beru/beru_run/beru_run_01.tga");
-	mRun_tex[2]->load("../CG/beru/beru_run/beru_run_02.tga");
-	mRun_tex[3]->load("../CG/beru/beru_run/beru_run_03.tga");
-	mRun_tex[4]->load("../CG/beru/beru_run/beru_run_04.tga");
-	mRun_tex[5]->load("../CG/beru/beru_run/beru_run_05.tga");
+	mRun_tex[0]->load(TEX_FILE_PLAYER_RUN"beru_run_00.tga");
+	mRun_tex[1]->load(TEX_FILE_PLAYER_RUN"beru_run_01.tga");
+	mRun_tex[2]->load(TEX_FILE_PLAYER_RUN"beru_run_02.tga");
+	mRun_tex[3]->load(TEX_FILE_PLAYER_RUN"beru_run_03.tga");
+	mRun_tex[4]->load(TEX_FILE_PLAYER_RUN"beru_run_04.tga");
+	mRun_tex[5]->load(TEX_FILE_PLAYER_RUN"beru_run_05.tga");
 
 
 
@@ -130,6 +132,11 @@ void CPlayer::Jump(){ //ジャンプ処理メソッド
 
 }
 
+void CPlayer::MovePosAxis(){
+		mPos += mForward * mVelocity;
+		mAxis += mForward.y * mVelocity;
+}
+
 /*アニメのフレームを動かすメソッド*/
 void CPlayer::AnimeFlame(){
 
@@ -194,8 +201,7 @@ void CPlayer::Update() {
 		}
 		if (mVelocity > 0){
 			mVelocity -= SLOW_DOWN;
-			mPos += mForward * mVelocity;
-			mAxis += mForward.y * mVelocity;
+			MovePosAxis();
 		}
 		else{
 			mVelocity = 0;
@@ -216,8 +222,7 @@ void CPlayer::Update() {
 		}
 		if (mVelocity > 0){ 
 			mVelocity -= SLOW_DOWN;
-			mPos += mForward * mVelocity;
-			mAxis += mForward.y * mVelocity;
+			MovePosAxis();
 		}
 		else{
 			mVelocity = 0;
@@ -235,34 +240,32 @@ void CPlayer::Update() {
 
 
 	//上移動
-	if (CKey::push(VK_UP) && mAxis < player_limit_top - SIZE_PLAYER_Y) { //軸が上限に達していないとき
+	if (CKey::push(VK_UP) && mAxis < character_limit_top - SIZE_PLAYER_Y) { //軸が上限に達していないとき
 		Run_Walk();
 		mForward = CVector2(0.0f, WALK_Y);
-		mPos += mForward * mVelocity;
-		mAxis += mForward.y * mVelocity;
+		MovePosAxis();
 	}
 
 	//下移動
-	if (CKey::push(VK_DOWN) && mAxis > player_limit_bottom + SIZE_PLAYER_Y) {//軸が上限に達していないとき
+	if (CKey::push(VK_DOWN) && mAxis > character_limit_bottom + SIZE_PLAYER_Y) {//軸が上限に達していないとき
 		Run_Walk();
 		mForward = CVector2(0.0f, -WALK_Y);
-		mPos += mForward * mVelocity;
-		mAxis += mForward.y * mVelocity;
+		MovePosAxis();
 	}
 
 
 
 	/*あたり判定*/
-	if (mPos.y > player_limit_top - SIZE_PLAYER_Y&& !mEnabledJump){  //マップ外に出ると元の位置に戻す(軸)
-		mPos.y = player_limit_top - SIZE_PLAYER_Y;
+	if (mPos.y > character_limit_top - SIZE_PLAYER_Y&& !mEnabledJump){  //マップ外に出ると元の位置に戻す(軸)
+		mPos.y = character_limit_top - SIZE_PLAYER_Y;
 		mAxis = mPos.y - SIZE_PLAYER_Y; //軸をもとに戻す
 	}
-	if (mPos.y < player_limit_bottom + SIZE_PLAYER_Y){  //マップ外に出ると元の位置に戻す(軸)
-		mPos.y = player_limit_bottom + SIZE_PLAYER_Y;
+	if (mPos.y < character_limit_bottom + SIZE_PLAYER_Y){  //マップ外に出ると元の位置に戻す(軸)
+		mPos.y = character_limit_bottom + SIZE_PLAYER_Y;
 		mAxis = mPos.y - SIZE_PLAYER_Y; //軸をもとに戻す
 	}
 
-	if (mPos.x >= player_limit_right - SIZE_PLAYER_X || mPos.x <= player_limit_left + SIZE_PLAYER_X){ //マップ外に出ると元の位置に戻す(X)
+	if (mPos.x >= character_limit_right - SIZE_PLAYER_X || mPos.x <= character_limit_left + SIZE_PLAYER_X){ //マップ外に出ると元の位置に戻す(X)
 		mPos.x = mPlayer.position.x;
 	}
 	/*あたり判定終了*/
