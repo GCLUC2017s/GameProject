@@ -1,28 +1,38 @@
-//ふくやま
-//高橋弘樹
+//シーンのプログラミング（シーンマネージャー）
+//担当者 高橋弘樹
 #ifndef CSCENE_HPP
 #define CSCENE_HPP
-#include "glut.h"
-#define _USE_MATH_DEFINES	//数学ライブラリのM_PIを有効にする
-#include <math.h>	//数学ライブラリのインクルード
-#include <stdio.h>
+<<<<<<< HEAD
 
+#include "../Define/define.h"
+=======
+>>>>>>> 86b196553959a77e4bd3a019ed2d013854cfcbcd
+#include "glut.h"
+#include <stdio.h>
 
 class CScene{
 public:
-
-	enum Estatus
-	{
-		E_GAMETITLE,E_GAMEMAIN
-	};
-	Estatus estatus;
-
-	static int status;
-
-	CScene() {
-		status = E_GAMETITLE;
+	CScene(void) {}
+	static CScene *mScene;
+	static CScene* mGetInstance(void){ //シングルトンにします。
+		return mScene;
 	}
 
-	void Loop();
+	//シーン毎に設定　並びは流れの順番
+		enum eSceneNo{
+			E_TITLE,
+			E_SELECT,
+			E_GAMEMAIN,
+			E_GAMECLEAR,
+			E_GAMEOVER
+		};
+
+
+		eSceneNo mNextStatus;
+
+			void ChangeScene(eSceneNo no);
+	virtual	void Update();	//virtual　？
+	virtual	void Render(){};
 };
+
 #endif
