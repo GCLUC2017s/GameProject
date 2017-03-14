@@ -1,3 +1,9 @@
+/*
+* @file		CPlayer.h
+* @brief	プレーヤー機能
+*
+* @author	Ryoji Anzai
+*/
 #ifndef CPLAYER_INCLUDE_GUARD
 #define CPLAYER_INCLUDE_GUARD
 #include "../Global.h"
