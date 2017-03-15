@@ -11,7 +11,6 @@ CTutorial::CTutorial(char * file) : CTask(0,0), mp_file(nullptr),
 									m_end(0), 
 									m_state(0)
 {
-	g_tutorialNo = 0;
 	mp_img[0] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("PlayerM"));
 	mp_img[1] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("PlayerW"));
 	

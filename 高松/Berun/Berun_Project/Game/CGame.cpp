@@ -25,3 +25,8 @@ void CGame::Draw()
 
 
 }
+
+CPlayer * CGame::GetPlayer()
+{
+	return nullptr;
+}
