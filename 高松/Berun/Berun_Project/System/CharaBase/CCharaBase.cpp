@@ -1,5 +1,10 @@
 #include "CCharaBase.h"
+<<<<<<< HEAD
 static T_CharacterData g_characterData[eCharacterMax] = {
+=======
+static T_CharacterData g_characterData[eCharacterMax] = 
+{
+>>>>>>> 8fa733087e86287f408b565c59a7cbfe1fdf32e0
 	//ID,レベル、最大HP,現在HP,最大SP,現在SP,攻撃力,防御力,取得経験値,必要経験値,移動速度,ジャンプ力,Xサイズ,Yサイズ(13)
 	{ "LittlePlayerM",0,5,0,0,0,0,0,0,0,1,0, },
 	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,0, },
@@ -7,14 +12,20 @@ static T_CharacterData g_characterData[eCharacterMax] = {
 	{ "Chick",3,5,0,0,0,0,0,0,0,1,0,0,0 },
 	{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
 	{ "Rice",5,5,0,0,0,0,0,0,0,1,0,0,0 },
+<<<<<<< HEAD
 	
 
+=======
+>>>>>>> 8fa733087e86287f408b565c59a7cbfe1fdf32e0
 };
-CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio) : CCharaBase(type, eUDP_Null, eDWP_Null)
+CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio) : CBase(type, updatePrio, drawPrio)
 {
 	m_state = eState_Idle;
-	m_chara = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get(mp_eData->imageName));
+<<<<<<< HEAD
+=======
 	mp_eData = &g_characterData[type];
+>>>>>>> 8fa733087e86287f408b565c59a7cbfe1fdf32e0
+	m_chara = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get(mp_eData->imageName));
 	m_imgPtn = 0;
 	m_level= mp_eData->level;
 	m_maxHp = mp_eData->maxHp;
@@ -27,8 +38,13 @@ CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio)
 	m_exp=mp_eData->exp;
 	m_speed=mp_eData->speed;
 	m_jump=mp_eData->jump;
+<<<<<<< HEAD
 	m_xsize=mp_eData->xsize;
 	m_ysize=mp_eData->ysize;
+=======
+	m_xSize=mp_eData->xSize;
+	m_ySize=mp_eData->ySize;
+>>>>>>> 8fa733087e86287f408b565c59a7cbfe1fdf32e0
 	m_charaDirection = false;
 	m_right = false;
 	m_left = false;
@@ -37,17 +53,34 @@ CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio)
 }
 CCharaBase::~CCharaBase() 
 {
-
+	CResourceManager::GetInstance()->Delete(mp_eData->imageName);
+	CResourceManager::ClearInstance();
 }
 void CCharaBase::Animation()
 {
 
 }
+<<<<<<< HEAD
 void CCharaBase::_key() {
 	m_right = false;
 	m_left = false;
 	m_up = false;
 	m_down = false;
+=======
+void CCharaBase::Key()
+{
+	m_left = false;
+	m_up = false;
+	m_down = false;
+
+	if (CInput::GetState(0, CInput::ePush, CInput::eUp)) m_up = true; 
+	if (CInput::GetState(0, CInput::ePush, CInput::eDown)) m_down = true;
+	if (CInput::GetState(0, CInput::ePush, CInput::eLeft)) m_left = true;
+	if (CInput::GetState(0, CInput::ePush, CInput::eRight)) m_right = true;
+	if (CInput::GetState(0, CInput::ePush, CInput::eUp) || CInput::GetState(0, CInput::ePush, CInput::eDown)
+		|| CInput::GetState(0, CInput::ePush, CInput::eLeft) || CInput::GetState(0, CInput::ePush, CInput::eRight)) m_state = eState_Walk;
+
+>>>>>>> 8fa733087e86287f408b565c59a7cbfe1fdf32e0
 }
 void CCharaBase::_idle(){
 
