@@ -17,7 +17,7 @@ CPlayer::~CPlayer()
 }
 
 void CPlayer::_key() {
-	CCharaBase::Key();
+	CCharaBase::_key();
 
 	
 	

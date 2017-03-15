@@ -1,5 +1,5 @@
 #include "CCharaBase.h"
-static T_CharacterData g_characterData[eCharacterMax] = 
+const static T_CharacterData g_characterData[eCharacterMax] = 
 {
 	//ID,レベル、最大HP,現在HP,最大SP,現在SP,攻撃力,防御力,取得経験値,必要経験値,移動速度,ジャンプ力,Xサイズ,Yサイズ(13)
 	{ "LittlePlayerM",0,5,0,0,0,0,0,0,0,1,0, },
@@ -9,7 +9,7 @@ static T_CharacterData g_characterData[eCharacterMax] =
 	{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
 	{ "Rice",5,5,0,0,0,0,0,0,0,1,0,0,0 },
 };
-CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio) : CBase(type, updatePrio, drawPrio)
+CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio) : CBase(updatePrio, drawPrio)
 {
 	m_state = eState_Idle;
 	mp_eData = &g_characterData[type];
@@ -45,10 +45,6 @@ void CCharaBase::Animation()
 }
 void CCharaBase::Key()
 {
-	m_left = false;
-	m_up = false;
-	m_down = false;
-
 	if (CInput::GetState(0, CInput::ePush, CInput::eUp)) m_up = true; 
 	if (CInput::GetState(0, CInput::ePush, CInput::eDown)) m_down = true;
 	if (CInput::GetState(0, CInput::ePush, CInput::eLeft)) m_left = true;
