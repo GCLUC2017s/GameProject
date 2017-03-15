@@ -25,5 +25,17 @@ void CPlayer::_key() {
 	{
 		m_right = true;
 	}
+	if (CInput::GetState(0, CInput::eHold, CInput::eLeft))
+	{
+		m_left = true;
+	}
+	if (CInput::GetState(0, CInput::eHold, CInput::eUp))
+	{
+		m_up = true;
+	}
+	if (CInput::GetState(0, CInput::eHold, CInput::eDown))
+	{
+		m_down = true;
+	}
 }
 
