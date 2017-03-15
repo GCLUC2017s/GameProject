@@ -8,7 +8,8 @@ CTutorial::CTutorial()
 
 CTutorial::CTutorial(char * file) : CTask(0,0), mp_file(nullptr),
 									m_face(0),
-									m_end(0), m_state(0)
+									m_end(0), 
+									m_state(0)
 {
 	g_tutorialNo = 0;
 	mp_img[0] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("PlayerM"));
@@ -34,6 +35,7 @@ void CTutorial::Update()
 	//スペースキーでチュートリアルスキップ
 	if (CInput::GetState(0, CInput::ePush, CInput::eButton5)) m_end = -2;
 	mp_img[g_tutorialNo]->SetPos(200, 250);
+	//テキストが終われば削除フラグを真にする
 	if (GetEnd()) SetDestroyFlag(true);
 }
 
