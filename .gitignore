@@ -1,32 +1,67 @@
+﻿共通資料/Ignore確認.txt
 
-共通資料/Ignore確認.txt
 /共通資料/Ignore確認.txt
+
 /高松/研修プログラム/安西/.vs
+
 /高松/研修プログラム/安西/Debug
+
 /高松/研修プログラム/安西/Project1/Debug
+
 /高松/研修プログラム/安西/Project1/Project1.vcxproj.filters
+
 /高松/研修プログラム/安西/Project1.VC.db
+
 /高松/研修プログラム/安西/Project1.VC.VC.opendb
+
 /高松/研修プログラム/安西/Project1/Debug
+
 /福山/Game/Game.sdf
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 /高松/Berun/GLLibrary/Debug
+
 /高松/Berun/Berun.VC.db
+
 /高松/Berun/Game.VC.db
+
 /高松/Berun/.vs
+
 /高松/Berun/Debug
+
 /高松/Berun/Berun_Project/Debug
+
 /高松/Berun/Berun_Project/BerunProject.vcxproj.filters
+
 /高松/Berun/Berun.VC.VC.opendb
+
 /福山/Game/*.suo
+
 /福山/Game/Program/Debug
+
 /福山/Game/Program/*.user
+
 /福山/Game/Debug
+<<<<<<< HEAD
 /福山/Game/Program/*.filters
 /福山/Game/Program/*.dll
+=======
+
+/福山/Game/Program/*.filters
+
+/福山/Game/Program/*.dll
+
+>>>>>>> origin/master
 /福山/Game/Game.v12.suo
+
 /福山/Game/Debug/Game.pdb
+
 /福山/Game/Debug/Game.exe
+
 /福山/Game/Debug/Game.ilk
+<<<<<<< HEAD
 /福山/Game/CG/Debug
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -49,3 +84,7 @@
 /福山/Game/Program/*.filters
 /福山/Game/CG/*.filters
 /福山/Game/*.sdf
+=======
+
+/福山/Game/CG/Debug
+>>>>>>> origin/master

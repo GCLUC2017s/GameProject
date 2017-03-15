@@ -4,10 +4,17 @@
 
 CGame::CGame() {
 
+<<<<<<< HEAD
 	//new CMap();
 	//new CTutorial(g_tutorialDataPath[g_tutorialNo]);
 	//new CPlayer(ePlayerMan);
 	//new CEnemy(eCarrot);
+=======
+//	new CMap();
+//	new CTutorial(g_tutorialDataPath[g_tutorialNo]);
+//	new CPlayer(ePlayerMan);
+//	new CEnemy(eCarrot);
+>>>>>>> origin/master
 }
 
 CGame::~CGame() {

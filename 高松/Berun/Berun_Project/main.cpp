@@ -110,8 +110,14 @@ void init(void)
 	CResourceManager::GetInstance()->Add("BackGround2", CImage::LoadImage("BackGround/Background_M01.png"));
 	CResourceManager::GetInstance()->Add("BackGround3", CImage::LoadImage("BackGround/Background_M01.png"));
 <<<<<<< HEAD
+<<<<<<< HEAD
 	CResourceManager::GetInstance()->Add("CarrotLeft", CImage::LoadImage("Enemy/Carrot/Carrot_01.png"));
 	CResourceManager::GetInstance()->Add("CarrotRight", CImage::LoadImage("Enemy/Carrot/Carrot_02.png"));
+=======
+	CResourceManager::GetInstance()->Add("Carrot", CImage::LoadImage("Enemy/Carrot/Carrot_01.png"));
+	CResourceManager::GetInstance()->Add("Carrot", CImage::LoadImage("Enemy/Carrot/Carrot_02.png"));
+	CResourceManager::GetInstance()->Add("Meter", CImage::LoadImage("Enemy/Meter_01.png"));
+>>>>>>> origin/master
 =======
 	CResourceManager::GetInstance()->Add("Carrot", CImage::LoadImage("Enemy/Carrot/Carrot_01.png"));
 	CResourceManager::GetInstance()->Add("Carrot", CImage::LoadImage("Enemy/Carrot/Carrot_02.png"));

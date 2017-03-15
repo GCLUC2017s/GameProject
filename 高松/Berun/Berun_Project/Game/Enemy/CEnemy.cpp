@@ -18,7 +18,11 @@ CEnemy::~CEnemy() {
 }
 
 void CEnemy::_key() {
+<<<<<<< HEAD
 	CCharaBase::_key();
+=======
+	CCharaBase::Key();
+>>>>>>> origin/master
 
 	
 	m_right =true;

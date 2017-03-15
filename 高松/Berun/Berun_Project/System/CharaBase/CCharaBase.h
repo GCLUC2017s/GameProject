@@ -9,6 +9,8 @@
 #define CHARABASE_INCLUDE_GUARD
 #include "../Base/CBase.h"
 
+#define CHARA_MOVE 4
+
 #define ARRAY_SIZE(a)(sizeof(a)/sizeof(a[0]))
 
 //キャラクターの基礎構造体
@@ -26,8 +28,13 @@ struct T_CharacterData {
 	int exp;		//必要経験値
 	float speed;	//移動速度
 	float jump;		//ジャンプ力
+<<<<<<< HEAD
 	float xsize;	//Xサイズ
 	float ysize;	//Yサイズ
+=======
+	float xSize;	//Xサイズ
+	float ySize;	//Yサイズ
+>>>>>>> origin/master
 };
 enum {
 	ePlayerMan,	//プレイヤー男
@@ -54,6 +61,8 @@ class CCharaBase : public CBase
 protected:
 	enum ESTATE{
 		eState_Idle,
+		eState_Walk,
+		eState_Dash,
 		eState_Jump,
 		eState_Attack,
 		
@@ -89,9 +98,15 @@ protected:
 	//キャラクターのジャンプ力
 	float m_jump;
 
+<<<<<<< HEAD
 	float m_xsize;//キャラクターのXサイズ
 
 	float m_ysize;//キャラクターのYサイズ
+=======
+	float m_xSize;//キャラクターのXサイズ
+
+	float m_ySize;//キャラクターのYサイズ
+>>>>>>> origin/master
 	
 	//キャラクターの向きを格納するフラグ
 	bool m_charaDirection;
@@ -100,8 +115,17 @@ protected:
 	bool m_left;
 	bool m_up;
 	bool m_down;
+<<<<<<< HEAD
 	virtual void _key();
 	void _idle();
+=======
+	virtual void Key();
+	void Idle();
+	void Walk();
+	void Dash();
+	void Jump();
+	void HpBar();
+>>>>>>> origin/master
 public:
 	CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio);
 	~CCharaBase();
