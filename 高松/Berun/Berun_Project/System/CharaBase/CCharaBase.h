@@ -26,6 +26,8 @@ struct T_CharacterData {
 	int exp;		//必要経験値
 	float speed;	//移動速度
 	float jump;		//ジャンプ力
+	float xsize;	//Xサイズ
+	float ysize;	//Yサイズ
 };
 enum {
 	ePlayerMan,	//プレイヤー男
@@ -53,15 +55,17 @@ protected:
 	enum ESTATE{
 		eState_Idle,
 		eState_Jump,
+		eState_Attack,
+		
 	};
 	ESTATE m_state;
 	CImage *m_chara;
+	CImage *m_enemyHp;
 
 	T_CharacterData  *mp_eData;
 
-	//キャラクターのサイズを格納する変数
-	int m_charaWidth;
-	int m_charaHeight;
+	
+	int m_imgPtn;
 	//キャラクターのレベル
 	int   m_level;
 	//キャラクターの最大体力
@@ -84,14 +88,22 @@ protected:
 	float m_speed;
 	//キャラクターのジャンプ力
 	float m_jump;
+
+	float m_xsize;//キャラクターのXサイズ
+
+	float m_ysize;//キャラクターのYサイズ
+	
 	//キャラクターの向きを格納するフラグ
 	bool m_charaDirection;
 
 	bool m_right;
+	bool m_left;
+	bool m_up;
+	bool m_down;
 	virtual void _key();
 	void _idle();
 public:
-	CCharaBase(int type);
+	CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio);
 	~CCharaBase();
 	void Animation();
 	void Update();
