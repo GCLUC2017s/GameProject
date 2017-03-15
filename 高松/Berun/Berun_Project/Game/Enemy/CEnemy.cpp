@@ -2,11 +2,11 @@
 
 
 
-T_EnemyData g_enemyData[] =
+/*T_EnemyData g_enemyData[] =
 {
 	//ID,Å‘åHP,Œ»İHP,UŒ‚—Í,–hŒä—Í,ŒoŒ±’l,ˆÚ“®‘¬“x
 	{ 0,0,0,0,0,0,0.0f },
-};
+};*/
 
 CEnemy::CEnemy(int type):CCharaBase(type)
 {
