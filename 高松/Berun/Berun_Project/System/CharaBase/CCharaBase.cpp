@@ -8,8 +8,9 @@ static T_CharacterData g_characterData[eCharacterMax] = {
 	
 
 };
-CCharaBase::CCharaBase(int type):m_state(eState_Idle)
+CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio) : CCharaBase(type, eUDP_Null, eDWP_Null)
 {
+	m_state = eState_Idle;
 	mp_eData = &g_characterData[type];
 	m_chara = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get(mp_eData->imageName));
 }

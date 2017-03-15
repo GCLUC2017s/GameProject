@@ -91,7 +91,7 @@ protected:
 	virtual void _key();
 	void _idle();
 public:
-	CCharaBase(int type);
+	CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio);
 	~CCharaBase();
 	void Animation();
 	void Update();

@@ -25,6 +25,7 @@ protected:
 	int   m_id;
 public:
 	CBase();
+	CBase(unsigned int updatePrio, unsigned int drawPrio);
 	~CBase();
 	CVector2D GetScreenPos();
 };

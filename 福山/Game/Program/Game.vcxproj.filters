@@ -101,9 +101,6 @@
     <ClCompile Include="Scene\CScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="CBase.cpp">
-      <Filter>Base</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\CBase.h">
