@@ -34,7 +34,9 @@ void CTutorial::Update()
 	if (CInput::GetState(0, CInput::ePush, CInput::eButton10)) GetText();
 	//スペースキーでチュートリアルスキップ
 	if (CInput::GetState(0, CInput::ePush, CInput::eButton5)) m_end = -2;
+
 	mp_img[g_tutorialNo]->SetPos(200, 250);
+
 	//テキストが終われば削除フラグを真にする
 	if (GetEnd()) SetDestroyFlag(true);
 }
