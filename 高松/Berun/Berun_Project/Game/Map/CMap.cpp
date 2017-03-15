@@ -2,15 +2,11 @@
 
 
 CMap::CMap() : CTask(eUDP_Map,eDWP_Map),
-m_backgroundMorning(0),//èâä˙âª
-m_backgroundMorning2(0),
-m_backgroundEvenig(0),
-m_backgroundNight(0),
+
 m_stage(eStage1)
 {
-	m_backgroundMorning = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("BackGround"));
-	m_backgroundMorning2 = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("BackGround2"));
-	m_backgroundMorning3 = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("BackGround3"));
+	m_backgroundMorning[MAP_DATA] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("BackGround"));
+	
 	/*switch (m_stage)
 	{
 	case eStage1:
@@ -35,14 +31,12 @@ CMap::~CMap() {
 }
 void CMap::Update() {
 
-	m_backgroundMorning->SetRect(0,0,1280,768);
-	m_backgroundMorning2->SetRect(0, 0, 1280, 768);
-	m_backgroundMorning3->SetRect(0, 0, 1280, 768);
+	m_backgroundMorning[MAP_DATA]->SetRect(0,0,1280,768);
+	
 //	m_backgroundEvenig->SetRect(0, 0, 1280, 768);
 //	m_backgroundNight->SetRect(0, 0, 1280, 768);
-	m_backgroundMorning->SetPos(m_mapPos.x - 1280, m_mapPos.y);
-	m_backgroundMorning2->SetPos(m_mapPos.x, m_mapPos.y);
-	m_backgroundMorning3->SetPos(m_mapPos.x-2560, m_mapPos.y);
+	m_backgroundMorning[MAP_DATA]->SetPos(m_mapPos.x - 1280, m_mapPos.y);
+	
 	if (m_mapPos.x == 0) {
 		m_mapPos.x = 1280;
 	}
@@ -58,10 +52,9 @@ void CMap::Update() {
 }
 
 void  CMap::Draw() {
-
-	m_backgroundMorning->Draw();
-	m_backgroundMorning2->Draw();
-	m_backgroundMorning3->Draw();
+	for (int i = 0; i < 3; i++) {
+		m_backgroundMorning[MAP_DATA]->Draw();
+	}
 //	m_backgroundEvenig->Draw();
 //	m_backgroundNight->Draw();
 }
