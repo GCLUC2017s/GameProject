@@ -76,11 +76,9 @@ void init(void)
 									CVector3D(0.0, 1.0, 0.0));
 	
 
-	//テスト用　読み込み
+	
 	//CResourceManagerで一括管理(前はCImageManagerだったもの)
-	CResourceManager::GetInstance()->Add("BackGround",CImage::LoadImage("BackGround/Background_M 01.png"));
-	CResourceManager::GetInstance()->Add("Life",CImage::LoadImage("Player/Life1.png"));
-
+	//画像読み込み
 	CResourceManager::GetInstance()->Add("Black", CImage::LoadImage("Title/Black.png"));
 	CResourceManager::GetInstance()->Add("BlackSecond", CImage::LoadImage("Title/Black.png"));
 	CResourceManager::GetInstance()->Add("White", CImage::LoadImage("Title/White.png"));
@@ -108,13 +106,19 @@ void init(void)
 	CResourceManager::GetInstance()->Add("PlayerWLogoWord1", CImage::LoadImage("CharaSelect/PlayerWWord1.png"));
 	CResourceManager::GetInstance()->Add("PlayerWLogoWord2", CImage::LoadImage("CharaSelect/PlayerWWord2.png"));
 	CResourceManager::GetInstance()->Add("PlayerWLogoWord3", CImage::LoadImage("CharaSelect/PlayerWWord3.png"));
-	CResourceManager::GetInstance()->Add("BackGround", CImage::LoadImage("BackGround/Game_Background/Background_M01.png"));
-	CResourceManager::GetInstance()->Add("BackGround2", CImage::LoadImage("BackGround/Game_Background/Background_M01.png"));
+	CResourceManager::GetInstance()->Add("BackGround", CImage::LoadImage("BackGround/Background_M01.png"));
+	CResourceManager::GetInstance()->Add("BackGround2", CImage::LoadImage("BackGround/Background_M01.png"));
 	CResourceManager::GetInstance()->Add("Carrot", CImage::LoadImage("Enemy/Carrot/Carrot_01.png"));
-
-//	CSound::GetInstance()->GetSound("BGM_BATTLE")->Load("BGM/battle.wav",1);
-//	CSound::GetInstance()->GetSound("BGM_BATTLE")->Play();
-
+	//サウンド読み込み
+	CSound::GetInstance()->GetSound("TITLE_BGM")->Load("BGM/Title.wav", 1);
+	CSound::GetInstance()->GetSound("CHARASELECT_BGM")->Load("BGM/CharaSelect.wav", 1);
+	CSound::GetInstance()->GetSound("AREA_M_BGM")->Load("BGM/Area_M.wav", 1);
+	CSound::GetInstance()->GetSound("AREA_N_BGM")->Load("BGM/Area_N.wav", 1);
+	CSound::GetInstance()->GetSound("AREA_E_BGM")->Load("BGM/Area_E.wav", 1);
+	CSound::GetInstance()->GetSound("AREA_Ni_BGM")->Load("BGM/Area_Ni.wav", 1);
+	CSound::GetInstance()->GetSound("RESULT_BGM")->Load("BGM/Result.wav", 1);
+	CSound::GetInstance()->GetSound("GAMEOVER_BGM")->Load("BGM/GameOver.wav", 1);
+	
 }
 
 
