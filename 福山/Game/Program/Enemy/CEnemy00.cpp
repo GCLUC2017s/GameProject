@@ -19,6 +19,16 @@
 #define WALK_X 2							//歩くベクトルX
 #define WALK_Y 1							//歩くベクトルY
 
+#define ENEMY00_STAY "../CG\\enemy00\\enemy00_stay\\"
+#define ENEMY00_WALK "../CG\\enemy00\\enemy00_walk\\"
+#define ENEMY00_ATTACK "../CG\\enemy00\\enemy00_attack\\"
+#define ENEMY00_DIE "../CG\\enemy00\\enemy00_dai\\"
+
+
+//攻撃時にいかなる場合でも右を向いてしまう。
+
+
+
 void CEnemy00::SetPos(){
 	mPos = Enemy_first_pos;
 	mAxis = mPos.y;
@@ -31,25 +41,39 @@ void CEnemy00::Init(){
 	{
 		mStay_tex[i] = new CTexture();		//テクスチャクラスのインスタンス作成
 		mWalk_tex[i] = new CTexture();		//テクスチャクラスのインスタンス作成
-		mRun_tex[i] = new CTexture();		//テクスチャクラスのインスタンス作成
+		mAttack_tex[i] = new CTexture();		//テクスチャクラスのインスタンス作成
+		mDie_tex[i] = new CTexture();
 	}
 
 	/*テクスチャファイル読み込み*/
-	mStay_tex[0]->load("../CG\\enemy00\\enemy00_walk\\enemy00_walk_00.tga");
-	mStay_tex[1]->load("../CG\\enemy00\\enemy00_walk\\enemy00_walk_01.tga");
-	mStay_tex[2]->load("../CG\\enemy00\\enemy00_walk\\enemy00_walk_02.tga");
-	mStay_tex[3]->load("../CG\\enemy00\\enemy00_walk\\enemy00_walk_03.tga");
-	mStay_tex[4]->load("../CG\\enemy00\\enemy00_walk\\enemy00_walk_04.tga");
-	mStay_tex[5]->load("../CG\\enemy00\\enemy00_walk\\enemy00_walk_05.tga");
+	mStay_tex[0]->load(ENEMY00_STAY"enemy00_stay_00.tga");
+	mStay_tex[1]->load(ENEMY00_STAY"enemy00_stay_01.tga");
+	mStay_tex[2]->load(ENEMY00_STAY"enemy00_stay_02.tga");
+	mStay_tex[3]->load(ENEMY00_STAY"enemy00_stay_03.tga");
+	mStay_tex[4]->load(ENEMY00_STAY"enemy00_stay_04.tga");
+	mStay_tex[5]->load(ENEMY00_STAY"enemy00_stay_05.tga");
 			
 
+	mWalk_tex[0]->load(ENEMY00_WALK"enemy00_walk_00.tga");
+	mWalk_tex[1]->load(ENEMY00_WALK"enemy00_walk_01.tga");
+	mWalk_tex[2]->load(ENEMY00_WALK"enemy00_walk_02.tga");
+	mWalk_tex[3]->load(ENEMY00_WALK"enemy00_walk_03.tga");
+	mWalk_tex[4]->load(ENEMY00_WALK"enemy00_walk_04.tga");
+	mWalk_tex[5]->load(ENEMY00_WALK"enemy00_walk_05.tga");
 
-	mWalk_tex[0]->load("../CG\\enemy00\\enemy00_walk\\enemy00_walk_00.tga");
-	mWalk_tex[1]->load("../CG\\enemy00\\enemy00_walk\\enemy00_walk_01.tga");
-	mWalk_tex[2]->load("../CG\\enemy00\\enemy00_walk\\enemy00_walk_02.tga");
-	mWalk_tex[3]->load("../CG\\enemy00\\enemy00_walk\\enemy00_walk_03.tga");
-	mWalk_tex[4]->load("../CG\\enemy00\\enemy00_walk\\enemy00_walk_04.tga");
-	mWalk_tex[5]->load("../CG\\enemy00\\enemy00_walk\\enemy00_walk_05.tga");
+	mAttack_tex[0]->load(ENEMY00_ATTACK"enemy00_attack_00.tga");
+	mAttack_tex[1]->load(ENEMY00_ATTACK"enemy00_attack_01.tga");
+	mAttack_tex[2]->load(ENEMY00_ATTACK"enemy00_attack_02.tga");
+	mAttack_tex[3]->load(ENEMY00_ATTACK"enemy00_attack_03.tga");
+	mAttack_tex[4]->load(ENEMY00_ATTACK"enemy00_attack_04.tga");
+	mAttack_tex[5]->load(ENEMY00_ATTACK"enemy00_attack_05.tga");
+
+	mDie_tex[0]->load(ENEMY00_DIE"enemy00_dai_00.tga");
+	mDie_tex[1]->load(ENEMY00_DIE"enemy00_dai_01.tga");
+	mDie_tex[2]->load(ENEMY00_DIE"enemy00_dai_02.tga");
+	mDie_tex[3]->load(ENEMY00_DIE"enemy00_dai_03.tga");
+	mDie_tex[4]->load(ENEMY00_DIE"enemy00_dai_04.tga");
+	mDie_tex[5]->load(ENEMY00_DIE"enemy00_dai_05.tga");
 
 
 
@@ -177,6 +201,30 @@ void CEnemy00::Update(){
 
 
 
+	
+		
+		if (mSaveAnime == E_WALK_L&&E_STAY_L&&E_ATTACK_L&&E_DIE_L){		//直前が左向きのアクションの場合
+			if (CKey::once('X')) { //テスト用　手動攻撃L
+				eAnime = E_ATTACK_L;
+			}
+			if (CKey::once('Z')) {//テスト用　手動自害L
+				eAnime = E_DIE_L;
+			}
+
+		}
+		else{
+			if (CKey::once('X')) { //テスト用　手動攻撃R
+				eAnime = E_ATTACK_R;
+			}
+			if (CKey::once('Z')) {//テスト用　手動自害R
+				eAnime = E_DIE_R;
+			}
+			
+		}
+
+	
+
+
 	/*あたり判定*/
 	if (mPos.y > character_limit_top - SIZE_ENEMY00_Y){  //マップ外に出ると元の位置に戻す(軸)
 		mPos.y = character_limit_top - SIZE_ENEMY00_Y;
@@ -211,7 +259,27 @@ void CEnemy00::Update(){
 	case E_WALK_L:
 		mEnemy00.SetUv(mWalk_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
 		break;
+		/*攻撃中*/
+	case E_ATTACK_R:
+		mEnemy00.SetUv(mAttack_tex[mAnime], SIZE_TEX_ENEMY00_STAY_X, 0, 0, SIZE_TEX_ENEMY00_STAY_Y);
+		printf("A右です\n");
+		break;
+	case E_ATTACK_L:
+		mEnemy00.SetUv(mAttack_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
+		printf("A左です\n");
+		break;
+		/*死亡*/
+	case E_DIE_R:
+		mEnemy00.SetUv(mDie_tex[mAnime], SIZE_TEX_ENEMY00_STAY_X, 0, 0, SIZE_TEX_ENEMY00_STAY_Y);
+		printf("D右です\n");
+		break;
+	case E_DIE_L:
+		mEnemy00.SetUv(mDie_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
+		printf("D左です\n");
+		break;
+
 	}
+
 
 }
 void CEnemy00::Render(){

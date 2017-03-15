@@ -92,6 +92,15 @@
     <ClCompile Include="Enemy\CEnemy00.cpp">
       <Filter>Enemey</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy\CBoss.cpp">
+      <Filter>Enemey</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\CEnemy01.cpp">
+      <Filter>Enemey</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\CScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\CBase.h">
@@ -146,6 +155,12 @@
       <Filter>Define</Filter>
     </ClInclude>
     <ClInclude Include="Enemy\CEnemy00.h">
+      <Filter>Enemey</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\CBoss.h">
+      <Filter>Enemey</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\CEnemy01.h">
       <Filter>Enemey</Filter>
     </ClInclude>
   </ItemGroup>

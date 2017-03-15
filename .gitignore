@@ -32,7 +32,11 @@
 /福山/Game/Debug
 /福山/Game/*.suo
 /福山/Game/Game.v12.suo
+<<<<<<< HEAD
 /福山/Game/Debug/Game.pdb
 /福山/Game/Debug/Game.exe
 /福山/Game/Debug/Game.ilk
 /福山/Game/CG/Debug
+=======
+/福山/Game/*.suo
+>>>>>>> b6279b1305236f688d3ae9101e0f072bfffb8ba0
