@@ -11,6 +11,7 @@
 #define SHADOW_TEX_X			70			//影のテクスチャのX
 #define SHADOW_TEX_Y			20			//影のテクスチャのY
 #define TEX_FILE_SHADOW		"../CG/shadow/"				//影のファイル場所
+#define FRAME_LIMIT 6
 #include "../Task/CTask.h"
 #include "../Vector/CVector2.h"
 #include "../Define/define.h"
@@ -43,8 +44,13 @@ public:
 	CVector2 mForward;	//向き
 	float mAxis;			//軸　使い方　mPosの'Y'を代入する(ジャンプの時など，移動以外の'Y'は代入しない)
 	bool mEnabled;		//有効フラグ
+	
 	CBase *mpPlayer;
+
 	float mHitPoint; //ヒットポイント
+	int mAnimeFrame;
+	int  mFlameCount;
+	float mSaveAnime;
 
 	int mAlertCnt;
 
