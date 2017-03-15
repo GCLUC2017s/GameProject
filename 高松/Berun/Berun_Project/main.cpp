@@ -108,7 +108,9 @@ void init(void)
 	CResourceManager::GetInstance()->Add("PlayerWLogoWord3", CImage::LoadImage("CharaSelect/PlayerWWord3.png"));
 	CResourceManager::GetInstance()->Add("BackGround", CImage::LoadImage("BackGround/Background_M01.png"));
 	CResourceManager::GetInstance()->Add("BackGround2", CImage::LoadImage("BackGround/Background_M01.png"));
-	CResourceManager::GetInstance()->Add("Carrot", CImage::LoadImage("Enemy/Carrot/Carrot_01.png"));
+	CResourceManager::GetInstance()->Add("BackGround3", CImage::LoadImage("BackGround/Background_M01.png"));
+	CResourceManager::GetInstance()->Add("CarrotLeft", CImage::LoadImage("Enemy/Carrot/Carrot_01.png"));
+	CResourceManager::GetInstance()->Add("CarrotRight", CImage::LoadImage("Enemy/Carrot/Carrot_02.png"));
 	//ƒTƒEƒ“ƒh“Ç‚Ýž‚Ý
 	CSound::GetInstance()->GetSound("TITLE_BGM")->Load("BGM/Title.wav", 1);
 	CSound::GetInstance()->GetSound("CHARASELECT_BGM")->Load("BGM/CharaSelect.wav", 1);
