@@ -11,8 +11,6 @@
 
 #define CHARA_MOVE 4
 
-#define ARRAY_SIZE(a)(sizeof(a)/sizeof(a[0]))
-
 //キャラクターの基礎構造体
 struct T_CharacterData {
 	char imageName[64];

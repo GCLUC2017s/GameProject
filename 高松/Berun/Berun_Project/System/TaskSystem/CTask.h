@@ -61,12 +61,12 @@ public:
 		return m_drawPrio;
 	}
 	//更新順位変更
-	void ChangeUpdatePrio(int updatePrio)
+	void ChangeUpdatePrio(unsigned int updatePrio)
 	{
 		m_updatePrio = updatePrio;
 	}
 	//描画順位変更
-	void ChangeDrawPriority(int drawPrio)
+	void ChangeDrawPriority(unsigned int drawPrio)
 	{
 		m_drawPrio = drawPrio;
 	}
