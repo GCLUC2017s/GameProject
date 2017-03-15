@@ -212,6 +212,7 @@ void CCharaSelect::Draw()
 				m_playerMLogoWord2->MoveImage(m_beforePlayerMLogoWord2Pos, m_afterPlayerMLogoWord2Pos, m_playerLogoWord1Size, m_playerMLogoMoveTime);
 				m_playerMLogoWord3->MoveImage(m_beforePlayerMLogoWord3Pos, m_afterPlayerMLogoWord3Pos, m_playerLogoWord1Size, m_playerMLogoMoveTime);
 				m_playerMLogoWord4->MoveImage(m_beforePlayerMLogoWord4Pos, m_afterPlayerMLogoWord4Pos, m_playerLogoWord2Size, m_playerMLogoMoveTime);
+				g_tutorialNo = 0;
 			}
 			else
 			{
@@ -234,7 +235,7 @@ void CCharaSelect::Draw()
 				m_playerWLogoWord1->MoveImage(m_beforePlayerWLogoWord1Pos, m_afterPlayerWLogoWord1Pos, m_playerLogoWord1Size, m_playerWLogoMoveTime);
 				m_playerWLogoWord2->MoveImage(m_beforePlayerWLogoWord2Pos, m_afterPlayerWLogoWord2Pos, m_playerLogoWord1Size, m_playerWLogoMoveTime);
 				m_playerWLogoWord3->MoveImage(m_beforePlayerWLogoWord3Pos, m_afterPlayerWLogoWord3Pos, m_playerLogoWord3Size, m_playerWLogoMoveTime);
-
+				g_tutorialNo = 1;
 
 			}
 			//メニュー画面のカーソル移動処理
