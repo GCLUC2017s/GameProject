@@ -18,8 +18,8 @@ CEnemy::~CEnemy() {
 }
 
 void CEnemy::_key() {
+	CCharaBase::_key();
 
-	CCharaBase::Key();
 	
 	m_right =true;
 }
