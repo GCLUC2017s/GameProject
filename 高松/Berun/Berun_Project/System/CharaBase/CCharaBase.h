@@ -14,6 +14,18 @@
 //キャラクターの基礎構造体
 struct T_CharacterData {
 	char imageName[64];
+	int id;			//ID
+	int level;		//レベル
+	int maxHp;		//最大HP
+	int hp;			//現在HP
+	int maxSp;		//最大SP
+	int sp;			//現在SP
+	int power;		//攻撃力
+	int defense;	//防御力
+	int xp;			//取得経験値
+	int exp;		//必要経験値
+	float speed;	//移動速度
+	float jump;		//ジャンプ力
 };
 enum {
 	ePlayerMan,	//プレイヤー男
@@ -34,33 +46,7 @@ enum {
 	eGrainboss,//穀物ボス（茶碗武士）
 	eCharacterMax
 };
-//プレイヤーの構造体
-struct T_PlayerData
-{
-	int id;			//ID
-	int level;		//レベル
-	int maxHp;		//最大HP
-	int hp;			//現在HP
-	int maxSp;		//最大SP
-	int sp;			//現在SP
-	int power;		//攻撃力
-	int defense;	//防御力
-	int xp;			//取得経験値
-	int exp;		//必要経験値
-	float speed;	//移動速度
-	float jump;		//ジャンプ力
-};
-//敵の構造体
-struct T_EnemyData
-{
-	int m_id;		//ID
-	int maxHp;		//最大HP
-	int hp;			//現在HP
-	int power;		//攻撃力
-	int defense;	//防御力
-	int xp;			//経験値
-	float speed;	//移動速度
-};
+
 class CCharaBase : public CBase
 {
 protected:
@@ -112,6 +98,6 @@ public:
 	void Draw();
 	void HitCheck();
 };
-extern T_PlayerData g_playerData[];
-extern T_EnemyData g_enemyData[];
+//extern T_PlayerData g_playerData[];
+//extern T_EnemyData g_enemyData[];
 #endif
