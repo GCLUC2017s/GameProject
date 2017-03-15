@@ -12,11 +12,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera\CCamera.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="CBase.cpp" />
-=======
     <ClCompile Include="Enemy\CBoss.cpp" />
->>>>>>> 42e4be2cdd02f75dca6ed493f7ad5fb47ed83e6f
     <ClCompile Include="Enemy\CEnemy00.cpp" />
     <ClCompile Include="Enemy\CEnemy01.cpp" />
     <ClCompile Include="GameMain\CGameMain.cpp" />

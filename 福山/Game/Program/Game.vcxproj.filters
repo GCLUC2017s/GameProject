@@ -92,10 +92,6 @@
     <ClCompile Include="Enemy\CEnemy00.cpp">
       <Filter>Enemey</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="CBase.cpp">
-      <Filter>Base</Filter>
-=======
     <ClCompile Include="Enemy\CBoss.cpp">
       <Filter>Enemey</Filter>
     </ClCompile>
@@ -104,7 +100,9 @@
     </ClCompile>
     <ClCompile Include="Scene\CScene.cpp">
       <Filter>Scene</Filter>
->>>>>>> 42e4be2cdd02f75dca6ed493f7ad5fb47ed83e6f
+    </ClCompile>
+    <ClCompile Include="CBase.cpp">
+      <Filter>Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

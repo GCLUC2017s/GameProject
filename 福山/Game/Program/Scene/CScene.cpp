@@ -64,8 +64,9 @@ void CScene::ChangeScene(eSceneNo SceneNo) {
 
 	};
 }
+/*
+作動用
 
-void CScene::Update(){	//とりあえずここに置いておく。
 	//初期シーンの指定
 	CScene::GetInstance()->ChangeScene(CScene::E_TITLE);
 
@@ -75,4 +76,6 @@ void CScene::Update(){	//とりあえずここに置いておく。
 	//シーンのデリート
 	CScene::GetInstance()->DeleteScene();
 
-}	
+
+
+*/
