@@ -9,10 +9,14 @@
 #include "../Graphic/CRectangle.h"
 #include "../Task/CTaskManager.h"
 #include "../Define/define.h"
+#include"../Player/CPlayer.h"
+
 #define FLAME_LIMIT 6 //フレーム数の上限
 
 const	 CVector2 Enemy_first_pos
-= CVector2(character_limit_left*0.85, (character_limit_top + character_limit_bottom) / 2);	//エネミーの初期位置
+= CVector2(character_limit_left*0.75,
+		  (character_limit_top + character_limit_bottom) / 2);	//エネミーの初期位置
+//現在はマップ自体の左端を見て配置している。
 
 class  CEnemy00 : public CBase
 {
@@ -20,11 +24,13 @@ private:
 
 	float mVelocity;//移動するときに使う
 	CRectangle	mEnemy00;
-	CRectangle  mShadow;
 	CTexture	*mStay_tex[FLAME_LIMIT];
 	CTexture	*mWalk_tex[FLAME_LIMIT];
 	CTexture	*mAttack_tex[FLAME_LIMIT];
 	CTexture	*mDie_tex[FLAME_LIMIT];
+
+	CPlayer		*mPlayer;
+
 	/*
 	自分がどのアニメーションか判断用
 	enum文
@@ -42,7 +48,7 @@ private:
 	int mSaveAnime; //直前のアニメが何か判断用
 	int mFlameCount;		//フレーム数カウント用
 	int mAnime;		//アニメーションのフレーム数
-	CVector2 mTarget;
+	CVector2 mTargetX;
 	CVector2 mSuvePos;//元いた位置の保存
 	
 	
