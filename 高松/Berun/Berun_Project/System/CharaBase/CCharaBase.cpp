@@ -26,7 +26,7 @@ const static T_CharacterData g_characterData[eCharacterMax] =
 =======
 >>>>>>> 8e40ae93fa263e291e501221197bd4f145d23183
 };
-CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio) : CBase(type, updatePrio, drawPrio)
+CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio) : CBase(updatePrio, drawPrio)
 {
 	m_state = eState_Idle;
 <<<<<<< HEAD
@@ -93,11 +93,14 @@ void CCharaBase::Key()
 =======
 void CCharaBase::Key()
 {
+<<<<<<< HEAD
 	m_left = false;
 	m_up = false;
 	m_down = false;
 >>>>>>> 8e40ae93fa263e291e501221197bd4f145d23183
 
+=======
+>>>>>>> ce39bbbcd3e70e8aca0ce261ae5601c6457c7971
 	if (CInput::GetState(0, CInput::ePush, CInput::eUp)) m_up = true; 
 	if (CInput::GetState(0, CInput::ePush, CInput::eDown)) m_down = true;
 	if (CInput::GetState(0, CInput::ePush, CInput::eLeft)) m_left = true;
