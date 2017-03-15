@@ -12,8 +12,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera\CCamera.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="CBase.cpp" />
+=======
+    <ClCompile Include="Enemy\CBoss.cpp" />
+>>>>>>> 42e4be2cdd02f75dca6ed493f7ad5fb47ed83e6f
     <ClCompile Include="Enemy\CEnemy00.cpp" />
+    <ClCompile Include="Enemy\CEnemy01.cpp" />
     <ClCompile Include="GameMain\CGameMain.cpp" />
     <ClCompile Include="Graphic\CRectangle.cpp" />
     <ClCompile Include="Graphic\CStringtexture.cpp" />
@@ -22,6 +27,7 @@
     <ClCompile Include="Main\main.cpp" />
     <ClCompile Include="Map\CMap.cpp" />
     <ClCompile Include="Player\CPlayer.cpp" />
+    <ClCompile Include="Scene\CScene.cpp" />
     <ClCompile Include="Task\CTaskManager.cpp" />
     <ClCompile Include="Title\CTitle.cpp" />
     <ClCompile Include="Title\CTitleScene.cpp" />
@@ -31,7 +37,9 @@
     <ClInclude Include="Base\CBase.h" />
     <ClInclude Include="Camera\CCamera.h" />
     <ClInclude Include="Define\define.h" />
+    <ClInclude Include="Enemy\CBoss.h" />
     <ClInclude Include="Enemy\CEnemy00.h" />
+    <ClInclude Include="Enemy\CEnemy01.h" />
     <ClInclude Include="GameMain\CGameMain.h" />
     <ClInclude Include="Graphic\CRectangle.h" />
     <ClInclude Include="Graphic\CStringtexture.h" />
@@ -79,21 +87,21 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\tomi-\Desktop\GameProject\福山\Game\Program\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\onsokunogyoniku\Desktop\ジーンインターン\GameProject\福山\Game\Program\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\Users\tomi-\Desktop\GameProject\福山\Game\Program\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\onsokunogyoniku\Desktop\ジーンインターン\GameProject\福山\Game\Program\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\tomi-\Desktop\GameProject\福山\Game\Program\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\onsokunogyoniku\Desktop\ジーンインターン\GameProject\福山\Game\Program\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\tomi-\Desktop\GameProject\福山\Game\Program\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\onsokunogyoniku\Desktop\ジーンインターン\GameProject\福山\Game\Program\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -103,13 +111,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\tomi-\Desktop\GameProject\福山\Game\Program\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\onsokunogyoniku\Desktop\ジーンインターン\GameProject\福山\Game\Program\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\Users\tomi-\Desktop\GameProject\福山\Game\Program\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\onsokunogyoniku\Desktop\ジーンインターン\GameProject\福山\Game\Program\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

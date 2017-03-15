@@ -1,5 +1,6 @@
 #ifndef CMAP_GURAD
 #define CMAP_GURAD
+#define SCROLL_SPEED 2//マップスクロール値
 #include "../Global.h"
 #include"../System/TaskSystem/CTaskManager.h"
 
@@ -12,7 +13,8 @@
 class CMap : public CTask{
 private:
 	CImage *m_backgroundMorning;
-	CImage *m_backgroundAfternoon;
+	CImage *m_backgroundMorning2;
+	CImage *m_backgroundMorning3;
 	CImage *m_backgroundEvenig;
 	CImage *m_backgroundNight;
 	
@@ -24,7 +26,9 @@ private:
 		eStage4,
 
 	};
-	E_Stage m_stage;
+	E_Stage m_stage; 
+	CVector2D m_mapPos;//マップ座標変化
+
 
 public:
 	

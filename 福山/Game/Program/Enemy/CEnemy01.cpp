@@ -25,11 +25,12 @@
 #define WALK_X 2							//飛行ベクトルX
 #define WALK_Y 1							//飛行ベクトルY
 
-#define ENEMY00_FLAY "../CG\\enemy01\\enemy01_flay\\"
-#define ENEMY00_STAY "../CG\\enemy01\\enemy01_stay\\"
-#define ENEMY00_ATTACK "../CG\\enemy01\\enemy01_attack\\"
-#define ENEMY00_DIE "../CG\\enemy01\\enemy01_die\\"
-#
+#define ENEMY01_FLAY "../CG\\enemy01\\enemy01_flay\\"
+#define ENEMY01_STAY "../CG\\enemy01\\enemy01_stay\\"
+#define ENEMY01_ATTACK "../CG\\enemy01\\enemy01_attack\\"
+#define ENEMY01_DIE "../CG\\enemy01\\enemy01_die\\"
+
+
 void CEnemy01::SetPos(){
 	mPos = Enemy_first_pos;
 	mAxis = mPos.y;
@@ -47,33 +48,33 @@ void CEnemy01::Init(){
 	}
 
 	/*テクスチャファイル読み込み*/
-	mStay_tex[0]->load(ENEMY00_STAY"enemy01_stay_00.tga");
-	mStay_tex[1]->load(ENEMY00_STAY"enemy01_stay_01.tga");
-	mStay_tex[2]->load(ENEMY00_STAY"enemy01_stay_02.tga");
-	mStay_tex[3]->load(ENEMY00_STAY"enemy01_stay_03.tga");
-	mStay_tex[4]->load(ENEMY00_STAY"enemy01_stay_04.tga");
-	mStay_tex[5]->load(ENEMY00_STAY"enemy01_stay_05.tga");
+	mStay_tex[0]->load(ENEMY01_STAY"enemy01_stay_00.tga");
+	mStay_tex[1]->load(ENEMY01_STAY"enemy01_stay_01.tga");
+	mStay_tex[2]->load(ENEMY01_STAY"enemy01_stay_02.tga");
+	mStay_tex[3]->load(ENEMY01_STAY"enemy01_stay_03.tga");
+	mStay_tex[4]->load(ENEMY01_STAY"enemy01_stay_04.tga");
+	mStay_tex[5]->load(ENEMY01_STAY"enemy01_stay_05.tga");
 
-	mFlay_tex[0]->load(ENEMY00_FLAY"enemy01_flay_00.tga");
-	mFlay_tex[1]->load(ENEMY00_FLAY"enemy01_flay_01.tga");
-	mFlay_tex[2]->load(ENEMY00_FLAY"enemy01_flay_02.tga");
-	mFlay_tex[3]->load(ENEMY00_FLAY"enemy01_flay_03.tga");
-	mFlay_tex[4]->load(ENEMY00_FLAY"enemy01_flay_04.tga");
-	mFlay_tex[5]->load(ENEMY00_FLAY"enemy01_flay_05.tga");
+	mFlay_tex[0]->load(ENEMY01_FLAY"enemy01_flay_00.tga");
+	mFlay_tex[1]->load(ENEMY01_FLAY"enemy01_flay_01.tga");
+	mFlay_tex[2]->load(ENEMY01_FLAY"enemy01_flay_02.tga");
+	mFlay_tex[3]->load(ENEMY01_FLAY"enemy01_flay_03.tga");
+	mFlay_tex[4]->load(ENEMY01_FLAY"enemy01_flay_04.tga");
+	mFlay_tex[5]->load(ENEMY01_FLAY"enemy01_flay_05.tga");
 
-	mAttack_tex[0]->load(ENEMY00_ATTACK"enemy01_attackR_00.tga");
-	mAttack_tex[1]->load(ENEMY00_ATTACK"enemy01_attackR_00.tga");
-	mAttack_tex[2]->load(ENEMY00_ATTACK"enemy01_attackR_00.tga");
-	mAttack_tex[3]->load(ENEMY00_ATTACK"enemy01_attackR_00.tga");
-	mAttack_tex[4]->load(ENEMY00_ATTACK"enemy01_attackR_00.tga");
-	mAttack_tex[5]->load(ENEMY00_ATTACK"enemy01_attackR_00.tga");
+	mAttack_tex[0]->load(ENEMY01_ATTACK"enemy01_attackR_00.tga");
+	mAttack_tex[1]->load(ENEMY01_ATTACK"enemy01_attackR_00.tga");
+	mAttack_tex[2]->load(ENEMY01_ATTACK"enemy01_attackR_00.tga");
+	mAttack_tex[3]->load(ENEMY01_ATTACK"enemy01_attackR_00.tga");
+	mAttack_tex[4]->load(ENEMY01_ATTACK"enemy01_attackR_00.tga");
+	mAttack_tex[5]->load(ENEMY01_ATTACK"enemy01_attackR_00.tga");
 
-	mDie_tex[0]->load(ENEMY00_DIE"enemy01_die_00.tga");
-	mDie_tex[1]->load(ENEMY00_DIE"enemy01_die_01.tga");
-	mDie_tex[2]->load(ENEMY00_DIE"enemy01_die_02.tga");
-	mDie_tex[3]->load(ENEMY00_DIE"enemy01_die_03.tga");
-	mDie_tex[4]->load(ENEMY00_DIE"enemy01_die_04.tga");
-	mDie_tex[5]->load(ENEMY00_DIE"enemy01_die_05.tga");
+	mDie_tex[0]->load(ENEMY01_DIE"enemy01_die_00.tga");
+	mDie_tex[1]->load(ENEMY01_DIE"enemy01_die_01.tga");
+	mDie_tex[2]->load(ENEMY01_DIE"enemy01_die_02.tga");
+	mDie_tex[3]->load(ENEMY01_DIE"enemy01_die_03.tga");
+	mDie_tex[4]->load(ENEMY01_DIE"enemy01_die_04.tga");
+	mDie_tex[5]->load(ENEMY01_DIE"enemy01_die_05.tga");
 
 
 

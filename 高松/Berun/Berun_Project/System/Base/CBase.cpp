@@ -3,6 +3,9 @@
 CBase::CBase() :CTask(0,0), m_gravitySpeed(0), m_pos(0, 0, 0) {
 
 }
+CBase::CBase(unsigned int updatePrio, unsigned int drawPrio) : CTask(m_updatePrio,m_drawPrio)
+{
+}
 CBase::~CBase()
 {
 }

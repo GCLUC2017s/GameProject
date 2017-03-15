@@ -1,13 +1,16 @@
 #include "CCharaBase.h"
 static T_CharacterData g_characterData[eCharacterMax] = {
+	//ID,レベル、最大HP,現在HP,最大SP,現在SP,攻撃力,防御力,取得経験値,必要経験値,移動速度,ジャンプ力 (11)
 	{ "LittlePlayerM" },
 	{ "LittlePlayerM" },
-	{ "Carrot" },
+	{ "CarrotLeft",5,5,0,0,0,0,0,0,0,1,0,},
+	
 	
 
 };
-CCharaBase::CCharaBase(int type):m_state(eState_Idle)
+CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio) : CCharaBase(type, eUDP_Null, eDWP_Null)
 {
+	m_state = eState_Idle;
 	mp_eData = &g_characterData[type];
 	m_chara = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get(mp_eData->imageName));
 }

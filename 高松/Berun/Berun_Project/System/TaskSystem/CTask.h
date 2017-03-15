@@ -7,7 +7,7 @@
 #ifndef TASK_GUARD
 #define TASK_GUARD
 
-enum E_UdPriority
+enum E_UpdatePrio
 {
 	eUDP_Player,
 	eUDP_Camera,
@@ -16,7 +16,7 @@ enum E_UdPriority
 	eUDP_Null,
 };
 
-enum E_DwPriority
+enum E_DrawPrio
 {
 	eDWP_Map,
 	eDWP_Player,
@@ -30,45 +30,45 @@ protected:
 	bool m_destroyFlg;				//削除フラグ
 	bool m_pauseFlg;				//更新停止フラグ
 	//符号無しの整数型	
-	unsigned int m_udPriority;	    //更新優先順位格納
-	unsigned int m_dwPriority;		//描画優先順位格納
+	unsigned int m_updatePrio;	    //更新優先順位格納
+	unsigned int m_drawPrio;		//描画優先順位格納
 	CTask *mp_prev;					//前のアドレスを格納するポインタ
 	CTask *mp_next;					//次のアドレスを格納するポインタ
 public:
 	CTask();						//CTaskクラスのコンストラクタ
-	CTask(unsigned int udpriority, unsigned int rdPriority);
+	CTask(unsigned int updateprio, unsigned int drawPrio);
 	virtual ~CTask();				//CTaskクラスのデストラクタ
 	virtual void Update();			//派生先クラスでの更新を行う関数
 	virtual void Draw();			//派生先クラスでの描写を行う関数
 	//更新順位設定関数
-	void SetUDPriority(int udPriority)
+	void SetUpdatePrio(int updatePrio)
 	{
-		m_udPriority = udPriority;
+		m_updatePrio = updatePrio;
 	}
 	//描画順位設定関数
-	void SetDWPriority(int dwPriority)
+	void SetDrawPrio(int drawPrio)
 	{
-		m_dwPriority = dwPriority;
+		m_drawPrio = drawPrio;
 	}
 	//更新順位取得関数
-	int GetUDPriority()
+	int GetUpdatePrio()
 	{
-		return m_udPriority;
+		return m_updatePrio;
 	}
 	//描画順位取得関数
-	int GetDWPriority()
+	int GetDrawPrio()
 	{
-		return m_udPriority;
+		return m_drawPrio;
 	}
 	//更新順位変更
-	void ChangeUpdatePriority(int udPriority)
+	void ChangeUpdatePrio(int updatePrio)
 	{
-		m_udPriority = udPriority;
+		m_updatePrio = updatePrio;
 	}
 	//描画順位変更
-	void ChangeDrawPriority(int dwPriority)
+	void ChangeDrawPriority(int drawPrio)
 	{
-		m_dwPriority = dwPriority;
+		m_drawPrio = drawPrio;
 	}
 	void SetDestroyFlag(bool f) {
 		m_destroyFlg = f;

@@ -13,31 +13,7 @@
 
 class CEnemy:public CCharaBase {
 private:
-	/*
-	//–ìØE‰Ê•¨
-	CImage *m_carrot;
-	CImage *m_papurika;
-	CImage *m_berry;
-	CImage *m_strawberry;
-	CImage *m_vegetavelBoss;
-	//“÷
-	CImage *m_pig;
-	CImage *m_bird;
-	CImage *m_meatboss;
-	//‹›
-	CImage *m_squid;
-	CImage *m_fish;
-	CImage *m_fishBoss;
-	//’•¨
-	CImage *m_rice;
-	CImage *m_bread;
-	CImage *m_grainBoss;
-	*/
-	enum E_Enemy 
-	{
-	};
-
-	E_Enemy m_enemytype;
+	
 	//int m_enemytime;
 	void _key();
 public:

@@ -18,9 +18,11 @@
 #define WALK_X 2							//歩くベクトルX
 #define WALK_Y 1							//歩くベクトルY
 
-#define ENEMY00_WALK "../CG\\enemy00\\enemy00_walk\\"
-#define ENEMY00_STAY "../CG\\enemy00\\enemy00_stay\\"
-
+#define BOSS_STAY 	 "../CG\\BOSS\\stay\\"
+#define BOSS_WALK	 "../CG\\BOSS\\walk\\"
+#define BOSS_ATTACK	 "../CG\\BOSS\\Attack\\"
+#define BOSS_HATTACK "../CG\\BOSS\\HAttack\\"
+#define BOSS_DIE	 "../CG\\BOSS\\die\\"
 
 void CBoss::SetPos(){
 	mPos = Enemy_first_pos;
@@ -34,25 +36,39 @@ void CBoss::Init(){
 	{
 		mStay_tex[i] = new CTexture();		//テクスチャクラスのインスタンス作成
 		mWalk_tex[i] = new CTexture();		//テクスチャクラスのインスタンス作成
-		mRun_tex[i] = new CTexture();		//テクスチャクラスのインスタンス作成
+		mAttack_tex[i] = new CTexture();
+		mHattack_tex[i] = new CTexture();
+		mDie_tex[i] = new CTexture();
 	}
 
 	/*テクスチャファイル読み込み*/
-	mStay_tex[0]->load(ENEMY00_STAY"enemy00_stay_00.tga");
-	mStay_tex[1]->load(ENEMY00_STAY"enemy00_stay_01.tga");
-	mStay_tex[2]->load(ENEMY00_STAY"enemy00_stay_02.tga");
-	mStay_tex[3]->load(ENEMY00_STAY"enemy00_stay_03.tga");
-	mStay_tex[4]->load(ENEMY00_STAY"enemy00_stay_04.tga");
-	mStay_tex[5]->load(ENEMY00_STAY"enemy00_stay_05.tga");
+	mStay_tex[0]->load(BOSS_STAY "BOSS_stay_00.tga");
+	mStay_tex[1]->load(BOSS_STAY "BOSS_stay_01.tga");
+	mStay_tex[2]->load(BOSS_STAY "BOSS_stay_02.tga");
+	mStay_tex[3]->load(BOSS_STAY "BOSS_stay_03.tga");
+	mStay_tex[4]->load(BOSS_STAY "BOSS_stay_04.tga");
+	mStay_tex[5]->load(BOSS_STAY "BOSS_stay_05.tga");
 
+	mWalk_tex[0]->load(BOSS_WALK"BOSS_walkR_00.tga");
+	mWalk_tex[1]->load(BOSS_WALK"BOSS_walkR_01.tga");
+	mWalk_tex[2]->load(BOSS_WALK"BOSS_walkR_02.tga");
+	mWalk_tex[3]->load(BOSS_WALK"BOSS_walkR_03.tga");
+	mWalk_tex[4]->load(BOSS_WALK"BOSS_walkR_04.tga");
+	mWalk_tex[5]->load(BOSS_WALK"BOSS_walkR_05.tga");
 
+	mAttack_tex[0]->load(BOSS_WALK"BOSS_walkR_00.tga");
+	mAttack_tex[1]->load(BOSS_WALK"BOSS_walkR_01.tga");
+	mAttack_tex[2]->load(BOSS_WALK"BOSS_walkR_02.tga");
+	mAttack_tex[3]->load(BOSS_WALK"BOSS_walkR_03.tga");
+	mAttack_tex[4]->load(BOSS_WALK"BOSS_walkR_04.tga");
+	mAttack_tex[5]->load(BOSS_WALK"BOSS_walkR_05.tga");
 
-	mWalk_tex[0]->load(ENEMY00_WALK"enemy00_walk_00.tga");
-	mWalk_tex[1]->load(ENEMY00_WALK"enemy00_walk_01.tga");
-	mWalk_tex[2]->load(ENEMY00_WALK"enemy00_walk_02.tga");
-	mWalk_tex[3]->load(ENEMY00_WALK"enemy00_walk_03.tga");
-	mWalk_tex[4]->load(ENEMY00_WALK"enemy00_walk_04.tga");
-	mWalk_tex[5]->load(ENEMY00_WALK"enemy00_walk_05.tga");
+	mWalk_tex[0]->load(BOSS_WALK"BOSS_walkR_00.tga");
+	mWalk_tex[1]->load(BOSS_WALK"BOSS_walkR_01.tga");
+	mWalk_tex[2]->load(BOSS_WALK"BOSS_walkR_02.tga");
+	mWalk_tex[3]->load(BOSS_WALK"BOSS_walkR_03.tga");
+	mWalk_tex[4]->load(BOSS_WALK"BOSS_walkR_04.tga");
+	mWalk_tex[5]->load(BOSS_WALK"BOSS_walkR_05.tga");
 
 
 
