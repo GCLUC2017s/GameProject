@@ -159,7 +159,7 @@ CPlayer::~CPlayer() {
 
 
 //プレイヤー描画
-CPlayer::CPlayer() : mVelocity(0), mSpeedJump(JUMP_FIRST_SPEED),eAnime(E_STAY_R),AnimePattern(E_BRAKE_R),mIntervalCount(0){
+CPlayer::CPlayer() : mVelocity(0),mEnabledNormalAttack(false), mSpeedJump(JUMP_FIRST_SPEED),mStatus(E_STAY_R),AnimePattern(E_BRAKE_R),mIntervalCount(0){
 
 	for (int i = 0; i < FRAME_LIMIT; i++)
 	{
@@ -182,13 +182,13 @@ CPlayer::CPlayer() : mVelocity(0), mSpeedJump(JUMP_FIRST_SPEED),eAnime(E_STAY_R)
 
 
 
-int CPlayer::DecisionRL(){
-	if (eAnime  < AnimePattern / 2){
-		return  PATTERN_L;
+void CPlayer::DecisionRL(int R,int L){
+	if (mStatus  < AnimePattern / 2){
+		mStatus = R;
 	}
 	else
 	{
-		return	PATTERN_R;
+		mStatus = L;
 	}
 }
 
@@ -225,20 +225,10 @@ void CPlayer::MovePosAxis(){
 void CPlayer::Run_Walk(){
 	if (CKey::push(VK_CONTROL)){ //走る時
 		mVelocity = RUN_SPEED;
-		if (DecisionRL() == PATTERN_L){
-			eAnime = E_RUN_L;
-		}
-		else{
-			eAnime = E_RUN_R;
-		}
+		DecisionRL(E_RUN_R, E_RUN_L);
 	}
 	else{					   //歩く時
-		if (DecisionRL() == PATTERN_L){
-			eAnime = E_WALK_L;
-		}
-		else{
-			eAnime = E_WALK_R;
-		}
+		DecisionRL(E_WALK_R, E_WALK_L);
 		mVelocity = WALK_SPEED;
 	}
 }
@@ -246,49 +236,54 @@ void CPlayer::Run_Walk(){
 /*アニメのフレームを動かすメソッド*/ //エネミーによって違う場合があるので画像データ用参照
 
 void CPlayer::AnimeFlame(){
-
-	mFlameCount += 1;
-	if (mFlameCount % 10 == 0){ //フレーム数=mStay_tex[5]->load(".../.tga");
-		mAnimeFrame += 1;
+	if (!mEnabledNormalAttack){//通常攻撃していない時
+		mFlameCount += 1;
+		if (mFlameCount % 8 == 0){
+			mAnimeFrame += 1;
+		}
+		if (mAnimeFrame >= FRAME_LIMIT || mSaveAnime != mStatus){
+			mAnimeFrame = 0;
+		}
+		mSaveAnime = mStatus;
 	}
-	if (mAnimeFrame >= FRAME_LIMIT || mSaveAnime != eAnime){
-		mAnimeFrame = 0;
+	else{						//通常攻撃していないとき
+		mAnimeFrame++;
+		if (mFlameCount % 8 == 0){
+			mAnimeFrame += 1;
+		}
+		if (mAnimeFrame >= FRAME_LIMIT || mSaveAnime != mStatus){
+			mAnimeFrame = 0;
+		}
+		mSaveAnime = mStatus;
 	}
-	mSaveAnime = eAnime;
 }
 
 bool CPlayer::Move(){
 	// 右移動
 	if (CKey::push(VK_RIGHT)) {
-		eAnime = E_WALK_R;
+		mStatus = E_WALK_R;
 		Run_Walk();
 		mForward = CVector2(WALK_X, 0.0f);
 		mPos += mForward * mVelocity;
 		return true;
 	}
 	else{
-		if (DecisionRL() == PATTERN_R)eAnime = E_BRAKE_R;
-		if (DecisionRL() == PATTERN_L)eAnime = E_BRAKE_L;
-		if (mVelocity == 0){
-			if (DecisionRL() == PATTERN_R)eAnime = E_STAY_R;
-			if (DecisionRL() == PATTERN_L)eAnime = E_STAY_L;
-		}
+		DecisionRL(E_BRAKE_R, E_BRAKE_L);
+		DecisionRL(E_STAY_R, E_STAY_L);
 	}
 
 	//左移動
 	if (CKey::push(VK_LEFT)) {
-		eAnime = E_WALK_L;
+		mStatus = E_WALK_L;
 		Run_Walk();
 		mForward = CVector2(-WALK_X, 0.0f);
 		mPos += mForward * mVelocity;
 		return true;
 	}
 	else{
-		if (DecisionRL() == PATTERN_R)eAnime = E_BRAKE_R;
-		if (DecisionRL() == PATTERN_L)eAnime = E_BRAKE_L;
+		DecisionRL(E_BRAKE_R, E_BRAKE_L);
 		if (mVelocity == 0){
-			if (DecisionRL() == PATTERN_R)eAnime = E_STAY_R;
-			if (DecisionRL() == PATTERN_L)eAnime = E_STAY_L;
+			DecisionRL(E_STAY_R, E_STAY_L);
 		}
 	}
 
@@ -300,11 +295,9 @@ bool CPlayer::Move(){
 		return true;
 	}
 	else{
-		if (DecisionRL() == PATTERN_R)eAnime = E_BRAKE_R;
-		if (DecisionRL() == PATTERN_L)eAnime = E_BRAKE_L;
+		DecisionRL(E_BRAKE_R, E_BRAKE_L);
 		if (mVelocity == 0){
-			if (DecisionRL() == PATTERN_R)eAnime = E_STAY_R;
-			if (DecisionRL() == PATTERN_L)eAnime = E_STAY_L;
+			DecisionRL(E_STAY_R, E_STAY_L);
 		}
 	}
 
@@ -316,22 +309,14 @@ bool CPlayer::Move(){
 		return true;
 	}
 	else{
-		if (DecisionRL() == PATTERN_R)eAnime = E_BRAKE_R;
-		if (DecisionRL() == PATTERN_L)eAnime = E_BRAKE_L;
+		DecisionRL(E_BRAKE_R, E_BRAKE_L);
 		if (mVelocity == 0){
-			if (DecisionRL() == PATTERN_R)eAnime = E_STAY_R;
-			if (DecisionRL() == PATTERN_L)eAnime = E_STAY_L;
+			DecisionRL(E_STAY_R, E_STAY_L);
 		}
 	}
 	return false;
 }
 
-int CPlayer::Interval(){
-	mIntervalCount++;
-	if (mIntervalCount < 5){
-		return mIntervalCount;
-	}
-}
 
 void CPlayer::Update() {
 	AnimeFlame();
@@ -340,26 +325,26 @@ void CPlayer::Update() {
 	//四角形の位置を設定
 	mPlayer.position = mPos;
 
-	//移動の処理
-	Move();
-
+	if (!mEnabledNormalAttack){
+		//移動の処理
+		Move();
+	}
 	//ジャンプ
 	if (CKey::push(' ') || mEnabledJump) {
-		if (!mEnabledJump){ //ジャンプしていないとき
+		if (!mEnabledJump && !mEnabledNormalAttack){ //ジャンプしていないとき
 			mEnabledJump = true;
 		}
 		Jump();
 	}
 
 	//通常攻撃
-	if (CKey::once('X')){
-		if (DecisionRL() == PATTERN_R)eAnime = E_NORMALATTACK_A_R;
-		if (DecisionRL() == PATTERN_L)eAnime = E_NORMALATTACK_A_L;
+	if (CKey::push('X')){
+		mEnabledNormalAttack = true;
+		DecisionRL(E_NORMALATTACK_A_L, E_NORMALATTACK_A_L);
 	}
-
 	
 	/*アニメーションのステータス*/
-	switch (eAnime)
+	switch (mStatus)
 	{
 		/*左*/
 	case E_STAY_L:
@@ -373,37 +358,58 @@ void CPlayer::Update() {
 		break;
 
 
+
+
+
+
 		/*攻撃 A B C*/
 	case E_NORMALATTACK_A_L:
 		if (mAnimeFrame < FRAME_LIMIT){
 			mPlayer.SetUv(mNormalAttackTex[0][mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
 		}
-		else
-		{
-			//３フレーム以内にキー入力で次に移動
-			if (Interval() ==0 ){
-				if (DecisionRL() == PATTERN_R)eAnime = E_NORMALATTACK_B_R;
-				if (DecisionRL() == PATTERN_L)eAnime = E_NORMALATTACK_B_L;
+		else{
+			//10フレーム以内にキー入力で次に移動
+			if (mIntervalCount <= 10){
+				DecisionRL(E_NORMALATTACK_B_R, E_NORMALATTACK_B_L);
 			}
 			else{
-				
+				DecisionRL(E_STAY_R, E_STAY_L);
 			}
+			mIntervalCount++;
 		}
 		break;
+
 	case E_NORMALATTACK_B_L:
-		mPlayer.SetUv(mNormalAttackTex[1][mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
-		if (mAnimeFrame == 0){
-			if (DecisionRL() == PATTERN_R)eAnime = E_NORMALATTACK_C_R;
-			if (DecisionRL() == PATTERN_L)eAnime = E_NORMALATTACK_C_L;
+		if (mAnimeFrame < FRAME_LIMIT){
+			mPlayer.SetUv(mNormalAttackTex[1][mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
+		}
+		else{
+			//10フレーム以内にキー入力で次に移動
+			if (mIntervalCount <= 10){
+				DecisionRL(E_NORMALATTACK_B_R, E_NORMALATTACK_B_L);
+			}
+			else{
+				DecisionRL(E_STAY_R, E_STAY_L);
+			}
+			mIntervalCount++;
 		}
 		break;
+
 	case E_NORMALATTACK_C_L:
-		mPlayer.SetUv(mNormalAttackTex[2][mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
-		if (mAnimeFrame = 0){
-			if (DecisionRL() == PATTERN_R)eAnime = E_STAY_R;
-			if (DecisionRL() == PATTERN_L)eAnime = E_STAY_L;
+		if (mAnimeFrame == FRAME_LIMIT){
+			mPlayer.SetUv(mNormalAttackTex[2][mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
 		}
+		else{
+			DecisionRL(E_STAY_R, E_STAY_L);
+		}
+		mIntervalCount++;
+
 		break;
+
+
+
+
+
 
 
 
@@ -424,8 +430,7 @@ void CPlayer::Update() {
 		mPos += mForward * mVelocity;
 		if (mVelocity < 0){
 			mVelocity = 0;
-			if (DecisionRL() == PATTERN_R)eAnime = E_STAY_R;
-			if (DecisionRL() == PATTERN_L)eAnime = E_STAY_L;
+			DecisionRL(E_STAY_R, E_STAY_L);
 		}
 		mPlayer.SetUv(mBrakeTex[mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
 		break;
@@ -445,6 +450,7 @@ void CPlayer::Update() {
 
 		/*右*/
 	case E_STAY_R:
+
 		mPlayer.SetUv(mStayTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_WALK_R:
@@ -453,27 +459,78 @@ void CPlayer::Update() {
 	case E_RUN_R:
 		mPlayer.SetUv(mRunTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
 		break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+		/*通常攻撃ABC*/
 	case E_NORMALATTACK_A_R:
-		mPlayer.SetUv(mNormalAttackTex[0][mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
-		if (mAnimeFrame == 0){
-			if (DecisionRL() == PATTERN_R)eAnime = E_NORMALATTACK_B_R;
-			if (DecisionRL() == PATTERN_L)eAnime = E_NORMALATTACK_B_L;
+		if (mAnimeFrame < FRAME_LIMIT){
+			mPlayer.SetUv(mNormalAttackTex[0][mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
 		}
+		else{
+			//10フレーム以内にキー入力で次に移動
+			if (mIntervalCount <= 10){
+				DecisionRL(E_NORMALATTACK_B_R, E_NORMALATTACK_B_L);
+			}
+			else{
+				DecisionRL(E_STAY_R, E_STAY_L);
+				mIntervalCount = 0;
+			}
+			mIntervalCount++;
+		}
+
 		break;
+
+
 	case E_NORMALATTACK_B_R:
-		mPlayer.SetUv(mNormalAttackTex[1][mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
-		if (mAnimeFrame == 0){
-			if (DecisionRL() == PATTERN_R)eAnime = E_NORMALATTACK_C_R;
-			if (DecisionRL() == PATTERN_L)eAnime = E_NORMALATTACK_C_L;
+		if (mAnimeFrame < FRAME_LIMIT){
+			mPlayer.SetUv(mNormalAttackTex[1][mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
+		}
+		else{
+			//10フレーム以内にキー入力で次に移動
+			if (mIntervalCount <= 10){
+				DecisionRL(E_NORMALATTACK_C_R, E_NORMALATTACK_C_L);
+			}
+			else{
+				DecisionRL(E_STAY_R, E_STAY_L);
+				mIntervalCount = 0;
+			}
+			mIntervalCount++;
 		}
 		break;
+
+
+
 	case E_NORMALATTACK_C_R:
-		mPlayer.SetUv(mNormalAttackTex[2][mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
-		if (mAnimeFrame = 0){
-			if (DecisionRL() == PATTERN_R)eAnime = E_STAY_R;
-			if (DecisionRL() == PATTERN_L)eAnime = E_STAY_L;
+		if (mAnimeFrame < FRAME_LIMIT){
+			mPlayer.SetUv(mNormalAttackTex[2][mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
+		}
+		else
+		{
+			DecisionRL(E_STAY_R, E_STAY_L);
 		}
 		break;
+
+
+
+
+
+
+
+
+
+
+
 	case E_EAT_R:
 		mPlayer.SetUv(mEatTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
 		break;
@@ -492,39 +549,37 @@ void CPlayer::Update() {
 		mPos += mForward * mVelocity;
 		if (mVelocity < 0){
 			mVelocity = 0;
-			if (DecisionRL() == PATTERN_R)eAnime = E_STAY_R;
-			if (DecisionRL() == PATTERN_L)eAnime = E_STAY_L;
+			DecisionRL(E_STAY_R, E_STAY_L);
 		}
 		mPlayer.SetUv(mBrakeTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
 		break;
+	};
+
+
+		/*あたり判定*/
+		if (mAxis > character_limit_top - SIZE_PLAYER_Y && !mEnabledJump){  //マップ外に出ると元の位置に戻す(軸)
+			mPos.y = character_limit_top;
+			mAxis = mPos.y - SIZE_PLAYER_Y; //軸をもとに戻す
+		}
+		if (mAxis < character_limit_bottom - SIZE_PLAYER_Y){  //マップ外に出ると元の位置に戻す(軸)
+			mPos.y = character_limit_bottom;
+			mAxis = mPos.y - SIZE_PLAYER_Y; //軸をもとに戻す
+		}
+
+		if (mPos.x >= character_limit_right - SIZE_PLAYER_X || mPos.x <= character_limit_left + SIZE_PLAYER_X){ //マップ外に出ると元の位置に戻す(X)
+			mPos.x = mPlayer.position.x;
+		}
+		/*あたり判定終了*/
+
+
+
+		mPriorityR = -mAxis;
+		camera_x = mPos.x;
+		camera_y = mPos.y;
+
+		mPlayer.position = mPos;
+		mShadow.position = CVector2(mPos.x, mAxis);
 	}
-
-	/*あたり判定*/
-	if (mAxis > character_limit_top - SIZE_PLAYER_Y && !mEnabledJump){  //マップ外に出ると元の位置に戻す(軸)
-		mPos.y = character_limit_top;
-		mAxis = mPos.y - SIZE_PLAYER_Y; //軸をもとに戻す
-	}
-	if (mAxis < character_limit_bottom - SIZE_PLAYER_Y){  //マップ外に出ると元の位置に戻す(軸)
-		mPos.y = character_limit_bottom;
-		mAxis = mPos.y - SIZE_PLAYER_Y; //軸をもとに戻す
-	}
-
-	if (mPos.x >= character_limit_right - SIZE_PLAYER_X || mPos.x <= character_limit_left + SIZE_PLAYER_X){ //マップ外に出ると元の位置に戻す(X)
-		mPos.x = mPlayer.position.x;
-	}
-	/*あたり判定終了*/
-
-
-
-	mPriorityR = -mAxis;
-	CTaskManager TaskManager;
-	camera_x = mPos.x;
-	camera_y = mPos.y;
-
-	mPlayer.position = mPos;
-	mShadow.position = CVector2(mPos.x, mAxis);
-
-}
 
 void CPlayer::Render(){
 	//プレイヤーの描画

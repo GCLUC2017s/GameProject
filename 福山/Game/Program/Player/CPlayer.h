@@ -32,12 +32,13 @@ private:
 	CTexture	*mEx02Tex[FRAME_LIMIT];									//必殺技(継続)テクスチャ
 	CTexture	*mFlameTex[FRAME_LIMIT];								//炎テクスチャ
 	CTexture	*mBrakeTex[FRAME_LIMIT];								//ブレーキテクスチャ
-	CTexture	*mShadowTex;											//影テクスチャ
+	CTexture	*mShadowTex;											//影テクスチャチャ
 
 	/*
 	自分がどのアニメーションか判断用
 	enum文
 	*/
+
 	enum EAnime
 	{
 		E_STAY_L, E_WALK_L,
@@ -58,9 +59,10 @@ private:
 
 	};
 
-	EAnime eAnime;
+	int mStatus;
 	int AnimePattern;				//全体のアニメーションパターン大きさ
 	bool mEnabledJump;				//ジャンプいている
+	bool mEnabledNormalAttack;		//通常攻撃しているかいないか
 	float mSpeedJump;				//ジャンプのスピード
 	float mIntervalCount;			//Interval関数カウント用
 
@@ -79,10 +81,8 @@ private:
 	void SetPos();
 	/*移動しているとき*/
 	bool Move();
-	/*Interval計算*/
-	int Interval();
 	/*アニメーションの値を入れて,返り値で右左を判断*/
-	int DecisionRL();
+	void DecisionRL(int R,int L);
 public:
 	/*
 	CCameraで使うXY
