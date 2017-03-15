@@ -31,8 +31,6 @@ public:
 	void UpdateAll();
 	//ƒŠƒXƒg•`‰æŠÖ”
 	void DrawAll();
-	//XV’â~ŠÖ” true‚Åpause false‚Å‰ğœ
-	void Pause(bool flg);
 	//CTaskManager‚ğ¶¬‚µ‚Ä•Ï”‚ÉŠi”[
 	static CTaskManager* GetInstance();
 	//Ši”[‚³‚ê‚Ä‚¢‚é‚à‚Ì‚ğíœ

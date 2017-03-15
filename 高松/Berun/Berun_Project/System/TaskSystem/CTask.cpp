@@ -5,23 +5,23 @@
 CTask::CTask() :
 	m_destroyFlg(false),
 	m_pauseFlg(false),
-	m_udPriority(0),
-	m_dwPriority(0),
+	m_updatePrio(eUDP_Null),
+	m_drawPrio(eDWP_Null),
 	mp_prev(nullptr),
 	mp_next(nullptr)
 {
 	//Manager‚É“o˜^‚³‚ê‚È‚¢
 }
-CTask::CTask(unsigned int udpriority, unsigned int dwpriority) :
+CTask::CTask(unsigned int updatePrio, unsigned int drawPrio) :
 	m_destroyFlg(false), 
 	m_pauseFlg(false), 
-	m_udPriority(udpriority),
-	m_dwPriority(dwpriority),
+	m_updatePrio(updatePrio),
+	m_drawPrio(drawPrio),
 	mp_prev(nullptr),
 	mp_next(nullptr)
 {
-	m_udPriority = udpriority;
-	m_dwPriority = dwpriority;
+	m_updatePrio = updatePrio;
+	m_drawPrio = drawPrio;
 	//ƒ^ƒXƒNì¬ŒãAŽ©“®‚ÅManager‚É“o˜^
 	CTaskManager::GetInstance()->Add(this);
 }
