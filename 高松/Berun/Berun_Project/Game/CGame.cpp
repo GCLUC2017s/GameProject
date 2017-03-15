@@ -25,8 +25,26 @@ void CGame::Draw()
 
 
 }
-
-CPlayer * CGame::GetPlayer()
+/*
+CPlayer CGame::GetPlayer()
 {
-	return nullptr;
+	
+	m_player = new CPlayer();
+
+	return m_player;
 }
+
+CPlayer CGame::GetEnemy()
+{
+	m_enemy = new CEnemy();
+
+	return m_enemy;
+}
+
+CPlayer CGame::GetMap()
+{
+	m_map = new CMap();
+
+	return m_map;
+}
+*/
