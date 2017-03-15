@@ -5,7 +5,7 @@
 #include "../Task/CTask.h"
 
 class CTitle :public CTask{
-private:
+public:
 
 	CRectangle mTitleLogo;
 	CRectangle mPleaseKey;
@@ -13,7 +13,6 @@ private:
 	CTexture	*mpTitleLogo;
 	CTexture	*mpPleaseKey;
 
-public:
 
 	~CTitle();
 

@@ -1,31 +1,84 @@
+//タイトルのプログラミング
+//担当者　高橋弘樹
 #include "CTitleScene.h"
 #include "../Key/CKey.h"
+#include"../Map/CMap.h"
 
+//CScene eSceneNo TITLE
 
-CTitleScene::CTitleScene() :status(0){}
+//CTitleScene::CTitleScene(){}
 
 void CTitleScene::Init() {
 
 
-	status = 0;
 	FirstX = -MAP_LIMIT_X / 2.5;
+	mMap.Init();
+	mTitle.Init();
+	
+	mFade.SetVertex(
+		-MAP_LIMIT_X / 2.0,
+	     MAP_LIMIT_Y / 2.0,
+		 MAP_LIMIT_X / 2.0,
+		-MAP_LIMIT_Y / 2.0);
+	//黒色に設定
+	mFade.SetColor(1.0f, 1.0f, 1.0f, alpha=1.0f);
+
+	//画面の座標系を設定
+	glMatrixMode(GL_PROJECTION);	//行列をプロジェクションモードへ変更
+	glLoadIdentity();	//行列を初期化
+	//	gluOrtho2D(-CGame::mDispCols / 2.0, CGame::mDispCols / 2.0, -CGame::mDispRows / 2.0, CGame::mDispRows / 2.0);
+	//表示するエリアを指定
+	gluOrtho2D(
+		-MAP_LIMIT_X / 2.5,
+		MAP_LIMIT_X / 2.5,
+		-MAP_LIMIT_Y / 2.0,
+		MAP_LIMIT_Y / 2.0);
+
+
+
 
 }
 
 void CTitleScene::Update() {
 
+	//Updateする
 
-		FirstX += 0.02f;
+	mMap.Update();
+	mMap.Render();
 
-}
+	
+	mTitle.Render((CVector2(MAP_LIMIT_X / 3.0 + FirstX,
+	MAP_LIMIT_X / 2.0 + FirstX - 5.0f)));
+
+	ChangeScene(E_TITLE);	//シーンの設定
+
+
+	FirstX += 0.02f;
 
 
 
-/* alertDisp
-追跡モードの時には、画面に赤みを付ける
-*/
-void CTitleScene::FadeDisp() {
+	glMatrixMode(GL_PROJECTION);	//行列をプロジェクションモードへ変更
+	glLoadIdentity();	//行列を初期化
+	gluOrtho2D(
+		-MAP_LIMIT_X / 1.0 + FirstX,
+		MAP_LIMIT_X / 1.0 + FirstX,
+		-MAP_LIMIT_Y / 1.5,
+		MAP_LIMIT_Y / 1.5);
 
-	mFade.Render();
+
+	if (FirstX > MAP_LIMIT_X / 2.5){
+	//	alpha = 1.0f;
+		FirstX = -MAP_LIMIT_X / 2.5;
+	} //マップの端まで行くと最初に戻す。
+
+	//Update終了
+
+
+	//エンターキーを押したときにシーンをセレクト画面に替える処理を行う。
+	if (CKey::push(VK_RETURN)) 
+	{
+		CScene::GetInstance()->ChangeScene(E_SELECT);
+	}
+
 
 }
