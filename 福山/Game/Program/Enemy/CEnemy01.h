@@ -2,8 +2,8 @@
 *エネミーのプログラム
 *担当者 冨田健斗&高橋弘樹
 */
-#ifndef ENEMY_HPP
-#define ENEMY_HPP
+#ifndef CENEMY01_HPP
+#define CENEMY01_HPP
 #include "../Base/CBase.h"
 #include "../Task/CTaskManager.h"
 #include "../Graphic/CRectangle.h"
@@ -33,7 +33,9 @@ private:
 	{
 		E_STAY_L, E_STAY_R,
 		E_FLAY_L, E_FLAY_R,
-		E_RUN_L, E_RUN_R
+		E_RUN_L, E_RUN_R,
+		E_ATTACK_L, E_ATTACK_R,
+		E_DIE_L, E_DIE_R
 	};
 
 	MyEnum eAnime = E_STAY_R;

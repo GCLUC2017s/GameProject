@@ -7,13 +7,9 @@
 #include <stdio.h>
 
 class CScene{
-public:
-	CScene(void) {}
+private:
 	static CScene *mScene;
-	static CScene* mGetInstance(void){ //シングルトンにします。
-		return mScene;
-	}
-
+public:
 	//シーン毎に設定　並びは流れの順番
 		enum eSceneNo{
 			E_TITLE,
@@ -22,12 +18,10 @@ public:
 			E_GAMECLEAR,
 			E_GAMEOVER
 		};
-
-
-		eSceneNo mNextStatus;
-
-			void ChangeScene(eSceneNo no);
-	virtual	void Update();	//virtual　？
+	static CScene *GetInstance(); //GetInstance
+			void ChangeScene(eSceneNo no);	//シーン切り替え
+			void DeleteScene();			//KILL
+	virtual	void Update();	//virtual　
 	virtual	void Render(){};
 };
 
