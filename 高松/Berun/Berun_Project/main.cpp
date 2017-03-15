@@ -112,9 +112,15 @@ void init(void)
 	CResourceManager::GetInstance()->Add("BackGround2", CImage::LoadImage("BackGround/Game_Background/Background_M01.png"));
 	CResourceManager::GetInstance()->Add("Carrot", CImage::LoadImage("Enemy/Carrot/Carrot_01.png"));
 
-//	CSound::GetInstance()->GetSound("BGM_BATTLE")->Load("BGM/battle.wav",1);
-//	CSound::GetInstance()->GetSound("BGM_BATTLE")->Play();
-
+	CSound::GetInstance()->GetSound("TITLE_BGM")->Load("BGM/Title.wav", 1);
+	CSound::GetInstance()->GetSound("CHARASELECT_BGM")->Load("BGM/CharaSelect.wav", 1);
+	CSound::GetInstance()->GetSound("AREA_M_BGM")->Load("BGM/Area_M.wav", 1);
+	CSound::GetInstance()->GetSound("AREA_N_BGM")->Load("BGM/Area_N.wav", 1);
+	CSound::GetInstance()->GetSound("AREA_E_BGM")->Load("BGM/Area_E.wav", 1);
+	CSound::GetInstance()->GetSound("AREA_Ni_BGM")->Load("BGM/Area_Ni.wav", 1);
+	CSound::GetInstance()->GetSound("RESULT_BGM")->Load("BGM/Result.wav", 1);
+	CSound::GetInstance()->GetSound("GAMEOVER_BGM")->Load("BGM/GameOver.wav", 1);
+	
 }
 
 
