@@ -21,7 +21,7 @@ public:
 	static CScene *GetInstance(); //GetInstance
 			void ChangeScene(eSceneNo no);	//シーン切り替え
 			void DeleteScene();			//KILL
-	virtual	void Update(){};	//virtual　
+	virtual	void Update();	//virtual　
 	virtual	void Render(){};
 };
 
