@@ -41,12 +41,12 @@ public:
 	virtual void Update();			//派生先クラスでの更新を行う関数
 	virtual void Draw();			//派生先クラスでの描写を行う関数
 	//更新順位設定関数
-	void SetUpdatePrio(int updatePrio)
+	void SetUpdatePrio(unsigned int updatePrio)
 	{
 		m_updatePrio = updatePrio;
 	}
 	//描画順位設定関数
-	void SetDrawPrio(int drawPrio)
+	void SetDrawPrio(unsigned int drawPrio)
 	{
 		m_drawPrio = drawPrio;
 	}
@@ -61,12 +61,12 @@ public:
 		return m_drawPrio;
 	}
 	//更新順位変更
-	void ChangeUpdatePrio(int updatePrio)
+	void ChangeUpdatePrio(unsigned int updatePrio)
 	{
 		m_updatePrio = updatePrio;
 	}
 	//描画順位変更
-	void ChangeDrawPriority(int drawPrio)
+	void ChangeDrawPriority(unsigned int drawPrio)
 	{
 		m_drawPrio = drawPrio;
 	}

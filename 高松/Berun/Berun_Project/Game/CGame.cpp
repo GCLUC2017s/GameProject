@@ -2,7 +2,8 @@
 #include "CPlayer/CPlayer.h"
 
 
-CGame::CGame() {
+CGame::CGame()
+{
 
 	//new CMap();
 	//new CTutorial(g_tutorialDataPath[g_tutorialNo]);
@@ -10,14 +11,22 @@ CGame::CGame() {
 	//new CEnemy(eCarrot);
 }
 
-CGame::~CGame() {
+CGame::~CGame()
+{
 }
-void CGame::Update() {
+void CGame::Update() 
+{
 	
 
 
 }
-void CGame::Draw() {
+void CGame::Draw()
+{
 
 
+}
+
+CPlayer * CGame::GetPlayer()
+{
+	return nullptr;
 }
