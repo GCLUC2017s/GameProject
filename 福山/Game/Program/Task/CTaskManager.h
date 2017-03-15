@@ -52,12 +52,9 @@ public:
 
 	*/
 
-	void Sort(CTask **t);
-
 	void AbsR();
 	void AbsU();
 	void Kill(CTask **t);
-	void AllKill();
 	void AllUpdate();
 	void AllRender();
 	void AllInit();

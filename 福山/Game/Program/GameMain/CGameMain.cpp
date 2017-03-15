@@ -8,8 +8,6 @@ void CGameMain::Init(){
 	taskmanger.Add(new CCamera);
 
 	taskmanger.Add(new CPlayer);
-	
-	taskmanger.Add(new CEnemy00);
 
 }
 
