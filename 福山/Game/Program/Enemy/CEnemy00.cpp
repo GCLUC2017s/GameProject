@@ -15,7 +15,7 @@
 #define SIZE_SHADOW							//影の表示
 #define SLOW_DOWN 0.001						//移動の減速スピード
 
-#define WALK_SPEED 0.03						//歩くスピード
+#define WALK_SPEED 0.05						//歩くスピード
 #define WALK_X 2							//歩くベクトルX
 #define WALK_Y 1							//歩くベクトルY
 
@@ -90,7 +90,6 @@ CEnemy00::~CEnemy00(){
 //エネミー00描画
 CEnemy00::CEnemy00() : mVelocity(0), mFlameCount(0){
 
-
 	for (int i = 0; i < FLAME_LIMIT; i++)
 	{
 		mStay_tex[i] = 0;
@@ -103,6 +102,7 @@ CEnemy00::CEnemy00() : mVelocity(0), mFlameCount(0){
 
 	//四角形の頂点設定
 	mEnemy00.SetVertex(-SIZE_ENEMY00_X, SIZE_ENEMY00_Y, SIZE_ENEMY00_X, -SIZE_ENEMY00_Y);
+	mShadow.SetVertex(-SIZE_ENEMY00_X, SIZE_ENEMY00_Y, SIZE_ENEMY00_X, -SIZE_ENEMY00_Y);
 	//四角形の色を設定
 	mEnemy00.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 
@@ -132,36 +132,6 @@ void CEnemy00::Update(){
 
 	//四角形の位置を設定
 	mEnemy00.position = mPos;
-
-	/*
-
-	プレイヤーの現在位置を取得したい。
-	現在出来ない。...プレイヤーの現在位置の取得方法が分からない。
-
-	if (mPos.x > mPlayer->mPos.x){　//保存されていないから読めない　対応１：CPlayer側で　mpPlayer=mPosをする　結果：できない
-
-		eAnime = E_WALK_L;
-		mVelocity = WALK_SPEED;
-
-		mForward = CVector2(-WALK_X, 0.0f);
-		mPos += mForward * mVelocity;
-
-	}
-	else{ //移動していないとき
-		if (mSaveAnime == E_WALK_L){ //待機中 直前が右の歩きでなければ
-			eAnime = E_STAY_L;
-		}
-		if (mVelocity > 0){
-			mVelocity -= SLOW_DOWN;
-			mPos += mForward * mVelocity;
-		}
-		else{
-			mVelocity = 0;
-		}
-
-	}
-	*/
-
 
 
 	// 右移動
