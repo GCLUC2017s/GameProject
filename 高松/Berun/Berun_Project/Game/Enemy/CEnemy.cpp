@@ -8,7 +8,7 @@
 	{ 0,0,0,0,0,0,0.0f },
 };*/
 
-CEnemy::CEnemy(int type):CCharaBase(type)
+CEnemy::CEnemy(int type):CCharaBase(type,eUDP_Enemy,eDWP_Enemy)
 {
 	m_pos = CVector3D(120, 0,0);
 }
