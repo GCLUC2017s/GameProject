@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera\CCamera.cpp" />
+    <ClCompile Include="CBase.cpp" />
     <ClCompile Include="Enemy\CEnemy00.cpp" />
     <ClCompile Include="GameMain\CGameMain.cpp" />
     <ClCompile Include="Graphic\CRectangle.cpp" />

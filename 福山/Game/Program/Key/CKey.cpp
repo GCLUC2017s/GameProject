@@ -21,3 +21,4 @@ bool CKey::once(char k) {
 	}
 	return false;
 }
+

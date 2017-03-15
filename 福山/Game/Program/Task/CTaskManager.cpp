@@ -19,12 +19,13 @@ void CTaskManager::Add(CTask  *t){
 		mRoot->prev = 0;
 		mRoot->next = t;
 		mTail = t;
+		t->mSaveR = t->mPriorityR;
 	}
 	else{
 		CTask temp;
 		CTask *p = &temp;
 		p->next = mRoot;
-
+		t->mSaveR = t->mPriorityR;
 		while (p != mTail)
 		{
 			p = p->next;
@@ -32,6 +33,7 @@ void CTaskManager::Add(CTask  *t){
 			if (p == mRoot && p->mPriorityR > t->mPriorityR){ //‰‚ß
 				mRoot = t;
 				mRoot->prev = 0;
+				mRoot->next = p;
 				p->prev = t;
 				if (p->next == 0){
 					mTail = p;
@@ -46,7 +48,7 @@ void CTaskManager::Add(CTask  *t){
 				mTail->next = 0;
 				break;
 			} 
-			else if (p->mPriorityR <= t->mPriorityR <= p->next->mPriorityR){ //’†ŠÔ
+			else if (p->mPriorityR > t->mPriorityR > p->next->mPriorityR){ //’†ŠÔ
 				t->next = p->next;
 				t->prev = p;
 				p->next->prev = t;
@@ -74,12 +76,26 @@ void CTaskManager::SwapTask(CTask **p, CTask **n){ //“ü‚ê‘Ö‚¦ˆ—
 	*p = s;
 
 }
-void CTaskManager::Sort(CTask **t){
-	CTask *n = new CTask();
-	n = *t;
-	Add(n);
-	Kill(t);
+void CTaskManager::SortR(CTask *t){
 
+		if (t->prev == 0){
+			mRoot = mRoot->next;
+			mRoot->prev = 0;
+		}
+		else if (t->next == 0){
+
+			mTail = mTail->prev;
+			mTail->next = 0;
+
+		}
+		else{
+			t->prev->next = t->next;
+			t->next->prev = t->prev;
+
+
+		}
+	Add(t);
+	t->mSaveR = t->mPriorityR;
 }
 
 void CTaskManager::AbsR(){
@@ -294,13 +310,12 @@ void CTaskManager::AllRender(){
 	/*‚·‚×‚Ä‚ÌRender•\Ž¦*/
 	while (task != 0)
 	{
-		AbsR();
-		//Sort(&task);
+		if (task->mSaveR != task->mPriorityR){ 
+			SortR(task); 
+		}
 		task->Render();
 		task = task->next;
 
 	}
-
-
 
 }

@@ -11,7 +11,6 @@ class  CTaskManager
 private:
 	CTask *mRoot;
 	CTask *mTail;
-
 	void SwapTask(CTask **p, CTask **n);
 
 public:
@@ -52,7 +51,7 @@ public:
 
 	*/
 
-	void Sort(CTask **t);
+	void SortR(CTask *t);
 
 	void AbsR();
 	void AbsU();
