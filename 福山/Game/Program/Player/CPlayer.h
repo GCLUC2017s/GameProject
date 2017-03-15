@@ -81,8 +81,10 @@ private:
 	void SetPos();
 	/*移動しているとき*/
 	bool Move();
-	/*アニメーションの値を入れて,返り値で右左を判断*/
+	/*アニメーションの値を入れて,引数で右左を判断 Rが*/
 	void DecisionRL(int R,int L);
+	/*テクスチャデリート*/
+	void Delete(CTexture *t);
 public:
 	/*
 	CCameraで使うXY

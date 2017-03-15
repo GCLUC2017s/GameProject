@@ -58,6 +58,7 @@ public:
 
 	}
 
+
 	virtual void Collision(CBase *b1, CBase *b2) {}
 
 

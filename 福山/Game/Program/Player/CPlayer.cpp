@@ -151,10 +151,34 @@ void CPlayer::Init() {
 	mShadow.SetUv(mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
 	mForward = CVector2(1.0f, 0.0f);
 }
-
+void CPlayer::Delete(CTexture *t){
+	if (t){
+		delete t;
+		t = 0;
+	}
+}
 
 CPlayer::~CPlayer() {
+	
+	/*テクスチャ読み込み*/
+	for (int i = 0; i < FRAME_LIMIT; i++)
+	{
+		Delete(mStayTex[i]);		
+		Delete(mWalkTex[i]);		
+		Delete(mRunTex[i]);			
+		Delete(mEx01Tex[i]);			//テクスチャクラスのインスタンス作成
+		Delete(mEx02Tex[i]);			//テクスチャクラスのインスタンス作成
+		Delete(mEatTex[i]);			
+		Delete(mFlameTex[i]);		
+		Delete(mBrakeTex[i]);		
 
+		for (int z = 0; z < NORMALATTACK_PATTERN; z++)
+		{
+			Delete(mNormalAttackTex[z][i]);	//テクスチャクラスのインスタンス作成
+		}
+		Delete(mEatTex[i]);
+
+	}
 }
 
 
@@ -317,11 +341,10 @@ bool CPlayer::Move(){
 	return false;
 }
 
-
 void CPlayer::Update() {
 	AnimeFlame();
-	assert(mAnimeFrame <= FRAME_LIMIT); //フレーム数が七を超えるとダメ
-
+	assert(mAnimeFrame <= FRAME_LIMIT);				//フレーム数が七を超えるとダメ
+	assert(E_STAY_L <= mStatus <= E_BRAKE_R);
 	//四角形の位置を設定
 	mPlayer.position = mPos;
 
