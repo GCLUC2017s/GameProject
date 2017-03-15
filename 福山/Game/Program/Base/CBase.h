@@ -43,7 +43,9 @@ public:
 	CVector2 mForward;	//向き
 	float mAxis;			//軸　使い方　mPosの'Y'を代入する(ジャンプの時など，移動以外の'Y'は代入しない)
 	bool mEnabled;		//有効フラグ
+	
 	CBase *mpPlayer;
+
 	float mHitPoint; //ヒットポイント
 
 	int mAlertCnt;
