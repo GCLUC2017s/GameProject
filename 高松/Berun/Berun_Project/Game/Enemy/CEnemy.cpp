@@ -17,7 +17,7 @@ CEnemy::~CEnemy() {
 
 }
 
-void CEnemy::_key() {
+void CEnemy::Key() {
 
 	CCharaBase::Key();
 	m_right =true;
