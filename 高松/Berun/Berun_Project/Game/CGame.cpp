@@ -24,25 +24,19 @@ void CGame::Draw()
 	
 }
 /*
-CPlayer CGame::GetPlayer()
+CPlayer CGame::GetPlayer(int type)
 {
 	
-	m_player = new CPlayer();
+	m_player = new CPlayer(type);
 
 	return m_player;
 }
 
-CPlayer CGame::GetEnemy()
+CEnemy CGame::GetEnemy(int type)
 {
-	m_enemy = new CEnemy();
+	m_enemy = new CEnemy(type);
 
 	return m_enemy;
 }
 
-CPlayer CGame::GetMap()
-{
-	m_map = new CMap();
-
-	return m_map;
-}
 */
