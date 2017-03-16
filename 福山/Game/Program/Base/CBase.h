@@ -15,6 +15,7 @@
 #include "../Task/CTask.h"
 #include "../Vector/CVector2.h"
 #include "../Define/define.h"
+#include "../Graphic/CRectangle.h"
 
 
 const float character_limit_left = -MAP_LIMIT_X / 2;			//進める上限(左)
@@ -41,8 +42,8 @@ class CBase : public CTask{
 public:
 	CVector2 mPos;					//位置
 	CVector2 mForward;				//向き
+	CRectangle mRect;				//
 	bool mEnabled;					//有効フラグ
-	CBase *mpPlayer;				
 	float mHitPoint;				//ヒットポイント
 
 	int mSaveAnime;                 //前のアニメーションがどれだったか判断用
@@ -50,15 +51,14 @@ public:
 	int mAnimeFrame;				//アニメのフレーム数
 	float mAxis;					//軸　使い方　mPosの'Y'を代入する(ジャンプの時など，移動以外の'Y'は代入しない)
 	int mAlertCnt;					//
+	int mStatus;
 
-
-	CBase() : mEnabled(true), mpPlayer(0), mAlertCnt(0),mAxis(0),mHitPoint(0) {
+	CBase() : mEnabled(true),mAlertCnt(0),mAxis(0),mHitPoint(0) {
 
 	}
 
-	virtual void Collision(CBase *b1, CBase *b2) {}
-
-
+	/*アニメのフレーム数計算用  roopがtrueならループする speed = RoopのSpeed*/
+	void AnimeFrame(bool roop, int speed);
 	
 };
 #endif

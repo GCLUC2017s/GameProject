@@ -16,9 +16,6 @@ return:À•Wã‚ÌˆÊ’u
 CVector2 CGame::getPosition(const CVector2 &v) {
 	return v;
 }
-CPlayer CGame::getPlayer(CPlayer &pl){
-	return pl;
-}
 CEnemy00 CGame::getEnemy(CEnemy00 &ene00){
 	return ene00;
 }

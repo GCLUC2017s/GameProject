@@ -21,7 +21,6 @@ class CPlayer : public CBase {
 private:
 
 	float mVelocity; //移動するときに使う
-	CRectangle	mPlayer;
 	CRectangle  mShadow;
 	CRectangle	mAttackCollision[NORMALATTACK_PATTERN]; //あたり判定だけの四角形
 	CTexture	*mStayTex[FRAME_LIMIT];									//待ちテクスチャ
@@ -60,8 +59,7 @@ private:
 
 	};
 
-	const int mStatus;
-	int AnimePattern;				//全体のアニメーションパターン大きさ
+	int mAnimePattern;				//全体のアニメーションパターン大きさ
 	bool mEnabledJump;				//ジャンプいている
 	bool mEnabledNormalAttack;		//通常攻撃しているかいないか
 	float mSpeedJump;				//ジャンプのスピード
@@ -70,8 +68,6 @@ private:
 	CVector2 mTarget;
 	CVector2 mSuvePos;				//元いた位置の保存
 
-	/*アニメのフレーム数計算用  roopがtrueならループする speed = RoopのSpeed*/
-	void AnimeFrame(bool roop,int speed);
 	/*移動処理*/
 	void Move();
 	/*走るか否か ※vは方向の値を入れる*/

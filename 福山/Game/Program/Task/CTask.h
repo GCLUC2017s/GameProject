@@ -15,14 +15,16 @@ public:
 	float mPriorityR; //Rander()のナンバー
 	float mPriorityU;//Update()のナンバー
 	bool mKillFlag;  //フラグが立っているものを消す
+	bool mCharaFlag;
 	int mMyNumber;	//種類判断のためのナンバ-
 
-	CTask() :next(0), prev(0),mPriorityR(0.0f),mPriorityU(0.0f),mKillFlag(false){};
+	CTask() :next(0), prev(0),mPriorityR(0.0f),mPriorityU(0.0f),mKillFlag(false),mCharaFlag(false){};
 	virtual ~CTask(){};
 
 	virtual void Init(){};
 	virtual void Update(){};
 	virtual void Render(){};
+	virtual void Collision(){};
 
 };
 

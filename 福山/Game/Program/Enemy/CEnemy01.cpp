@@ -7,7 +7,13 @@
 
 */
 
+/*
 
+
+CKeyを使っている条件文は今後別の処理になります。
+
+高橋弘樹
+*/
 
 #define SIZE_ENEMY00_Y 1  //エネミー01のサイズ_Y
 #define SIZE_ENEMY00_X 1 //エネミー01のサイズ_X
@@ -16,7 +22,7 @@
 #define FIRST_R_NO_PL 1						//初めのレンダーのポイント
 #define FIRST_U_NO_PL 1						//初めのアップデートのポイント
 #define SIZE_TEX_ENEMY00_STAY_X 800			//エネミーの待ち姿テクスチャサイズ X
-#define SIZE_TEX_ENEMY00_STAY_Y 800			//エネミーの待ち姿テクスチャサイズ Y
+#define SIZE_TEX_ENEMY00_STAY_Y 800		//エネミーの待ち姿テクスチャサイズ Y
 #define SIZE_TEX_ENEMY00_WALK_X 800			//エネミーの歩くテクスチャサイズ Y
 #define SIZE_TEX_ENEMY00_WALK_Y 800			//エネミーの歩く姿テクスチャサイズ Y
 #define SIZE_SHADOW							//影の表示
@@ -25,14 +31,14 @@
 #define WALK_X 2							//飛行ベクトルX
 #define WALK_Y 1							//飛行ベクトルY
 
-#define ENEMY01_FLAY "../CG\\enemy01\\enemy01_flay\\"
-#define ENEMY01_STAY "../CG\\enemy01\\enemy01_stay\\"
-#define ENEMY01_ATTACK "../CG\\enemy01\\enemy01_attack\\"
-#define ENEMY01_DIE "../CG\\enemy01\\enemy01_die\\"
+#define ENEMY01_FLAY "../CG\\enemy01\\fly\\"
+#define ENEMY01_STAY "../CG\\enemy01\\stay\\"
+#define ENEMY01_ATTACK "../CG\\enemy01\\attack\\"
+#define ENEMY01_DIE "../CG\\enemy01\\die\\"
 
 
 void CEnemy01::SetPos(){
-	mPos = Enemy_first_pos;
+	mPos = Enemy01_first_pos;
 	mAxis = mPos.y;
 };
 
@@ -55,12 +61,12 @@ void CEnemy01::Init(){
 	mStay_tex[4]->load(ENEMY01_STAY"enemy01_stay_04.tga");
 	mStay_tex[5]->load(ENEMY01_STAY"enemy01_stay_05.tga");
 
-	mFlay_tex[0]->load(ENEMY01_FLAY"enemy01_flay_00.tga");
-	mFlay_tex[1]->load(ENEMY01_FLAY"enemy01_flay_01.tga");
-	mFlay_tex[2]->load(ENEMY01_FLAY"enemy01_flay_02.tga");
-	mFlay_tex[3]->load(ENEMY01_FLAY"enemy01_flay_03.tga");
-	mFlay_tex[4]->load(ENEMY01_FLAY"enemy01_flay_04.tga");
-	mFlay_tex[5]->load(ENEMY01_FLAY"enemy01_flay_05.tga");
+	mFlay_tex[0]->load(ENEMY01_FLAY"enemy01_flyR_00.tga");
+	mFlay_tex[1]->load(ENEMY01_FLAY"enemy01_flyR_01.tga");
+	mFlay_tex[2]->load(ENEMY01_FLAY"enemy01_flyR_02.tga");
+	mFlay_tex[3]->load(ENEMY01_FLAY"enemy01_flyR_03.tga");
+	mFlay_tex[4]->load(ENEMY01_FLAY"enemy01_flyR_04.tga");
+	mFlay_tex[5]->load(ENEMY01_FLAY"enemy01_flyR_05.tga");
 
 	mAttack_tex[0]->load(ENEMY01_ATTACK"enemy01_attackR_00.tga");
 	mAttack_tex[1]->load(ENEMY01_ATTACK"enemy01_attackR_00.tga");
@@ -69,12 +75,12 @@ void CEnemy01::Init(){
 	mAttack_tex[4]->load(ENEMY01_ATTACK"enemy01_attackR_00.tga");
 	mAttack_tex[5]->load(ENEMY01_ATTACK"enemy01_attackR_00.tga");
 
-	mDie_tex[0]->load(ENEMY01_DIE"enemy01_die_00.tga");
-	mDie_tex[1]->load(ENEMY01_DIE"enemy01_die_01.tga");
-	mDie_tex[2]->load(ENEMY01_DIE"enemy01_die_02.tga");
-	mDie_tex[3]->load(ENEMY01_DIE"enemy01_die_03.tga");
-	mDie_tex[4]->load(ENEMY01_DIE"enemy01_die_04.tga");
-	mDie_tex[5]->load(ENEMY01_DIE"enemy01_die_05.tga");
+	mDie_tex[0]->load(ENEMY01_DIE"enemy01_dieR_00.tga");
+	mDie_tex[1]->load(ENEMY01_DIE"enemy01_dieR_01.tga");
+	mDie_tex[2]->load(ENEMY01_DIE"enemy01_dieR_02.tga");
+	mDie_tex[3]->load(ENEMY01_DIE"enemy01_dieR_03.tga");
+	mDie_tex[4]->load(ENEMY01_DIE"enemy01_dieR_04.tga");
+	mDie_tex[5]->load(ENEMY01_DIE"enemy01_dieR_05.tga");
 
 
 
@@ -102,7 +108,7 @@ CEnemy01::CEnemy01() : mVelocity(0), mFlameCount(0){
 	mMyNumber = E_ENEMY00;
 
 	//四角形の頂点設定
-	mEnemy01.SetVertex(-SIZE_ENEMY00_X, SIZE_ENEMY00_Y, SIZE_ENEMY00_X, -SIZE_ENEMY00_Y);
+	mEnemy01.SetVertex(SIZE_ENEMY00_X, SIZE_ENEMY00_Y, -SIZE_ENEMY00_X, -SIZE_ENEMY00_Y);
 	mShadow.SetVertex(-SIZE_ENEMY00_X, SIZE_ENEMY00_Y, SIZE_ENEMY00_X, -SIZE_ENEMY00_Y);
 	//四角形の色を設定
 	mEnemy01.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -129,22 +135,21 @@ void CEnemy01::Update(){
 	AnimeFlame();
 	assert(mAnime <= FLAME_LIMIT); //フレーム数が七を超えるとダメ
 	mPriorityR = -mAxis;
-	CTaskManager TaskManager;
 
 	//四角形の位置を設定
 	mEnemy01.position = mPos;
 
-
 	// 右移動
 	if (CKey::push('D')) {
-		eAnime = E_FLAY_R;
+		direction = 0;
+		eAnime = E_FLY_R;
 		mVelocity = WALK_SPEED;
 
 		mForward = CVector2(WALK_X, 0.0f);
 		mPos += mForward * mVelocity;
 	}
 	else{
-		if (mSaveAnime == E_FLAY_R){//待機中 直前が左の歩きでなければ
+		if (mSaveAnime == E_FLY_R){//待機中 直前が左の歩きでなければ
 			eAnime = E_STAY_R;
 		}
 		if (mVelocity > 0){
@@ -160,7 +165,8 @@ void CEnemy01::Update(){
 	//左移動
 	if (CKey::push('A')) {
 
-		eAnime = E_FLAY_L;
+		direction = 1;
+		eAnime = E_FLY_L;
 		mVelocity = WALK_SPEED;
 
 		mForward = CVector2(-WALK_X, 0.0f);
@@ -168,7 +174,7 @@ void CEnemy01::Update(){
 
 	}
 	else{ //移動していないとき
-		if (mSaveAnime == E_FLAY_L){ //待機中 直前が右の歩きでなければ
+		if (mSaveAnime == E_FLY_L){ //待機中 直前が右の歩きでなければ
 			eAnime = E_STAY_L;
 		}
 		if (mVelocity > 0){
@@ -185,6 +191,14 @@ void CEnemy01::Update(){
 	//上移動
 	if (CKey::push('W') && mAxis < character_limit_top - SIZE_ENEMY00_Y) { //軸が上限に達していないとき
 		Walk();
+		if (direction == 0){
+			eAnime = E_FLY_R;
+		}
+		else if (direction == 1){
+			eAnime = E_FLY_L;
+
+		}
+		mVelocity = WALK_SPEED;
 		mForward = CVector2(0.0f, WALK_Y);
 		mPos += mForward * mVelocity;
 		mAxis += mForward.y * mVelocity;
@@ -194,11 +208,50 @@ void CEnemy01::Update(){
 	//下移動
 	if (CKey::push('S') && mAxis > character_limit_bottom + SIZE_ENEMY00_Y) {//軸が上限に達していないとき
 		Walk();
+		if (direction == 0){
+			eAnime = E_FLY_R;
+		}
+		else if (direction == 1){
+			eAnime = E_FLY_L;
+
+		}
+		mVelocity = WALK_SPEED;
 		mForward = CVector2(0.0f, -WALK_Y);
 		mPos += mForward * mVelocity;
 		mAxis += mForward.y * mVelocity;
 	}
 
+
+	//攻撃
+	if (CKey::push('X')) {
+			
+		if (direction == 0){
+			eAnime = E_ATTACK_R;
+		}
+		else if (direction == 1){
+			eAnime = E_ATTACK_L;
+		}
+	}
+	//死亡
+	if (CKey::push('Z')) {
+		if (direction == 0){
+			eAnime = E_DIE_R;
+		}
+		else if (direction == 1){
+			eAnime = E_DIE_L;
+		}
+	}
+
+
+	switch (direction)
+	{
+	case 0:
+		//右
+		break;
+	case 1:
+		//左
+		break;
+	}
 
 
 
@@ -230,11 +283,25 @@ void CEnemy01::Update(){
 		mEnemy01.SetUv(mStay_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
 		break;
 		/*歩き中*/
-	case E_FLAY_L:
+	case E_FLY_L:
 		mEnemy01.SetUv(mFlay_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
 		break;
-	case E_FLAY_R:
+	case E_FLY_R:
 		mEnemy01.SetUv(mFlay_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
+		break;
+	/*攻撃*/
+	case E_ATTACK_L:
+		mEnemy01.SetUv(mAttack_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
+		break;
+	case E_ATTACK_R:
+		mEnemy01.SetUv(mAttack_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
+		break;
+	/*死亡*/
+	case E_DIE_L:
+		mEnemy01.SetUv(mDie_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
+		break;
+	case E_DIE_R:
+		mEnemy01.SetUv(mDie_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
 		break;
 	}
 

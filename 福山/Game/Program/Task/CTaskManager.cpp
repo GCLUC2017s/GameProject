@@ -1,4 +1,17 @@
 #include "CTaskManager.h"
+#include "../Collision/ccollisionmanager.h"
+
+
+CTaskManager* CTaskManager::mTaskManager = 0;
+//GetInstance
+CTaskManager* CTaskManager::GetInstance() {
+	if (mTaskManager == 0) {
+		mTaskManager = new CTaskManager();
+	}
+	return mTaskManager;
+}
+
+
 
 CTaskManager::CTaskManager(){}
 
@@ -276,13 +289,24 @@ void CTaskManager::AllInit(){
 
 void CTaskManager::AllUpdate(){
 	CTask *task;
+	CCollisionManager col;
 	task = mRoot;
-
+	
 	/*‚·‚×‚Ä‚ÌRender•\Ž¦*/
 	while (task != 0)
 	{
 		task->Update();
 		
+		if (task->mMyNumber == E_ENEMY00){ 
+			col.Update((CEnemy00*)task); 
+		}
+
+
+		if (task->mKillFlag){
+			Kill(&task);
+		}
+
+
 		task = task->next;
 
 	}

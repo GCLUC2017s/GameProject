@@ -12,9 +12,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera\CCamera.cpp" />
-    <ClCompile Include="CCollisionManager.cpp" />
+    <ClCompile Include="CBase.cpp" />
     <ClCompile Include="CGame\CGame.cpp" />
     <ClCompile Include="Collision\CCollision.cpp" />
+    <ClCompile Include="Collision\CCollisionManager.cpp" />
+    <ClCompile Include="CUserInterface.cpp" />
     <ClCompile Include="Enemy\CBoss.cpp" />
     <ClCompile Include="Enemy\CEnemy00.cpp" />
     <ClCompile Include="Enemy\CEnemy01.cpp" />
@@ -35,9 +37,10 @@
   <ItemGroup>
     <ClInclude Include="Base\CBase.h" />
     <ClInclude Include="Camera\CCamera.h" />
-    <ClInclude Include="CCollisionManager.h" />
     <ClInclude Include="CGame\CGame.h" />
     <ClInclude Include="Collision\CCollision.h" />
+    <ClInclude Include="Collision\ccollisionmanager.h" />
+    <ClInclude Include="CUserInterface.h" />
     <ClInclude Include="Define\define.h" />
     <ClInclude Include="Enemy\CBoss.h" />
     <ClInclude Include="Enemy\CEnemy00.h" />
@@ -49,6 +52,7 @@
     <ClInclude Include="Graphic\CTriangle.h" />
     <ClInclude Include="Key\CKey.h" />
     <ClInclude Include="Map\CMap.h" />
+    <ClInclude Include="MyNumber\CMyNumber.h" />
     <ClInclude Include="Player\CPlayer.h" />
     <ClInclude Include="SceneManager\CSceneManager.h" />
     <ClInclude Include="Scene\CScene.h" />
