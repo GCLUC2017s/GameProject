@@ -3,6 +3,9 @@
 #include "../Define/define.h"
 #include "../Vector/CVector2.h"
 #include "../Graphic/CRectangle.h"
+#include "../Player/CPlayer.h"
+#include "../Enemy/CEnemy00.h"
+
 
 class CGame {
 public:
@@ -11,8 +14,9 @@ public:
 	static int mMapCols;	//マップの列数
 	static int mDispRows;	//表示する行数
 	static int mDispCols;	//表示する列数
-	static CRectangle *mpMap;	//Mapの四角形データ
-	static CRectangle *mEnemy;	//
+	static CRectangle *mpMap; //Mapの四角形データ
+	static CRectangle *mEnemy; //
+	static CPlayer *mPlayer;   //
 	static int status;
 
 	/* getIndex
@@ -24,9 +28,10 @@ public:
 	/* getPosition
 	index:マップデータ配列の添え字
 	return:座標上の位置
-	マップデータの添え字から、座標上の位置を返す
 	*/
-	static CVector2 getPosition(CVector2 &v);
+	static CVector2 getPosition(const CVector2 &v);
+	static CPlayer  getPlayer(CPlayer &pl);
+	static CEnemy00 getEnemy(CEnemy00 &ene00);
 };
 
 #endif

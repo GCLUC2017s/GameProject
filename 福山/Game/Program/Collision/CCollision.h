@@ -1,8 +1,11 @@
-#pragma once
+#ifndef COLLISION_HPP
+#define COLLISION_HPP
 #include "../Graphic/CRectangle.h"
 #include "../Vector/CVector2.h"
 
 class CCollision {
 public:
-	static bool collision(CRectangle &r1, CRectangle &r2, CVector2 *vec);
+	static bool mCollision(CRectangle &r1, CRectangle &r2);
 };
+
+#endif

@@ -1,6 +1,7 @@
 #include "CPlayer.h"
 #include "../Key/CKey.h"
 #include "../MyNumber/CMyNumber.h"
+#include "../CGame/CGame.h"
 #define JUMP_FIRST_SPEED				0.2f								//ジャンプのジャンプ力
 #define HITPOINT_PLAYER					10.0f								//プレイヤーの体力
 #define FIRST_R_NO_PL					0.0f								//初めのレンダーのポイント
@@ -40,6 +41,7 @@ float CPlayer::camera_y;
 
 
 void CPlayer::SetPos(){
+	CPlayer::mpPlayer = this;
 	mPos = first_pos;
 	mAxis = mPos.y - SIZE_PLAYER_Y;
 

@@ -8,13 +8,13 @@
 #include <assert.h> 
 class  CTaskManager
 {
-private:
+public:
 	CTask *mRoot;
 	CTask *mTail;
 
 	void SwapTask(CTask **p, CTask **n);
 
-public:
+
 	CTaskManager();
 
 	~CTaskManager();
