@@ -13,9 +13,8 @@
 
 class CPlayer : public CCharaBase
 {
-//	T_PlayerData *mp_pData;
 
-	void _key();
+	void Key();
 public:
 	CPlayer(int type);
 	~CPlayer();

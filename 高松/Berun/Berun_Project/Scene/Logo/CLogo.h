@@ -29,6 +29,8 @@ class CLogo : public CScene
 	//ˆÈ‰ºAƒƒS‚Ì‘å‚«‚³‚ğŠi”[‚·‚é•Ï”
 	int m_logoWidth;
 	int m_logoHeight;
+	//•–¡‚Ì“§–¾“x‚ğŠi”[‚·‚é•Ï”
+	float m_alphaBlack;
 	//ƒƒS‚ÌÀ•W‚ğ“Z‚ß‚é•Ï”
 	CVector2D m_logoPoint;
 	//ƒƒS‚Ì‘å‚«‚³‚ğ“Z‚ß‚é•Ï”
