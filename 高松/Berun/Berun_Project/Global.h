@@ -34,11 +34,11 @@ extern int  g_tutorialNo;
 #define GAMEOVER_BGM	"GAMEOVER_BGM"
 
 //キー入力の定義
-#define KEY_DECIDE_ATTACK (CInput::eButton10)	//決定攻撃キー
-#define KEY_SKIP_JUMP     (CInput::eButton5)	//スキップジャンプキー
-#define KEY_UP			  (CInput::eUp)			//上移動キー
-#define KEY_DOWN		　(CInput::eDown)		//下移動キー
-#define KEY_RIGHT		  (CInput::eRight)		//右移動キー
-#define KEY_LEFT		  (CInput::eLeft)		//左移動キー
+#define KEY_DECIDE_ATTACK	(CInput::eButton10)		//決定攻撃キー
+#define KEY_SKIP_JUMP		(CInput::eButton5)		//スキップジャンプキー
+#define KEY_UP				CInput::eUp				//上移動キー
+#define KEY_DOWN			CInput::eDown			//下移動キー
+#define KEY_RIGHT			CInput::eRight			//右移動キー
+#define KEY_LEFT			CInput::eLeft			//左移動キー
 
 
