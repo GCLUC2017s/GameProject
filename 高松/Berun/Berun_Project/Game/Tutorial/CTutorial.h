@@ -11,7 +11,7 @@
 #include "CImage.h"
 #include "../Global.h"
 
-#define IMAGE_MAX  4
+#define IMAGE_MAX  5
 #define LINE_MAX   2
 #define WORD_MAX 128
 #define TEXT_END  -2
@@ -26,7 +26,6 @@ private:
 	int		m_state;
 	char    m_text[LINE_MAX][WORD_MAX];		//•¶Í(s)(•¶š”j
 	char    m_str[WORD_MAX];				//•\¦•¶š—ñ
-	static bool m_isActive;
 public:
 	CTutorial();
 	CTutorial(char *file);
