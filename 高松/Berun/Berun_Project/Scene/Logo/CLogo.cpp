@@ -2,6 +2,7 @@
 #include "../CSceneManager.h"
 #include "../CScene.h"
 
+#define LOGO_END_POS 1600
 CLogo::CLogo()
 {
 	m_black = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Black"));
@@ -16,8 +17,10 @@ CLogo::CLogo()
 	m_logoY = 280;
 	m_logoWidth = 900;
 	m_logoHeight = 150;
+	m_alphaBlack = 0;
 	m_logoPoint = CVector2D(m_logoX,m_logoY);
 	m_logoSize = CVector2D(m_logoWidth,m_logoHeight);
+
 
 	flag = false;
 }
@@ -40,6 +43,13 @@ void CLogo::Draw()
 	//ã‚É”í‚¹‚½•–¡‚ð‚¸‚ç‚·ˆ—(•¶Žš‚ª•\Ž¦‚³‚ê‚Ä‚¢‚­)
 	m_blackPosX += m_xSpeed;
 	m_blackSecond->SetPos(m_blackPosX, 0);
+	if (m_blackPosX >= LOGO_END_POS)
+	{
+		m_alphaBlack += 0.05f;
+		m_blackSecond->SetPos(0, 0);
+		m_blackSecond->SetColor(1,1,1,m_alphaBlack);
+		if(m_alphaBlack >= 1.2f)	CSceneManager::GetInstance()->Quit(0, eTitle);
+	}
 	m_blackSecond->Draw();
 
 	if (CInput::GetState(0, CInput::ePush, CInput::eButton10)) CSceneManager::GetInstance()->Quit(0, eTitle);

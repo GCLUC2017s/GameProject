@@ -1,13 +1,15 @@
-#ifndef CENEMY_GURAD
-#define CENEMY_GUARD
-#include"../Global.h"
-#include "../../System/CharaBase/CCharaBase.h"
-
 /**
 *@file	 CEnemy.h
 *@brief  “GƒNƒ‰ƒX
 *@author ‹{“c
 */
+
+#ifndef CENEMY_GURAD
+#define CENEMY_GUARD
+#include"../Global.h"
+#include "../../System/CharaBase/CCharaBase.h"
+
+
 
 
 
@@ -15,8 +17,8 @@ class CEnemy:public CCharaBase {
 private:
 	
 	//int m_enemytime;
-	void _key();
-	CImage *m_chara;
+	void Key();
+
 public:
 		
 	CEnemy(int type);

@@ -1,6 +1,6 @@
 #include "CCharaBase.h"
 
-static T_CharacterData g_characterData[eCharacterMax] = 
+static T_CharacterData g_characterData[] = 
 {
 	//ID,レベル、最大HP,現在HP,最大SP,現在SP,攻撃力,防御力,取得経験値,必要経験値,移動速度,ジャンプ力,Xサイズ,Yサイズ(13)
 	{ "LittlePlayerM",0,5,0,0,0,0,0,0,0,1,0, },
@@ -10,6 +10,8 @@ static T_CharacterData g_characterData[eCharacterMax] =
 	//{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Rice",5,5,0,0,0,0,0,0,0,1,0,0,0 },
 };
+
+//static_assert (ARRAY_SIZE(g_characterData) == eCharacterMax,"g_characterDataSizeError");
 CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio) : CBase(updatePrio, drawPrio)
 {
 	m_state = eState_Idle;
@@ -29,11 +31,13 @@ CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio)
 	m_jump=mp_eData->jump;
 	m_xSize=mp_eData->xSize;
 	m_ySize=mp_eData->ySize;
+	m_dashSpeed = 1;
 	m_charaDirection = false;
 	m_right = false;
 	m_left = false;
 	m_up = false;
 	m_down = false;
+	m_dash = false;
 }
 CCharaBase::~CCharaBase() 
 {
@@ -47,55 +51,32 @@ void CCharaBase::Animation()
 
 void CCharaBase::Key()
 {
-
-	m_left = false;
 	m_up = false;
 	m_down = false;
-	if (CInput::GetState(0, CInput::ePush, CInput::eUp)) m_up = true; 
-	if (CInput::GetState(0, CInput::ePush, CInput::eDown)) m_down = true;
-	if (CInput::GetState(0, CInput::ePush, CInput::eLeft)) m_left = true;
-	if (CInput::GetState(0, CInput::ePush, CInput::eRight)) m_right = true;
-	if (CInput::GetState(0, CInput::ePush, CInput::eUp) || CInput::GetState(0, CInput::ePush, CInput::eDown)
-		|| CInput::GetState(0, CInput::ePush, CInput::eLeft) || CInput::GetState(0, CInput::ePush, CInput::eRight)) m_state = eState_Walk;
-
+	m_left = false;
+	m_right = false;
 }
 void CCharaBase::Idle(){
 	Animation();
 
 
 }
-void CCharaBase::Walk()
+void CCharaBase::Move()
 {
-	//上キー(W)を入力した時の処理
-	if (m_up)
-	{
-		m_pos.z += CHARA_MOVE;
-	}
-	//下キー(S)を入力した時の処理
-	if (m_down)
-	{
-		m_pos.z += CHARA_MOVE;
-	}
-	//左キー(A)を入力した時の処理
+	if (m_up)	m_pos.z += CHARA_MOVE * m_dashSpeed;
+	if (m_down)	m_pos.z += -CHARA_MOVE * m_dashSpeed;
 	if (m_left)
 	{
-		//キャラのX座標にマイナス値(左方向の値)を加算していく処理
-		m_pos.x += -CHARA_MOVE;
+		m_pos.x += -CHARA_MOVE * m_dashSpeed;
 		//キャラの方向フラグを左向きの状態にする
 		m_charaDirection = true;
 	}
-	//右キー(D)を入力した時の処理
 	if (m_right)
 	{
-		//キャラのX座標にプラス値(右方向の値)を加算していく処理
-		m_pos.x += CHARA_MOVE;
+		m_pos.x += CHARA_MOVE * m_dashSpeed;
 		//キャラの方向フラグを右向きの状態にする
 		m_charaDirection = false;
 	}
-}
-void CCharaBase::Dash()
-{
-
 }
 void CCharaBase::Jump()
 {
@@ -118,11 +99,8 @@ void CCharaBase::Update()
 	case eState_Idle:
 		Idle();
 		break;
-	case eState_Walk:
-		Walk();
-		break;
-	case eState_Dash:
-		Dash();
+	case eState_Move:
+		Move();
 		break;
 	case eState_Jump:
 		if (m_pos.y <= 0) m_state = eState_Idle;

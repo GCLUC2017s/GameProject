@@ -2,7 +2,7 @@
 
 static CFont *font = nullptr;
 
-CTutorial::CTutorial() 
+CTutorial::CTutorial() : CTutorial(g_tutorialDataPath[g_tutorialNo])
 {
 }
 
@@ -13,6 +13,8 @@ CTutorial::CTutorial(char * file) : CTask(0,0), mp_file(nullptr),
 {
 	mp_img[0] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("PlayerM"));
 	mp_img[1] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("PlayerW"));
+	mp_img[2] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("TutorialM"));
+	mp_img[3] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("TutorialW"));
 	
 	//テキストファイルオープン
 	fopen_s(&mp_file, file, "r");
@@ -32,9 +34,15 @@ void CTutorial::Update()
 	//エンターキーでチュートリアル進行
 	if (CInput::GetState(0, CInput::ePush, CInput::eButton10)) GetText();
 	//スペースキーでチュートリアルスキップ
-	if (CInput::GetState(0, CInput::ePush, CInput::eButton5)) m_end = -2;
+	if (CInput::GetState(0, CInput::ePush, CInput::eButton5)) m_end = TEXT_END;
 
-	mp_img[g_tutorialNo]->SetPos(200, 250);
+	assert(0 <= g_tutorialNo && g_tutorialNo < ARRAY_SIZE(mp_img),"ARRAY_SIZE_ERROR");
+	mp_img[g_tutorialNo]->SetSize(400, 800);
+	mp_img[g_tutorialNo]->SetPos(-50, 100);
+	mp_img[2]->SetSize(1000, 300);
+	mp_img[2]->SetPos(250, 400);
+	mp_img[3]->SetSize(1000, 300);
+	mp_img[3]->SetPos(250, 400);
 
 	//テキストが終われば削除フラグを真にする
 	if (GetEnd()) SetDestroyFlag(true);
@@ -44,24 +52,25 @@ void CTutorial::Draw()
 {
 	//チュートリアル操作表示
 	sprintf(m_str, "ENTER：進行");
-	font->Draw(800, 35, 1, 1, 1, m_str);
+	font->Draw(900, 50, 0, 0, 0, m_str);
 	sprintf(m_str, "SPACE：スキップ");
-	font->Draw(800, 75, 1, 1, 1, m_str);
+	font->Draw(900, 100, 0, 0, 0, m_str);
 	mp_img[g_tutorialNo]->Draw();
+	if (g_tutorialNo == 0) mp_img[2]->Draw();
+	if (g_tutorialNo == 1) mp_img[3]->Draw();
 }
 
 void CTutorial::GetText()
 {
 	fgets(m_str, WORD_MAX, mp_file);
 	sscanf_s(m_str, "%d", &m_end);
-	if (m_end == -2) return;
+	if (m_end == TEXT_END) return;
 	sscanf_s(m_str, "%d", &m_face);
-	fgets(m_name, WORD_MAX, mp_file);
 	fgets(m_text[0], WORD_MAX, mp_file);
 	fgets(m_text[1], WORD_MAX, mp_file);
 }
 
 bool CTutorial::GetEnd()
 {
-	return (m_end == -2);
+	return (m_end == TEXT_END);
 }

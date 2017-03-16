@@ -23,7 +23,7 @@ void CTaskManager::Add(CTask *p)
 		mp_tail->mp_next = p;
 	}
 
-	if(p->m_updatePrio)mp_tail = p;
+	mp_tail = p;
 }
 CTask* CTaskManager::Destroy(CTask *p)
 {
