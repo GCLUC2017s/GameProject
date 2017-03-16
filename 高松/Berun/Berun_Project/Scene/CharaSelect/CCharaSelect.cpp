@@ -127,12 +127,12 @@ CCharaSelect::CCharaSelect()
 	m_drawCharaSelectBackGround = false;
 	m_chara = false;
 
-
+	CSound::GetInstance()->GetSound("CHARASELECT_BGM")->Play();
 
 }
 CCharaSelect::~CCharaSelect()
 {
-
+	CSound::GetInstance()->GetSound("CHARASELECT_BGM")->Stop();
 }
 void CCharaSelect::Update()
 {
