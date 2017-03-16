@@ -1,19 +1,19 @@
 #include "CCharaBase.h"
 
-const static T_CharacterData g_characterData[eCharacterMax] = 
+static T_CharacterData g_characterData[eCharacterMax] = 
 {
 	//ID,レベル、最大HP,現在HP,最大SP,現在SP,攻撃力,防御力,取得経験値,必要経験値,移動速度,ジャンプ力,Xサイズ,Yサイズ(13)
 	{ "LittlePlayerM",0,5,0,0,0,0,0,0,0,1,0, },
 	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,0, },
-	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,0 },
-	{ "Chick",3,5,0,0,0,0,0,0,0,1,0,0,0 },
-	{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
-	{ "Rice",5,5,0,0,0,0,0,0,0,1,0,0,0 },
+	{ "CarrotLeft",2,5,0,0,0,0,0,0,0,1,0,0,0 },
+	//{ "Chick",3,5,0,0,0,0,0,0,0,1,0,0,0 },
+	//{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
+	//{ "Rice",5,5,0,0,0,0,0,0,0,1,0,0,0 },
 };
 CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio) : CBase(updatePrio, drawPrio)
 {
 	m_state = eState_Idle;
-	//mp_eData = &g_characterData[type];
+	mp_eData = &g_characterData[type];
 	m_chara = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get(mp_eData->imageName));
 	m_imgPtn = 0;
 	m_level= mp_eData->level;
