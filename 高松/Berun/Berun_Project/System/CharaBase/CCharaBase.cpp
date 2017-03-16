@@ -1,6 +1,6 @@
 #include "CCharaBase.h"
 
-static T_CharacterData g_characterData[eCharacterMax] = 
+static T_CharacterData g_characterData[] = 
 {
 	//ID,レベル、最大HP,現在HP,最大SP,現在SP,攻撃力,防御力,取得経験値,必要経験値,移動速度,ジャンプ力,Xサイズ,Yサイズ(13)
 	{ "LittlePlayerM",0,5,0,0,0,0,0,0,0,1,0, },
@@ -10,6 +10,8 @@ static T_CharacterData g_characterData[eCharacterMax] =
 	//{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Rice",5,5,0,0,0,0,0,0,0,1,0,0,0 },
 };
+
+//static_assert (ARRAY_SIZE(g_characterData) == eCharacterMax,"g_characterDataSizeError");
 CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio) : CBase(updatePrio, drawPrio)
 {
 	m_state = eState_Idle;
@@ -48,13 +50,12 @@ void CCharaBase::Animation()
 void CCharaBase::Key()
 {
 
-	m_left = false;
+
 	m_up = false;
 	m_down = false;
-	if (CInput::GetState(0, CInput::ePush, CInput::eUp)) m_up = true; 
-	if (CInput::GetState(0, CInput::ePush, CInput::eDown)) m_down = true;
-	if (CInput::GetState(0, CInput::ePush, CInput::eLeft)) m_left = true;
-	if (CInput::GetState(0, CInput::ePush, CInput::eRight)) m_right = true;
+	m_left = false;
+	m_right = false;
+
 	if (CInput::GetState(0, CInput::ePush, CInput::eUp) || CInput::GetState(0, CInput::ePush, CInput::eDown)
 		|| CInput::GetState(0, CInput::ePush, CInput::eLeft) || CInput::GetState(0, CInput::ePush, CInput::eRight)) m_state = eState_Walk;
 
@@ -74,7 +75,7 @@ void CCharaBase::Walk()
 	//下キー(S)を入力した時の処理
 	if (m_down)
 	{
-		m_pos.z += CHARA_MOVE;
+		m_pos.z += -CHARA_MOVE;
 	}
 	//左キー(A)を入力した時の処理
 	if (m_left)

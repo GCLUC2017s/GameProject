@@ -15,6 +15,7 @@ class CPlayer : public CCharaBase
 {
 
 	void Key();
+
 public:
 	CPlayer(int type);
 	~CPlayer();

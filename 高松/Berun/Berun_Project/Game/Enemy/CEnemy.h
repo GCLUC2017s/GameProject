@@ -16,7 +16,7 @@ private:
 	
 	//int m_enemytime;
 	void _key();
-	CImage *m_chara;
+
 public:
 		
 	CEnemy(int type);

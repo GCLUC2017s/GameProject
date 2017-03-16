@@ -2,6 +2,7 @@
 
 CPlayer::CPlayer(int type) : CCharaBase(type, eUDP_Player,eDWP_Player)
 {
+	m_pos = CVector3D(0, 0, 0);
 }
 CPlayer::~CPlayer()
 {
@@ -14,7 +15,6 @@ void CPlayer::Key() {
 	
 	if (CInput::GetState(0, CInput::eHold, CInput::eRight))
 	{
-		m_pos = CVector3D(0, 0, 0);
 		m_right = true;
 	}
 	if (CInput::GetState(0, CInput::eHold, CInput::eLeft))
@@ -30,4 +30,3 @@ void CPlayer::Key() {
 		m_down = true;
 	}
 }
-
