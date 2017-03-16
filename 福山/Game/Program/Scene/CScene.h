@@ -7,8 +7,6 @@
 #include <stdio.h>
 
 class CScene{
-private:
-	static CScene *mScene;
 public:
 	//シーン毎に設定　並びは流れの順番
 		enum eSceneNo{
@@ -18,11 +16,12 @@ public:
 			E_GAMECLEAR,
 			E_GAMEOVER
 		};
-	static CScene *GetInstance(); //GetInstance
-			void ChangeScene(eSceneNo no);	//シーン切り替え
-			void DeleteScene();			//KILL
-	virtual	void Update();	//virtual　
-	virtual	void Render(){};
+
+
+		friend class CSceneManager;
+		friend class CTitleScene;
+		friend class CScene2;
+
 };
 
 #endif
