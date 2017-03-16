@@ -10,17 +10,15 @@
 
 CEnemy::CEnemy(int type):CCharaBase(type,eUDP_Enemy,eDWP_Enemy)
 {
-	m_pos = CVector3D(120, 0,0);
+	m_pos = CVector3D(300, 0 ,300);
 	m_enemyHp= dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Meter"));
 }
 CEnemy::~CEnemy() {
 
 }
-
 void CEnemy::Key() {
 
 	CCharaBase::Key();
-	m_right =true;
 }
 /*
 void CEnemy::Update() {

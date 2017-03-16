@@ -113,7 +113,7 @@ void init(void)
 	CResourceManager::GetInstance()->Add("BackGroundNoon", CImage::LoadImage("BackGround/Background_N02.png"));
 	CResourceManager::GetInstance()->Add("BackGroundEvenig", CImage::LoadImage("BackGround/Background_E03.png"));
 	CResourceManager::GetInstance()->Add("BackGroundNight", CImage::LoadImage("BackGround/Background_Ni04.png"));
-	CResourceManager::GetInstance()->Add("Carrot", CImage::LoadImage("Enemy/Carrot/Carrot_01.png"));
+	CResourceManager::GetInstance()->Add("Carrot", CImage::LoadImage("Enemy/Carrot.png"));
 	
 	CResourceManager::GetInstance()->Add("Meter", CImage::LoadImage("Enemy/Meter_01.png"));
 	//ƒTƒEƒ“ƒh“Ç‚İ‚İ
