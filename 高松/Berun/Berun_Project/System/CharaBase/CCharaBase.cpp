@@ -1,13 +1,15 @@
 #include "CCharaBase.h"
-
+T_AnimData _carrotAnimData[] = {
+	{2,5},
+	{9,10},
+	{5,1},
+};
 static T_CharacterData g_characterData[] = 
 {
 	//ID,レベル、最大HP,現在HP,最大SP,現在SP,攻撃力,防御力,取得経験値,必要経験値,移動速度,ジャンプ力,Xサイズ,Yサイズ(13)
-	{ "LittlePlayerM",0,5,0,0,0,0,0,0,0,1,0, },
-	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,0, },
-	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,0 },
-	{ "Berry",3,5,0,0,0,0,0,0,0,1,0,0,0 },
-
+	{ "LittlePlayerM",0,5,0,0,0,0,0,0,0,1,0,0,100,140 ,_carrotAnimData },
+	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,0,0, 256,256,_carrotAnimData },
+	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,160,160 ,_carrotAnimData },
 	//{ "Chick",3,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Rice",5,5,0,0,0,0,0,0,0,1,0,0,0 },
@@ -33,6 +35,9 @@ CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio)
 	m_jump=mp_eData->jump;
 	m_xSize=mp_eData->xSize;
 	m_ySize=mp_eData->ySize;
+	m_animPaternX = 0;
+	m_animPaternY = eAnim_Attack;
+	m_animCounter = 0;
 	m_dashSpeed = 1;
 	m_charaDirection = false;
 	m_right = false;
@@ -40,15 +45,22 @@ CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio)
 	m_up = false;
 	m_down = false;
 	m_dash = false;
+	m_jumpInDash = false;
+	m_jumpFlag = false;
 }
 CCharaBase::~CCharaBase() 
 {
-	CResourceManager::GetInstance()->Delete(mp_eData->imageName);
-	CResourceManager::ClearInstance();
+
 }
 void CCharaBase::Animation()
 {
-
+	m_animCounter++;
+	if (m_animCounter >= mp_eData->animData[m_animPaternY].speed) {
+		m_animPaternX++;
+		m_animCounter = 0;
+	}
+	if (m_animPaternX >= mp_eData->animData[m_animPaternY].pattrn) m_animPaternX = 0;
+	m_chara->SetRect(m_xSize * m_animPaternX, m_ySize * m_animPaternY, m_xSize * (m_animPaternX + ANIM_REVISION), m_ySize * (m_animPaternY + ANIM_REVISION));
 }
 
 void CCharaBase::Key()
@@ -59,7 +71,7 @@ void CCharaBase::Key()
 	m_right = false;
 }
 void CCharaBase::Idle(){
-	Animation();
+//	Animation();
 
 
 }
@@ -82,12 +94,23 @@ void CCharaBase::Move()
 }
 void CCharaBase::Jump()
 {
-	if (CInput::GetState(0, CInput::ePush, CInput::eButton1))
+	if (!m_jumpFlag) m_gravitySpeed += 20;
+	m_jumpFlag = true;
+	if (m_left)
 	{
-		m_gravitySpeed += 20;
-		m_state = eState_Jump;
+		m_pos.x += -CHARA_MOVE;
+		m_charaDirection = true;
 	}
-	if (m_pos.y <= 0) m_state = eState_Idle;
+	if (m_right)
+	{
+		m_pos.x += CHARA_MOVE;
+		m_charaDirection = false;
+	}
+	if (m_pos.y <= 0 && m_gravitySpeed < 20)
+	{
+		m_jumpFlag = false;
+		m_state = eState_Idle;
+	}
 }
 void CCharaBase::HpBar()
 {
@@ -105,9 +128,8 @@ void CCharaBase::Update()
 		Move();
 		break;
 	case eState_Jump:
-		if (m_pos.y <= 0) m_state = eState_Idle;
+		Jump();
 		break;
-
 	}
 	m_gravitySpeed += GRAVITY;
 	m_pos.y += m_gravitySpeed;
@@ -116,15 +138,15 @@ void CCharaBase::Update()
 		m_pos.y = 0;
 		m_gravitySpeed = 0;
 	}
-
 }
 void CCharaBase::Draw()
 {
-	m_chara->SetCenter(64,128);
-	m_chara->SetSize(128,128);
-	m_chara->SetPos(GetScreenPos());
-	m_chara->SetFlipH(m_charaDirection);
-	m_chara->Draw();
+		m_chara->SetCenter(64, 128);
+		m_chara->SetSize(m_xSize, m_ySize);
+		m_chara->SetPos(GetScreenPos());
+		m_chara->SetFlipH(m_charaDirection);
+		Animation();
+		m_chara->Draw();
 }
 void CCharaBase::HitCheck()
 {

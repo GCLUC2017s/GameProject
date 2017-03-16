@@ -6,7 +6,7 @@ private:
  HFONT Hfont;
  HDC Hdc;
 public:
-	CFont(wchar_t *font = L"ＭＳゴシック", int size=24);
+	CFont(wchar_t *font = L"HG丸ゴシックM-PRO", int size=24);
 	void Draw(int x,int y,float r,float g,float b,char *str);
 	void Release();
 };

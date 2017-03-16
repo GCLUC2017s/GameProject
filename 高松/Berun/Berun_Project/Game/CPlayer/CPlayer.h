@@ -10,6 +10,8 @@
 #include "../../System/CharaBase/CCharaBase.h"
 
 #define PLAYER_MOVE 4
+#define WALK_SPEED 1
+#define DASH_SPEED 2
 
 class CPlayer : public CCharaBase
 {

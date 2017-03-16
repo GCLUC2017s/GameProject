@@ -14,15 +14,14 @@
 class CGame : public CScene
 {
 private:
-	//static CPlayer *m_player;
-	//static CEnemy  *m_enemy;
+	CMap		*mp_map;
+	CTutorial	*mp_tutorial;
+	unsigned int m_step;
 public:
 	CGame();
 	~CGame();
 	void Update();
 	void Draw();
-	//CPlayer GetPlayer(int type);
-	//CEnemy GetEnemy(int type);
 };
 
 #endif

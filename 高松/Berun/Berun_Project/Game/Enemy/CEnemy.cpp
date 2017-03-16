@@ -10,14 +10,7 @@
 
 CEnemy::CEnemy(int type):CCharaBase(type,eUDP_Enemy,eDWP_Enemy)
 {
-	
-	srand(time(nullptr));
-	m_enemyAppears = rand() % 4;
-	if (eCarrot) {
-		m_pos = CVector3D(300, 0, 300);
-	}
-	
-
+	m_pos = CVector3D(300, 0 ,300);
 	m_enemyHp= dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Meter"));
 	
 	m_enemyHp->SetColor(1, 0, 0, 1);
@@ -26,11 +19,9 @@ CEnemy::CEnemy(int type):CCharaBase(type,eUDP_Enemy,eDWP_Enemy)
 CEnemy::~CEnemy() {
 
 }
-
 void CEnemy::Key() {
 
 	CCharaBase::Key();
-	m_right =true;
 }
 
 void CEnemy::Update() {

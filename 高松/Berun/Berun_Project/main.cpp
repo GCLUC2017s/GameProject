@@ -75,7 +75,7 @@ void init(void)
 	CCamera::GetCamera()->LookAt(	CVector3D(0,100,-150),
 									CVector3D(0,10,0),
 									CVector3D(0.0, 1.0, 0.0));
-	
+
 
 	
 	//CResourceManagerで一括管理(前はCImageManagerだったもの)
@@ -113,7 +113,7 @@ void init(void)
 	CResourceManager::GetInstance()->Add("BackGroundNoon", CImage::LoadImage("BackGround/Background_N02.png"));
 	CResourceManager::GetInstance()->Add("BackGroundEveing", CImage::LoadImage("BackGround/Background_E03.png"));
 	CResourceManager::GetInstance()->Add("BackGroundNight", CImage::LoadImage("BackGround/Game_Background/Background_Ni02.png"));
-	CResourceManager::GetInstance()->Add("Carrot", CImage::LoadImage("Enemy/Carrot/Carrot_01.png"));
+	CResourceManager::GetInstance()->Add("Carrot", CImage::LoadImage("Enemy/Carrot.png"));
 	
 	CResourceManager::GetInstance()->Add("Meter", CImage::LoadImage("Enemy/Meter_01.png"));
 	//サウンド読み込み

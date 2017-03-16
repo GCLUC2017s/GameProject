@@ -11,7 +11,12 @@
 
 #define ARRAY_SIZE(a)(sizeof(a)/sizeof(a[0]))
 #define CHARA_MOVE 4
+#define ANIM_REVISION 1
 
+struct T_AnimData {
+	int pattrn;
+	int speed;
+};
 //キャラクターの基礎構造体
 struct T_CharacterData {
 	char imageName[64];
@@ -29,6 +34,7 @@ struct T_CharacterData {
 	float jump;		//ジャンプ力
 	float xSize;	//Xサイズ
 	float ySize;	//Yサイズ
+	T_AnimData *animData;
 };
 enum {
 	ePlayerMan,	//プレイヤー男
@@ -60,6 +66,11 @@ protected:
 		eState_Attack,
 		
 	};
+	enum {
+		eAnim_Walk,
+		eAnim_Idle,
+		eAnim_Attack,
+	};
 	ESTATE m_state;
 	CImage *m_chara;
 	CImage *m_enemyHp;
@@ -86,6 +97,12 @@ protected:
 	int   m_exp;
 	//キャラクターのスピード
 	float m_speed;
+	//アニメーションパターンの何行目かを格納する変数
+	int m_animPaternX;
+	//アニメーションパターンの何列目かを格納する変数
+	int m_animPaternY;
+	//アニメーションの切り替えカウンター
+	int m_animCounter;
 	//ダッシュする時のスピード
 	int m_dashSpeed;
 	//キャラクターのジャンプ力
@@ -100,6 +117,10 @@ protected:
 	bool m_down;
 	//ダッシュ中かどうかを格納する変数(false = No,true = Yes)
 	bool m_dash;
+	//ジャンプする時に走っていたかどうかを格納する変数(false = No,true = Yes)
+	bool m_jumpInDash;
+	//ジャンプ中かどうかを格納する変数(false = No,true = Yes)
+	bool m_jumpFlag;
 	virtual void Key();
 	void Idle();
 	void Move();
