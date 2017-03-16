@@ -27,7 +27,6 @@ private:
 	char    m_text[LINE_MAX][WORD_MAX];		//•¶Í(s)(•¶š”j
 	char    m_str[WORD_MAX];				//•\¦•¶š—ñ
 public:
-	CTutorial();
 	CTutorial(char *file);
 	~CTutorial();
 	void Update();
