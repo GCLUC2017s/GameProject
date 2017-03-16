@@ -34,11 +34,16 @@ extern int  g_tutorialNo;
 #define GAMEOVER_BGM	"GAMEOVER_BGM"
 
 //キー入力の定義
-#define KEY_DECIDE_ATTACK	(CInput::eButton10)		//決定攻撃キー
-#define KEY_SKIP_JUMP		(CInput::eButton5)		//スキップジャンプキー
-#define KEY_UP				CInput::eUp				//上移動キー
-#define KEY_DOWN			CInput::eDown			//下移動キー
-#define KEY_RIGHT			CInput::eRight			//右移動キー
-#define KEY_LEFT			CInput::eLeft			//左移動キー
+#define PUSH_KEY_ENTER		CInput::GetState(0, CInput::ePush, CInput::eButton10)		//決定・攻撃キー
+#define PUSH_KEY_SPASE		CInput::GetState(0, CInput::ePush, CInput::eButton5)		//スキップ・ジャンプキー
+#define HOLD_KEY_SHIFT		CInput::GetState(0, CInput::eHold, CInput::eButton6)		//ダッシュキー
+#define PUSH_KEY_UP			CInput::GetState(0, CInput::ePush, CInput::eUp)				//上キープッシュ
+#define HOLD_KEY_UP			CInput::GetState(0, CInput::eHold, CInput::eUp)				//上キーホールド
+#define PUSH_KEY_DOWN		CInput::GetState(0, CInput::ePush, CInput::eDown)			//下キープッシュ
+#define HOLD_KEY_DOWN		CInput::GetState(0, CInput::eHold, CInput::eDown)			//下キーホールド
+#define PUSH_KEY_RIGHT		CInput::GetState(0, CInput::ePush, CInput::eRight)			//右キープッシュ
+#define HOLD_KEY_RIGHT		CInput::GetState(0, CInput::eHold, CInput::eRight)			//右キーホールド
+#define PUSH_KEY_LEFT		CInput::GetState(0, CInput::ePush, CInput::eLeft)			//左キープッシュ
+#define HOLD_KEY_LEFT		CInput::GetState(0, CInput::eHold, CInput::eLeft)			//左キーホールド
 
 

@@ -56,8 +56,7 @@ protected:
 	enum ESTATE{
 		eState_Idle,
 		eState_Jump,
-		eState_Walk,
-		eState_Dash,
+		eState_Move,
 		eState_Attack,
 		
 	};
@@ -87,6 +86,8 @@ protected:
 	int   m_exp;
 	//キャラクターのスピード
 	float m_speed;
+	//ダッシュする時のスピード
+	int m_dashSpeed;
 	//キャラクターのジャンプ力
 	float m_jump;
 	float m_xSize;//キャラクターのXサイズ
@@ -97,10 +98,11 @@ protected:
 	bool m_left;
 	bool m_up;
 	bool m_down;
+	//ダッシュ中かどうかを格納する変数(false = No,true = Yes)
+	bool m_dash;
 	virtual void Key();
 	void Idle();
-	void Walk();
-	void Dash();
+	void Move();
 	void Jump();
 	void HpBar();
 public:
