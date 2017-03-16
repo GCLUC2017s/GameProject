@@ -44,8 +44,7 @@ CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio)
 }
 CCharaBase::~CCharaBase() 
 {
-	CResourceManager::GetInstance()->Delete(mp_eData->imageName);
-	CResourceManager::ClearInstance();
+
 }
 void CCharaBase::Animation()
 {

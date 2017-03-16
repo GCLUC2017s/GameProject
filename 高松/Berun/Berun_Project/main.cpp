@@ -75,7 +75,7 @@ void init(void)
 	CCamera::GetCamera()->LookAt(	CVector3D(0,100,-150),
 									CVector3D(0,10,0),
 									CVector3D(0.0, 1.0, 0.0));
-	
+
 
 	
 	//CResourceManager‚ÅˆêŠ‡ŠÇ—(‘O‚ÍCImageManager‚¾‚Á‚½‚à‚Ì)

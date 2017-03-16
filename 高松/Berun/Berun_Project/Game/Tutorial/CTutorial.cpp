@@ -2,15 +2,14 @@
 
 static CFont *font = nullptr;
 
-CTutorial::CTutorial() : CTutorial(g_tutorialDataPath[g_tutorialNo])
-{
-}
-
-CTutorial::CTutorial(char * file) : CTask(0,0), mp_file(nullptr),
+CTutorial::CTutorial(char * file) : CTask(0,0), 
+									mp_file(nullptr),
 									m_face(0),
 									m_end(0), 
 									m_state(0)
 {
+	assert(0 <= g_tutorialNo && g_tutorialNo < ARRAY_SIZE(mp_img), "ARRAY_SIZE_ERROR");
+	file = g_tutorialDataPath[g_tutorialNo];
 	mp_img[0] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("PlayerM"));
 	mp_img[1] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("PlayerW"));
 	mp_img[2] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("TutorialM"));
@@ -45,10 +44,11 @@ void CTutorial::Update()
 	mp_img[3]->SetPos(250, 400);
 	mp_img[4]->SetColor(0,0,0,0.5);
 	//テキストが終われば削除フラグを真にする
-	if (GetEnd())
+	
+	/*if (GetEnd())
 	{
 		SetDestroyFlag(true);
-	}
+	}*/
 }
 
 void CTutorial::Draw()
