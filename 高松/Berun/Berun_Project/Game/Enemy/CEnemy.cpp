@@ -18,13 +18,8 @@ CEnemy::~CEnemy() {
 }
 
 void CEnemy::_key() {
-<<<<<<< HEAD
-	CCharaBase::_key();
-=======
->>>>>>> 8fa733087e86287f408b565c59a7cbfe1fdf32e0
 
 	CCharaBase::Key();
-	
 	m_right =true;
 }
 /*
