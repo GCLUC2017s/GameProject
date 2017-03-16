@@ -16,7 +16,6 @@ class CGame : public CScene
 private:
 	//static CPlayer *mp_player;
 	//static CEnemy  *mp_enemy;
-	static CTutorial *mp_tuto;
 public:
 	CGame();
 	~CGame();
@@ -24,7 +23,6 @@ public:
 	void Draw();
 	//CPlayer GetPlayer(int type);
 	//CEnemy GetEnemy(int type);
-	CTutorial GetTutorial();
 };
 
 #endif
