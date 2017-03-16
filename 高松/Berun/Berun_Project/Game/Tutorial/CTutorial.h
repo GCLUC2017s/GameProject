@@ -23,9 +23,10 @@ private:
 	FILE   *mp_file;						//ファイルポインタ	
 	int     m_face;							//立ち絵ナンバー
 	int     m_end;							//テキスト終了伝達
+	int		m_state;
 	char    m_text[LINE_MAX][WORD_MAX];		//文章(行)(文字数）
 	char    m_str[WORD_MAX];				//表示文字列
-	int		m_state;
+	static bool m_isActive;
 public:
 	CTutorial();
 	CTutorial(char *file);

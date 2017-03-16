@@ -1,6 +1,7 @@
 #include "CTutorial.h"
 
 static CFont *font = nullptr;
+bool CTutorial::m_isActive = false;
 
 CTutorial::CTutorial() : CTutorial(g_tutorialDataPath[g_tutorialNo])
 {
@@ -21,6 +22,7 @@ CTutorial::CTutorial(char * file) : CTask(0,0), mp_file(nullptr),
 	//ファイルが無ければ何もしない
 	if (mp_file == nullptr) return;
 	GetText();
+	m_isActive = true;
 }
 
 CTutorial::~CTutorial()
@@ -30,7 +32,7 @@ CTutorial::~CTutorial()
 
 void CTutorial::Update()
 {
-	if (!font) font = new CFont(L"HG丸ゴシックM-PRO", 40);
+	if (!font) font = new CFont(L"HG丸ゴシックM-PRO", 50);
 	//エンターキーでチュートリアル進行
 	if (CInput::GetState(0, CInput::ePush, CInput::eButton10)) GetText();
 	//スペースキーでチュートリアルスキップ
@@ -52,12 +54,14 @@ void CTutorial::Draw()
 {
 	//チュートリアル操作表示
 	sprintf(m_str, "ENTER：進行");
-	font->Draw(900, 50, 0, 0, 0, m_str);
+	font->Draw(875, 50, 0, 0, 0, m_str);
 	sprintf(m_str, "SPACE：スキップ");
-	font->Draw(900, 100, 0, 0, 0, m_str);
+	font->Draw(875, 100, 0, 0, 0, m_str);
 	mp_img[g_tutorialNo]->Draw();
 	if (g_tutorialNo == 0) mp_img[2]->Draw();
 	if (g_tutorialNo == 1) mp_img[3]->Draw();
+	font->Draw(275, 570, 0, 0, 0, m_text[0]);
+	font->Draw(275, 650, 0, 0, 0, m_text[1]);
 }
 
 void CTutorial::GetText()
