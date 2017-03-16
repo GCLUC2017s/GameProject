@@ -107,15 +107,8 @@ void init(void)
 	CResourceManager::GetInstance()->Add("PlayerWLogoWord2", CImage::LoadImage("CharaSelect/PlayerWWord2.png"));
 	CResourceManager::GetInstance()->Add("PlayerWLogoWord3", CImage::LoadImage("CharaSelect/PlayerWWord3.png"));
 	CResourceManager::GetInstance()->Add("BackGround", CImage::LoadImage("BackGround/Background_M01.png"));
-<<<<<<< HEAD
-	CResourceManager::GetInstance()->Add("BackGround2", CImage::LoadImage("BackGround/Background_M01.png"));
-	CResourceManager::GetInstance()->Add("BackGround3", CImage::LoadImage("BackGround/Background_M01.png"));
-	CResourceManager::GetInstance()->Add("Carrot", CImage::LoadImage("Enemy/Carrot/Carrot_01.png"));
-	CResourceManager::GetInstance()->Add("Carrot", CImage::LoadImage("Enemy/Carrot/Carrot_02.png"));
-=======
 	CResourceManager::GetInstance()->Add("CarrotLeft", CImage::LoadImage("Enemy/Carrot/Carrot_01.png"));
 	CResourceManager::GetInstance()->Add("CarrotRight", CImage::LoadImage("Enemy/Carrot/Carrot_02.png"));
->>>>>>> 8fa733087e86287f408b565c59a7cbfe1fdf32e0
 	CResourceManager::GetInstance()->Add("Meter", CImage::LoadImage("Enemy/Meter_01.png"));
 	//ƒTƒEƒ“ƒh“Ç‚Ýž‚Ý
 	CSound::GetInstance()->GetSound("TITLE_BGM")->Load("BGM/Title.wav", 1);
