@@ -53,8 +53,27 @@ void CMap::Update() {
 
 void  CMap::Draw() {
 	for (int i = 0; i < MAP_DATA; i++) {
-		m_backGroundMorning[MAP_DATA]->SetPos(m_mapPos.x - 1280 * i, m_mapPos.y);
-		m_backGroundMorning[MAP_DATA]->Draw();
+		switch (m_stage)//‰¼,
+		{
+		case eStage1:
+			m_backGroundMorning[MAP_DATA]->SetPos(m_mapPos.x - 1280 * i, m_mapPos.y);
+			m_backGroundMorning[MAP_DATA]->Draw();
+			break;
+		case eStage2:
+			m_backGroundNoon[MAP_DATA]->SetPos(m_mapPos.x - 1280 * i, m_mapPos.y);
+			m_backGroundNoon[MAP_DATA]->Draw();
+			break;
+		case eStage3:
+			m_backGroundEvenig[MAP_DATA]->SetPos(m_mapPos.x - 1280 * i, m_mapPos.y);
+			m_backGroundEvenig[MAP_DATA]->Draw();
+			break;
+		case eStage4:
+			m_backGroundNight[MAP_DATA]->SetPos(m_mapPos.x - 1280 * i, m_mapPos.y);
+			m_backGroundNight[MAP_DATA]->Draw();
+			break;
+
+		}
+		
 		
 	}
 		//m_backGroundNoon[MAP_DATA]->Draw();

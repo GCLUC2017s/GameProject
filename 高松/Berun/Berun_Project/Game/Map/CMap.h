@@ -33,7 +33,7 @@ private:
 	};
 	E_Stage m_stage; 
 	CVector2D m_mapPos;//マップ座標変化
-
+	int m_backEvenig;
 
 public:
 	CMap();

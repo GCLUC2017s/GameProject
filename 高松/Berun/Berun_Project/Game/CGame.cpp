@@ -7,21 +7,23 @@ CGame::CGame()
 
 	new CMap();
 	//new CTutorial(g_tutorialDataPath[g_tutorialNo]);
-	//new CPlayer(ePlayerMan);
+	new CPlayer(ePlayerMan);
 	//new CEnemy(eCarrot);
-	CSound::GetInstance()->GetSound("AREA_M_BGM")->Play();
 }
 
 CGame::~CGame()
 {
-	CSound::GetInstance()->GetSound("AREA_M_BGM")->Stop();
 }
-void CGame::Update()
+void CGame::Update() 
 {
+	
+
+
 }
 void CGame::Draw()
 {
-	
+
+
 }
 /*
 CPlayer CGame::GetPlayer()
