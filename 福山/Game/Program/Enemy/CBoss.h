@@ -11,8 +11,8 @@
 #include "../Define/define.h"
 #define FLAME_LIMIT 6 //フレーム数の上限
 
-const	 CVector2 Enemy_first_pos
-= CVector2(character_limit_left*0.85, (character_limit_top + character_limit_bottom) / 2);	//ボスエネミーの初期位置
+const	 CVector2 Boss_first_pos
+= CVector2(character_limit_left*0.65, (character_limit_top + character_limit_bottom) / 2);	//ボスエネミーの初期位置
 
 class  CBoss : public CBase
 {
@@ -48,8 +48,7 @@ private:
 	int mAnime;		//アニメーションのフレーム数
 	CVector2 mTarget;
 	CVector2 mSuvePos;//元いた位置の保存
-
-
+	int direction;
 	void Walk(){};
 	void AnimeFlame();
 	void SetPos();

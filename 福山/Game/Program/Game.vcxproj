@@ -11,10 +11,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Base\CBase.cpp" />
     <ClCompile Include="Camera\CCamera.cpp" />
-    <ClCompile Include="CCollisionManager.cpp" />
     <ClCompile Include="CGame\CGame.cpp" />
     <ClCompile Include="Collision\CCollision.cpp" />
+    <ClCompile Include="Collision\CCollisionManager.cpp" />
     <ClCompile Include="Enemy\CBoss.cpp" />
     <ClCompile Include="Enemy\CEnemy00.cpp" />
     <ClCompile Include="Enemy\CEnemy01.cpp" />
@@ -30,14 +31,15 @@
     <ClCompile Include="Task\CTaskManager.cpp" />
     <ClCompile Include="Title\CTitle.cpp" />
     <ClCompile Include="Title\CTitleScene.cpp" />
+    <ClCompile Include="UserInterface\CUserInterface.cpp" />
     <ClCompile Include="Vector\CVector2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\CBase.h" />
     <ClInclude Include="Camera\CCamera.h" />
-    <ClInclude Include="CCollisionManager.h" />
     <ClInclude Include="CGame\CGame.h" />
     <ClInclude Include="Collision\CCollision.h" />
+    <ClInclude Include="Collision\ccollisionmanager.h" />
     <ClInclude Include="Define\define.h" />
     <ClInclude Include="Enemy\CBoss.h" />
     <ClInclude Include="Enemy\CEnemy00.h" />
@@ -56,6 +58,7 @@
     <ClInclude Include="Task\CTaskManager.h" />
     <ClInclude Include="Title\CTitle.h" />
     <ClInclude Include="Title\CTitleScene.h" />
+    <ClInclude Include="UserInterface\CUserInterface.h" />
     <ClInclude Include="Vector\CVector2.h" />
   </ItemGroup>
   <ItemGroup>

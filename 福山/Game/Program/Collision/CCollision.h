@@ -5,7 +5,7 @@
 
 class CCollision {
 public:
-	static bool mCollision(CRectangle &r1, CRectangle &r2);
+	static bool Collision(const CRectangle &r1,const CRectangle &r2);
 };
 
 #endif

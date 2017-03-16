@@ -57,6 +57,12 @@
     <Filter Include="SceneManager">
       <UniqueIdentifier>{d24ac0fe-3b6a-4b6c-8b9e-8a02eb07ef15}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MyNumber">
+      <UniqueIdentifier>{38142665-583b-4845-a4f2-b67ef2f3cd31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterface">
+      <UniqueIdentifier>{69d6562a-8ab3-4196-8124-2633330ca8f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera\CCamera.cpp">
@@ -107,23 +113,26 @@
     <ClCompile Include="Enemy\CEnemy01.cpp">
       <Filter>Enemey</Filter>
     </ClCompile>
-    <ClCompile Include="Collision\CCollision.cpp">
-      <Filter>Collision</Filter>
-    </ClCompile>
     <ClCompile Include="CGame\CGame.cpp">
       <Filter>CGame</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager\CSceneManager.cpp">
       <Filter>SceneManager</Filter>
     </ClCompile>
-    <ClCompile Include="CCollisionManager.cpp">
+    <ClCompile Include="Collision\CCollision.cpp">
       <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\CCollisionManager.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\CUserInterface.cpp">
+      <Filter>UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\CBase.cpp">
+      <Filter>Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Base\CBase.h">
-      <Filter>Base</Filter>
-    </ClInclude>
     <ClInclude Include="Camera\CCamera.h">
       <Filter>Camera</Filter>
     </ClInclude>
@@ -181,17 +190,23 @@
     <ClInclude Include="Enemy\CEnemy01.h">
       <Filter>Enemey</Filter>
     </ClInclude>
-    <ClInclude Include="Collision\CCollision.h">
-      <Filter>Collision</Filter>
-    </ClInclude>
     <ClInclude Include="CGame\CGame.h">
       <Filter>CGame</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager\CSceneManager.h">
       <Filter>SceneManager</Filter>
     </ClInclude>
-    <ClInclude Include="CCollisionManager.h">
+    <ClInclude Include="Collision\CCollision.h">
       <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\ccollisionmanager.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\CUserInterface.h">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\CBase.h">
+      <Filter>Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
