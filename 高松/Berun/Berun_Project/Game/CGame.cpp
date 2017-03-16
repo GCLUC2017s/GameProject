@@ -5,10 +5,10 @@
 CGame::CGame()
 {
 
-	new CMap();
+	new CMap(CMap::eStage2);
 	new CTutorial(g_tutorialDataPath[g_tutorialNo]);
 	new CPlayer(ePlayerMan);
-	//new CEnemy(eCarrot);
+	new CEnemy(eCarrot);
 }
 
 CGame::~CGame()

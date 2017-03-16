@@ -34,8 +34,8 @@ enum {
 	ePlayerMan,	//プレイヤー男
 	ePlayerWoman,//プレイヤー女
 	eCarrot,//ニンジン
-	ePapurika,//ピーマン
 	eBerry,//イチゴサングラス空中
+	ePapurika,//ピーマン
 	eStrawberry,//イチゴ地上
 	eVegetavelboss,//野菜ボス（ウサギ）
 	ePig,//豚
@@ -110,7 +110,7 @@ public:
 	~CCharaBase();
 	void Animation();
 	void Update();
-	void Draw();
+	virtual void Draw();
 	void HitCheck();
 };
 

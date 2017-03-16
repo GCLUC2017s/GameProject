@@ -4,30 +4,22 @@
 #include"../Berun_Project/Global.h"
 #include"../System/CharaBase/CCharaBase.h"
 
-CMap::CMap() : CTask(eUDP_Map,eDWP_Map),
 
-m_stage(eStage1)
-{
+static T_MapData g_mapData[] = {
+	{"BackGroundMoning",},
+	{ "BackGroundNoon", },
+	{ "BackGroundEveing", },
+	{ "BackGroundNight", },
+};
+CMap::CMap(E_Stage type) : CTask(eUDP_Map,eDWP_Map){
 
-	
-	
-	
 
-	switch (m_stage)
-	{
-	case eStage1:
-		m_backGroundMorning[MAP_DATA] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("BackGroundMoning"));
-		break;
-	case eStage2:
-		m_backGroundNoon[MAP_DATA]= dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("BackGroundNoon"));
-		break;
-	case eStage3:
-		m_backGroundEvenig[MAP_DATA] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("BackGroundEvenig"));
-		break;
-	case eStage4:
-		m_backGroundNight[MAP_DATA] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("BackGroundNight"));
-		break;
+	assert(MAP_DATA == 4);
+	for (int i = 0; i < MAP_DATA; i++) {
+		m_backGround[i] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get(g_mapData[i].imgName));
 	}
+	m_stage = type;
+	m_newstage = static_cast<E_Stage>(m_stage + 1);
 	m_mapPos.x = 1280;
 	m_mapPos.y = 0;
 }
@@ -43,41 +35,24 @@ void CMap::Update() {
 	if (m_mapPos.x == 1280) {
 		m_mapPos.x == 0;
 	}
-	if (CInput::GetState(0, CInput::eHold, CInput::eRight)) {
+	
+	if (HOLD_KEY_RIGHT) {
 		m_mapPos.x -= SCROLL_SPEED;
+		
 	}
-	if (CInput::GetState(0, CInput::eHold, CInput::eLeft)) {
+	if (HOLD_KEY_LEFT) {
 		m_mapPos.x += SCROLL_SPEED;
 	}
 }
 
 void  CMap::Draw() {
-	for (int i = 0; i < MAP_DATA; i++) {
-		switch (m_stage)//‰¼,
-		{
-		case eStage1:
-			m_backGroundMorning[MAP_DATA]->SetPos(m_mapPos.x - 1280 * i, m_mapPos.y);
-			m_backGroundMorning[MAP_DATA]->Draw();
-			break;
-		case eStage2:
-			m_backGroundNoon[MAP_DATA]->SetPos(m_mapPos.x - 1280 * i, m_mapPos.y);
-			m_backGroundNoon[MAP_DATA]->Draw();
-			break;
-		case eStage3:
-			m_backGroundEvenig[MAP_DATA]->SetPos(m_mapPos.x - 1280 * i, m_mapPos.y);
-			m_backGroundEvenig[MAP_DATA]->Draw();
-			break;
-		case eStage4:
-			m_backGroundNight[MAP_DATA]->SetPos(m_mapPos.x - 1280 * i, m_mapPos.y);
-			m_backGroundNight[MAP_DATA]->Draw();
-			break;
 
-		}
+	m_backGround[m_stage]->SetColor(1, 1, 1, 1);
+	m_backGround[m_stage]->Draw();
+
+	m_backGround[m_newstage]->SetColor(1, 1, 1, 0.5f);
+	m_backGround[m_newstage]->Draw();
+
 		
-		
-	}
-		//m_backGroundNoon[MAP_DATA]->Draw();
-		//m_backGroundEvenig[MAP_DATA]->Draw();
-		//m_backGroundNight[MAP_DATA]->Draw();
 	}
 

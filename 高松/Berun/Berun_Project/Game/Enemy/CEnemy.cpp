@@ -10,8 +10,18 @@
 
 CEnemy::CEnemy(int type):CCharaBase(type,eUDP_Enemy,eDWP_Enemy)
 {
-	m_pos = CVector3D(120, 0,0);
+	
+	srand(time(nullptr));
+	m_enemyAppears = rand() % 4;
+	if (eCarrot) {
+		m_pos = CVector3D(300, 0, 300);
+	}
+	
+
 	m_enemyHp= dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Meter"));
+	
+	m_enemyHp->SetColor(1, 0, 0, 1);
+	
 }
 CEnemy::~CEnemy() {
 
@@ -22,27 +32,24 @@ void CEnemy::Key() {
 	CCharaBase::Key();
 	m_right =true;
 }
-/*
+
 void CEnemy::Update() {
 	
-	if (m_enemytime < 200) {
-		m_vegetavelenemy->SetRect(0, 0, 160, 84);
-		m_vegetavelenemy->SetSize(160, 84);
-		m_vegetavelenemy->SetPos(600, 500);
-		m_enemytime++;
+	if (m_pos.x > -10) {
+		if (eCarrot) {
+			m_enemyHp->SetPos(m_pos.x - 50, m_pos.z+100);
+			m_pos.x -=  1;
+		}
 	}
-	if (m_enemytime >= 200) {
-		m_vegetavelenemy->SetRect(0, 0, 160, 160);
-		m_vegetavelenemy->SetSize(160, 160);
-		m_vegetavelenemy->SetPos(600, 416);
+	else {
+		
+		m_pos.x = 1280;
 	}
-	
-	
 	
 	
 }
 void CEnemy::Draw(){
-	
-	m_vegetavelenemy->Draw();
+
+	CCharaBase::Draw();
+	m_enemyHp->Draw();
 }
-*/
