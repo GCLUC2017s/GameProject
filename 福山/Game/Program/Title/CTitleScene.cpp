@@ -77,7 +77,7 @@ void CTitleScene::Update() {
 	//エンターキーを押したときにシーンをセレクト画面に替える処理を行う。
 	if (CKey::push(VK_RETURN)) 
 	{
-		CScene::GetInstance()->ChangeScene(E_SELECT);
+		CSceneManager::GetInstance()->ChangeScene(E_SELECT);
 	}
 
 

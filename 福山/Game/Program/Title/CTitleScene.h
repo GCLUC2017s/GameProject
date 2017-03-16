@@ -8,8 +8,8 @@
 #include "../Title/CTitle.h"
 #include "../Map/CMap.h"
 #include "../Scene/CScene.h"
-
-class CTitleScene:public CScene{
+#include "../SceneManager/CSceneManager.h"
+class CTitleScene :public CSceneManager{
 private:
 	CMap mMap;
 	CTitle mTitle;

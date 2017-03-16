@@ -1,36 +1,41 @@
 #include "CPlayer.h"
 #include "../Key/CKey.h"
 #include "../MyNumber/CMyNumber.h"
-#define JUMP_FIRST_SPEED 0.2				//ジャンプのジャンプ力
-#define HITPOINT_PLAYER 10					//プレイヤーの体力
-#define FIRST_R_NO_PL 0						//初めのレンダーのポイント
-#define FIRST_U_NO_PL 0						//初めのアップデートのポイント
-#define SIZE_TEX_PLAYER_STAY_X 800			//プレイヤーの待ち姿テクスチャサイズ X
-#define SIZE_TEX_PLAYER_STAY_Y 800			//プレイヤーの待ち姿テクスチャサイズ Y
-#define SIZE_TEX_PLAYER_WALK_X 800			//プレイヤーの歩くテクスチャサイズ Y
-#define SIZE_TEX_PLAYER_WALK_Y 800			//プレイヤーの歩く姿テクスチャサイズ Y
-#define SIZE_TEX_PLAYER_RUN_X  800			//プレイヤーの走る姿テクスチャサイズ Y
-#define SIZE_TEX_PLAYER_RUN_Y  800			//プレイヤーの走る姿テクスチャサイズ Y
-#define SLOW_DOWN 0.02						//移動の減速スピード
-#define WALK_SPEED 0.05						//歩くスピード
-#define RUN_SPEED 0.1						//走るスピード
-#define WALK_X 1							//歩くベクトルX
-#define WALK_Y 0.5							//歩くベクトルY
-#define PATTERN_R 1							//PATTERNの右
-#define PATTERN_L 2							//PATTERNの左
-#define TEX_FILE_PLAYER_STAY			 "../CG\\beru\\beru_stay\\"		//プレイヤーのファイル場所　待ち
-#define TEX_FILE_PLAYER_WALK			 "../CG\\beru\\beru_walk\\"		//プレイヤーのファイル場所　待ち
-#define TEX_FILE_PLAYER_RUN				 "../CG\\beru\\beru_run\\"		//プレイヤーのファイル場所　待ち
-#define TEX_FILE_PLAYER_NormalATTACK_A	 "../CG\\beru\\beru_attackA\\"	//プレイヤーのファイル場所　通常攻撃A
-#define TEX_FILE_PLAYER_NormalATTACK_B	 "../CG\\beru\\beru_attackB\\"	//プレイヤーのファイル場所　通常攻撃B
-#define TEX_FILE_PLAYER_NormalATTACK_C	 "../CG\\beru\\beru_attackC\\"	//プレイヤーのファイル場所　通常攻撃C
-#define TEX_FILE_PLAYER_EX01			 "../CG\\beru\\beru_EX01\\"		//プレイヤーのファイル場所　消費
-#define TEX_FILE_PLAYER_EX02			 "../CG\\beru\\beru_EX02\\"		//プレイヤーのファイル場所　継続
-#define TEX_FILE_PLAYER_EAT				 "../CG\\beru\\beru_eat\\"		//プレイヤーのファイル場所　捕食
-#define TEX_FILE_PLAYER_FLAME			 "../CG\\beru\\beru_flame\\"	//プレイヤーのファイル場所　炎
-#define TEX_FILE_PLAYER_BRAKE			 "../CG\\beru\\beru_brake\\"	//プレイヤーのファイル場所　ブレーキ
+#define JUMP_FIRST_SPEED				0.2f								//ジャンプのジャンプ力
+#define HITPOINT_PLAYER					10.0f								//プレイヤーの体力
+#define FIRST_R_NO_PL					0.0f								//初めのレンダーのポイント
+#define FIRST_U_NO_PL					0.0f								//初めのアップデートのポイント
 
-float CPlayer::camera_x; 
+#define SIZE_TEX_PLAYER_BASE_X			800.0f								//プレイヤーの基本的なテクスチャサイズ X
+#define SIZE_TEX_PLAYER_BASE_Y			800.0f								//プレイヤーの基本的なテクスチャサイズ Y
+
+#define SLOW_DOWN						 0.01f								//移動の減速スピード
+#define WALK_SPEED						 0.1f								//歩くスピード
+#define RUN_SPEED						 0.2f								//走るスピード
+#define WALK_X							 1.0f								//歩くベクトルX
+#define WALK_Y							 0.5f								//歩くベクトルY
+#define PATTERN_R						 1.0f								//PATTERNの右
+#define PATTERN_L						 2.0f								//PATTERNの左
+#define TEX_FILE_PLAYER_STAY			 "../CG\\beru\\beru_stay\\"			//プレイヤーのファイル場所　待ち
+#define TEX_FILE_PLAYER_WALK			 "../CG\\beru\\beru_walk\\"			//プレイヤーのファイル場所　待ち
+#define TEX_FILE_PLAYER_RUN				 "../CG\\beru\\beru_run\\"			//プレイヤーのファイル場所　待ち
+#define TEX_FILE_PLAYER_NormalATTACK_A	 "../CG\\beru\\beru_attackA\\"		//プレイヤーのファイル場所　通常攻撃A
+#define TEX_FILE_PLAYER_NormalATTACK_B	 "../CG\\beru\\beru_attackB\\"		//プレイヤーのファイル場所　通常攻撃B
+#define TEX_FILE_PLAYER_NormalATTACK_C	 "../CG\\beru\\beru_attackC\\"		//プレイヤーのファイル場所　通常攻撃C
+#define TEX_FILE_PLAYER_EX01			 "../CG\\beru\\beru_EX01\\"			//プレイヤーのファイル場所　消費
+#define TEX_FILE_PLAYER_EX02			 "../CG\\beru\\beru_EX02\\"			//プレイヤーのファイル場所　継続
+#define TEX_FILE_PLAYER_EAT				 "../CG\\beru\\beru_eat\\"			//プレイヤーのファイル場所　捕食
+#define TEX_FILE_PLAYER_FLAME			 "../CG\\beru\\beru_flame\\"		//プレイヤーのファイル場所　炎(オーラ)
+#define TEX_FILE_PLAYER_BRAKE			 "../CG\\beru\\beru_brake\\"		//プレイヤーのファイル場所　ブレーキ
+#define V2_RIGHT						 CVector2(WALK_X, 0.0f)				//右の向き
+#define V2_LEFT							 CVector2(-WALK_X, 0.0f)			//左の向き
+#define V2_TOP							 CVector2(0.0f, WALK_Y)				//上の向き
+#define V2_BOTTOM						 CVector2(0.0f, -WALK_Y)			//下の向き
+#define ANIME_TIME_BASE						10								//アニメのループ時間 継続的なもの
+#define ANIME_TIME_ATTACK					8								//アニメのループ時間 攻撃のもの
+#define ANIME_TIME_BRAKE					7								//アニメのループ時間 BRAKE
+
+float CPlayer::camera_x;
 float CPlayer::camera_y;
 
 
@@ -64,7 +69,7 @@ void CPlayer::Init() {
 		mEatTex[i] = new CTexture();
 
 	}
-	
+
 	mShadowTex = new CTexture();		//テクスチャクラスのインスタンス作成
 
 	/*テクスチャファイル読み込み*/
@@ -149,29 +154,42 @@ void CPlayer::Init() {
 	mShadowTex->load(TEX_FILE_SHADOW"shadow.tga");
 
 	/*テクスチャを張る*/
-	mPlayer.SetUv(mStayTex[0], 0, 0, SIZE_TEX_PLAYER_STAY_X,SIZE_TEX_PLAYER_STAY_Y);
-	mShadow.SetUv(mShadowTex, 0, 0, SIZE_SHADOW_X, SHADOW_TEX_Y);
+	mPlayer.SetUv(mStayTex[0], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
+	mShadow.SetUv(mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
 	mForward = CVector2(1.0f, 0.0f);
 }
-
+void CPlayer::Delete(CTexture *t){
+	if (t){
+		delete t;
+		t = 0;
+	}
+}
 
 CPlayer::~CPlayer() {
 
-}
-
-int CPlayer::DecisionRL(int i){
-	if (i / 2  < AnimePattern){
-		return  PATTERN_R;
-	}
-	else
+	/*テクスチャ読み込み*/
+	for (int i = 0; i < FRAME_LIMIT; i++)
 	{
-		return	PATTERN_L;
+		Delete(mStayTex[i]);
+		Delete(mWalkTex[i]);
+		Delete(mRunTex[i]);
+		Delete(mEx01Tex[i]);			//テクスチャクラスのインスタンス作成
+		Delete(mEx02Tex[i]);			//テクスチャクラスのインスタンス作成
+		Delete(mEatTex[i]);
+		Delete(mFlameTex[i]);
+		Delete(mBrakeTex[i]);
+
+		for (int z = 0; z < NORMALATTACK_PATTERN; z++)
+		{
+			Delete(mNormalAttackTex[z][i]);	//テクスチャクラスのインスタンス作成
+		}
+		Delete(mEatTex[i]);
+
 	}
 }
-
 
 //プレイヤー描画
-CPlayer::CPlayer() : mVelocity(0), mSpeedJump(JUMP_FIRST_SPEED),mFlameCount(0){
+CPlayer::CPlayer() : mVelocity(0), mEnabledNormalAttack(false), mSpeedJump(JUMP_FIRST_SPEED), mStatus(E_STAY_R), AnimePattern(E_BRAKE_R), mIntervalCount(0){
 
 	for (int i = 0; i < FRAME_LIMIT; i++)
 	{
@@ -188,160 +206,266 @@ CPlayer::CPlayer() : mVelocity(0), mSpeedJump(JUMP_FIRST_SPEED),mFlameCount(0){
 	mShadow.SetVertex(-SIZE_SHADOW_X, SIZE_SHADOW_Y, SIZE_SHADOW_X, -SIZE_SHADOW_Y);
 	//四角形の色を設定
 	mPlayer.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-	mShadow.SetColor(0.0f, 0.0f, 0.0f, 0.0f);
+	mShadow.SetColor(0.5f, 0.5f, 0.5f, 0.7f);
 
 }
 
-
-
-
+/*右左判断メソッド*/
+void CPlayer::DecisionRL(int R, int L){
+	if (mStatus  < AnimePattern / 2){
+		(int)mStatus = R;
+	}
+	else
+	{
+		(int)mStatus = L;
+	}
+}
+/*ジャンプメソッド*/
 void CPlayer::Jump(){ //ジャンプ処理メソッド
-
-	mPos.y += mSpeedJump; //飛ぶ処理
-	mSpeedJump -= gravity;//減速処理
-
-
-	if (mPos.y < mAxis){//現在の軸についたとき
-		mPos.y = mAxis; //元いた地面の"Y"に戻す
-		mSpeedJump = JUMP_FIRST_SPEED;
-		mEnabledJump = false; //終了
-
+	/*
+	計算
+	y = y + v(時間により進んだ距離)
+	重力計算
+	v = v0 + g*t(どれくらい重力がかかったか)
+	*/
+	if (CKey::push(' ') || mEnabledJump) {
+		if (!mEnabledJump && !mEnabledNormalAttack)	mEnabledJump = true; //ジャンプしていないとき
 	}
 
+	if (mEnabledJump){
+		mPos.y = mPos.y + mSpeedJump; //飛ぶ処理
+		mSpeedJump -= gravity;//減速処理
 
 
-}
-
-void CPlayer::MovePosAxis(){
-		mPos += mForward * mVelocity;
-		mAxis += mForward.y * mVelocity;
-}
-
-/*アニメのフレームを動かすメソッド*/
-void CPlayer::AnimeFlame(){
-
-	mFlameCount += 1;
-	if (mFlameCount % 5 == 0){ //フレーム数
-		mAnime += 1;
+		if (mPos.y < mAxis + SIZE_PLAYER_Y){//現在の軸に足がついたとき
+			mPos.y = mAxis + SIZE_PLAYER_Y; //元いた地面の"Y"に戻す
+			mSpeedJump = JUMP_FIRST_SPEED;
+			mEnabledJump = false; //終了
+		}
 	}
-	if (mAnime >= FRAME_LIMIT || mSaveAnime != eAnime){
-		mAnime = 0;
-	}
-	mSaveAnime = eAnime;
-
 }
-void CPlayer::Run_Walk(){
+/*走るか否かメソッド*/
+void CPlayer::RunWalk(CVector2 v){
 	if (CKey::push(VK_CONTROL)){ //走る時
 		mVelocity = RUN_SPEED;
-		if (DecisionRL(eAnime) == PATTERN_L){
-			eAnime = E_RUN_L;
-		}
-		else{
-			eAnime = E_RUN_R;
-		}
+		DecisionRL(E_RUN_R, E_RUN_L);
 	}
-	else{					   //歩く時
-		if (DecisionRL(eAnime) == PATTERN_L){
-			eAnime = E_WALK_L;
+	else{				
+			DecisionRL(E_WALK_R, E_WALK_L);
+			mVelocity = WALK_SPEED;
+	}
+	
+	mForward = v;
+}
+/*アニメのフレームを動かすメソッド*/ //エネミーによって違う場合があるので画像データ用参照
+void CPlayer::AnimeFrame(bool roop,int speed){
+	if (roop){
+		mFrameCount++;
+		if (mFrameCount % speed == 0){
+			mAnimeFrame++;
 		}
-		else{
-			eAnime = E_WALK_R;
+		if (mAnimeFrame >= FRAME_LIMIT || mSaveAnime != mStatus){
+			mAnimeFrame = 0;
 		}
-		mVelocity = WALK_SPEED;
+		mSaveAnime = mStatus;
+	}
+	else{						
+		mFrameCount++;
+		if (mFrameCount % speed == 0){
+			mAnimeFrame++;
+		}
+		if (mAnimeFrame >= FRAME_LIMIT){
+			mAnimeFrame = FRAME_LIMIT - 1; //テクスチャの最大値 = FRAME_LIMITなので ー１
+		}
+		mSaveAnime = mStatus;
 	}
 }
-void CPlayer::Update() {
-	AnimeFlame();
-	assert(mAnime <= FRAME_LIMIT); //フレーム数が七を超えるとダメ
-	mPriorityR = -mAxis;
-	CTaskManager TaskManager;
-	camera_x = mPos.x;
-	camera_y = mPos.y;
+/*移動時のメソッド*/
+void CPlayer::Move(){
+	CVector2 SavemPos = mPos;		//位置保存
+	float  SavemAxis = mAxis;		//位置保存
+	// 右移動
+	if (CKey::push(VK_RIGHT)) {
+		(int)mStatus = E_WALK_R;
+		RunWalk(V2_RIGHT);
+	}
+	//左移動
+	if (CKey::push(VK_LEFT)) {
+		(int)mStatus = E_WALK_L;
+		RunWalk(V2_LEFT);
+	}
+	//上移動
+	if (CKey::push(VK_UP)) { //軸が上限に達していないとき
+		RunWalk(V2_TOP);
+	}
+	//下移動
+	if (CKey::push(VK_DOWN)) {//軸が上限に達していないとき
+		RunWalk(V2_BOTTOM);
+	}
 
+	//BRAKE
+	Brake();
+	if (mAxis > character_limit_top - SIZE_PLAYER_Y){ //上
+		mPos = SavemPos;
+		mAxis = SavemAxis;
+	}
+	else{
+		mPos += mForward * mVelocity;
+		mAxis += mForward.y * mVelocity;
+	}
+}
+	
+
+	
+/*ブレーキメソッド*/
+void CPlayer::Brake(){
+	//ブレーキがかかるとき(走らない歩かないジャンプしない)
+	if (!CKey::push(VK_DOWN) && !CKey::push(VK_UP) && !CKey::push(VK_LEFT) && !CKey::push(VK_RIGHT) &&
+		mVelocity > 0 && !mEnabledJump){
+		mVelocity -= SLOW_DOWN;
+		DecisionRL(E_BRAKE_R, E_BRAKE_L);
+	}
+	else if (mVelocity < 0){
+		DecisionRL(E_STAY_R, E_STAY_L);
+		mVelocity = 0;
+	}
+}
+/*NormalAttackメソッド*/
+void CPlayer::NormalAttack(){
+	/*範囲*/
+
+	//通常攻撃
+	if (CKey::push('X') && !mEnabledNormalAttack){
+		mEnabledNormalAttack = true;
+		DecisionRL(E_NORMALATTACK_A_L, E_NORMALATTACK_A_L);
+	}
+
+
+	if (mEnabledNormalAttack){//攻撃しているとき
+		if (mAnimeFrame == FRAME_LIMIT - 1){
+			mEnabledNormalAttack = false;//攻撃終了
+			DecisionRL(E_STAY_R, E_STAY_L);
+		}
+	}
+
+
+}
+/*アップデート*/
+void CPlayer::Update() {
+	assert(mAnimeFrame <= FRAME_LIMIT);				//フレーム数が七を超えるとダメ
+	assert(E_STAY_L <= mStatus <= E_BRAKE_R);       //テクスチャを正しく読み込めているかどうか
 	//四角形の位置を設定
 	mPlayer.position = mPos;
 
+	if (!mEnabledNormalAttack)	Move(); 
 
-	//移動の処理
+	NormalAttack();
 
-	//走るボタン
-	
-	
+	Jump();
 
-	// 右移動
-	if (CKey::push(VK_RIGHT)) {		
-		Run_Walk();
-		mForward = CVector2(WALK_X, 0.0f);
-		mPos += mForward * mVelocity;
-	}
-	else{
-		if (mSaveAnime == E_WALK_R ||
-			mSaveAnime == E_RUN_R){//待機中 直前が左の歩きでなければ
-			eAnime = E_STAY_R;
-		}
-		if (mVelocity > 0){
-			mVelocity -= SLOW_DOWN;
-			MovePosAxis();
-		}
-		else{
-			mVelocity = 0;
-		}
-	}
-
-	//左移動
-	if (CKey::push(VK_LEFT)) { 
-		Run_Walk();
-		mForward = CVector2(-WALK_X, 0.0f);
-		mPos += mForward * mVelocity;
-
-	
-	}else{ //移動していないとき
-		if (mSaveAnime == E_WALK_L ||
-			mSaveAnime == E_RUN_L){ //待機中 直前が右の歩きでなければ
-			eAnime = E_STAY_L;
-		}
-		if (mVelocity > 0){ 
-			mVelocity -= SLOW_DOWN;
-			MovePosAxis();
-		}
-		else{
-			mVelocity = 0;
-		}
-
-	}
-
-	//ジャンプ
-	if (CKey::push(' ') || mEnabledJump) {
-		if (!mEnabledJump){ //ジャンプしていないとき
-			mEnabledJump = true;
-		}
-		Jump();
-	}
-
-
-	//上移動
-	if (CKey::push(VK_UP) && mAxis < character_limit_top - SIZE_PLAYER_Y) { //軸が上限に達していないとき
-		Run_Walk();
-		mForward = CVector2(0.0f, WALK_Y);
-		MovePosAxis();
-	}
-
-	//下移動
-	if (CKey::push(VK_DOWN) && mAxis > character_limit_bottom + SIZE_PLAYER_Y) {//軸が上限に達していないとき
-		Run_Walk();
-		mForward = CVector2(0.0f, -WALK_Y);
-		MovePosAxis();
-	}
-
+	/*アニメーションのステータス*/
+	switch (mStatus)
+	{
+		/*左*/
+	case E_STAY_L:
+		AnimeFrame(true,ANIME_TIME_BASE);
+		mPlayer.SetUv(mStayTex[mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
+		break;
+	case E_WALK_L:
+		AnimeFrame(true,ANIME_TIME_BASE);
+		mPlayer.SetUv(mWalkTex[mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
+		break;
+	case E_RUN_L:
+		AnimeFrame(true,ANIME_TIME_BASE);
+		mPlayer.SetUv(mRunTex[mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
+		break;
+	case E_NORMALATTACK_A_L:
+		AnimeFrame(false,ANIME_TIME_ATTACK);
+		mPlayer.SetUv(mNormalAttackTex[0][mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
+		break;
+	case E_NORMALATTACK_B_L:
+		AnimeFrame(false,ANIME_TIME_ATTACK);
+		mPlayer.SetUv(mNormalAttackTex[1][mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
+		break;
+	case E_NORMALATTACK_C_L:
+		AnimeFrame(false,ANIME_TIME_ATTACK);
+		mPlayer.SetUv(mNormalAttackTex[2][mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
+		break;
+	case E_EAT_L:
+		AnimeFrame(false,ANIME_TIME_ATTACK);
+		mPlayer.SetUv(mEatTex[mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
+		break;
+	case E_EX01_L:
+		AnimeFrame(false,ANIME_TIME_ATTACK);
+		mPlayer.SetUv(mEx01Tex[mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
+		break;
+	case E_EX02_L:
+		AnimeFrame(false,ANIME_TIME_ATTACK);
+		mPlayer.SetUv(mEx02Tex[mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
+		break;
+	case E_FLAME_L:
+		AnimeFrame(true,ANIME_TIME_BASE);
+		mPlayer.SetUv(mFlameTex[mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
+		break;
+	case E_BRAKE_L:
+		AnimeFrame(false,ANIME_TIME_BRAKE);
+		mPlayer.SetUv(mBrakeTex[mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
+		break;
+		/*右*/
+	case E_STAY_R:
+		AnimeFrame(true,ANIME_TIME_BASE);
+		mPlayer.SetUv(mStayTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
+		break;
+	case E_WALK_R:
+		AnimeFrame(true,ANIME_TIME_BASE);
+		mPlayer.SetUv(mWalkTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
+		break;
+	case E_RUN_R:
+		AnimeFrame(true,ANIME_TIME_BASE);
+		mPlayer.SetUv(mRunTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
+		break;
+	case E_NORMALATTACK_A_R:
+		AnimeFrame(false,ANIME_TIME_ATTACK);
+		mPlayer.SetUv(mNormalAttackTex[0][mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
+		break;
+	case E_NORMALATTACK_B_R:
+		AnimeFrame(false,ANIME_TIME_ATTACK);
+		mPlayer.SetUv(mNormalAttackTex[1][mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
+		break;
+	case E_NORMALATTACK_C_R:
+		AnimeFrame(false,ANIME_TIME_ATTACK);
+		mPlayer.SetUv(mNormalAttackTex[2][mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
+		break;
+	case E_EAT_R:
+		AnimeFrame(false,ANIME_TIME_ATTACK);
+		mPlayer.SetUv(mEatTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
+		break;
+	case E_EX01_R:
+		AnimeFrame(false,ANIME_TIME_ATTACK);
+		mPlayer.SetUv(mEx01Tex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
+		break;
+	case E_EX02_R:
+		AnimeFrame(false, ANIME_TIME_ATTACK);
+		mPlayer.SetUv(mEx02Tex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
+		break;
+	case E_FLAME_R:
+		AnimeFrame(true, ANIME_TIME_BASE);
+		mPlayer.SetUv(mFlameTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
+		break;
+	case E_BRAKE_R:
+		AnimeFrame(false, ANIME_TIME_BRAKE);
+		mPlayer.SetUv(mBrakeTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
+		break;
+	};
 
 
 	/*あたり判定*/
-	if (mPos.y > character_limit_top - SIZE_PLAYER_Y&& !mEnabledJump){  //マップ外に出ると元の位置に戻す(軸)
-		mPos.y = character_limit_top - SIZE_PLAYER_Y;
+	if (mAxis > character_limit_top - SIZE_PLAYER_Y && !mEnabledJump){  //マップ外に出ると元の位置に戻す(軸)
+		mPos.y = character_limit_top;
 		mAxis = mPos.y - SIZE_PLAYER_Y; //軸をもとに戻す
 	}
-	if (mPos.y < character_limit_bottom + SIZE_PLAYER_Y){  //マップ外に出ると元の位置に戻す(軸)
-		mPos.y = character_limit_bottom + SIZE_PLAYER_Y;
+	if (mAxis + SIZE_PLAYER_Y < character_limit_bottom + SIZE_PLAYER_Y){  //マップ外に出ると元の位置に戻す(軸)
+		mPos.y = character_limit_bottom+SIZE_PLAYER_Y;
 		mAxis = mPos.y - SIZE_PLAYER_Y; //軸をもとに戻す
 	}
 
@@ -350,36 +474,15 @@ void CPlayer::Update() {
 	}
 	/*あたり判定終了*/
 
+
+	mPriorityR = -mAxis;
+	camera_x = mPos.x;
+	camera_y = mPos.y;
+
 	mPlayer.position = mPos;
-	mShadow.position = CVector2(mPos.x,mAxis);
-
-	/*アニメーションのステータス*/
-	switch (eAnime)
-	{
-		/*待機中*/
-	case E_STAY_L:
-		mPlayer.SetUv(mStayTex[mAnime],SIZE_TEX_PLAYER_STAY_X, 0, 0, SIZE_TEX_PLAYER_STAY_Y);
-		break;
-	case E_STAY_R:
-		mPlayer.SetUv(mStayTex[mAnime], 0, 0, SIZE_TEX_PLAYER_STAY_X,SIZE_TEX_PLAYER_STAY_Y);
-		break;
-		/*歩き中*/
-	case E_WALK_L:
-		mPlayer.SetUv(mWalkTex[mAnime], SIZE_TEX_PLAYER_WALK_X, 0, 0, SIZE_TEX_PLAYER_WALK_Y);
-		break;
-	case E_WALK_R:
-		mPlayer.SetUv(mWalkTex[mAnime], 0, 0, SIZE_TEX_PLAYER_WALK_X, SIZE_TEX_PLAYER_WALK_Y);
-		break;
-		/*走り中*/
-	case E_RUN_L:
-		mPlayer.SetUv(mRunTex[mAnime], SIZE_TEX_PLAYER_RUN_X, 0, 0, SIZE_TEX_PLAYER_RUN_Y);
-		break;
-	case E_RUN_R:
-		mPlayer.SetUv(mRunTex[mAnime], 0, 0, SIZE_TEX_PLAYER_RUN_X, SIZE_TEX_PLAYER_RUN_Y);
-		break;
-	}
-
+	mShadow.position = CVector2(mPos.x, mAxis);
 }
+
 
 void CPlayer::Render(){
 	//プレイヤーの描画
