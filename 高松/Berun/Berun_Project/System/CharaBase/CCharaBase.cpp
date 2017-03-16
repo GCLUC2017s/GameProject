@@ -38,7 +38,9 @@ CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio)
 	m_up = false;
 	m_down = false;
 	m_dash = false;
+	m_jumpInDash = false;
 	m_jumpFlag = false;
+	m_tutorialFlag = true;
 }
 CCharaBase::~CCharaBase() 
 {
@@ -83,7 +85,17 @@ void CCharaBase::Jump()
 {
 	if (!m_jumpFlag) m_gravitySpeed += 20;
 	m_jumpFlag = true;
-	if (m_pos.y <= 0)
+	if (m_left)
+	{
+		m_pos.x += -CHARA_MOVE;
+		m_charaDirection = true;
+	}
+	if (m_right)
+	{
+		m_pos.x += CHARA_MOVE;
+		m_charaDirection = false;
+	}
+	if (m_pos.y <= 0 && m_gravitySpeed < 20)
 	{
 		m_jumpFlag = false;
 		m_state = eState_Idle;
@@ -95,38 +107,47 @@ void CCharaBase::HpBar()
 }
 void CCharaBase::Update()
 {
-	Key();
-	switch (m_state)
+	if (!m_tutorialFlag)
 	{
-	case eState_Idle:
-		Idle();
-		break;
-	case eState_Move:
-		Move();
-		break;
-	case eState_Jump:
-		Jump();
-		break;
+		Key();
+		switch (m_state)
+		{
+		case eState_Idle:
+			Idle();
+			break;
+		case eState_Move:
+			Move();
+			break;
+		case eState_Jump:
+			Jump();
+			break;
+		}
+		m_gravitySpeed += GRAVITY;
+		m_pos.y += m_gravitySpeed;
+		if (m_pos.y < 0)
+		{
+			m_pos.y = 0;
+			m_gravitySpeed = 0;
+		}
 	}
-	m_gravitySpeed += GRAVITY;
-	m_pos.y += m_gravitySpeed;
-	if (m_pos.y < 0)
-	{
-		m_pos.y = 0;
-		m_gravitySpeed = 0;
-	}
-
 }
 void CCharaBase::Draw()
 {
-	m_chara->SetCenter(64,128);
-	m_chara->SetSize(128,128);
-	m_chara->SetPos(GetScreenPos());
-	m_chara->SetFlipH(m_charaDirection);
-	m_chara->Draw();
+	if (!m_tutorialFlag)
+	{
+		m_chara->SetCenter(64, 128);
+		m_chara->SetSize(128, 128);
+		m_chara->SetPos(GetScreenPos());
+		m_chara->SetFlipH(m_charaDirection);
+		m_chara->Draw();
+	}
 }
 void CCharaBase::HitCheck()
 {
 
+}
+void CCharaBase::SetTutolialFlag(bool p)
+{
+	m_tutorialFlag = p;
 }
 
