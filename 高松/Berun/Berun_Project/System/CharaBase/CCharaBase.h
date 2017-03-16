@@ -100,6 +100,8 @@ protected:
 	bool m_down;
 	//ダッシュ中かどうかを格納する変数(false = No,true = Yes)
 	bool m_dash;
+	//ジャンプ中かどうかを格納する変数(false = No,true = Yes)
+	bool m_jumpFlag;
 	virtual void Key();
 	void Idle();
 	void Move();

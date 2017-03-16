@@ -38,6 +38,7 @@ CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio)
 	m_up = false;
 	m_down = false;
 	m_dash = false;
+	m_jumpFlag = false;
 }
 CCharaBase::~CCharaBase() 
 {
@@ -80,12 +81,13 @@ void CCharaBase::Move()
 }
 void CCharaBase::Jump()
 {
-	if (CInput::GetState(0, CInput::ePush, CInput::eButton1))
+	if (!m_jumpFlag) m_gravitySpeed += 20;
+	m_jumpFlag = true;
+	if (m_pos.y <= 0)
 	{
-		m_gravitySpeed += 20;
-		m_state = eState_Jump;
+		m_jumpFlag = false;
+		m_state = eState_Idle;
 	}
-	if (m_pos.y <= 0) m_state = eState_Idle;
 }
 void CCharaBase::HpBar()
 {
@@ -103,9 +105,8 @@ void CCharaBase::Update()
 		Move();
 		break;
 	case eState_Jump:
-		if (m_pos.y <= 0) m_state = eState_Idle;
+		Jump();
 		break;
-
 	}
 	m_gravitySpeed += GRAVITY;
 	m_pos.y += m_gravitySpeed;
