@@ -11,7 +11,7 @@
 #include "CImage.h"
 #include "../Global.h"
 
-#define IMAGE_MAX  4
+#define IMAGE_MAX  5
 #define LINE_MAX   2
 #define WORD_MAX 128
 #define TEXT_END  -2
@@ -23,11 +23,10 @@ private:
 	FILE   *mp_file;						//ファイルポインタ	
 	int     m_face;							//立ち絵ナンバー
 	int     m_end;							//テキスト終了伝達
+	int		m_state;
 	char    m_text[LINE_MAX][WORD_MAX];		//文章(行)(文字数）
 	char    m_str[WORD_MAX];				//表示文字列
-	int		m_state;
 public:
-	CTutorial();
 	CTutorial(char *file);
 	~CTutorial();
 	void Update();

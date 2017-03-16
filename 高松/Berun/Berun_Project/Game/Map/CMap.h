@@ -8,21 +8,18 @@
 #ifndef CMAP_GURAD
 #define CMAP_GURAD
 #define SCROLL_SPEED 2//マップスクロール値
-#define MAP_DATA 3//マップの数
-#define MAP_NUMBER 4
+#define MAP_DATA 4//マップの数
+
 #include "../Global.h"
 #include"../System/TaskSystem/CTaskManager.h"
+#include "../../System/CharaBase/CCharaBase.h"
 
-
-extern char g_stageNumber[MAP_DATA][MAP_NUMBER];
-
+struct T_MapData
+{
+	char imgName[64];
+};
 class CMap : public CTask{
-private:
-	CImage *m_backGroundMorning[MAP_DATA];
-	CImage *m_backGroundNoon[MAP_DATA];
-	CImage *m_backGroundEvenig[MAP_DATA];
-	CImage *m_backGroundNight[MAP_DATA];
-	
+public:
 	enum E_Stage
 	{
 		eStage1,
@@ -31,16 +28,22 @@ private:
 		eStage4,
 
 	};
-	E_Stage m_stage; 
+private:
+	CImage *m_backGround[MAP_DATA];
+	
+	
+	E_Stage m_stage;
+	E_Stage m_newstage;
+	T_MapData *map_eData;
 	CVector2D m_mapPos;//マップ座標変化
 
-
 public:
-	CMap();
+	CMap(E_Stage type);
 	~CMap();
 	void Update();
 	void Draw();
 	//void Setstge(E_Stage stage);
 };
+
 
 #endif // !CMAP_GURAD

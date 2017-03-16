@@ -35,6 +35,7 @@ extern int  g_tutorialNo;
 
 //キー入力の定義
 #define PUSH_KEY_ENTER		CInput::GetState(0, CInput::ePush, CInput::eButton10)		//決定・攻撃キー
+#define HOLD_KEY_ENTER		CInput::GetState(0, CInput::eHold, CInput::eButton10)		//決定・攻撃キー
 #define PUSH_KEY_SPASE		CInput::GetState(0, CInput::ePush, CInput::eButton5)		//スキップ・ジャンプキー
 #define HOLD_KEY_SHIFT		CInput::GetState(0, CInput::eHold, CInput::eButton6)		//ダッシュキー
 #define PUSH_KEY_UP			CInput::GetState(0, CInput::ePush, CInput::eUp)				//上キープッシュ

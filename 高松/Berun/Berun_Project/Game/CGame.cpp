@@ -2,41 +2,36 @@
 #include "CPlayer/CPlayer.h"
 
 
-CGame::CGame()
+CGame::CGame() : m_step(0)
 {
 
-	new CMap();
+new CMap(CMap::eStage2);
 	new CTutorial(g_tutorialDataPath[g_tutorialNo]);
-	//new CPlayer(ePlayerMan);
-	//new CEnemy(eCarrot);
-	CSound::GetInstance()->GetSound("AREA_M_BGM")->Play();
-}
+	new CPlayer(ePlayerMan);
+	new CEnemy(eCarrot);}
 
 CGame::~CGame()
 {
-	CSound::GetInstance()->GetSound("AREA_M_BGM")->Stop();
 }
-void CGame::Update()
+void CGame::Update() 
 {
-}
+switch (m_step)
+	{
+	case 0:
+		if (mp_tutorial->GetEnd())
+		{
+			new CPlayer(g_tutorialNo);
+			new CEnemy(eCarrot);
+			m_step++;
+			mp_tutorial->SetDestroyFlag(true);
+		}
+	case 1:
+
+	default:
+		break;
+	}}
 void CGame::Draw()
 {
-	
+
+
 }
-/*
-CPlayer CGame::GetPlayer(int type)
-{
-	
-	m_player = new CPlayer(type);
-
-	return m_player;
-}
-
-CEnemy CGame::GetEnemy(int type)
-{
-	m_enemy = new CEnemy(type);
-
-	return m_enemy;
-}
-
-*/
