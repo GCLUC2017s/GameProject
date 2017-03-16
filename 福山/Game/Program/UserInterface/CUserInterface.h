@@ -1,7 +1,7 @@
 #ifndef USERINTERFACE_HPP
 #define USERINTERFACE_HPP
-#include "Graphic\CRectangle.h"
-#include "Graphic\CTexture.h"
+#include "../Graphic/CRectangle.h"
+#include "../Graphic/CTexture.h"
 
 class  CUserinterface
 {

@@ -125,17 +125,14 @@
     <ClCompile Include="Collision\CCollisionManager.cpp">
       <Filter>Collision</Filter>
     </ClCompile>
-    <ClCompile Include="CBase.cpp">
-      <Filter>Base</Filter>
-    </ClCompile>
-    <ClCompile Include="CUserInterface.cpp">
+    <ClCompile Include="UserInterface\CUserInterface.cpp">
       <Filter>UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\CBase.cpp">
+      <Filter>Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Base\CBase.h">
-      <Filter>Base</Filter>
-    </ClInclude>
     <ClInclude Include="Camera\CCamera.h">
       <Filter>Camera</Filter>
     </ClInclude>
@@ -205,11 +202,11 @@
     <ClInclude Include="Collision\ccollisionmanager.h">
       <Filter>Collision</Filter>
     </ClInclude>
-    <ClInclude Include="CUserInterface.h">
+    <ClInclude Include="UserInterface\CUserInterface.h">
       <Filter>UserInterface</Filter>
     </ClInclude>
-    <ClInclude Include="MyNumber\CMyNumber.h">
-      <Filter>MyNumber</Filter>
+    <ClInclude Include="Base\CBase.h">
+      <Filter>Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
