@@ -11,7 +11,7 @@
 #include "CImage.h"
 #include "../Global.h"
 
-#define IMAGE_MAX  4
+#define IMAGE_MAX  5
 #define LINE_MAX   2
 #define WORD_MAX 128
 #define TEXT_END  -2

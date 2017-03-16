@@ -15,7 +15,7 @@ CTutorial::CTutorial(char * file) : CTask(0,0), mp_file(nullptr),
 	mp_img[1] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("PlayerW"));
 	mp_img[2] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("TutorialM"));
 	mp_img[3] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("TutorialW"));
-	
+	mp_img[4] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Black"));
 	//テキストファイルオープン
 	fopen_s(&mp_file, file, "r");
 	//ファイルが無ければ何もしない
@@ -43,7 +43,7 @@ void CTutorial::Update()
 	mp_img[2]->SetPos(250, 400);
 	mp_img[3]->SetSize(1000, 300);
 	mp_img[3]->SetPos(250, 400);
-
+	mp_img[4]->SetColor(0,0,0,0.5);
 	//テキストが終われば削除フラグを真にする
 	if (GetEnd())
 	{
@@ -53,6 +53,7 @@ void CTutorial::Update()
 
 void CTutorial::Draw()
 {
+	mp_img[4]->Draw();
 	//チュートリアル操作表示
 	sprintf(m_str, "ENTER：進行");
 	font->Draw(875, 50, 1, 1, 1, m_str);
