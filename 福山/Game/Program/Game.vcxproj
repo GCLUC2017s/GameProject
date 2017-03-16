@@ -12,6 +12,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera\CCamera.cpp" />
+    <ClCompile Include="CGame\CGame.cpp" />
+    <ClCompile Include="Collision\CCollision.cpp" />
     <ClCompile Include="Enemy\CBoss.cpp" />
     <ClCompile Include="Enemy\CEnemy00.cpp" />
     <ClCompile Include="Enemy\CEnemy01.cpp" />
@@ -23,7 +25,7 @@
     <ClCompile Include="Main\main.cpp" />
     <ClCompile Include="Map\CMap.cpp" />
     <ClCompile Include="Player\CPlayer.cpp" />
-    <ClCompile Include="Scene\CScene.cpp" />
+    <ClCompile Include="SceneManager\CSceneManager.cpp" />
     <ClCompile Include="Task\CTaskManager.cpp" />
     <ClCompile Include="Title\CTitle.cpp" />
     <ClCompile Include="Title\CTitleScene.cpp" />
@@ -32,6 +34,8 @@
   <ItemGroup>
     <ClInclude Include="Base\CBase.h" />
     <ClInclude Include="Camera\CCamera.h" />
+    <ClInclude Include="CGame\CGame.h" />
+    <ClInclude Include="Collision\CCollision.h" />
     <ClInclude Include="Define\define.h" />
     <ClInclude Include="Enemy\CBoss.h" />
     <ClInclude Include="Enemy\CEnemy00.h" />
@@ -44,6 +48,7 @@
     <ClInclude Include="Key\CKey.h" />
     <ClInclude Include="Map\CMap.h" />
     <ClInclude Include="Player\CPlayer.h" />
+    <ClInclude Include="SceneManager\CSceneManager.h" />
     <ClInclude Include="Scene\CScene.h" />
     <ClInclude Include="Task\CTask.h" />
     <ClInclude Include="Task\CTaskManager.h" />
@@ -83,21 +88,21 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\onsokunogyoniku\Desktop\ジーンインターン\GameProject\福山\Game\Program\include;$(IncludePath)</IncludePath>
+    <IncludePath>include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\Users\onsokunogyoniku\Desktop\ジーンインターン\GameProject\福山\Game\Program\include;$(IncludePath)</IncludePath>
+    <IncludePath>include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\onsokunogyoniku\Desktop\ジーンインターン\GameProject\福山\Game\Program\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\onsokunogyoniku\Desktop\ジーンインターン\GameProject\福山\Game\Program\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -107,13 +112,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\onsokunogyoniku\Desktop\ジーンインターン\GameProject\福山\Game\Program\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\Users\onsokunogyoniku\Desktop\ジーンインターン\GameProject\福山\Game\Program\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

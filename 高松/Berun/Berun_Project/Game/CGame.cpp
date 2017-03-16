@@ -9,10 +9,12 @@ CGame::CGame()
 	//new CTutorial(g_tutorialDataPath[g_tutorialNo]);
 	new CPlayer(ePlayerMan);
 	new CEnemy(eCarrot);
+	CSound::GetInstance()->GetSound("AREA_M_BGM")->Play();
 }
 
 CGame::~CGame()
 {
+	CSound::GetInstance()->GetSound("AREA_M_BGM")->Stop();
 }
 void CGame::Update()
 {

@@ -108,14 +108,15 @@ CTitle::CTitle()
 	m_firstMenu = false;
 	m_firstChara = false;
 	m_titleMenu = false;
+	CSound::GetInstance()->GetSound("TITLE_BGM")->Play();
 }
 CTitle::~CTitle()
 {
-
+	CSound::GetInstance()->GetSound("TITLE_BGM")->Stop();
 }
 void CTitle::Update()
 {
-	//CSound::GetInstance()->GetSound("TITLE_BGM")->Play();
+	
 	/*
 	if (CInput::GetState(0, CInput::ePush, CInput::eButton1))
 	{

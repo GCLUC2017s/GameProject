@@ -48,6 +48,15 @@
     <Filter Include="Define">
       <UniqueIdentifier>{8bff56c5-b153-4774-b31b-7f5e167014e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Collision">
+      <UniqueIdentifier>{94976508-211c-424f-9e34-0273457876ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CGame">
+      <UniqueIdentifier>{34577c5b-ced1-4a11-a5ba-474dad128e15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneManager">
+      <UniqueIdentifier>{d24ac0fe-3b6a-4b6c-8b9e-8a02eb07ef15}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera\CCamera.cpp">
@@ -98,8 +107,14 @@
     <ClCompile Include="Enemy\CEnemy01.cpp">
       <Filter>Enemey</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\CScene.cpp">
-      <Filter>Scene</Filter>
+    <ClCompile Include="Collision\CCollision.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="CGame\CGame.cpp">
+      <Filter>CGame</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager\CSceneManager.cpp">
+      <Filter>SceneManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +177,15 @@
     </ClInclude>
     <ClInclude Include="Enemy\CEnemy01.h">
       <Filter>Enemey</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\CCollision.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="CGame\CGame.h">
+      <Filter>CGame</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager\CSceneManager.h">
+      <Filter>SceneManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
