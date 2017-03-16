@@ -6,6 +6,7 @@
 #include "../Task/CTaskManager.h"
 #include "../Camera/CCamera.h"  
 #include "../Map/CMap.h"
+#include "../CCollisionManager.h"
 #define JUMP_FIRST_SPEED 0.2
 
 class CGameMain{

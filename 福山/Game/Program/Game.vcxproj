@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera\CCamera.cpp" />
+    <ClCompile Include="CCollisionManager.cpp" />
     <ClCompile Include="CGame\CGame.cpp" />
     <ClCompile Include="Collision\CCollision.cpp" />
     <ClCompile Include="Enemy\CBoss.cpp" />
@@ -34,6 +35,7 @@
   <ItemGroup>
     <ClInclude Include="Base\CBase.h" />
     <ClInclude Include="Camera\CCamera.h" />
+    <ClInclude Include="CCollisionManager.h" />
     <ClInclude Include="CGame\CGame.h" />
     <ClInclude Include="Collision\CCollision.h" />
     <ClInclude Include="Define\define.h" />
