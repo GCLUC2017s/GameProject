@@ -17,12 +17,7 @@ CGame::~CGame()
 }
 void CGame::Update()
 {
-	/*
-	if (mp_tuto->GetEnd())
-	{
 
-	}
-	*/
 }
 void CGame::Draw()
 {
@@ -44,8 +39,3 @@ CEnemy CGame::GetEnemy(int type)
 	return mp_enemy;
 }
 */
-CTutorial CGame::GetTutorial()
-{
-	CTutorial mp_tuto = CTutorial();
-	return mp_tuto;
-}
