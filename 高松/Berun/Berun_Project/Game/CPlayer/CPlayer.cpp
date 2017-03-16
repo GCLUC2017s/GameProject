@@ -28,5 +28,5 @@ void CPlayer::Key() {
 	if (m_dash) m_dashSpeed = DASH_SPEED;
 	else m_dashSpeed = WALK_SPEED;
 	//ジャンプ中以外でスペースキーを入力したら、状態をジャンプにする処理
-	if(!m_jumpFlag)	if (PUSH_KEY_SPASE)	m_state = eState_Jump;
+	if (PUSH_KEY_SPASE)	m_state = eState_Jump;
 }
