@@ -4,7 +4,6 @@
 
 CGame::CGame()
 {
-
 	new CMap();
 	new CTutorial(g_tutorialDataPath[g_tutorialNo]);
 	//new CPlayer(ePlayerMan);
@@ -18,6 +17,12 @@ CGame::~CGame()
 }
 void CGame::Update()
 {
+	/*
+	if (mp_tuto->GetEnd())
+	{
+
+	}
+	*/
 }
 void CGame::Draw()
 {
@@ -27,16 +32,20 @@ void CGame::Draw()
 CPlayer CGame::GetPlayer(int type)
 {
 	
-	m_player = new CPlayer(type);
+	CPlayer mp_player = new CPlayer(type);
 
-	return m_player;
+	return mp_player;
 }
 
 CEnemy CGame::GetEnemy(int type)
 {
-	m_enemy = new CEnemy(type);
+	CEnemy mp_enemy = new CEnemy(type);
 
-	return m_enemy;
+	return mp_enemy;
 }
-
 */
+CTutorial CGame::GetTutorial()
+{
+	CTutorial mp_tuto = CTutorial();
+	return mp_tuto;
+}

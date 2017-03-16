@@ -26,7 +26,6 @@ private:
 	int		m_state;
 	char    m_text[LINE_MAX][WORD_MAX];		//•¶Í(s)(•¶š”j
 	char    m_str[WORD_MAX];				//•\¦•¶š—ñ
-	static bool m_isActive;
 public:
 	CTutorial();
 	CTutorial(char *file);
