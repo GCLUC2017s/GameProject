@@ -3,15 +3,14 @@
 CGameMain::CGameMain(){}
 
 void CGameMain::Init(){
-	taskmanger.Add(new CMap);
+	CTaskManager::GetInstance()->Add(new CMap);
 
-	taskmanger.Add(new CCamera);
+	CTaskManager::GetInstance()->Add(new CCamera);
 
-	taskmanger.Add(new CPlayer);
+	CTaskManager::GetInstance()->Add(new CPlayer);
 	
-	taskmanger.Add(new CEnemy00);
+	CTaskManager::GetInstance()->Add(new CEnemy00);
 
-	taskmanger.Add(new CCollisionManager);
 
 }
 
@@ -21,12 +20,12 @@ void CGameMain::Update(){
 	{
 	case E_INIT:
 		Init();
-		taskmanger.AllInit();
+		CTaskManager::GetInstance()->AllInit();
 		status = E_MAIN;
 		break;
 	case E_MAIN:
-		taskmanger.AllUpdate();
-		taskmanger.AllRender();
+		CTaskManager::GetInstance()->AllUpdate();
+		CTaskManager::GetInstance()->AllRender();
 		break;
 
 	}

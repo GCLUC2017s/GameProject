@@ -6,16 +6,20 @@
 #define TASKMANAGER_HPP
 #include "CTask.h"
 #include <assert.h> 
+
 class  CTaskManager
 {
+private:
+	static CTaskManager *mTaskManager;
+	void SwapTask(CTask **p, CTask **n);
+
+	CTaskManager();
+
 public:
 	CTask *mRoot;
 	CTask *mTail;
 
-	void SwapTask(CTask **p, CTask **n);
-
-
-	CTaskManager();
+	static CTaskManager *GetInstance(); //GetInstance
 
 	~CTaskManager();
 
@@ -61,7 +65,7 @@ public:
 	void AllUpdate();
 	void AllRender();
 	void AllInit();
-	 
+	
 };
 
 #endif

@@ -2,7 +2,7 @@
 #include <math.h>
 
 
-bool CCollision::mCollision(CRectangle &r1, CRectangle &r2){
+bool CCollision::Collision(const CRectangle &r1,const CRectangle &r2){
 
 	float w_xl1 = r1.triangle1.x1 + r1.position.x;
 	float w_xr1 = r1.triangle1.x3 + r1.position.x;

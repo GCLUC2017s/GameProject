@@ -30,8 +30,8 @@ public:
 	return:À•Wã‚ÌˆÊ’u
 	*/
 	static CVector2 getPosition(const CVector2 &v);
-	static CPlayer  getPlayer(CPlayer &pl);
 	static CEnemy00 getEnemy(CEnemy00 &ene00);
+	static CPlayer getPlayer(CTask &t);
 };
 
 #endif
