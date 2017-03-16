@@ -9,6 +9,7 @@
 #include "../Graphic/CRectangle.h"
 #include "../Task/CTaskManager.h"
 #include "../Define/define.h"
+
 #define NORMALATTACK_PATTERN 3 //通常攻撃のパターン
 
 const float gravity = 0.01;	 //重力

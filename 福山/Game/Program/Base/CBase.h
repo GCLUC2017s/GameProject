@@ -42,15 +42,15 @@ public:
 	CVector2 mPos;					//位置
 	CVector2 mForward;				//向き
 	bool mEnabled;					//有効フラグ
-	CBase *mpPlayer;
+	CBase *mpPlayer;				
 	float mHitPoint;				//ヒットポイント
 
 	int mSaveAnime;                 //前のアニメーションがどれだったか判断用
 	int mFrameCount;				//現在のフレーム数
 	int mAnimeFrame;				//アニメのフレーム数
 	float mAxis;					//軸　使い方　mPosの'Y'を代入する(ジャンプの時など，移動以外の'Y'は代入しない)
-
 	int mAlertCnt;					//
+
 
 	CBase() : mEnabled(true), mpPlayer(0), mAlertCnt(0),mAxis(0),mHitPoint(0) {
 
