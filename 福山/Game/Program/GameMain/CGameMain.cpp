@@ -11,6 +11,8 @@ void CGameMain::Init(){
 	
 	taskmanger.Add(new CEnemy00);
 
+	taskmanger.Add(new CCollisionManager);
+
 }
 
 void CGameMain::Update(){

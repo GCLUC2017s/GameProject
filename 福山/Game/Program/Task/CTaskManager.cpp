@@ -282,6 +282,7 @@ void CTaskManager::AllUpdate(){
 	while (task != 0)
 	{
 		task->Update();
+		
 		task = task->next;
 
 	}
