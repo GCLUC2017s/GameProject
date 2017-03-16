@@ -32,8 +32,9 @@ void CTutorial::Update()
 	//エンターキーでチュートリアル進行
 	if (CInput::GetState(0, CInput::ePush, CInput::eButton10)) GetText();
 	//スペースキーでチュートリアルスキップ
-	if (CInput::GetState(0, CInput::ePush, CInput::eButton5)) m_end = -2;
+	if (CInput::GetState(0, CInput::ePush, CInput::eButton5)) m_end = TEXT_END;
 
+	assert(0 <= g_tutorialNo && g_tutorialNo < ARRAY_SIZE(mp_img),"ARRAY_SIZE_ERROR");
 	mp_img[g_tutorialNo]->SetPos(200, 250);
 
 	//テキストが終われば削除フラグを真にする
@@ -54,7 +55,7 @@ void CTutorial::GetText()
 {
 	fgets(m_str, WORD_MAX, mp_file);
 	sscanf_s(m_str, "%d", &m_end);
-	if (m_end == -2) return;
+	if (m_end == TEXT_END) return;
 	sscanf_s(m_str, "%d", &m_face);
 	fgets(m_name, WORD_MAX, mp_file);
 	fgets(m_text[0], WORD_MAX, mp_file);
@@ -63,5 +64,5 @@ void CTutorial::GetText()
 
 bool CTutorial::GetEnd()
 {
-	return (m_end == -2);
+	return (m_end == TEXT_END);
 }

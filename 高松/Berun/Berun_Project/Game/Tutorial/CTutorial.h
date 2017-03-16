@@ -15,6 +15,7 @@
 #define NAME_MAX  64
 #define LINE_MAX   2
 #define WORD_MAX 128
+#define TEXT_END  -2
 
 class CTutorial : public CTask
 {
