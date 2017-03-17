@@ -167,6 +167,17 @@ void idle(void)
 	static LARGE_INTEGER time;
 	static LARGE_INTEGER time_buf;
 	static long t_buf=0;
+	HDC glDc = wglGetCurrentDC();
+	//ウィンドウハンドル取得
+	HWND hWnd = WindowFromDC(glDc);
+	//ユーザーの操作対象になっているウインドウを取得
+	HWND h = GetForegroundWindow();
+	while (h && hWnd != h)
+	{
+		//非アクティブに
+		Sleep(10);
+		h = GetForegroundWindow();
+	}
 	//現在のシステムのカウント数を取得
 	QueryPerformanceCounter(&time_buf);
 
@@ -257,7 +268,7 @@ int __main(int* argcp, char** argv) {
 	init();
 
 
-	HDC glDc = wglGetCurrentDC();
+	
 
 
 
@@ -268,8 +279,7 @@ int __main(int* argcp, char** argv) {
 	glutMouseWheelFunc(wheel);
 
 	
-	//ウィンドウハンドル取得
-	HWND hWnd = WindowFromDC(glDc);
+	
 
 	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 	glutMainLoop();
