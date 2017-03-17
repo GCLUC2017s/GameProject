@@ -9,29 +9,23 @@
 
 class CGame {
 public:
-	static int *mpMapData;	//マップデータ
-	static int mMapRows;	//マップの行数
-	static int mMapCols;	//マップの列数
-	static int mDispRows;	//表示する行数
-	static int mDispCols;	//表示する列数
-	static CRectangle *mpMap; //Mapの四角形データ
-	static CRectangle *mEnemy; //
-	static CPlayer *mPlayer;   //
-	static int status;
-
-	/* getIndex
-	v:座標上の位置
-	return:マップデータ配列の添え字
-	座標上の位置からマップデータの添え字を返す
-	*/
-	static int getIndex(const CVector2 &v);
 	/* getPosition
-	index:マップデータ配列の添え字
 	return:座標上の位置
 	*/
+	static CVector2 mGetPlayerPos();
 	static CVector2 getPosition(const CVector2 &v);
 	static CEnemy00 getEnemy(CEnemy00 &ene00);
 	static CPlayer getPlayer(CTask &t);
+	/*タスク属性がほしいときに使う
+	　number　ほしいもののナンバー
+	 キャストをして使う 
+	 (例)
+	 CPlyer *pl;
+
+	 pl = (CPlayer*)getStatus(E_PLAYER);
+
+	 */
+	static CTask *getStatus(int number);
 };
 
 #endif

@@ -7,6 +7,7 @@
 #include "../Camera/CCamera.h"  
 #include "../Map/CMap.h"
 #include "../Collision/CCollision.h"
+#include "../UserInterface/CUserInterface.h"
 
 #define JUMP_FIRST_SPEED 0.2
 

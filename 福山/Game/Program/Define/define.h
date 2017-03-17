@@ -17,5 +17,9 @@
 #define DISP_Y	WINDOW_PIXEL_Y * 0.012		//ウィンドウ解像度：高さ
 #define MAP_LIMIT_Y	10						//マップのY
 #define MAP_LIMIT_X	100						//マップのX
+#define UP_KEY VK_UP
+#define DOWN_KEY VK_DOWN
+#define RIGHT_KEY VK_RIGHT
+#define LEFT_KEY VK_LEFT
 
 #endif
