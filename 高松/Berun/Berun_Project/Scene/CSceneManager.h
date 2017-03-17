@@ -11,12 +11,13 @@
 #include "CScene.h"
 #include "CSceneChangeAnimation.h"
 #include "CCamera.h"
-#include "../Scene/Logo/CLogo.h"
-#include "../Scene/Title/CTitle.h"
-#include "../Scene/CharaSelect/CCharaSelect.h"
+#include "Logo/CLogo.h"
+#include "Title/CTitle.h"
+#include "CharaSelect/CCharaSelect.h"
 #include "../Game/CGame.h"
 #include "../System/TaskSystem/CTaskManager.h"
-#include "../Scene/Test/CTest.h"
+#include "Test/CTest.h"
+#include "Result\CResult.h" 
 
 enum E_Scene
 {

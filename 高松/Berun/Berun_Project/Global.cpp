@@ -6,9 +6,3 @@ char g_tutorialDataPath[TUTORIAL_MAX][FILE_NAME] =
 	"TutoText/TutorialW.txt",	//—‘I‘ğ
 };
 int  g_tutorialNo = 0;	//‰Šú’l‚Í’j 1‚È‚ç—
-/*
-for (int i = 0; i < ARRAY_SIZE(g_itemArray); i++)
-{
-	int  g_itemArray[i] = 0;
-}
-*/
