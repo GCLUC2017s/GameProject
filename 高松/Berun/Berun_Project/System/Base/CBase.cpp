@@ -15,9 +15,9 @@ CBase::~CBase()
 
 CVector2D CBase::GetScreenPos()
 {
-	CVector2D p;
-	p.x = m_pos.x;
-	p.y = 720 - m_pos.z*0.5;
-	p.y -= m_pos.y;
-	return p - m_scroal;
+	CVector2D m_player;
+	m_player.x = m_pos.x;
+	m_player.y = 720 - m_pos.z*0.5;
+	m_player.y -= m_pos.y;
+	return m_player - m_scroal;
 }

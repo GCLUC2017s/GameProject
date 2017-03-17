@@ -3,13 +3,13 @@
 /**
 *@file	 CMap.h
 *@brief  マップクラス
-*@author 宮田
+*@author Kousei Miyeta
 */
 #ifndef CMAP_GURAD
 #define CMAP_GURAD
 #define SCROLL_SPEED 2//マップスクロール値
 #define MAP_DATA 4//マップの数
-#define MAP_WITHT 1280
+#define MAP_WITHT 1280//マップの幅
 
 
 #include "../Global.h"

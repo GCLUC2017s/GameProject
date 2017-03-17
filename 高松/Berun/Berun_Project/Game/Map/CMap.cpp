@@ -34,20 +34,21 @@ void CMap::Update() {
 void  CMap::Draw() {
 
 
-	CVector2D s = GetScroal();
-	s.x = (int)s.x % MAP_WITHT;
+	CVector2D m_mapScreen = GetScroal();
+	m_mapScreen.x = (int)m_mapScreen.x % MAP_WITHT;
 	m_backGround[m_stage]->SetColor(1, 1, 1, 1);
-	m_backGround[m_stage]->SetPos(-s.x,-s.y);
+	m_backGround[m_stage]->SetPos(-m_mapScreen.x,-m_mapScreen.y);
 	m_backGround[m_stage]->Draw();
+
 	m_backGround[m_stage]->SetColor(1, 1, 1, 1);
-	m_backGround[m_stage]->SetPos(-s.x +MAP_WITHT, -s.y);
+	m_backGround[m_stage]->SetPos(-m_mapScreen.x +MAP_WITHT, -m_mapScreen.y);
 	m_backGround[m_stage]->Draw();
 
 
 	/*m_backGround[m_newstage]->SetColor(1, 1, 1, 0.5f);
-	m_backGround[m_newstage]->SetPos(-s.x, -s.y);
-	m_backGround[m_newstage]->Draw();
+	m_backGround[m_newstage]->SetPos(-m_mapScreen.x, -m_mapScreen.y);
+	m_backGround[m_newstage]->Draw();*/
 
-		*/
+		
 	}
 
