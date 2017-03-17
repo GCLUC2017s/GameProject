@@ -63,6 +63,9 @@
     <Filter Include="UserInterface">
       <UniqueIdentifier>{69d6562a-8ab3-4196-8124-2633330ca8f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="LoadManager">
+      <UniqueIdentifier>{8ef0f892-97d4-4575-8c0a-62a7d51344f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera\CCamera.cpp">
@@ -128,7 +131,7 @@
     <ClCompile Include="Base\CBase.cpp">
       <Filter>Base</Filter>
     </ClCompile>
-    <ClCompile Include="CCollisionManager.cpp">
+    <ClCompile Include="Collision\CCollisionManager.cpp">
       <Filter>Collision</Filter>
     </ClCompile>
   </ItemGroup>
@@ -210,6 +213,9 @@
     </ClInclude>
     <ClInclude Include="Collision\CCollisionmanager.h">
       <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="CLoadManager.h">
+      <Filter>LoadManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

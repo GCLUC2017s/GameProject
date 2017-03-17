@@ -18,35 +18,53 @@
 #define SIZE_TEX_EN_FRAME_Y	  100
 
 #define TEX_FILE "../CG/UI/"
+#define _HP_ 0
+#define _ST_ 1
 CUserinterface::CUserinterface()
 {
 	mPriorityR = E_UI;
 	mPriorityU = E_UI;
 	mMyNumber = E_UI;
 
-	mPlayerGageTex = new CTexture();
+	mPlayerGageTex[_HP_] = new CTexture();
+	mPlayerGageTex[_ST_] = new CTexture();
+	mPlayerFrameTex[_HP_] = new CTexture();
+	mPlayerFrameTex[_ST_] = new CTexture();
+
 	mEnemyGageTex = new CTexture();
 	mEnemyFrameTex = new CTexture();
-	mPlyerFrameTex = new CTexture();
 
+	/*プレイヤー*/
+	/*テクスチャ読み込み*/
+	mPlayerGageTex[_HP_]->load(TEX_FILE"UI_player_HP_gauge.tga");
+	mPlayerFrameTex[_HP_]->load(TEX_FILE"UI_player_Frame.tga");
+	mPlayerGageTex[_ST_]->load(TEX_FILE"UI_player_HP_gauge.tga");
+	mPlayerFrameTex[_ST_]->load(TEX_FILE"UI_player_Frame.tga");
+	/*四角作成*/
+	mFramePlayer[_HP_].SetVertex(-SIZE_PL_FRAME_X, SIZE_PL_FRAME_Y, SIZE_PL_FRAME_X, -SIZE_PL_FRAME_Y); //四角作成
+	mFramePlayer[_ST_].SetVertex(-SIZE_PL_FRAME_X, SIZE_PL_FRAME_Y, SIZE_PL_FRAME_X, -SIZE_PL_FRAME_Y); //四角作成
+	/*カラーを決める*/
+	mGaugePlayer[_HP_].SetColor(1.0f, 1.0f, 1.0f, 1.0f); //色を決める
+	mFramePlayer[_HP_].SetColor(1.0f, 1.0f, 1.0f, 1.0f);//色を決める
 
-	mPlayerGageTex->load(TEX_FILE"UI_player_HP_gauge.tga");
-	mPlyerFrameTex->load(TEX_FILE"UI_player_Frame.tga");
+	mGaugePlayer[_ST_].SetColor(1.0f, 1.0f, 0.0f, 1.0f); //色を決める 
+	mFramePlayer[_ST_].SetColor(1.0f, 1.0f, 0.0f, 1.0f);//色を決める
+	/*テクスチャを張る*/
+	mGaugePlayer[_HP_].SetUv(mPlayerGageTex[_HP_], 0, 0, SIZE_TEX_PLAYER_FRAME_X, SIZE_TEX_PLAYER_FRAME_Y);
+	mFramePlayer[_HP_].SetUv(mPlayerFrameTex[_HP_], 0, 0, SIZE_TEX_PLAYER_FRAME_X, SIZE_TEX_PLAYER_FRAME_Y);
+	mGaugePlayer[_ST_].SetUv(mPlayerGageTex[_ST_], 0, 0, SIZE_TEX_PLAYER_FRAME_X, SIZE_TEX_PLAYER_FRAME_Y);
+	mFramePlayer[_ST_].SetUv(mPlayerFrameTex[_ST_], 0, 0, SIZE_TEX_PLAYER_FRAME_X, SIZE_TEX_PLAYER_FRAME_Y);
+	/*エネミー*/
 	mEnemyGageTex->load(TEX_FILE"UI_Enemy_HP_gauge.tga");
 	mEnemyFrameTex->load(TEX_FILE"UI_Enemy_HP_Frame.tga");
-
-	mFramePl.SetVertex(-SIZE_PL_FRAME_X, SIZE_PL_FRAME_Y, SIZE_PL_FRAME_X, -SIZE_PL_FRAME_Y); //四角作成
+	
 	mGaugeEne.SetVertex(-SIZE_PL_FRAME_X, SIZE_PL_FRAME_Y, SIZE_PL_FRAME_X, -SIZE_PL_FRAME_Y); //四角作成
 
-	mGaugePl.SetColor(1.0f, 1.0f, 1.0f, 1.0f); //色を決める
-	mFramePl.SetColor(1.0f, 1.0f, 1.0f, 1.0f);//色を決める
 	mGaugeEne.SetColor(1.0f, 1.0f, 1.0f, 1.0f); //色を決める
 	mFrameEne.SetColor(1.0f, 1.0f, 1.0f, 1.0f);//色を決める
 
 	mGaugeEne.SetUv(mEnemyGageTex, 0, 0, SIZE_TEX_PLAYER_FRAME_X, SIZE_TEX_PLAYER_FRAME_Y);
 	mFrameEne.SetUv(mEnemyFrameTex, 0, 0, SIZE_TEX_PLAYER_FRAME_X, SIZE_TEX_PLAYER_FRAME_Y);
-	mGaugePl.SetUv(mPlayerGageTex, 0, 0, SIZE_TEX_PLAYER_FRAME_X, SIZE_TEX_PLAYER_FRAME_Y);
-	mFramePl.SetUv(mPlyerFrameTex, 0, 0, SIZE_TEX_PLAYER_FRAME_X, SIZE_TEX_PLAYER_FRAME_Y);
 }
 
 CUserinterface::~CUserinterface()
@@ -71,15 +89,20 @@ void CUserinterface::Update(){
 
 				savex = CPlayer::camera_x + SIZE_PLAYER_X;
 
-				mGaugePl.position = CVector2(player->mPos.x - DISP_X / 2, DISP_Y - SIZE_PL_FRAME_Y * 2);
-				mFramePl.position = CVector2(player->mPos.x - DISP_X / 2, DISP_Y - SIZE_PL_FRAME_Y * 2);
+				mGaugePlayer[_HP_].position = CVector2(player->mPos.x - DISP_X / 2, DISP_Y - SIZE_PL_FRAME_Y * 2);
+				mFramePlayer[_HP_].position = CVector2(player->mPos.x - DISP_X / 2, DISP_Y - SIZE_PL_FRAME_Y * 2);
+				mGaugePlayer[_ST_].position = CVector2(player->mPos.x - DISP_X / 2, DISP_Y - SIZE_PL_FRAME_Y * 4);
+				mFramePlayer[_ST_].position = CVector2(player->mPos.x - DISP_X / 2, DISP_Y - SIZE_PL_FRAME_Y * 4);
 			}
 			else{
-				mGaugePl.position = CVector2(savex - DISP_X + SIZE_PL_FRAME_X , DISP_Y - SIZE_PL_FRAME_Y * 2);
-				mFramePl.position = CVector2(savex - DISP_X + SIZE_PL_FRAME_X, DISP_Y - SIZE_PL_FRAME_Y * 2);
+				mGaugePlayer[_HP_].position = CVector2(savex - DISP_X + SIZE_PL_FRAME_X, DISP_Y - SIZE_PL_FRAME_Y * 2);
+				mFramePlayer[_HP_].position = CVector2(savex - DISP_X + SIZE_PL_FRAME_X, DISP_Y - SIZE_PL_FRAME_Y * 2);
+				mGaugePlayer[_ST_].position = CVector2(savex - DISP_X + SIZE_PL_FRAME_X, DISP_Y - SIZE_PL_FRAME_Y * 4);
+				mFramePlayer[_ST_].position = CVector2(savex - DISP_X + SIZE_PL_FRAME_X, DISP_Y - SIZE_PL_FRAME_Y * 4);
 			}
 
-			mGaugePl.SetVertex(-player->mHitPoint, SIZE_PL_FRAME_Y, player->mHitPoint, -SIZE_PL_FRAME_Y); //四角作成
+			mGaugePlayer[_HP_].SetVertex(-player->mHitPoint, SIZE_PL_FRAME_Y, player->mHitPoint, -SIZE_PL_FRAME_Y); //四角作成
+			mGaugePlayer[_ST_].SetVertex(-player->mStamina, SIZE_PL_FRAME_Y, player->mStamina, -SIZE_PL_FRAME_Y); //四角作成
 			
 
 			break;
@@ -138,8 +161,10 @@ void CUserinterface::Update(){
 }
 
 void CUserinterface::Render(){
-	mFramePl.Render();
-	mGaugePl.Render();
+	mFramePlayer[_HP_].Render();
+	mGaugePlayer[_HP_].Render();
+	mFramePlayer[_ST_].Render();
+	mGaugePlayer[_ST_].Render();
 
 	mFrameEne.Render();
 	mGaugeEne.Render();

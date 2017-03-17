@@ -17,9 +17,9 @@ private:
 
 
 	CPlayer *mPlayer;
-
+	int mCamerax;
 public:
- 	static int mCamerax;
+   
 
 	CCamera();
 

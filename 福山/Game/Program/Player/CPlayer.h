@@ -11,11 +11,11 @@
 #include "../Define/define.h"
 
 #define NORMALATTACK_PATTERN 3 //通常攻撃のパターン
-
 const float gravity = 0.01;	 //重力
 
 const	 CVector2 first_pos
 = CVector2(character_limit_left*0.85, (character_limit_top + character_limit_bottom) / 2);		//プレイヤーの初期位置
+
 
 class CPlayer : public CBase {
 private:
@@ -23,6 +23,7 @@ private:
 	float mVelocity; //移動するときに使う
 	CRectangle  mShadow;
 	CRectangle	mAttackCollision[NORMALATTACK_PATTERN]; //あたり判定だけの四角形
+
 	CTexture	*mStayTex[FRAME_LIMIT];									//待ちテクスチャ
 	CTexture	*mWalkTex[FRAME_LIMIT];									//歩くテクスチャ
 	CTexture	*mRunTex[FRAME_LIMIT];									//走るテクスチャ
@@ -81,7 +82,7 @@ private:
 	/*アニメーションの値を入れて,引数で右左を判断 Rが*/
 	void DecisionRL(int R, int L);
 	/*テクスチャデリート*/
-	void Delete(CTexture *t);
+	void Delete(CTexture **t);
 	/*BRAKEするか否か*/
 	bool EnabledBrake();
 	/*NormalAttackメソッド*/

@@ -36,6 +36,8 @@
 #define ANIME_TIME_BRAKE					7								//アニメのループ時間 BRAKE
 #define RIGHT WALK_X
 #define LEFT -WALK_X
+
+
 float CPlayer::camera_x;
 float CPlayer::camera_y;
 
@@ -160,34 +162,36 @@ void CPlayer::Init() {
 	mShadow.SetUv(mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
 	mForward = CVector2(1.0f, 0.0f);
 }
-void CPlayer::Delete(CTexture *t){
-	if (t){
-		delete t;
-		t = 0;
+
+void CPlayer::Delete(CTexture **t){
+	if (*t){
+		delete *t;
+		*t = 0;
 	}
 }
 
 CPlayer::~CPlayer() {
 
-	///*テクスチャ読み込み*/
-	//for (int i = 0; i < FRAME_LIMIT; i++)
-	//{
-	//	Delete(mStayTex[i]);
-	//	Delete(mWalkTex[i]);
-	//	Delete(mRunTex[i]);
-	//	Delete(mEx01Tex[i]);			//テクスチャクラスのインスタンス作成
-	//	Delete(mEx02Tex[i]);			//テクスチャクラスのインスタンス作成
-	//	Delete(mEatTex[i]);
-	//	Delete(mFlameTex[i]);
-	//	Delete(mBrakeTex[i]);
+	/*テクスチャ読み込み*/
+	for (int i = 0; i < FRAME_LIMIT; i++)
+	{
+		delete mStayTex[i];
+		delete mWalkTex[i];
+		delete mRunTex[i];
+		delete mEx01Tex[i];			//テクスチャクラスのインスタンス作成
+		delete mEx02Tex[i];			//テクスチャクラスのインスタンス作成
+		delete mEatTex[i];
+		delete mFlameTex[i];
+		delete mBrakeTex[i];
 
-	//	for (int z = 0; z < NORMALATTACK_PATTERN; z++)
-	//	{
-	//		Delete(mNormalAttackTex[z][i]);	//テクスチャクラスのインスタンス作成
-	//	}
-	//	Delete(mEatTex[i]);
+		for (int z = 0; z < NORMALATTACK_PATTERN; z++)
+		{
+			Delete(&mNormalAttackTex[z][i]);	//テクスチャクラスのインスタンス作成
+		}
+		Delete(&mEatTex[i]);
 
-	//}
+	}
+
 }
 
 //プレイヤー描画
@@ -201,6 +205,7 @@ CPlayer::CPlayer() : mVelocity(0), mSpeedJump(JUMP_FIRST_SPEED), mIntervalCount(
 	mPriorityR = E_PLAYER;			//Renderのナンバー 
 	mPriorityU = E_PLAYER;			//Updateのナンバー
 	mHitPoint = PL_HP_X;		//ＨＰ
+	mStamina = PL_ST_X;			//ST
 	mMyNumber = E_PLAYER;
 	mStatus = E_STAY_R,
 	//四角形の頂点設定
@@ -281,7 +286,8 @@ void CPlayer::Move(){
 
 	//BRAKE
 	Brake();
-	if (mAxis > character_limit_top - SIZE_PLAYER_Y){ //上
+	if (mAxis > character_limit_top - SIZE_PLAYER_Y ||
+		mAxis + SIZE_PLAYER_Y < character_limit_bottom + SIZE_PLAYER_Y){ //上
 		mPos = SavemPos;
 		mAxis = SavemAxis;
 	}
@@ -449,7 +455,9 @@ void CPlayer::Update() {
 	mPriorityR = -mAxis;
 	camera_x = mPos.x;
 	camera_y = mPos.y;
-	if (mHitPoint == 0) mKillFlag = true;
+	mStamina -= 0.001f;
+
+	if (mHitPoint < 0) mKillFlag = true;
 
 	mRect.position = mPos;
 	mShadow.position = CVector2(mPos.x, mAxis);

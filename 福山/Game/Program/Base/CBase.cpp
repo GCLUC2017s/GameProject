@@ -25,16 +25,16 @@ void CBase::AnimeFrame(bool roop, int speed){
 }
 void CBase::LimitDisp(int sizex, int sizey){
 	/*あたり判定*/
-	if (mAxis > character_limit_top - SIZE_PLAYER_Y && !mEnabledJump){  //マップ外に出ると元の位置に戻す(軸)
+	if (mAxis > character_limit_top - sizey && !mEnabledJump){  //マップ外に出ると元の位置に戻す(軸)
 		mPos.y = character_limit_top;
-		mAxis = mPos.y - SIZE_PLAYER_Y; //軸をもとに戻す
+		mAxis = mPos.y - sizey; //軸をもとに戻す
 	}
-	if (mAxis + SIZE_PLAYER_Y < character_limit_bottom + SIZE_PLAYER_Y){  //マップ外に出ると元の位置に戻す(軸)
-		mPos.y = character_limit_bottom + SIZE_PLAYER_Y;
-		mAxis = mPos.y - SIZE_PLAYER_Y; //軸をもとに戻す
+	if (mAxis + sizey < character_limit_bottom + sizey && !mEnabledJump){  //マップ外に出ると元の位置に戻す(軸)
+		mPos.y = character_limit_bottom + sizey;
+		mAxis = mPos.y - sizey; //軸をもとに戻す
 	}
 
-	if (mPos.x >= character_limit_right - SIZE_PLAYER_X || mPos.x <= character_limit_left + SIZE_PLAYER_X){ //マップ外に出ると元の位置に戻す(X)
+	if (mPos.x >= character_limit_right - sizex || mPos.x <= character_limit_left + sizex){ //マップ外に出ると元の位置に戻す(X)
 		mPos.x = mRect.position.x;
 	}
 	/*あたり判定終了*/

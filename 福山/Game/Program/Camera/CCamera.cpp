@@ -3,7 +3,7 @@
 #include "../Define/define.h"
 #include "../Player/CPlayer.h"  
 
-int CCamera::mCamerax;
+
 
 CCamera::CCamera(){
 	mPriorityR = E_CAMERA;

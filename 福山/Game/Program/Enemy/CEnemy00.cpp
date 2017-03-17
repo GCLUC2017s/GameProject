@@ -187,7 +187,7 @@ void CEnemy00::Update(){
 	mPriorityR = -mAxis;
 
 
-	/*
+	
 	//（ターゲットが右にいる場合）
 	if (RIGHT_PTT) {
 		direction = 0;
@@ -234,8 +234,8 @@ void CEnemy00::Update(){
 		}
 
 	}
-*/
-	/*
+
+	
 	//（ターゲットが上にいる場合）
 	if (DOWN_PTT) { //軸が上限に達していないとき
 		Walk();
@@ -254,7 +254,7 @@ void CEnemy00::Update(){
 		mPos += mForward * mVelocity;
 		mAxis += mForward.y * mVelocity;
 	}
-	*/
+	
 
 
 	//攻撃範囲内にターゲットが来た
@@ -282,47 +282,7 @@ void CEnemy00::Update(){
 
 	case 1://歩き
 		//（ターゲットが右にいる場合）
-		if (RIGHT_PTT) {
-			direction = 0;
-			motion = 1;
-			eAnime = E_WALK_R;
-			mVelocity = WALK_SPEED;
-			mForward = CVector2(WALK_X, 0.0f);
-			mPos += mForward * mVelocity;
-		}
-
-		//（ターゲットが左にいる場合）
-		if (LEFT_PTT) {
-			direction = 1;
-			motion = 1;
-			eAnime = E_WALK_L;
-			mVelocity = WALK_SPEED;
-
-			mForward = CVector2(-WALK_X, 0.0f);
-			mPos += mForward * mVelocity;
-
-		}
-
-		if (DOWN_PTT) { //軸が上限に達していないとき
-			Walk();
-			mVelocity = WALK_SPEED;
-			mForward = CVector2(0.0f, WALK_Y);
-			mPos += mForward * mVelocity;
-			mAxis += mForward.y * mVelocity;
-
-		}
-
-
-		//（ターゲットが下にいる場合）
-		if (UP_PTT) {//軸が上限に達していないとき
-			Walk();
-			mVelocity = WALK_SPEED;
-			mForward = CVector2(0.0f, -WALK_Y);
-			mPos += mForward * mVelocity;
-			mAxis += mForward.y * mVelocity;
-		}
-
-
+	
 
 
 
@@ -337,6 +297,12 @@ void CEnemy00::Update(){
 		if (NO_ATTACK_PTT){
 			motion = 1;
 		}
+		mAttackRange.SetVertex(-SIZE_ENEMY00_X, SIZE_ENEMY00_Y, SIZE_ENEMY00_X, -SIZE_ENEMY00_Y);
+		mAttackRange.SetColor(1.0f, 1.0f, 0.0f, 1.0f);
+		mAttackRange.position = CVector2(mPos.x + 1, mPos.y);
+		mAttackRange.position = CVector2(mPos.x - 1, mPos.y);
+		mAttackAxis = 10.0f;
+		mEnabledAttack = true;
 		break;
 
 	case 3://死亡
@@ -413,7 +379,8 @@ void CEnemy00::Update(){
 
 	}
 
-	if(mHitPoint == 0)mKillFlag = true;
+	if (mHitPoint == 0)mKillFlag = true;
+
 }
 void CEnemy00::Render(){
 	mRect.Render();

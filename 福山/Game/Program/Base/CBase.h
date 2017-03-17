@@ -15,6 +15,9 @@
 
 #define PL_HP_X 2.0f //ゲージx　
 #define PL_HP_Y 0.15f//ゲージy
+#define PL_ST_X 2.0f //ゲージx
+#define PL_ST_Y 0.15f//ゲージy
+
 
 #define SIZE_PL_FRAME_X 2.2f //フレームＸ
 #define SIZE_PL_FRAME_Y 0.2f //フレームY			
@@ -65,7 +68,12 @@ public:
 	CRectangle mRect;				//画像用
 	CRectangle mAttackRange;		//攻撃範囲の四角形
 	bool mEnabled;					//有効フラグ
+
 	float mHitPoint;				//ヒットポイント
+	float mAttackPoint;				//攻撃力
+	float mSpeed;					//スピード
+	float mStamina;					//スタミナ
+
 	bool mEnabledAttack;		    //攻撃しているか否か
 	int mSaveAnime;                 //前のアニメーションがどれだったか判断用
 	int mFrameCount;				//現在のフレーム数
@@ -76,6 +84,8 @@ public:
 	int mAlertCnt;					//
 	int mStatus;
 	bool mEnabledJump;				//ジャンプいている
+
+
 	CVector2 mTargetP;  //プレイヤーポジションの取得用
 	
 	CBase() : mEnabled(true), mAlertCnt(0), mAxis(0), mHitPoint(0), mEnabledAttack(false),mEnabledUi(true){

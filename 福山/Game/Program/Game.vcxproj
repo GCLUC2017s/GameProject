@@ -13,9 +13,9 @@
   <ItemGroup>
     <ClCompile Include="Base\CBase.cpp" />
     <ClCompile Include="Camera\CCamera.cpp" />
-    <ClCompile Include="CCollisionManager.cpp" />
     <ClCompile Include="CGame\CGame.cpp" />
     <ClCompile Include="Collision\CCollision.cpp" />
+    <ClCompile Include="Collision\CCollisionManager.cpp" />
     <ClCompile Include="Enemy\CBoss.cpp" />
     <ClCompile Include="Enemy\CEnemy00.cpp" />
     <ClCompile Include="Enemy\CEnemy01.cpp" />
@@ -38,6 +38,7 @@
     <ClInclude Include="Base\CBase.h" />
     <ClInclude Include="Camera\CCamera.h" />
     <ClInclude Include="CGame\CGame.h" />
+    <ClInclude Include="CLoadManager.h" />
     <ClInclude Include="Collision\CCollision.h" />
     <ClInclude Include="Collision\CCollisionmanager.h" />
     <ClInclude Include="Define\define.h" />
