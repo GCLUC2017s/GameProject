@@ -17,8 +17,8 @@ class CGame : public CScene
 private:
 	CMap		*mp_map;
 	CTutorial	*mp_tutorial;
-	unsigned int m_step;
 	CPlayer		*mp_player;
+	unsigned int m_step;
 public:
 
 	CGame();

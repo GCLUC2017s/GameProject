@@ -25,8 +25,9 @@ switch (m_step)
 			m_step++;
 			mp_tutorial->SetDestroyFlag(true);
 		}
+		break;
 	case 1:
-
+		break;
 	default:
 		break;
 	}}
