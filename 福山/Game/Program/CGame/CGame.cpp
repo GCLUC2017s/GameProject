@@ -25,3 +25,17 @@ CTask *CGame::getStatus(int number){
 		t = t->next;
 	}
 }
+
+CVector2 CGame::mGetPlayerPos() {
+	CTask *t;
+	t = CTaskManager::GetInstance()->mRoot;
+
+	while (t != 0){
+		if (t->mMyNumber == E_PLAYER){
+			CPlayer *p;
+			p = (CPlayer*)t;
+			return p->mPos;
+		}
+		t = t->next;
+	}
+}

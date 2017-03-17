@@ -67,7 +67,7 @@ private:
 
 	int motion;
 	
-	void Walk();
+	void Walk(){};
 	void AnimeFlame();
 	void SetPos();
 

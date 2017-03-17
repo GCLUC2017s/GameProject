@@ -12,7 +12,7 @@ public:
 	/* getPosition
 	return:ç¿ïWè„ÇÃà íu
 	*/
-
+	static CVector2 mGetPlayerPos();
 	static CVector2 getPosition(const CVector2 &v);
 	static CEnemy00 getEnemy(CEnemy00 &ene00);
 	static CPlayer getPlayer(CTask &t);

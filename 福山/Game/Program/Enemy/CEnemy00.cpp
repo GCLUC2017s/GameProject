@@ -3,7 +3,7 @@
 #include "../Key/CKey.h" //挙動テスト時の操作用
 #include "../CGame/CGame.h"
 #include "stdio.h"
-#include"../CEnemyPattern.h"
+#include "../Enemy/CEnemyPattern.h"
 #include <cstdlib>
 #define SIZE_ENEMY00_Y 1  //エネミー00のサイズ_Y
 #define SIZE_ENEMY00_X 1 //エネミー00のサイズ_X

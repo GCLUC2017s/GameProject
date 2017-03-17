@@ -76,7 +76,7 @@ public:
 	int mAlertCnt;					//
 	int mStatus;
 	bool mEnabledJump;				//ジャンプいている
-
+	CVector2 mTargetP;  //プレイヤーポジションの取得用
 	
 	CBase() : mEnabled(true), mAlertCnt(0), mAxis(0), mHitPoint(0), mEnabledAttack(false),mEnabledUi(true){
 		mCharaFlag = true;
