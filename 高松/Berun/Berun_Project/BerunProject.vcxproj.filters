@@ -54,6 +54,9 @@
     <ClCompile Include="Game\Item\CItem.cpp">
       <Filter>Game\Item</Filter>
     </ClCompile>
+    <ClCompile Include="Game\CollisionA\CCollisionA.cpp">
+      <Filter>Game\CCollision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Global.h" />
@@ -111,6 +114,9 @@
     <ClInclude Include="Game\Item\CItem.h">
       <Filter>Game\Item</Filter>
     </ClInclude>
+    <ClInclude Include="Game\CollisionA\CCollisionA.h">
+      <Filter>Game\CCollision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="System">
@@ -157,6 +163,9 @@
     </Filter>
     <Filter Include="Game\Item">
       <UniqueIdentifier>{cc267a3f-4e23-43fc-bff4-8fb6fd303cc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\CCollision">
+      <UniqueIdentifier>{f821a886-4b42-465a-9dfe-6d68df4afed6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

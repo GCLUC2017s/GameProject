@@ -1,6 +1,8 @@
 #include "CGame.h"
 #include "CPlayer/CPlayer.h"
-
+#include "../Game/Tutorial/CTutorial.h"
+#include "../Game/Map/CMap.h"
+#include "../Game/Enemy/CEnemy.h"
 
 CGame::CGame() : mp_player(nullptr),m_step(0)
 {

@@ -92,11 +92,22 @@ void init(void)
 	CResourceManager::GetInstance()->Add("Berun", CImage::LoadImage("Title/Baran.png"));
 	CResourceManager::GetInstance()->Add("Start", CImage::LoadImage("Title/Start.png"));
 	CResourceManager::GetInstance()->Add("Exit", CImage::LoadImage("Title/Exit.png"));
+	CResourceManager::GetInstance()->Add("Clear", CImage::LoadImage("Result/Clear.png"));
+	CResourceManager::GetInstance()->Add("RankA", CImage::LoadImage("Result/A.png"));
+	CResourceManager::GetInstance()->Add("RankB", CImage::LoadImage("Result/B.png"));
+	CResourceManager::GetInstance()->Add("RankC", CImage::LoadImage("Result/C.png"));
+	CResourceManager::GetInstance()->Add("RancS", CImage::LoadImage("Result/S.png"));
+	CResourceManager::GetInstance()->Add("Rank", CImage::LoadImage("Result/Rank.png"));
+	CResourceManager::GetInstance()->Add("Select", CImage::LoadImage("Result/Item5.png"));
+	CResourceManager::GetInstance()->Add("Item", CImage::LoadImage("Result/Itemhyouji.png"));
+	CResourceManager::GetInstance()->Add("Arrow", CImage::LoadImage("Result/Yajirusi.png"));
+	CResourceManager::GetInstance()->Add("Craft", CImage::LoadImage("Result/Tsukurulogo.png"));
+	CResourceManager::GetInstance()->Add("ItemSelect", CImage::LoadImage("Result/Itemsentaku.png"));
 	CResourceManager::GetInstance()->Add("TutorialM", CImage::LoadImage("TutoText/Serihu.png"));
 	CResourceManager::GetInstance()->Add("TutorialW", CImage::LoadImage("Tutotext/Serihu2.png"));
 	CResourceManager::GetInstance()->Add("PlayerM", CImage::LoadImage("Player/Player_m.png"));
 	CResourceManager::GetInstance()->Add("PlayerW", CImage::LoadImage("Player/Player_w.png"));
-	CResourceManager::GetInstance()->Add("LittlePlayerM", CImage::LoadImage("Player/LittlePlayerM.png"));
+	CResourceManager::GetInstance()->Add("LittlePlayerM", CImage::LoadImage("Player/PlayerM.png"));
 	CResourceManager::GetInstance()->Add("LittlePlayerW", CImage::LoadImage("Player/LittlePlayerW.png"));
 	CResourceManager::GetInstance()->Add("PlayerMShadow", CImage::LoadImage("Player/Player_m2.png"));
 	CResourceManager::GetInstance()->Add("PlayerWShadow", CImage::LoadImage("Player/Player_w2.png"));
@@ -114,7 +125,6 @@ void init(void)
 	CResourceManager::GetInstance()->Add("BackGroundEveing", CImage::LoadImage("BackGround/Background_E03.png"));
 	CResourceManager::GetInstance()->Add("BackGroundNight", CImage::LoadImage("BackGround/Game_Background/Background_Ni02.png"));
 	CResourceManager::GetInstance()->Add("Carrot", CImage::LoadImage("Enemy/Carrot.png"));
-	
 	CResourceManager::GetInstance()->Add("Meter", CImage::LoadImage("Enemy/Meter_01.png"));
 	//ƒTƒEƒ“ƒh“Ç‚Ýž‚Ý
 	CSound::GetInstance()->GetSound("TITLE_BGM")->Load("BGM/Title.wav", 1);
