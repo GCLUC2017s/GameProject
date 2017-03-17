@@ -37,6 +37,7 @@ CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio)
 	m_ySize=mp_eData->ySize;
 	m_animPaternX = 0;
 	m_animPaternY = eAnim_Attack;
+	m_animLoop = false;
 	m_animCounter = 0;
 	m_dashSpeed = 1;
 	m_anim = 0;
@@ -45,7 +46,6 @@ CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio)
 	m_left = false;
 	m_up = false;
 	m_down = false;
-	m_walk = false;
 	m_dash = false;
 	m_jumpInDash = false;
 	m_jumpFlag = false;
@@ -57,26 +57,27 @@ CCharaBase::~CCharaBase()
 void CCharaBase::Animation()
 {
 	m_animCounter++;
-	switch (m_state)
-	{
-	case eState_Move:
-		if (m_walk)	m_animPaternY = 0;
-		if (m_dash) m_animPaternY = 0;
-		break;
-	case eState_Jump:
-		break;
-	case eState_Attack:
-		break;
-	default:
-		break;
-	}
 
-	if (m_animCounter >= mp_eData->animData[m_animPaternY].speed) {
+	if (m_animCounter >= mp_eData->animData[m_animPaternY].speed)
+	{
 		m_animPaternX++;
 		m_animCounter = 0;
 	}
-	if (m_animPaternX >= mp_eData->animData[m_animPaternY].pattrn) m_animPaternX = 0;
+	if (m_animPaternX >= mp_eData->animData[m_animPaternY].pattrn)
+	{
+		if(m_animLoop) m_animPaternX = 0;
+		else m_animPaternX = mp_eData->animData[m_animPaternY].pattrn - 1;
+	}
 	m_chara->SetRect(m_xSize * m_animPaternX, m_ySize * m_animPaternY, m_xSize * (m_animPaternX + ANIM_REVISION), m_ySize * (m_animPaternY + ANIM_REVISION));
+}
+
+void CCharaBase::ChangeAnimation(EANIM type, bool loop)
+{
+	//もし呼び出された瞬間にそのアニメーションが選ばれていたら、何もせずに関数を抜ける処理
+	if (type == m_animPaternY) return;
+	m_animPaternY = type;
+	m_animPaternX = 0;
+	m_animLoop = loop;
 }
 
 
@@ -87,11 +88,6 @@ void CCharaBase::Key()
 	m_left = false;
 	m_right = false; 
 	m_jump = false;
-}
-void CCharaBase::Idle(){
-//	Animation();
-
-
 }
 void CCharaBase::Move()
 {
@@ -117,9 +113,19 @@ void CCharaBase::Move()
 		m_jumpFlag = true;
 		m_state = eState_Jump;
 	}
+	if (m_up || m_down || m_left || m_right)
+	{
+		if (!m_dash)	ChangeAnimation(eAnim_Walk, true);
+		else ChangeAnimation(eAnim_Dash, true);
+	}
+	else
+	{
+		ChangeAnimation(eAnim_Idle, true);
+	}
 }
 void CCharaBase::Jump()
 {
+	ChangeAnimation(eAnim_Jump, true);
 	if (m_left)
 	{
 		m_pos.x += -CHARA_MOVE * m_dashSpeed;
