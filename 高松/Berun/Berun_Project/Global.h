@@ -24,7 +24,7 @@ enum E_Item
 	eChickItem,
 	eFishItem,
 	eRiceItem,
-	eNone,
+	eNoItem,
 };
 
 //チュートリアルデータパス
