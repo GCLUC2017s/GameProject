@@ -18,10 +18,20 @@
 #define TUTORIAL_MAX 2
 #define FILE_NAME 32
 
+enum E_Item
+{
+	eCarrotItem,
+	eChickItem,
+	eFishItem,
+	eRiceItem,
+	eNone,
+};
+
 //チュートリアルデータパス
 extern char g_tutorialDataPath[TUTORIAL_MAX][FILE_NAME];
 //現在のチュートリアルナンバー
 extern int  g_tutorialNo;
+extern int  g_itemArray[];
 
 //サウンド　マクロの定義
 #define TITLE_BGM	"TITLE_BGM"
