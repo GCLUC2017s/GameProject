@@ -89,6 +89,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Game\CGame.h" />
+    <ClInclude Include="Game\CollisionA\CCollisionA.h" />
     <ClInclude Include="Game\CPlayer\CPlayer.h" />
     <ClInclude Include="Game\Enemy\CEnemy.h" />
     <ClInclude Include="Game\Item\CItem.h" />
@@ -110,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\CGame.cpp" />
+    <ClCompile Include="Game\CollisionA\CCollisionA.cpp" />
     <ClCompile Include="Game\CPlayer\CPlayer.cpp" />
     <ClCompile Include="Game\Enemy\CEnemy.cpp" />
     <ClCompile Include="Game\Item\CItem.cpp" />
