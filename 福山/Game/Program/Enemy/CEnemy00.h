@@ -13,8 +13,16 @@
 
 #define FLAME_LIMIT 6 //フレーム数の上限
 
+
+#define LEFT_PTT	mTargetP.x<mPos.x	//ターゲットが左にいる
+#define RIGHT_PTT	mTargetP.x>mPos.x	//ターゲットが右にいる
+#define UP_PTT		mTargetP.y<mPos.y&&mAxis < character_limit_top - SIZE_ENEMY00_Y	//ターゲットが上にいる
+#define DOWN_PTT	mTargetP.y>mPos.y&& mAxis > character_limit_bottom + SIZE_ENEMY00_Y	//ターゲットが下にいる
+#define ATTACK_PTT   rulerR <3||rulerL <3  // ターゲットが左にいる時の当たり判定
+#define NO_ATTACK_PTT   rulerR >3 || rulerL >3  // ターゲットが左にいる時の当たり判定
+
 const	 CVector2 Enemy00_first_pos
-= CVector2(character_limit_left*0.75,
+= CVector2(character_limit_left*0.55,
 		  (character_limit_top + character_limit_bottom) / 2);	//エネミーの初期位置
 //現在はマップ自体の左端を見て配置している。
 
@@ -23,7 +31,7 @@ class  CEnemy00 : public CBase
 private:
 
 	float mVelocity;//移動するときに使う
-	CPlayer mPlayer;
+
 	CTexture	*mStay_tex[FLAME_LIMIT];
 	CTexture	*mWalk_tex[FLAME_LIMIT];
 	CTexture	*mAttack_tex[FLAME_LIMIT];
@@ -47,12 +55,17 @@ private:
 	int mSaveAnime; //直前のアニメが何か判断用
 	int mFlameCount;		//フレーム数カウント用
 	int mAnime;		//アニメーションのフレーム数
-	CVector2 mTarget;
 	CVector2 mSuvePos;//元いた位置の保存
-	/*アニメーションの値を入れて,引数で右左を判断 Rが*/
-	void DecisionRL(int R, int L){};
 
-	int direction;
+	int direction;	
+
+	float rulerR; //エネミーとキャラクターの距離
+	float rulerL; //エネミーとキャラクターの距離
+
+	float npNum;
+	float npNum2;
+
+	int motion;
 	
 	void Walk(){};
 	void AnimeFlame();

@@ -21,7 +21,6 @@ void CPlayer::Key() {
 	if (m_state != eState_Jump)
 	{
 		if (HOLD_KEY_UP || HOLD_KEY_DOWN || HOLD_KEY_LEFT || HOLD_KEY_RIGHT)	m_state = eState_Move;
-		else m_state = eState_Idle;
 	}
 	//シフトキーを入力していれば、状態をダッシュに設定する処理
 	if (HOLD_KEY_SHIFT)	m_dash = true;
@@ -29,8 +28,6 @@ void CPlayer::Key() {
 	if (m_dash) m_dashSpeed = DASH_SPEED;
 	else m_dashSpeed = WALK_SPEED;
 	//スペースキーを入力したら、状態をジャンプにする処理
-	if (PUSH_KEY_SPASE)
-	{
-		m_state = eState_Jump;
-	}
+	if (PUSH_KEY_SPASE)		m_jump = true;
+
 }

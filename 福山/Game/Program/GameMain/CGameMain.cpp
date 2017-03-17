@@ -11,7 +11,7 @@ void CGameMain::Init(){
 	
 	CTaskManager::GetInstance()->Add(new CEnemy00);
 
-
+	CTaskManager::GetInstance()->Add(new CUserinterface);
 }
 
 void CGameMain::Update(){

@@ -59,7 +59,7 @@ void CTaskManager::Add(CTask  *t){
 				mTail->next = 0;
 				break;
 			} 
-			else if (p->mPriorityR <= t->mPriorityR <= p->next->mPriorityR){ //’†ŠÔ
+			else if (p->mPriorityR <= t->mPriorityR && t->mPriorityR <= p->next->mPriorityR){ //’†ŠÔ
 				t->next = p->next;
 				t->prev = p;
 				p->next->prev = t;
@@ -296,12 +296,9 @@ void CTaskManager::AllUpdate(){
 	while (task != 0)
 	{
 		task->Update();
-		
-		if (task->mMyNumber == E_ENEMY00){ 
-			col.Update((CEnemy00*)task); 
+		if (task->mCharaFlag){
+			col.Update((CBase*)task);
 		}
-
-
 		if (task->mKillFlag){
 			Kill(&task);
 		}

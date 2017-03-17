@@ -102,10 +102,10 @@ CEnemy01::CEnemy01() : mVelocity(0), mFlameCount(0){
 		mStay_tex[i] = 0;
 	}
 
-	mPriorityR = FIRST_R_NO_PL;			//Renderのナンバー 
-	mPriorityU = FIRST_U_NO_PL;			//Updateのナンバー
+	mPriorityR = E_ENEMY01;			//Renderのナンバー 
+	mPriorityU = E_ENEMY01;			//Updateのナンバー
 	mHitPoint = HITPOINT_ENEMY00;		//ＨＰ
-	mMyNumber = E_ENEMY00;
+	mMyNumber = E_ENEMY01;
 
 	//四角形の頂点設定
 	mEnemy01.SetVertex(SIZE_ENEMY00_X, SIZE_ENEMY00_Y, -SIZE_ENEMY00_X, -SIZE_ENEMY00_Y);

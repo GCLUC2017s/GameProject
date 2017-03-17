@@ -1,10 +1,2 @@
-#include "CCollisionManager.h"
+#include "Collision\ccollisionmanager.h"
 
-
-CCollisionManager::CCollisionManager()
-{
-}
-
-CCollisionManager::~CCollisionManager()
-{
-}
