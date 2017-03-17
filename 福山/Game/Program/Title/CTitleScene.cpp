@@ -50,9 +50,6 @@ void CTitleScene::Update() {
 	mTitle.Render((CVector2(MAP_LIMIT_X / 3.0 + FirstX,
 	MAP_LIMIT_X / 2.0 + FirstX - 5.0f)));
 
-	ChangeScene(E_TITLE);	//シーンの設定
-
-
 	FirstX += 0.02f;
 
 
@@ -77,7 +74,7 @@ void CTitleScene::Update() {
 	//エンターキーを押したときにシーンをセレクト画面に替える処理を行う。
 	if (CKey::push(VK_RETURN)) 
 	{
-		CSceneManager::GetInstance()->ChangeScene(E_SELECT);
+		CSceneManager::GetInstance()->ChangeScene(eSceneNo::E_GAMEMAIN);
 	}
 
 

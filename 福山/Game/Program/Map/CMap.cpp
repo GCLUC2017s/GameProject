@@ -7,6 +7,9 @@
 #define FILE_BG_GROUND		"../CG/background/ground/"
 #define FILE_BG_SKY			"../CG/background/sky/"
 #define FILE_BG_TREE		"../CG/background/tree/"
+#define BG_SIZE_X 1600
+#define BG_SIZE_Y 400
+
 
 void CMap::Init() {
 	mGroundTex = new CTexture;
@@ -14,7 +17,7 @@ void CMap::Init() {
 	mTreeTex = new CTexture;
 
 	mGroundTex->load(FILE_BG_GROUND"ground_background.tga");
-	mSkyTex->load(FILE_BG_SKY"background\sky.tga");
+	mSkyTex->load(FILE_BG_SKY"sky_background.tga");
 	mTreeTex->load(FILE_BG_TREE"background_tree.tga");
 
 	const float area_top = MAP_LIMIT_Y / 8;
@@ -23,15 +26,15 @@ void CMap::Init() {
 
 	mGround.SetVertex(-area_x, area_top, area_x, area_bottom);
 	mGround.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-	mGround.SetUv(mGroundTex, 0, 0, 1600, 400);
+	mGround.SetUv(mGroundTex, 0, 0, BG_SIZE_X, BG_SIZE_Y);
 
 	mSky.SetVertex(-area_x, area_top, area_x, area_bottom);
 	mSky.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-	mSky.SetUv(mGroundTex, 0, 0, 1600, 400);
+	mSky.SetUv(mSkyTex, 0, 0, BG_SIZE_X, BG_SIZE_Y);
 	
 	mTree.SetVertex(-area_x, area_top, area_x, area_bottom);
 	mTree.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-	mTree.SetUv(mGroundTex, 0, 0, 1600, 400);
+	mTree.SetUv(mTreeTex, 0, 0, BG_SIZE_X, BG_SIZE_Y);
 
 
 }
@@ -63,4 +66,6 @@ void CMap::Update() {
 
 void CMap::Render() {
 	mGround.Render();
+	mSky.Render();
+	mTree.Render();
 }

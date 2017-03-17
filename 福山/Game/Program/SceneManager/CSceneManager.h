@@ -2,12 +2,14 @@
 #define CSCENEMANAGER_HPP
 #include "../Scene/CScene.h"
 
-class CSceneManager :public CScene{
+class CSceneManager{
 private:
 	static CSceneManager *mSceneManager;
 
 public:
 	int NextNo;
+
+	int status;
 
 	static CSceneManager *GetInstance(); //GetInstance
 
@@ -16,8 +18,6 @@ public:
 	
 	void SceneMain();
 
-	virtual	void Update(){};	//virtualÅ@
-	virtual	void Render(){};
 
 };
 #endif

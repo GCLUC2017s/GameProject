@@ -9,7 +9,8 @@
 #include "../Map/CMap.h"
 #include "../Scene/CScene.h"
 #include "../SceneManager/CSceneManager.h"
-class CTitleScene :public CSceneManager{
+
+class CTitleScene :public CScene{
 private:
 	CMap mMap;
 	CTitle mTitle;

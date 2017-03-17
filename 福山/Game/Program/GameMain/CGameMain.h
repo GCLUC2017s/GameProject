@@ -8,10 +8,11 @@
 #include "../Map/CMap.h"
 #include "../Collision/CCollision.h"
 #include "../UserInterface/CUserInterface.h"
+#include "../SceneManager/CSceneManager.h"
 
 #define JUMP_FIRST_SPEED 0.2
 
-class CGameMain{
+class CGameMain :public CScene{
 public:
 
 	enum EStatus{

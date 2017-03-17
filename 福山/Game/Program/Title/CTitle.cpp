@@ -27,9 +27,9 @@ CTitle::~CTitle(){
 	}
 }
 CTitle::CTitle() : mpTexture(0){
-	mMyNumber = E_TITLE;
-	mPriorityR = E_TITLE;
-	mPriorityU = E_TITLE;
+	mMyNumber = E_MTITLE;
+	mPriorityR = E_MTITLE;
+	mPriorityU = E_MTITLE;
 
 	mTitleLogo.SetVertex(-7.0f, 2.0f, 2.0, -1.0f);//ï\é¶îÕàÕ
 	mTitleLogo.SetColor(1.0f, 1.0f, 1.0f, 1.0f);//êFñ°

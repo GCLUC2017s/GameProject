@@ -171,8 +171,9 @@ void CPlayer::Delete(CTexture **t){
 }
 
 CPlayer::~CPlayer() {
+	/*
 
-	/*テクスチャ読み込み*/
+	//テクスチャ読み込み
 	for (int i = 0; i < FRAME_LIMIT; i++)
 	{
 		delete mStayTex[i];
@@ -191,6 +192,7 @@ CPlayer::~CPlayer() {
 		Delete(&mEatTex[i]);
 
 	}
+	*/
 
 }
 

@@ -1,6 +1,6 @@
 #include "CGameMain.h"
 
-CGameMain::CGameMain(){}
+CGameMain::CGameMain():status(E_INIT){}
 
 void CGameMain::Init(){
 	CTaskManager::GetInstance()->Add(new CMap);

@@ -1,11 +1,11 @@
 #include "../GameMain/CGameMain.h"
 #include "../Define/define.h"
 #include <Windows.h>
+#include "../SceneManager/CSceneManager.h"
 #define JUMP_FIRST_SPEED 0.2
 #define ENEMYE_ARRAY_SIZE 10 //エネミー数
 #define PLAYER_ARRAY_SIZE 10 //プレイヤー数
-
-CGameMain gamemain;
+CSceneManager manager;
 
 /* display関数
 1秒間に60回実行される
@@ -14,7 +14,7 @@ void display() {
 	//画面のクリア
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	gamemain.Update();
+	manager.SceneMain();
 
 	//画面に表示
 	glutSwapBuffers();
