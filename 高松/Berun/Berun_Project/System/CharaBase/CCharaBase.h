@@ -33,11 +33,11 @@ struct T_CharacterData {
 	int exp;		//必要経験値
 	float speed;	//移動速度
 	float jump;		//ジャンプ力
-	float xSize;	//Xサイズ
-	float ySize;	//Yサイズ
+	SVector2D size;
 	T_AnimData *animData;
-	int texSizeX;
-	int texSizeY;
+	SVector2D texSize;
+	SVector2D senter;	//キャラクターの中心点
+	CRect rect;			//キャラクターの矩形
 	E_Item item;
 };
 enum {
@@ -80,7 +80,7 @@ protected:
 	ESTATE m_state;
 	CImage *m_chara;
 	CImage *m_enemyHp;
-	T_CharacterData  *mp_eData;
+	const T_CharacterData  *mp_eData;
 	
 	int m_imgPtn;
 	//キャラクターのレベル
@@ -115,8 +115,6 @@ protected:
 	int m_dashSpeed;
 
 	unsigned int m_anim;
-	float m_xSize;//キャラクターのXサイズ
-	float m_ySize;//キャラクターのYサイズ
 	//キャラクターの向きを格納するフラグ
 	bool m_charaDirection;
 	bool m_right;

@@ -8,6 +8,7 @@
 	{ 0,0,0,0,0,0,0.0f },
 };*/
 
+
 CEnemy::CEnemy(int type):CCharaBase(type,eUDP_Enemy,eDWP_Enemy)
 {
 	m_pos = CVector3D(300, 0 ,300);
@@ -28,13 +29,16 @@ void CEnemy::Update() {
 	
 	if (m_pos.x > -10) {
 		if (eCarrot) {
-			m_enemyHp->SetPos(m_pos.x - 50, m_pos.z+100);
-			m_pos.x -=  1;
+			m_enemyHp->SetPos(m_pos.x, m_pos.z+100);
+			m_pos.x -=  2;
 		}
 	}
 	else {
 		
 		m_pos.x = 1280;
+	}
+	if (m_hp < 0) {
+		
 	}
 	
 	
@@ -44,3 +48,4 @@ void CEnemy::Draw(){
 	CCharaBase::Draw();
 	m_enemyHp->Draw();
 }
+

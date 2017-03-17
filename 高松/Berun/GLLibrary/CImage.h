@@ -122,6 +122,7 @@ public:
 		@retval	–³‚µ
 	**/
 	void SetColor(float r, float g, float b,float a){
+
 		m_color.r = r;
 		m_color.g = g;
 		m_color.b = b;
