@@ -7,11 +7,14 @@
 #ifndef RESULT_GUARD
 #define RESULT_GUARD
 
-#include "../Scene/CScene.h"
+#include "../GLLibrary/CImage.h"
+#include "../Global.h"
+#include "../CScene.h"
 
 
 class CResult : public CScene
 {
+private:
 public:
 	CResult();
 	~CResult();

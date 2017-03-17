@@ -7,9 +7,9 @@ T_AnimData _carrotAnimData[] = {
 static T_CharacterData g_characterData[] = 
 {
 	//ID,レベル、最大HP,現在HP,最大SP,現在SP,攻撃力,防御力,取得経験値,必要経験値,移動速度,ジャンプ力,Xサイズ,Yサイズ(13)
-	{ "LittlePlayerM",0,5,0,0,0,0,0,0,0,1,0,0,100,140 ,_carrotAnimData },
-	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,0,0, 256,256,_carrotAnimData },
-	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,160,160 ,_carrotAnimData },
+	{ "LittlePlayerM",0,5,0,0,0,0,0,0,0,1,0,0,100,140 ,_carrotAnimData,eNoItem },
+	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,0,0, 256,256,_carrotAnimData,eNoItem },
+	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,160,160 ,_carrotAnimData,eCarrotItem },
 	//{ "Chick",3,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Rice",5,5,0,0,0,0,0,0,0,1,0,0,0 },

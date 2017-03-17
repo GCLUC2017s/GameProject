@@ -35,6 +35,7 @@ struct T_CharacterData {
 	float xSize;	//Xサイズ
 	float ySize;	//Yサイズ
 	T_AnimData *animData;
+	E_Item item;
 };
 enum {
 	ePlayerMan,	//プレイヤー男
