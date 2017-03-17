@@ -49,7 +49,7 @@ void CSceneManager::Draw()
 		if(m_inCnt < m_inTime) 
 		{
 			m_inCnt++;
-			m_anim.Draw(1.0 - (float)m_inCnt / m_inTime);
+			m_anim.Draw(1.0f - (float)m_inCnt / m_inTime);
 		}
 	}
 

@@ -1,5 +1,6 @@
 #include"../Title/CTitle.h"
 #include"../Graphic/CTexture.h"
+#include "../MyNumber/CMyNumber.h"
 
 //TitleSceneで表示されるテクスチャの設定。
 
@@ -26,6 +27,10 @@ CTitle::~CTitle(){
 	}
 }
 CTitle::CTitle() : mpTexture(0){
+	mMyNumber = E_TITLE;
+	mPriorityR = E_TITLE;
+	mPriorityU = E_TITLE;
+
 	mTitleLogo.SetVertex(-7.0f, 2.0f, 2.0, -1.0f);//表示範囲
 	mTitleLogo.SetColor(1.0f, 1.0f, 1.0f, 1.0f);//色味
 

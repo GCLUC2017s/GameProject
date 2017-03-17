@@ -107,10 +107,10 @@ CBoss::CBoss() : mVelocity(0), mFlameCount(0){
 		mStay_tex[i] = 0;
 	}
 
-	mPriorityR = FIRST_R_NO_PL;			//Renderのナンバー 
-	mPriorityU = FIRST_U_NO_PL;			//Updateのナンバー
+	mPriorityR = E_BOSS;			//Renderのナンバー 
+	mPriorityU = E_BOSS;			//Updateのナンバー
 	mHitPoint = HITPOINT_ENEMY00;		//ＨＰ
-	mMyNumber = E_ENEMY00;
+	mMyNumber = E_BOSS;
 
 	//四角形の頂点設定
 	mBoss.SetVertex(SIZE_BOSS_X, SIZE_BOSS_Y, -SIZE_BOSS_X, -SIZE_BOSS_Y);

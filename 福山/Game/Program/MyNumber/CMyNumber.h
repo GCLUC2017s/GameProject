@@ -9,11 +9,15 @@
 
 task　の　属性を知るために使う
 
+mPriorityRにも使うrender
+mPriorityUにも使う
+
+E_ERRORは初期値として入れる
 
 */
 enum  EMyNumber
 {
-	E_BACKGROWND, E_PLAYER, E_ENEMY00, E_ENEMY01, E_BOSS, E_CAMERA
+	E_BACKGROWND = -100, E_TITLE, E_PLAYER = 0, E_ENEMY00, E_ENEMY01, E_BOSS, E_CAMERA = 90, E_UI, E_ERROR = 999
 };
 
 #endif
