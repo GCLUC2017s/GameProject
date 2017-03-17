@@ -1,7 +1,7 @@
 /**
 * @file		CResult.h
 * @brief	リザルトシーンクラス
-* @author	
+* @author	yuki yamaji
 */
 
 #ifndef RESULT_GUARD
