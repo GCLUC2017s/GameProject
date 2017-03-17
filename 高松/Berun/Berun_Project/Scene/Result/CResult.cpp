@@ -15,14 +15,8 @@ static T_ResultData g_resultdata[eMax] =
 	{ 200.0f,137.0f,{ 0.0f,0.0f } },
 };
 
-CResult::CResult()
-{
-}
-
 CResult::CResult(int type) : m_xSize(0.0f), m_ySize(0.0f), m_step(0)
 {
-	mp_data = &g_resultdata[type];
-	CSound::GetInstance()->GetSound("RESULT_BGM")->Play();
 	mp_img[0] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Clear"));
 	mp_img[1] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("RankA"));
 	mp_img[2] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("RankB"));
@@ -34,6 +28,8 @@ CResult::CResult(int type) : m_xSize(0.0f), m_ySize(0.0f), m_step(0)
 	mp_img[8] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Arrow"));
 	mp_img[9] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Craft"));
 	mp_img[10] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("ItemSelect"));
+	CSound::GetInstance()->GetSound("RESULT_BGM")->Play();
+	mp_data = &g_resultdata[type];
 	m_xSize = mp_data->xSize;
 	m_ySize = mp_data->ySize;
 	m_pos = mp_data->pos;
@@ -72,11 +68,6 @@ void CResult::Update()
 		}
 	}
 	*/
-	for (int i = 0; i < eMax; i++)
-	{
-		mp_img[i]->SetPos(m_pos);
-		mp_img[i]->SetSize(m_xSize,m_ySize);
-	}
 }
 
 void CResult::Draw()
