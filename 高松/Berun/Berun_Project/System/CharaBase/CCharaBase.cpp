@@ -7,8 +7,8 @@ T_AnimData _carrotAnimData[] = {
 static T_CharacterData g_characterData[] = 
 {
 	//ID,レベル、最大HP,現在HP,最大SP,現在SP,攻撃力,防御力,取得経験値,必要経験値,移動速度,ジャンプ力,Xサイズ,Yサイズ(13)
-	{ "LittlePlayerM",0,5,0,0,0,0,0,0,0,1,0,0,100,140 ,_carrotAnimData,eNoItem },
-	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,0,0, 256,256,_carrotAnimData,eNoItem },
+	{ "LittlePlayerM",0,5,0,0,0,0,0,0,0,1,1,0,100,140 ,_carrotAnimData,eNoItem },
+	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,1,0, 256,256,_carrotAnimData,eNoItem },
 	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,160,160 ,_carrotAnimData,eCarrotItem },
 	//{ "Chick",3,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
@@ -18,7 +18,7 @@ static T_CharacterData g_characterData[] =
 //static_assert (ARRAY_SIZE(g_characterData) == eCharacterMax,"g_characterDataSizeError");
 CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio) : CBase(updatePrio, drawPrio)
 {
-	m_state = eState_Idle;
+	m_state = eState_Move;
 	mp_eData = &g_characterData[type];
 	m_chara = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get(mp_eData->imageName));
 	m_imgPtn = 0;
@@ -39,11 +39,13 @@ CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio)
 	m_animPaternY = eAnim_Attack;
 	m_animCounter = 0;
 	m_dashSpeed = 1;
+	m_anim = 0;
 	m_charaDirection = false;
 	m_right = false;
 	m_left = false;
 	m_up = false;
 	m_down = false;
+	m_walk = false;
 	m_dash = false;
 	m_jumpInDash = false;
 	m_jumpFlag = false;
@@ -55,6 +57,20 @@ CCharaBase::~CCharaBase()
 void CCharaBase::Animation()
 {
 	m_animCounter++;
+	switch (m_state)
+	{
+	case eState_Move:
+		if (m_walk)	m_animPaternY = 0;
+		if (m_dash) m_animPaternY = 0;
+		break;
+	case eState_Jump:
+		break;
+	case eState_Attack:
+		break;
+	default:
+		break;
+	}
+
 	if (m_animCounter >= mp_eData->animData[m_animPaternY].speed) {
 		m_animPaternX++;
 		m_animCounter = 0;
@@ -63,12 +79,14 @@ void CCharaBase::Animation()
 	m_chara->SetRect(m_xSize * m_animPaternX, m_ySize * m_animPaternY, m_xSize * (m_animPaternX + ANIM_REVISION), m_ySize * (m_animPaternY + ANIM_REVISION));
 }
 
+
 void CCharaBase::Key()
 {
 	m_up = false;
 	m_down = false;
 	m_left = false;
-	m_right = false;
+	m_right = false; 
+	m_jump = false;
 }
 void CCharaBase::Idle(){
 //	Animation();
@@ -77,6 +95,9 @@ void CCharaBase::Idle(){
 }
 void CCharaBase::Move()
 {
+	
+	if (m_dash) m_dashSpeed = mp_eData->speed*2;
+	else m_dashSpeed = mp_eData->speed;
 	if (m_up)	m_pos.z += CHARA_MOVE * m_dashSpeed;
 	if (m_down)	m_pos.z += -CHARA_MOVE * m_dashSpeed;
 	if (m_left)
@@ -91,25 +112,29 @@ void CCharaBase::Move()
 		//キャラの方向フラグを右向きの状態にする
 		m_charaDirection = false;
 	}
+	if (m_jump) {
+		m_gravitySpeed += 20;
+		m_jumpFlag = true;
+		m_state = eState_Jump;
+	}
 }
 void CCharaBase::Jump()
 {
-	if (!m_jumpFlag) m_gravitySpeed += 20;
-	m_jumpFlag = true;
 	if (m_left)
 	{
-		m_pos.x += -CHARA_MOVE;
+		m_pos.x += -CHARA_MOVE * m_dashSpeed;
 		m_charaDirection = true;
 	}
 	if (m_right)
 	{
-		m_pos.x += CHARA_MOVE;
+		m_pos.x += CHARA_MOVE * m_dashSpeed;
 		m_charaDirection = false;
 	}
 	if (m_pos.y <= 0 && m_gravitySpeed < 20)
 	{
 		m_jumpFlag = false;
-		m_state = eState_Idle;
+		m_jumpInDash = false;
+		m_state = eState_Move;
 	}
 }
 void CCharaBase::HpBar()
@@ -121,9 +146,6 @@ void CCharaBase::Update()
 	Key();
 	switch (m_state)
 	{
-	case eState_Idle:
-		Idle();
-		break;
 	case eState_Move:
 		Move();
 		break;

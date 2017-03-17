@@ -61,13 +61,12 @@ class CCharaBase : public CBase
 {
 protected:
 	enum ESTATE{
-		eState_Idle,
 		eState_Jump,
 		eState_Move,
 		eState_Attack,
 		
 	};
-	enum {
+	enum EANIM {
 		eAnim_Walk,
 		eAnim_Idle,
 		eAnim_Attack,
@@ -106,8 +105,8 @@ protected:
 	int m_animCounter;
 	//ダッシュする時のスピード
 	int m_dashSpeed;
-	//キャラクターのジャンプ力
-	float m_jump;
+
+	unsigned int m_anim;
 	float m_xSize;//キャラクターのXサイズ
 	float m_ySize;//キャラクターのYサイズ
 	//キャラクターの向きを格納するフラグ
@@ -116,6 +115,8 @@ protected:
 	bool m_left;
 	bool m_up;
 	bool m_down;
+	bool m_walk;
+	bool m_jump;
 	//ダッシュ中かどうかを格納する変数(false = No,true = Yes)
 	bool m_dash;
 	//ジャンプする時に走っていたかどうかを格納する変数(false = No,true = Yes)
@@ -131,9 +132,9 @@ public:
 	CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio);
 	~CCharaBase();
 	void Animation();
+	void AnimationChange();
 	void Update();
 	virtual void Draw();
 	void HitCheck();
 };
-
 #endif
