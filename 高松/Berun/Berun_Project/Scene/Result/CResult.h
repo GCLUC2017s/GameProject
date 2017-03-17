@@ -48,7 +48,6 @@ private:
 	int m_step;
 	//int m_corsol;
 public:
-	CResult();
 	CResult(int type);
 	~CResult();
 	void Update();

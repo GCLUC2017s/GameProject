@@ -6,11 +6,13 @@
 
 #ifndef GAME_GUARD
 #define GAME_GUARD
-#include"Map/CMap.h"
-#include"Enemy/CEnemy.h"
-#include"CPlayer/CPlayer.h"
+
 #include "../Scene/CScene.h"
-#include "../Game/Tutorial/CTutorial.h"
+
+//クラスのプロトタイプ宣言
+class CMap;
+class CTutorial;
+class CPlayer;
 
 class CGame : public CScene
 {
