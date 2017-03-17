@@ -107,7 +107,7 @@ void init(void)
 	CResourceManager::GetInstance()->Add("TutorialW", CImage::LoadImage("Tutotext/Serihu2.png"));
 	CResourceManager::GetInstance()->Add("PlayerM", CImage::LoadImage("Player/Player_m.png"));
 	CResourceManager::GetInstance()->Add("PlayerW", CImage::LoadImage("Player/Player_w.png"));
-	CResourceManager::GetInstance()->Add("LittlePlayerM", CImage::LoadImage("Player/LittlePlayerM.png"));
+	CResourceManager::GetInstance()->Add("LittlePlayerM", CImage::LoadImage("Player/PlayerM.png"));
 	CResourceManager::GetInstance()->Add("LittlePlayerW", CImage::LoadImage("Player/LittlePlayerW.png"));
 	CResourceManager::GetInstance()->Add("PlayerMShadow", CImage::LoadImage("Player/Player_m2.png"));
 	CResourceManager::GetInstance()->Add("PlayerWShadow", CImage::LoadImage("Player/Player_w2.png"));
