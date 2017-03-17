@@ -1,12 +1,6 @@
 #include "CGame.h"
+#include "../Task/CTaskManager.h"
 
-int *CGame::mpMapData = 0;	//マップのデータ
-int CGame::mMapRows = 0;	//マップの行数
-int CGame::mMapCols = 0;	//マップの列数
-int CGame::mDispRows = 0;	//表示する行数
-int CGame::mDispCols = 0;	//表示する列数
-int CGame::status = 0;		//ゲーム全体のステータス
-CPlayer *CGame::mPlayer;
 
 /* getPosition
 i:マップデータ配列の添字
@@ -18,4 +12,16 @@ CVector2 CGame::getPosition(const CVector2 &v) {
 }
 CEnemy00 CGame::getEnemy(CEnemy00 &ene00){
 	return ene00;
+}
+
+
+CTask *CGame::getStatus(int number){
+	CTask *t;
+	t = CTaskManager::GetInstance()->mRoot;
+	while (t != 0){
+		if (t->mMyNumber == number){
+			return t;
+		}
+		t = t->next;
+	}
 }

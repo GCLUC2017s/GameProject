@@ -1,8 +1,14 @@
+/*
+　あたり判定の管理プログラム
+  担当者　 冨田健斗
+*/
 #ifndef COLLISIONMANAGER_HPP
 #define COLLISIONMANAGER_HPP
 #include "../Collision/CCollision.h"
 #include "../Player/CPlayer.h"
 #include "../Enemy/CEnemy00.h"
+#include "../Enemy/CEnemy01.h"
+#include"../Enemy/CBoss.h"
 #include "../MyNumber/CMyNumber.h"
 
 class CCollisionManager : public CBase
@@ -10,33 +16,11 @@ class CCollisionManager : public CBase
 public:
 	CCollisionManager();
 	~CCollisionManager();
+	/*引数の部分に攻撃したい対象を入れる*/
+	void EnemyAttack(CPlayer *b);
+	void PlayerAttack(CBase *b);
 
-	void Update(CEnemy00 *ENE)
-	{
-	
-		CTask *task;
-		CPlayer *player;
-
-		task = CTaskManager::GetInstance()->mRoot; 
-		/*始まり*/
-		while (task != 0)
-		{
-			if (task->mMyNumber == E_PLAYER){
-				player = (CPlayer*)task;
-
-				if (CCollision::Collision(player->mRect, ENE->mRect)){
-
-					player->mHitPoint = 0;
-
-				}
-				
-			}
-			task = task->next;
-			
-		}
-		/*終わり*/
-
-	}
+	void Update(CBase *b);
 	
 private:
 

@@ -48,7 +48,7 @@ private:
 		E_EX02_L, E_FLAME_L,
 		E_BRAKE_L,
 
-		E_STAY_R, E_WALK_R,
+		E_STAY_R=12, E_WALK_R,
 		E_RUN_R, E_NORMALATTACK_A_R,
 		E_NORMALATTACK_B_R, E_NORMALATTACK_C_R,
 		E_EAT_R, E_EX01_R,
@@ -59,14 +59,12 @@ private:
 
 	};
 
-	int mAnimePattern;				//全体のアニメーションパターン大きさ
-	bool mEnabledJump;				//ジャンプいている
-	bool mEnabledNormalAttack;		//通常攻撃しているかいないか
 	float mSpeedJump;				//ジャンプのスピード
 	float mIntervalCount;			//Interval関数カウント用
-
+	
 	CVector2 mTarget;
 	CVector2 mSuvePos;				//元いた位置の保存
+	CVector2 mSaveForword;			//前の右左判断
 
 	/*移動処理*/
 	void Move();
@@ -88,6 +86,8 @@ private:
 	bool EnabledBrake();
 	/*NormalAttackメソッド*/
 	void NormalAttack();
+	/*アニメーションシーン*/
+	void AnimeScene();
 	
 public:
 	/*

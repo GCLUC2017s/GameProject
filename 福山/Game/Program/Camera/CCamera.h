@@ -6,24 +6,24 @@
 #define CAMERA_HPP
 #include "../Task/CTask.h"
 #include "../Player/CPlayer.h"
+#include "../Camera/CCamera.h"
+#include "../MyNumber/CMyNumber.h"
+
 #define CAMERA_R_NO 100 //カメラのレンダーのナンバー
 #define CAMERA_U_NO 100 //カメラのアップデータのナンバー
+
 class  CCamera : public CTask {
 private:
 
 
 	CPlayer *mPlayer;
 
-	int save_player_x;
 public:
+ 	static int mCamerax;
 
-	CCamera(){
-		mPriorityR = CAMERA_R_NO;
-		mPriorityU = CAMERA_U_NO;
-		save_player_x = first_pos.x;
-	};
+	CCamera();
 
-	void Render();
+	void Update();
 
 };
 

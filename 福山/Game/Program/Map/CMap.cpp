@@ -31,8 +31,8 @@ CMap::~CMap() {
 }
 CMap::CMap() : BackGround(0) {
 	
-		mPriorityR = FIRST_R_NO_BG;		//レンダー順番の初期設定
-		mPriorityU = FIRST_U_NO_BG;		//アップデータ順番の初期設定
+		mPriorityR = E_BACKGROWND;		//レンダー順番の初期設定
+		mPriorityU = E_BACKGROWND;		//アップデータ順番の初期設定
 		mMyNumber = E_BACKGROWND;		//属性の設定
 	
 }

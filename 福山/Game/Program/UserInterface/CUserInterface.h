@@ -2,15 +2,32 @@
 #define USERINTERFACE_HPP
 #include "../Graphic/CRectangle.h"
 #include "../Graphic/CTexture.h"
+#include "../Task/CTask.h"
+#include "../Define/define.h"
 
-class  CUserinterface
+class  CUserinterface : public CTask
 {
-public:
-	CRectangle  mRect;
-	
-	CTexture  *mPlayerTex;
-	CTexture  *mEnemyTex;
+private:
 
+	CRectangle  mGaugePl;
+	CRectangle  mFramePl;
+
+	CRectangle mGaugeEne;
+	CRectangle mFrameEne;
+
+	CTexture  *mPlayerGageTex;
+	CTexture  *mPlyerFrameTex;
+
+	CTexture  *mEnemyGageTex;
+	CTexture  *mEnemyFrameTex;
+
+	CVector2 mPos;
+	float savex;
+
+	const float area_x = MAP_LIMIT_X / 2;
+	
+
+public:
 	/*
 	自分がどのアニメーションか判断用
 	enum文
@@ -19,7 +36,6 @@ public:
 	 CUserinterface();
 	~ CUserinterface();
 
-	void Init();
 	void Update();
 	void Render();
 };
