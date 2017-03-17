@@ -10,7 +10,6 @@
 #include "../GLLibrary/CImage.h"
 #include "../Global.h"
 #include "../CScene.h"
-#include "../Game/Item/CItem.h"
 
 class CTitle : public CScene
 {

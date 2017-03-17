@@ -148,7 +148,7 @@ void CCharaBase::Draw()
 		m_chara->SetFlipH(m_charaDirection);
 		Animation();
 		m_chara->Draw();
-		m_enemyHp->Draw();
+	//	m_enemyHp->Draw();
 }
 void CCharaBase::HitCheck()
 {

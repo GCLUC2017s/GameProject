@@ -20,6 +20,10 @@ struct T_MapData
 {
 	char imgName[64];
 };
+struct T_MapDataBack
+{
+	char imgName[64];
+};
 class CMap : public CBase{
 public:
 	enum E_Stage
@@ -32,13 +36,16 @@ public:
 	};
 private:
 	CImage *m_backGround[MAP_DATA];
+	CImage *m_ground;//‰¼
+	CImage *m_ground2;//‰¼
+	CImage *m_mapRight;//–¾‚é‚³
+	float m_mapTime;//“§–¾“x
+	E_Stage m_stage;//¡‚Ì
+	E_Stage m_newstage;//Ÿ‚Ì
 	
-	
-	E_Stage m_stage;
-	E_Stage m_newstage;
-	T_MapData *map_eData;
-	
-
+	T_MapDataBack *map_eDataBack;
+	int m_time;
+	int m_cont;
 public:
 	CMap(E_Stage type);
 	~CMap();

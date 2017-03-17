@@ -37,7 +37,7 @@ void CGame::Draw()
 		CVector3D m_playerPos = mp_player->GetPos();
 		CVector2D m_screen = CVector2D(m_playerPos.x - 640, 0);
 		if (m_screen.x < 0) m_screen.x = 0;
-		if (m_screen.x > 2400) m_screen.x = 2400;
+		if (m_screen.x > 5120) m_screen.x = 5120;
 		mp_player->SetScroal(m_screen);
 
 	}
