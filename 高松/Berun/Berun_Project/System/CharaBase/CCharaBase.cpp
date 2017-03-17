@@ -5,12 +5,12 @@ T_AnimData _carrotAnimData[] = {
 	{ 5,3 },
 	{ 5,10 },
 };
-static T_CharacterData g_characterData[] = 
+ static const T_CharacterData g_characterData[] =
 {
-	//ID,レベル、最大HP,現在HP,最大SP,現在SP,攻撃力,防御力,取得経験値,必要経験値,移動速度,ジャンプ力,Xサイズ,Yサイズ(13)
-	{ "LittlePlayerM",0,5,0,0,0,0,0,0,0,1,1,0,122,161 ,_carrotAnimData,550,900,eItemMax },
-	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,1,0, 256,256,_carrotAnimData,500,900,eItemMax },
-	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,160,160 ,_carrotAnimData,160,160,eCarrotItem },
+	//ID,レベル、最大HP,現在HP,最大SP,現在SP,攻撃力,防御力,取得経験値,必要経験値,移動速度,ジャンプ力,キャラクターの表示サイズ,キャラクターのアニメデータ,キャラクターの元画像での1サイズ,
+	{ "LittlePlayerM",0,5,0,0,0,0,0,0,0,1,1,0,{120,160} ,_carrotAnimData,{550,900},{60,160},CRect(-60,-160,60,0),eItemMax },
+	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,1,0, {256,256},_carrotAnimData,{500,900},{ 60,160 },CRect(-60,-160,60,0),eItemMax },
+	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,{160,160} ,_carrotAnimData,{160,160},{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	//{ "Chick",3,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Rice",5,5,0,0,0,0,0,0,0,1,0,0,0 },
@@ -34,8 +34,6 @@ CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio)
 	m_exp=mp_eData->exp;
 	m_speed=mp_eData->speed;
 	m_jump=mp_eData->jump;
-	m_xSize=mp_eData->xSize;
-	m_ySize=mp_eData->ySize;
 	m_animPaternX = 0;
 	m_animPaternY = eAnim_Attack;
 	m_animLoop = false;
@@ -68,7 +66,7 @@ void CCharaBase::Animation()
 		if(m_animLoop) m_animPaternX = 0;
 		else m_animPaternX = mp_eData->animData[m_animPaternY].pattrn - 1;
 	}
-	m_chara->SetRect(mp_eData->texSizeX * m_animPaternX, mp_eData->texSizeY * m_animPaternY, mp_eData->texSizeX * (m_animPaternX + ANIM_REVISION), mp_eData->texSizeY * (m_animPaternY + ANIM_REVISION));
+	m_chara->SetRect(mp_eData->texSize.x * m_animPaternX, mp_eData->texSize.y * m_animPaternY, mp_eData->texSize.x * (m_animPaternX + ANIM_REVISION), mp_eData->texSize.y * (m_animPaternY + ANIM_REVISION));
 }
 
 void CCharaBase::ChangeAnimation(EANIM type, bool loop)
@@ -168,9 +166,9 @@ void CCharaBase::Update()
 }
 void CCharaBase::Draw()
 {
-		m_chara->SetCenter(64, 128);
+		m_chara->SetCenter(mp_eData->senter.x, mp_eData->senter.y);
 		Animation();
-		m_chara->SetSize(m_xSize, m_ySize);
+		m_chara->SetSize(mp_eData->size.x, mp_eData->size.y);
 		m_chara->SetPos(GetScreenPos());
 		m_chara->SetFlipH(m_charaDirection);
 

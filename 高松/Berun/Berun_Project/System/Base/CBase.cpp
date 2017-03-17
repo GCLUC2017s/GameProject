@@ -21,3 +21,8 @@ CVector2D CBase::GetScreenPos()
 	p.y -= m_pos.y;
 	return p - m_scroal;
 }
+
+void CBase::HitCallBack(CBase * p) 
+{
+
+}
