@@ -12,6 +12,7 @@ CResult::~CResult()
 
 void CResult::Update()
 {
+	//CItem::GetInstance()->AddItem(eCarrotItem,0);
 	/*
 	if (PUSH_KEY_ENTER)
 	{

@@ -109,6 +109,7 @@ CTitle::CTitle()
 	m_firstChara = false;
 	m_titleMenu = false;
 	CSound::GetInstance()->GetSound("TITLE_BGM")->Play();
+	CItem::ClearInstance();
 }
 CTitle::~CTitle()
 {
