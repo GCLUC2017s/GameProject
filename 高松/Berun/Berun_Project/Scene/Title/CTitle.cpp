@@ -1,5 +1,6 @@
 #include "CTitle.h"
 #include "../CSceneManager.h"
+#include "../Game/Item/CItem.h"
 
 CTitle::CTitle()
 {

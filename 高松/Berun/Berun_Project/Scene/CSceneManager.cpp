@@ -49,7 +49,7 @@ void CSceneManager::Draw()
 		if(m_inCnt < m_inTime) 
 		{
 			m_inCnt++;
-			m_anim.Draw(1.0 - (float)m_inCnt / m_inTime);
+			m_anim.Draw(1.0f - (float)m_inCnt / m_inTime);
 		}
 	}
 
@@ -86,9 +86,11 @@ void CSceneManager::ChangeScene(E_Scene scene)
 	case eGame:
 		mp_scene = new CGame();
 		break;
+		/*
 	case eResult:
 		mp_scene = new CResult();
 		break;
+		*/
 	default:
 		//デバッグ
 		assert(false);

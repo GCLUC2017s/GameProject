@@ -3,13 +3,13 @@
 /**
 *@file	 CMap.h
 *@brief  マップクラス
-*@author 宮田
+*@author Kousei Miyeta
 */
 #ifndef CMAP_GURAD
 #define CMAP_GURAD
 #define SCROLL_SPEED 2//マップスクロール値
 #define MAP_DATA 4//マップの数
-#define MAP_WITHT 1280
+#define MAP_WITHT 1280//マップの幅
 
 
 #include "../Global.h"
@@ -17,6 +17,10 @@
 #include "../../System/CharaBase/CCharaBase.h"
 
 struct T_MapData
+{
+	char imgName[64];
+};
+struct T_MapDataBack
 {
 	char imgName[64];
 };
@@ -32,13 +36,16 @@ public:
 	};
 private:
 	CImage *m_backGround[MAP_DATA];
+	CImage *m_ground;//仮
+	CImage *m_ground2;//仮
+	CImage *m_mapRight;//明るさ
+	float m_mapTime;//透明度
+	E_Stage m_stage;//今の時刻
+	E_Stage m_newstage;//次の時刻
 	
-	
-	E_Stage m_stage;
-	E_Stage m_newstage;
-	T_MapData *map_eData;
-	
-
+	T_MapDataBack *map_eDataBack;
+	int m_time;
+	int m_cont;
 public:
 	CMap(E_Stage type);
 	~CMap();

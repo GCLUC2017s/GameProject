@@ -40,7 +40,7 @@ CCharaSelect::CCharaSelect()
 	m_charaSelectLogoX = 170;
 	m_charaSelectLogoY = 0;
 	m_charaSelectLogoWidth = 940;
-	m_charaSelectLogoHeight = m_charaSelectLogoWidth * 0.13;
+	m_charaSelectLogoHeight = m_charaSelectLogoWidth * 0.13f;
 	m_beforePlayerMLogoWord1X = 10;
 	m_beforePlayerMLogoWord1Y = -200;
 	m_afterPlayerMLogoWord1X = 10;

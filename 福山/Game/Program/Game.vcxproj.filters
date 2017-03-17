@@ -208,7 +208,7 @@
     <ClInclude Include="MyNumber\CMyNumber.h">
       <Filter>MyNumber</Filter>
     </ClInclude>
-    <ClInclude Include="Collision\Ccollisionmanager.h">
+    <ClInclude Include="Collision\CCollisionmanager.h">
       <Filter>Collision</Filter>
     </ClInclude>
   </ItemGroup>

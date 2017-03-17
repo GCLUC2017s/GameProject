@@ -36,6 +36,7 @@ public:
 	CBase();
 	CBase(unsigned int updatePrio, unsigned int drawPrio);
 	~CBase();
+	virtual void HitCallBack(CBase * p);
 	CVector2D GetScreenPos();
 	CVector3D GetPos() {
 		return m_pos;

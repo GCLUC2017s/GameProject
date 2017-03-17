@@ -1,7 +1,7 @@
 /**
 *@file	 CEnemy.h
 *@brief  “GƒNƒ‰ƒX
-*@author ‹{“c
+*@author Kousei Miyata
 */
 
 #ifndef CENEMY_GURAD
@@ -18,6 +18,7 @@ private:
 	//int m_enemytime;
 	void Key();
 	int m_enemyAppears;
+	
 public:
 		
 	CEnemy(int type);

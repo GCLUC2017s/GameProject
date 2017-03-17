@@ -45,10 +45,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryWPath>$(WindowsSDK_MetadataPath);</LibraryWPath>
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -89,6 +93,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Game\CGame.h" />
+    <ClInclude Include="Game\CollisionA\CCollisionA.h" />
     <ClInclude Include="Game\CPlayer\CPlayer.h" />
     <ClInclude Include="Game\Enemy\CEnemy.h" />
     <ClInclude Include="Game\Item\CItem.h" />
@@ -110,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\CGame.cpp" />
+    <ClCompile Include="Game\CollisionA\CCollisionA.cpp" />
     <ClCompile Include="Game\CPlayer\CPlayer.cpp" />
     <ClCompile Include="Game\Enemy\CEnemy.cpp" />
     <ClCompile Include="Game\Item\CItem.cpp" />

@@ -33,9 +33,11 @@ struct T_CharacterData {
 	int exp;		//必要経験値
 	float speed;	//移動速度
 	float jump;		//ジャンプ力
-	float xSize;	//Xサイズ
-	float ySize;	//Yサイズ
+	SVector2D size;
 	T_AnimData *animData;
+	SVector2D texSize;
+	SVector2D senter;	//キャラクターの中心点
+	CRect rect;			//キャラクターの矩形
 	E_Item item;
 };
 enum {
@@ -62,21 +64,23 @@ class CCharaBase : public CBase
 {
 protected:
 	enum ESTATE{
-		eState_Idle,
 		eState_Jump,
 		eState_Move,
 		eState_Attack,
 		
 	};
-	enum {
-		eAnim_Walk,
+	enum EANIM {
 		eAnim_Idle,
+		eAnim_Walk,
+		eAnim_Dash,
+		eAnim_Jump,
 		eAnim_Attack,
+		eAnim_Down,
 	};
 	ESTATE m_state;
 	CImage *m_chara;
 	CImage *m_enemyHp;
-	T_CharacterData  *mp_eData;
+	const T_CharacterData  *mp_eData;
 	
 	int m_imgPtn;
 	//キャラクターのレベル
@@ -103,28 +107,26 @@ protected:
 	int m_animPaternX;
 	//アニメーションパターンの何列目かを格納する変数
 	int m_animPaternY;
+	//アニメーションをループさせるかどうかを格納する変数(false = No,true = Yes)
+	int m_animLoop;
 	//アニメーションの切り替えカウンター
 	int m_animCounter;
 	//ダッシュする時のスピード
 	int m_dashSpeed;
-	//キャラクターのジャンプ力
-	float m_jump;
-	float m_xSize;//キャラクターのXサイズ
-	float m_ySize;//キャラクターのYサイズ
+
+	unsigned int m_anim;
 	//キャラクターの向きを格納するフラグ
 	bool m_charaDirection;
 	bool m_right;
 	bool m_left;
 	bool m_up;
 	bool m_down;
+	bool m_jump;
 	//ダッシュ中かどうかを格納する変数(false = No,true = Yes)
 	bool m_dash;
-	//ジャンプする時に走っていたかどうかを格納する変数(false = No,true = Yes)
-	bool m_jumpInDash;
 	//ジャンプ中かどうかを格納する変数(false = No,true = Yes)
 	bool m_jumpFlag;
 	virtual void Key();
-	void Idle();
 	void Move();
 	void Jump();
 	void HpBar();
@@ -132,9 +134,8 @@ public:
 	CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio);
 	~CCharaBase();
 	void Animation();
+	void ChangeAnimation(EANIM type,bool loop);
 	void Update();
 	virtual void Draw();
-	void HitCheck();
 };
-
 #endif
