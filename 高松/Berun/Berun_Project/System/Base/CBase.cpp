@@ -1,5 +1,8 @@
 #include "CBase.h"
 
+
+
+CVector2D CBase::m_scroal(0,0);
 CBase::CBase() :CTask(0,0), m_gravitySpeed(0), m_pos(0, 0, 0) {
 
 }
@@ -16,5 +19,5 @@ CVector2D CBase::GetScreenPos()
 	p.x = m_pos.x;
 	p.y = 720 - m_pos.z*0.5;
 	p.y -= m_pos.y;
-	return p;
+	return p - m_scroal;
 }

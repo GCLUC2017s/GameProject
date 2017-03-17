@@ -8,6 +8,7 @@
 #ifndef CHARABASE_INCLUDE_GUARD
 #define CHARABASE_INCLUDE_GUARD
 #include "../Base/CBase.h"
+#include "../Game/Item/CItem.h"
 
 #define ARRAY_SIZE(a)(sizeof(a)/sizeof(a[0]))
 #define CHARA_MOVE 4
@@ -35,6 +36,7 @@ struct T_CharacterData {
 	float xSize;	//Xサイズ
 	float ySize;	//Yサイズ
 	T_AnimData *animData;
+	E_Item item;
 };
 enum {
 	ePlayerMan,	//プレイヤー男

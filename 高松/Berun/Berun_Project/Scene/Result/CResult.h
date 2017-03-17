@@ -1,17 +1,23 @@
 /**
 * @file		CResult.h
 * @brief	リザルトシーンクラス
-* @author	
+* @author	yuki yamaji
 */
 
 #ifndef RESULT_GUARD
 #define RESULT_GUARD
 
-#include "../Scene/CScene.h"
+#include "../GLLibrary/CImage.h"
+#include "../Global.h"
+#include "../CScene.h"
+#include "../Game/Item/CItem.h"
 
+#define IMAGE_MAX 6
 
 class CResult : public CScene
 {
+private:
+	CImage m_image[IMAGE_MAX];
 public:
 	CResult();
 	~CResult();

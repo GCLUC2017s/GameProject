@@ -9,6 +9,8 @@
 #define CMAP_GURAD
 #define SCROLL_SPEED 2//マップスクロール値
 #define MAP_DATA 4//マップの数
+#define MAP_WITHT 1280
+
 
 #include "../Global.h"
 #include"../System/TaskSystem/CTaskManager.h"
@@ -18,7 +20,7 @@ struct T_MapData
 {
 	char imgName[64];
 };
-class CMap : public CTask{
+class CMap : public CBase{
 public:
 	enum E_Stage
 	{
@@ -35,7 +37,7 @@ private:
 	E_Stage m_stage;
 	E_Stage m_newstage;
 	T_MapData *map_eData;
-	CVector2D m_mapPos;//マップ座標変化
+	
 
 public:
 	CMap(E_Stage type);
