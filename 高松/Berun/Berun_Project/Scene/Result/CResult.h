@@ -17,7 +17,9 @@
 class CResult : public CScene
 {
 private:
-	CImage m_image[IMAGE_MAX];
+	CImage *mp_img[IMAGE_MAX];
+	int m_step;
+	//int m_corsol;
 public:
 	CResult();
 	~CResult();
