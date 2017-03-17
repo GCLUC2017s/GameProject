@@ -1,5 +1,5 @@
 /*
-* @file		CCollision.h
+* @file		CCollisionA.h
 * @brief	“–‚½‚è”»’èƒNƒ‰ƒX
 *
 * @author	Ryoji Anzai
@@ -8,11 +8,12 @@
 #define CCOLISION_INCLUDE_GUARD
 
 #include "../Global.h"
+#include "../System/Base/CBase.h"
 
 class CCollisionA
 {
 private:
 public:
-	bool CheckHit();
+	bool CheckHit(CBase *p,CBase *t);
 };
 #endif
