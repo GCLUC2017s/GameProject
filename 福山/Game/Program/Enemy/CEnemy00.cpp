@@ -174,7 +174,6 @@ void CEnemy00::Update(){
 		rulerR = rulerR * -1;
 	}
 
-	printf("L%f\n", rulerL);
 
 	//mTargetP‚ðplayer‚É‚·‚é
 	mTargetP = CGame::mGetPlayerPos();

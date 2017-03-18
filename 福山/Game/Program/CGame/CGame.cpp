@@ -39,3 +39,10 @@ CVector2 CGame::mGetPlayerPos() {
 		t = t->next;
 	}
 }
+
+void CGame::Delete(CTexture **t){
+	if (*t){
+		delete *t;
+		*t = 0;
+	}
+}

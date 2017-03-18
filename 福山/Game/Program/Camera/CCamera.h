@@ -20,10 +20,12 @@ private:
 	int mCamerax;
 public:
    
+	int status;
 
 	CCamera();
 
 	void Update();
+
 
 };
 

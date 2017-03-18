@@ -17,21 +17,21 @@ void CCollisionManager::EnemyAttack(CPlayer *pl){
 			CEnemy00 *ene00;
 			ene00 = (CEnemy00*)CGame::getStatus(E_ENEMY00);
 			if (CCollision::Collision(*(CBase*)ene00, *(CBase*)pl, ene00->mAttackAxis) && ene00->mEnabledAttack){
-				pl->mHitPoint  -= 0.1f;
+				pl->mHitPoint -= ene00->mAttackPoint;
 			}
 			break;
 		case E_ENEMY01:
 			CEnemy01 *ene01;
 			ene01 = (CEnemy01*)CGame::getStatus(E_ENEMY01);
 			if (CCollision::Collision(*(CBase*)ene01, *(CBase*)pl, ene01->mAttackAxis) && ene01->mEnabledAttack){
-				pl->mHitPoint -= 0.5f;
+				pl->mHitPoint -= ene01->mAttackPoint;
 			}
 			break;
 		case E_BOSS:
 			CBoss *boss;
 			boss = (CBoss*)CGame::getStatus(E_BOSS);
 			if (CCollision::Collision(*(CBase*)boss, *(CBase*)pl, boss->mAttackAxis) && boss->mEnabledAttack){
-				pl->mHitPoint -= 0.1f;
+				pl->mHitPoint -= boss->mAttackPoint;
 			}
 			break;
 		}
@@ -48,17 +48,32 @@ void CCollisionManager::PlayerAttack(CBase *b){
 	{
 	case E_ENEMY00:
 		if (CCollision::Collision(*(CBase*)player, *b, player->mAttackAxis) && player->mEnabledAttack){
-			b->mHitPoint  -= 0.1f;
+			b->mHitPoint -= player->mAttackPoint;
+			/*•ßHUŒ‚*/
+			if (b->mHitPoint <= 0 && player->mEnabledEat){
+				player->mStamina += CAL_ENEMY00; 
+				b->mKillFlag = true;
+			}
 		}
 		break;
 	case E_ENEMY01:
 		if (CCollision::Collision(*(CBase*)player, *b, player->mAttackAxis) && player->mEnabledAttack){
-			b->mHitPoint -= 0.1f;
+			b->mHitPoint -= player->mAttackPoint;
+			/*•ßHUŒ‚*/
+			if (b->mHitPoint <= 0 && player->mEnabledEat){
+				player->mStamina += CAL_ENEMY00;
+				b->mKillFlag = true;
+			}
 		}
 		break;
 	case E_BOSS:
 		if (CCollision::Collision(*(CBase*)player, *b, player->mAttackAxis) && player->mEnabledAttack){
-			b->mHitPoint -= 0.1f;
+			b->mHitPoint -= player->mAttackPoint;
+			/*•ßHUŒ‚*/
+			if (b->mHitPoint <= 0 && player->mEnabledEat){
+				player->mStamina += CAL_ENEMY00;
+				b->mKillFlag = true;
+			}
 		}
 		break;
 	}

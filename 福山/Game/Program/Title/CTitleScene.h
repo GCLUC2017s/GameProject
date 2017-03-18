@@ -14,7 +14,6 @@ class CTitleScene :public CScene{
 private:
 	CMap mMap;
 	CTitle mTitle;
-	CRectangle mFade;	//アラート表示四角形
 	
 	float count;	//スクロール演出のため
 

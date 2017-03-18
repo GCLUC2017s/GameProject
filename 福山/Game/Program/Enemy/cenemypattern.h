@@ -14,8 +14,9 @@
 
 
 class CNemPatt:public CBase{
+
 private:
-		
+	CNemPatt(){ mCharaFlag = false;}
 	friend	class CEnemy00;
 	friend	class CBoss;
 	friend	class CEnemy01;

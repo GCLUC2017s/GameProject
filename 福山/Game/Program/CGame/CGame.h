@@ -26,6 +26,7 @@ public:
 
 	 */
 	static CTask *getStatus(int number);
+	static void Delete(CTexture **t);
 };
 
 #endif

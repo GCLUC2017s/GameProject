@@ -11,7 +11,7 @@
 #include"../Enemy/CBoss.h"
 #include "../MyNumber/CMyNumber.h"
 
-class CCollisionManager : public CBase
+class CCollisionManager
 {
 public:
 	CCollisionManager();

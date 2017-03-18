@@ -2,6 +2,7 @@
 #include "glut.h"
 #include "../Define/define.h"
 #include "../Player/CPlayer.h"  
+#include "../SceneManager/CSceneManager.h"
 
 
 
@@ -16,19 +17,18 @@ void CCamera::Update(){
 	//画面の座標系を設定
 	glMatrixMode(GL_PROJECTION);	//行列をプロジェクションモードへ変更
 	glLoadIdentity();	//行列を初期化
-	const float area_x = MAP_LIMIT_X / 2;
+	const float arealeft_x = character_limit_left  + (DISP_X/2) -SIZE_PLAYER_X*2;
+	const float arearifgt_x = character_limit_right - (DISP_X / 2) - SIZE_PLAYER_X*3;
 	//表示するエリアを指定
-	if (-area_x <= -DISP_X + CPlayer::camera_x + SIZE_PLAYER_X &&
-		area_x >= DISP_X + CPlayer::camera_x + SIZE_PLAYER_X){
-		mCamerax = CPlayer::camera_x + SIZE_PLAYER_X;
+	if (arealeft_x <= CPlayer::camera_x&& arearifgt_x >= CPlayer::camera_x){
 
+		mCamerax = CPlayer::camera_x ;
 		gluOrtho2D(
-			-DISP_X + CPlayer::camera_x + SIZE_PLAYER_X,
-			DISP_X + CPlayer::camera_x + SIZE_PLAYER_X,
+			-DISP_X + CPlayer::camera_x ,
+			DISP_X  + CPlayer::camera_x ,
 			-DISP_Y,
 			DISP_Y);
-	}
-	else{
+	}else{
 		gluOrtho2D(
 			-DISP_X + mCamerax,
 			DISP_X + mCamerax,

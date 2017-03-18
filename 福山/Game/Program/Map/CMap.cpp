@@ -2,6 +2,8 @@
 #include  <Windows.h>
 #include "../Define/define.h"
 #include "../MyNumber/CMyNumber.h"
+#include "../Player/CPlayer.h"
+#include  "../CGame/CGame.h"
 #define FIRST_R_NO_BG -100 //”wŒi‚ÌƒŒƒ“ƒ_[‰ŠúÝ’è
 #define FIRST_U_NO_BG -100 //”wŒi‚ÌƒAƒbƒvƒf[ƒ^‰ŠúÝ’è
 #define FILE_BG_GROUND		"../CG/background/ground/"
@@ -9,6 +11,8 @@
 #define FILE_BG_TREE		"../CG/background/tree/"
 #define BG_SIZE_X 1600
 #define BG_SIZE_Y 400
+#define MAPDISPX
+
 
 
 void CMap::Init() {
@@ -20,31 +24,28 @@ void CMap::Init() {
 	mSkyTex->load(FILE_BG_SKY"sky_background.tga");
 	mTreeTex->load(FILE_BG_TREE"background_tree.tga");
 
-	const float area_top = MAP_LIMIT_Y / 8;
-	const float area_bottom = -MAP_LIMIT_Y / 2;
-	const float area_x = MAP_LIMIT_X / 2;
-
-	mGround.SetVertex(-area_x, area_top, area_x, area_bottom);
+	mGround.SetVertex(-DISP_X, 0, DISP_X*10,character_limit_bottom);
 	mGround.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 	mGround.SetUv(mGroundTex, 0, 0, BG_SIZE_X, BG_SIZE_Y);
 
-	mSky.SetVertex(-area_x, area_top, area_x, area_bottom);
+	mSky.SetVertex(-DISP_X, DISP_Y, DISP_X*10, 0);
 	mSky.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 	mSky.SetUv(mSkyTex, 0, 0, BG_SIZE_X, BG_SIZE_Y);
 	
-	mTree.SetVertex(-area_x, area_top, area_x, area_bottom);
+	mTree.SetVertex(-DISP_X, DISP_Y, DISP_X*10, -0);
 	mTree.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 	mTree.SetUv(mTreeTex, 0, 0, BG_SIZE_X, BG_SIZE_Y);
 
+	mGround.position.x = first_pos.x;
+	mTree.position.x = first_pos.x;
+	mSky.position.x = first_pos.x;
 
 }
 
 CMap::~CMap() {
-	if (mGroundTex){
-		delete mGroundTex;
-		mGroundTex = 0;
-	}
-
+	CGame::Delete(&mGroundTex);
+	CGame::Delete(&mSkyTex);
+	CGame::Delete(&mTreeTex);
 }
 CMap::CMap() :mGroundTex(0) {
 	
@@ -65,7 +66,8 @@ void CMap::Update() {
 */
 
 void CMap::Render() {
-	mGround.Render();
 	mSky.Render();
 	mTree.Render();
+	mGround.Render();
+
 }

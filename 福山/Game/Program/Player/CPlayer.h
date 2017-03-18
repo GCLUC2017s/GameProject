@@ -14,14 +14,12 @@
 const float gravity = 0.01;	 //重力
 
 const	 CVector2 first_pos
-= CVector2(character_limit_left*0.85, (character_limit_top + character_limit_bottom) / 2);		//プレイヤーの初期位置
+= CVector2(character_limit_left*0.85f, (character_limit_top + character_limit_bottom) / 2);		//プレイヤーの初期位置
 
 
 class CPlayer : public CBase {
 private:
 
-	float mVelocity; //移動するときに使う
-	CRectangle  mShadow;
 	CRectangle	mAttackCollision[NORMALATTACK_PATTERN]; //あたり判定だけの四角形
 
 	CTexture	*mStayTex[FRAME_LIMIT];									//待ちテクスチャ
@@ -61,7 +59,11 @@ private:
 	};
 
 	float mSpeedJump;				//ジャンプのスピード
-	float mIntervalCount;			//Interval関数カウント用
+	float mEx01Speed;				//必殺技の進むスピード
+	float mHungryPower;				//おなかが減る減らないの力の変化 += して使う(攻撃力)
+	float mHungrySSpp;				//おなかが減る減らないの力の変化 += して使う(スピード)
+	bool mEnabledInterval;			//Interval中するとき
+	
 	
 	CVector2 mTarget;
 	CVector2 mSuvePos;				//元いた位置の保存
@@ -81,19 +83,20 @@ private:
 	void EnabledMove();
 	/*アニメーションの値を入れて,引数で右左を判断 Rが*/
 	void DecisionRL(int R, int L);
-	/*テクスチャデリート*/
-	void Delete(CTexture **t);
 	/*BRAKEするか否か*/
 	bool EnabledBrake();
-	/*NormalAttackメソッド*/
-	void NormalAttack();
+	/*攻撃処理メソッド*/
+	void PlayerAttack();
 	/*アニメーションシーン*/
 	void AnimeScene();
-	
+	/*能力変化のメソッド*/
+	void ChangeStatus();
 public:
 	/*
 	CCameraで使うXY
 	*/
+
+	float mVelocity; //移動するときに使う
 	static float camera_x;
 	static float camera_y;
 

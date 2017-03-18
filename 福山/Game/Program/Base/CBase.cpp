@@ -6,8 +6,9 @@ void CBase::AnimeFrame(bool roop, int speed){
 		mFrameCount++;
 		if (mFrameCount % speed == 0){
 			mAnimeFrame++;
+
 		}
-		if (mAnimeFrame >= FRAME_LIMIT || mSaveAnime != mStatus){
+		else if (mAnimeFrame >= FRAME_LIMIT-1 || mSaveAnime != mStatus){
 			mAnimeFrame = 0;
 		}
 	}
@@ -38,4 +39,53 @@ void CBase::LimitDisp(int sizex, int sizey){
 		mPos.x = mRect.position.x;
 	}
 	/*あたり判定終了*/
+}
+
+/*
+攻撃範囲を決める
+ベースにある変数を使う 
+float Forwordは現在の向きを入れる
+0以上　が　右
+0未満　が  左
+float x , y , mAxis は攻撃範囲 ,Cvector2は　自分のposを入れる
+
+*/
+
+void CBase::Attack(float Forword, float x, float y, float Axis, CVector2 &mPos){
+	mAttackRange.SetVertex(-x, y, x, -y);
+	mAttackRange.SetColor(1.0f, 1.0f, 0.0f, 1.0f); //デバッグ用
+	if (Forword > 0)mAttackRange.position = CVector2(mPos.x + 1 + x, mPos.y);
+	if (Forword <= 0)mAttackRange.position = CVector2(mPos.x - 1 - x, mPos.y);
+	mAttackAxis = Axis;
+}
+/*時間計算用
+使い方　
+float 時間で猶予の時間を書く
+trueの場合
+
+falseの場合
+
+if文として使う
+
+（例）
+if(FrameTime(時間)){			//猶予の時間を書く
+	if(キー入力された場合){
+	攻撃Bに移行
+	}
+}else{							//時間が来てしまった場合
+	待ちアニメに移行
+}
+
+*/
+
+bool CBase::FrameTime(float t){
+	if (t > mFrameTime){
+		mFrameTime += 0.1;
+		return true;
+	}
+	else{
+		mFrameTime = 0;
+		return false;
+	}
+	
 }

@@ -31,10 +31,10 @@ CTitle::CTitle() : mpTexture(0){
 	mPriorityR = E_MTITLE;
 	mPriorityU = E_MTITLE;
 
-	mTitleLogo.SetVertex(-7.0f, 2.0f, 2.0, -1.0f);//表示範囲
+	mTitleLogo.SetVertex(-5.0f, 2.0f, 5.0, -1.0f);//表示範囲
 	mTitleLogo.SetColor(1.0f, 1.0f, 1.0f, 1.0f);//色味
 
-	mPleaseKey.SetVertex(-5.0f, -2.0f, 0.0f, -3.0f);//表示範囲
+	mPleaseKey.SetVertex(-3.0f, -2.0f, 3.0f, -3.0f);//表示範囲
 	mPleaseKey.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 }

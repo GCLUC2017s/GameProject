@@ -6,7 +6,8 @@
 #include <stdio.h>
 #include "../Base/CBase.h"
 
-class CMap :public CBase{
+
+class CMap :public CTask{
 private:
 	CRectangle mGround;			//”wŒi‚Ì’n–Ê
 	CRectangle mSky;		//‹ó

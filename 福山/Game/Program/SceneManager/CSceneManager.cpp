@@ -56,7 +56,6 @@ void CSceneManager::ChangeScene(eSceneNo SceneNo) {
 		//ゲームメインの呼び出しを行う
 
 	case eSceneNo::E_GAMEMAIN:
-		printf("あああ\n");
 		mScene = new CGameMain;
 		
 

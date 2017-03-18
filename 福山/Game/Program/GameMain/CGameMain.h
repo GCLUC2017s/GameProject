@@ -1,14 +1,6 @@
 #ifndef GAMEMAIN_HPP
 #define GAMEMAIN_HPP
-#include "../Task/CTask.h"
-#include "../Player/CPlayer.h"
-#include "../Enemy/CEnemy00.h"
-#include "../Task/CTaskManager.h"
-#include "../Camera/CCamera.h"  
-#include "../Map/CMap.h"
-#include "../Collision/CCollision.h"
-#include "../UserInterface/CUserInterface.h"
-#include "../SceneManager/CSceneManager.h"
+#include "../Scene/CScene.h"
 
 #define JUMP_FIRST_SPEED 0.2
 
