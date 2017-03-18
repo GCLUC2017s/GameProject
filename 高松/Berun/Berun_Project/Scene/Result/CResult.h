@@ -12,10 +12,12 @@
 #include "../CScene.h"
 #include "../Game/Item/CItem.h"
 
-#define ITEM_IMAGE_MAX 11
+#define ITEM_IMAGE_MAX 12
+#define ITEM_TYPE_MAX 16
 
 enum E_ResultData
 {
+	eResultBackGround,
 	eClear,
 	eRankA,
 	eRankB,
@@ -46,9 +48,9 @@ private:
 	float m_xSize;
 	float m_ySize;
 	int m_step;
-	//int m_corsol;
+	int m_corsol[ITEM_TYPE_MAX];
 public:
-	CResult(int type);
+	CResult();
 	~CResult();
 	void Update();
 	void Draw();
