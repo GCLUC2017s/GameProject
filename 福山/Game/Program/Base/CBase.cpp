@@ -8,7 +8,7 @@ void CBase::AnimeFrame(bool roop, int speed){
 			mAnimeFrame++;
 
 		}
-		else if (mAnimeFrame >= FRAME_LIMIT-1 || mSaveAnime != mStatus){
+		if (mAnimeFrame >= FRAME_LIMIT-1 || mSaveAnime != mStatus){
 			mAnimeFrame = 0;
 		}
 	}
@@ -80,7 +80,7 @@ if(FrameTime(ŽžŠÔ)){			//—P—\‚ÌŽžŠÔ‚ð‘‚­
 
 bool CBase::FrameTime(float t){
 	if (t > mFrameTime){
-		mFrameTime += 0.1;
+		mFrameTime += 1;
 		return true;
 	}
 	else{

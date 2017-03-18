@@ -7,7 +7,7 @@
 #define FIRST_U_NO_PL					0.0f								//初めのアップデートのポイント
 #define SIZE_TEX_PLAYER_BASE_X			-160.0f								//プレイヤーの基本的なテクスチャサイズ X
 #define SIZE_TEX_PLAYER_BASE_Y			160.0f								//プレイヤーの基本的なテクスチャサイズ Y
-#define SLOW_DOWN						 0.01f								//移動の減速スピード
+#define SLOW_DOWN						 0.005f								//移動の減速スピード
 #define WALK_SPEED						 0.05f								//歩くスピード
 #define RUN_SPEED						 0.1f								//走るスピード
 #define WALK_X							 1.0f								//歩くベクトルX
@@ -25,6 +25,7 @@
 #define TEX_FILE_PLAYER_EAT				 "../CG\\beru\\beru_eat\\"			//プレイヤーのファイル場所　捕食
 #define TEX_FILE_PLAYER_FLAME			 "../CG\\beru\\beru_flame\\"		//プレイヤーのファイル場所　炎(オーラ)
 #define TEX_FILE_PLAYER_BRAKE			 "../CG\\beru\\beru_brake\\"		//プレイヤーのファイル場所　ブレーキ
+#define TEX_FILE_PLAYER_JUMP			 "../CG\\beru\\beru_jump\\"			//プレイヤーのファイル場所　ジャンプ
 #define V2_RIGHT						 CVector2(WALK_X, 0.0f)				//右の向き
 #define V2_LEFT							 CVector2(-WALK_X, 0.0f)			//左の向き
 #define V2_TOP							 CVector2(0.0f, WALK_Y)				//上の向き
@@ -32,6 +33,7 @@
 #define ANIME_TIME_BASE						10								//アニメのループ時間 継続的なもの
 #define ANIME_TIME_ATTACK					8								//アニメのループ時間 攻撃のもの
 #define ANIME_TIME_BRAKE					7								//アニメのループ時間 BRAKE
+#define ANIME_TIME_JUMP						6								//アニメループ時間
 #define RIGHT WALK_X														//右
 #define LEFT -WALK_X														//左
 #define ATTACK_A		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,2, mPos	//攻撃範囲A
@@ -46,6 +48,7 @@
 #define HUNGRY_SSPP_LOW		WALK_SPEED*0.1f									//おなかがいっぱい走りにくい 	+=　して使うも
 #define HUNGRY_POWER_HIGH	0.1f											//おなかが減って力が出る　+=して使うもの
 #define HUNGRY_POWER_LOW	-0.1f											//おなかがいっぱい力が出ない　+=して使うもの
+
 float CPlayer::camera_x;
 float CPlayer::camera_y;
 
@@ -72,6 +75,7 @@ void CPlayer::Init() {
 		mEatTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
 		mFlameTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
 		mBrakeTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
+		mJumpTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
 
 		for (int z = 0; z < NORMALATTACK_PATTERN; z++)
 		{
@@ -148,6 +152,12 @@ void CPlayer::Init() {
 	//mEx02Tex[3]->load(TEX_FILE_PLAYER_EX02"beru_EX02_03.tga");
 	//mEx02Tex[4]->load(TEX_FILE_PLAYER_EX02"beru_EX02_04.tga");
 	//mEx02Tex[5]->load(TEX_FILE_PLAYER_EX02"beru_EX02_05.tga");
+	mJumpTex[0]->load(TEX_FILE_PLAYER_JUMP"beru_jump_00.tga");
+	mJumpTex[1]->load(TEX_FILE_PLAYER_JUMP"beru_jump_01.tga");
+	mJumpTex[2]->load(TEX_FILE_PLAYER_JUMP"beru_jump_02.tga");
+	mJumpTex[3]->load(TEX_FILE_PLAYER_JUMP"beru_jump_03.tga");
+	mJumpTex[4]->load(TEX_FILE_PLAYER_JUMP"beru_jump_04.tga");
+	mJumpTex[5]->load(TEX_FILE_PLAYER_JUMP"beru_jump_05.tga");
 	/*ブレーキ*/
 	mBrakeTex[0]->load(TEX_FILE_PLAYER_BRAKE"beru_brake_00.tga");
 	mBrakeTex[1]->load(TEX_FILE_PLAYER_BRAKE"beru_brake_01.tga");
@@ -163,7 +173,7 @@ void CPlayer::Init() {
 	//mFlameTex[4]->load(TEX_FILE_PLAYER_FLAME"beru_flame_04.tga");
 	//mFlameTex[5]->load(TEX_FILE_PLAYER_FLAME"beru_flame_05.tga");
 	///*影*/
-	//mShadowTex->load(TEX_FILE_SHADOW"shadow.tga");
+	mShadowTex->load(TEX_FILE_SHADOW"shadow.tga");
 
 	/*テクスチャを張る*/
 	mRect.SetUv(mStayTex[0], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
@@ -187,7 +197,7 @@ CPlayer::~CPlayer() {
 		CGame::Delete( &mEatTex[i]);
 		CGame::Delete( &mFlameTex[i]);
 		CGame::Delete( &mBrakeTex[i]);
-
+		CGame::Delete(& mJumpTex[i]);
 		for (int z = 0; z < NORMALATTACK_PATTERN; z++)
 		{
 			CGame::Delete(&mNormalAttackTex[z][i]);	//テクスチャクラスのインスタンス作成
@@ -234,18 +244,19 @@ void CPlayer::Jump(){ //ジャンプ処理メソッド
 	重力計算
 	v = v0 + g*t(どれくらい重力がかかったか)
 	*/
-	if (CKey::push('C') || mEnabledJump) {
-		if (!mEnabledJump && !mEnabledAttack)	mEnabledJump = true; //ジャンプしていないとき
+	if (CKey::push('C') && !mEnabledJump && !mEnabledAttack) {
+		mSpeedJump = JUMP_FIRST_SPEED;
+		mEnabledJump = true; //ジャンプしていないとき
 	}
 
 	if (mEnabledJump){
 		mPos.y = mPos.y + mSpeedJump; //飛ぶ処理
 		mSpeedJump -= gravity;//減速処理
-
+		DecisionRL(E_JUMP_R, E_JUMP_L);
 
 		if (mPos.y < mAxis + SIZE_PLAYER_Y){//現在の軸に足がついたとき
+			DecisionRL(E_STAY_R,E_STAY_L);
 			mPos.y = mAxis + SIZE_PLAYER_Y; //元いた地面の"Y"に戻す
-			mSpeedJump = JUMP_FIRST_SPEED;
 			mEnabledJump = false; //終了
 		}
 	}
@@ -295,7 +306,6 @@ void CPlayer::Move(){
 		mPos = SavemPos;
 		mAxis = SavemAxis;
 	}
-	Brake();
 }
 
 /*ブレーキメソッド*/
@@ -307,13 +317,9 @@ void CPlayer::Brake(){
 		DecisionRL(E_BRAKE_R, E_BRAKE_L);
 	}
 	else if (mVelocity <= 0){
-		if (!mEnabledInterval){
-			printf("止まる\n");
-			DecisionRL(E_STAY_R, E_STAY_L);
-		}
+		if (!mEnabledInterval)DecisionRL(E_STAY_R, E_STAY_L);
 		mVelocity = 0;
 	}
-
 	mPos += mForward * mVelocity;
 	mAxis += mForward.y * mVelocity;
 }
@@ -324,12 +330,13 @@ void CPlayer::PlayerAttack(){
 	{
 	case E_NORMALATTACK_A_R:				//1段階目
 	case E_NORMALATTACK_A_L:
-
-		if (mAnimeFrame == FRAME_LIMIT - 1){
+		if (mAnimeFrame != FRAME_LIMIT - 1){ mEnabledAttack = true; }
+		else{ //アニメ最後が来たら
 			mEnabledAttack = false;
 			if (FrameTime(INTERVAL)){
 				mEnabledInterval = true;
 				if (CKey::once('X')){
+					mEnabledAttack = true;
 					DecisionRL(E_NORMALATTACK_B_R, E_NORMALATTACK_B_L);
 				}
 			}
@@ -342,12 +349,13 @@ void CPlayer::PlayerAttack(){
 		break;
 	case E_NORMALATTACK_B_R:				//2段階目
 	case E_NORMALATTACK_B_L:
-
-		if (mAnimeFrame == FRAME_LIMIT - 1){
-			mEnabledAttack = false;
-			if (FrameTime(INTERVAL)){
-				mEnabledInterval = true;
-				if (CKey::once('X')){
+		if (mAnimeFrame != FRAME_LIMIT - 1){ mEnabledAttack = true; }
+		else{ //アニメ最後が来たら
+			mEnabledAttack = false;			 // 攻撃判定を消す　
+			if (FrameTime(INTERVAL)){		//Interval
+				mEnabledInterval = true;    //キー入力待ち
+				if (CKey::once('X')){		
+					mEnabledAttack = true;
 					DecisionRL(E_NORMALATTACK_C_R, E_NORMALATTACK_C_L);
 				}
 			}
@@ -356,19 +364,24 @@ void CPlayer::PlayerAttack(){
 				DecisionRL(E_STAY_R, E_STAY_L);
 			}
 		}
+		
 		Attack(ATTACK_B);
 		break;
 	case E_NORMALATTACK_C_R:				//3段階目
 	case E_NORMALATTACK_C_L:
-		if (mAnimeFrame == FRAME_LIMIT - 1){
+		if (mAnimeFrame != FRAME_LIMIT - 1){ mEnabledAttack = true; }
+		else{ //アニメ最後が来たら
 			DecisionRL(E_STAY_R, E_STAY_L);
 			mEnabledAttack = false;
+			mEnabledInterval = false;
+
 		}
 		Attack(ATTACK_C);
 		break;
 	case E_EAT_R:
 	case E_EAT_L:
-		if (mAnimeFrame == FRAME_LIMIT - 1){
+		if (mAnimeFrame != FRAME_LIMIT - 1){ mEnabledAttack = true; }
+		else{ //アニメ最後が来たら
 			DecisionRL(E_STAY_R, E_STAY_L);
 			mEnabledAttack = false;
 			mEnabledEat = false;
@@ -380,7 +393,8 @@ void CPlayer::PlayerAttack(){
 
 		if (mSaveForword.x == RIGHT || mSaveForword.x == 0){ mEx01Speed += EX01_SPEED; }
 		if (mSaveForword.x == LEFT){ mEx01Speed -= EX01_SPEED; }
-		if (mAnimeFrame == FRAME_LIMIT - 1){
+		if (mAnimeFrame != FRAME_LIMIT - 1){ mEnabledAttack = true; }
+		else{ //アニメ最後が来たら
 			mEx01Speed = 0;
 			DecisionRL(E_STAY_R, E_STAY_L);
 			mEnabledAttack = false;
@@ -389,7 +403,9 @@ void CPlayer::PlayerAttack(){
 		Attack(EX01_ATTACK);
 		break;
 	default:
-		if (mStatus != E_BRAKE_R && mStatus != E_BRAKE_L){
+		mEnabledAttack = false;
+		mEnabledInterval = false;
+		if (mStatus != E_BRAKE_R && mStatus != E_BRAKE_L){ //ブレーキがかかっていないとき
 			/*通常攻撃 攻撃力の設定 フラグを真に*/
 			if (CKey::once('X') && !mEnabledAttack){
 				mAttackPoint = PL_NORMAL_POWER;
@@ -406,8 +422,9 @@ void CPlayer::PlayerAttack(){
 				DecisionRL(E_EAT_R, E_EAT_L);
 			}
 			/*必殺技(消費)*/
-			if (CKey::once('A')){
+			if (CKey::once('A') && mStamina >= PL_ST_X *0.1){
 				mAttackPoint = PL_EX01_POWER;
+				mStamina -= PL_ST_X*0.1f;
 				mAttackPoint += mHungryPower;
 				mEnabledAttack = true;
 				mEnabledEx01 = true;
@@ -464,6 +481,9 @@ void CPlayer::AnimeScene(){
 		AnimeFrame(true, ANIME_TIME_BASE);
 		mRect.SetUv(mFlameTex[mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
 		break;
+	case E_JUMP_L:
+		AnimeFrame(false,ANIME_TIME_JUMP);
+		mRect.SetUv(mJumpTex[mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
 	case E_BRAKE_L:
 		AnimeFrame(false, ANIME_TIME_BRAKE);
 		mRect.SetUv(mBrakeTex[mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
@@ -509,6 +529,9 @@ void CPlayer::AnimeScene(){
 		AnimeFrame(true, ANIME_TIME_BASE);
 		mRect.SetUv(mFlameTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
 		break;
+	case E_JUMP_R:
+		AnimeFrame(false, ANIME_TIME_JUMP);
+		mRect.SetUv(mJumpTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
 	case E_BRAKE_R:
 		AnimeFrame(false, ANIME_TIME_BRAKE);
 		mRect.SetUv(mBrakeTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
@@ -552,11 +575,10 @@ void CPlayer::Update() {
 	assert(E_STAY_L <= mStatus && mStatus <= E_BRAKE_R);       //テクスチャを正しく読み込めているかどうか
 	//四角形の位置を設定
 	mRect.position = mPos;
-
-	if (!mEnabledAttack){
-		Move();
-	}
-
+	printf("move%d\n", mStatus);
+	if (!mEnabledAttack){Move();}
+	//Brake();
+	printf("brake%d\n", mStatus);
 
 	PlayerAttack();
 	Jump();

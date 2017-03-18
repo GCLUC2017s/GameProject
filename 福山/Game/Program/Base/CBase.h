@@ -104,7 +104,7 @@ public:
 
 	CVector2 mTargetP;  //プレイヤーポジションの取得用
 	
-	CBase() : mEnabledEat(false), mAxis(0), mHitPoint(0), mEnabledAttack(false){
+	CBase() : mEnabledEat(false), mAxis(0), mHitPoint(0), mEnabledAttack(false), mAttackPoint(0.01f){
 		mCharaFlag = true;
 	}
 

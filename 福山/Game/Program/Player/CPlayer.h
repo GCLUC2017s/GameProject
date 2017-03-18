@@ -31,6 +31,7 @@ private:
 	CTexture	*mEx02Tex[FRAME_LIMIT];									//必殺技(継続)テクスチャ
 	CTexture	*mFlameTex[FRAME_LIMIT];								//炎テクスチャ
 	CTexture	*mBrakeTex[FRAME_LIMIT];								//ブレーキテクスチャ
+	CTexture	*mJumpTex[FRAME_LIMIT];												//ジャンプテクスチャ
 	CTexture	*mShadowTex;											//影テクスチャチャ
 
 	/*
@@ -45,14 +46,14 @@ private:
 		E_NORMALATTACK_B_L, E_NORMALATTACK_C_L,
 		E_EAT_L, E_EX01_L,
 		E_EX02_L, E_FLAME_L,
-		E_BRAKE_L,
+		E_JUMP_L, E_BRAKE_L,
 
-		E_STAY_R=12, E_WALK_R,
+		E_STAY_R, E_WALK_R,
 		E_RUN_R, E_NORMALATTACK_A_R,
 		E_NORMALATTACK_B_R, E_NORMALATTACK_C_R,
 		E_EAT_R, E_EX01_R,
 		E_EX02_R, E_FLAME_R,
-		E_BRAKE_R,
+		E_JUMP_R, E_BRAKE_R,
 
 
 
