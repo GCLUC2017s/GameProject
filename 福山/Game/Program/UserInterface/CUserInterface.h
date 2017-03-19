@@ -10,6 +10,7 @@ UIのプログラム
 #include "../Task/CTask.h"
 #include "../Define/define.h"
 #define HP_ST 2 //HPとST
+#define HUNG_HLN	3//おなかの減り具合	hungry_high_low_normalの略
 
 class  CUserinterface : public CTask
 {
@@ -22,7 +23,8 @@ private:
 	CRectangle mFrameEne;
 	/*PLAYERのテクスチャ*/
 	CTexture  *mPlayerGageTex[HP_ST];
-	CTexture  *mPlayerFrameTex[HP_ST];
+	CTexture  *mPlayerFrameHpTex;
+	CTexture  *mPlayerFrameStTex[HUNG_HLN];
 	/*エネミーのテクスチャ*/
 	CTexture  *mEnemyGageTex;
 	CTexture  *mEnemyFrameTex;

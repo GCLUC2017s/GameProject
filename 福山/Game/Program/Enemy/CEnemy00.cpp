@@ -4,6 +4,7 @@
 #include "../CGame/CGame.h"
 #include "stdio.h"
 #include "../Enemy/CEnemyPattern.h"
+#include "../Load/CLoadEnemy00.h"
 #include <cstdlib>
 #define SIZE_ENEMY00_Y 1  //エネミー00のサイズ_Y
 #define SIZE_ENEMY00_X 1 //エネミー00のサイズ_X
@@ -15,7 +16,7 @@
 
 
 高橋弘樹
-*/
+//*/
 #define HITPOINT_ENEMY00 5					//エネミー00の体力
 #define FIRST_R_NO_PL 1						//初めのレンダーのポイント
 #define FIRST_U_NO_PL 1						//初めのアップデートのポイント
@@ -32,58 +33,18 @@
 #define WALK_X 2						//歩くベクトルX
 #define WALK_Y 1						//歩くベクトルY
 
-#define ENEMY00_STAY "../CG\\enemy00\\enemy00_stay\\"
-#define ENEMY00_WALK "../CG\\enemy00\\enemy00_walk\\"
-#define ENEMY00_ATTACK "../CG\\enemy00\\enemy00_attack\\"
-#define ENEMY00_DIE "../CG\\enemy00\\enemy00_dai\\"
+//#define ENEMY00_STAY "../CG\\enemy00\\enemy00_stay\\"
+//#define ENEMY00_WALK "../CG\\enemy00\\enemy00_walk\\"
+//#define ENEMY00_ATTACK "../CG\\enemy00\\enemy00_attack\\"
+//#define ENEMY00_DIE "../CG\\enemy00\\enemy00_dai\\"
 
 
 
 void CEnemy00::Init(){
 	SetPos();
-	/*テクスチャ読み込み*/
-	for (int i = 0; i < FLAME_LIMIT; i++)
-	{
-		mStay_tex[i] = new CTexture();		//テクスチャクラスのインスタンス作成
-		mWalk_tex[i] = new CTexture();		//テクスチャクラスのインスタンス作成
-		mAttack_tex[i] = new CTexture();		//テクスチャクラスのインスタンス作成
-		mDie_tex[i] = new CTexture();
-	}
-
-	/*テクスチャファイル読み込み*/
-	mStay_tex[0]->load(ENEMY00_STAY"enemy00_stay_00.tga");
-	mStay_tex[1]->load(ENEMY00_STAY"enemy00_stay_01.tga");
-	mStay_tex[2]->load(ENEMY00_STAY"enemy00_stay_02.tga");
-	mStay_tex[3]->load(ENEMY00_STAY"enemy00_stay_03.tga");
-	mStay_tex[4]->load(ENEMY00_STAY"enemy00_stay_04.tga");
-	mStay_tex[5]->load(ENEMY00_STAY"enemy00_stay_05.tga");
-			
-
-	mWalk_tex[0]->load(ENEMY00_WALK"enemy00_walk_00.tga");
-	mWalk_tex[1]->load(ENEMY00_WALK"enemy00_walk_01.tga");
-	mWalk_tex[2]->load(ENEMY00_WALK"enemy00_walk_02.tga");
-	mWalk_tex[3]->load(ENEMY00_WALK"enemy00_walk_03.tga");
-	mWalk_tex[4]->load(ENEMY00_WALK"enemy00_walk_04.tga");
-	mWalk_tex[5]->load(ENEMY00_WALK"enemy00_walk_05.tga");
-
-	mAttack_tex[0]->load(ENEMY00_ATTACK"enemy00_attack_00.tga");
-	mAttack_tex[1]->load(ENEMY00_ATTACK"enemy00_attack_01.tga");
-	mAttack_tex[2]->load(ENEMY00_ATTACK"enemy00_attack_02.tga");
-	mAttack_tex[3]->load(ENEMY00_ATTACK"enemy00_attack_03.tga");
-	mAttack_tex[4]->load(ENEMY00_ATTACK"enemy00_attack_04.tga");
-	mAttack_tex[5]->load(ENEMY00_ATTACK"enemy00_attack_05.tga");
-
-	mDie_tex[0]->load(ENEMY00_DIE"enemy00_dai_00.tga");
-	mDie_tex[1]->load(ENEMY00_DIE"enemy00_dai_01.tga");
-	mDie_tex[2]->load(ENEMY00_DIE"enemy00_dai_02.tga");
-	mDie_tex[3]->load(ENEMY00_DIE"enemy00_dai_03.tga");
-	mDie_tex[4]->load(ENEMY00_DIE"enemy00_dai_04.tga");
-	mDie_tex[5]->load(ENEMY00_DIE"enemy00_dai_05.tga");
-
-
 
 	/*テクスチャを張る*/
-	mRect.SetUv(mStay_tex[0], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
+	mRect.SetUv(CLoadEnemy00::GetInstance()->mStay_tex[0], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
 	mForward = CVector2(1.0f, 0.0f);
 
 	motion = 0;
@@ -96,12 +57,6 @@ void CEnemy00::Init(){
 
 //エネミー00描画
 CEnemy00::CEnemy00() : mVelocity(0), mFlameCount(0), mAnime(E_STAY_L){
-
-
-	for (int i = 0; i < FLAME_LIMIT; i++)
-	{
-		mStay_tex[i] = 0;
-	}
 
 	mPriorityR = FIRST_R_NO_PL;			//Renderのナンバー 
 	mPriorityU = FIRST_U_NO_PL;			//Updateのナンバー
@@ -124,13 +79,13 @@ CEnemy00::~CEnemy00(){
 //特に何もしない
 }
 /*アニメのフレームを動かすメソッド*/ //エネミーによって違う場合があるので画像データ用参照
-void CEnemy00::AnimeFlame(){
+void CEnemy00::AnimeFrame(){
 
 	mFlameCount += 1;
 	if (mFlameCount % 5 == 0){ //フレーム数=mStay_tex[5]->load(".../.tga");
 		mAnime += 1;
 	}
-	if (mAnime >= FLAME_LIMIT || mSaveAnime != eAnime){
+	if (mAnime >= FRAME_LIMIT || mSaveAnime != eAnime){
 		mAnime = 0;
 	}
 	mSaveAnime = eAnime;
@@ -181,8 +136,8 @@ void CEnemy00::Update(){
 	//四角形の位置を設定
 	mRect.position = mPos;
 
-	AnimeFlame();
-	assert(mAnime <= FLAME_LIMIT); //フレーム数が七を超えるとダメ
+	AnimeFrame();
+	assert(mAnime <= FRAME_LIMIT); //フレーム数が七を超えるとダメ
 	mPriorityR = -mAxis;
 
 
@@ -349,31 +304,31 @@ void CEnemy00::Update(){
 	{
 		/*待機中*/
 	case E_STAY_R:
-		mRect.SetUv(mStay_tex[mAnime], SIZE_TEX_ENEMY00_STAY_X, 0, 0, SIZE_TEX_ENEMY00_STAY_Y);
+		mRect.SetUv(CLoadEnemy00::GetInstance()->mStay_tex[mAnime], SIZE_TEX_ENEMY00_STAY_X, 0, 0, SIZE_TEX_ENEMY00_STAY_Y);
 		break;
 	case E_STAY_L:
-		mRect.SetUv(mStay_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
+		mRect.SetUv(CLoadEnemy00::GetInstance()->mStay_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
 		break;
 		/*歩き中*/
 	case E_WALK_R:
-		mRect.SetUv(mWalk_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
+		mRect.SetUv(CLoadEnemy00::GetInstance()->mWalk_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
 		break;
 	case E_WALK_L:
-		mRect.SetUv(mWalk_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
+		mRect.SetUv(CLoadEnemy00::GetInstance()->mWalk_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
 		break;
 		/*攻撃中*/
 	case E_ATTACK_R:
-		mRect.SetUv(mAttack_tex[mAnime], SIZE_TEX_ENEMY00_STAY_X, 0, 0, SIZE_TEX_ENEMY00_STAY_Y);
+		mRect.SetUv(CLoadEnemy00::GetInstance()->mAttack_tex[mAnime], SIZE_TEX_ENEMY00_STAY_X, 0, 0, SIZE_TEX_ENEMY00_STAY_Y);
 		break;
 	case E_ATTACK_L:
-		mRect.SetUv(mAttack_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
+		mRect.SetUv(CLoadEnemy00::GetInstance()->mAttack_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
 		break;
 		/*死亡*/
 	case E_DIE_R:
-		mRect.SetUv(mDie_tex[mAnime], SIZE_TEX_ENEMY00_STAY_X, 0, 0, SIZE_TEX_ENEMY00_STAY_Y);
+		mRect.SetUv(CLoadEnemy00::GetInstance()->mDie_tex[mAnime], SIZE_TEX_ENEMY00_STAY_X, 0, 0, SIZE_TEX_ENEMY00_STAY_Y);
 		break;
 	case E_DIE_L:
-		mRect.SetUv(mDie_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
+		mRect.SetUv(CLoadEnemy00::GetInstance()->mDie_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
 		break;
 
 	}

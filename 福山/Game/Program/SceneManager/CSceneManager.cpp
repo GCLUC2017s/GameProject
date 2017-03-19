@@ -12,7 +12,7 @@
 #include "../Scene/CScene.h"
 #include "../Title/CTitleScene.h"
 #include"CSceneManager.h"
-#include "../GameMain/CGameMain.h"
+#include "../GameScene/CGameScene.h" 
 #include "../Key/CKey.h"
 
 CSceneManager* CSceneManager::mSceneManager = 0;
@@ -56,7 +56,7 @@ void CSceneManager::ChangeScene(eSceneNo SceneNo) {
 		//ゲームメインの呼び出しを行う
 
 	case eSceneNo::E_GAMEMAIN:
-		mScene = new CGameMain;
+		mScene = new CGameScene;
 		
 
 		break;

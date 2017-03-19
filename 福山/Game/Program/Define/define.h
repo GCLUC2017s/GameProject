@@ -17,6 +17,8 @@
 #define DISP_X	WINDOW_PIXEL_X * 0.012		//ウィンドウ解像度：幅
 #define DISP_Y	WINDOW_PIXEL_Y * 0.012		//ウィンドウ解像度：高さ
 
+#define FRAME_LIMIT 6							//アニメのフレーム数(整数型)	
+#define NORMALATTACK_PATTERN 3 //通常攻撃のパターン
 
 const float character_limit_left = -DISP_X;			//進める上限(左)
 const float character_limit_top = 0;	    //進める上限(上)

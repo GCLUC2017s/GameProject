@@ -11,8 +11,6 @@
 #include "../Define/define.h"
 #include"../Player/CPlayer.h"
 
-#define FLAME_LIMIT 6 //フレーム数の上限
-
 
 #define LEFT_PTT	mTargetP.x<mPos.x	//ターゲットが左にいる
 #define RIGHT_PTT	mTargetP.x>mPos.x	//ターゲットが右にいる
@@ -32,10 +30,10 @@ private:
 
 	float mVelocity;//移動するときに使う
 
-	CTexture	*mStay_tex[FLAME_LIMIT];
-	CTexture	*mWalk_tex[FLAME_LIMIT];
-	CTexture	*mAttack_tex[FLAME_LIMIT];
-	CTexture	*mDie_tex[FLAME_LIMIT];
+	//CTexture	*mStay_tex[FLAME_LIMIT];
+	//CTexture	*mWalk_tex[FLAME_LIMIT];
+	//CTexture	*mAttack_tex[FLAME_LIMIT];
+	//CTexture	*mDie_tex[FLAME_LIMIT];
 
 	/*
 	自分がどのアニメーションか判断用
@@ -68,7 +66,7 @@ private:
 	int motion;
 	
 	void Walk(){};
-	void AnimeFlame();
+	void AnimeFrame();
 	void AnimeScene();
 	void SetPos();
 

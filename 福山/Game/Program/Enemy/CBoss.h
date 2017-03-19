@@ -9,7 +9,6 @@
 #include "../Graphic/CRectangle.h"
 #include "../Task/CTaskManager.h"
 #include "../Define/define.h"
-#define FLAME_LIMIT 6 //フレーム数の上限
 
 const	 CVector2 Boss_first_pos
 = CVector2(character_limit_left*0.65, (character_limit_top + character_limit_bottom) / 2);	//ボスエネミーの初期位置
@@ -21,11 +20,6 @@ private:
 	float mVelocity;//移動するときに使う
 	CRectangle	mBoss;
 	CRectangle  mShadow;
-	CTexture	*mStay_tex[FLAME_LIMIT];
-	CTexture	*mWalk_tex[FLAME_LIMIT];
-	CTexture	*mAttack_tex[FLAME_LIMIT];
-	CTexture	*mHattack_tex[FLAME_LIMIT];
-	CTexture	*mDie_tex[FLAME_LIMIT];
 
 
 	/*
@@ -50,7 +44,7 @@ private:
 	CVector2 mSuvePos;//元いた位置の保存
 	int direction;
 	void Walk(){};
-	void AnimeFlame();
+	void AnimeFrame();
 	void SetPos();
 
 public:

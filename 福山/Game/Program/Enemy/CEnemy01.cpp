@@ -1,6 +1,7 @@
 #include "CEnemy01.h"
 #include "../MyNumber/CMyNumber.h"
 #include "../Key/CKey.h" //挙動テスト時の操作用
+#include "../Load/CLoadEnemy01.h"
 /*
 
 ヒコースケーチ
@@ -31,10 +32,6 @@ CKeyを使っている条件文は今後別の処理になります。
 #define WALK_X 2							//飛行ベクトルX
 #define WALK_Y 1							//飛行ベクトルY
 
-#define ENEMY01_FLAY "../CG\\enemy01\\fly\\"
-#define ENEMY01_STAY "../CG\\enemy01\\stay\\"
-#define ENEMY01_ATTACK "../CG\\enemy01\\attack\\"
-#define ENEMY01_DIE "../CG\\enemy01\\die\\"
 
 
 void CEnemy01::SetPos(){
@@ -44,48 +41,10 @@ void CEnemy01::SetPos(){
 
 void CEnemy01::Init(){
 	SetPos();
-	/*テクスチャ読み込み*/
-	for (int i = 0; i < FLAME_LIMIT; i++)
-	{
-		mStay_tex[i] = new CTexture();		//テクスチャクラスのインスタンス作成
-		mFlay_tex[i] = new CTexture();		//テクスチャクラスのインスタンス作成
-		mAttack_tex[i] = new CTexture();
-		mDie_tex[i] = new CTexture();		
-	}
 
-	/*テクスチャファイル読み込み*/
-	mStay_tex[0]->load(ENEMY01_STAY"enemy01_stay_00.tga");
-	mStay_tex[1]->load(ENEMY01_STAY"enemy01_stay_01.tga");
-	mStay_tex[2]->load(ENEMY01_STAY"enemy01_stay_02.tga");
-	mStay_tex[3]->load(ENEMY01_STAY"enemy01_stay_03.tga");
-	mStay_tex[4]->load(ENEMY01_STAY"enemy01_stay_04.tga");
-	mStay_tex[5]->load(ENEMY01_STAY"enemy01_stay_05.tga");
-
-	mFlay_tex[0]->load(ENEMY01_FLAY"enemy01_flyR_00.tga");
-	mFlay_tex[1]->load(ENEMY01_FLAY"enemy01_flyR_01.tga");
-	mFlay_tex[2]->load(ENEMY01_FLAY"enemy01_flyR_02.tga");
-	mFlay_tex[3]->load(ENEMY01_FLAY"enemy01_flyR_03.tga");
-	mFlay_tex[4]->load(ENEMY01_FLAY"enemy01_flyR_04.tga");
-	mFlay_tex[5]->load(ENEMY01_FLAY"enemy01_flyR_05.tga");
-
-	mAttack_tex[0]->load(ENEMY01_ATTACK"enemy01_attackR_00.tga");
-	mAttack_tex[1]->load(ENEMY01_ATTACK"enemy01_attackR_00.tga");
-	mAttack_tex[2]->load(ENEMY01_ATTACK"enemy01_attackR_00.tga");
-	mAttack_tex[3]->load(ENEMY01_ATTACK"enemy01_attackR_00.tga");
-	mAttack_tex[4]->load(ENEMY01_ATTACK"enemy01_attackR_00.tga");
-	mAttack_tex[5]->load(ENEMY01_ATTACK"enemy01_attackR_00.tga");
-
-	mDie_tex[0]->load(ENEMY01_DIE"enemy01_dieR_00.tga");
-	mDie_tex[1]->load(ENEMY01_DIE"enemy01_dieR_01.tga");
-	mDie_tex[2]->load(ENEMY01_DIE"enemy01_dieR_02.tga");
-	mDie_tex[3]->load(ENEMY01_DIE"enemy01_dieR_03.tga");
-	mDie_tex[4]->load(ENEMY01_DIE"enemy01_dieR_04.tga");
-	mDie_tex[5]->load(ENEMY01_DIE"enemy01_dieR_05.tga");
-
-
-
+	
 	/*テクスチャを張る*/
-	mEnemy01.SetUv(mStay_tex[0], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
+	mEnemy01.SetUv(CLoadEnemy01::GetInstance()->mStay_tex[0], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
 	mForward = CVector2(1.0f, 0.0f);
 
 }
@@ -96,11 +55,6 @@ CEnemy01::~CEnemy01(){
 
 //エネミー00描画
 CEnemy01::CEnemy01() : mVelocity(0), mFlameCount(0){
-
-	for (int i = 0; i < FLAME_LIMIT; i++)
-	{
-		mStay_tex[i] = 0;
-	}
 
 	mPriorityR = E_ENEMY01;			//Renderのナンバー 
 	mPriorityU = E_ENEMY01;			//Updateのナンバー
@@ -277,31 +231,31 @@ void CEnemy01::Update(){
 	{
 		/*待機中*/
 	case E_STAY_L:
-		mEnemy01.SetUv(mStay_tex[mAnime], SIZE_TEX_ENEMY00_STAY_X, 0, 0, SIZE_TEX_ENEMY00_STAY_Y);
+		mEnemy01.SetUv(CLoadEnemy01::GetInstance()->mStay_tex[mAnime], SIZE_TEX_ENEMY00_STAY_X, 0, 0, SIZE_TEX_ENEMY00_STAY_Y);
 		break;
 	case E_STAY_R:
-		mEnemy01.SetUv(mStay_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
+		mEnemy01.SetUv(CLoadEnemy01::GetInstance()->mStay_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
 		break;
 		/*歩き中*/
 	case E_FLY_L:
-		mEnemy01.SetUv(mFlay_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
+		mEnemy01.SetUv(CLoadEnemy01::GetInstance()->mFlay_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
 		break;
 	case E_FLY_R:
-		mEnemy01.SetUv(mFlay_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
+		mEnemy01.SetUv(CLoadEnemy01::GetInstance()->mFlay_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
 		break;
 	/*攻撃*/
 	case E_ATTACK_L:
-		mEnemy01.SetUv(mAttack_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
+		mEnemy01.SetUv(CLoadEnemy01::GetInstance()->mAttack_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
 		break;
 	case E_ATTACK_R:
-		mEnemy01.SetUv(mAttack_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
+		mEnemy01.SetUv(CLoadEnemy01::GetInstance()->mAttack_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
 		break;
 	/*死亡*/
 	case E_DIE_L:
-		mEnemy01.SetUv(mDie_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
+		mEnemy01.SetUv(CLoadEnemy01::GetInstance()->mDie_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
 		break;
 	case E_DIE_R:
-		mEnemy01.SetUv(mDie_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
+		mEnemy01.SetUv(CLoadEnemy01::GetInstance()->mDie_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
 		break;
 	}
 

@@ -21,10 +21,7 @@ private:
 	float mVelocity;//移動するときに使う
 	CRectangle	mEnemy01;
 	CRectangle  mShadow;
-	CTexture	*mStay_tex[FLAME_LIMIT];
-	CTexture	*mFlay_tex[FLAME_LIMIT];
-	CTexture	*mAttack_tex[FLAME_LIMIT];
-	CTexture	*mDie_tex[FLAME_LIMIT];
+
 	/*
 	自分がどのアニメーションか判断用
 	enum文

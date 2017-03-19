@@ -52,7 +52,6 @@
 #define BOSS_HIGH_POWER	0.2f
 
 #define TEX_FILE_SHADOW		"../CG/shadow/"		//影のファイル場所
-#define FRAME_LIMIT 6							//アニメのフレーム数(整数型)		
 #include "../Task/CTask.h"
 #include "../Vector/CVector2.h"
 #include "../Define/define.h"

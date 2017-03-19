@@ -1,4 +1,3 @@
-#include "../GameMain/CGameMain.h"
 #include "../Define/define.h"
 #include <Windows.h>
 #include "../SceneManager/CSceneManager.h"

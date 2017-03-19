@@ -25,12 +25,8 @@ CKeyを使っている条件文は今後別の処理になります。
 #define WALK_SPEED 0.04						//歩くスピード
 #define WALK_X 2							//歩くベクトルX
 #define WALK_Y 1							//歩くベクトルY
+#include"../Load/CLoadBoss.h"
 
-#define BOSS_STAY 	 "../CG\\BOSS\\stay\\"
-#define BOSS_WALK	 "../CG\\BOSS\\walk\\"
-#define BOSS_ATTACK	 "../CG\\BOSS\\Attack\\"
-#define BOSS_HATTACK "../CG\\BOSS\\HAttack\\"
-#define BOSS_DIE	 "../CG\\BOSS\\die\\"
 
 void CBoss::SetPos(){
 	mPos = Boss_first_pos;
@@ -39,58 +35,11 @@ void CBoss::SetPos(){
 
 void CBoss::Init(){
 	SetPos();
-	/*テクスチャ読み込み*/
-	for (int i = 0; i < FLAME_LIMIT; i++)
-	{
-		mStay_tex[i] = new CTexture();		//テクスチャクラスのインスタンス作成
-		mWalk_tex[i] = new CTexture();		//テクスチャクラスのインスタンス作成
-		mAttack_tex[i] = new CTexture();
-		mHattack_tex[i] = new CTexture();
-		mDie_tex[i] = new CTexture();
-	}
 
-	/*テクスチャファイル読み込み*/
-	mStay_tex[0]->load(BOSS_STAY "BOSS_stay_00.tga");
-	mStay_tex[1]->load(BOSS_STAY "BOSS_stay_01.tga");
-	mStay_tex[2]->load(BOSS_STAY "BOSS_stay_02.tga");
-	mStay_tex[3]->load(BOSS_STAY "BOSS_stay_03.tga");
-	mStay_tex[4]->load(BOSS_STAY "BOSS_stay_04.tga");
-	mStay_tex[5]->load(BOSS_STAY "BOSS_stay_05.tga");
-
-	mWalk_tex[0]->load(BOSS_WALK"BOSS_walk_00.tga");
-	mWalk_tex[1]->load(BOSS_WALK"BOSS_walk_01.tga");
-	mWalk_tex[2]->load(BOSS_WALK"BOSS_walk_02.tga");
-	mWalk_tex[3]->load(BOSS_WALK"BOSS_walk_03.tga");
-	mWalk_tex[4]->load(BOSS_WALK"BOSS_walk_04.tga");
-	mWalk_tex[5]->load(BOSS_WALK"BOSS_walk_05.tga");
-
-	mAttack_tex[0]->load(BOSS_ATTACK"BOSS_AttackR_00.tga");
-	mAttack_tex[1]->load(BOSS_ATTACK"BOSS_AttackR_01.tga");
-	mAttack_tex[2]->load(BOSS_ATTACK"BOSS_AttackR_02.tga");
-	mAttack_tex[3]->load(BOSS_ATTACK"BOSS_AttackR_03.tga");
-	mAttack_tex[4]->load(BOSS_ATTACK"BOSS_AttackR_04.tga");
-	mAttack_tex[5]->load(BOSS_ATTACK"BOSS_AttackR_05.tga");
-
-
-	mHattack_tex[0]->load(BOSS_HATTACK"BOSS_HAttackR_00.tga");
-	mHattack_tex[1]->load(BOSS_HATTACK"BOSS_HAttackR_01.tga");
-	mHattack_tex[2]->load(BOSS_HATTACK"BOSS_HAttackR_02.tga");
-	mHattack_tex[3]->load(BOSS_HATTACK"BOSS_HAttackR_03.tga");
-	mHattack_tex[4]->load(BOSS_HATTACK"BOSS_HAttackR_04.tga");
-	mHattack_tex[5]->load(BOSS_HATTACK"BOSS_HAttackR_05.tga");
-
-
-	mDie_tex[0]->load(BOSS_DIE"BOSS_dieR_00.tga");
-	mDie_tex[1]->load(BOSS_DIE"BOSS_dieR_01.tga");
-	mDie_tex[2]->load(BOSS_DIE"BOSS_dieR_02.tga");
-	mDie_tex[3]->load(BOSS_DIE"BOSS_dieR_03.tga");
-	mDie_tex[4]->load(BOSS_DIE"BOSS_dieR_04.tga");
-	mDie_tex[5]->load(BOSS_DIE"BOSS_dieR_05.tga");
-
-
+	
 
 	/*テクスチャを張る*/
-	mBoss.SetUv(mStay_tex[0], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
+	mBoss.SetUv(CLoadBoss::GetInstance()->mStay_tex[0], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
 	mForward = CVector2(1.0f, 0.0f);
 
 }
@@ -102,10 +51,6 @@ CBoss::~CBoss(){
 //エネミー00描画
 CBoss::CBoss() : mVelocity(0), mFlameCount(0){
 
-	for (int i = 0; i < FLAME_LIMIT; i++)
-	{
-		mStay_tex[i] = 0;
-	}
 
 	mPriorityR = E_BOSS;			//Renderのナンバー 
 	mPriorityU = E_BOSS;			//Updateのナンバー
@@ -121,13 +66,13 @@ CBoss::CBoss() : mVelocity(0), mFlameCount(0){
 }
 
 /*アニメのフレームを動かすメソッド*/ //エネミーによって違う場合があるので画像データ用参照
-void CBoss::AnimeFlame(){
+void CBoss::AnimeFrame(){
 
 	mFlameCount += 1;
 	if (mFlameCount % 5 == 0){ //フレーム数=mStay_tex[5]->load(".../.tga");
 		mAnime += 1;
 	}
-	if (mAnime >= FLAME_LIMIT || mSaveAnime != eAnime){
+	if (mAnime >= FRAME_LIMIT || mSaveAnime != eAnime){
 		mAnime = 0;
 	}
 	mSaveAnime = eAnime;
@@ -137,8 +82,8 @@ void CBoss::AnimeFlame(){
 
 void CBoss::Update(){
 
-	AnimeFlame();
-	assert(mAnime <= FLAME_LIMIT); //フレーム数が七を超えるとダメ
+	AnimeFrame();
+	assert(mAnime <= FRAME_LIMIT); //フレーム数が七を超えるとダメ
 	mPriorityR = -mAxis;
 
 	//四角形の位置を設定
@@ -290,38 +235,38 @@ void CBoss::Update(){
 		{
 			/*待機中*/
 		case E_STAY_L:
-			mBoss.SetUv(mStay_tex[mAnime], SIZE_TEX_ENEMY00_STAY_X, 0, 0, SIZE_TEX_ENEMY00_STAY_Y);
+			mBoss.SetUv(CLoadBoss::GetInstance()->mStay_tex[mAnime], SIZE_TEX_ENEMY00_STAY_X, 0, 0, SIZE_TEX_ENEMY00_STAY_Y);
 			break;
 		case E_STAY_R:
-			mBoss.SetUv(mStay_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
+			mBoss.SetUv(CLoadBoss::GetInstance()->mStay_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
 			break;
 			/*歩き中*/
 		case E_WALK_L:
-			mBoss.SetUv(mWalk_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
+			mBoss.SetUv(CLoadBoss::GetInstance()->mWalk_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
 			break;
 		case E_WALK_R:
-			mBoss.SetUv(mWalk_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
+			mBoss.SetUv(CLoadBoss::GetInstance()->mWalk_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
 			break;
 			/*攻撃*/
 		case E_ATTACK_L:
-			mBoss.SetUv(mAttack_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
+			mBoss.SetUv(CLoadBoss::GetInstance()->mAttack_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
 			break;
 		case E_ATTACK_R:
-			mBoss.SetUv(mAttack_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
+			mBoss.SetUv(CLoadBoss::GetInstance()->mAttack_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
 			break;
 			/*強攻撃*/
 		case E_HATTACK_L:
-			mBoss.SetUv(mHattack_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
+			mBoss.SetUv(CLoadBoss::GetInstance()->mHattack_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
 			break;
 		case E_HATTACK_R:
-			mBoss.SetUv(mHattack_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
+			mBoss.SetUv(CLoadBoss::GetInstance()->mHattack_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
 			break;
 			/*死亡*/
 		case E_DIE_L:
-			mBoss.SetUv(mDie_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
+			mBoss.SetUv(CLoadBoss::GetInstance()->mDie_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
 			break;
 		case E_DIE_R:
-			mBoss.SetUv(mDie_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
+			mBoss.SetUv(CLoadBoss::GetInstance()->mDie_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
 			break;
 
 		}

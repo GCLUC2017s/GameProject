@@ -5,9 +5,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="GameMain">
-      <UniqueIdentifier>{b4fa9412-6e8b-452f-a5f1-6804abcde9a8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Base">
       <UniqueIdentifier>{c5b85c7a-2c51-4a5d-bfc8-f74c36bdac90}</UniqueIdentifier>
     </Filter>
@@ -63,16 +60,16 @@
     <Filter Include="UserInterface">
       <UniqueIdentifier>{69d6562a-8ab3-4196-8124-2633330ca8f3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="LoadManager">
-      <UniqueIdentifier>{8ef0f892-97d4-4575-8c0a-62a7d51344f5}</UniqueIdentifier>
+    <Filter Include="Load">
+      <UniqueIdentifier>{e5088dea-7ee7-417d-ba5b-4e320a5abbe7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameScene">
+      <UniqueIdentifier>{b4fa9412-6e8b-452f-a5f1-6804abcde9a8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera\CCamera.cpp">
       <Filter>Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="GameMain\CGameMain.cpp">
-      <Filter>GameMain</Filter>
     </ClCompile>
     <ClCompile Include="Graphic\CRectangle.cpp">
       <Filter>Graphic</Filter>
@@ -134,13 +131,25 @@
     <ClCompile Include="Collision\CCollisionManager.cpp">
       <Filter>Collision</Filter>
     </ClCompile>
+    <ClCompile Include="Load\CLoadPlayer.cpp">
+      <Filter>Load</Filter>
+    </ClCompile>
+    <ClCompile Include="Load\CLoadEnemy00.cpp">
+      <Filter>Load</Filter>
+    </ClCompile>
+    <ClCompile Include="Load\CLoadEnemy01.cpp">
+      <Filter>Load</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene\CGameScene.cpp">
+      <Filter>GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Load\CLoadBoss.cpp">
+      <Filter>Load</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\CCamera.h">
       <Filter>Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="GameMain\CGameMain.h">
-      <Filter>GameMain</Filter>
     </ClInclude>
     <ClInclude Include="Graphic\CRectangle.h">
       <Filter>Graphic</Filter>
@@ -214,8 +223,20 @@
     <ClInclude Include="Collision\CCollisionmanager.h">
       <Filter>Collision</Filter>
     </ClInclude>
-    <ClInclude Include="CLoadManager.h">
-      <Filter>LoadManager</Filter>
+    <ClInclude Include="Load\CLoadPlayer.h">
+      <Filter>Load</Filter>
+    </ClInclude>
+    <ClInclude Include="Load\CLoadEnemy00.h">
+      <Filter>Load</Filter>
+    </ClInclude>
+    <ClInclude Include="Load\CLoadEnemy01.h">
+      <Filter>Load</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene\CGameScene.h">
+      <Filter>GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Load\CLoadBoss.h">
+      <Filter>Load</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -9,30 +9,18 @@
 #include "../Graphic/CRectangle.h"
 #include "../Task/CTaskManager.h"
 #include "../Define/define.h"
+#define HUNGRY_S_HIGH_IF mStamina >= PL_ST_X*0.7f	//おなかがいっぱいステータス
+#define HUNGRY_S_LOW_IF mStamina <= PL_ST_X*0.2		//おなかが減ったステータス
 
-#define NORMALATTACK_PATTERN 3 //通常攻撃のパターン
 const float gravity = 0.01;	 //重力
 
 const	 CVector2 first_pos
 = CVector2(character_limit_left*0.85f, (character_limit_top + character_limit_bottom) / 2);		//プレイヤーの初期位置
 
-
 class CPlayer : public CBase {
 private:
 
 	CRectangle	mAttackCollision[NORMALATTACK_PATTERN]; //あたり判定だけの四角形
-
-	CTexture	*mStayTex[FRAME_LIMIT];									//待ちテクスチャ
-	CTexture	*mWalkTex[FRAME_LIMIT];									//歩くテクスチャ
-	CTexture	*mRunTex[FRAME_LIMIT];									//走るテクスチャ
-	CTexture	*mNormalAttackTex[NORMALATTACK_PATTERN][FRAME_LIMIT];	//通常攻撃テクスチャ
-	CTexture	*mEatTex[FRAME_LIMIT];									//捕食テクスチャ
-	CTexture	*mEx01Tex[FRAME_LIMIT];									//必殺技(消費)テクスチャ									
-	CTexture	*mEx02Tex[FRAME_LIMIT];									//必殺技(継続)テクスチャ
-	CTexture	*mFlameTex[FRAME_LIMIT];								//炎テクスチャ
-	CTexture	*mBrakeTex[FRAME_LIMIT];								//ブレーキテクスチャ
-	CTexture	*mJumpTex[FRAME_LIMIT];												//ジャンプテクスチャ
-	CTexture	*mShadowTex;											//影テクスチャチャ
 
 	/*
 	自分がどのアニメーションか判断用
@@ -96,7 +84,6 @@ public:
 	/*
 	CCameraで使うXY
 	*/
-
 	float mVelocity; //移動するときに使う
 	static float camera_x;
 	static float camera_y;
