@@ -11,7 +11,7 @@
 #define FILE_BG_TREE		"../CG/background/tree/"
 #define BG_SIZE_X 1600
 #define BG_SIZE_Y 400
-#define MAPDISPX
+#define SC_SPEED 0.5f
 
 
 
@@ -47,7 +47,7 @@ CMap::~CMap() {
 	CGame::Delete(&mSkyTex);
 	CGame::Delete(&mTreeTex);
 }
-CMap::CMap() :mGroundTex(0) {
+CMap::CMap() :mGroundTex(0),mFlagSc(false),mLeftSc(0),mRightSc(BG_SIZE_X){
 	
 		mPriorityR = E_BACKGROWND;		//レンダー順番の初期設定
 		mPriorityU = E_BACKGROWND;		//アップデータ順番の初期設定
@@ -58,7 +58,25 @@ CMap::CMap() :mGroundTex(0) {
 
 
 void CMap::Update() {
-
+	if (mFlagSc){
+		mRightSc += SC_SPEED;
+		mLeftSc += SC_SPEED;
+		if (mRightSc >= BG_SIZE_X){
+			mLeftSc = 0;
+			mRightSc = BG_SIZE_X;
+			mFlagSc = false;
+		}
+	}
+	else{
+		mRightSc += SC_SPEED;
+		mLeftSc += SC_SPEED;
+		if (mLeftSc >= BG_SIZE_X){
+			mLeftSc = BG_SIZE_X;
+			mRightSc = 0;
+			mFlagSc = true;
+		}
+	}
+	mSky.SetUv(mSkyTex, mLeftSc, 0, mRightSc, BG_SIZE_Y);
 }
 
 /* render

@@ -17,6 +17,10 @@ private:
 	CTexture *mSkyTex;
 	CTexture *mTreeTex;
 
+	float	mLeftSc;		//左スクロール用
+	float	mRightSc;	//右スクロール用
+	bool	mFlagSc;	//引く足すフラグ
+
 public:
 	~CMap();
 	CMap();
