@@ -62,7 +62,7 @@
 #include "../Vector/CVector2.h"
 #include "../Define/define.h"
 #include "../Graphic/CRectangle.h"
-
+#include <time.h>
 
 /*
 使い方
@@ -106,13 +106,15 @@ public:
 	int mAnimeFrame;				//アニメのフレーム数
 	float mAxis;					//軸　使い方　mPosの'Y'を代入する(ジャンプの時など，移動以外の'Y'は代入しない)
 	int mStatus;					//現在何をしているかステータス
-
+	static int kazu;				//デバッグ用					
 
 	CVector2 mTargetP;  //プレイヤーポジションの取得用
 	
 	CBase() : mEnabledEat(false), mAxis(0), mHitPoint(0), mEnabledAttack(false), mAttackPoint(0.01f),mEnabledPoint(false){
 		mCharaFlag = true;
 		mShadow.SetColor(0.5f, 0.5f, 0.5f, 0.7f);
+		kazu += 1;
+		srand(time(NULL));
 	}
 
 	/*アニメのフレーム数計算用  roopがtrueならループする speed = RoopのSpeed*/
@@ -129,5 +131,7 @@ public:
 	*/
 	void Attack(float Forword, float x, float y,float mAxis, CVector2 &mPos);
 	bool FrameTime(float time);
+	void RandPos(int x, int y, CVector2 *mPos);		//ポジションをランダムにする	サイズをx,yに当てはめる
+
 };
 #endif

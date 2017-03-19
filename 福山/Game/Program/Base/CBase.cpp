@@ -1,5 +1,6 @@
 #include "../Base\CBase.h"
-
+#include"../Task/CTaskManager.h"
+#include <time.h>
 /*アニメのフレームを動かすメソッド*/ //エネミーによって違う場合があるので画像データ用参照
 void CBase::AnimeFrame(bool roop, int speed){
 	if (roop){
@@ -8,7 +9,7 @@ void CBase::AnimeFrame(bool roop, int speed){
 			mAnimeFrame++;
 
 		}
-		if (mAnimeFrame >= FRAME_LIMIT-1 || mSaveAnime != mStatus){
+		if (mAnimeFrame >= FRAME_LIMIT|| mSaveAnime != mStatus){
 			mAnimeFrame = 0;
 		}
 	}
@@ -78,6 +79,7 @@ if(FrameTime(時間)){			//猶予の時間を書く
 
 */
 
+
 bool CBase::FrameTime(float t){
 	if (t > mFrameTime){
 		mFrameTime += 1;
@@ -89,3 +91,39 @@ bool CBase::FrameTime(float t){
 	}
 	
 }
+/*シングルか判断*/
+bool SinglePos(CVector2 pos){
+	CTask *t;
+	t = CTaskManager::GetInstance()->mRoot;
+
+	while (t != 0){
+		CBase *b = (CBase*)t;
+		if (b->mCharaFlag && pos.x == b->mPos.x && pos.y == b->mPos.y){ //ポスが同じ場合
+			return false;						//シングル×
+		}
+		t = t->next;
+	}
+	if (t == 0){ //ここまででシングルだった場合
+		return true;			//シングル○
+	}
+	return false;
+}
+
+/*
+[使い方]
+ランダムでポジションを決める
+サイズx,サイズy,&自分のポジション
+*/
+void CBase::RandPos(int x,int y,CVector2 *mPos){
+	while (true)
+	{
+		mPos->x = (rand()-rand())%(int)(character_limit_left+character_limit_right)/2;
+		mPos->y = (rand() - rand())%(int)(character_limit_top + character_limit_bottom) / 2;
+		mAxis = mPos->y - y;
+		LimitDisp(mPos->x, mPos->y);
+		if (SinglePos(*mPos)){ 
+			break;
+		}
+	}
+}
+int CBase::kazu = 0;

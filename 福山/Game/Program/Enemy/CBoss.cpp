@@ -18,9 +18,6 @@ CKeyを使っている条件文は今後別の処理になります。
 
 */
 
-#define SIZE_BOSS_Y 1  //BOSSのサイズ_Y
-#define SIZE_BOSS_X 1 //BOSSのサイズ_X
-
 #define HITPOINT_BOSS 5					//BOSSの体力
 #define FIRST_R_NO_BOSS 1						//初めのレンダーのポイント
 #define FIRST_U_NO_BOSS 1						//初めのアップデートのポイント
@@ -74,8 +71,8 @@ CBoss::CBoss() : mVelocity(0), mFlameCount(0), actionflag(false), motion(0), dir
 	mStatus = E_STAY_L;
 
 	//四角形の頂点設定
-	mRect.SetVertex(SIZE_BOSS_X, SIZE_BOSS_Y, -SIZE_BOSS_X, -SIZE_BOSS_Y);
-	mShadow.SetVertex(SIZE_BOSS_X, SIZE_BOSS_Y, -SIZE_BOSS_X, -SIZE_BOSS_Y);
+	mRect.SetVertex(-SIZE_BOSS_X, SIZE_BOSS_Y, SIZE_BOSS_X, -SIZE_BOSS_Y);
+	mShadow.SetVertex(-SIZE_BOSS_X, SIZE_BOSS_Y, SIZE_BOSS_X, -SIZE_BOSS_Y);
 
 	//四角形の色を設定
 	mRect.SetColor(1.0f, 1.0f, 1.0f, 1.0f);

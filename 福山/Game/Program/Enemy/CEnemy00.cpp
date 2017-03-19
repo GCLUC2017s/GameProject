@@ -7,9 +7,6 @@
 #include<iostream>
 #include "CEnemybasetest.h"
 #include "../Load/CLoadEnemy00.h"
-
-#define SIZE_ENEMY00_Y 1  //エネミー00のサイズ_Y
-#define SIZE_ENEMY00_X 1 //エネミー00のサイズ_X
 /*
 
 高橋弘樹

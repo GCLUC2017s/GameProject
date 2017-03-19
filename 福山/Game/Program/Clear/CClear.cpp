@@ -36,7 +36,7 @@
 #define R_KILLS_POS		CVector2(CPlayer::camera_x - DISP_X / 2, 0- 1.0f)
 #define R_SUM_POS		CVector2(CPlayer::camera_x - DISP_X / 2,- DISP_Y / 3- 1.0f)
 /*‚b‚k‚d‚`‚qSCORE”»’èãŒÀ*/
-#define SABC_MAX	(ENE00_LIMIT+ENE01_LIMIT+BOSS_LIMIT) * 500
+#define SABC_MAX	(ENE00_LIMIT*POINT_00	+	ENE01_LIMIT*POINT_01	+	BOSS_LIMIT*POINT_BOSS)
 
 
 #define FILE_TEX "../CG\\GameScreen\\"
@@ -141,15 +141,21 @@ void CClear::Update(){
 			if (b->mHitPoint <= 0 && !b->mEnabledPoint){
 				mKillPolint += POINT_00; 
 				b->mEnabledPoint = true; 
-				SABC((mKillPolint + mTimePoint));
 				mFlagRect = true;
 			} 
 			break;
 		case E_ENEMY01:
-			if (b->mHitPoint <= 0 && !b->mEnabledPoint){ mKillPolint += POINT_01; b->mEnabledPoint = true; }
+			if (b->mHitPoint <= 0 && !b->mEnabledPoint){ 
+				mKillPolint += POINT_01;
+				b->mEnabledPoint = true;
+			}
 			break;
 		case E_BOSS:
-			if (b->mHitPoint <= 0 && !b->mEnabledPoint){ mKillPolint += POINT_BOSS; b->mEnabledPoint = true; }
+			if (b->mHitPoint <= 0 && !b->mEnabledPoint){ 
+				mKillPolint += POINT_BOSS;
+				b->mEnabledPoint = true;
+				SABC((mKillPolint + mTimePoint));
+			}
 			break;
 		};
 		t = t->next;

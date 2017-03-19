@@ -49,14 +49,11 @@ inline void InitRand(){
 	srand((unsigned int)time(NULL));
 }
 
-
 void CEnemy01::SetPos(){
-	mPos = Enemy01_first_pos;
-	mAxis = mPos.y;
+	RandPos(SIZE_ENEMY00_X, SIZE_ENEMY00_Y,&mPos);
 };
 
 void CEnemy01::Init(){
-	SetPos();
 
 	/*テクスチャを張る*/
 	mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
@@ -72,14 +69,14 @@ CEnemy01::~CEnemy01(){
 
 //エネミー01描画
 CEnemy01::CEnemy01() : mVelocity(0), mFlameCount(0), actionflag(false), motion(0), direction(1){
-
+	SetPos();
 	mPriorityR = E_ENEMY01;			//Renderのナンバー 
 	mPriorityU = E_ENEMY01;			//Updateのナンバー
 	mHitPoint = HITPOINT_ENEMY00;		//ＨＰ
 	mMyNumber = E_ENEMY01;
 
 	//四角形の頂点設定
-	mRect.SetVertex(SIZE_ENEMY00_X, SIZE_ENEMY00_Y, -SIZE_ENEMY00_X, -SIZE_ENEMY00_Y);
+	mRect.SetVertex(-SIZE_ENEMY00_X, SIZE_ENEMY00_Y, SIZE_ENEMY00_X, -SIZE_ENEMY00_Y);
 	mShadow.SetVertex(-SIZE_SHADOW_X, SIZE_SHADOW_Y, SIZE_SHADOW_X, -SIZE_SHADOW_Y);
 	//四角形の色を設定
 	mRect.SetColor(1.0f, 1.0f, 1.0f, 1.0f);

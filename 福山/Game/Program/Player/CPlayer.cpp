@@ -90,9 +90,10 @@ CPlayer::CPlayer() : mVelocity(0), mSpeedJump(JUMP_FIRST_SPEED),mEnabledInterval
 }
 /*左右判断*/
 void CPlayer::DecisionRL(int R, int L){
-	if (mSaveForword.x == RIGHT || mSaveForword.x == 0){ mStatus = R; }
-	if (mSaveForword.x == LEFT){ mStatus = L; }
-	mAnimeFrame = 0;
+	
+		if (mSaveForword.x == RIGHT || mSaveForword.x == 0){ mStatus = R; }
+		if (mSaveForword.x == LEFT){ mStatus = L; }
+	
 }
 /*ジャンプメソッド*/
 void CPlayer::Jump(){ //ジャンプ処理メソッド
@@ -125,7 +126,6 @@ void CPlayer::RunWalk(CVector2 v){
 	}
 	else{				//歩くとき
 		mVelocity = WALK_SPEED;
-		DecisionRL(E_WALK_R, E_WALK_L);
 	}
 	
 	mForward = v;
@@ -434,8 +434,6 @@ void CPlayer::Update() {
 	Jump();
 	ChangeStatus();
 	AnimeScene();
-
-	printf("%d\n", mEnabledAttack);
 
 	if (!mEnabledInterval && mStatus != E_STAY_L && mStatus != E_STAY_R && mVelocity <= 0 && !mEnabledJump && !mEnabledAttack){
 		DecisionRL(E_STAY_R, E_STAY_L);
