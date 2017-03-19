@@ -113,6 +113,7 @@ void CClear::SABC(int i){ //“G‚ð“|‚·‘O‚ÉŠÖ”‚ðŒÄ‚Ô
 		else{
 			mRectLogoRect[_SABC_].SetUv(mLogoTex[_SABC_], T_SIZE_C);
 		}
+		mFlagRect = true;
 	}
 
 }
@@ -141,7 +142,6 @@ void CClear::Update(){
 			if (b->mHitPoint <= 0 && !b->mEnabledPoint){
 				mKillPolint += POINT_00; 
 				b->mEnabledPoint = true; 
-				mFlagRect = true;
 			} 
 			break;
 		case E_ENEMY01:

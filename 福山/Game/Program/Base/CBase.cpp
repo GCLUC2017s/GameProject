@@ -36,8 +36,11 @@ void CBase::LimitDisp(int sizex, int sizey){
 		mAxis = mPos.y - sizey; //軸をもとに戻す
 	}
 
-	if (mPos.x >= character_limit_right - sizex || mPos.x <= character_limit_left + sizex){ //マップ外に出ると元の位置に戻す(X)
-		mPos.x = mRect.position.x;
+	if (mPos.x > character_limit_right - sizex){ //マップ外に出ると元の位置に戻す(X)
+		mPos.x = character_limit_right - sizex;
+	}
+	if (mPos.x < character_limit_left + sizex){
+		mPos.x = character_limit_left + sizex;
 	}
 	/*あたり判定終了*/
 }

@@ -23,8 +23,6 @@
 #define ANIME_TIME_ATTACK					8								//アニメのループ時間 攻撃のもの
 #define ANIME_TIME_BRAKE					7								//アニメのループ時間 BRAKE
 #define ANIME_TIME_JUMP						6								//アニメループ時間
-#define RIGHT WALK_X														//右
-#define LEFT -WALK_X														//左
 #define ATTACK_A		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,2, mPos	//攻撃範囲A
 #define ATTACK_B		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,2, mPos	//攻撃範囲B
 #define ATTACK_C		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,3, mPos	//攻撃範囲C
@@ -33,11 +31,12 @@
 #define EX01_SPEED 0.1f														//必殺技が進むスピード
 #define INTERVAL		100.0f												//攻撃後のINTERVALキー入力待ち時間
 #define HUNGRY_SPEED	0.001f												//おなかが減るスピード
-#define HUNGRY_SSPP_HIGT	WALK_SPEED*0.1f									//おなかが減ってスピードが上がる　+=　して使うもの
-#define HUNGRY_SSPP_LOW		WALK_SPEED*0.1f									//おなかがいっぱい走りにくい 	+=　して使うも
-#define HUNGRY_POWER_HIGH	0.1f											//おなかが減って力が出る　+=して使うもの
-#define HUNGRY_POWER_LOW	-0.1f											//おなかがいっぱい力が出ない　+=して使うもの
-
+#define HUNGRY_SSPP_HIGH	 RUN_SPEED									//おなかが減ってスピードが上がる　+=　して使うもの
+#define HUNGRY_SSPP_LOW		-WALK_SPEED*0.5f								//おなかがいっぱい走りにくい 	+=　して使うも
+#define HUNGRY_POWER_HIGH	1.2f											//おなかが減って力が出る　*=して使うもの
+#define HUNGRY_POWER_LOW	0.8f											//おなかがいっぱい力が出ない　*=して使うもの
+#define RIGHT WALK_X														//右
+#define LEFT -WALK_X														//左
 
 float CPlayer::camera_x;
 float CPlayer::camera_y;
@@ -260,14 +259,14 @@ void CPlayer::PlayerAttack(){
 			/*通常攻撃 攻撃力の設定 フラグを真に*/
 			if (CKey::once('X') && !mEnabledAttack){
 				mAttackPoint = PL_NORMAL_POWER;
-				mAttackPoint += mHungryPower;
+				mAttackPoint = mAttackPoint *mHungryPower;
 				mEnabledAttack = true;
 				DecisionRL(E_NORMALATTACK_A_R, E_NORMALATTACK_A_L);
 			}
 			/*捕食攻撃 攻撃力の設定 フラグを真に*/
 			if (CKey::once('Z') && !mEnabledAttack){
-				mAttackPoint = PL_EAT_POWER;
-				mAttackPoint += mHungryPower;
+				mAttackPoint = PL_EAT_POWER;			
+				mAttackPoint = mAttackPoint *mHungryPower;
 				mEnabledAttack = true;
 				mEnabledEat = true;
 				DecisionRL(E_EAT_R, E_EAT_L);
@@ -276,7 +275,7 @@ void CPlayer::PlayerAttack(){
 			if (CKey::once('A') && mStamina >= PL_ST_X *0.1){
 				mAttackPoint = PL_EX01_POWER;
 				mStamina -= PL_ST_X*0.1f;
-				mAttackPoint += mHungryPower;
+				mAttackPoint = mAttackPoint *mHungryPower;
 				mEnabledAttack = true;
 				mEnabledEx01 = true;
 				DecisionRL(E_EX01_R, E_EX01_L);
@@ -401,10 +400,10 @@ void CPlayer::ChangeStatus(){
 
 		/*ステータス変化*/
 		if (HUNGRY_S_HIGH_IF){ 
-			mHungryPower = HUNGRY_POWER_LOW; mHungrySSpp = HUNGRY_SSPP_LOW; 
+			mHungryPower = HUNGRY_POWER_LOW; mHungrySSpp = HUNGRY_SSPP_LOW; //おなか一杯減少
 		} 
 		else if (HUNGRY_S_LOW_IF){ 
-			mHungryPower = HUNGRY_POWER_HIGH; mHungrySSpp = HUNGRY_POWER_HIGH;
+			mHungryPower = HUNGRY_POWER_HIGH; mHungrySSpp = HUNGRY_SSPP_HIGH;//おなかすいた上昇
 		}
 		else{									 //中間 変化なし
 			mHungryPower = 0; mHungrySSpp = 0;

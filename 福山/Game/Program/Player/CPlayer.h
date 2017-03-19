@@ -9,9 +9,8 @@
 #include "../Graphic/CRectangle.h"
 #include "../Task/CTaskManager.h"
 #include "../Define/define.h"
-#define HUNGRY_S_HIGH_IF mStamina >= PL_ST_X*0.7f	//おなかがいっぱいステータス
-#define HUNGRY_S_LOW_IF mStamina <= PL_ST_X*0.2		//おなかが減ったステータス
-
+#define HUNGRY_S_HIGH_IF (mStamina >= PL_ST_X*0.7f)	//おなかがいっぱいステータス
+#define HUNGRY_S_LOW_IF (mStamina <= PL_ST_X*0.2	)	//おなかが減ったステータス
 const float gravity = 0.01;	 //重力
 
 const	 CVector2 first_pos
@@ -56,7 +55,7 @@ private:
 	
 	CVector2 mTarget;
 	CVector2 mSuvePos;				//元いた位置の保存
-	CVector2 mSaveForword;			//前の右左判断
+	
 
 	/*移動処理*/
 	void Move();
@@ -87,7 +86,7 @@ public:
 	float mVelocity; //移動するときに使う
 	static float camera_x;
 	static float camera_y;
-
+	CVector2 mSaveForword;			//前の右左判断
 	CPlayer();
 	~CPlayer();
 	void Init();
