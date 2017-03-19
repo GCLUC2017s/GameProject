@@ -12,6 +12,7 @@
 #define TEX_FILE_PLAYER_FLAME			 "../CG\\beru\\beru_flame\\"		//プレイヤーのファイル場所　炎(オーラ)
 #define TEX_FILE_PLAYER_BRAKE			 "../CG\\beru\\beru_brake\\"		//プレイヤーのファイル場所　ブレーキ
 #define TEX_FILE_PLAYER_JUMP			 "../CG\\beru\\beru_jump\\"			//プレイヤーのファイル場所　ジャンプ
+#define TEX_FILE_SHADOW					 "../CG/shadow/"					//影テクスチャ場所
 
 CLoadPlayer* CLoadPlayer::mLoadPlayer = 0;
 
@@ -108,13 +109,6 @@ CLoadPlayer::CLoadPlayer()
 	mEx01Tex[3]->load(TEX_FILE_PLAYER_EX01"beru_EX01_03.tga");
 	mEx01Tex[4]->load(TEX_FILE_PLAYER_EX01"beru_EX01_04.tga");
 	mEx01Tex[5]->load(TEX_FILE_PLAYER_EX01"beru_EX01_05.tga");
-	///*必殺技(継続)*/
-	//mEx02Tex[0]->load(TEX_FILE_PLAYER_EX02"beru_EX02_00.tga");
-	//mEx02Tex[1]->load(TEX_FILE_PLAYER_EX02"beru_EX02_01.tga");
-	//mEx02Tex[2]->load(TEX_FILE_PLAYER_EX02"beru_EX02_02.tga");
-	//mEx02Tex[3]->load(TEX_FILE_PLAYER_EX02"beru_EX02_03.tga");
-	//mEx02Tex[4]->load(TEX_FILE_PLAYER_EX02"beru_EX02_04.tga");
-	//mEx02Tex[5]->load(TEX_FILE_PLAYER_EX02"beru_EX02_05.tga");
 	/*ジャンプ*/
 	mJumpTex[0]->load(TEX_FILE_PLAYER_JUMP"beru_jump_00.tga");
 	mJumpTex[1]->load(TEX_FILE_PLAYER_JUMP"beru_jump_01.tga");
@@ -129,6 +123,8 @@ CLoadPlayer::CLoadPlayer()
 	mBrakeTex[3]->load(TEX_FILE_PLAYER_BRAKE"beru_brake_03.tga");
 	mBrakeTex[4]->load(TEX_FILE_PLAYER_BRAKE"beru_brake_04.tga");
 	mBrakeTex[5]->load(TEX_FILE_PLAYER_BRAKE"beru_brake_05.tga");
+	/*影*/
+	mShadowTex->load(TEX_FILE_SHADOW"shadow.tga");
 }
 
 CLoadPlayer::~CLoadPlayer()
@@ -151,6 +147,6 @@ CLoadPlayer::~CLoadPlayer()
 			CGame::Delete(&mNormalAttackTex[z][i]);
 		}
 		CGame::Delete(&mEatTex[i]);
-
 	}
+	CGame::Delete(&mShadowTex);
 }

@@ -55,14 +55,6 @@ void CPlayer::Init() {
 	SetPos();
 	camera_x = mPos.x;
 	camera_y = mPos.y;
-	///*炎*/
-	//mFlameTex[0]->load(TEX_FILE_PLAYER_FLAME"beru_flame_00.tga");
-	//mFlameTex[1]->load(TEX_FILE_PLAYER_FLAME"beru_flame_01.tga");
-	//mFlameTex[2]->load(TEX_FILE_PLAYER_FLAME"beru_flame_02.tga");
-	//mFlameTex[3]->load(TEX_FILE_PLAYER_FLAME"beru_flame_03.tga");
-	//mFlameTex[4]->load(TEX_FILE_PLAYER_FLAME"beru_flame_04.tga");
-	//mFlameTex[5]->load(TEX_FILE_PLAYER_FLAME"beru_flame_05.tga");
-	///*影*/
 
 	/*テクスチャを張る*/
 	mRect.SetUv(CLoadPlayer::GetInstance()->mStayTex[0], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
@@ -94,7 +86,6 @@ CPlayer::CPlayer() : mVelocity(0), mSpeedJump(JUMP_FIRST_SPEED),mEnabledInterval
 	mShadow.SetVertex(-SIZE_SHADOW_X, SIZE_SHADOW_Y, SIZE_SHADOW_X, -SIZE_SHADOW_Y);
 	//四角形の色を設定
 	mRect.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-	mShadow.SetColor(0.5f, 0.5f, 0.5f, 0.7f);
 
 }
 /*左右判断*/
@@ -405,7 +396,7 @@ void CPlayer::ChangeStatus(){
 
 	/*ヒットポイント処理*/
 	/*スタミナ処理*/
-	if (mStamina <= PL_ST_X && mStamina >= 0){	 //減っていく
+	if (mStamina <= PL_ST_X && mStamina >= 0){	  //減っていく
 		mStamina -= HUNGRY_SPEED; 
 
 		/*ステータス変化*/
@@ -415,7 +406,7 @@ void CPlayer::ChangeStatus(){
 		else if (HUNGRY_S_LOW_IF){ 
 			mHungryPower = HUNGRY_POWER_HIGH; mHungrySSpp = HUNGRY_POWER_HIGH;
 		}
-		else{									//中間 変化なし
+		else{									 //中間 変化なし
 			mHungryPower = 0; mHungrySSpp = 0;
 		}
 		/*ステータス変化終了*/

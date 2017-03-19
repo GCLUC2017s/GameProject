@@ -130,6 +130,7 @@ CUserinterface::~CUserinterface()
 
 void CUserinterface::Update(){
 	if (task != 0){
+		mPriorityR = task->mPriorityR;
 		switch (task->mMyNumber)
 		{
 			/*プレーイヤー*/
@@ -210,6 +211,7 @@ void CUserinterface::Update(){
 			}
 			break;
 		}
+
 	}
 }
 

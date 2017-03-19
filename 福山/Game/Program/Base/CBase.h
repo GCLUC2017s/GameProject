@@ -22,8 +22,6 @@
 #define SHADOW_TEX_X			70.f				//影のテクスチャのX
 #define SHADOW_TEX_Y			20.f				//影のテクスチャのY
 
-
-
 #define PL_HP_X 2.0f //ゲージx　 //HPはこちらから使うように(初期値)
 #define PL_HP_Y 0.15f//ゲージy
 #define PL_ST_X 2.0f //ゲージx
@@ -50,6 +48,14 @@
 #define ENE01_POWER		0.05f
 #define BOSS_JAB_POWER	0.1f
 #define BOSS_HIGH_POWER	0.2f
+/*ＰＯＩＮＴ*/
+#define POINT_00		(int)100
+#define POINT_01		(int)200
+#define POINT_BOSS		(int)1000
+/*エネミー数*/
+#define ENE00_LIMIT	5
+#define ENE01_LIMIT	5
+#define BOSS_LIMIT	1
 
 #define TEX_FILE_SHADOW		"../CG/shadow/"		//影のファイル場所
 #include "../Task/CTask.h"
@@ -77,9 +83,10 @@ private:
 	float mFrameTime;				//bool 関数	 FrameTie計算用
 	int mFrameCount;				//現在のフレーム数
 public:
+	CTexture	*mShadowTex;		//影テクスチャチャ
 	CVector2 mPos;					//位置
 	CVector2 mForward;				//向き
-	CRectangle mRect;				//画像用
+	CRectangle  mRect;				//画像用
 	CRectangle  mShadow;			//影
 	CRectangle mAttackRange;		//攻撃範囲の四角形
 
@@ -87,7 +94,7 @@ public:
 	bool mEnabledAttack;		    //攻撃しているか否か
 	bool mEnabledJump;				//ジャンプいている
 	bool mEnabledEx01;				//必殺技(消費)
-
+	bool mEnabledPoint;				//ポイント換算された判断
 
 	float mHitPoint;				//ヒットポイント
 	float mAttackPoint;				//攻撃力
@@ -103,8 +110,9 @@ public:
 
 	CVector2 mTargetP;  //プレイヤーポジションの取得用
 	
-	CBase() : mEnabledEat(false), mAxis(0), mHitPoint(0), mEnabledAttack(false), mAttackPoint(0.01f){
+	CBase() : mEnabledEat(false), mAxis(0), mHitPoint(0), mEnabledAttack(false), mAttackPoint(0.01f),mEnabledPoint(false){
 		mCharaFlag = true;
+		mShadow.SetColor(0.5f, 0.5f, 0.5f, 0.7f);
 	}
 
 	/*アニメのフレーム数計算用  roopがtrueならループする speed = RoopのSpeed*/

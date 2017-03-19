@@ -15,6 +15,7 @@ public:
 	static CVector2 mGetPlayerPos();
 	static CVector2 getPosition(const CVector2 &v);
 	static CEnemy00 getEnemy(CEnemy00 &ene00);
+	static float	GetPlayerAxis();
 	static CPlayer getPlayer(CTask &t);
 	/*タスク属性がほしいときに使う
 	　number　ほしいもののナンバー

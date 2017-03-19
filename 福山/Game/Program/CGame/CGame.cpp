@@ -46,3 +46,17 @@ void CGame::Delete(CTexture **t){
 		*t = 0;
 	}
 }
+
+float CGame::GetPlayerAxis(){
+	CTask *t;
+	t = CTaskManager::GetInstance()->mRoot;
+
+	while (t != 0){
+		if (t->mMyNumber == E_PLAYER){
+			CPlayer *p;
+			p = (CPlayer*)t;
+			return p->mAxis;
+		}
+		t = t->next;
+	}
+}

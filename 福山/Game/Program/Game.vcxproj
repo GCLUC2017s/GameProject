@@ -14,6 +14,7 @@
     <ClCompile Include="Base\CBase.cpp" />
     <ClCompile Include="Camera\CCamera.cpp" />
     <ClCompile Include="CGame\CGame.cpp" />
+    <ClCompile Include="Clear\CClear.cpp" />
     <ClCompile Include="Collision\CCollision.cpp" />
     <ClCompile Include="Collision\CCollisionManager.cpp" />
     <ClCompile Include="Enemy\CBoss.cpp" />
@@ -42,12 +43,15 @@
     <ClInclude Include="Base\CBase.h" />
     <ClInclude Include="Camera\CCamera.h" />
     <ClInclude Include="CGame\CGame.h" />
+    <ClInclude Include="Clear\CClear.h" />
     <ClInclude Include="Collision\CCollision.h" />
     <ClInclude Include="Collision\CCollisionmanager.h" />
     <ClInclude Include="Define\define.h" />
     <ClInclude Include="Enemy\CBoss.h" />
     <ClInclude Include="Enemy\CEnemy00.h" />
     <ClInclude Include="Enemy\CEnemy01.h" />
+    <ClInclude Include="Enemy\CEnemybasetest.h" />
+    <ClInclude Include="Enemy\cenemypattern.h" />
     <ClInclude Include="GameScene\CGameScene.h" />
     <ClInclude Include="Graphic\CRectangle.h" />
     <ClInclude Include="Graphic\CStringtexture.h" />

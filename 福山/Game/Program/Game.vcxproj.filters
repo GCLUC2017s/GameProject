@@ -66,15 +66,15 @@
     <Filter Include="GameScene">
       <UniqueIdentifier>{b4fa9412-6e8b-452f-a5f1-6804abcde9a8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Clear">
+      <UniqueIdentifier>{c4198125-4827-4e9a-8eda-175430a4ae6e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera\CCamera.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
     <ClCompile Include="Graphic\CRectangle.cpp">
-      <Filter>Graphic</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphic\CStringtexture.cpp">
       <Filter>Graphic</Filter>
     </ClCompile>
     <ClCompile Include="Graphic\CTriangle.cpp">
@@ -104,15 +104,6 @@
     <ClCompile Include="Vector\CVector2.cpp">
       <Filter>Vector</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy\CEnemy00.cpp">
-      <Filter>Enemey</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy\CBoss.cpp">
-      <Filter>Enemey</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy\CEnemy01.cpp">
-      <Filter>Enemey</Filter>
-    </ClCompile>
     <ClCompile Include="CGame\CGame.cpp">
       <Filter>CGame</Filter>
     </ClCompile>
@@ -131,9 +122,6 @@
     <ClCompile Include="Collision\CCollisionManager.cpp">
       <Filter>Collision</Filter>
     </ClCompile>
-    <ClCompile Include="Load\CLoadPlayer.cpp">
-      <Filter>Load</Filter>
-    </ClCompile>
     <ClCompile Include="Load\CLoadEnemy00.cpp">
       <Filter>Load</Filter>
     </ClCompile>
@@ -146,15 +134,30 @@
     <ClCompile Include="Load\CLoadBoss.cpp">
       <Filter>Load</Filter>
     </ClCompile>
+    <ClCompile Include="Graphic\CStringtexture.cpp">
+      <Filter>Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Clear\CClear.cpp">
+      <Filter>Clear</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\CBoss.cpp">
+      <Filter>Enemey</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\CEnemy00.cpp">
+      <Filter>Enemey</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\CEnemy01.cpp">
+      <Filter>Enemey</Filter>
+    </ClCompile>
+    <ClCompile Include="Load\CLoadPlayer.cpp">
+      <Filter>Load</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\CCamera.h">
       <Filter>Camera</Filter>
     </ClInclude>
     <ClInclude Include="Graphic\CRectangle.h">
-      <Filter>Graphic</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic\CStringtexture.h">
       <Filter>Graphic</Filter>
     </ClInclude>
     <ClInclude Include="Graphic\CTexture.h">
@@ -193,15 +196,6 @@
     <ClInclude Include="Define\define.h">
       <Filter>Define</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy\CEnemy00.h">
-      <Filter>Enemey</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy\CBoss.h">
-      <Filter>Enemey</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy\CEnemy01.h">
-      <Filter>Enemey</Filter>
-    </ClInclude>
     <ClInclude Include="CGame\CGame.h">
       <Filter>CGame</Filter>
     </ClInclude>
@@ -223,9 +217,6 @@
     <ClInclude Include="Collision\CCollisionmanager.h">
       <Filter>Collision</Filter>
     </ClInclude>
-    <ClInclude Include="Load\CLoadPlayer.h">
-      <Filter>Load</Filter>
-    </ClInclude>
     <ClInclude Include="Load\CLoadEnemy00.h">
       <Filter>Load</Filter>
     </ClInclude>
@@ -236,6 +227,30 @@
       <Filter>GameScene</Filter>
     </ClInclude>
     <ClInclude Include="Load\CLoadBoss.h">
+      <Filter>Load</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\CStringtexture.h">
+      <Filter>Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Clear\CClear.h">
+      <Filter>Clear</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\CBoss.h">
+      <Filter>Enemey</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\CEnemy00.h">
+      <Filter>Enemey</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\CEnemy01.h">
+      <Filter>Enemey</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\CEnemybasetest.h">
+      <Filter>Enemey</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\cenemypattern.h">
+      <Filter>Enemey</Filter>
+    </ClInclude>
+    <ClInclude Include="Load\CLoadPlayer.h">
       <Filter>Load</Filter>
     </ClInclude>
   </ItemGroup>
