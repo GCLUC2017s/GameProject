@@ -152,6 +152,8 @@ void init(void)
 	CResourceManager::GetInstance()->Add("Item14", CImage::LoadImage("Item/Item_2/Item14.png"));
 	CResourceManager::GetInstance()->Add("Item15", CImage::LoadImage("Item/Item_2/Item15.png"));
 	CResourceManager::GetInstance()->Add("Item16", CImage::LoadImage("Item/Item_2/Item16.png"));
+	CResourceManager::GetInstance()->Add("HP", CImage::LoadImage("Player/Life1.png"));
+	CResourceManager::GetInstance()->Add("SP", CImage::LoadImage("Player/SP.png"));
 	//ƒTƒEƒ“ƒh“Ç‚Ýž‚Ý
 	CSound::GetInstance()->GetSound("TITLE_BGM")->Load("BGM/Title.wav", 1);
 	CSound::GetInstance()->GetSound("CHARASELECT_BGM")->Load("BGM/CharaSelect.wav", 1);

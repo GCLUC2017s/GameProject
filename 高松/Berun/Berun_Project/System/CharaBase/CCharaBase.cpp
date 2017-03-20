@@ -22,6 +22,8 @@ CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio)
 	m_state = eState_Move;
 	mp_eData = &g_characterData[type];
 	m_chara = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get(mp_eData->imageName));
+	for (int i = 0; i < HP_MAX; i++) mp_hp[i] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("HP"));
+	for (int j = 0; j < SP_MAX; j++) mp_sp[j] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("SP"));
 	m_imgPtn = 0;
 	m_level= mp_eData->level;
 	m_maxHp = mp_eData->maxHp;
@@ -47,6 +49,7 @@ CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio)
 	m_down = false;
 	m_dash = false;
 	m_jumpFlag = false;
+
 }
 CCharaBase::~CCharaBase() 
 {
@@ -147,6 +150,16 @@ void CCharaBase::HpBar()
 }
 void CCharaBase::Update()
 {
+	for (int i = 0; i < HP_MAX; i++)
+	{
+		mp_hp[i]->SetPos(i * 75, 25);
+		mp_hp[i]->SetSize(75, 75);
+	}
+	for (int j = 0; j < SP_MAX; j++)
+	{
+		mp_sp[j]->SetPos(j * 75 + 300, 25);
+		mp_sp[j]->SetSize(75, 75);
+	}
 	Key();
 	switch (m_state)
 	{
@@ -169,6 +182,14 @@ void CCharaBase::Update()
 }
 void CCharaBase::Draw()
 {
+	for (int i = 0; i < HP_MAX; i++)
+	{
+		mp_hp[i]->Draw();
+	}
+	for (int j = 0; j < SP_MAX; j++)
+	{
+		mp_sp[j]->Draw();
+	}
 		m_chara->SetCenter(mp_eData->senter.x, mp_eData->senter.y);
 		Animation();
 		m_chara->SetSize(mp_eData->size.x, mp_eData->size.y);
