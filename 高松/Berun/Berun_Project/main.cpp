@@ -133,6 +133,9 @@ void init(void)
 	CResourceManager::GetInstance()->Add("Back_03", CImage::LoadImage("BackGround/Back/Back_03.png"));
 	CResourceManager::GetInstance()->Add("Carrot", CImage::LoadImage("Enemy/Carrot.png"));
 	CResourceManager::GetInstance()->Add("Meter", CImage::LoadImage("Enemy/Meter_01.png"));
+	CResourceManager::GetInstance()->Add("Pos", CImage::LoadImage("BackGround/Gauge01.png"));
+	CResourceManager::GetInstance()->Add("PosGauge", CImage::LoadImage("BackGround/Gauge02.png"));
+	CResourceManager::GetInstance()->Add("Gauge", CImage::LoadImage("BackGround/Gauge03.png"));
 	//ƒTƒEƒ“ƒh“Ç‚Ýž‚Ý
 	CSound::GetInstance()->GetSound("TITLE_BGM")->Load("BGM/Title.wav", 1);
 	CSound::GetInstance()->GetSound("CHARASELECT_BGM")->Load("BGM/CharaSelect.wav", 1);
