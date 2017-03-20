@@ -96,7 +96,7 @@ void init(void)
 	CResourceManager::GetInstance()->Add("RankA", CImage::LoadImage("Result/A.png"));
 	CResourceManager::GetInstance()->Add("RankB", CImage::LoadImage("Result/B.png"));
 	CResourceManager::GetInstance()->Add("RankC", CImage::LoadImage("Result/C.png"));
-	CResourceManager::GetInstance()->Add("RancS", CImage::LoadImage("Result/S.png"));
+	CResourceManager::GetInstance()->Add("RankS", CImage::LoadImage("Result/S.png"));
 	CResourceManager::GetInstance()->Add("Rank", CImage::LoadImage("Result/Rank.png"));
 	CResourceManager::GetInstance()->Add("Select", CImage::LoadImage("Result/Item5.png"));
 	CResourceManager::GetInstance()->Add("Item", CImage::LoadImage("Result/Itemhyouji.png"));
@@ -122,8 +122,14 @@ void init(void)
 	CResourceManager::GetInstance()->Add("PlayerWLogoWord3", CImage::LoadImage("CharaSelect/PlayerWWord3.png"));
 	CResourceManager::GetInstance()->Add("BackGroundMoning", CImage::LoadImage("BackGround/Background_M01.png"));
 	CResourceManager::GetInstance()->Add("BackGroundNoon", CImage::LoadImage("BackGround/Background_N02.png"));
-	CResourceManager::GetInstance()->Add("BackGroundEveing", CImage::LoadImage("BackGround/Background_E03.png"));
-	CResourceManager::GetInstance()->Add("BackGroundNight", CImage::LoadImage("BackGround/Game_Background/Background_Ni02.png"));
+	CResourceManager::GetInstance()->Add("ResultBackGround", CImage::LoadImage("BackGround/Game_Background/Background_Ni02.png"));
+	CResourceManager::GetInstance()->Add("BackGroundMoningBack", CImage::LoadImage("BackGround/Back/Back_06.png"));
+	CResourceManager::GetInstance()->Add("BackGroundNoonBack", CImage::LoadImage("BackGround/Back/Back_05.png"));
+	CResourceManager::GetInstance()->Add("BackGroundEveingBack", CImage::LoadImage("BackGround/Back/Back_04.png"));
+	CResourceManager::GetInstance()->Add("BackGroundNightBack", CImage::LoadImage("BackGround/Back/Back_00.png"));
+	CResourceManager::GetInstance()->Add("BackGround", CImage::LoadImage("BackGround/Back/Back_02.png"));
+	CResourceManager::GetInstance()->Add("BackGround2", CImage::LoadImage("BackGround/Back/Back_02.png"));
+	CResourceManager::GetInstance()->Add("Back_03", CImage::LoadImage("BackGround/Back/Back_03.png"));
 	CResourceManager::GetInstance()->Add("Carrot", CImage::LoadImage("Enemy/Carrot.png"));
 	CResourceManager::GetInstance()->Add("Meter", CImage::LoadImage("Enemy/Meter_01.png"));
 	//サウンド読み込み
@@ -167,6 +173,17 @@ void idle(void)
 	static LARGE_INTEGER time;
 	static LARGE_INTEGER time_buf;
 	static long t_buf=0;
+	HDC glDc = wglGetCurrentDC();
+	//ウィンドウハンドル取得
+	HWND hWnd = WindowFromDC(glDc);
+	//ユーザーの操作対象になっているウインドウを取得
+	HWND h = GetForegroundWindow();
+	while (h && hWnd != h)
+	{
+		//非アクティブに
+		Sleep(10);
+		h = GetForegroundWindow();
+	}
 	//現在のシステムのカウント数を取得
 	QueryPerformanceCounter(&time_buf);
 
@@ -257,7 +274,7 @@ int __main(int* argcp, char** argv) {
 	init();
 
 
-	HDC glDc = wglGetCurrentDC();
+	
 
 
 
@@ -268,8 +285,7 @@ int __main(int* argcp, char** argv) {
 	glutMouseWheelFunc(wheel);
 
 	
-	//ウィンドウハンドル取得
-	HWND hWnd = WindowFromDC(glDc);
+	
 
 	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 	glutMainLoop();

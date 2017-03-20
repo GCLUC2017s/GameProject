@@ -3,6 +3,7 @@
 #include "CTitleScene.h"
 #include "../Key/CKey.h"
 #include"../Map/CMap.h"
+#include "../Player/CPlayer.h"
 
 //CScene eSceneNo TITLE
 
@@ -11,31 +12,9 @@
 void CTitleScene::Init() {
 
 
-	FirstX = -MAP_LIMIT_X / 2.5;
+	FirstX = first_pos.x;
 	mMap.Init();
 	mTitle.Init();
-	
-	mFade.SetVertex(
-		-MAP_LIMIT_X / 2.0,
-	     MAP_LIMIT_Y / 2.0,
-		 MAP_LIMIT_X / 2.0,
-		-MAP_LIMIT_Y / 2.0);
-	//黒色に設定
-	mFade.SetColor(1.0f, 1.0f, 1.0f, alpha=1.0f);
-
-	//画面の座標系を設定
-	glMatrixMode(GL_PROJECTION);	//行列をプロジェクションモードへ変更
-	glLoadIdentity();	//行列を初期化
-	//	gluOrtho2D(-CGame::mDispCols / 2.0, CGame::mDispCols / 2.0, -CGame::mDispRows / 2.0, CGame::mDispRows / 2.0);
-	//表示するエリアを指定
-	gluOrtho2D(
-		-MAP_LIMIT_X / 2.5,
-		MAP_LIMIT_X / 2.5,
-		-MAP_LIMIT_Y / 2.0,
-		MAP_LIMIT_Y / 2.0);
-
-
-
 
 }
 
@@ -47,11 +26,7 @@ void CTitleScene::Update() {
 	mMap.Render();
 
 	
-	mTitle.Render((CVector2(MAP_LIMIT_X / 3.0 + FirstX,
-	MAP_LIMIT_X / 2.0 + FirstX - 5.0f)));
-
-	ChangeScene(E_TITLE);	//シーンの設定
-
+	mTitle.Render(CVector2(FirstX,0));
 
 	FirstX += 0.02f;
 
@@ -59,16 +34,12 @@ void CTitleScene::Update() {
 
 	glMatrixMode(GL_PROJECTION);	//行列をプロジェクションモードへ変更
 	glLoadIdentity();	//行列を初期化
-	gluOrtho2D(
-		-MAP_LIMIT_X / 1.0 + FirstX,
-		MAP_LIMIT_X / 1.0 + FirstX,
-		-MAP_LIMIT_Y / 1.5,
-		MAP_LIMIT_Y / 1.5);
+	gluOrtho2D(-DISP_X+ FirstX,DISP_X  + FirstX,-DISP_Y ,DISP_Y);
 
 
-	if (FirstX > MAP_LIMIT_X / 2.5){
+	if (FirstX > DISP_X / 2.0){
 	//	alpha = 1.0f;
-		FirstX = -MAP_LIMIT_X / 2.5;
+		FirstX = first_pos.x;
 	} //マップの端まで行くと最初に戻す。
 
 	//Update終了
@@ -77,7 +48,7 @@ void CTitleScene::Update() {
 	//エンターキーを押したときにシーンをセレクト画面に替える処理を行う。
 	if (CKey::push(VK_RETURN)) 
 	{
-		CSceneManager::GetInstance()->ChangeScene(E_SELECT);
+		CSceneManager::GetInstance()->ChangeScene(eSceneNo::E_GAMEMAIN);
 	}
 
 

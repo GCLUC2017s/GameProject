@@ -86,11 +86,9 @@ void CSceneManager::ChangeScene(E_Scene scene)
 	case eGame:
 		mp_scene = new CGame();
 		break;
-		/*
 	case eResult:
 		mp_scene = new CResult();
 		break;
-		*/
 	default:
 		//デバッグ
 		assert(false);

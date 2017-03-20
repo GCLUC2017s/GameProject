@@ -6,22 +6,28 @@
 #include "glut.h"
 #include <stdio.h>
 
+enum eSceneNo{
+	E_TITLE,
+	E_SELECT,
+	E_GAMEMAIN,
+	E_GAMECLEAR,
+	E_GAMEOVER
+};
+
 class CScene{
 public:
 	//シーン毎に設定　並びは流れの順番
-		enum eSceneNo{
-			E_TITLE,
-			E_SELECT,
-			E_GAMEMAIN,
-			E_GAMECLEAR,
-			E_GAMEOVER
-		};
+	
+
+
+		virtual	void Update(){};	//virtual　
+		virtual	void Render(){};
+		virtual	void Init(){};
 
 
 		friend class CSceneManager;
 		friend class CTitleScene;
 		friend class CScene2;
-
 };
 
 #endif

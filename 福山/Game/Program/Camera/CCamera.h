@@ -17,13 +17,15 @@ private:
 
 
 	CPlayer *mPlayer;
-
+	int mCamerax;
 public:
- 	static int mCamerax;
+   
+	int status;
 
 	CCamera();
 
 	void Update();
+
 
 };
 

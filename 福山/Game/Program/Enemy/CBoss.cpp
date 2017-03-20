@@ -1,6 +1,14 @@
 #include "CBoss.h"
 #include "../MyNumber/CMyNumber.h"
-#include "../Key/CKey.h" //挙動テスト時の操作用
+#include "../CGame/CGame.h"
+#include <cstdlib>
+#include <stdio.h>
+#include<time.h>
+#include<iostream>
+#include "CEnemybasetest.h"
+#include "../Load/CLoadBoss.h"
+#include "../Load/CLoadPlayer.h"
+
 /*
 
 
@@ -10,21 +18,19 @@ CKeyを使っている条件文は今後別の処理になります。
 
 */
 
-#define SIZE_BOSS_Y 3  //エネミー00のサイズ_Y
-#define SIZE_BOSS_X 3 //エネミー00のサイズ_X
-
-#define HITPOINT_ENEMY00 5					//エネミー00の体力
-#define FIRST_R_NO_PL 1						//初めのレンダーのポイント
-#define FIRST_U_NO_PL 1						//初めのアップデートのポイント
-#define SIZE_TEX_ENEMY00_STAY_X 800			//エネミーの待ち姿テクスチャサイズ X
-#define SIZE_TEX_ENEMY00_STAY_Y 800			//エネミーの待ち姿テクスチャサイズ Y
-#define SIZE_TEX_ENEMY00_WALK_X 800			//エネミーの歩くテクスチャサイズ Y
-#define SIZE_TEX_ENEMY00_WALK_Y 800			//エネミーの歩く姿テクスチャサイズ Y
+#define HITPOINT_BOSS 5					//BOSSの体力
+#define FIRST_R_NO_BOSS 1						//初めのレンダーのポイント
+#define FIRST_U_NO_BOSS 1						//初めのアップデートのポイント
+#define SIZE_TEX_BOSS_STAY_X 800			//エネミーの待ち姿テクスチャサイズ X
+#define SIZE_TEX_BOSS_STAY_Y 800			//エネミーの待ち姿テクスチャサイズ Y
+#define SIZE_TEX_BOSS_WALK_X 800			//エネミーの歩くテクスチャサイズ Y
+#define SIZE_TEX_BOSS_WALK_Y 800			//エネミーの歩く姿テクスチャサイズ Y
 #define SIZE_SHADOW							//影の表示
-#define SLOW_DOWN 0.001						//移動の減速スピード
 #define WALK_SPEED 0.04						//歩くスピード
 #define WALK_X 2							//歩くベクトルX
 #define WALK_Y 1							//歩くベクトルY
+
+#define ANIME_TIME_BASE 6
 
 #define BOSS_STAY 	 "../CG\\BOSS\\stay\\"
 #define BOSS_WALK	 "../CG\\BOSS\\walk\\"
@@ -32,302 +38,366 @@ CKeyを使っている条件文は今後別の処理になります。
 #define BOSS_HATTACK "../CG\\BOSS\\HAttack\\"
 #define BOSS_DIE	 "../CG\\BOSS\\die\\"
 
+
+inline void InitRand(){
+	srand((unsigned int)time(NULL));
+}
+
 void CBoss::SetPos(){
 	mPos = Boss_first_pos;
 	mAxis = mPos.y;
 };
 
+
 void CBoss::Init(){
 	SetPos();
-	/*テクスチャ読み込み*/
-	for (int i = 0; i < FLAME_LIMIT; i++)
-	{
-		mStay_tex[i] = new CTexture();		//テクスチャクラスのインスタンス作成
-		mWalk_tex[i] = new CTexture();		//テクスチャクラスのインスタンス作成
-		mAttack_tex[i] = new CTexture();
-		mHattack_tex[i] = new CTexture();
-		mDie_tex[i] = new CTexture();
-	}
 
-	/*テクスチャファイル読み込み*/
-	mStay_tex[0]->load(BOSS_STAY "BOSS_stay_00.tga");
-	mStay_tex[1]->load(BOSS_STAY "BOSS_stay_01.tga");
-	mStay_tex[2]->load(BOSS_STAY "BOSS_stay_02.tga");
-	mStay_tex[3]->load(BOSS_STAY "BOSS_stay_03.tga");
-	mStay_tex[4]->load(BOSS_STAY "BOSS_stay_04.tga");
-	mStay_tex[5]->load(BOSS_STAY "BOSS_stay_05.tga");
-
-	mWalk_tex[0]->load(BOSS_WALK"BOSS_walk_00.tga");
-	mWalk_tex[1]->load(BOSS_WALK"BOSS_walk_01.tga");
-	mWalk_tex[2]->load(BOSS_WALK"BOSS_walk_02.tga");
-	mWalk_tex[3]->load(BOSS_WALK"BOSS_walk_03.tga");
-	mWalk_tex[4]->load(BOSS_WALK"BOSS_walk_04.tga");
-	mWalk_tex[5]->load(BOSS_WALK"BOSS_walk_05.tga");
-
-	mAttack_tex[0]->load(BOSS_ATTACK"BOSS_AttackR_00.tga");
-	mAttack_tex[1]->load(BOSS_ATTACK"BOSS_AttackR_01.tga");
-	mAttack_tex[2]->load(BOSS_ATTACK"BOSS_AttackR_02.tga");
-	mAttack_tex[3]->load(BOSS_ATTACK"BOSS_AttackR_03.tga");
-	mAttack_tex[4]->load(BOSS_ATTACK"BOSS_AttackR_04.tga");
-	mAttack_tex[5]->load(BOSS_ATTACK"BOSS_AttackR_05.tga");
-
-
-	mHattack_tex[0]->load(BOSS_HATTACK"BOSS_HAttackR_00.tga");
-	mHattack_tex[1]->load(BOSS_HATTACK"BOSS_HAttackR_01.tga");
-	mHattack_tex[2]->load(BOSS_HATTACK"BOSS_HAttackR_02.tga");
-	mHattack_tex[3]->load(BOSS_HATTACK"BOSS_HAttackR_03.tga");
-	mHattack_tex[4]->load(BOSS_HATTACK"BOSS_HAttackR_04.tga");
-	mHattack_tex[5]->load(BOSS_HATTACK"BOSS_HAttackR_05.tga");
-
-
-	mDie_tex[0]->load(BOSS_DIE"BOSS_dieR_00.tga");
-	mDie_tex[1]->load(BOSS_DIE"BOSS_dieR_01.tga");
-	mDie_tex[2]->load(BOSS_DIE"BOSS_dieR_02.tga");
-	mDie_tex[3]->load(BOSS_DIE"BOSS_dieR_03.tga");
-	mDie_tex[4]->load(BOSS_DIE"BOSS_dieR_04.tga");
-	mDie_tex[5]->load(BOSS_DIE"BOSS_dieR_05.tga");
-
-
-
+	
 	/*テクスチャを張る*/
-	mBoss.SetUv(mStay_tex[0], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
+	mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
+	mRect.SetUv(CLoadBoss::GetInstance()->mStay_tex[0], 0, 0, SIZE_TEX_BOSS_STAY_X, SIZE_TEX_BOSS_STAY_Y);
 	mForward = CVector2(1.0f, 0.0f);
 
 }
 
-CBoss::~CBoss(){
-	//特に何もしない
-}
 
-//エネミー00描画
-CBoss::CBoss() : mVelocity(0), mFlameCount(0){
-
-	for (int i = 0; i < FLAME_LIMIT; i++)
-	{
-		mStay_tex[i] = 0;
-	}
+//BOSS描画
+CBoss::CBoss() : mVelocity(0), mFlameCount(0), actionflag(false), motion(0), direction(1){
 
 	mPriorityR = E_BOSS;			//Renderのナンバー 
 	mPriorityU = E_BOSS;			//Updateのナンバー
-	mHitPoint = HITPOINT_ENEMY00;		//ＨＰ
+	mHitPoint = HITPOINT_BOSS;		//ＨＰ
 	mMyNumber = E_BOSS;
+	mStatus = E_STAY_L;
 
 	//四角形の頂点設定
-	mBoss.SetVertex(SIZE_BOSS_X, SIZE_BOSS_Y, -SIZE_BOSS_X, -SIZE_BOSS_Y);
+	mRect.SetVertex(-SIZE_BOSS_X, SIZE_BOSS_Y, SIZE_BOSS_X, -SIZE_BOSS_Y);
 	mShadow.SetVertex(-SIZE_BOSS_X, SIZE_BOSS_Y, SIZE_BOSS_X, -SIZE_BOSS_Y);
+
 	//四角形の色を設定
-	mBoss.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+	mRect.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 }
 
-/*アニメのフレームを動かすメソッド*/ //エネミーによって違う場合があるので画像データ用参照
-void CBoss::AnimeFlame(){
+CBoss::~CBoss(){
 
-	mFlameCount += 1;
-	if (mFlameCount % 5 == 0){ //フレーム数=mStay_tex[5]->load(".../.tga");
-		mAnime += 1;
-	}
-	if (mAnime >= FLAME_LIMIT || mSaveAnime != eAnime){
-		mAnime = 0;
-	}
-	mSaveAnime = eAnime;
+	
+
+
 
 }
 
+void CBoss::AnimeScene(){
+	/*アニメーションのステータス*/
+	switch (mStatus)
+	{
+		/*待機中*/
+	case E_STAY_L:
+		AnimeFrame(true, ANIME_TIME_BASE);
+		mRect.SetUv(CLoadBoss::GetInstance()->mStay_tex[mAnime], SIZE_TEX_BOSS_STAY_X, 0, 0, SIZE_TEX_BOSS_STAY_Y);
+		break;
+	case E_STAY_R:
+		AnimeFrame(true, ANIME_TIME_BASE);
+		mRect.SetUv(CLoadBoss::GetInstance()->mStay_tex[mAnime], 0, 0, SIZE_TEX_BOSS_STAY_X, SIZE_TEX_BOSS_STAY_Y);
+		break;
+		/*歩き中*/
+	case E_WALK_L:
+		AnimeFrame(true, ANIME_TIME_BASE);
+		mRect.SetUv(CLoadBoss::GetInstance()->mWalk_tex[mAnime], SIZE_TEX_BOSS_WALK_X, 0, 0, SIZE_TEX_BOSS_WALK_Y);
+		break;
+	case E_WALK_R:
+		AnimeFrame(true, ANIME_TIME_BASE);
+		mRect.SetUv(CLoadBoss::GetInstance()->mWalk_tex[mAnime], 0, 0, SIZE_TEX_BOSS_WALK_X, SIZE_TEX_BOSS_WALK_Y);
+		break;
+		/*攻撃*/
+	case E_ATTACK_L:
+		AnimeFrame(true, ANIME_TIME_BASE);
+		mRect.SetUv(CLoadBoss::GetInstance()->mAttack_tex[mAnime], SIZE_TEX_BOSS_WALK_X, 0, 0, SIZE_TEX_BOSS_WALK_Y);
+		break;
+	case E_ATTACK_R:
+		AnimeFrame(true, ANIME_TIME_BASE);
+		mRect.SetUv(CLoadBoss::GetInstance()->mAttack_tex[mAnime], 0, 0, SIZE_TEX_BOSS_WALK_X, SIZE_TEX_BOSS_WALK_Y);
+		break;
+		/*強攻撃*/
+	case E_HATTACK_L:
+		AnimeFrame(true, ANIME_TIME_BASE);
+		mRect.SetUv(CLoadBoss::GetInstance()->mHattack_tex[mAnime], SIZE_TEX_BOSS_WALK_X, 0, 0, SIZE_TEX_BOSS_WALK_Y);
+		break;
+	case E_HATTACK_R:
+		AnimeFrame(true, ANIME_TIME_BASE);
+		mRect.SetUv(CLoadBoss::GetInstance()->mHattack_tex[mAnime], 0, 0, SIZE_TEX_BOSS_WALK_X, SIZE_TEX_BOSS_WALK_Y);
+		break;
+		/*死亡*/
+	case E_DIE_L:
+		AnimeFrame(true, ANIME_TIME_BASE);
+		mRect.SetUv(CLoadBoss::GetInstance()->mDie_tex[mAnime], SIZE_TEX_BOSS_WALK_X, 0, 0, SIZE_TEX_BOSS_WALK_Y);
+		break;
+	case E_DIE_R:
+		AnimeFrame(true, ANIME_TIME_BASE);
+		mRect.SetUv(CLoadBoss::GetInstance()->mDie_tex[mAnime], 0, 0, SIZE_TEX_BOSS_WALK_X, SIZE_TEX_BOSS_WALK_Y);
+		break;
 
-void CBoss::Update(){
+	}
+}
 
-	AnimeFlame();
-	assert(mAnime <= FLAME_LIMIT); //フレーム数が七を超えるとダメ
-	mPriorityR = -mAxis;
-
-	//四角形の位置を設定
-	mBoss.position = mPos;
-
-
-	// 右移動
-	if (CKey::push('D')) {
-		eAnime = E_WALK_R;
+void CBoss::Walk(){
+	//（ターゲットが右にいる場合）
+	if (RIGHT_PTT) {
 		direction = 0;
-
+		mStatus = E_WALK_R;
 		mVelocity = WALK_SPEED;
-
 		mForward = CVector2(WALK_X, 0.0f);
 		mPos += mForward * mVelocity;
 	}
-	else{
-		if (mSaveAnime == E_WALK_R){//待機中 直前が左の歩きでなければ
-			eAnime = E_STAY_R;
-		}
-		if (mVelocity > 0){
-			mVelocity -= SLOW_DOWN;
-			mPos += mForward * mVelocity;
-		}
-		else{
-			mVelocity = 0;
-		}
-	}
-
-
-	//左移動
-	if (CKey::push('A')) {
+	//（ターゲットが左にいる場合）
+	if (LEFT_PTT) {
 		direction = 1;
-
-		eAnime = E_WALK_L;
+		mStatus = E_WALK_L;
 		mVelocity = WALK_SPEED;
-
 		mForward = CVector2(-WALK_X, 0.0f);
 		mPos += mForward * mVelocity;
-
 	}
-	else{ //移動していないとき
-		if (mSaveAnime == E_WALK_L){ //待機中 直前が右の歩きでなければ
-			eAnime = E_STAY_L;
-		}
-		if (mVelocity > 0){
-			mVelocity -= SLOW_DOWN;
-			mPos += mForward * mVelocity;
-		}
-		else{
-			mVelocity = 0;
-		}
-
-	}
-
-
-	//上移動
-	if (CKey::push('W') && mAxis < character_limit_top - SIZE_BOSS_Y) { //軸が上限に達していないとき
-		Walk();
-		if (direction == 0){
-			eAnime = E_WALK_R;
-		}
-		else if (direction == 1){
-			eAnime = E_WALK_L;
-
-		}
+	//（ターゲットが上にいる場合）
+	if ((CGame::GetPlayerAxis() + CGame::mGetPlayerPos().y) / 2 > mAxis) {
 		mVelocity = WALK_SPEED;
 		mForward = CVector2(0.0f, WALK_Y);
 		mPos += mForward * mVelocity;
 		mAxis += mForward.y * mVelocity;
-
 	}
-
-	//下移動
-	if (CKey::push('S') && mAxis > character_limit_bottom + SIZE_BOSS_Y) {//軸が上限に達していないとき
-		Walk();
-		if (direction==0){
-			eAnime = E_WALK_R;
-		}else if(direction==1){
-			eAnime = E_WALK_L;
-
-		}
-		
+	//（ターゲットが下にいる場合）
+	if ((CGame::GetPlayerAxis() + CGame::mGetPlayerPos().y) / 2 < mAxis) {
 		mVelocity = WALK_SPEED;
 		mForward = CVector2(0.0f, -WALK_Y);
 		mPos += mForward * mVelocity;
 		mAxis += mForward.y * mVelocity;
 	}
+}
 
-	//攻撃
-	if (CKey::push('X') && direction == 0) {
+void CBoss::Update(){
+	assert(mAnime <= FLAME_LIMIT); //フレーム数が七を超えるとダメ
+	mRect.position = mPos;
 
-		eAnime = E_ATTACK_R;
+	InitRand();
+	mTargetP = CGame::mGetPlayerPos();
+	float getAxis = CGame::GetPlayerAxis();
+
+	mPriorityR = -mAxis;
+
+	rulerR = mTargetP.x - mPos.x;	//プレイヤーとの距離を出す
+	rulerL = mPos.x - mTargetP.x;
+
+	if (rulerL < 0){				//絶対値にする
+		rulerL = rulerL * -1;
 	}
-	else if (CKey::push('X') && direction == 1){
-		eAnime = E_ATTACK_L;
+	if (rulerR < 0){
+		rulerR = rulerR * -1;
 	}
-	
 
-
-	//強攻撃
-	if (CKey::push('C') && direction == 0) {
-		
-			eAnime = E_HATTACK_R;
-		}
-	else if (CKey::push('C') && direction == 1){
-			eAnime = E_HATTACK_L;
-		}
-
-
-
-
-		//死亡
-	if (CKey::push('Z') && direction == 0) {
-
-		eAnime = E_DIE_R;
+	if (mHitPoint <= 0){
+		motion = 2;		//体力が０ならDIEする
 	}
-	else if (CKey::push('Z') && direction == 1){
-				eAnime = E_DIE_L;
+
+	switch (motion)
+	{
+	case 0://待機
+		if (direction == 0){	//右向き
+			mStatus = E_STAY_R;
+		}
+		else if (direction = 1){	//左向き
+
+			mStatus = E_STAY_L;
 		}
 
-		switch (direction)
+		if (ENEMY_VISI)		//視界内にとらえたら追ってくる
 		{
-		case 0:			//右
-			break;
-		case 1:			//左
-			break;
+			motion = 1;
+		}
+		break;
+	case 1://歩き	
+		Walk();
+		if (ATTACK_PTT){//攻撃モーションに変更
+			actionflag = false;
+			motion = 2;
+		}
+		if (HATTACK_PTT){
+			actionflag = false;
+			motion = 2;
+		}
+
+		break;
+	case 2://攻撃範囲内に入った時
+		if (ATTACK_PTT){
+			if (!actionflag){
+				pattern = rand() % 6; //0~2の中でランダムでパターンを選択する。
+			}
+			if (pattern == 0){
+				mEnabledAttack = true;
+				motion = 6;
+			}
+			else if (pattern == 1){
+				actionflag = true;
+				motion = 4;
+			}
+			else if (pattern == 2){
+				motion = 6;
+			}
+			else if (pattern == 3){
+				motion = 4;
+			}
+			else if (pattern == 4){
+				motion = 6;
+			}
+			else if (pattern == 5){
+				motion = 6;
+			}
+		}
+
+		//強攻撃の範囲内
+		if (HATTACK_PTT){
+			if (!actionflag){
+				pattern = rand() % 3; //0~2の中でランダムでパターンを選択する。
+			}
+			if (pattern == 0){
+				mEnabledAttack = true;
+				motion = 7;
+			}
+			else if (pattern == 1){
+				actionflag = true;
+				motion = 4;
+			}
+			else if (pattern == 2){
+				mEnabledAttack = true;
+				motion = 6;
+			}
 		}
 
 
-		/*あたり判定*/
-		if (mPos.y > character_limit_top - SIZE_BOSS_Y){  //マップ外に出ると元の位置に戻す(軸)
-			mPos.y = character_limit_top - SIZE_BOSS_Y;
-			mAxis = mPos.y; //軸をもとに戻す
+		if (NO_ATTACK_PTT){
+			actionflag = false;
+			motion = 1;
 		}
-		if (mPos.y < character_limit_bottom + SIZE_BOSS_Y){  //マップ外に出ると元の位置に戻す(軸)
-			mPos.y = character_limit_bottom + SIZE_BOSS_Y;
-			mAxis = mPos.y; //軸をもとに戻す
+		break;
+	case 3://死亡
+		if (direction == 0) {
+			mStatus = E_DIE_R;
 		}
-
-		if (mPos.x >= character_limit_right - SIZE_BOSS_X || mPos.x <= character_limit_left + SIZE_BOSS_X){ //マップ外に出ると元の位置に戻す(X)
-			mPos.x = mBoss.position.x;
+		else if (direction == 1){
+			mStatus = E_DIE_L;
 		}
-		/*あたり判定終了*/
+		break;
 
-
-		/*アニメーションのステータス*/
-		switch (eAnime)
-		{
-			/*待機中*/
-		case E_STAY_L:
-			mBoss.SetUv(mStay_tex[mAnime], SIZE_TEX_ENEMY00_STAY_X, 0, 0, SIZE_TEX_ENEMY00_STAY_Y);
-			break;
-		case E_STAY_R:
-			mBoss.SetUv(mStay_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
-			break;
-			/*歩き中*/
-		case E_WALK_L:
-			mBoss.SetUv(mWalk_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
-			break;
-		case E_WALK_R:
-			mBoss.SetUv(mWalk_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
-			break;
-			/*攻撃*/
-		case E_ATTACK_L:
-			mBoss.SetUv(mAttack_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
-			break;
-		case E_ATTACK_R:
-			mBoss.SetUv(mAttack_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
-			break;
-			/*強攻撃*/
-		case E_HATTACK_L:
-			mBoss.SetUv(mHattack_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
-			break;
-		case E_HATTACK_R:
-			mBoss.SetUv(mHattack_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
-			break;
-			/*死亡*/
-		case E_DIE_L:
-			mBoss.SetUv(mDie_tex[mAnime], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
-			break;
-		case E_DIE_R:
-			mBoss.SetUv(mDie_tex[mAnime], 0, 0, SIZE_TEX_ENEMY00_WALK_X, SIZE_TEX_ENEMY00_WALK_Y);
-			break;
+	case 4://後ろに逃げる。
+		if (direction == 1) {
+			direction = 1;
+			mVelocity = WALK_SPEED * 3;
+			mForward = CVector2(WALK_X, 0.0f);
+			mPos += mForward * mVelocity;
 
 		}
-		mBoss.position = mPos;
+		else if (direction == 0){
+			direction = 0;
+			mVelocity = -WALK_SPEED * 3;
+			mForward = CVector2(WALK_X, 0.0f);
+			mPos += mForward * mVelocity;
+		}
+
+		if (ENEMY_ESCAPE){	//一定距離離れると再度こちらに向かってくる
+			actionflag = false; //actionflagをfalseにする。
+			motion = 1;
+		}
+
+		break;
+	case 5:		//攻撃をしながら近づいてくる
+		Walk();
+		if (RIGHT_PTT && !mEnabledAttack) {
+			mStatus = E_ATTACK_R;
+		}
+		else if (LEFT_PTT && !mEnabledAttack){
+			mStatus = E_ATTACK_L;
+		}
+		/*範囲*/
+		if (mEnabledAttack){
+			mAttackRange.SetVertex(-SIZE_PLAYER_X, SIZE_PLAYER_Y, SIZE_PLAYER_X, -SIZE_PLAYER_Y);
+			mAttackRange.SetColor(1.0f, 1.0f, 0.0f, 1.0f);
+			if (RIGHT_PTT)mAttackRange.position = CVector2(mPos.x + 1, mPos.y);
+			if (LEFT_PTT)mAttackRange.position = CVector2(mPos.x - 1, mPos.y);
+			mAttackAxis = 2.0f;
+		}
+		if (mAnimeFrame == FRAME_LIMIT - 1){
+			mEnabledAttack = false;//攻撃終了
+		}
+		if (rulerR > 2 || rulerL > 2){
+			actionflag = false;
+			motion = 1;
+		}
+		break;
+
+	case 6:		//攻撃中
+
+		if (RIGHT_PTT && !mEnabledAttack) {
+			mStatus = E_ATTACK_R;
+		}
+		else if (LEFT_PTT && !mEnabledAttack){
+			mStatus = E_ATTACK_L;
+		}
+		/*範囲*/
+		if (mEnabledAttack){
+			mAttackRange.SetVertex(-SIZE_PLAYER_X, SIZE_PLAYER_Y, SIZE_PLAYER_X, -SIZE_PLAYER_Y);
+			mAttackRange.SetColor(1.0f, 1.0f, 0.0f, 1.0f);
+			if (RIGHT_PTT)mAttackRange.position = CVector2(mPos.x + 1, mPos.y);
+			if (LEFT_PTT)mAttackRange.position = CVector2(mPos.x - 1, mPos.y);
+			mAttackAxis = 2.0f;
+		}
+		if (mAnimeFrame == FRAME_LIMIT - 1){
+			mEnabledAttack = false;//攻撃終了
+		}
+		if (rulerR > 2 || rulerL > 2){
+			actionflag = false;
+			motion = 1;
+		}
+		break;
+	case 7:
+		if (RIGHT_PTT && !mEnabledAttack) {
+			mStatus = E_HATTACK_R;
+		}
+		else if (LEFT_PTT && !mEnabledAttack){
+			mStatus = E_HATTACK_L;
+		}
+		/*範囲*/
+		if (mEnabledAttack){
+			mAttackRange.SetVertex(-SIZE_PLAYER_X, SIZE_PLAYER_Y, SIZE_PLAYER_X, -SIZE_PLAYER_Y);
+			mAttackRange.SetColor(1.0f, 1.0f, 0.0f, 1.0f);
+			if (RIGHT_PTT)mAttackRange.position = CVector2(mPos.x + 1, mPos.y);
+			if (LEFT_PTT)mAttackRange.position = CVector2(mPos.x - 1, mPos.y);
+			mAttackAxis = 4.0f;
+		}
+		if (mAnimeFrame == FRAME_LIMIT - 1){
+			mEnabledAttack = false;//攻撃終了
+		}
+		if (rulerR > 2 || rulerL > 2){
+			actionflag = false;
+			motion = 1;
+		}
+
+		break;
 	}
+	switch (direction)
+	{
+	case 0:	//右向き
+		break;
+	case 1:	//左向き
+		break;
+	}
+	LimitDisp(SIZE_BOSS_X, SIZE_BOSS_Y);	//当たり判定
+	AnimeScene();
+	if (mHitPoint == 0)mKillFlag = true;
+
+	mShadow.position = CVector2(mPos.x, mAxis);
+
+	mRect.position = mPos;
+}
 
 void CBoss::Render(){
-	mBoss.Render();
+	mShadow.Render();
+	mRect.Render();
 }

@@ -19,8 +19,9 @@ public:
 	bool mKillFlag;  //フラグが立っているものを消す
 	bool mCharaFlag; //キャラクターのフラグがたっているものにはCol判定
 	int mMyNumber;	//種類判断のためのナンバ-
+	bool mUiFlag; //UIがあるか判断
 
-	CTask() :next(0), prev(0), mKillFlag(false), mCharaFlag(false), mMyNumber(E_ERROR),mPriorityR(E_ERROR),mPriorityU(E_ERROR){};
+	CTask() :next(0), prev(0), mKillFlag(false),mUiFlag(false) ,mCharaFlag(false), mMyNumber(E_ERROR),mPriorityR(E_ERROR),mPriorityU(E_ERROR){};
 	virtual ~CTask(){};
 
 	virtual void Init(){};

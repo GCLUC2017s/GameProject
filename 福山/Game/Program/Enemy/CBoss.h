@@ -9,24 +9,18 @@
 #include "../Graphic/CRectangle.h"
 #include "../Task/CTaskManager.h"
 #include "../Define/define.h"
+
+
 #define FLAME_LIMIT 6 //フレーム数の上限
 
 const	 CVector2 Boss_first_pos
-= CVector2(character_limit_left*0.65, (character_limit_top + character_limit_bottom) / 2);	//ボスエネミーの初期位置
+= CVector2(character_limit_left*0.55, (character_limit_top + character_limit_bottom) / 2);	//ボスエネミーの初期位置
 
 class  CBoss : public CBase
 {
 private:
 
 	float mVelocity;//移動するときに使う
-	CRectangle	mBoss;
-	CRectangle  mShadow;
-	CTexture	*mStay_tex[FLAME_LIMIT];
-	CTexture	*mWalk_tex[FLAME_LIMIT];
-	CTexture	*mAttack_tex[FLAME_LIMIT];
-	CTexture	*mHattack_tex[FLAME_LIMIT];
-	CTexture	*mDie_tex[FLAME_LIMIT];
-
 
 	/*
 	自分がどのアニメーションか判断用
@@ -42,15 +36,23 @@ private:
 		E_DIE_L, E_DIE_R
 	};
 
-	MyEnum eAnime = E_STAY_R;
+	int AnimePattern;
 	int mSaveAnime; //直前のアニメが何か判断用
 	int mFlameCount;		//フレーム数カウント用
 	int mAnime;		//アニメーションのフレーム数
-	CVector2 mTarget;
-	CVector2 mSuvePos;//元いた位置の保存
-	int direction;
-	void Walk(){};
-	void AnimeFlame();
+	
+	int direction;//左右判定
+
+	float rulerR; //エネミーとキャラクターの距離
+	float rulerL; //エネミーとキャラクターの距離
+
+	int motion;
+	bool actionflag;
+	
+	int pattern;//ランダム用
+
+	void Walk();
+	void AnimeScene();
 	void SetPos();
 
 public:

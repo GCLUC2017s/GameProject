@@ -142,7 +142,8 @@ void CCharaBase::Jump()
 }
 void CCharaBase::HpBar()
 {
-
+	m_enemyHp = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Meter"));
+	m_enemyHp->SetPos(0, 0);
 }
 void CCharaBase::Update()
 {
@@ -175,6 +176,7 @@ void CCharaBase::Draw()
 		m_chara->SetFlipH(m_charaDirection);
 
 		m_chara->Draw();
+	//	m_enemyHp->Draw();
 }
 
 

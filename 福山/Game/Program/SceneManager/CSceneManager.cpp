@@ -12,8 +12,12 @@
 #include "../Scene/CScene.h"
 #include "../Title/CTitleScene.h"
 #include"CSceneManager.h"
+#include "../GameScene/CGameScene.h" 
+#include "../Key/CKey.h"
 
 CSceneManager* CSceneManager::mSceneManager = 0;
+
+CScene* mScene=0;
 
 //GetInstance
 CSceneManager* CSceneManager::GetInstance() {
@@ -25,9 +29,9 @@ CSceneManager* CSceneManager::GetInstance() {
 
 //KILL処理
 void CSceneManager::DeleteScene(){
-	if (mSceneManager)
-		delete mSceneManager;
-	mSceneManager = 0;
+	if (mScene)
+		delete mScene;
+	mScene = 0;
 }
 
 void CSceneManager::ChangeScene(eSceneNo SceneNo) {
@@ -37,30 +41,33 @@ void CSceneManager::ChangeScene(eSceneNo SceneNo) {
 	switch (SceneNo) {
 
 		//タイトルの呼び出しを行う
-	case E_TITLE:
-		mSceneManager = new CTitleScene;
+	case eSceneNo::E_TITLE:
+		mScene = new CTitleScene;
+		mScene->Init();
 
 		break;
 		//セレクト画面の呼び出しを行う
 
-	case E_SELECT:
+	case eSceneNo::E_SELECT:
 		//ゲーム画面に飛ばします
 
 
 		break;
 		//ゲームメインの呼び出しを行う
 
-	case E_GAMEMAIN:
+	case eSceneNo::E_GAMEMAIN:
+		mScene = new CGameScene;
+		
 
 		break;
 		//ゲームクリア画面の呼び出しを行う
 
-	case E_GAMECLEAR:
+	case eSceneNo::E_GAMECLEAR:
 
 		break;
 		//ゲームオーバー画面の呼び出しを行う
 
-	case E_GAMEOVER:
+	case eSceneNo::E_GAMEOVER:
 
 		break;
 
@@ -69,16 +76,20 @@ void CSceneManager::ChangeScene(eSceneNo SceneNo) {
 }
 
 void CSceneManager::SceneMain(){
+	switch (status)
+	{
+	case 0:
 
-	CSceneManager::GetInstance()->ChangeScene(CScene::E_TITLE);
-	for (int i = 0; i < 10; i++) {
-		CSceneManager::GetInstance()->Update();
-		CSceneManager::GetInstance()->Update();
+		CSceneManager::GetInstance()->ChangeScene(eSceneNo::E_TITLE);
+
+		status = 1;
+		break;
+	case 1:
+
+		mScene->Update();
+
+		break;
 	}
-	CSceneManager::GetInstance()->DeleteScene();
-
-
-	getchar();
 
 }
 
