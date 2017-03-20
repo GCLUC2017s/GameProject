@@ -103,6 +103,7 @@ void init(void)
 	CResourceManager::GetInstance()->Add("Arrow", CImage::LoadImage("Result/Yajirusi.png"));
 	CResourceManager::GetInstance()->Add("Craft", CImage::LoadImage("Result/Tsukurulogo.png"));
 	CResourceManager::GetInstance()->Add("ItemSelect", CImage::LoadImage("Result/Itemsentaku.png"));
+	CResourceManager::GetInstance()->Add("ResultTitle", CImage::LoadImage("Result/Titlegamen.png"));
 	CResourceManager::GetInstance()->Add("TutorialM", CImage::LoadImage("TutoText/Serihu.png"));
 	CResourceManager::GetInstance()->Add("TutorialW", CImage::LoadImage("Tutotext/Serihu2.png"));
 	CResourceManager::GetInstance()->Add("PlayerM", CImage::LoadImage("Player/Player_m.png"));
@@ -123,9 +124,9 @@ void init(void)
 	CResourceManager::GetInstance()->Add("BackGroundMoning", CImage::LoadImage("BackGround/Background_M01.png"));
 	CResourceManager::GetInstance()->Add("BackGroundNoon", CImage::LoadImage("BackGround/Background_N02.png"));
 	CResourceManager::GetInstance()->Add("ResultBackGround", CImage::LoadImage("BackGround/Game_Background/Background_Ni02.png"));
-	CResourceManager::GetInstance()->Add("BackGroundMoningBack", CImage::LoadImage("BackGround/Back/Back_06.png"));
-	CResourceManager::GetInstance()->Add("BackGroundNoonBack", CImage::LoadImage("BackGround/Back/Back_05.png"));
-	CResourceManager::GetInstance()->Add("BackGroundEveingBack", CImage::LoadImage("BackGround/Back/Back_04.png"));
+	CResourceManager::GetInstance()->Add("BackGroundMoningBack", CImage::LoadImage("BackGround/Back/Background_M_2.png"));
+	CResourceManager::GetInstance()->Add("BackGroundNoonBack", CImage::LoadImage("BackGround/Back/Background_ M_2.png"));
+	CResourceManager::GetInstance()->Add("BackGroundEveingBack", CImage::LoadImage("BackGround/Back/Background_E_2.png"));
 	CResourceManager::GetInstance()->Add("BackGroundNightBack", CImage::LoadImage("BackGround/Back/Back_00.png"));
 	CResourceManager::GetInstance()->Add("BackGround", CImage::LoadImage("BackGround/Back/Back_02.png"));
 	CResourceManager::GetInstance()->Add("BackGround2", CImage::LoadImage("BackGround/Back/Back_02.png"));

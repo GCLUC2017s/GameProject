@@ -13,6 +13,7 @@
 class CMap;
 class CTutorial;
 class CPlayer;
+class CEnemy;
 
 class CGame : public CScene
 {
@@ -20,6 +21,7 @@ private:
 	CMap		*mp_map;
 	CTutorial	*mp_tutorial;
 	CPlayer		*mp_player;
+	CEnemy		*mp_enemy;
 	unsigned int m_step;
 public:
 
