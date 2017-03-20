@@ -136,6 +136,22 @@ void init(void)
 	CResourceManager::GetInstance()->Add("Pos", CImage::LoadImage("BackGround/Gauge01.png"));
 	CResourceManager::GetInstance()->Add("PosGauge", CImage::LoadImage("BackGround/Gauge02.png"));
 	CResourceManager::GetInstance()->Add("Gauge", CImage::LoadImage("BackGround/Gauge03.png"));
+	CResourceManager::GetInstance()->Add("Item1", CImage::LoadImage("Item/Item_2/Item01.png"));
+	CResourceManager::GetInstance()->Add("Item2", CImage::LoadImage("Item/Item_2/Item02.png"));
+	CResourceManager::GetInstance()->Add("Item3", CImage::LoadImage("Item/Item_2/Item03.png"));
+	CResourceManager::GetInstance()->Add("Item4", CImage::LoadImage("Item/Item_2/Item04.png"));
+	CResourceManager::GetInstance()->Add("Item5", CImage::LoadImage("Item/Item_2/Item05.png"));
+	CResourceManager::GetInstance()->Add("Item6", CImage::LoadImage("Item/Item_2/Item06.png"));
+	CResourceManager::GetInstance()->Add("Item7", CImage::LoadImage("Item/Item_2/Item07.png"));
+	CResourceManager::GetInstance()->Add("Item8", CImage::LoadImage("Item/Item_2/Item08.png"));
+	CResourceManager::GetInstance()->Add("Item9", CImage::LoadImage("Item/Item_2/Item09.png"));
+	CResourceManager::GetInstance()->Add("Item10", CImage::LoadImage("Item/Item_2/Item10.png"));
+	CResourceManager::GetInstance()->Add("Item11", CImage::LoadImage("Item/Item_2/Item11.png"));
+	CResourceManager::GetInstance()->Add("Item12", CImage::LoadImage("Item/Item_2/Item12.png"));
+	CResourceManager::GetInstance()->Add("Item13", CImage::LoadImage("Item/Item_2/Item13.png"));
+	CResourceManager::GetInstance()->Add("Item14", CImage::LoadImage("Item/Item_2/Item14.png"));
+	CResourceManager::GetInstance()->Add("Item15", CImage::LoadImage("Item/Item_2/Item15.png"));
+	CResourceManager::GetInstance()->Add("Item16", CImage::LoadImage("Item/Item_2/Item16.png"));
 	//ƒTƒEƒ“ƒh“Ç‚Ýž‚Ý
 	CSound::GetInstance()->GetSound("TITLE_BGM")->Load("BGM/Title.wav", 1);
 	CSound::GetInstance()->GetSound("CHARASELECT_BGM")->Load("BGM/CharaSelect.wav", 1);
