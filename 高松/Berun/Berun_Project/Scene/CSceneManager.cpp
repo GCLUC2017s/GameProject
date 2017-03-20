@@ -11,7 +11,7 @@ CSceneManager::CSceneManager() :
 	m_sceneNum(eNone),
 	mp_scene(nullptr)
 {
-	ChangeScene(eLogo);
+	ChangeScene(eGame);
 }
 
 
@@ -27,16 +27,12 @@ void CSceneManager::Update()
 	}
 	//シーン更新処理
 	mp_scene->Update();
-	CTaskManager::GetInstance()->UpdateAll();
-	CTaskManager::GetInstance()->DestroyAppoint();
 }
 
 void CSceneManager::Draw()
 {
 	//シーン更新描画
 	mp_scene->Draw();
-
-	CTaskManager::GetInstance()->DrawAll();
 
 	if(m_quit)
 	{

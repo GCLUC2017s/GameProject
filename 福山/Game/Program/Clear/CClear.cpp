@@ -1,9 +1,10 @@
 #include "CClear.h"
 #include "../CGame/CGame.h"
 #include "../Define/define.h"
-#define CONF_TIME_NUM		0.2f, 1.0f, 1.0f, 1.0f, 1.0f		//NUMBERの大きさと色設定(TIME)
-#define CONF_KILLS_NUM		0.2f, 1.0f, 1.0f, 1.0f, 1.0f		//NUMBERの大きさと色設定(KILLS)
-#define CONF_SUM_NUM		0.2f, 1.0f, 1.0f, 1.0f, 1.0f		//NUMBERの大きさと色設定(SUM)
+#define STR_SIZE		     0.3f
+#define CONF_TIME_NUM		 1.0f, 1.0f, 1.0f, 1.0f		//NUMBERの大きさと色設定(TIME)
+#define CONF_KILLS_NUM		 1.0f, 1.0f, 1.0f, 1.0f		//NUMBERの大きさと色設定(KILLS)
+#define CONF_SUM_NUM		 1.0f, 1.0f, 1.0f, 1.0f		//NUMBERの大きさと色設定(SUM)
 /*TEXサイズ*/
 #define T_SIZE_CLEAR		0.0f,0.0f,700.0f,70.0f
 #define T_SIZE_SCORESUM		0.0f,0.0f,250.0f,50.0f
@@ -24,21 +25,24 @@
 #define R_SIZE_CLEAR		-5.0f,0.5f,5.0f,-0.5f
 
 #define DOWN_POINT		(int)100
-#define TIME_POS		CVector2(CPlayer::camera_x - DISP_X / 3, DISP_Y / 3 - 1.0f)
-#define KILLS_POS		CVector2(CPlayer::camera_x - DISP_X / 3, - 1.0f)
-#define SUM_POS			CVector2(CPlayer::camera_x - DISP_X / 3,- DISP_Y / 3- 1.0f)
+#define TIME_POS		CVector2(CGame::CameraPos().x - DISP_X / 3, DISP_Y / 3 - 1.0f)
+#define KILLS_POS		CVector2(CGame::CameraPos().x - DISP_X / 3, - 1.0f)
+#define SUM_POS			CVector2(CGame::CameraPos().x- DISP_X / 3,- DISP_Y / 3- 1.0f)
 
 /*四角のポジション*/
-#define R_EVAL_POS		CVector2(CPlayer::camera_x +DISP_X/2,  DISP_Y/ 3)
-#define R_SABC_POS		CVector2(CPlayer::camera_x +DISP_X/2, -DISP_Y / 4)
-#define R_CLEAR_POS		CVector2(CPlayer::camera_x , DISP_Y/2)
-#define R_TIME_POS		CVector2(CPlayer::camera_x - DISP_X / 2, DISP_Y / 3- 1.0f)
-#define R_KILLS_POS		CVector2(CPlayer::camera_x - DISP_X / 2, 0- 1.0f)
-#define R_SUM_POS		CVector2(CPlayer::camera_x - DISP_X / 2,- DISP_Y / 3- 1.0f)
+#define R_EVAL_POS		CVector2(CGame::CameraPos().x +DISP_X/2,  DISP_Y/ 3)
+#define R_SABC_POS		CVector2(CGame::CameraPos().x +DISP_X/2, -DISP_Y / 4)
+#define R_CLEAR_POS		CVector2(CGame::CameraPos().x, DISP_Y/2)
+#define R_TIME_POS		CVector2(CGame::CameraPos().x- DISP_X / 2, DISP_Y / 3- 1.0f)
+#define R_KILLS_POS		CVector2(CGame::CameraPos().x- DISP_X / 2, 0- 1.0f)
+#define R_SUM_POS		CVector2(CGame::CameraPos().x- DISP_X / 2,- DISP_Y / 3- 1.0f)
 /*ＣＬＥＡＲSCORE判定上限*/
 #define SABC_MAX	(ENE00_LIMIT*POINT_00	+	ENE01_LIMIT*POINT_01	+	BOSS_LIMIT*POINT_BOSS)
-
-
+/*カラー設定*/
+#define COLLAR4_FIRST		0.0f, 0.0f, 0.0f, 0.0f
+/*フェードスピード*/
+#define F_SPEEDBASE	0.01f
+#define F_SPEEDHIGH	0.1f
 #define FILE_TEX "../CG\\GameScreen\\"
 #include "../Player/CPlayer.h"
 
@@ -63,28 +67,28 @@ CClear::CClear() : mTimePoint(2000),mFlagRect(false){
 	mLogoTex[_SABC_]->load(FILE_TEX"SABC.tga");
 	/*四角を作る*/
 	mRectClearLogo.SetVertex(R_SIZE_CLEAR);
-	mRectClearLogo.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+	mRectClearLogo.SetColor(COLLAR4_FIRST);
 	mRectClearLogo.SetUv(mClearLoagoT,T_SIZE_CLEAR);
 
 	mRectEvaluation.SetVertex(R_SIZE_STR4);
-	mRectEvaluation.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+	mRectEvaluation.SetColor(COLLAR4_FIRST);
 	mRectEvaluation.SetUv(mEvaluationT,T_SIZE_SUMEVAL);
 
-	mRectLogoRect[_TIME_].SetVertex(R_SIZE_STR5);
-	mRectLogoRect[_TIME_].SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-	mRectLogoRect[_TIME_].SetUv(mLogoTex[_TIME_],T_SIZE_CLEARTIME);
+	mRectLogo[_TIME_].SetVertex(R_SIZE_STR5);
+	mRectLogo[_TIME_].SetColor(COLLAR4_FIRST);
+	mRectLogo[_TIME_].SetUv(mLogoTex[_TIME_],T_SIZE_CLEARTIME);
 
-	mRectLogoRect[_KILLS_].SetVertex(R_SIZE_STR6);
-	mRectLogoRect[_KILLS_].SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-	mRectLogoRect[_KILLS_].SetUv(mLogoTex[_KILLS_], T_SIZE_KILLS);
+	mRectLogo[_KILLS_].SetVertex(R_SIZE_STR6);
+	mRectLogo[_KILLS_].SetColor(COLLAR4_FIRST);
+	mRectLogo[_KILLS_].SetUv(mLogoTex[_KILLS_], T_SIZE_KILLS);
 
-	mRectLogoRect[_SUM_].SetVertex(R_SIZE_STR5);
-	mRectLogoRect[_SUM_].SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-	mRectLogoRect[_SUM_].SetUv(mLogoTex[_SUM_],T_SIZE_SCORESUM);
+	mRectLogo[_SUM_].SetVertex(R_SIZE_STR5);
+	mRectLogo[_SUM_].SetColor(COLLAR4_FIRST);
+	mRectLogo[_SUM_].SetUv(mLogoTex[_SUM_],T_SIZE_SCORESUM);
 
-	mRectLogoRect[_SABC_].SetVertex(R_SIZE_SABC);
-	mRectLogoRect[_SABC_].SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-	mRectLogoRect[_SABC_].SetUv(mLogoTex[_SABC_], T_SIZE_SABC);
+	mRectLogo[_SABC_].SetVertex(R_SIZE_SABC);
+	mRectLogo[_SABC_].SetColor(COLLAR4_FIRST);
+	mRectLogo[_SABC_].SetUv(mLogoTex[_SABC_], T_SIZE_SABC);
 	
 
 }
@@ -102,21 +106,29 @@ CClear::~CClear(){
 void CClear::SABC(int i){ //敵を倒す前に関数を呼ぶ
 	if (!mFlagRect){
 		if (SABC_MAX * 0.8 <= i){
-			mRectLogoRect[_SABC_].SetUv(mLogoTex[_SABC_], T_SIZE_S);
+			mRectLogo[_SABC_].SetUv(mLogoTex[_SABC_], T_SIZE_S);
 		}
 		else if (SABC_MAX * 0.6 <= i){
-			mRectLogoRect[_SABC_].SetUv(mLogoTex[_SABC_], T_SIZE_A);
+			mRectLogo[_SABC_].SetUv(mLogoTex[_SABC_], T_SIZE_A);
 		}
 		else if (SABC_MAX * 0.4 <= i){
-			mRectLogoRect[_SABC_].SetUv(mLogoTex[_SABC_], T_SIZE_B);
+			mRectLogo[_SABC_].SetUv(mLogoTex[_SABC_], T_SIZE_B);
 		}
 		else{
-			mRectLogoRect[_SABC_].SetUv(mLogoTex[_SABC_], T_SIZE_C);
+			mRectLogo[_SABC_].SetUv(mLogoTex[_SABC_], T_SIZE_C);
 		}
 		mFlagRect = true;
 	}
 
 }
+
+bool CClear::FlagCrectA(const CRectangle &rect){
+	if (rect.triangle1.a >= 1.0f){
+		return true;
+	}
+	return false;
+}
+
 
 void CClear::Update(){
 	/*時間がたつにつれ得点減点*/
@@ -160,6 +172,7 @@ void CClear::Update(){
 		};
 		t = t->next;
 	}
+
 	//文字列の設定
 	sprintf_s(str[_KILLS_], "%d", mKillPolint);
 	sprintf_s(str[_SUM_], "%d", (mKillPolint + mTimePoint));
@@ -167,27 +180,48 @@ void CClear::Update(){
 	mRectClearLogo.position = R_CLEAR_POS;
 	mRectEvaluation.position = R_EVAL_POS;
 	
-	mRectLogoRect[_TIME_].position = R_TIME_POS;
-	mRectLogoRect[_KILLS_].position = R_KILLS_POS;
-	mRectLogoRect[_SUM_].position = R_SUM_POS;
-	mRectLogoRect[_SABC_].position = R_SABC_POS;
-	
+	mRectLogo[_TIME_].position = R_TIME_POS;
+	mRectLogo[_KILLS_].position = R_KILLS_POS;
+	mRectLogo[_SUM_].position = R_SUM_POS;
+	mRectLogo[_SABC_].position = R_SABC_POS;
 
+	mNumber[_TIME_].render(str[_TIME_], TIME_POS, STR_SIZE, CONF_TIME_NUM);
+	mNumber[_KILLS_].render(str[_KILLS_], KILLS_POS, STR_SIZE, CONF_KILLS_NUM);
+	mNumber[_SUM_].render(str[_SUM_], SUM_POS, STR_SIZE, CONF_SUM_NUM);
+
+	if (mFlagRect){ //フラグが立った時にフェード開始
+		CGame::Fade(F_SPEEDBASE, &mRectClearLogo);
+		if (FlagCrectA(mRectClearLogo)){					//CLEAR表示で
+			CGame::Fade(F_SPEEDBASE, &mRectLogo[_TIME_]);	
+		}
+		if (FlagCrectA(mRectLogo[_TIME_])){					//時間表示で
+			CGame::Fade(F_SPEEDBASE, &mRectLogo[_KILLS_]);
+		}
+		if (FlagCrectA(mRectLogo[_KILLS_])){				//倒した数表示で
+			CGame::Fade(F_SPEEDBASE, &mRectLogo[_SUM_]);
+		}
+		if (FlagCrectA(mRectLogo[_SUM_])){					//スコア合計表示で
+			CGame::Fade(F_SPEEDBASE, &mRectEvaluation);
+		}
+		if (FlagCrectA(mRectEvaluation)){					//評価表示で
+			CGame::Fade(F_SPEEDBASE, &mRectLogo[_SABC_]);
+		}
+	}
+	
 	
 }
 void CClear::Render(){
 	//文字列の描画 演出まだ　
-
 	if (mFlagRect){
-		mNumber[_TIME_].render(str[_TIME_], TIME_POS, CONF_TIME_NUM);
-		mNumber[_KILLS_].render(str[_KILLS_], KILLS_POS, CONF_KILLS_NUM);
-		mNumber[_SUM_].render(str[_SUM_], SUM_POS, CONF_SUM_NUM);
-
+		mNumber[_TIME_].render(str[_TIME_], TIME_POS, STR_SIZE, CONF_TIME_NUM);
+		mNumber[_KILLS_].render(str[_KILLS_], KILLS_POS, STR_SIZE, CONF_KILLS_NUM);
+		mNumber[_SUM_].render(str[_SUM_], SUM_POS, STR_SIZE, CONF_SUM_NUM);
+		
 		mRectClearLogo.Render();
 		mRectEvaluation.Render();
 		for (int i = 0; i < LOGO_MAX; i++)
 		{
-			mRectLogoRect[i].Render();
+				mRectLogo[i].Render(); 
 		}
 	}
 }

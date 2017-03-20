@@ -17,7 +17,7 @@ private:
 
 	CRectangle mRectEvaluation;
 	CRectangle mRectClearLogo;
-	CRectangle mRectLogoRect[LOGO_MAX];
+	CRectangle mRectLogo[LOGO_MAX];
 
 	CTexture *mEvaluationT;
 	CTexture *mLogoTex[LOGO_MAX];
@@ -29,8 +29,9 @@ private:
 	int mKillPolint;			//倒した数のポイント
 	int mTimePoint;				//時間によるPOINT
 	bool mFlagRect;				
-
+	bool *mFlagEval;			//評価フラグ管理
 	void SABC(int i);
+	bool FlagCrectA(const CRectangle &rect); //
 
 public:
 	void Update();
