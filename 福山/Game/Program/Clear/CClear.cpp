@@ -2,9 +2,9 @@
 #include "../CGame/CGame.h"
 #include "../Define/define.h"
 #define STR_SIZE		     0.3f
-#define CONF_TIME_NUM		 1.0f, 1.0f, 1.0f, 1.0f		//NUMBERの大きさと色設定(TIME)
-#define CONF_KILLS_NUM		 1.0f, 1.0f, 1.0f, 1.0f		//NUMBERの大きさと色設定(KILLS)
-#define CONF_SUM_NUM		 1.0f, 1.0f, 1.0f, 1.0f		//NUMBERの大きさと色設定(SUM)
+#define CONF_TIME_NUM		 1.0f, 1.0f, 1.0f, mRectLogo[_TIME_].triangle1.a		//NUMBERの大きさと色設定(TIME)
+#define CONF_KILLS_NUM		 1.0f, 1.0f, 1.0f, mRectLogo[_KILLS_].triangle1.a		//NUMBERの大きさと色設定(KILLS)
+#define CONF_SUM_NUM		 1.0f, 1.0f, 1.0f, mRectLogo[_SUM_].triangle1.a		//NUMBERの大きさと色設定(SUM)
 /*TEXサイズ*/
 #define T_SIZE_CLEAR		0.0f,0.0f,700.0f,70.0f
 #define T_SIZE_SCORESUM		0.0f,0.0f,250.0f,50.0f
@@ -37,7 +37,8 @@
 #define R_KILLS_POS		CVector2(CGame::CameraPos().x- DISP_X / 2, 0- 1.0f)
 #define R_SUM_POS		CVector2(CGame::CameraPos().x- DISP_X / 2,- DISP_Y / 3- 1.0f)
 /*ＣＬＥＡＲSCORE判定上限*/
-#define SABC_MAX	(ENE00_LIMIT*POINT_00	+	ENE01_LIMIT*POINT_01	+	BOSS_LIMIT*POINT_BOSS)
+#define TIMEMAX		2000
+#define SABC_MAX	(ENE00_LIMIT*POINT_00	+	ENE01_LIMIT*POINT_01	+	BOSS_LIMIT*POINT_BOSS	+	 TIMEMAX)
 /*カラー設定*/
 #define COLLAR4_FIRST		0.0f, 0.0f, 0.0f, 0.0f
 /*フェードスピード*/
@@ -46,8 +47,7 @@
 #define FILE_TEX "../CG\\GameScreen\\"
 #include "../Player/CPlayer.h"
 
-
-CClear::CClear() : mTimePoint(2000),mFlagRect(false){
+CClear::CClear() : mTimePoint(TIMEMAX),mFlagRect(false){
 	mMyNumber = E_CLEAR;
 	mPriorityR = E_CLEAR;
 	mPriorityU = E_CLEAR;
@@ -90,7 +90,6 @@ CClear::CClear() : mTimePoint(2000),mFlagRect(false){
 	mRectLogo[_SABC_].SetColor(COLLAR4_FIRST);
 	mRectLogo[_SABC_].SetUv(mLogoTex[_SABC_], T_SIZE_SABC);
 	
-
 }
 
 CClear::~CClear(){
@@ -117,9 +116,11 @@ void CClear::SABC(int i){ //敵を倒す前に関数を呼ぶ
 		else{
 			mRectLogo[_SABC_].SetUv(mLogoTex[_SABC_], T_SIZE_C);
 		}
-		mFlagRect = true;
+		sprintf_s(str[_TIME_], "%d", mTimePoint);
+		sprintf_s(str[_KILLS_], "%d", mKillPolint);
+		sprintf_s(str[_SUM_], "%d", (mKillPolint + mTimePoint));
 	}
-
+	mFlagRect = true;
 }
 
 bool CClear::FlagCrectA(const CRectangle &rect){
@@ -141,7 +142,6 @@ void CClear::Update(){
 		mTimePoint = 0;
 	}
 	//文字列の設定
-	sprintf_s(str[_TIME_], "%d", mTimePoint);
 	/*敵が死亡した時の得点を追加*/
 	CTask *t; //探索用
 	t = CTaskManager::GetInstance()->mRoot;
@@ -173,10 +173,7 @@ void CClear::Update(){
 		t = t->next;
 	}
 
-	//文字列の設定
-	sprintf_s(str[_KILLS_], "%d", mKillPolint);
-	sprintf_s(str[_SUM_], "%d", (mKillPolint + mTimePoint));
-
+	/*演出面*/
 	mRectClearLogo.position = R_CLEAR_POS;
 	mRectEvaluation.position = R_EVAL_POS;
 	
@@ -213,9 +210,9 @@ void CClear::Update(){
 void CClear::Render(){
 	//文字列の描画 演出まだ　
 	if (mFlagRect){
-		mNumber[_TIME_].render(str[_TIME_], TIME_POS, STR_SIZE, CONF_TIME_NUM);
-		mNumber[_KILLS_].render(str[_KILLS_], KILLS_POS, STR_SIZE, CONF_KILLS_NUM);
-		mNumber[_SUM_].render(str[_SUM_], SUM_POS, STR_SIZE, CONF_SUM_NUM);
+		if (FlagCrectA(mRectLogo[_TIME_]))mNumber[_TIME_].render(str[_TIME_], TIME_POS, STR_SIZE, CONF_TIME_NUM);
+		if (FlagCrectA(mRectLogo[_KILLS_]))mNumber[_KILLS_].render(str[_KILLS_], KILLS_POS, STR_SIZE, CONF_KILLS_NUM);
+		if (FlagCrectA(mRectLogo[_SUM_]))mNumber[_SUM_].render(str[_SUM_], SUM_POS, STR_SIZE, CONF_SUM_NUM);
 		
 		mRectClearLogo.Render();
 		mRectEvaluation.Render();

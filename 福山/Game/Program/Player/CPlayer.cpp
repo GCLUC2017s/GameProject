@@ -150,10 +150,12 @@ void CPlayer::Move(){
 	}
 	//上移動
 	if (CKey::push(UP_KEY)) { 
+		DecisionRL(E_WALK_R, E_WALK_L);
 		RunWalk(V2_TOP);
 	}
 	//下移動
 	if (CKey::push(DOWN_KEY)) {
+		DecisionRL(E_WALK_R, E_WALK_L);
 		RunWalk(V2_BOTTOM);
 	}
 	if (mAxis > character_limit_top - SIZE_PLAYER_Y ||
@@ -170,7 +172,6 @@ void CPlayer::Brake(){
 		&& !mEnabledJump && mVelocity != 0 && !mEnabledAttack){
 		mVelocity -= SLOW_DOWN;
 		DecisionRL(E_BRAKE_R, E_BRAKE_L);
-		printf("BRAKE中\n");
 	}
 	else if (mVelocity <= 0){
 		mVelocity = 0;
@@ -447,9 +448,13 @@ void CPlayer::Update() {
 	mRect.position = mPos;
 	mShadow.position = CVector2(mPos.x, mAxis);
 
-	if (mHitPoint < 0) {
-		//シーンゲームオーバー
-		mHitPoint = 0;
+	const float fade_speed = 0.01f;
+	if (mHitPoint <= 0) {
+		//シーンゲームオーバーいこう
+		CGame::FadeOut(fade_speed,&mRect);
+	}
+	if (mRect.triangle1.a <= 0){ //フェードアウトが終了したらKILLする
+		mKillFlag = true;
 	}
 }
 

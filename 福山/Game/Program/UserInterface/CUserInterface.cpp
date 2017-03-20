@@ -23,8 +23,10 @@
 #define _HIGH_ 0
 #define _NORM_ 1
 #define _LOW_ 2
-#define ST_POSX			player->mStamina - PL_ST_X //‚r‚s@pos ’²®—p ˆø‚«ŽZ‚ÅŽg‚¤
-#define HP_POSX			player->mHitPoint -PL_HP_X  //HP@pos ’²®—p ˆø‚«ŽZ‚ÅŽg‚¤
+#define ST_POSX			player->mStamina - PL_ST_X //‚r‚s@pos ’²®—p ‘«‚·
+#define HP_POSX			player->mHitPoint -PL_HP_X+0.1f  //HP@pos ’²®—p ‘«‚·
+#define ENE_HP_POSX		base->mHitPoint +ENE_HP_X  //HP@pos ’²®—pˆø‚­
+
 #define T_ST_RIGHT		SIZE_TEX_PLAYER_FRAME_X  * (player->mStamina / PL_ST_X)
 #define SPEED_COLAR		0.05f
 
@@ -198,32 +200,15 @@ void CUserinterface::Update(){
 			break;
 			/*ƒGƒlƒ~[*/
 		case E_ENEMY00:
-			CEnemy00 *ene00;
-			ene00 = (CEnemy00*)task;
-			mGaugeEne.position = CVector2(ene00->mPos.x, ene00->mPos.y + SIZE_ENEMY00_Y);
-			mFrameEne.position = CVector2(ene00->mPos.x, ene00->mPos.y + SIZE_ENEMY00_Y);
-			mGaugeEne.SetVertex(-ene00->mHitPoint, ENE_HP_Y, ene00->mHitPoint, -ENE_HP_Y); //ŽlŠp
-			if (ene00->mHitPoint <= 0){
-				mKillFlag = true;
-			}
-			break;
-		case E_ENEMY01:
-			CEnemy01 *ene01;
-			ene01 = (CEnemy01*)task;
-			mGaugeEne.position = CVector2(ene01->mPos.x, ene01->mPos.y + SIZE_ENEMY01_Y);
-			mFrameEne.position = CVector2(ene01->mPos.x, ene01->mPos.y + SIZE_ENEMY01_Y);
-			mGaugeEne.SetVertex(-ene01->mHitPoint, SIZE_EN_FRAME_Y, ene01->mHitPoint, -SIZE_EN_FRAME_Y); //ŽlŠpì¬
-			if (ene01->mHitPoint <= 0){
-				mKillFlag = true;
-			}
-			break;
 		case E_BOSS:
-			CBoss *boss;
-			boss = (CBoss*)task;
-			mGaugeEne.position = CVector2(boss->mPos.x, boss->mPos.y + SIZE_BOSS_Y);
-			mFrameEne.position = CVector2(boss->mPos.x, boss->mPos.y + SIZE_BOSS_Y);
-			mGaugeEne.SetVertex(-boss->mHitPoint, SIZE_BOSS_FRAME_Y, boss->mHitPoint, -SIZE_BOSS_FRAME_Y); //ŽlŠpì¬
-			if (boss->mHitPoint <= 0){
+		case E_ENEMY01:
+
+			CBase *base;
+			base = (CBase*)task;
+			mGaugeEne.position = CVector2(base->mPos.x - ENE_HP_POSX, base->mPos.y + base->mRect.triangle1.y1);
+			mFrameEne.position = CVector2(base->mPos.x, base->mPos.y + base->mRect.triangle1.y1);
+			mGaugeEne.SetVertex(-base->mHitPoint, ENE_HP_Y, base->mHitPoint, -ENE_HP_Y); //ŽlŠp
+			if (base->mHitPoint <= 0){
 				mKillFlag = true;
 			}
 			break;

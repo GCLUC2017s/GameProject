@@ -6,7 +6,7 @@
 #include "../Player/CPlayer.h"
 #include "../MyNumber/CMyNumber.h"
 #define		PL_HITBUCK	player->mAttackPoint*10.0f
-
+#define     ALPHA		 pl->mRect.triangle1.a
 CCollisionManager::CCollisionManager(){};
 CCollisionManager::~CCollisionManager(){};
 
@@ -25,11 +25,11 @@ void CCollisionManager::EnemyAttack(CBase *pl){
 			ene = (CBase*)task;
 			if (CCollision::Collision(*ene, *pl, ene->mAttackAxis) && ene->mEnabledAttack){
 				/*ƒAƒ‰[ƒg*/
-				pl->mRect.SetColor(1.0f, 0.2f, 0.2f, 1.0f);
+				pl->mRect.SetColor(1.0f, 0.2f, 0.2f, ALPHA);
 				pl->mHitPoint -= ene->mAttackPoint;
 			}
 			else{
-				pl->mRect.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+				pl->mRect.SetColor(1.0f, 1.0f, 1.0f, ALPHA);
 			}
 			break;
 		}

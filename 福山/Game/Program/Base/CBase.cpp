@@ -94,23 +94,7 @@ bool CBase::FrameTime(float t){
 	}
 	
 }
-/*シングルか判断*/
-bool SinglePos(CVector2 pos){
-	CTask *t;
-	t = CTaskManager::GetInstance()->mRoot;
 
-	while (t != 0){
-		CBase *b = (CBase*)t;
-		if (b->mCharaFlag && pos.x == b->mPos.x && pos.y == b->mPos.y){ //ポスが同じ場合
-			return false;						//シングル×
-		}
-		t = t->next;
-	}
-	if (t == 0){ //ここまででシングルだった場合
-		return true;			//シングル○
-	}
-	return false;
-}
 
 /*
 [使い方]
@@ -120,11 +104,13 @@ bool SinglePos(CVector2 pos){
 void CBase::RandPos(int x,int y,CVector2 *mPos){
 	while (true)
 	{
-		mPos->x = (rand()-rand())%(int)(character_limit_left+character_limit_right)/2;
-		mPos->y = (rand() - rand())%(int)(character_limit_top + character_limit_bottom) / 2;
+		mPos->x = (rand() - rand()) % (int)(character_limit_left + character_limit_right);
+		mPos->y = (rand() - rand()) % (int)(character_limit_top + character_limit_bottom);
+
 		mAxis = mPos->y - y;
 		LimitDisp(mPos->x, mPos->y);
-		if (SinglePos(*mPos)){ 
+
+		if (mPos->x != 0 || mPos->y != 0){
 			break;
 		}
 	}

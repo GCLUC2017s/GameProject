@@ -20,6 +20,7 @@ public:
 	static CVector2 CameraPos();
 	static float	GetPlayerAxis();
 	static CPlayer getPlayer(CTask &t);
+
 	/*タスク属性がほしいときに使う
 	　number　ほしいもののナンバー
 	 キャストをして使う 
@@ -33,7 +34,8 @@ public:
 	static CTask *getStatus(int number);
 	static void Delete(CTexture **t);
 	/*使い方　フェードしたい四角　次にフェードしたい bool型*/
-	static void Fade(float speed,CRectangle *rect);
+	static void Fade(float speed, CRectangle *rect);
+	static void FadeOut(float speed, CRectangle *rect);
 };
 
 #endif

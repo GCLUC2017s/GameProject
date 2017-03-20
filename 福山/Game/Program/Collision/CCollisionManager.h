@@ -5,8 +5,9 @@
 #ifndef COLLISIONMANAGER_HPP
 #define COLLISIONMANAGER_HPP
 #include "../Collision/CCollision.h"
+#include "../Task/CTaskManager.h"
 
-class CCollisionManager
+class CCollisionManager : public CTask
 {
 public:
 	CCollisionManager();

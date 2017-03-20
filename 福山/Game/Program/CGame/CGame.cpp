@@ -85,3 +85,13 @@ void CGame::Fade(float speed,CRectangle *rect){
 	}
 	rect->SetColor(1.0f, 1.0f, 1.0f, mFade4);
 }
+
+/*フェード関数*/
+void CGame::FadeOut(float speed, CRectangle *rect){
+	float mFade4 = rect->triangle1.a - speed;		//フェード関数で使う
+	mFade4 -= speed;
+	if (mFade4 <= 0.0f){
+		mFade4 = 0.0f;
+	}
+	rect->SetColor(1.0f, 1.0f, 1.0f, mFade4);
+}

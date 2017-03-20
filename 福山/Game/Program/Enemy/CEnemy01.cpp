@@ -15,8 +15,6 @@
 */
 
 /*
-
-
 CKeyを使っている条件文は今後別の処理になります。
 
 高橋弘樹
@@ -25,7 +23,6 @@ CKeyを使っている条件文は今後別の処理になります。
 #define SIZE_ENEMY00_Y 1  //エネミー01のサイズ_Y
 #define SIZE_ENEMY00_X 1 //エネミー01のサイズ_X
 
-#define HITPOINT_ENEMY00 6					//エネミー01の体力
 #define FIRST_R_NO_PL 1						//初めのレンダーのポイント
 #define FIRST_U_NO_PL 1						//初めのアップデートのポイント
 #define SIZE_TEX_ENEMY00_STAY_X 800			//エネミーの待ち姿テクスチャサイズ X
@@ -36,25 +33,22 @@ CKeyを使っている条件文は今後別の処理になります。
 #define WALK_SPEED 0.07		//テスト用にいじってる				//飛行スピード
 #define WALK_X 2							//飛行ベクトルX
 #define WALK_Y 1							//飛行ベクトルY
-#define ANIME_TIME_BASE						6
-#define ANIME_TIME_ATTACK					6	
+#define ANIME_TIME_BASE						EM_ATTCK
+#define ANIME_TIME_ATTACK					EM_ATTCK	
 
 #define ENEMY01_FLAY "../CG\\enemy01\\fly\\"
 #define ENEMY01_STAY "../CG\\enemy01\\stay\\"
 #define ENEMY01_ATTACK "../CG\\enemy01\\attack\\"
 #define ENEMY01_DIE "../CG\\enemy01\\die\\"
-
+#define AT_RANGE01		mForward.x, SIZE_ENEMY01_X, SIZE_ENEMY01_Y,1, mPos	//攻撃範囲A
 
 inline void InitRand(){
 	srand((unsigned int)time(NULL));
 }
 
-void CEnemy01::SetPos(){
-	RandPos(SIZE_ENEMY00_X, SIZE_ENEMY00_Y,&mPos);
-};
 
 void CEnemy01::Init(){
-
+	RandPos(SIZE_ENEMY01_X, SIZE_ENEMY01_Y, &mPos);
 	/*テクスチャを張る*/
 	mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
 	mRect.SetUv(CLoadEnemy01::GetInstance()->mStay_tex[0], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
@@ -69,10 +63,9 @@ CEnemy01::~CEnemy01(){
 
 //エネミー01描画
 CEnemy01::CEnemy01() : mVelocity(0), mFlameCount(0), actionflag(false), motion(0), direction(1){
-	SetPos();
 	mPriorityR = E_ENEMY01;			//Renderのナンバー 
 	mPriorityU = E_ENEMY01;			//Updateのナンバー
-	mHitPoint = HITPOINT_ENEMY00;		//ＨＰ
+	mHitPoint = ENE_HP_X;		//ＨＰ
 	mMyNumber = E_ENEMY01;
 
 	//四角形の頂点設定
@@ -118,11 +111,11 @@ void CEnemy01::AnimeScene(){
 		break;
 		/*死亡*/
 	case E_DIE_R:
-		AnimeFrame(true, ANIME_TIME_BASE);
+		AnimeFrame(false, ANIME_TIME_BASE);
 		mRect.SetUv(CLoadEnemy01::GetInstance()->mDie_tex[mAnimeFrame], SIZE_TEX_ENEMY00_STAY_X, 0, 0, SIZE_TEX_ENEMY00_STAY_Y);
 		break;
 	case E_DIE_L:
-		AnimeFrame(true, ANIME_TIME_BASE);
+		AnimeFrame(false, ANIME_TIME_BASE);
 		mRect.SetUv(CLoadEnemy01::GetInstance()->mDie_tex[mAnimeFrame], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
 		break;
 
@@ -177,7 +170,6 @@ void CEnemy01::Update(){
 
 	mTargetP = CGame::mGetPlayerPos();
 
-	mPriorityR = -mAxis;
 	rulerR = mTargetP.x - mPos.x;	//プレイヤーとの距離を出す
 	rulerL = mPos.x - mTargetP.x;
 
@@ -189,12 +181,12 @@ void CEnemy01::Update(){
 	}
 
 	if (mHitPoint <= 0){
-		motion = 2;		//体力が０ならDIEする
+		motion = EM_DIE;		//体力が０ならDIEする
 	}
 
 	switch (motion)
 	{
-	case 0://待機
+	case EM_STAY://待機
 		if (direction == 0){	//右向き
 			mStatus = E_STAY_R;
 		}
@@ -205,48 +197,48 @@ void CEnemy01::Update(){
 
 		if (ENEMY_VISI)		//視界内にとらえたら追ってくる
 		{
-			motion = 1;
+			motion = EM_WALK;
 		}
 
 		break;
-	case 1://歩き	
+	case EM_WALK://歩き	
 		Fly();
 
 		if (ATTACK_PTT){//攻撃モーションに変更
 			actionflag = false;
-			motion = 2;
+			motion = EM_RANGE;
 		}
 
 		break;
-	case 2://攻撃範囲内に入った時
+	case EM_RANGE://攻撃範囲内に入った時
 
 		if (!actionflag){
-			pattern = rand() % 4; //0~2の中でランダムでパターンを選択する。
+			pattern = rand() % EM_BACK_X; //0~2の中でランダムでパターンを選択する。
 		}
 		if (pattern == 0){
-			motion = 6;
+			motion = EM_ATTCK;
 		}
 		else if (pattern == 1){
 			actionflag = true;
-			motion = 5;
+			motion = EM_BACK_Y;
 		}
 		else if (pattern == 2){
 
-			motion = 5;
+			motion = EM_BACK_Y;
 		}
-		else if (pattern == 3){
+		else if (pattern == EM_DIE){
 
-			motion = 6;
+			motion = EM_ATTCK;
 		}
 
 		if (NO_ATTACK_PTT){
 			actionflag = false;
-			motion = 1;
+			motion = EM_STAY;
 		}
 
 		break;
 
-	case 3://死亡
+	case EM_DIE://死亡
 		if (direction == 0) {
 			mStatus = E_DIE_R;
 		}
@@ -255,50 +247,50 @@ void CEnemy01::Update(){
 		}
 		break;
 
-	case 4://後ろに逃げる。
+	case EM_BACK_X://後ろに逃げる。
 
 
 		if (direction == 1) {
 			direction = 1;
-			mVelocity = WALK_SPEED * 3;
+			mVelocity = WALK_SPEED * EM_DIE;
 			mForward = CVector2(WALK_X, 0.0f);
 			mPos += mForward * mVelocity;
 
 		}
 		else if (direction == 0){
 			direction = 0;
-			mVelocity = -WALK_SPEED * 3;
+			mVelocity = -WALK_SPEED * EM_DIE;
 			mForward = CVector2(WALK_X, 0.0f);
 			mPos += mForward * mVelocity;
 		}
 
 		if (ENEMY_ESCAPE){	//一定距離離れると再度こちらに向かってくる
 			actionflag = false; //actionflagをfalseにする。
-			motion = 1;
+			motion = EM_WALK;
 		}
 
 		break;
-	case 5:		//キャラの後ろに行こうとする
+	case EM_BACK_Y:		//キャラの後ろに行こうとする
 
 
 		if (direction == 1) {
 			direction = 1;
-			mVelocity = -WALK_SPEED * 3;
+			mVelocity = -WALK_SPEED * EM_DIE;
 			mForward = CVector2(WALK_X, 0.0f);
 			mPos += mForward * mVelocity;
-			if (rulerR >5){
-				motion = 2;
+			if (rulerR >EM_BACK_Y){
+				motion = EM_RANGE;
 			}
 
 		}
 		else if (direction == 0){
 			direction = 0;
-			mVelocity = WALK_SPEED * 3;
+			mVelocity = WALK_SPEED * EM_DIE;
 			mForward = CVector2(WALK_X, 0.0f);
 			mPos += mForward * mVelocity;
 
-			if (rulerL >5){
-				motion = 2;
+			if (rulerL >EM_BACK_Y){
+				motion = EM_RANGE;
 			}
 		}
 
@@ -307,34 +299,29 @@ void CEnemy01::Update(){
 
 		break;
 
-	case 6:		//攻撃中
+	case EM_ATTCK:		//攻撃中
 
-		if (RIGHT_PTT && !mEnabledAttack) {
+		if (RIGHT_PTT) {
 			mEnabledAttack = true;
 			mStatus = E_ATTACK_R;
 		}
-		else if (LEFT_PTT && !mEnabledAttack){
+		else{
 			mEnabledAttack = true;
 			mStatus = E_ATTACK_L;
 		}
 
-
 		/*範囲*/
-		if (mEnabledAttack){
-			mAttackRange.SetVertex(-SIZE_PLAYER_X, SIZE_PLAYER_Y, SIZE_PLAYER_X, -SIZE_PLAYER_Y);
-			mAttackRange.SetColor(1.0f, 1.0f, 0.0f, 1.0f);
-			if (RIGHT_PTT)mAttackRange.position = CVector2(mPos.x + 1, mPos.y);
-			if (LEFT_PTT)mAttackRange.position = CVector2(mPos.x - 1, mPos.y);
-			mAttackAxis = 3.0f;
+		Attack(AT_RANGE01);
+		if (mAnimeFrame == int(FRAME_LIMIT /2)){ //攻撃が中間に来たときのみあたり判定のフラグを立てる
+			mEnabledAttack = true;//攻撃終了
 		}
-
-		if (mAnimeFrame == FRAME_LIMIT - 1){
-			mEnabledAttack = false;//攻撃終了
+		else{
+			mEnabledAttack = false;
 		}
-
+		/*攻撃範囲に距離を詰める*/
 		if (rulerR > 2 || rulerL >2){
 			actionflag = false;
-			motion = 1;
+			motion = EM_WALK;
 		}
 
 
@@ -349,14 +336,13 @@ void CEnemy01::Update(){
 		break;
 	}
 
-
-	//printf("%d\n", motion);
-
-
-	LimitDisp(SIZE_ENEMY00_X, SIZE_ENEMY00_Y);
+	/*軸の設定*/
+	mAxis = mPos.y - SIZE_ENEMY01_Y;
+	/*範囲外調整*/
+	LimitDisp(SIZE_ENEMY01_X, SIZE_ENEMY01_Y);
+	/*レンダー順番設定*/
+	mPriorityR = -mAxis;
 	AnimeScene();
-	if (mHitPoint == 0)mKillFlag = true;
-
 	mRect.position = mPos;
 	mShadow.position = CVector2(mPos.x, mAxis);
 

@@ -1,6 +1,6 @@
 /*
 キャラクターのベースクラス
-担当者　冨田健斗　&& 
+担当者　冨田健斗
 */
 #ifndef BASE_HPP
 #define BASE_HPP
@@ -27,14 +27,13 @@
 #define PL_ST_X 2.0f //ゲージx
 #define PL_ST_Y 0.15f//ゲージy
 
-
-#define SIZE_PL_FRAME_X 2.2f //フレームＸ
-#define SIZE_PL_FRAME_Y 0.2f //フレームY			
+#define SIZE_PL_FRAME_X PL_HP_X //フレームＸ
+#define SIZE_PL_FRAME_Y 0.2f  //フレームY			
 
 #define ENE_HP_X 2.0f			//エネミーgauge　(初期値)
 #define ENE_HP_Y 0.2f			//エネミーgauge
 
-#define SIZE_EN_FRAME_X 2.0f			//エネミーのフレーム
+#define SIZE_EN_FRAME_X ENE_HP_X*0.8			//エネミーのフレーム
 #define SIZE_EN_FRAME_Y 0.15f			//エネミーのフレーム
 
 #define SIZE_BOSS_FRAME_X	2.0f		
