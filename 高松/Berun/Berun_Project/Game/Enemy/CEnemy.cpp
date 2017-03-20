@@ -24,7 +24,7 @@ void CEnemy::Key() {
 	CCharaBase::Key();
 }
 
-void CEnemy::Update() {
+/*void CEnemy::Update() {
 	
 	if (m_pos.x > -10) {
 		if (eCarrot) {
@@ -38,7 +38,7 @@ void CEnemy::Update() {
 	}
 	
 	
-}
+}*/
 void CEnemy::Draw(){
 
 	CCharaBase::Draw();
