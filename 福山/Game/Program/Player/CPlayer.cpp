@@ -3,11 +3,17 @@
 #include "../MyNumber/CMyNumber.h"
 #include "../CGame/CGame.h"
 #include "../Load/CLoadPlayer.h"
+#include <math.h>
 #define JUMP_FIRST_SPEED				0.2f								//ジャンプのジャンプ力
 #define FIRST_R_NO_PL					0.0f								//初めのレンダーのポイント
 #define FIRST_U_NO_PL					0.0f								//初めのアップデートのポイント
+/*テクスチャサイズ*/
 #define SIZE_TEX_PLAYER_BASE_X			-160.0f								//プレイヤーの基本的なテクスチャサイズ X
 #define SIZE_TEX_PLAYER_BASE_Y			160.0f								//プレイヤーの基本的なテクスチャサイズ Y
+/*テクスチャ例外*/
+#define SIZE_TEX_CUTFLY_X				100.0f								//飛ぶ斬撃のテクスチャサイズX
+#define SIZE_TEX_CUTFLY_Y				30.0f								//飛ぶ斬撃のテクスチャサイズY
+
 #define SLOW_DOWN						 0.005f								//移動の減速スピード
 #define WALK_SPEED						 0.05f								//歩くスピード
 #define RUN_SPEED						 0.1f								//走るスピード
@@ -27,7 +33,7 @@
 #define ATTACK_B		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,2, mPos	//攻撃範囲B
 #define ATTACK_C		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,3, mPos	//攻撃範囲C
 #define EAT_ATTACK		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,1, mPos	//食べる攻撃
-#define EX01_ATTACK		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y+mEx01Speed,3, CVector2(mPos.x+mEx01Speed,mPos.y) //必殺技範囲
+#define EX01_ATTACK		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y + fabsf(mEx01Speed),3, CVector2(mPos.x+mEx01Speed,mPos.y) //必殺技範囲
 #define EX01_SPEED 0.1f														//必殺技が進むスピード
 #define INTERVAL		100.0f												//攻撃後のINTERVALキー入力待ち時間
 #define HUNGRY_SPEED	0.001f												//おなかが減るスピード
@@ -58,6 +64,7 @@ void CPlayer::Init() {
 	/*テクスチャを張る*/
 	mRect.SetUv(CLoadPlayer::GetInstance()->mStayTex[0], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
 	mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
+	mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutFlyTex, 0, 0, SIZE_TEX_CUTFLY_X, SIZE_TEX_CUTFLY_Y);
 	mForward = CVector2(1.0f, 0.0f);
 }
 
@@ -390,6 +397,10 @@ void CPlayer::AnimeScene(){
 		mRect.SetUv(CLoadPlayer::GetInstance()->mBrakeTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	};
+
+/*エフェクトなのでcaseなし*/
+if (mSaveForword.x == LEFT){ mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutFlyTex, 0, 0, SIZE_TEX_CUTFLY_X, SIZE_TEX_CUTFLY_Y); }//飛ぶ斬撃()
+if (mSaveForword.x == RIGHT){ mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutFlyTex, SIZE_TEX_CUTFLY_X, 0, 0, SIZE_TEX_CUTFLY_Y); }//飛ぶ斬撃()
 }
 /*能力変化のメソッド*/
 void CPlayer::ChangeStatus(){

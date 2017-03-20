@@ -13,6 +13,7 @@
 #define TEX_FILE_PLAYER_BRAKE			 "../CG\\beru\\beru_brake\\"		//プレイヤーのファイル場所　ブレーキ
 #define TEX_FILE_PLAYER_JUMP			 "../CG\\beru\\beru_jump\\"			//プレイヤーのファイル場所　ジャンプ
 #define TEX_FILE_SHADOW					 "../CG/shadow/"					//影テクスチャ場所
+#define TEX_FILE_CUTFLY					 "../CG\\beru\\beru_Effect\\"			//必殺技飛ぶよう
 
 CLoadPlayer* CLoadPlayer::mLoadPlayer = 0;
 
@@ -40,7 +41,6 @@ CLoadPlayer::CLoadPlayer()
 		mFlameTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
 		mBrakeTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
 		mJumpTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
-
 		for (int z = 0; z < NORMALATTACK_PATTERN; z++)
 		{
 			mNormalAttackTex[z][i] = new CTexture();	//テクスチャクラスのインスタンス作成
@@ -50,7 +50,7 @@ CLoadPlayer::CLoadPlayer()
 	}
 
 	mShadowTex = new CTexture();		//テクスチャクラスのインスタンス作成
-
+	mCutFlyTex = new CTexture();
 	/*テクスチャファイル読み込み*/
 	/*待ち*/
 	mStayTex[0]->load(TEX_FILE_PLAYER_STAY"beru_stay_00.tga");
@@ -125,6 +125,8 @@ CLoadPlayer::CLoadPlayer()
 	mBrakeTex[5]->load(TEX_FILE_PLAYER_BRAKE"beru_brake_05.tga");
 	/*影*/
 	mShadowTex->load(TEX_FILE_SHADOW"shadow.tga");
+	/*飛ぶ斬撃*/
+	mCutFlyTex->load(TEX_FILE_CUTFLY"CutFlyEffect.tga");
 }
 
 CLoadPlayer::~CLoadPlayer()
@@ -149,4 +151,5 @@ CLoadPlayer::~CLoadPlayer()
 		CGame::Delete(&mEatTex[i]);
 	}
 	CGame::Delete(&mShadowTex);
+	CGame::Delete(&mCutFlyTex);
 }

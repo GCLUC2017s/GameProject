@@ -19,6 +19,7 @@ public:
 	CTexture	*mBrakeTex[FRAME_LIMIT];								//ブレーキテクスチャ
 	CTexture	*mJumpTex[FRAME_LIMIT];												//ジャンプテクスチャ
 	CTexture	*mShadowTex;											//影テクスチャチャ
+	CTexture    *mCutFlyTex;												//飛ぶ斬撃
 
 	CLoadPlayer();
 	~CLoadPlayer();

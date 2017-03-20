@@ -56,10 +56,14 @@ float x , y , mAxis は攻撃範囲 ,Cvector2は　自分のposを入れる
 */
 
 void CBase::Attack(float Forword, float x, float y, float Axis, CVector2 &mPos){
-	mAttackRange.SetVertex(-x, y, x, -y);
-	mAttackRange.SetColor(1.0f, 1.0f, 0.0f, 1.0f); //デバッグ用
-	if (Forword > 0)mAttackRange.position = CVector2(mPos.x + 1 + x, mPos.y);
-	if (Forword <= 0)mAttackRange.position = CVector2(mPos.x - 1 - x, mPos.y);
+	mAttackRange.SetVertex(x, y, -x, -y);
+	mAttackRange.SetColor(1.0f, 1.0f, 1.0f, 1.0f);			 //デバッグ用
+	if (Forword >= 0){											//右
+		mAttackRange.position = CVector2(mPos.x + 1 + x, mPos.y);
+	}
+	else{														//左
+		mAttackRange.position = CVector2(mPos.x - 1 - x, mPos.y);
+	}
 	mAttackAxis = Axis;
 }
 /*時間計算用
