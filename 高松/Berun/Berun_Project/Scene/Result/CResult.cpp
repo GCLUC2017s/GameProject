@@ -1,4 +1,5 @@
 #include "CResult.h"
+#include "../Scene/CSceneManager.h"
 
 static T_ResultData g_resultdata[eMax] =
 {
@@ -9,19 +10,16 @@ static T_ResultData g_resultdata[eMax] =
 	{ 100.0f,150.0f,{ 1075.0f,25.0f } },
 	{ 100.0f,150.0f,{ 1075.0f,25.0f } },
 	{ 300.0f,150.0f,{ 750.0f,50.0f } },
-	{ 500.0f,100.0f,{ 750.0f,200.0f } },
+	{ 500.0f,100.0f,{ 500.0f,220.0f } },
 	{ 500.0f,550.0f,{ 25.0f,150.0f } },
 	{ 150.0f,100.0f,{ 550.0f,400.0f } },
-	{ 300.0f,150.0f,{ 700.0f,550.0f } },
+	{ 300.0f,150.0f,{ 950.0f,180.0f } },
 	{ 500.0f,200.0f,{ 750.0f,350.0f } },
+	{ 600.0f,100.0f,{ 700.0f,600.0f } },
 };
 
-CResult::CResult() : m_xSize(0.0f), m_ySize(0.0f), m_step(0)
+CResult::CResult() : m_xSize(0.0f), m_ySize(0.0f), m_step(0), m_corsol(0)
 {
-	for (int i = 0; i < ITEM_TYPE_MAX; i++)
-	{
-		m_corsol[i] = 0;
-	}
 	mp_img[0] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("ResultBackGround"));
 	mp_img[1] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Clear"));
 	mp_img[2] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("RankA"));
@@ -34,6 +32,7 @@ CResult::CResult() : m_xSize(0.0f), m_ySize(0.0f), m_step(0)
 	mp_img[9] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Arrow"));
 	mp_img[10] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Craft"));
 	mp_img[11] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("ItemSelect"));
+	mp_img[12] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("ResultTitle"));
 	CSound::GetInstance()->GetSound("RESULT_BGM")->Play();
 	for (int j = 0; j < eMax; j++)
 	{
@@ -55,31 +54,17 @@ void CResult::Update()
 {
 	mp_img[0]->SetColor(0.5, 0.5, 0.5, 1);
 	//CItem::GetInstance()->AddItem(eCarrotItem,0);
-	/*
-	if (m_step == 0)
+	switch (m_corsol)
 	{
+	case 0:
+		mp_img[12]->SetColor(0, 0, 0.8, 1);
 		if (PUSH_KEY_ENTER)
 		{
-
+			CSceneManager::GetInstance()->Quit(60, eTitle);
 		}
-		else if (PUSH_KEY_UP)
-		{
-
-		}
-		else if (PUSH_KEY_DOWN)
-		{
-
-		}
-		else if (PUSH_KEY_RIGHT)
-		{
-
-		}
-		else if (PUSH_KEY_LEFT)
-		{
-
-		}
+	default:
+		break;
 	}
-	*/
 }
 
 void CResult::Draw()

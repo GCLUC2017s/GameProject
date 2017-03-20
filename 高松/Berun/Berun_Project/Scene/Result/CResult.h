@@ -12,7 +12,7 @@
 #include "../CScene.h"
 #include "../Game/Item/CItem.h"
 
-#define ITEM_IMAGE_MAX 12
+#define RESULT_IMAGE_MAX 13
 #define ITEM_TYPE_MAX 16
 
 enum E_ResultData
@@ -29,7 +29,31 @@ enum E_ResultData
 	eArrow,
 	eCraft,
 	eItemselect,
+	eResultTitle,
 	eMax,
+};
+
+enum E_SelectData
+{
+	eSelectTitle,
+	eSelectCraft,
+	eSelectUdon,
+	eSelectBread,
+	eSelectRice,
+	eSelectMeet,
+	eSelectCheese,
+	eSelectChicken,
+	eSelectPork,
+	eSelectEgg,
+	eSelectOil,
+	eSelectMilk,
+	eSelectCarrot,
+	eSelectStrawberry,
+	eSelectApple,
+	eSelectPaprika,
+	eSelectFish,
+	eSelectSquid,
+	eFull,
 };
 
 struct T_ResultData 
@@ -42,13 +66,14 @@ struct T_ResultData
 class CResult : public CScene
 {
 private:
-	CImage *mp_img[ITEM_IMAGE_MAX];
+	CImage *mp_img[RESULT_IMAGE_MAX];
 	CVector2D m_pos;
 	T_ResultData  *mp_data;
 	float m_xSize;
 	float m_ySize;
 	int m_step;
-	int m_corsol[ITEM_TYPE_MAX];
+	int m_corsol;
+	//int m_select;
 public:
 	CResult();
 	~CResult();

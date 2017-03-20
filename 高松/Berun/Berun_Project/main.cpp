@@ -103,6 +103,7 @@ void init(void)
 	CResourceManager::GetInstance()->Add("Arrow", CImage::LoadImage("Result/Yajirusi.png"));
 	CResourceManager::GetInstance()->Add("Craft", CImage::LoadImage("Result/Tsukurulogo.png"));
 	CResourceManager::GetInstance()->Add("ItemSelect", CImage::LoadImage("Result/Itemsentaku.png"));
+	CResourceManager::GetInstance()->Add("ResultTitle", CImage::LoadImage("Result/Titlegamen.png"));
 	CResourceManager::GetInstance()->Add("TutorialM", CImage::LoadImage("TutoText/Serihu.png"));
 	CResourceManager::GetInstance()->Add("TutorialW", CImage::LoadImage("Tutotext/Serihu2.png"));
 	CResourceManager::GetInstance()->Add("PlayerM", CImage::LoadImage("Player/Player_m.png"));
