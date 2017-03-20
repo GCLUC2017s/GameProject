@@ -126,9 +126,11 @@ protected:
 	bool m_dash;
 	//ƒWƒƒƒ“ƒv’†‚©‚Ç‚¤‚©‚ğŠi”[‚·‚é•Ï”(false = No,true = Yes)
 	bool m_jumpFlag;
+	bool m_attack;
 	virtual void Key();
 	void Move();
 	void Jump();
+	void Attack();
 	void HpBar();
 public:
 	CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio);
