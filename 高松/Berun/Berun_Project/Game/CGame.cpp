@@ -3,6 +3,7 @@
 #include "../Game/Tutorial/CTutorial.h"
 #include "../Game/Map/CMap.h"
 #include "../Game/Enemy/CEnemy.h"
+#include "../Game/CollisionA/CCollisionA.h"
 
 CGame::CGame() : mp_player(nullptr),m_step(0)
 {
@@ -23,7 +24,7 @@ switch (m_step)
 		if (mp_tutorial->GetEnd())
 		{
 			mp_player=new CPlayer(g_tutorialNo);
-			new CEnemy(eCarrot);
+			mp_enemy=new CEnemy(eCarrot);
 			m_step++;
 			mp_tutorial->SetDestroyFlag(true);
 		}
@@ -41,6 +42,8 @@ void CGame::Draw()
 		if (m_screen.x < 0) m_screen.x = 0;
 		if (m_screen.x > 5120) m_screen.x = 5120;
 		mp_player->SetScroal(m_screen);
+
+		CCollisionA::CheckHit(mp_player, mp_enemy);
 
 	}
 }

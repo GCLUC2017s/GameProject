@@ -12,8 +12,7 @@
 
 class CCollisionA
 {
-private:
 public:
-	bool CheckHit(CBase *p,CBase *t);
+	static bool CheckHit(CBase *p,CBase *t);
 };
 #endif

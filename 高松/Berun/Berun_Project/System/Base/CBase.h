@@ -24,6 +24,8 @@ protected:
 	CVector2D m_size;
 	//キャラクターのID
 	int   m_id;
+	//キャラクターの当たり判定用矩形
+	CRect rect;
 	static CVector2D m_scroal;
 public:
 	CVector2D GetScroal() {
@@ -40,6 +42,10 @@ public:
 	CVector2D GetScreenPos();
 	CVector3D GetPos() {
 		return m_pos;
+	}
+	CRect GetRect()
+	{
+		return rect;
 	}
 };
 #endif
