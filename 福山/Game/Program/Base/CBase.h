@@ -17,8 +17,8 @@
 #define CAL_ENEMY00	2  //エネミーのカロリー
 #define CAL_ENEMY01 3
 #define CAL_BOSS	100
-#define SIZE_SHADOW_X 0.4f						//影のサイズX
-#define SIZE_SHADOW_Y 0.4f						//影のサイズY
+#define SIZE_SHADOW_X *mRect.mRRight*0.8f						//影のサイズX
+#define SIZE_SHADOW_Y *mRect.mRLeft	*0.5f					//影のサイズY
 #define SHADOW_TEX_X			70.f				//影のテクスチャのX
 #define SHADOW_TEX_Y			20.f				//影のテクスチャのY
 

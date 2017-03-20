@@ -8,7 +8,7 @@
 #include "CEnemybasetest.h"
 #include "../Load/CLoadBoss.h"
 #include "../Load/CLoadPlayer.h"
-
+#include "../CGame/CGame.h"
 /*
 
 
@@ -40,6 +40,7 @@ CKeyを使っている条件文は今後別の処理になります。
 #define LOW_AT		mForward.x, SIZE_BOSS_X, SIZE_BOSS_Y,1, mPos      	//攻撃範囲
 #define HIGH_AT		mForward.x, SIZE_BOSS_X, SIZE_BOSS_Y,3, mPos      	//攻撃範囲
 #define MOVE_AT		mForward.x, SIZE_BOSS_X, SIZE_BOSS_Y,1, mPos      	//攻撃範囲
+
 inline void InitRand(){
 	srand((unsigned int)time(NULL));
 }
@@ -52,7 +53,7 @@ void CBoss::SetPos(){
 
 void CBoss::Init(){
 	SetPos();
-
+	CBase::RandPos(SIZE_BOSS_X, SIZE_BOSS_Y,&mPos);
 	/*テクスチャを張る*/
 	mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
 	mRect.SetUv(CLoadBoss::GetInstance()->mStay_tex[0], 0, 0, SIZE_TEX_BOSS_STAY_X, SIZE_TEX_BOSS_STAY_Y);
@@ -72,11 +73,9 @@ CBoss::CBoss() : mVelocity(0), mFlameCount(0), actionflag(false), motion(0), dir
 
 	//四角形の頂点設定
 	mRect.SetVertex(-SIZE_BOSS_X, SIZE_BOSS_Y, SIZE_BOSS_X, -SIZE_BOSS_Y);
-	mShadow.SetVertex(-SIZE_BOSS_X, SIZE_BOSS_Y, SIZE_BOSS_X, -SIZE_BOSS_Y);
-
+	mShadow.SetVertex(-SIZE_SHADOW_X, SIZE_SHADOW_Y, SIZE_SHADOW_X, -SIZE_SHADOW_Y);
 	//四角形の色を設定
 	mRect.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-
 }
 
 CBoss::~CBoss(){
