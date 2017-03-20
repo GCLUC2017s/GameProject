@@ -23,7 +23,7 @@
 #define R_SIZE_STR6			-1.0f,0.2f,1.2f,-0.2f
 #define R_SIZE_SABC			-2.0f,2.0f,2.0f,-2.0f
 #define R_SIZE_CLEAR		-5.0f,0.5f,5.0f,-0.5f
-
+#define R_SIZE_FILTER		-DISP_X,DISP_Y,DISP_X,-DISP_Y
 #define DOWN_POINT		(int)100
 #define TIME_POS		CVector2(CGame::CameraPos().x - DISP_X / 3, DISP_Y / 3 - 1.0f)
 #define KILLS_POS		CVector2(CGame::CameraPos().x - DISP_X / 3, - 1.0f)
@@ -36,13 +36,17 @@
 #define R_TIME_POS		CVector2(CGame::CameraPos().x- DISP_X / 2, DISP_Y / 3- 1.0f)
 #define R_KILLS_POS		CVector2(CGame::CameraPos().x- DISP_X / 2, 0- 1.0f)
 #define R_SUM_POS		CVector2(CGame::CameraPos().x- DISP_X / 2,- DISP_Y / 3- 1.0f)
+#define R_FILTER_POS	CVector2(CGame::CameraPos().x,0)
 /*ＣＬＥＡＲSCORE判定上限*/
 #define TIMEMAX		2000
 #define SABC_MAX	(ENE00_LIMIT*POINT_00	+	ENE01_LIMIT*POINT_01	+	BOSS_LIMIT*POINT_BOSS	+	 TIMEMAX)
 /*カラー設定*/
-#define COLLAR4_FIRST		0.0f, 0.0f, 0.0f, 0.0f
+#define COLLAR4_FIRST		1.0f, 1.0f, 1.0f, 0.0f
+/*FILTER a上限*/
+#define F_ALFMAX	0.4f
 /*フェードスピード*/
 #define F_SPEEDBASE	0.01f
+#define F_SPEEDLOW	0.0001f
 #define F_SPEEDHIGH	0.1f
 #define FILE_TEX "../CG\\GameScreen\\"
 #include "../Player/CPlayer.h"
@@ -58,6 +62,7 @@ CClear::CClear() : mTimePoint(TIMEMAX),mFlagRect(false){
 	{
 		mLogoTex[i] = new CTexture();
 	}
+	mFilterTex = new CTexture();
 	/*ロード*/
 	mEvaluationT->load(FILE_TEX"Evaluation.tga");
 	mClearLoagoT->load(FILE_TEX"STAG_CLEAR.tga");
@@ -65,6 +70,7 @@ CClear::CClear() : mTimePoint(TIMEMAX),mFlagRect(false){
 	mLogoTex[_KILLS_]->load(FILE_TEX"Defeated enemy.tga");
 	mLogoTex[_SUM_]->load(FILE_TEX"score.tga");
 	mLogoTex[_SABC_]->load(FILE_TEX"SABC.tga");
+	mFilterTex->load("../CG\\Filter\\filter.tga");
 	/*四角を作る*/
 	mRectClearLogo.SetVertex(R_SIZE_CLEAR);
 	mRectClearLogo.SetColor(COLLAR4_FIRST);
@@ -89,6 +95,10 @@ CClear::CClear() : mTimePoint(TIMEMAX),mFlagRect(false){
 	mRectLogo[_SABC_].SetVertex(R_SIZE_SABC);
 	mRectLogo[_SABC_].SetColor(COLLAR4_FIRST);
 	mRectLogo[_SABC_].SetUv(mLogoTex[_SABC_], T_SIZE_SABC);
+
+	mRectFilter.SetVertex(R_SIZE_FILTER);
+	mRectFilter.SetColor(0.0f, 0.0f, 0.0f, 0.0f);
+	mRectFilter.SetUv(mFilterTex, 0,0,10,10);
 	
 }
 
@@ -100,6 +110,7 @@ CClear::~CClear(){
 	{
 		CGame::Delete(&mLogoTex[i]);
 	}
+	CGame::Delete(&mFilterTex);
 }
 
 void CClear::SABC(int i){ //敵を倒す前に関数を呼ぶ
@@ -129,7 +140,6 @@ bool CClear::FlagCrectA(const CRectangle &rect){
 	}
 	return false;
 }
-
 
 void CClear::Update(){
 	/*時間がたつにつれ得点減点*/
@@ -181,27 +191,29 @@ void CClear::Update(){
 	mRectLogo[_KILLS_].position = R_KILLS_POS;
 	mRectLogo[_SUM_].position = R_SUM_POS;
 	mRectLogo[_SABC_].position = R_SABC_POS;
+	mRectFilter.position = R_FILTER_POS;
 
 	mNumber[_TIME_].render(str[_TIME_], TIME_POS, STR_SIZE, CONF_TIME_NUM);
 	mNumber[_KILLS_].render(str[_KILLS_], KILLS_POS, STR_SIZE, CONF_KILLS_NUM);
 	mNumber[_SUM_].render(str[_SUM_], SUM_POS, STR_SIZE, CONF_SUM_NUM);
 
 	if (mFlagRect){ //フラグが立った時にフェード開始
-		CGame::Fade(F_SPEEDBASE, &mRectClearLogo);
+		CGame::Fade(F_SPEEDBASE, &mRectClearLogo,1.0f);
 		if (FlagCrectA(mRectClearLogo)){					//CLEAR表示で
-			CGame::Fade(F_SPEEDBASE, &mRectLogo[_TIME_]);	
+			CGame::Fade(F_SPEEDBASE, &mRectFilter, F_ALFMAX);
+			CGame::Fade(F_SPEEDBASE, &mRectLogo[_TIME_], 1.0f);
 		}
 		if (FlagCrectA(mRectLogo[_TIME_])){					//時間表示で
-			CGame::Fade(F_SPEEDBASE, &mRectLogo[_KILLS_]);
+			CGame::Fade(F_SPEEDBASE, &mRectLogo[_KILLS_], 1.0f);
 		}
 		if (FlagCrectA(mRectLogo[_KILLS_])){				//倒した数表示で
-			CGame::Fade(F_SPEEDBASE, &mRectLogo[_SUM_]);
+			CGame::Fade(F_SPEEDBASE, &mRectLogo[_SUM_], 1.0f);
 		}
 		if (FlagCrectA(mRectLogo[_SUM_])){					//スコア合計表示で
-			CGame::Fade(F_SPEEDBASE, &mRectEvaluation);
+			CGame::Fade(F_SPEEDBASE, &mRectEvaluation, 1.0f);
 		}
 		if (FlagCrectA(mRectEvaluation)){					//評価表示で
-			CGame::Fade(F_SPEEDBASE, &mRectLogo[_SABC_]);
+			CGame::Fade(F_SPEEDBASE, &mRectLogo[_SABC_], 1.0f);
 		}
 	}
 	
@@ -209,6 +221,8 @@ void CClear::Update(){
 }
 void CClear::Render(){
 	//文字列の描画 演出まだ　
+
+	mRectFilter.Render();
 	if (mFlagRect){
 		if (FlagCrectA(mRectLogo[_TIME_]))mNumber[_TIME_].render(str[_TIME_], TIME_POS, STR_SIZE, CONF_TIME_NUM);
 		if (FlagCrectA(mRectLogo[_KILLS_]))mNumber[_KILLS_].render(str[_KILLS_], KILLS_POS, STR_SIZE, CONF_KILLS_NUM);

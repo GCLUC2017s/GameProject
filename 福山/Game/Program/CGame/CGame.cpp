@@ -77,13 +77,14 @@ float CGame::GetPlayerAxis(){
 }
 
 /*フェード関数*/
-void CGame::Fade(float speed,CRectangle *rect){
+#define SET_C3 rect->triangle1.r,rect->triangle1.g,rect->triangle1.b //元の四角形rgb
+void CGame::Fade(float speed,CRectangle *rect,float a){
 	float mFade4 = rect->triangle1.a + speed;		//フェード関数で使う
 	mFade4 += speed;
-	if (mFade4 >= 1.0f){
-		mFade4 = 1.0f;
+	if (mFade4 >= a){
+		mFade4 = a;
 	}
-	rect->SetColor(1.0f, 1.0f, 1.0f, mFade4);
+	rect->SetColor(SET_C3, mFade4);
 }
 
 /*フェード関数*/
@@ -93,5 +94,18 @@ void CGame::FadeOut(float speed, CRectangle *rect){
 	if (mFade4 <= 0.0f){
 		mFade4 = 0.0f;
 	}
-	rect->SetColor(1.0f, 1.0f, 1.0f, mFade4);
+	rect->SetColor(SET_C3, mFade4);
+}
+/*拡大縮小*/
+void CGame::RectScaling(bool flag, float x, float y,float speed,CRectangle *rect){
+	switch (flag)
+	{
+	case true: //拡大
+		if (rect->triangle1.x1 <= x){
+			rect->SetVertex(*rect->mRLeft - x, *rect->mRTop + y, *rect->mRRight + x, *rect->mRBottom - y);
+		}
+		break;
+	case false://縮小
+		break;
+	}
 }

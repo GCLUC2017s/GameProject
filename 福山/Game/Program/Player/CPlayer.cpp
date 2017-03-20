@@ -25,10 +25,13 @@
 #define V2_LEFT							 CVector2(-WALK_X, 0.0f)			//左の向き
 #define V2_TOP							 CVector2(0.0f, WALK_Y)				//上の向き
 #define V2_BOTTOM						 CVector2(0.0f, -WALK_Y)			//下の向き
+/*アニメの速さ*/
 #define ANIME_TIME_BASE						10								//アニメのループ時間 継続的なもの
 #define ANIME_TIME_ATTACK					8								//アニメのループ時間 攻撃のもの
 #define ANIME_TIME_BRAKE					7								//アニメのループ時間 BRAKE
-#define ANIME_TIME_JUMP						6								//アニメループ時間
+#define ANIME_TIME_JUMP						6								//アニメループ時間 ジャンプ
+#define ANIME_TIME_WALK						8 + mHungryStatus				//アニメループ時間　歩く
+
 #define ATTACK_A		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,2, mPos	//攻撃範囲A
 #define ATTACK_B		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,2, mPos	//攻撃範囲B
 #define ATTACK_C		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,3, mPos	//攻撃範囲C
@@ -65,7 +68,7 @@ void CPlayer::Init() {
 	mRect.SetUv(CLoadPlayer::GetInstance()->mStayTex[0], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
 	mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
 	mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutFlyTex, 0, 0, SIZE_TEX_CUTFLY_X, SIZE_TEX_CUTFLY_Y);
-	mForward = CVector2(1.0f, 0.0f);
+	mForward = CVector2(RIGHT, 0.0f);
 }
 
 
@@ -300,11 +303,11 @@ void CPlayer::AnimeScene(){
 	{
 		/*左*/
 	case E_STAY_L:
-		AnimeFrame(true, ANIME_TIME_BASE,FRAME_LIMIT8);
+		AnimeFrame(true, ANIME_TIME_BASE);
 		mRect.SetUv(CLoadPlayer::GetInstance()->mStayTex[mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_WALK_L:
-		AnimeFrame(true, ANIME_TIME_BASE);
+		AnimeFrame(true, ANIME_TIME_WALK,FRAME_LIMIT8);
 		mRect.SetUv(CLoadPlayer::GetInstance()->mWalkTex[mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_RUN_L:
@@ -353,7 +356,7 @@ void CPlayer::AnimeScene(){
 		mRect.SetUv(CLoadPlayer::GetInstance()->mStayTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_WALK_R:
-		AnimeFrame(true, ANIME_TIME_BASE);
+		AnimeFrame(true, ANIME_TIME_WALK,FRAME_LIMIT8);
 		mRect.SetUv(CLoadPlayer::GetInstance()->mWalkTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_RUN_R:
@@ -413,12 +416,15 @@ void CPlayer::ChangeStatus(){
 		/*ステータス変化*/
 		if (HUNGRY_S_HIGH_IF){ 
 			mHungryPower = HUNGRY_POWER_LOW; mHungrySSpp = HUNGRY_SSPP_LOW; //おなか一杯減少
+			mHungryStatus = E_HIGH;
 		} 
 		else if (HUNGRY_S_LOW_IF){ 
 			mHungryPower = HUNGRY_POWER_HIGH; mHungrySSpp = HUNGRY_SSPP_HIGH;//おなかすいた上昇
+			mHungryStatus = E_LOW;
 		}
 		else{									 //中間 変化なし
 			mHungryPower = 0; mHungrySSpp = 0;
+			mHungryStatus = E_NORMAL;
 		}
 		/*ステータス変化終了*/
 	} 
@@ -435,7 +441,7 @@ void CPlayer::ChangeStatus(){
 
 /*アップデート*/
 void CPlayer::Update() {
-	assert(mAnimeFrame <= FRAME_LIMIT);				//フレーム数が七を超えるとダメ
+	assert(mAnimeFrame <= FRAME_LIMIT8);				//フレーム数が七を超えるとダメ
 	//assert(E_STAY_L <= mStatus && mStatus <= E_BRAKE_R);       //テクスチャを正しく読み込めているかどうか
 	//四角形の位置を設定
 	mRect.position = mPos;

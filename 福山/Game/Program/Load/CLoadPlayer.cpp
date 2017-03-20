@@ -33,7 +33,6 @@ CLoadPlayer::CLoadPlayer()
 	for (int i = 0; i < FRAME_LIMIT; i++)
 	{
 		mStayTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
-		mWalkTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
 		mRunTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
 		mEx01Tex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
 		mEx02Tex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
@@ -48,6 +47,10 @@ CLoadPlayer::CLoadPlayer()
 		mEatTex[i] = new CTexture();
 
 	}
+	for (int i = 0; i < FRAME_LIMIT8; i++)
+	{
+		mWalkTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
+	}
 
 	mShadowTex = new CTexture();		//テクスチャクラスのインスタンス作成
 	mCutFlyTex = new CTexture();
@@ -59,8 +62,6 @@ CLoadPlayer::CLoadPlayer()
 	mStayTex[3]->load(TEX_FILE_PLAYER_STAY"beru_stay_03.tga");
 	mStayTex[4]->load(TEX_FILE_PLAYER_STAY"beru_stay_04.tga");
 	mStayTex[5]->load(TEX_FILE_PLAYER_STAY"beru_stay_05.tga");
-	mStayTex[6]->load(TEX_FILE_PLAYER_STAY"beru_stay_06.tga");
-	mStayTex[7]->load(TEX_FILE_PLAYER_STAY"beru_stay_07.tga");
 
 	/*歩く*/
 	mWalkTex[0]->load(TEX_FILE_PLAYER_WALK"beru_walk_00.tga");
@@ -69,6 +70,8 @@ CLoadPlayer::CLoadPlayer()
 	mWalkTex[3]->load(TEX_FILE_PLAYER_WALK"beru_walk_03.tga");
 	mWalkTex[4]->load(TEX_FILE_PLAYER_WALK"beru_walk_04.tga");
 	mWalkTex[5]->load(TEX_FILE_PLAYER_WALK"beru_walk_05.tga");
+	mWalkTex[6]->load(TEX_FILE_PLAYER_WALK"beru_walk_06.tga");
+	mWalkTex[7]->load(TEX_FILE_PLAYER_WALK"beru_walk_07.tga");
 	/*走る*/
 	mRunTex[0]->load(TEX_FILE_PLAYER_RUN"beru_run_00.tga");
 	mRunTex[1]->load(TEX_FILE_PLAYER_RUN"beru_run_01.tga");

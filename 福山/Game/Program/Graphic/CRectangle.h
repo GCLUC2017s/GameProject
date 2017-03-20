@@ -17,7 +17,10 @@ public:
 	float		uv[2][6];
 	int degree;
 	bool deg_enabled;
-
+	float *mRLeft;
+	float *mRRight;
+	float *mRTop;
+	float *mRBottom;
 
 	/* ’¸“_‚P`‚R‚ÌXÀ•WAYÀ•W‚Æ•`‰æF‚Ì’l‚ğ‰Šúİ’è‚·‚é
 	CRectangle(float left, float top, float right, float bottom, float r, float g, float b, float a)
