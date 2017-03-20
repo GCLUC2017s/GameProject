@@ -27,8 +27,10 @@ CMap::CMap(E_Stage type) : CBase(eUDP_Map, eDWP_Map) {
 	m_newstage= static_cast<E_Stage>(m_stage + 1);
 	m_pos = CVector3D(0, 0, 0);
 	m_cont = 0;
+	CSound::GetInstance()->GetSound("AREA_M_BGM")->Play();
 }
 CMap::~CMap() {
+	CSound::GetInstance()->GetSound("AREA_M_BGM")->Stop();
 }
 void CMap::Update() {
 	//ポインタの場合はデストラクトを作る
