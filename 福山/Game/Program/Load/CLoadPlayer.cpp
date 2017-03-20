@@ -59,6 +59,8 @@ CLoadPlayer::CLoadPlayer()
 	mStayTex[3]->load(TEX_FILE_PLAYER_STAY"beru_stay_03.tga");
 	mStayTex[4]->load(TEX_FILE_PLAYER_STAY"beru_stay_04.tga");
 	mStayTex[5]->load(TEX_FILE_PLAYER_STAY"beru_stay_05.tga");
+	mStayTex[6]->load(TEX_FILE_PLAYER_STAY"beru_stay_06.tga");
+	mStayTex[7]->load(TEX_FILE_PLAYER_STAY"beru_stay_07.tga");
 
 	/*•à‚­*/
 	mWalkTex[0]->load(TEX_FILE_PLAYER_WALK"beru_walk_00.tga");

@@ -300,7 +300,7 @@ void CPlayer::AnimeScene(){
 	{
 		/*左*/
 	case E_STAY_L:
-		AnimeFrame(true, ANIME_TIME_BASE);
+		AnimeFrame(true, ANIME_TIME_BASE,FRAME_LIMIT8);
 		mRect.SetUv(CLoadPlayer::GetInstance()->mStayTex[mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_WALK_L:
@@ -439,13 +439,13 @@ void CPlayer::Update() {
 	//assert(E_STAY_L <= mStatus && mStatus <= E_BRAKE_R);       //テクスチャを正しく読み込めているかどうか
 	//四角形の位置を設定
 	mRect.position = mPos;
-	if (!mEnabledAttack){Move();}
-	Brake();
-	PlayerAttack();
-	Jump();
-	ChangeStatus();
-	AnimeScene();
-
+	if (!mEnabledAttack){Move();}	//移動メソッド
+	Brake();						//ブレーキメソッド
+	PlayerAttack();					//アタックメソッド
+	Jump();							//ジャンプメソッド
+	ChangeStatus();					//能力変化メソッド
+	AnimeScene();					//アニメメソッド
+	AlertHPRect(&mRect, mHitPoint);	//アラートメソッド(HP変化によるもの)
 	if (!mEnabledInterval && mStatus != E_STAY_L && mStatus != E_STAY_R && mVelocity <= 0 && !mEnabledJump && !mEnabledAttack){
 		DecisionRL(E_STAY_R, E_STAY_L);
 	}
@@ -455,7 +455,6 @@ void CPlayer::Update() {
 	mPriorityR = -mAxis;
 	camera_x = mPos.x;
 	camera_y = mPos.y;
-
 	mRect.position = mPos;
 	mShadow.position = CVector2(mPos.x, mAxis);
 

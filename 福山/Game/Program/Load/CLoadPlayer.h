@@ -1,6 +1,6 @@
 #include "../Graphic/CTexture.h"
 #include "../Define/define.h"
-
+#define FRAME_LIMIT8 8
 class CLoadPlayer
 {
 private:
@@ -8,7 +8,7 @@ private:
 public:
 	static CLoadPlayer *GetInstance(); //GetInstance
 
-	CTexture	*mStayTex[FRAME_LIMIT];									//待ちテクスチャ
+	CTexture	*mStayTex[FRAME_LIMIT8];									//待ちテクスチャ
 	CTexture	*mWalkTex[FRAME_LIMIT];									//歩くテクスチャ
 	CTexture	*mRunTex[FRAME_LIMIT];									//走るテクスチャ
 	CTexture	*mNormalAttackTex[NORMALATTACK_PATTERN][FRAME_LIMIT];	//通常攻撃テクスチャ

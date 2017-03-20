@@ -79,8 +79,14 @@ CBase を継承するものには必ず入れること
 
 class CBase : public CTask{
 private:
+
 	float mFrameTime;				//bool 関数	 FrameTie計算用
 	int mFrameCount;				//現在のフレーム数
+	/*アラート関数用*/
+	float mSaveAlertHitoPoint;		//アラート用
+	float mAlertCount;				//アラートカウント
+	bool FlagAlertSetHp;			//アラートHPの初期設定用
+
 public:
 	CTexture	*mShadowTex;		//影テクスチャチャ
 	CVector2 mPos;					//位置
@@ -109,15 +115,17 @@ public:
 
 	CVector2 mTargetP;  //プレイヤーポジションの取得用
 	
-	CBase() : mEnabledEat(false), mAxis(0), mHitPoint(0), mEnabledAttack(false), mAttackPoint(0.01f),mEnabledPoint(false){
+	CBase() : mEnabledEat(false), mAxis(0), mHitPoint(0), mEnabledAttack(false), mAttackPoint(0.01f), mEnabledPoint(false), FlagAlertSetHp(false){
 		mCharaFlag = true;
 		mShadow.SetColor(0.5f, 0.5f, 0.5f, 0.7f);
 		kazu += 1;
 		srand(time(NULL));
 	}
 
-	/*アニメのフレーム数計算用  roopがtrueならループする speed = RoopのSpeed*/
+	/*アニメのフレーム数計算用  roopがtrueならループする speed = RoopのSpeed Frame = フレーム数*/
 	void AnimeFrame(bool roop, int speed);
+	/*オーダーが入ったので追加*/
+	void AnimeFrame(bool roop, int speed,int frame);
 	/*使い方 sizex,sizeyに画像のサイズを入れる*/
 	void LimitDisp(int sizex, int sizey);
 	/*
@@ -131,6 +139,8 @@ public:
 	void Attack(float Forword, float x, float y,float mAxis, CVector2 &mPos);
 	bool FrameTime(float time);
 	void RandPos(int x, int y, CVector2 *mPos);		//ポジションをランダムにする	サイズをx,yに当てはめる
+	/*HPによるアラート関数*/
+	void AlertHPRect(CRectangle *rect,float &Hp);
 
 };
 #endif

@@ -335,7 +335,7 @@ void CEnemy01::Update(){
 	case 1:	//左向き
 		break;
 	}
-
+	AlertHPRect(&mRect, mHitPoint);	//アラートメソッド(HP変化によるもの)
 	/*軸の設定*/
 	mAxis = mPos.y - SIZE_ENEMY01_Y;
 	/*範囲外調整*/

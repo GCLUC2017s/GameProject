@@ -25,6 +25,31 @@ void CBase::AnimeFrame(bool roop, int speed){
 
 	mSaveAnime = mStatus;
 }
+
+void CBase::AnimeFrame(bool roop, int speed,int frame){
+	if (roop){
+		mFrameCount++;
+		if (mFrameCount % speed == 0){
+			mAnimeFrame++;
+
+		}
+		if (mAnimeFrame >= frame || mSaveAnime != mStatus){
+			mAnimeFrame = 0;
+		}
+	}
+	else{
+		mFrameCount++;
+		if (mFrameCount % speed == 0){
+			mAnimeFrame++;
+		}
+		if (mAnimeFrame >= frame){
+			mAnimeFrame = frame - 1; //テクスチャの最大値 = FRAME_LIMITなので ー１
+		}
+	}
+
+	mSaveAnime = mStatus;
+}
+
 void CBase::LimitDisp(int sizex, int sizey){
 	/*あたり判定*/
 	if (mAxis > character_limit_top - sizey && !mEnabledJump){  //マップ外に出ると元の位置に戻す(軸)
@@ -59,10 +84,10 @@ void CBase::Attack(float Forword, float x, float y, float Axis, CVector2 &mPos){
 	mAttackRange.SetVertex(x, y, -x, -y);
 	mAttackRange.SetColor(1.0f, 1.0f, 1.0f, 1.0f);			 //デバッグ用
 	if (Forword >= 0){											//右
-		mAttackRange.position = CVector2(mPos.x + 1 + x, mPos.y);
+		mAttackRange.position = CVector2(mPos.x+ x, mPos.y);
 	}
 	else{														//左
-		mAttackRange.position = CVector2(mPos.x - 1 - x, mPos.y);
+		mAttackRange.position = CVector2(mPos.x- x, mPos.y);
 	}
 	mAttackAxis = Axis;
 }
@@ -120,3 +145,25 @@ void CBase::RandPos(int x,int y,CVector2 *mPos){
 	}
 }
 int CBase::kazu = 0;
+
+/*ＨＰが減ったとき赤色の表示*/
+/*関数で使う一覧*/
+const float mAlertMax = 10.0f;								//赤色に表示しておく時間
+#define SET_ALERT_COLLAR		1.0f, 0.4f, 0.4f, 1.0f	//アラートカラー設定
+/*ＨＰが減ったとき赤色の表示関数*/
+void CBase::AlertHPRect(CRectangle *rect, float &hp){
+	if (!FlagAlertSetHp){				//HP初期設定
+		mSaveAlertHitoPoint = hp;
+		FlagAlertSetHp = true;
+	}
+	if (mSaveAlertHitoPoint != hp){		//HPが減ったとき
+		rect->SetColor(SET_ALERT_COLLAR);
+		if (mAlertCount >= mAlertMax){ //元に戻すまでのINTERVAL
+			mSaveAlertHitoPoint = hp;
+			rect->SetColor(1.0f,1.0f,1.0f,1.0f);
+			mAlertCount = 0;
+		}
+		mAlertCount++;
+	}
+
+}
