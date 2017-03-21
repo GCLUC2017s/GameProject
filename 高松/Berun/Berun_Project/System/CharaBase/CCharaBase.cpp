@@ -1,4 +1,6 @@
 #include "CCharaBase.h"
+#include "../Game/CollisionManager/CollisionManager.h"
+#define HitCheck
 T_AnimData _playerMAnimData[] = {
 	{ 1,5 },
 	{ 6,5 },
@@ -23,8 +25,8 @@ T_AnimData _carrotAnimData[] = {
  static const T_CharacterData g_characterData[] =
 {
 	//ID,レベル、最大HP,現在HP,最大SP,現在SP,攻撃力,防御力,取得経験値,必要経験値,移動速度,ジャンプ力,キャラクターの表示サイズ,キャラクターのアニメデータ,キャラクターの元画像での1サイズ,
-	{ "LittlePlayerM",0,5,5,5,3,3,0,0,0,1,1,0,{ 120,160 } ,_playerMAnimData,{ 550,900 },{ 60,160 },CRect(-60,-160,60,0),eItemMax },
-	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,1,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 360,180 },CRect(-180,-180,180,0),eItemMax },
+	{ "LittlePlayerM",0,5,5,5,3,3,0,0,0,1,1,0,{ 120,160 } ,_playerMAnimData,{ 550,900 },{ 60,160 },CRect(-40,-160,40,0),eItemMax },
+	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,1,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 150,180 },CRect(-180,-180,180,0),eItemMax },
 	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	//{ "Chick",2,5,0,0,0,0,0,0,0,1,0,0,{ 160,160 } ,_carrotAnimData,{ 240,224 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	//{ "Chick",3,5,0,0,0,0,0,0,0,1,0,0,0 },
@@ -38,6 +40,7 @@ CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio)
 	m_state = eState_Move;
 	mp_eData = &g_characterData[type];
 	m_chara = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get(mp_eData->imageName));
+	m_red = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("RED"));
 	
 	m_imgPtn = 0;
 	m_level= mp_eData->level;
@@ -109,23 +112,30 @@ void CCharaBase::Key()
 }
 void CCharaBase::Move()
 {
-	
+
 	if (m_dash) m_dashSpeed = mp_eData->speed*2;
 	else m_dashSpeed = mp_eData->speed;
-	if (m_up)	m_pos.z += CHARA_MOVE * m_dashSpeed;
-	if (m_down)	m_pos.z += -CHARA_MOVE * m_dashSpeed;
-	if (m_left)
-	{
-		m_pos.x += -CHARA_MOVE * m_dashSpeed;
-		//キャラの方向フラグを左向きの状態にする
-		m_charaDirection = true;
-	}
-	if (m_right)
-	{
-		m_pos.x += CHARA_MOVE * m_dashSpeed;
-		//キャラの方向フラグを右向きの状態にする
-		m_charaDirection = false;
-	}
+
+		m_oldPos = m_pos;
+		if (m_up)	m_pos.z += CHARA_MOVE * m_dashSpeed;
+		if (m_down)	m_pos.z += -CHARA_MOVE * m_dashSpeed;
+		if (m_left)
+		{
+			m_pos.x += -CHARA_MOVE * m_dashSpeed;
+			//キャラの方向フラグを左向きの状態にする
+			m_charaDirection = true;
+		}
+		if (m_right)
+		{
+			m_pos.x += CHARA_MOVE * m_dashSpeed;
+			//キャラの方向フラグを右向きの状態にする
+			m_charaDirection = false;
+
+		}
+		if (m_pos.z > 600 || m_pos.z < 100)
+		{
+			m_pos.z = m_oldPos.z;
+		}
 	if (m_jump) {
 		m_gravitySpeed += 20;
  		m_jumpFlag = true;
@@ -142,7 +152,7 @@ void CCharaBase::Move()
 		ChangeAnimation(eAnim_Idle, true);
 	}
 	//当たり判定用の矩形を計算
-	rect = CRect(m_pos.x + mp_eData->rect.m_left, m_pos.z + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right, m_pos.z + mp_eData->rect.m_bottom);
+	rect = CRect(m_pos.x + mp_eData->rect.m_left, m_pos.y + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right, m_pos.y + mp_eData->rect.m_bottom);
 }
 void CCharaBase::Jump()
 {
@@ -166,12 +176,8 @@ void CCharaBase::Jump()
 void CCharaBase::Attack()
 {
 	ChangeAnimation(eAnim_Attack, true);
-	if (m_charaDirection)	rect = CRect(m_pos.x + mp_eData->rect.m_left - 60, m_pos.z + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right, m_pos.z + mp_eData->rect.m_bottom);
-	else rect = CRect(m_pos.x + mp_eData->rect.m_left, m_pos.z + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right + 60, m_pos.z + mp_eData->rect.m_bottom);
-}
-void CCharaBase::HpBar()
-{
-
+	if (m_charaDirection)	rect = CRect(m_pos.x + mp_eData->rect.m_left - 60, m_pos.y + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right, m_pos.y + mp_eData->rect.m_bottom);
+	else rect = CRect(m_pos.x + mp_eData->rect.m_left, m_pos.y + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right + 60, m_pos.y + mp_eData->rect.m_bottom);
 }
 void CCharaBase::Update()
 {
@@ -196,8 +202,7 @@ void CCharaBase::Update()
 		m_pos.y = 0;
 		m_gravitySpeed = 0;
 	}
-	//当たり判定用の矩形を取得
-	rect = CRect(m_pos.x + mp_eData->rect.m_left, m_pos.y + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right, m_pos.y + mp_eData->rect.m_bottom);
+	CCollisionManager::GetInstance()->Regist(this);
 }
 void CCharaBase::Draw()
 {
@@ -207,8 +212,25 @@ void CCharaBase::Draw()
 		m_chara->SetSize(mp_eData->size.x, mp_eData->size.y);
 		m_chara->SetPos(GetScreenPos());
 		m_chara->SetFlipH(m_charaDirection);
+		if (!m_charaDirection)	m_chara->SetCenter(mp_eData->senter.x, mp_eData->senter.y);
+		else	m_chara->SetCenter(mp_eData->size.x - mp_eData->senter.x, mp_eData->senter.y);
 
 		m_chara->Draw();
+#ifdef HitCheck 
+		m_red->SetPos(GetScreenPos(CVector3D(rect.m_left, rect.m_bottom, m_pos.z)));
+		m_red->SetCenter(0,0);
+		m_red->SetSize(rect.m_right - rect.m_left, -g_characterData[g_tutorialNo].size.y);
+		if (m_state == eState_Attack)
+		{
+			if (m_charaDirection)
+			{
+				m_red->SetPos(GetScreenPos(CVector3D(rect.m_left - 60, rect.m_bottom, m_pos.z)));
+				m_red->SetSize(mp_eData->size.x + 60, -mp_eData->size.y);
+			}
+			else m_red->SetSize(mp_eData->size.x + 60, -mp_eData->size.y);
+		}
+		m_red->Draw();
+#endif
 	//	m_enemyHp->Draw();
 }
 

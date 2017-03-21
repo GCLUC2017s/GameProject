@@ -3,7 +3,7 @@
 #include "../Game/Tutorial/CTutorial.h"
 #include "../Game/Map/CMap.h"
 #include "../Game/Enemy/CEnemy.h"
-#include "../Game/CollisionA/CCollisionA.h"
+#include "../Game/CollisionManager/CollisionManager.h"
 #include "../Scene/CSceneManager.h"
 
 CGame::CGame() : mp_player(nullptr),m_step(0)
@@ -54,8 +54,10 @@ switch (m_step)
 	default:
 		break;
 	}
+CCollisionManager::GetInstance()->UnRegistAll();
+CTaskManager::GetInstance()->DestroyAppoint();
 	CTaskManager::GetInstance()->UpdateAll();
-	CTaskManager::GetInstance()->DestroyAppoint();
+	CCollisionManager::GetInstance()->CheckHitAll();
 }
 void CGame::Draw()
 {
@@ -67,7 +69,6 @@ void CGame::Draw()
 		if (m_screen.x > 5120) m_screen.x = 5120;
 		mp_player->SetScroal(m_screen);
 
-		CCollisionA::CheckHit(mp_player, mp_enemy);
 	}
 
 	if (mp_player)

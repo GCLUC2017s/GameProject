@@ -5,14 +5,20 @@
 * @author	Ryoji Anzai
 */
 #ifndef CCOLLISION_INCLUDE_GUARD
-#define CCOLISION_INCLUDE_GUARD
+#define CCOLLISION_INCLUDE_GUARD
 
 #include "../Global.h"
-#include "../System/Base/CBase.h"
 
 class CCollisionA
 {
+protected:
+	CCollisionA *mp_prev;					//前のアドレスを格納するポインタ
+	CCollisionA *mp_next;					//次のアドレスを格納するポインタ
 public:
-	static bool CheckHit(CBase *p,CBase *t);
+	CCollisionA();
+	~CCollisionA();
+	virtual bool CheckHit(CCollisionA *t)=0;
+	virtual void HitCallBack(CCollisionA * p)=0;
+	friend class CCollisionManager;
 };
 #endif

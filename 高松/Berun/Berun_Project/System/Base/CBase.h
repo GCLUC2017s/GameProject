@@ -10,10 +10,11 @@
 #include "../stdafx.h"
 #include "../Global.h"
 #include "../System/TaskSystem/CTask.h"
+#include "../Game/CollisionA/CCollisionA.h"
 
 
 
-class CBase : public CTask
+class CBase : public CTask, public CCollisionA
 {
 protected:
 	//èdóÕóéâ∫ë¨ìx
@@ -38,8 +39,11 @@ public:
 	CBase();
 	CBase(unsigned int updatePrio, unsigned int drawPrio);
 	~CBase();
-	virtual void HitCallBack(CBase * p);
+	virtual void HitCallBack(CCollisionA * p);
+
+	bool CheckHit(CCollisionA *t);
 	CVector2D GetScreenPos();
+	CVector2D GetScreenPos(CVector3D pos);
 	CVector3D GetPos() {
 		return m_pos;
 	}
@@ -47,5 +51,5 @@ public:
 	{
 		return rect;
 	}
-};
+	friend class  CCollisionA;};
 #endif
