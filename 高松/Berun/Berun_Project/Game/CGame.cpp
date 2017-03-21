@@ -20,7 +20,7 @@ CGame::~CGame()
 	CSound::GetInstance()->GetSound("AREA_M_BGM")->Stop();
 }
 void CGame::Update() 
-{
+{	
 switch (m_step)
 	{
 	case 0:
@@ -37,10 +37,7 @@ switch (m_step)
 			mp_img[0]->SetSize(85, 100);
 			mp_img[1]->SetSize(690, 90);
 			mp_img[2]->SetSize(700, 100);
-			if (p.x > 1200.0f)
-			{
-				m_step++;
-			}
+			m_step++;
 		}
 		break;
 	}
@@ -54,7 +51,6 @@ switch (m_step)
 		}
 		break;
 	}
-	case 2:
 	default:
 		break;
 	}
