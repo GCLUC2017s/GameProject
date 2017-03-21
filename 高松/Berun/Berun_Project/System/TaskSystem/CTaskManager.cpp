@@ -78,6 +78,11 @@ void CTaskManager::DrawAll()
 	}
 }
 
+CTask CTaskManager::GetTask()
+{
+	return CTask();
+}
+
 CTaskManager* CTaskManager::GetInstance()
 {
 	//CTaskManagerを一度のみ（シングルトン）生成して格納

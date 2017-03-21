@@ -8,8 +8,8 @@
 #define RESULT_GUARD
 
 #include "CImage.h"
-#include "CScene.h"
-#include "Item/CItem.h"
+#include "../CScene.h"
+#include "../Game/Item/CItem.h"
 
 #define RESULT_IMAGE_MAX 29
 #define ITEM_TYPE_MAX 16
