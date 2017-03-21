@@ -5,6 +5,7 @@
 #include "../Game/Enemy/CEnemy.h"
 #include "../Game/CollisionManager/CollisionManager.h"
 #include "../Scene/CSceneManager.h"
+#include"../Game/Enemy/CEnemyManager.h"
 
 CGame::CGame() : mp_player(nullptr),m_step(0)
 {
@@ -27,8 +28,10 @@ switch (m_step)
 	{
 		if (mp_tutorial->GetEnd())
 		{
-			mp_enemy = new CEnemy(eCarrot);
+			
 			mp_player = new CPlayer(g_tutorialNo);
+			new CEnemyManager();
+			mp_enemy = new CEnemy(eChick);
 			mp_tutorial->SetDestroyFlag(true);
 			CVector3D p = mp_player->GetPos();
 			mp_img[0]->SetPos(p.x / 1200.0f + 285, 588);
