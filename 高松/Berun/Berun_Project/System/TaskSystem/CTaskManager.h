@@ -8,6 +8,7 @@
 #define TASKMANAGER_GUARD
 
 #include "CTask.h"
+class CPlayer;
 
 class CTaskManager
 {

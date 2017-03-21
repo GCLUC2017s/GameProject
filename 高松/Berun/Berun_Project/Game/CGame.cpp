@@ -19,8 +19,9 @@ CGame::~CGame()
 {
 	CSound::GetInstance()->GetSound("AREA_M_BGM")->Stop();
 }
-void CGame::Update() 
-{	
+void CGame::Update()
+{
+	
 switch (m_step)
 	{
 	case 0:
@@ -37,6 +38,7 @@ switch (m_step)
 			mp_img[0]->SetSize(85, 100);
 			mp_img[1]->SetSize(690, 90);
 			mp_img[2]->SetSize(700, 100);
+			mp_img[1]->SetRect(0, 0, p.x / 1200.0f, 90);
 			m_step++;
 		}
 		break;

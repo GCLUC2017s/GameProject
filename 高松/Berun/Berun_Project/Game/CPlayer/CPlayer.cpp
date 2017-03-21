@@ -50,3 +50,4 @@ void CPlayer::Key() {
 	if (PUSH_KEY_SPASE)		m_jump = true;
 	if (PUSH_KEY_ENTER)		m_attack = true;
 }
+

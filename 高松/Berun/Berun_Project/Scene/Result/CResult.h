@@ -15,6 +15,7 @@
 #define RESULT_IMAGE_MAX 29
 #define ITEM_TYPE_MAX 16
 
+//画像データ
 enum E_ResultData
 {
 	eResultBackGround,
@@ -48,7 +49,7 @@ enum E_ResultData
 	eItem16,
 	eMax,
 };
-
+//選択データ
 enum E_SelectData
 {
 	eSelectTitle,
