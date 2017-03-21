@@ -15,7 +15,6 @@
 
 class CPlayer : public CCharaBase
 {
-	static CPlayer*  mp_player;
 	void Key();
 	CImage *mp_hp;
 	CImage *mp_sp;
@@ -24,8 +23,6 @@ public:
 	~CPlayer();
 //	void Update();
 	void Draw();
-	static CPlayer* GetInstance();
-	static void ClearInstance();
 };
 
 #endif // !CPLAYER_INCLUDE_GUARD

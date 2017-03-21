@@ -21,14 +21,7 @@ CGame::~CGame()
 }
 void CGame::Update()
 {
-	CVector3D p = mp_player->GetPos();
-	mp_img[0]->SetPos(p.x / 1200.0f + 285, 588);
-	mp_img[1]->SetPos(285, 625);
-	mp_img[2]->SetPos(294, 599);
-	mp_img[0]->SetSize(85, 100);
-	mp_img[1]->SetSize(690, 90);
-	mp_img[2]->SetSize(700, 100);
-	mp_img[1]->SetRect(0, 0, p.x / 1200.0f, 90);
+	
 switch (m_step)
 	{
 	case 0:
@@ -38,6 +31,14 @@ switch (m_step)
 			mp_enemy = new CEnemy(eCarrot);
 			mp_player = new CPlayer(g_tutorialNo);
 			mp_tutorial->SetDestroyFlag(true);
+			CVector3D p = mp_player->GetPos();
+			mp_img[0]->SetPos(p.x / 1200.0f + 285, 588);
+			mp_img[1]->SetPos(285, 625);
+			mp_img[2]->SetPos(294, 599);
+			mp_img[0]->SetSize(85, 100);
+			mp_img[1]->SetSize(690, 90);
+			mp_img[2]->SetSize(700, 100);
+			mp_img[1]->SetRect(0, 0, p.x / 1200.0f, 90);
 			m_step++;
 		}
 		break;
