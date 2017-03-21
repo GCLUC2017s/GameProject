@@ -24,7 +24,7 @@ T_AnimData _carrotAnimData[] = {
 {
 	//ID,レベル、最大HP,現在HP,最大SP,現在SP,攻撃力,防御力,取得経験値,必要経験値,移動速度,ジャンプ力,キャラクターの表示サイズ,キャラクターのアニメデータ,キャラクターの元画像での1サイズ,
 	{ "LittlePlayerM",0,5,0,0,0,0,0,0,0,1,1,0,{ 120,160 } ,_playerMAnimData,{ 550,900 },{ 60,160 },CRect(-60,-160,60,0),eItemMax },
-	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,1,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 360,180 },CRect(-180,-180,180,0),eItemMax },
+	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,1,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 180,180 },CRect(-180,-180,180,0),eItemMax },
 	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	//{ "Chick",2,5,0,0,0,0,0,0,0,1,0,0,{ 160,160 } ,_carrotAnimData,{ 240,224 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	//{ "Chick",3,5,0,0,0,0,0,0,0,1,0,0,0 },
@@ -170,10 +170,7 @@ void CCharaBase::Attack()
 	if (m_charaDirection)	rect = CRect(m_pos.x + mp_eData->rect.m_left - 60, m_pos.z + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right, m_pos.z + mp_eData->rect.m_bottom);
 	else rect = CRect(m_pos.x + mp_eData->rect.m_left, m_pos.z + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right + 60, m_pos.z + mp_eData->rect.m_bottom);
 }
-void CCharaBase::HpBar()
-{
 
-}
 void CCharaBase::Update()
 {
 	for (int i = 0; i < HP_MAX; i++)
