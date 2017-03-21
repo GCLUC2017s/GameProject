@@ -49,7 +49,7 @@ enum {
 	eStrawberry,//イチゴ地上
 	eVegetavelboss,//野菜ボス（ウサギ）
 	ePig,//豚
-	eBird,//鳥
+	eChick,//鳥
 	eMeatboss,//肉ボス（鶏）
 	eSquid,//イカ
 	eFish,//魚

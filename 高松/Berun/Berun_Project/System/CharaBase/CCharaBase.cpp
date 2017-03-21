@@ -4,13 +4,15 @@ T_AnimData _carrotAnimData[] = {
 	{ 6,5 },
 	{ 5,3 },
 	{ 5,10 },
+	
 };
  static const T_CharacterData g_characterData[] =
 {
 	//ID,レベル、最大HP,現在HP,最大SP,現在SP,攻撃力,防御力,取得経験値,必要経験値,移動速度,ジャンプ力,キャラクターの表示サイズ,キャラクターのアニメデータ,キャラクターの元画像での1サイズ,
 	{ "LittlePlayerM",0,5,0,0,0,0,0,0,0,1,1,0, {120,160} ,_carrotAnimData,{ 550,900 },{ 60,160 },CRect(-60,-160,60,0),eItemMax },
 	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,1,0, {256,256},_carrotAnimData,{ 500,900 },{ 60,160 },CRect(-60,-160,60,0),eItemMax },
-	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,{160,160} ,_carrotAnimData,{ 500,900 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	//{ "Chick",2,5,0,0,0,0,0,0,0,1,0,0,{ 160,160 } ,_carrotAnimData,{ 240,224 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	//{ "Chick",3,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Rice",5,5,0,0,0,0,0,0,0,1,0,0,0 },
@@ -142,8 +144,7 @@ void CCharaBase::Jump()
 }
 void CCharaBase::HpBar()
 {
-	m_enemyHp = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Meter"));
-	m_enemyHp->SetPos(0, 0);
+
 }
 void CCharaBase::Update()
 {

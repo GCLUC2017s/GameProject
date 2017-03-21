@@ -8,8 +8,9 @@
 #ifndef CMAP_GURAD
 #define CMAP_GURAD
 #define SCROLL_SPEED 2//マップスクロール値
-#define MAP_DATA 4//マップの数
+#define MAP_DATA 5//マップの数
 #define MAP_WITHT 1280//マップの幅
+#define MAP_GROUND 2
 
 
 #include "../Global.h"
@@ -24,7 +25,7 @@ struct T_MapDataBack
 {
 	char imgName[64];
 };
-class CMap : public CBase{
+class CMap : public CBase {
 public:
 	enum E_Stage
 	{
@@ -36,14 +37,18 @@ public:
 	};
 private:
 	CImage *m_backGround[MAP_DATA];
-	CImage *m_ground;//仮
-	CImage *m_ground2;//仮
-	CImage *m_mapRight;//明るさ
+	CImage *m_ground[MAP_GROUND];
+
+
+
 	float m_mapTime;//透明度
 	E_Stage m_stage;//今の時刻
 	E_Stage m_newstage;//次の時刻
-	
+	E_Stage m_stage2;
+	E_Stage m_newstage2;
+
 	T_MapDataBack *map_eDataBack;
+	T_MapData *map_eData;
 	int m_time;
 	int m_cont;
 public:
