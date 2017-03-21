@@ -120,7 +120,7 @@ protected:
 	//ダメージを受けているかどうかを格納する変数
 	bool m_damage;
 	//ダメージを受けた後の無敵時間を格納する変数
-	float m_damage;
+	//float m_damage;
 	CVector3D m_oldPos;
 
 	unsigned int m_anim;

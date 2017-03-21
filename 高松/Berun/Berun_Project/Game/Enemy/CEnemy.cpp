@@ -1,4 +1,5 @@
 #include"CEnemy.h"
+#include "../CPlayer/CPlayer.h"
 
 
 
