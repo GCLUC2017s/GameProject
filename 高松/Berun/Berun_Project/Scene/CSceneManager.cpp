@@ -77,16 +77,24 @@ void CSceneManager::ChangeScene(E_Scene scene)
 		mp_scene = new CLogo();
 		break;
 	case eTitle:
+		CSound::GetInstance()->GetSound("RESULT_BGM")->Stop();
 		mp_scene = new CTitle();
+		CSound::GetInstance()->GetSound("TITLE_BGM")->Play(true);
 		break;
 	case eCharaSelect:
+		CSound::GetInstance()->GetSound("TITLE_BGM")->Stop();
 		mp_scene = new CCharaSelect();
+		CSound::GetInstance()->GetSound("CHARASELECT_BGM")->Play(true);
 		break;
 	case eGame:
+		CSound::GetInstance()->GetSound("CHARASELECT_BGM")->Stop();
 		mp_scene = new CGame();
+		CSound::GetInstance()->GetSound("AREA_M_BGM")->Play(true);
 		break;
 	case eResult:
+		CSound::GetInstance()->GetSound("AREA_M_BGM")->Stop();
 		mp_scene = new CResult();
+		CSound::GetInstance()->GetSound("RESULT_BGM")->Play(true);
 		break;
 	default:
 		//デバッグ

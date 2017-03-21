@@ -9,9 +9,11 @@
 
 #include "CImage.h"
 #include "CScene.h"
+#include "Item/CItem.h"
 
 #define RESULT_IMAGE_MAX 29
 #define ITEM_TYPE_MAX 16
+#define BAG_MAX 5
 
 //âÊëúÉfÅ[É^
 enum E_ResultData
@@ -89,15 +91,17 @@ class CResult : public CScene
 private:
 	CImage *mp_img[RESULT_IMAGE_MAX];
 	CVector2D m_pos;
-	float m_xSize;
-	float m_ySize;
-	int   m_corsol;
+	float  m_xSize;
+	float  m_ySize;
+	int    m_corsol;
+	//E_Item m_box[BAG_MAX];
 public:
 	CResult();
 	~CResult();
 	void Update();
 	void Draw();
 	void DarkenColor();
+	//void SelectItem(int box,E_Item &item);
 };
 
 #endif

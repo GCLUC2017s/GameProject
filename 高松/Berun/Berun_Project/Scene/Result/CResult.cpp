@@ -72,7 +72,7 @@ CResult::CResult() : m_xSize(0.0f), m_ySize(0.0f), m_corsol(0)
 	mp_img[26] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Item14"));
 	mp_img[27] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Item15"));
 	mp_img[28] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Item16"));
-	CSound::GetInstance()->GetSound("RESULT_BGM")->Play();
+	
 
 	for (int j = 0; j < eMax; j++)
 	{
@@ -88,7 +88,7 @@ CResult::CResult() : m_xSize(0.0f), m_ySize(0.0f), m_corsol(0)
 
 CResult::~CResult()
 {
-	CSound::GetInstance()->GetSound("RESULT_BGM")->Stop();
+	
 }
 
 void CResult::Update()
@@ -221,3 +221,9 @@ void CResult::DarkenColor()
 {
 	for (int i = (int)eSelectStart; i < (int)eSelectEnd; i++) mp_img[i]->SetColor(0.5, 0.5, 0.5, 1);
 }
+/*
+void CResult::SelectItem(int box, E_Item & item)
+{
+	m_box[box] = item;
+}
+*/

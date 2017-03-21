@@ -17,7 +17,7 @@ CGame::CGame() : mp_player(nullptr),m_step(0)
 
 CGame::~CGame()
 {
-	CSound::GetInstance()->GetSound("AREA_M_BGM")->Stop();
+	
 }
 void CGame::Update()
 {
@@ -38,9 +38,9 @@ switch (m_step)
 	case 1:
 	{
 		CVector3D p = mp_player->GetPos();
-		if (p.x > 1200.0f)
+		if (p.x > 5100.0f)
 		{
-			CSceneManager::GetInstance()->Quit(60, eResult);
+			CSceneManager::GetInstance()->Quit(30, eResult);
 			m_step++;
 		}
 		break;
@@ -57,13 +57,14 @@ void CGame::Draw()
 	CTaskManager::GetInstance()->DrawAll();
 	if (mp_player) {
 		CVector3D p = mp_player->GetPos();
-		mp_img[0]->SetPos(1200.0f / (p.x + 285), 588);
-		mp_img[1]->SetPos(285, 625);
+		mp_img[0]->SetPos(p.x+285/100, 588);
+		mp_img[1]->SetPos(310, 630);
 		mp_img[2]->SetPos(294, 599);
 		mp_img[0]->SetSize(85, 100);
-		mp_img[1]->SetSize(690, 90);
+		mp_img[1]->SetSize(650, 60);
 		mp_img[2]->SetSize(700, 100);
-		mp_img[1]->SetRect(0, 0, 1200.0f / (p.x * 100 + 285), 90);
+		mp_img[1]->SetRect((p.x * 100 + 285) / 1200.0f, 0, 0, 90);
+		
 		CVector3D m_playerPos = mp_player->GetPos();
 		CVector2D m_screen = CVector2D(m_playerPos.x - 640, 0);
 		if (m_screen.x < 0) m_screen.x = 0;
