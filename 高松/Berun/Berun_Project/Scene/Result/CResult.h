@@ -28,8 +28,11 @@ enum E_ResultData
 	eSelect,
 	eItem,
 	eArrow,
-	eCraft,
 	eItemselect,
+
+	eSelectStart,
+
+	eCraft = eSelectStart,
 	eResultTitle,
 	eItem1,
 	eItem2,
@@ -47,7 +50,10 @@ enum E_ResultData
 	eItem14,
 	eItem15,
 	eItem16,
-	eMax,
+
+	eSelectEnd,
+
+	eMax = eSelectEnd,
 };
 //選択データ
 enum E_SelectData
@@ -85,18 +91,15 @@ class CResult : public CScene
 private:
 	CImage *mp_img[RESULT_IMAGE_MAX];
 	CVector2D m_pos;
-	T_ResultData  *mp_data;
 	float m_xSize;
 	float m_ySize;
-	int	  m_step;
 	int   m_corsol;
-	//int m_select;
-	char  m_str[64];
 public:
 	CResult();
 	~CResult();
 	void Update();
 	void Draw();
+	void DarkenColor();
 };
 
 #endif

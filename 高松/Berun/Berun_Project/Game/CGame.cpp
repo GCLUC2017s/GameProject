@@ -21,7 +21,6 @@ CGame::~CGame()
 }
 void CGame::Update()
 {
-	
 switch (m_step)
 	{
 	case 0:
@@ -31,15 +30,8 @@ switch (m_step)
 			mp_enemy = new CEnemy(eCarrot);
 			mp_player = new CPlayer(g_tutorialNo);
 			mp_tutorial->SetDestroyFlag(true);
-			CVector3D p = mp_player->GetPos();
-			mp_img[0]->SetPos(p.x / 1200.0f + 285, 588);
-			mp_img[1]->SetPos(285, 625);
-			mp_img[2]->SetPos(294, 599);
-			mp_img[0]->SetSize(85, 100);
-			mp_img[1]->SetSize(690, 90);
-			mp_img[2]->SetSize(700, 100);
-			mp_img[1]->SetRect(0, 0, p.x / 1200.0f, 90);
 			m_step++;
+			
 		}
 		break;
 	}
@@ -61,8 +53,17 @@ switch (m_step)
 }
 void CGame::Draw()
 {
+	
 	CTaskManager::GetInstance()->DrawAll();
 	if (mp_player) {
+		CVector3D p = mp_player->GetPos();
+		mp_img[0]->SetPos(1200.0f / (p.x + 285), 588);
+		mp_img[1]->SetPos(285, 625);
+		mp_img[2]->SetPos(294, 599);
+		mp_img[0]->SetSize(85, 100);
+		mp_img[1]->SetSize(690, 90);
+		mp_img[2]->SetSize(700, 100);
+		mp_img[1]->SetRect(0, 0, 1200.0f / (p.x * 100 + 285), 90);
 		CVector3D m_playerPos = mp_player->GetPos();
 		CVector2D m_screen = CVector2D(m_playerPos.x - 640, 0);
 		if (m_screen.x < 0) m_screen.x = 0;

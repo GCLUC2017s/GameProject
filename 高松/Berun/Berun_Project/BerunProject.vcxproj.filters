@@ -108,9 +108,6 @@
     <ClInclude Include="System\CharaBase\CCharaBase.h">
       <Filter>System\CharaBase</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Tutorial\CTutorial.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Scene\Test\CTest.h">
       <Filter>Scene\Test</Filter>
     </ClInclude>
@@ -122,6 +119,9 @@
     </ClInclude>
     <ClInclude Include="Game\CollisionManager\CollisionManager.h">
       <Filter>Game\CCollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Tutorial\CTutorial.h">
+      <Filter>Scene\Logo</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
