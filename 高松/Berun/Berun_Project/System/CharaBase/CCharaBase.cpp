@@ -84,6 +84,7 @@ void CCharaBase::Animation()
 	{
 		if(m_animLoop) m_animPaternX = 0;
 		else m_animPaternX = mp_eData->animData[m_animPaternY].pattrn - 1;
+		if (m_state == eState_Attack)	m_state = eState_Move;
 	}
 	m_chara->SetRect(mp_eData->texSize.x * m_animPaternX, mp_eData->texSize.y * m_animPaternY, mp_eData->texSize.x * (m_animPaternX + ANIM_REVISION), mp_eData->texSize.y * (m_animPaternY + ANIM_REVISION));
 }
@@ -206,7 +207,7 @@ void CCharaBase::Update()
 		m_gravitySpeed = 0;
 	}
 	//“–‚½‚è”»’è—p‚Ì‹éŒ`‚ðŽæ“¾
-	rect = CRect(m_pos.x + mp_eData->rect.m_left, m_pos.y + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right, m_pos.y + mp_eData->rect.m_bottom);
+	rect = CRect(m_pos.x + mp_eData->rect.m_left, m_pos.z + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right, m_pos.z + mp_eData->rect.m_bottom);
 }
 void CCharaBase::Draw()
 {
