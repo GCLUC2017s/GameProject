@@ -79,6 +79,8 @@ CLoadPlayer::CLoadPlayer()
 	mRunTex[3]->load(TEX_FILE_PLAYER_RUN"beru_run_03.tga");
 	mRunTex[4]->load(TEX_FILE_PLAYER_RUN"beru_run_04.tga");
 	mRunTex[5]->load(TEX_FILE_PLAYER_RUN"beru_run_05.tga");
+	mRunTex[6]->load(TEX_FILE_PLAYER_RUN"beru_run_06.tga");
+	mRunTex[7]->load(TEX_FILE_PLAYER_RUN"beru_run_07.tga");
 	/*’ÊíA*/
 	mNormalAttackTex[0][0]->load(TEX_FILE_PLAYER_NormalATTACK_A"beru_attackA_00.tga");
 	mNormalAttackTex[0][1]->load(TEX_FILE_PLAYER_NormalATTACK_A"beru_attackA_01.tga");

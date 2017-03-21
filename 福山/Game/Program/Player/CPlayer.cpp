@@ -311,7 +311,7 @@ void CPlayer::AnimeScene(){
 		mRect.SetUv(CLoadPlayer::GetInstance()->mWalkTex[mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_RUN_L:
-		AnimeFrame(true, ANIME_TIME_BASE);
+		AnimeFrame(true, ANIME_TIME_BASE,FRAME_LIMIT8);
 		mRect.SetUv(CLoadPlayer::GetInstance()->mRunTex[mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_NORMALATTACK_A_L:
@@ -344,7 +344,7 @@ void CPlayer::AnimeScene(){
 		break;
 	case E_JUMP_L:
 		AnimeFrame(false,ANIME_TIME_JUMP);
-		mRect.SetUv(CLoadPlayer::GetInstance()->mJumpTex[mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
+		mRect.SetUv(CLoadPlayer::GetInstance()->mRunTex[2], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_BRAKE_L:
 		AnimeFrame(false, ANIME_TIME_BRAKE);
@@ -360,7 +360,7 @@ void CPlayer::AnimeScene(){
 		mRect.SetUv(CLoadPlayer::GetInstance()->mWalkTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_RUN_R:
-		AnimeFrame(true, ANIME_TIME_BASE);
+		AnimeFrame(true, ANIME_TIME_BASE,FRAME_LIMIT8);
 		mRect.SetUv(CLoadPlayer::GetInstance()->mRunTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_NORMALATTACK_A_R:
@@ -393,7 +393,7 @@ void CPlayer::AnimeScene(){
 		break;
 	case E_JUMP_R:
 		AnimeFrame(false, ANIME_TIME_JUMP);
-		mRect.SetUv(CLoadPlayer::GetInstance()->mJumpTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
+		mRect.SetUv(CLoadPlayer::GetInstance()->mRunTex[2], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_BRAKE_R:
 		AnimeFrame(false, ANIME_TIME_BRAKE);

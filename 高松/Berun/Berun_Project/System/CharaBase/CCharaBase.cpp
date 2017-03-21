@@ -169,10 +169,6 @@ void CCharaBase::Attack()
 	if (m_charaDirection)	rect = CRect(m_pos.x + mp_eData->rect.m_left - 60, m_pos.z + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right, m_pos.z + mp_eData->rect.m_bottom);
 	else rect = CRect(m_pos.x + mp_eData->rect.m_left, m_pos.z + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right + 60, m_pos.z + mp_eData->rect.m_bottom);
 }
-void CCharaBase::HpBar()
-{
-
-}
 void CCharaBase::Update()
 {
 	
