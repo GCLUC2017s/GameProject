@@ -6,7 +6,7 @@
 #include "../Player/CPlayer.h"
 #include "../MyNumber/CMyNumber.h"
 #define		PL_HITBUCK	player->mAttackPoint*10.0f
-
+#define     ALPHA		 pl->mRect.triangle1.a
 CCollisionManager::CCollisionManager(){};
 CCollisionManager::~CCollisionManager(){};
 
@@ -24,12 +24,7 @@ void CCollisionManager::EnemyAttack(CBase *pl){
 			CBase *ene;
 			ene = (CBase*)task;
 			if (CCollision::Collision(*ene, *pl, ene->mAttackAxis) && ene->mEnabledAttack){
-				/*アラート*/
-				pl->mRect.SetColor(1.0f, 0.2f, 0.2f, 1.0f);
 				pl->mHitPoint -= ene->mAttackPoint;
-			}
-			else{
-				pl->mRect.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 			}
 			break;
 		}
@@ -54,16 +49,11 @@ void CCollisionManager::PlayerAttack(CBase *b){
 				/*ヒットバック*/
 				if (player->mSaveForword.x >= 0){ b->mPos.x += PL_HITBUCK; }		//右向きの場合
 				else{ b->mPos.x -= PL_HITBUCK; }									//左向きの場合
-				/*アラート*/
-				b->mRect.SetColor(1.0f, 0.2f, 0.2f, 1.0f);
 				/*捕食攻撃*/
 				if (b->mHitPoint <= 0 && player->mEnabledEat){
 					player->mStamina += CAL_ENEMY00;
 				}
 			}
-		}
-		else{
-			b->mRect.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 		}
 		break;
 	};

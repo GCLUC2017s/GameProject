@@ -4,7 +4,7 @@
 #define NUM_Y 200		//NUMBERのテクスチャ縦幅
 #define NUM_SX 1000
 #define NUM_SY 200
-#define NUM_FILE "../CG/Game screen/"
+#define NUM_FILE "../CG/GameScreen/"
 
 CStringtexture::CStringtexture(){
 	mPtexture = new CTexture();

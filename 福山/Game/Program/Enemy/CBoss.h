@@ -14,7 +14,7 @@
 #define FLAME_LIMIT 6 //フレーム数の上限
 
 const	 CVector2 Boss_first_pos
-= CVector2(character_limit_left*0.55, (character_limit_top + character_limit_bottom) / 2);	//ボスエネミーの初期位置
+= CVector2(character_limit_right*0.8f, (character_limit_top + character_limit_bottom) / 2);	//ボスエネミーの初期位置
 
 class  CBoss : public CBase
 {
@@ -39,7 +39,6 @@ private:
 	int AnimePattern;
 	int mSaveAnime; //直前のアニメが何か判断用
 	int mFlameCount;		//フレーム数カウント用
-	int mAnime;		//アニメーションのフレーム数
 	
 	int direction;//左右判定
 

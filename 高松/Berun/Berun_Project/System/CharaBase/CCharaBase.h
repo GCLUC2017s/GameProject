@@ -13,6 +13,8 @@
 #define ARRAY_SIZE(a)(sizeof(a)/sizeof(a[0]))
 #define CHARA_MOVE 4
 #define ANIM_REVISION 1
+#define HP_MAX 5
+#define SP_MAX 3
 
 struct T_AnimData {
 	int pattrn;
@@ -80,6 +82,8 @@ protected:
 	ESTATE m_state;
 	CImage *m_chara;
 	CImage *m_enemyHp;
+	CImage *mp_hp[HP_MAX];
+	CImage *mp_sp[SP_MAX];
 	const T_CharacterData  *mp_eData;
 	
 	int m_imgPtn;

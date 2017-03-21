@@ -1,0 +1,16 @@
+(BGM)甘茶の音楽工房(タイトル)はじめてのお菓子作り	(用途)BGM
+http://amachamusic.chagasi.com/music_hajimetenookashidukuri.html
+[名前]BGM
+
+
+(SE)Music is VFR(タイトル)斬る01			(用途)beruの通常攻撃が当たったとき
+http://musicisvfr.com/free/se/cut01.html
+[名前]SECut
+
+(SE)効果音ラボ(タイトル)剣の素振り1		        (用途)通常攻撃の空振り時	
+http://soundeffect-lab.info/sound/battle/
+[名前]SwingMiss
+
+(SE)魔王魂(タイトル)戦闘12				(用途)敵の攻撃
+http://maoudamashii.jokersounds.com/core.cgi?page=1&field=%E5%8A%B9%E6%9E%9C%E9%9F%B3%E7%B4%A0%E6%9D%90%3C%3E%E6%88%A6%E9%97%98
+[名前]SEEnemy

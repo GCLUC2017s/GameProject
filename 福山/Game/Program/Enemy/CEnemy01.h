@@ -45,7 +45,6 @@ private:
 	int motion;
 	int pattern;
 	void Fly();
-	void SetPos();
 	void AnimeScene();
 
 public:

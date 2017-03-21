@@ -1,6 +1,6 @@
 /*
 キャラクターのベースクラス
-担当者　冨田健斗　&& 
+担当者　冨田健斗
 */
 #ifndef BASE_HPP
 #define BASE_HPP
@@ -17,8 +17,8 @@
 #define CAL_ENEMY00	2  //エネミーのカロリー
 #define CAL_ENEMY01 3
 #define CAL_BOSS	100
-#define SIZE_SHADOW_X 0.4f						//影のサイズX
-#define SIZE_SHADOW_Y 0.4f						//影のサイズY
+#define SIZE_SHADOW_X *mRect.mRRight*0.8f						//影のサイズX
+#define SIZE_SHADOW_Y *mRect.mRLeft	*0.5f					//影のサイズY
 #define SHADOW_TEX_X			70.f				//影のテクスチャのX
 #define SHADOW_TEX_Y			20.f				//影のテクスチャのY
 
@@ -27,14 +27,13 @@
 #define PL_ST_X 2.0f //ゲージx
 #define PL_ST_Y 0.15f//ゲージy
 
-
-#define SIZE_PL_FRAME_X 2.2f //フレームＸ
-#define SIZE_PL_FRAME_Y 0.2f //フレームY			
+#define SIZE_PL_FRAME_X PL_HP_X //フレームＸ
+#define SIZE_PL_FRAME_Y 0.2f  //フレームY			
 
 #define ENE_HP_X 2.0f			//エネミーgauge　(初期値)
 #define ENE_HP_Y 0.2f			//エネミーgauge
 
-#define SIZE_EN_FRAME_X 2.0f			//エネミーのフレーム
+#define SIZE_EN_FRAME_X ENE_HP_X*0.8			//エネミーのフレーム
 #define SIZE_EN_FRAME_Y 0.15f			//エネミーのフレーム
 
 #define SIZE_BOSS_FRAME_X	2.0f		
@@ -80,8 +79,14 @@ CBase を継承するものには必ず入れること
 
 class CBase : public CTask{
 private:
+
 	float mFrameTime;				//bool 関数	 FrameTie計算用
 	int mFrameCount;				//現在のフレーム数
+	/*アラート関数用*/
+	float mSaveAlertHitoPoint;		//アラート用
+	float mAlertCount;				//アラートカウント
+	bool FlagAlertSetHp;			//アラートHPの初期設定用
+
 public:
 	CTexture	*mShadowTex;		//影テクスチャチャ
 	CVector2 mPos;					//位置
@@ -110,15 +115,17 @@ public:
 
 	CVector2 mTargetP;  //プレイヤーポジションの取得用
 	
-	CBase() : mEnabledEat(false), mAxis(0), mHitPoint(0), mEnabledAttack(false), mAttackPoint(0.01f),mEnabledPoint(false){
+	CBase() : mEnabledEat(false), mAxis(0), mHitPoint(0), mEnabledAttack(false), mAttackPoint(0.01f), mEnabledPoint(false), FlagAlertSetHp(false){
 		mCharaFlag = true;
 		mShadow.SetColor(0.5f, 0.5f, 0.5f, 0.7f);
 		kazu += 1;
 		srand(time(NULL));
 	}
 
-	/*アニメのフレーム数計算用  roopがtrueならループする speed = RoopのSpeed*/
+	/*アニメのフレーム数計算用  roopがtrueならループする speed = RoopのSpeed Frame = フレーム数*/
 	void AnimeFrame(bool roop, int speed);
+	/*オーダーが入ったので追加*/
+	void AnimeFrame(bool roop, int speed,int frame);
 	/*使い方 sizex,sizeyに画像のサイズを入れる*/
 	void LimitDisp(int sizex, int sizey);
 	/*
@@ -132,6 +139,8 @@ public:
 	void Attack(float Forword, float x, float y,float mAxis, CVector2 &mPos);
 	bool FrameTime(float time);
 	void RandPos(int x, int y, CVector2 *mPos);		//ポジションをランダムにする	サイズをx,yに当てはめる
+	/*HPによるアラート関数*/
+	void AlertHPRect(CRectangle *rect,float &Hp);
 
 };
 #endif

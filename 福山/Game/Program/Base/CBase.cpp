@@ -25,6 +25,31 @@ void CBase::AnimeFrame(bool roop, int speed){
 
 	mSaveAnime = mStatus;
 }
+
+void CBase::AnimeFrame(bool roop, int speed,int frame){
+	if (roop){
+		mFrameCount++;
+		if (mFrameCount % speed == 0){
+			mAnimeFrame++;
+
+		}
+		if (mAnimeFrame >= frame || mSaveAnime != mStatus){
+			mAnimeFrame = 0;
+		}
+	}
+	else{
+		mFrameCount++;
+		if (mFrameCount % speed == 0){
+			mAnimeFrame++;
+		}
+		if (mAnimeFrame >= frame){
+			mAnimeFrame = frame - 1; //テクスチャの最大値 = FRAME_LIMITなので ー１
+		}
+	}
+
+	mSaveAnime = mStatus;
+}
+
 void CBase::LimitDisp(int sizex, int sizey){
 	/*あたり判定*/
 	if (mAxis > character_limit_top - sizey && !mEnabledJump){  //マップ外に出ると元の位置に戻す(軸)
@@ -56,10 +81,14 @@ float x , y , mAxis は攻撃範囲 ,Cvector2は　自分のposを入れる
 */
 
 void CBase::Attack(float Forword, float x, float y, float Axis, CVector2 &mPos){
-	mAttackRange.SetVertex(-x, y, x, -y);
-	mAttackRange.SetColor(1.0f, 1.0f, 0.0f, 1.0f); //デバッグ用
-	if (Forword > 0)mAttackRange.position = CVector2(mPos.x + 1 + x, mPos.y);
-	if (Forword <= 0)mAttackRange.position = CVector2(mPos.x - 1 - x, mPos.y);
+	mAttackRange.SetVertex(x, y, -x, -y);
+	mAttackRange.SetColor(1.0f, 1.0f, 1.0f, 1.0f);			 //デバッグ用
+	if (Forword >= 0){											//右
+		mAttackRange.position = CVector2(mPos.x+ x, mPos.y);
+	}
+	else{														//左
+		mAttackRange.position = CVector2(mPos.x- x, mPos.y);
+	}
 	mAttackAxis = Axis;
 }
 /*時間計算用
@@ -94,23 +123,7 @@ bool CBase::FrameTime(float t){
 	}
 	
 }
-/*シングルか判断*/
-bool SinglePos(CVector2 pos){
-	CTask *t;
-	t = CTaskManager::GetInstance()->mRoot;
 
-	while (t != 0){
-		CBase *b = (CBase*)t;
-		if (b->mCharaFlag && pos.x == b->mPos.x && pos.y == b->mPos.y){ //ポスが同じ場合
-			return false;						//シングル×
-		}
-		t = t->next;
-	}
-	if (t == 0){ //ここまででシングルだった場合
-		return true;			//シングル○
-	}
-	return false;
-}
 
 /*
 [使い方]
@@ -120,13 +133,37 @@ bool SinglePos(CVector2 pos){
 void CBase::RandPos(int x,int y,CVector2 *mPos){
 	while (true)
 	{
-		mPos->x = (rand()-rand())%(int)(character_limit_left+character_limit_right)/2;
-		mPos->y = (rand() - rand())%(int)(character_limit_top + character_limit_bottom) / 2;
+		mPos->x = (rand() - rand()) % (int)(character_limit_left + character_limit_right);
+		mPos->y = (rand() - rand()) % (int)(character_limit_top + character_limit_bottom);
+
 		mAxis = mPos->y - y;
 		LimitDisp(mPos->x, mPos->y);
-		if (SinglePos(*mPos)){ 
+
+		if (mPos->x != 0 || mPos->y != 0){
 			break;
 		}
 	}
 }
 int CBase::kazu = 0;
+
+/*ＨＰが減ったとき赤色の表示*/
+/*関数で使う一覧*/
+const float mAlertMax = 10.0f;								//赤色に表示しておく時間
+#define SET_ALERT_COLLAR		1.0f, 0.4f, 0.4f, 1.0f	//アラートカラー設定
+/*ＨＰが減ったとき赤色の表示関数*/
+void CBase::AlertHPRect(CRectangle *rect, float &hp){
+	if (!FlagAlertSetHp){				//HP初期設定
+		mSaveAlertHitoPoint = hp;
+		FlagAlertSetHp = true;
+	}
+	if (mSaveAlertHitoPoint != hp){		//HPが減ったとき
+		rect->SetColor(SET_ALERT_COLLAR);
+		if (mAlertCount >= mAlertMax){ //元に戻すまでのINTERVAL
+			mSaveAlertHitoPoint = hp;
+			rect->SetColor(1.0f,1.0f,1.0f,1.0f);
+			mAlertCount = 0;
+		}
+		mAlertCount++;
+	}
+
+}

@@ -12,7 +12,7 @@
 #include "../CScene.h"
 #include "../Game/Item/CItem.h"
 
-#define RESULT_IMAGE_MAX 13
+#define RESULT_IMAGE_MAX 29
 #define ITEM_TYPE_MAX 16
 
 enum E_ResultData
@@ -30,6 +30,22 @@ enum E_ResultData
 	eCraft,
 	eItemselect,
 	eResultTitle,
+	eItem1,
+	eItem2,
+	eItem3,
+	eItem4,
+	eItem5,
+	eItem6,
+	eItem7,
+	eItem8,
+	eItem9,
+	eItem10,
+	eItem11,
+	eItem12,
+	eItem13,
+	eItem14,
+	eItem15,
+	eItem16,
 	eMax,
 };
 
@@ -71,9 +87,10 @@ private:
 	T_ResultData  *mp_data;
 	float m_xSize;
 	float m_ySize;
-	int m_step;
-	int m_corsol;
+	int	  m_step;
+	int   m_corsol;
 	//int m_select;
+	char  m_str[64];
 public:
 	CResult();
 	~CResult();
