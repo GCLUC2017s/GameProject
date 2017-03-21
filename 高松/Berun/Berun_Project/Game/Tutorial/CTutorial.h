@@ -7,7 +7,7 @@
 #ifndef TUTORIAL_GUARD
 #define TUTORIAL_GUARD
 
-#include "../System/TaskSystem/CTask.h"
+#include "TaskSystem/CTask.h"
 #include "CImage.h"
 #include "../Global.h"
 

@@ -1,9 +1,9 @@
 #include "CGame.h"
 #include "CPlayer/CPlayer.h"
-#include "../Game/Tutorial/CTutorial.h"
-#include "../Game/Map/CMap.h"
-#include "../Game/Enemy/CEnemy.h"
-#include "../Game/CollisionA/CCollisionA.h"
+#include "Tutorial/CTutorial.h"
+#include "Map/CMap.h"
+#include "Enemy/CEnemy.h"
+#include "CollisionA/CCollisionA.h"
 #include "../Scene/CSceneManager.h"
 
 CGame::CGame() : mp_player(nullptr),m_step(0)
@@ -75,10 +75,6 @@ void CGame::Draw()
 
 	if (mp_player)
 	{
-		for (int i = 0; i < IMG_ARRAY; i++)
-		{
-			mp_img[i]->Draw();
-		}
+		for (int i = 0; i < IMG_ARRAY; i++) mp_img[i]->Draw();
 	}
-	
 }

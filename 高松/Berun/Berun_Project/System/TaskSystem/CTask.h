@@ -6,7 +6,7 @@
 
 #ifndef TASK_GUARD
 #define TASK_GUARD
-
+//XV‡˜
 enum E_UpdatePrio
 {
 	eUDP_Player,
@@ -15,7 +15,7 @@ enum E_UpdatePrio
 	eUDP_Map,
 	eUDP_Null,
 };
-
+//•`‰æ‡˜
 enum E_DrawPrio
 {
 	eDWP_Map,

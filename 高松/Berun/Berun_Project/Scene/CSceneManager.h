@@ -1,7 +1,6 @@
 /**
 * @file		CSceneManager.h
 * @brief	シーン管理クラス
-*
 * @author	yuki yamaji
 */
 
@@ -10,14 +9,6 @@
 
 #include "CScene.h"
 #include "CSceneChangeAnimation.h"
-#include "CCamera.h"
-#include "Logo/CLogo.h"
-#include "Title/CTitle.h"
-#include "CharaSelect/CCharaSelect.h"
-#include "../Game/CGame.h"
-#include "../System/TaskSystem/CTaskManager.h"
-#include "Test/CTest.h"
-#include "Result\CResult.h" 
 
 enum E_Scene
 {
@@ -26,7 +17,6 @@ enum E_Scene
 	eCharaSelect,	//キャラセレクトシーン
 	eGame,			//ゲームシーン
 	eResult,		//リザルトシーン
-	eTest,
 	eNone,			//シーン無し
 };
 

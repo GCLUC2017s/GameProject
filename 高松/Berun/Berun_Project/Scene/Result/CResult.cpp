@@ -1,5 +1,6 @@
 #include "CResult.h"
 #include "../Scene/CSceneManager.h"
+#include "../Global.h"
 
 static CFont *font = nullptr;
 

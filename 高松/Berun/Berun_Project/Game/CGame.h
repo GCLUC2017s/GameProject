@@ -8,7 +8,7 @@
 #define GAME_GUARD
 #define IMG_ARRAY 3
 
-#include "../Scene/CScene.h"
+#include "CScene.h"
 #include "CImage.h"
 
 //クラスのプロトタイプ宣言

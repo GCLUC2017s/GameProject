@@ -8,6 +8,7 @@
 #define TASKMANAGER_GUARD
 
 #include "CTask.h"
+//クラスのプロトタイプ宣言
 class CPlayer;
 
 class CTaskManager

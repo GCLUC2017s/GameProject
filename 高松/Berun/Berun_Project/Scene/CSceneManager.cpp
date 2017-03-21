@@ -1,4 +1,9 @@
 #include "CSceneManager.h"
+#include "Logo/CLogo.h"
+#include "Title/CTitle.h"
+#include "CharaSelect/CCharaSelect.h"
+#include "../Game/CGame.h"
+#include "Result/CResult.h" 
 
 CSceneManager* CSceneManager::mp_sceneManager = nullptr;
 
@@ -9,6 +14,7 @@ CSceneManager::CSceneManager() :
 	m_inCnt(0),
 	m_inTime(0),
 	m_sceneNum(eNone),
+	m_nextNum(eNone),
 	mp_scene(nullptr)
 {
 	ChangeScene(eLogo);
@@ -67,9 +73,6 @@ void CSceneManager::ChangeScene(E_Scene scene)
 
 	switch(m_sceneNum)
 	{
-	case eTest:
-		mp_scene = new CTest();
-		break;
 	case eLogo:
 		mp_scene = new CLogo();
 		break;
