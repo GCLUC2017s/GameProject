@@ -34,6 +34,7 @@ struct T_CharacterData {
 	int exp;		//必要経験値
 	float speed;	//移動速度
 	float jump;		//ジャンプ力
+	int charaType;	//キャラのタイプ
 	SVector2D size;
 	T_AnimData *animData;
 	SVector2D texSize;
@@ -61,7 +62,7 @@ enum {
 	eCharacterMax
 };
 
-class CCharaBase : public CBase
+class CCharaBase : public CBase, public CCollisionA
 {
 protected:
 	enum ESTATE{
@@ -116,6 +117,10 @@ protected:
 	int m_animCounter;
 	//ダッシュする時のスピード
 	int m_dashSpeed;
+	//ダメージを受けているかどうかを格納する変数
+	bool m_damage;
+	//ダメージを受けた後の無敵時間を格納する変数
+	//float m_damage;
 	CVector3D m_oldPos;
 
 	unsigned int m_anim;
@@ -131,16 +136,20 @@ protected:
 	//ジャンプ中かどうかを格納する変数(false = No,true = Yes)
 	bool m_jumpFlag;
 	bool m_attack;
-	virtual void Key();
+	void ResetKey();
+	virtual void Contlol();
 	void Move();
 	void Jump();
 	void Attack();
 public:
-	CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio);
+	CCharaBase(int type, int id, unsigned int updatePrio, unsigned int drawPrio);
 	~CCharaBase();
 	void Animation();
 	void ChangeAnimation(EANIM type,bool loop);
 	void Update();
-	virtual void Draw();
+	virtual void Draw(); 
+	virtual void HitCallBack(CCollisionA * p);
+	bool CheckHit(CCollisionA *t);
+	void Damage();
 };
 #endif

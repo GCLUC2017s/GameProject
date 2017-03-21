@@ -32,11 +32,12 @@ protected:
 	//符号無しの整数型	
 	unsigned int m_updatePrio;	    //更新優先順位格納
 	unsigned int m_drawPrio;		//描画優先順位格納
+	int m_id;
 	CTask *mp_prev;					//前のアドレスを格納するポインタ
 	CTask *mp_next;					//次のアドレスを格納するポインタ
 public:
 	CTask();						//CTaskクラスのコンストラクタ
-	CTask(unsigned int updateprio, unsigned int drawPrio);
+	CTask(int id, unsigned int updateprio, unsigned int drawPrio);
 	virtual ~CTask();				//CTaskクラスのデストラクタ
 	virtual void Update();			//派生先クラスでの更新を行う関数
 	virtual void Draw();			//派生先クラスでの描写を行う関数

@@ -15,7 +15,7 @@ const static T_MapData g_mapDataBack[]{
 
 
 
-CMap::CMap(E_Stage type) : CBase(eUDP_Map, eDWP_Map) {
+CMap::CMap(E_Stage type) : CBase(eMap,eUDP_Map, eDWP_Map) {
 
 	m_mapTime = 0;
 	for (int i = 0; i < MAP_DATA; i++) {
@@ -31,10 +31,8 @@ CMap::CMap(E_Stage type) : CBase(eUDP_Map, eDWP_Map) {
 	m_newstage = static_cast<E_Stage>(m_stage + 1);
 	m_pos = CVector3D(0, 0, 0);
 	m_cont = 0;
-	CSound::GetInstance()->GetSound("AREA_M_BGM")->Play(true);
 }
 CMap::~CMap() {
-	CSound::GetInstance()->GetSound("AREA_M_BGM")->Stop();
 	//ポインタの場合はデストラクトを作る
 	//ポインタじゃなかったら自動的に呼ばれる
 }

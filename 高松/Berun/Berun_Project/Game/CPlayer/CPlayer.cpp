@@ -1,11 +1,13 @@
 #include "CPlayer.h"
 
-CPlayer::CPlayer(int type) : CCharaBase(type, eUDP_Player,eDWP_Player)
+CPlayer* CPlayer::mp_player=nullptr;
+CPlayer::CPlayer(int type) : CCharaBase(type, ePlayer, eUDP_Player,eDWP_Player)
 
 {
 	m_pos = CVector3D(100, 0, 400);
 	mp_hp = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("HP"));
 	mp_sp = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("SP"));
+	mp_player = this;
 }
 CPlayer::~CPlayer()
 {
@@ -29,8 +31,8 @@ void CPlayer::Draw()
 	}
 }
 
-void CPlayer::Key() {
-	CCharaBase::Key();
+void CPlayer::Contlol() {
+	CCharaBase::ResetKey();
 	//以下、上下左右のキーを入力すればそれに応じてフラグが切り替わる
 	if (HOLD_KEY_UP)	m_up = true;
 	if (HOLD_KEY_DOWN)	m_down = true;
@@ -49,9 +51,4 @@ void CPlayer::Key() {
 	//スペースキーを入力したら、状態をジャンプにする処理
 	if (PUSH_KEY_SPASE)		m_jump = true;
 	if (PUSH_KEY_ENTER)		m_attack = true;
-}
-
-void CPlayer::HitCallBack(CCollisionA * p)
-{
-	printf("当たりました。\n");
 }

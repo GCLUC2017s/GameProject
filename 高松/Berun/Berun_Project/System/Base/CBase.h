@@ -12,9 +12,15 @@
 #include "../System/TaskSystem/CTask.h"
 #include "../Game/CollisionA/CCollisionA.h"
 
+enum E_Id 
+{
+	ePlayer,
+	eEnemy,
+	eMap,
+	eIdMax,
+};
 
-
-class CBase : public CTask, public CCollisionA
+class CBase : public CTask
 {
 protected:
 	//èdóÕóéâ∫ë¨ìx
@@ -37,11 +43,9 @@ public:
 	}
 
 	CBase();
-	CBase(unsigned int updatePrio, unsigned int drawPrio);
+	CBase(int id, unsigned int updatePrio, unsigned int drawPrio);
 	~CBase();
-	virtual void HitCallBack(CCollisionA * p);
-
-	bool CheckHit(CCollisionA *t);
+	
 	CVector2D GetScreenPos();
 	CVector2D GetScreenPos(CVector3D pos);
 	CVector3D GetPos() {
@@ -51,5 +55,6 @@ public:
 	{
 		return rect;
 	}
-	friend class  CCollisionA;};
+	friend class  CCollisionA;
+};
 #endif

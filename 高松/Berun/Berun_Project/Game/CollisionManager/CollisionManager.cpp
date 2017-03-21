@@ -62,7 +62,8 @@ void CCollisionManager::CheckHitAll()
 		CCollisionA *q = p->mp_next;
 		while (q)
 		{
-			p->CheckHit(q);
+			//pとqのタイプが違う時のみ当たり判定を行う処理
+			if(p->m_type != q->m_type)	p->CheckHit(q);
 			q = q->mp_next;
 		}
 		p = p->mp_next;

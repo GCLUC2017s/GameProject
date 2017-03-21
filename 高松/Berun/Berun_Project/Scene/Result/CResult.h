@@ -7,14 +7,15 @@
 #ifndef RESULT_GUARD
 #define RESULT_GUARD
 
-#include "../GLLibrary/CImage.h"
-#include "../Global.h"
+#include "CImage.h"
 #include "../CScene.h"
 #include "../Game/Item/CItem.h"
 
 #define RESULT_IMAGE_MAX 29
 #define ITEM_TYPE_MAX 16
+#define BAG_MAX 5
 
+//画像データ
 enum E_ResultData
 {
 	eResultBackGround,
@@ -27,8 +28,11 @@ enum E_ResultData
 	eSelect,
 	eItem,
 	eArrow,
-	eCraft,
 	eItemselect,
+
+	eSelectStart,
+
+	eCraft = eSelectStart,
 	eResultTitle,
 	eItem1,
 	eItem2,
@@ -46,9 +50,12 @@ enum E_ResultData
 	eItem14,
 	eItem15,
 	eItem16,
-	eMax,
-};
 
+	eSelectEnd,
+
+	eMax = eSelectEnd,
+};
+//選択データ
 enum E_SelectData
 {
 	eSelectTitle,
@@ -84,18 +91,17 @@ class CResult : public CScene
 private:
 	CImage *mp_img[RESULT_IMAGE_MAX];
 	CVector2D m_pos;
-	T_ResultData  *mp_data;
-	float m_xSize;
-	float m_ySize;
-	int	  m_step;
-	int   m_corsol;
-	//int m_select;
-	char  m_str[64];
+	float  m_xSize;
+	float  m_ySize;
+	int    m_corsol;
+	//E_Item m_box[BAG_MAX];
 public:
 	CResult();
 	~CResult();
 	void Update();
 	void Draw();
+	void DarkenColor();
+	//void SelectItem(int box,E_Item &item);
 };
 
 #endif
