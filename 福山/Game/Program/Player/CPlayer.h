@@ -42,7 +42,7 @@ private:
 		E_EX02_R, E_FLAME_R,
 		E_JUMP_R, E_BRAKE_R,
 
-
+		ANIMECOUNTMAX//ç≈å„Ç…ïKÇ∏èëÇ≠
 
 	};
 
