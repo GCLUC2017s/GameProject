@@ -83,6 +83,7 @@ void CCharaBase::Animation()
 	{
 		if(m_animLoop) m_animPaternX = 0;
 		else m_animPaternX = mp_eData->animData[m_animPaternY].pattrn - 1;
+		if (m_state == eState_Attack)	m_state = eState_Move;
 	}
 	m_chara->SetRect(mp_eData->texSize.x * m_animPaternX, mp_eData->texSize.y * m_animPaternY, mp_eData->texSize.x * (m_animPaternX + ANIM_REVISION), mp_eData->texSize.y * (m_animPaternY + ANIM_REVISION));
 }
