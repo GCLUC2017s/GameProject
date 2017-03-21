@@ -106,7 +106,16 @@ void CBoss::AnimeScene(){
 		break;
 	case E_WALK_R:
 		AnimeFrame(true, ANIME_TIME_BASE);
+<<<<<<< HEAD
 			mRect.SetUv(CLoadBoss::GetInstance()->mWalk_tex[mAnimeFrame], 0, 0, SIZE_TEX_BOSS_WALK_X, SIZE_TEX_BOSS_WALK_Y);
+=======
+		if (motion != EM_BACK_X){//バックステップ×
+			mRect.SetUv(CLoadBoss::GetInstance()->mWalk_tex[mAnimeFrame], 0, 0, SIZE_TEX_BOSS_WALK_X, SIZE_TEX_BOSS_WALK_Y);//左向き
+		}
+		else{//バックステップ○			
+			mRect.SetUv(CLoadBoss::GetInstance()->mWalk_tex[mAnimeFrame], SIZE_TEX_BOSS_WALK_X, 0, 0, SIZE_TEX_BOSS_WALK_Y);//右向き
+		}
+>>>>>>> 97d02c8f7767f6aa041da256200778deabdb8b61
 		break;
 		/*攻撃*/
 	case E_ATTACK_L:

@@ -19,12 +19,10 @@ private:
 	CRectangle mRectClearLogo;
 	CRectangle mRectLogo[LOGO_MAX];
 	CRectangle mRectFilter;
-	CRectangle mRectGameOver;
 
 	CTexture *mEvaluationT;
 	CTexture *mLogoTex[LOGO_MAX];
 	CTexture *mClearLoagoT;
-	CTexture *mGameOverLogoT;
 	CTexture *mFilterTex;
 
 
@@ -34,10 +32,8 @@ private:
 	int mKillPolint;			//倒した数のポイント
 	int mTimePoint;				//時間によるPOINT
 	bool mFlagRect;				
-	bool mFlagDie;
 	bool *mFlagEval;			//評価フラグ管理
 	void SABC(int i);
-	void Die(int i);
 	bool FlagCrectA(const CRectangle &rect); //
 
 public:

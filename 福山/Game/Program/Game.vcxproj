@@ -14,6 +14,7 @@
     <ClCompile Include="Base\CBase.cpp" />
     <ClCompile Include="Camera\CCamera.cpp" />
     <ClCompile Include="CGame\CGame.cpp" />
+    <ClCompile Include="Clear\CClear.cpp" />
     <ClCompile Include="Collision\CCollision.cpp" />
     <ClCompile Include="Collision\CCollisionManager.cpp" />
     <ClCompile Include="Enemy\CBoss.cpp" />
@@ -31,7 +32,6 @@
     <ClCompile Include="Main\main.cpp" />
     <ClCompile Include="Map\CMap.cpp" />
     <ClCompile Include="Player\CPlayer.cpp" />
-    <ClCompile Include="Result\CResult.cpp" />
     <ClCompile Include="SceneManager\CSceneManager.cpp" />
     <ClCompile Include="Task\CTaskManager.cpp" />
     <ClCompile Include="Title\CTitle.cpp" />
@@ -43,6 +43,7 @@
     <ClInclude Include="Base\CBase.h" />
     <ClInclude Include="Camera\CCamera.h" />
     <ClInclude Include="CGame\CGame.h" />
+    <ClInclude Include="Clear\CClear.h" />
     <ClInclude Include="Collision\CCollision.h" />
     <ClInclude Include="Collision\CCollisionmanager.h" />
     <ClInclude Include="Define\define.h" />
@@ -64,7 +65,6 @@
     <ClInclude Include="Map\CMap.h" />
     <ClInclude Include="MyNumber\CMyNumber.h" />
     <ClInclude Include="Player\CPlayer.h" />
-    <ClInclude Include="Result\CResult.h" />
     <ClInclude Include="SceneManager\CSceneManager.h" />
     <ClInclude Include="Scene\CScene.h" />
     <ClInclude Include="Task\CTask.h" />
@@ -116,7 +116,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>lib</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -130,7 +130,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>lib</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

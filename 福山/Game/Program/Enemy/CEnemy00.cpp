@@ -113,7 +113,57 @@ void CEnemy00::AnimeScene(){
 	}
 }
 
+<<<<<<< HEAD
 void CEnemy00::Motion(){
+=======
+void CEnemy00::Walk(){
+
+	//（ターゲットが右にいる場合）
+	if (RIGHT_PTT) {
+		direction = 0;
+		mStatus = E_WALK_R;
+		mVelocity = WALK_SPEED;
+		mForward = CVector2(WALK_X, 0.0f);
+		mPos += mForward * mVelocity;
+	}
+	
+	//（ターゲットが左にいる場合）
+	if (LEFT_PTT) {
+		direction = 1;
+		mStatus = E_WALK_L;
+		mVelocity = WALK_SPEED;
+		mForward = CVector2(-WALK_X, 0.0f);
+		mPos += mForward * mVelocity;
+	}
+
+
+	//（ターゲットが上にいる場合）
+	if ((CGame::GetPlayerAxis() + CGame::mGetPlayerPos().y) / 2 > mAxis) {
+		mVelocity = WALK_SPEED;
+		mForward = CVector2(0.0f, WALK_Y);
+		mPos += mForward * mVelocity;
+		mAxis += mForward.y * mVelocity;
+
+	}
+
+	//（ターゲットが下にいる場合）
+	if ((CGame::GetPlayerAxis() + CGame::mGetPlayerPos().y) / 2 < mAxis) {
+		mVelocity = WALK_SPEED;
+		mForward = CVector2(0.0f, -WALK_Y);
+		mPos += mForward * mVelocity;
+		mAxis += mForward.y * mVelocity;
+	}
+
+
+}
+
+void CEnemy00::Update(){
+	assert(mAnimeFrame <= FLAME_LIMIT); //フレーム数が七を超えるとダメ
+	
+	mRect.position = mPos;
+	//mTargetPをplayerにする
+	InitRand();
+>>>>>>> 97d02c8f7767f6aa041da256200778deabdb8b61
 
 
 

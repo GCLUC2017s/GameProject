@@ -5,13 +5,13 @@
 #include "../Graphic/CRectangle.h"
 #include <stdio.h>
 #include "../Base/CBase.h"
-#define	TREE_NUM 10
+
 
 class CMap :public CTask{
 private:
 	CRectangle mGround;			//”wŒi‚Ì’n–Ê
 	CRectangle mSky;		//‹ó
-	CRectangle mTree[TREE_NUM];		//–Ø
+	CRectangle mTree;		//–Ø
 
 	CTexture *mGroundTex; //”wŒi‚ÌƒeƒNƒXƒ`ƒƒ
 	CTexture *mSkyTex;

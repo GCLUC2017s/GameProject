@@ -3,7 +3,7 @@
 CPlayer::CPlayer(int type) : CCharaBase(type, eUDP_Player,eDWP_Player)
 
 {
-	m_pos = CVector3D(0, 0, 0);
+	m_pos = CVector3D(100, 0, 400);
 	mp_hp = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("HP"));
 	mp_sp = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("SP"));
 }
@@ -51,3 +51,7 @@ void CPlayer::Key() {
 	if (PUSH_KEY_ENTER)		m_attack = true;
 }
 
+void CPlayer::HitCallBack(CCollisionA * p)
+{
+	printf("ìñÇΩÇËÇ‹ÇµÇΩÅB\n");
+}
