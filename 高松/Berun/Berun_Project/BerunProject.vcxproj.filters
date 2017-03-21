@@ -78,9 +78,6 @@
     <ClInclude Include="Scene\CharaSelect\CCharaSelect.h">
       <Filter>Scene\CharaSelect</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\CScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Scene\CSceneChangeAnimation.h">
       <Filter>Scene</Filter>
     </ClInclude>
@@ -116,6 +113,9 @@
     </ClInclude>
     <ClInclude Include="Game\CollisionA\CCollisionA.h">
       <Filter>Game\CCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\CScene.h">
+      <Filter>Scene\Title</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
