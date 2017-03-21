@@ -39,6 +39,8 @@ T_AnimData _chicntAnimData[] = {
 	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,1,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 150,180 },CRect(-180,-180,180,0),eItemMax },
 	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	{ "Chick",3,5,0,0,0,0,0,0,0,1,0,0,{ 160,160 } ,_chicntAnimData,{ 225,225 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,{ 160,160 } ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,{ 160,160 } ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	//{ "Pig",4,5,0,0,0,0,0,0,0,1,0,0,{ 160,160 } ,_chicntAnimData,{ 225,225 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 
 	//{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
