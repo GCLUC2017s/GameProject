@@ -1,7 +1,7 @@
 #include "CPlayer.h"
 
 CPlayer* CPlayer::mp_player=nullptr;
-CPlayer::CPlayer(int type) : CCharaBase(type, eUDP_Player,eDWP_Player)
+CPlayer::CPlayer(int type) : CCharaBase(type, ePlayer, eUDP_Player,eDWP_Player)
 
 {
 	m_pos = CVector3D(100, 0, 400);

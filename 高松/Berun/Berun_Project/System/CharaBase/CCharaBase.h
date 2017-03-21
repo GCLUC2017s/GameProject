@@ -142,7 +142,7 @@ protected:
 	void Jump();
 	void Attack();
 public:
-	CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio);
+	CCharaBase(int type, int id, unsigned int updatePrio, unsigned int drawPrio);
 	~CCharaBase();
 	void Animation();
 	void ChangeAnimation(EANIM type,bool loop);

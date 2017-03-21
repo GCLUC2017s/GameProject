@@ -36,7 +36,7 @@ T_AnimData _carrotAnimData[] = {
 };
 
 //static_assert (ARRAY_SIZE(g_characterData) == eCharacterMax,"g_characterDataSizeError");
-CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio) : CBase(updatePrio, drawPrio)
+CCharaBase::CCharaBase(int type, int id, unsigned int updatePrio, unsigned int drawPrio) : CBase(id,updatePrio, drawPrio)
 {
 	m_state = eState_Move;
 	mp_eData = &g_characterData[type];

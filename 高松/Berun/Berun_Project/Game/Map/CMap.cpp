@@ -15,7 +15,7 @@ const static T_MapData g_mapDataBack[]{
 
 
 
-CMap::CMap(E_Stage type) : CBase(eUDP_Map, eDWP_Map) {
+CMap::CMap(E_Stage type) : CBase(eMap,eUDP_Map, eDWP_Map) {
 
 	m_mapTime = 0;
 	for (int i = 0; i < MAP_DATA; i++) {

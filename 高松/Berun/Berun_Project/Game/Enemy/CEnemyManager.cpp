@@ -6,7 +6,7 @@
 
 
 
-CEnemyManager::CEnemyManager():CTask(0,0) {
+CEnemyManager::CEnemyManager():CTask(0,0,0) {
 	m_enemyCont = 0;
 	m_enemy = 0;
 	mp_player = CPlayer::mp_player;

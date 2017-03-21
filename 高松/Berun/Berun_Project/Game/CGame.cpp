@@ -7,6 +7,8 @@
 #include "../Scene/CSceneManager.h"
 #include"../Game/Enemy/CEnemyManager.h"
 
+CGame* CGame::mp_game = nullptr;
+
 CGame::CGame() : mp_player(nullptr),m_step(0)
 {
 	mp_img[0] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Pos"));
@@ -58,7 +60,7 @@ switch (m_step)
 		break;
 	}
 	CCollisionManager::GetInstance()->UnRegistAll();
-CTaskManager::GetInstance()->DestroyAppoint();
+	CTaskManager::GetInstance()->DestroyAppoint();
 	CTaskManager::GetInstance()->UpdateAll();
 	CCollisionManager::GetInstance()->CheckHitAll();
 }
@@ -81,4 +83,19 @@ void CGame::Draw()
 			mp_img[i]->Draw();
 		}
 	}
+}
+
+CGame * CGame::GetInstance()
+{
+	if (mp_game == nullptr)
+	{
+		mp_game = new CGame();
+	}
+
+	return mp_game;
+}
+
+void CGame::ClearInstance()
+{
+	if (mp_game != nullptr) delete mp_game;
 }

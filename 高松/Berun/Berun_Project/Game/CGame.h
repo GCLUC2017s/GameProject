@@ -21,6 +21,7 @@ class CEnemy;
 class CGame : public CScene
 {
 private:
+	static CGame* mp_game;
 	CMap	  *mp_map;
 	CTutorial *mp_tutorial;
 	CPlayer	  *mp_player;
@@ -33,6 +34,9 @@ public:
 	~CGame();
 	void Update();
 	void Draw();
+	static CGame* GetInstance();
+	//Ši”[‚³‚ê‚Ä‚¢‚é‚à‚Ì‚ğíœ
+	static void ClearInstance();
 };
 
 #endif

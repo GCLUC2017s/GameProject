@@ -12,11 +12,12 @@ CTask::CTask() :
 {
 	//Manager‚É“o˜^‚³‚ê‚È‚¢
 }
-CTask::CTask(unsigned int updatePrio, unsigned int drawPrio) :
+CTask::CTask(int id, unsigned int updatePrio, unsigned int drawPrio) :
 	m_destroyFlg(false), 
 	m_pauseFlg(false), 
 	m_updatePrio(updatePrio),
 	m_drawPrio(drawPrio),
+	m_id(id),
 	mp_prev(nullptr),
 	mp_next(nullptr)
 {

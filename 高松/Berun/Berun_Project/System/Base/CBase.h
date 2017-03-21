@@ -12,7 +12,13 @@
 #include "../System/TaskSystem/CTask.h"
 #include "../Game/CollisionA/CCollisionA.h"
 
-
+enum E_Id 
+{
+	ePlayer,
+	eEnemy,
+	eMap,
+	eIdMax,
+};
 
 class CBase : public CTask
 {
@@ -37,7 +43,7 @@ public:
 	}
 
 	CBase();
-	CBase(unsigned int updatePrio, unsigned int drawPrio);
+	CBase(int id, unsigned int updatePrio, unsigned int drawPrio);
 	~CBase();
 	
 	CVector2D GetScreenPos();

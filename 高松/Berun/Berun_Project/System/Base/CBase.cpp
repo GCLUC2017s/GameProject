@@ -3,10 +3,10 @@
 
 
 CVector2D CBase::m_scroal(0,0);
-CBase::CBase() :CTask(0,0), m_gravitySpeed(0), m_pos(0, 0, 0) {
+CBase::CBase() :CTask(0,0,0), m_gravitySpeed(0), m_pos(0, 0, 0) {
 
 }
-CBase::CBase(unsigned int updatePrio, unsigned int drawPrio) : CTask(updatePrio,drawPrio)
+CBase::CBase(int id, unsigned int updatePrio, unsigned int drawPrio) : CTask(id,updatePrio,drawPrio)
 {
 }
 CBase::~CBase()
