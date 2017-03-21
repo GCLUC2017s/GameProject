@@ -1,3 +1,7 @@
+/*
+メソッド一覧
+冨田健斗
+*/
 #ifndef GAME_HPP
 #define GAME_HPP
 #include "../Define/define.h"
@@ -20,6 +24,7 @@ public:
 	static CVector2 CameraPos();
 	static float	GetPlayerAxis();
 	static CPlayer getPlayer(CTask &t);
+
 	/*タスク属性がほしいときに使う
 	　number　ほしいもののナンバー
 	 キャストをして使う 
@@ -29,11 +34,21 @@ public:
 	 pl = (CPlayer*)getStatus(E_PLAYER);
 
 	 */
-
 	static CTask *getStatus(int number);
+	 /*テクスチャをデリートするときに使う*/
 	static void Delete(CTexture **t);
-	/*使い方　フェードしたい四角　次にフェードしたい bool型*/
-	static void Fade(float speed,CRectangle *rect);
+	 /*フェード関数 speed = フェードの速さ a = ALPHA*/
+	static void Fade(float speed, CRectangle *rect,float a);
+	static void FadeOut(float speed, CRectangle *rect);
+	/*拡大縮小関数
+	true 拡大, false 縮小
+	x,y 上限
+	speed 速さ
+	rect 四角
+	*/
+	static void RectScaling(bool flag, float x, float y,float speed,CRectangle *rect);
+
+
 };
 
 #endif

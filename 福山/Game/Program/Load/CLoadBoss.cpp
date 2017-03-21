@@ -44,28 +44,28 @@ CLoadBoss::CLoadBoss(){
 	mWalk_tex[4]->load(BOSS_WALK"BOSS_walk_04.tga");
 	mWalk_tex[5]->load(BOSS_WALK"BOSS_walk_05.tga");
 
-	mAttack_tex[0]->load(BOSS_ATTACK"BOSS_AttackR_00.tga");
-	mAttack_tex[1]->load(BOSS_ATTACK"BOSS_AttackR_01.tga");
-	mAttack_tex[2]->load(BOSS_ATTACK"BOSS_AttackR_02.tga");
-	mAttack_tex[3]->load(BOSS_ATTACK"BOSS_AttackR_03.tga");
-	mAttack_tex[4]->load(BOSS_ATTACK"BOSS_AttackR_04.tga");
-	mAttack_tex[5]->load(BOSS_ATTACK"BOSS_AttackR_05.tga");
+	mAttack_tex[0]->load(BOSS_ATTACK"BOSS_Attack_00.tga");
+	mAttack_tex[1]->load(BOSS_ATTACK"BOSS_Attack_01.tga");
+	mAttack_tex[2]->load(BOSS_ATTACK"BOSS_Attack_02.tga");
+	mAttack_tex[3]->load(BOSS_ATTACK"BOSS_Attack_03.tga");
+	mAttack_tex[4]->load(BOSS_ATTACK"BOSS_Attack_04.tga");
+	mAttack_tex[5]->load(BOSS_ATTACK"BOSS_Attack_05.tga");
 
 
-	mHattack_tex[0]->load(BOSS_HATTACK"BOSS_HAttackR_00.tga");
-	mHattack_tex[1]->load(BOSS_HATTACK"BOSS_HAttackR_01.tga");
-	mHattack_tex[2]->load(BOSS_HATTACK"BOSS_HAttackR_02.tga");
-	mHattack_tex[3]->load(BOSS_HATTACK"BOSS_HAttackR_03.tga");
-	mHattack_tex[4]->load(BOSS_HATTACK"BOSS_HAttackR_04.tga");
-	mHattack_tex[5]->load(BOSS_HATTACK"BOSS_HAttackR_05.tga");
+	mHattack_tex[0]->load(BOSS_HATTACK"BOSS_HAttack_00.tga");
+	mHattack_tex[1]->load(BOSS_HATTACK"BOSS_HAttack_01.tga");
+	mHattack_tex[2]->load(BOSS_HATTACK"BOSS_HAttack_02.tga");
+	mHattack_tex[3]->load(BOSS_HATTACK"BOSS_HAttack_03.tga");
+	mHattack_tex[4]->load(BOSS_HATTACK"BOSS_HAttack_04.tga");
+	mHattack_tex[5]->load(BOSS_HATTACK"BOSS_HAttack_05.tga");
 
 
-	mDie_tex[0]->load(BOSS_DIE"BOSS_dieR_00.tga");
-	mDie_tex[1]->load(BOSS_DIE"BOSS_dieR_01.tga");
-	mDie_tex[2]->load(BOSS_DIE"BOSS_dieR_02.tga");
-	mDie_tex[3]->load(BOSS_DIE"BOSS_dieR_03.tga");
-	mDie_tex[4]->load(BOSS_DIE"BOSS_dieR_04.tga");
-	mDie_tex[5]->load(BOSS_DIE"BOSS_dieR_05.tga");
+	mDie_tex[0]->load(BOSS_DIE"BOSS_die_0.tga");
+	mDie_tex[1]->load(BOSS_DIE"BOSS_die_1.tga");
+	mDie_tex[2]->load(BOSS_DIE"BOSS_die_2.tga");
+	mDie_tex[3]->load(BOSS_DIE"BOSS_die_3.tga");
+	mDie_tex[4]->load(BOSS_DIE"BOSS_die_4.tga");
+	mDie_tex[5]->load(BOSS_DIE"BOSS_die_5.tga");
 
 }
 CLoadBoss::~CLoadBoss(){

@@ -41,7 +41,6 @@ private:
 	int AnimePattern;				//全体のアニメーションパターン
 	int mSaveAnime; //直前のアニメが何か判断用
 	int mFlameCount;		//フレーム数カウント用
-	int mAnime;		//アニメーションのフレーム数
 
 	CVector2 mSuvePos;//元いた位置の保存
 
@@ -58,7 +57,6 @@ private:
 	int pattern;
 
 	void Walk();
-	void SetPos();
 	void AnimeScene();
 
 public:

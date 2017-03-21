@@ -18,10 +18,13 @@ private:
 	CRectangle mRectEvaluation;
 	CRectangle mRectClearLogo;
 	CRectangle mRectLogo[LOGO_MAX];
+	CRectangle mRectFilter;
 
 	CTexture *mEvaluationT;
 	CTexture *mLogoTex[LOGO_MAX];
 	CTexture *mClearLoagoT;
+	CTexture *mFilterTex;
+
 
 	char str[NUM_MAX][8];		//NUMBERêî Ç∆ äiî[êî
 	float Time;					//åvë™óp

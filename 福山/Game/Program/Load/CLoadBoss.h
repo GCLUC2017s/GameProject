@@ -5,7 +5,8 @@ class CLoadBoss
 {
 private:
 	static CLoadBoss *mLoadBoss;
-
+	CLoadBoss();
+	~CLoadBoss();
 public:
 	static CLoadBoss *GetInstance(); //GetInstance
 
@@ -15,8 +16,6 @@ public:
 	CTexture	*mHattack_tex[FRAME_LIMIT];
 	CTexture	*mDie_tex[FRAME_LIMIT];
 
-	CLoadBoss();
-	~CLoadBoss();
 
 
 };

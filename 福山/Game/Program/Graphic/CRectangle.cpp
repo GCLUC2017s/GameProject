@@ -79,6 +79,10 @@ void CRectangle::SetVertex(float left, float top, float right, float bottom) {
 	triangle2.x3 = right; triangle2.y3 = top;
 	triangle1.v1 = CVector2(left, top); triangle1.v2 = CVector2(left, bottom); triangle1.v3 = CVector2(right, bottom);
 	triangle2.v1 = CVector2(left, top); triangle2.v2 = CVector2(right, bottom); triangle2.v3 = CVector2(right, top);
+	mRLeft = &triangle1.x1;
+	mRRight = &triangle1.x3;
+	mRBottom = &triangle1.y3;
+	mRTop = &triangle2.y1;
 
 }
 

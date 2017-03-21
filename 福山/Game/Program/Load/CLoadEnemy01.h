@@ -7,7 +7,8 @@ class CLoadEnemy01
 private:
 
 	static CLoadEnemy01 *mLoadEnemy01;
-
+	CLoadEnemy01();
+	~CLoadEnemy01();
 public:
 
 	static CLoadEnemy01 *GetInstance(); //GetInstance
@@ -15,8 +16,7 @@ public:
 	CTexture	*mFly_tex[FRAME_LIMIT];
 	CTexture	*mAttack_tex[FRAME_LIMIT];
 	CTexture	*mDie_tex[FRAME_LIMIT];
-	CLoadEnemy01();
-	~CLoadEnemy01();
+
 
 };
 

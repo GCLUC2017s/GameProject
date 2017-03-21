@@ -50,6 +50,11 @@ private:
 	float mEx01Speed;				//必殺技の進むスピード
 	float mHungryPower;				//おなかが減る減らないの力の変化 += して使う(攻撃力)
 	float mHungrySSpp;				//おなかが減る減らないの力の変化 += して使う(スピード)
+	enum MyHungry
+	{
+		E_LOW=-4,E_NORMAL =0,E_HIGH = 4
+	};
+	MyHungry mHungryStatus = E_HIGH; //おなかの状態判断
 	bool mEnabledInterval;			//Interval中するとき
 	
 	
