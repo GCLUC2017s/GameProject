@@ -8,7 +8,7 @@
 #include "../UserInterface/CUserInterface.h"
 #include "../Enemy/CEnemy01.h"
 #include "../Enemy/CBoss.h"
-#include "../Result/CResult.h"
+#include "../Clear/CClear.h"
 
 CGameScene::CGameScene():status(E_INIT){}
 

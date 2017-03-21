@@ -20,7 +20,7 @@
 #define ENEMY00_STAY "../CG\\enemy00\\enemy00_stay\\"
 #define ENEMY00_WALK "../CG\\enemy00\\enemy00_walk\\"
 #define ENEMY00_ATTACK "../CG\\enemy00\\enemy00_attack\\"
-#define ENEMY00_DIE "../CG\\enemy00\\enemy00_dei\\"
+#define ENEMY00_DIE "../CG\\enemy00\\enemy00_dai\\"
 
 
 CLoadEnemy00* CLoadEnemy00::mLoadEnemy00 = 0;
@@ -68,12 +68,12 @@ CLoadEnemy00::CLoadEnemy00()
 	mAttack_tex[4]->load(ENEMY00_ATTACK"enemy00_attack_04.tga");
 	mAttack_tex[5]->load(ENEMY00_ATTACK"enemy00_attack_05.tga");
 
-	mDie_tex[0]->load(ENEMY00_DIE"enemy00_dei_00.tga");
-	mDie_tex[1]->load(ENEMY00_DIE"enemy00_dei_01.tga");
-	mDie_tex[2]->load(ENEMY00_DIE"enemy00_dei_02.tga");
-	mDie_tex[3]->load(ENEMY00_DIE"enemy00_dei_03.tga");
-	mDie_tex[4]->load(ENEMY00_DIE"enemy00_dei_04.tga");
-	mDie_tex[5]->load(ENEMY00_DIE"enemy00_dei_05.tga");
+	mDie_tex[0]->load(ENEMY00_DIE"enemy00_dai_00.tga");
+	mDie_tex[1]->load(ENEMY00_DIE"enemy00_dai_01.tga");
+	mDie_tex[2]->load(ENEMY00_DIE"enemy00_dai_02.tga");
+	mDie_tex[3]->load(ENEMY00_DIE"enemy00_dai_03.tga");
+	mDie_tex[4]->load(ENEMY00_DIE"enemy00_dai_04.tga");
+	mDie_tex[5]->load(ENEMY00_DIE"enemy00_dai_05.tga");
 
 	printf("aaaa\n");
 

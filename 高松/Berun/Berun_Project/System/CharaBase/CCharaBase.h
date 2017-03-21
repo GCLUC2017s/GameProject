@@ -45,12 +45,12 @@ enum {
 	ePlayerMan,	//プレイヤー男
 	ePlayerWoman,//プレイヤー女
 	eCarrot,//ニンジン
+	eChick,//鳥
+	ePig,//豚
 	eBerry,//イチゴサングラス空中
 	ePapurika,//ピーマン
 	eStrawberry,//イチゴ地上
 	eVegetavelboss,//野菜ボス（ウサギ）
-	ePig,//豚
-	eChick,//鳥
 	eMeatboss,//肉ボス（鶏）
 	eSquid,//イカ
 	eFish,//魚
@@ -81,6 +81,7 @@ protected:
 	ESTATE m_state;
 	CImage *m_chara;
 	CImage *m_enemyHp;
+	CImage *m_red;
 	
 	const T_CharacterData  *mp_eData;
 	
@@ -115,6 +116,7 @@ protected:
 	int m_animCounter;
 	//ダッシュする時のスピード
 	int m_dashSpeed;
+	CVector3D m_oldPos;
 
 	unsigned int m_anim;
 	//キャラクターの向きを格納するフラグ

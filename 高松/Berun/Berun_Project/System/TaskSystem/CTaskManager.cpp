@@ -1,11 +1,8 @@
 #include "CTaskManager.h"
-#include "../Game/CPlayer/CPlayer.h"
 
 CTaskManager* CTaskManager::mp_instance = nullptr;
-
 CTaskManager::CTaskManager() : mp_head(nullptr), mp_tail(nullptr)
 {
-	
 }
 CTaskManager::~CTaskManager()
 {

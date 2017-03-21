@@ -3,8 +3,9 @@
 #include "../Game/Tutorial/CTutorial.h"
 #include "../Game/Map/CMap.h"
 #include "../Game/Enemy/CEnemy.h"
-#include "../Game/CollisionA/CCollisionA.h"
+#include "../Game/CollisionManager/CollisionManager.h"
 #include "../Scene/CSceneManager.h"
+#include"../Game/Enemy/CEnemyManager.h"
 
 CGame::CGame() : mp_player(nullptr),m_step(0)
 {
@@ -19,17 +20,18 @@ CGame::~CGame()
 {
 	CSound::GetInstance()->GetSound("AREA_M_BGM")->Stop();
 }
-void CGame::Update()
-{
-	
+void CGame::Update() 
+{	
 switch (m_step)
 	{
 	case 0:
 	{
 		if (mp_tutorial->GetEnd())
 		{
-			mp_enemy = new CEnemy(eCarrot);
+			
 			mp_player = new CPlayer(g_tutorialNo);
+			new CEnemyManager();
+			mp_enemy = new CEnemy(eChick);
 			mp_tutorial->SetDestroyFlag(true);
 			CVector3D p = mp_player->GetPos();
 			mp_img[0]->SetPos(p.x / 1200.0f + 285, 588);
@@ -38,7 +40,6 @@ switch (m_step)
 			mp_img[0]->SetSize(85, 100);
 			mp_img[1]->SetSize(690, 90);
 			mp_img[2]->SetSize(700, 100);
-			mp_img[1]->SetRect(0, 0, p.x / 1200.0f, 90);
 			m_step++;
 		}
 		break;
@@ -56,8 +57,10 @@ switch (m_step)
 	default:
 		break;
 	}
+CCollisionManager::GetInstance()->UnRegistAll();
+CTaskManager::GetInstance()->DestroyAppoint();
 	CTaskManager::GetInstance()->UpdateAll();
-	CTaskManager::GetInstance()->DestroyAppoint();
+	CCollisionManager::GetInstance()->CheckHitAll();
 }
 void CGame::Draw()
 {
@@ -69,7 +72,6 @@ void CGame::Draw()
 		if (m_screen.x > 5120) m_screen.x = 5120;
 		mp_player->SetScroal(m_screen);
 
-		CCollisionA::CheckHit(mp_player, mp_enemy);
 	}
 
 	if (mp_player)

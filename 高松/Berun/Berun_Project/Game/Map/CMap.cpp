@@ -4,21 +4,15 @@
 #include"../Berun_Project/Global.h"
 #include"../System/CharaBase/CCharaBase.h"
 
-
-static T_MapDataBack g_mapDataBack[]{
+//背景（朝、昼、夕、夜,朝）時間変化する画像
+const static T_MapData g_mapDataBack[]{
 	{ "BackGroundMoningBack", },
 	{ "BackGroundNoonBack", },
 	{ "BackGroundEveingBack", },
 	{ "BackGroundNightBack", },
 	{ "BackGroundMoningBack2", },
 };
-static T_MapData g_mapData[]{
-	{ "BackGroundMoning", },
-	{ "BackGroundNoon", },
-	{ "BackGroundEveing", },
-	{ "BackGroundNight", },
-	{ "BackGroundMoning2", },
-};
+
 
 
 CMap::CMap(E_Stage type) : CBase(eUDP_Map, eDWP_Map) {
@@ -40,35 +34,42 @@ CMap::CMap(E_Stage type) : CBase(eUDP_Map, eDWP_Map) {
 	CSound::GetInstance()->GetSound("AREA_M_BGM")->Play(true);
 }
 CMap::~CMap() {
-	CSound::GetInstance()->GetSound("AREA_M_BGM")->Play();
+	CSound::GetInstance()->GetSound("AREA_M_BGM")->Stop();
 	//ポインタの場合はデストラクトを作る
-	//ポインタじゃなかったら自動的に呼ばれる}
+	//ポインタじゃなかったら自動的に呼ばれる
 }
+
 void CMap::Update() {
+	
+	m_mapTime += MAP_TIME;
 
-	m_mapTime += 0.003f;
+	if (m_mapTime >MAP_CHANGE) {
+		m_mapTime = 0;
+		m_cont = (m_cont + 1) % (int)STAGE_COUNT;
+		m_stage = m_newstage;
+		m_newstage = static_cast<E_Stage>((m_newstage + 1)%(int)STAGE_COUNT);
 
-	if (m_mapTime > 2.0f) {
-		if (m_cont <= 4) {
+
+		/*if (m_cont <= STAGE_COUNT) {
 			m_cont++;
 			m_mapTime = 0;
 			m_stage = static_cast<E_Stage>(m_stage + 1);
 			m_newstage = static_cast<E_Stage>(m_stage + 1);
 		}
-		if (m_cont >= 4) {
+		if (m_cont >= STAGE_COUNT) {
 			m_stage = static_cast<E_Stage>(m_stage * 0);
 			m_newstage = static_cast<E_Stage>(m_newstage * 0 + 1);
 			m_cont = 0;
 			m_mapTime = 0;
 
 
-		}
+		}*/
 
 
 
 	}
 	CVector2D m_mapScreen = GetScroal();
-	m_mapScreen.x = (int)m_mapScreen.x % MAP_WITHT;
+	m_mapScreen.x = (int)m_mapScreen.x % MAP_WIDTH;
 	if (m_cont == 3) {
 
 	}
@@ -86,7 +87,7 @@ void CMap::Update() {
 	m_ground[0]->SetPos(-m_mapScreen.x, -m_mapScreen.y);
 
 	m_ground[1]->SetColor(1, 1, 1, 1);
-	m_ground[1]->SetPos(-m_mapScreen.x + MAP_WITHT, -m_mapScreen.y);
+	m_ground[1]->SetPos(-m_mapScreen.x + MAP_WIDTH, -m_mapScreen.y);
 }
 
 

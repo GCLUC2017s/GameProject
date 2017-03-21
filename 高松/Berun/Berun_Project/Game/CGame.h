@@ -11,6 +11,7 @@
 #include "../Scene/CScene.h"
 #include "CImage.h"
 
+
 //クラスのプロトタイプ宣言
 class CMap;
 class CTutorial;

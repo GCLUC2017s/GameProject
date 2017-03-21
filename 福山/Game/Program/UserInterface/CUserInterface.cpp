@@ -9,7 +9,6 @@
 #include "../Camera/CCamera.h"
 #include "../Task/CTaskManager.h"
 #include "../Camera/CCamera.h"
-#include "../Define/define.h"
 
 #define SIZE_TEX_PLAYER_FRAME_X 1000
 #define SIZE_TEX_PLAYER_FRAME_Y 100
@@ -27,16 +26,9 @@
 #define ST_POSX			player->mStamina - PL_ST_X //ＳＴ　pos 調整用 足す
 #define HP_POSX			player->mHitPoint -PL_HP_X+0.1f  //HP　pos 調整用 足す
 #define ENE_HP_POSX		base->mHitPoint +ENE_HP_X  //HP　pos 調整用引く
+
 #define T_ST_RIGHT		SIZE_TEX_PLAYER_FRAME_X  * (player->mStamina / PL_ST_X)
-#define SPEED_COLAR		1.0f/FPS //一秒に1.0f
-
-/*
-ブラッシュアップすること
-FPSを治す
-スコア処理を適切に
-CGameに関数を追加する
-*/
-
+#define SPEED_COLAR		0.05f
 
 void CUserinterface::Init(){
 	/*作成*/
