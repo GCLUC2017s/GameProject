@@ -18,7 +18,7 @@ CGame::CGame() : mp_player(nullptr),m_step(0)
 
 CGame::~CGame()
 {
-	CSound::GetInstance()->GetSound("AREA_M_BGM")->Stop();
+	
 }
 void CGame::Update() 
 {	
