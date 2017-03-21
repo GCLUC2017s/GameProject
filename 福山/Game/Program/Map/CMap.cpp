@@ -9,8 +9,8 @@
 #define FILE_BG_GROUND		"../CG/background/ground/"
 #define FILE_BG_SKY			"../CG/background/sky/"
 #define FILE_BG_TREE		"../CG/background/tree/"
-#define BG_SIZE_X 1600
-#define BG_SIZE_Y 400
+#define BG_SIZE_X 3200
+#define BG_SIZE_Y 2400
 #define SC_SPEED 0.5f
 
 
@@ -20,9 +20,9 @@ void CMap::Init() {
 	mSkyTex = new CTexture;
 	mTreeTex = new CTexture;
 
-	mGroundTex->load(FILE_BG_GROUND"ground_background.tga");
+	mGroundTex->load(FILE_BG_GROUND"background_ground.tga");
 	mSkyTex->load(FILE_BG_SKY"sky_background.tga");
-	mTreeTex->load(FILE_BG_TREE"background_tree.tga");
+	mTreeTex->load(FILE_BG_TREE"tree_background.tga");
 
 	mGround.SetVertex(-DISP_X, 0, DISP_X*10,character_limit_bottom);
 	mGround.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -32,12 +32,16 @@ void CMap::Init() {
 	mSky.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 	mSky.SetUv(mSkyTex, 0, 0, BG_SIZE_X, BG_SIZE_Y);
 	
-	mTree.SetVertex(-DISP_X, DISP_Y, DISP_X*10, -0);
-	mTree.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-	mTree.SetUv(mTreeTex, 0, 0, BG_SIZE_X, BG_SIZE_Y);
+	for (int i = 0; i < TREE_NUM; i++)
+	{
+		mTree[i].SetVertex(-DISP_X, DISP_Y, DISP_X, -0);
+		mTree[i].SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+		mTree[i].SetUv(mTreeTex, 0, 0, BG_SIZE_X, BG_SIZE_Y);
+		mTree[i].position.x = first_pos.x*i*2;
+
+	}
 
 	mGround.position.x = first_pos.x;
-	mTree.position.x = first_pos.x;
 	mSky.position.x = first_pos.x;
 
 }
@@ -85,7 +89,10 @@ void CMap::Update() {
 
 void CMap::Render() {
 	mSky.Render();
-	mTree.Render();
+	for (int i = 0; i < TREE_NUM; i++)
+	{
+		mTree[i].Render();
+	}
 	mGround.Render();
 
 }

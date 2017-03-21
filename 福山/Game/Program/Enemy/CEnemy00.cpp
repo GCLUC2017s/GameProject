@@ -165,7 +165,6 @@ void CEnemy00::Walk(){
 }
 
 void CEnemy00::Update(){
-	assert(mAnimeFrame <= FLAME_LIMIT); //ƒtƒŒ[ƒ€”‚ªŽµ‚ð’´‚¦‚é‚Æƒ_ƒ
 	
 	mRect.position = mPos;
 	//mTargetP‚ðplayer‚É‚·‚é
