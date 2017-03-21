@@ -1,7 +1,5 @@
 #include "CPlayer.h"
 
-CPlayer* CPlayer::mp_player = nullptr;
-
 CPlayer::CPlayer(int type) : CCharaBase(type, eUDP_Player,eDWP_Player)
 
 {
@@ -31,15 +29,6 @@ void CPlayer::Draw()
 	}
 }
 
-CPlayer * CPlayer::GetInstance()
-{
-	return nullptr;
-}
-
-void CPlayer::ClearInstance()
-{
-}
-
 void CPlayer::Key() {
 	CCharaBase::Key();
 	//以下、上下左右のキーを入力すればそれに応じてフラグが切り替わる
@@ -62,16 +51,3 @@ void CPlayer::Key() {
 	if (PUSH_KEY_ENTER)		m_attack = true;
 }
 
-CPlayer* CPlayer::GetInstance()
-{
-	if (mp_player == nullptr)
-	{
-		mp_player = new CPlayer(g_tutorialNo);
-	}
-	return mp_player;
-}
-
-void CPlayer::ClearInstance()
-{
-	if (mp_player != nullptr) delete mp_player;
-}
