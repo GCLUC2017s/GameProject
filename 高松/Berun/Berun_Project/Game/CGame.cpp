@@ -19,8 +19,8 @@ CGame::~CGame()
 {
 	CSound::GetInstance()->GetSound("AREA_M_BGM")->Stop();
 }
-void CGame::Update() 
-{	
+void CGame::Update()
+{
 switch (m_step)
 	{
 	case 0:
