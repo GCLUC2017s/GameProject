@@ -14,7 +14,6 @@ class CTaskManager
 {
 private:
 	static CTaskManager* mp_instance;	//シングルトン化のためのポインタ
-	static CPlayer*      mp_player;
 protected:
 	CTask *mp_head;		//先頭要素を指すポインタ
 	CTask *mp_tail;		//末尾要素を指すポインタ
@@ -37,8 +36,6 @@ public:
 	static CTaskManager* GetInstance();
 	//格納されているものを削除
 	static void ClearInstance();
-	static CPlayer* GetPlayerInstance();
-	static void ClearPlayerInstance();
 };
 
 #endif
