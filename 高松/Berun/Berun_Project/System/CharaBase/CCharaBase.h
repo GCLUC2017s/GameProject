@@ -46,11 +46,11 @@ enum {
 	ePlayerWoman,//プレイヤー女
 	eCarrot,//ニンジン
 	eChick,//鳥
+	ePig,//豚
 	eBerry,//イチゴサングラス空中
 	ePapurika,//ピーマン
 	eStrawberry,//イチゴ地上
 	eVegetavelboss,//野菜ボス（ウサギ）
-	ePig,//豚
 	eMeatboss,//肉ボス（鶏）
 	eSquid,//イカ
 	eFish,//魚
