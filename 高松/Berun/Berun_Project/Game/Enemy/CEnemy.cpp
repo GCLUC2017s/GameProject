@@ -1,6 +1,7 @@
 #include"CEnemy.h"
-#include"../CPlayer/CPlayer.h"
-#include"CEnemyManager.h"
+#include "../CPlayer/CPlayer.h"
+
+
 
 /*T_EnemyData g_enemyData[] =
 {
@@ -9,34 +10,28 @@
 };*/
 
 
-CEnemy::CEnemy(int type) :CCharaBase(type, eUDP_Enemy, eDWP_Enemy)
+CEnemy::CEnemy(int type):CCharaBase(type,eEnemy,eUDP_Enemy,eDWP_Enemy)
 {
-	if (eChick) {
-		srand(time(nullptr));
-		m_z = rand() % 3;
-		m_pos = CVector3D(1200, 0, 300+50*m_z);
-	}
+
+	m_pos = CVector3D(1000, 0 ,300);
 	m_enemyHp = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Meter"));
 	
 	m_enemyHp->SetColor(1, 0, 0, 1);
+
+	mp_player = CPlayer::mp_player;
 	
 }
 CEnemy::~CEnemy() {
 
 }
-void CEnemy::Key()
-{
-	CCharaBase::Key();
-	CVector3D vec = mp_player->GetPos();
-	m_pos.x -= 1;
+void CEnemy::Contlol() {
+	CCharaBase::ResetKey();
 	
-	
-	
-	//m_enemyHp->SetPos(m_pos.x, m_pos.z);
-	
-/*	if (vec.x>=0) {
+	m_enemyHp->SetPos(m_pos.x, m_pos.z);
+
+	if (m_pos.x <= 300) {
 		m_pos.x -= 1;
-	}*/
+	}
 	//if()
 }
 

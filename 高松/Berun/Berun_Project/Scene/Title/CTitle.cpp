@@ -109,12 +109,11 @@ CTitle::CTitle()
 	m_firstMenu = false;
 	m_firstChara = false;
 	m_titleMenu = false;
-	CSound::GetInstance()->GetSound("TITLE_BGM")->Play();
 	CItem::ClearInstance();
 }
 CTitle::~CTitle()
 {
-	CSound::GetInstance()->GetSound("TITLE_BGM")->Stop();
+
 }
 void CTitle::Update()
 {

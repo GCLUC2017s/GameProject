@@ -15,15 +15,15 @@
 
 class CPlayer : public CCharaBase
 {
-	void Key();
+	void Contlol();
 	CImage *mp_hp;
 	CImage *mp_sp;
 public:
+	static CPlayer* mp_player;
 	CPlayer(int type);
 	~CPlayer();
 //	void Update();
 	void Draw();
-	void HitCallBack(CCollisionA * p);
 };
 
 #endif // !CPLAYER_INCLUDE_GUARD

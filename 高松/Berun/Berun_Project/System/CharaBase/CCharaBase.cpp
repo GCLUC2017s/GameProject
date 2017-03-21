@@ -1,6 +1,6 @@
 #include "CCharaBase.h"
 #include "../Game/CollisionManager/CollisionManager.h"
-#define HitCheck
+//#define HitCheck
 T_AnimData _playerMAnimData[] = {
 	{ 1,5 },
 	{ 6,5 },
@@ -22,31 +22,21 @@ T_AnimData _carrotAnimData[] = {
 	{ 5,10 },
 	
 };
-T_AnimData _chicntAnimData[] = {
-	{ 2,5 },
-	{ 2,5 },
-	{ 2,3 },
-	{ 0,10 },
-	{ 3,5 },
-	{ 1,5 },
-	{ 4,3 },
-
-};
  static const T_CharacterData g_characterData[] =
 {
-	//ID,レベル、最大HP,現在HP,最大SP,現在SP,攻撃力,防御力,取得経験値,必要経験値,移動速度,ジャンプ力,キャラクターの表示サイズ,キャラクターのアニメデータ,キャラクターの元画像での1サイズ,
-	{ "LittlePlayerM",0,5,5,5,3,3,0,0,0,1,1,0,{ 120,160 } ,_playerMAnimData,{ 550,900 },{ 60,160 },CRect(-40,-160,40,0),eItemMax },
-	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,1,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 150,180 },CRect(-180,-180,180,0),eItemMax },
-	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
-	{ "Chick",3,5,0,0,0,0,0,0,0,1,0,0,{ 160,160 } ,_chicntAnimData,{ 225,225 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+{ "LittlePlayerM",0,5,5,5,3,3,0,0,0,1,1,0,0,{ 120,160 } ,_playerMAnimData,{ 550,900 },{ 60,160 },CRect(-40,-160,40,0),eItemMax },
+	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,1,0,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 150,180 },CRect(-180,-180,180,0),eItemMax },
+	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,1,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Chick",3,5,0,0,0,0,0,0,0,1,0,0,1,{ 160,160 } ,_carrotAnimData,{ 225,225 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,1,{ 160,160 } ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,1,{ 160,160 } ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	//{ "Pig",4,5,0,0,0,0,0,0,0,1,0,0,{ 160,160 } ,_chicntAnimData,{ 225,225 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
-
 	//{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Rice",5,5,0,0,0,0,0,0,0,1,0,0,0 },
 };
 
 //static_assert (ARRAY_SIZE(g_characterData) == eCharacterMax,"g_characterDataSizeError");
-CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio) : CBase(updatePrio, drawPrio)
+CCharaBase::CCharaBase(int type, int id, unsigned int updatePrio, unsigned int drawPrio) : CBase(id,updatePrio, drawPrio)
 {
 	m_state = eState_Move;
 	mp_eData = &g_characterData[type];
@@ -65,6 +55,7 @@ CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio)
 	m_exp=mp_eData->exp;
 	m_speed=mp_eData->speed;
 	m_jump=mp_eData->jump;
+	SetType(mp_eData->charaType);
 	m_animPaternX = 0;
 	m_animPaternY = eAnim_Attack;
 	m_animLoop = false;
@@ -112,7 +103,7 @@ void CCharaBase::ChangeAnimation(EANIM type, bool loop)
 }
 
 
-void CCharaBase::Key()
+void CCharaBase::ResetKey()
 {
 	m_up = false;
 	m_down = false;
@@ -120,6 +111,10 @@ void CCharaBase::Key()
 	m_right = false; 
 	m_jump = false;
 	m_attack = false;
+}
+void CCharaBase::Contlol()
+{
+	//派生先で定義
 }
 void CCharaBase::Move()
 {
@@ -193,7 +188,7 @@ void CCharaBase::Attack()
 void CCharaBase::Update()
 {
 	
-	Key();
+	Contlol();
 	switch (m_state)
 	{
 	case eState_Move:
@@ -246,3 +241,26 @@ void CCharaBase::Draw()
 }
 
 
+bool CCharaBase::CheckHit(CCollisionA *t)
+{
+	CCharaBase* tt = dynamic_cast<CCharaBase*>(t);
+	assert(tt);
+	CRect p_rect = GetRect();
+	CRect t_rect = tt->GetRect();
+	if (abs(m_pos.z - tt->m_pos.z) < 50 && p_rect.m_right > t_rect.m_left && p_rect.m_left < t_rect.m_right && p_rect.m_top < t_rect.m_bottom && p_rect.m_bottom > t_rect.m_top) {
+		HitCallBack(t);
+		t->HitCallBack(this);
+	}
+	else return false;
+}
+
+void CCharaBase::HitCallBack(CCollisionA * p)
+{
+	CCharaBase* tt = dynamic_cast<CCharaBase*>(p);
+ if(tt->m_state==eState_Attack)	SetDestroyFlag(true);
+}
+
+void CCharaBase::Damage()
+{
+
+}

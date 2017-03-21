@@ -78,6 +78,27 @@ void CTaskManager::DrawAll()
 	}
 }
 
+CTask* CTaskManager::GetTask(int id)
+{
+	CTask *p;
+	while (id)
+	{
+		if (p->m_id == id) return p;
+	}
+	return nullptr;
+}
+
+int CTaskManager::GetCount(int id)
+{
+	int cnt = 0;
+	CTask *p;
+	while (id)
+	{
+		if(p->m_id == id) cnt++;
+	}
+	return cnt;
+}
+
 CTaskManager* CTaskManager::GetInstance()
 {
 	//CTaskManagerを一度のみ（シングルトン）生成して格納
