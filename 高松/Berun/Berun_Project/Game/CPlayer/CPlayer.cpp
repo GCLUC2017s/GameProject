@@ -4,10 +4,29 @@ CPlayer::CPlayer(int type) : CCharaBase(type, eUDP_Player,eDWP_Player)
 
 {
 	m_pos = CVector3D(0, 0, 0);
+	mp_hp = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("HP"));
+	mp_sp = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("SP"));
 }
 CPlayer::~CPlayer()
 {
 
+}
+
+void CPlayer::Draw()
+{
+	CCharaBase::Draw();
+	for (int i = 0; i < m_hp; i++)
+	{
+		mp_hp->SetPos(i * 75 + 10, 25);
+		mp_hp->SetSize(75, 75);
+		mp_hp->Draw();
+	}
+	for (int j = 0; j < m_sp; j++)
+	{
+		mp_sp->SetPos(j * 75 + 400, 25);
+		mp_sp->SetSize(75, 75);
+		mp_sp->Draw();
+	}
 }
 
 void CPlayer::Key() {
