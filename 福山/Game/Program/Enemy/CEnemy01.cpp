@@ -40,7 +40,7 @@ CKeyを使っている条件文は今後別の処理になります。
 #define ENEMY01_STAY "../CG\\enemy01\\stay\\"
 #define ENEMY01_ATTACK "../CG\\enemy01\\attack\\"
 #define ENEMY01_DIE "../CG\\enemy01\\die\\"
-#define AT_RANGE01		mForward.x, SIZE_ENEMY01_X, SIZE_ENEMY01_Y,1, mPos	//攻撃範囲A
+#define AT_RANGE01		mForward.x, 100, 100,10, mPos	//攻撃範囲A
 
 inline void InitRand(){
 	srand((unsigned int)time(NULL));
@@ -335,6 +335,8 @@ void CEnemy01::Update(){
 	case 1:	//左向き
 		break;
 	}
+	mAttackRange.position = mPos;
+	
 	AlertHPRect(&mRect, mHitPoint);	//アラートメソッド(HP変化によるもの)
 	/*軸の設定*/
 	mAxis = mPos.y - SIZE_ENEMY01_Y;

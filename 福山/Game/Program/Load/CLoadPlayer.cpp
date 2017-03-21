@@ -33,8 +33,11 @@ CLoadPlayer::CLoadPlayer()
 	for (int i = 0; i < FRAME_LIMIT; i++)
 	{
 		mStayTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
+<<<<<<< HEAD
+=======
 		mRunTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
 		mEx01Tex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
+>>>>>>> 97d02c8f7767f6aa041da256200778deabdb8b61
 		mEx02Tex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
 		mEatTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
 		mFlameTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
@@ -50,6 +53,7 @@ CLoadPlayer::CLoadPlayer()
 	for (int i = 0; i < FRAME_LIMIT8; i++)
 	{
 		mWalkTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
+		mEx01Tex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
 	}
 
 	mShadowTex = new CTexture();		//テクスチャクラスのインスタンス作成
@@ -114,6 +118,8 @@ CLoadPlayer::CLoadPlayer()
 	mEx01Tex[3]->load(TEX_FILE_PLAYER_EX01"beru_EX01_03.tga");
 	mEx01Tex[4]->load(TEX_FILE_PLAYER_EX01"beru_EX01_04.tga");
 	mEx01Tex[5]->load(TEX_FILE_PLAYER_EX01"beru_EX01_05.tga");
+	mEx01Tex[6]->load(TEX_FILE_PLAYER_EX01"beru_EX01_06.tga");
+	mEx01Tex[7]->load(TEX_FILE_PLAYER_EX01"beru_EX01_07.tga");
 	/*ジャンプ*/
 	mJumpTex[0]->load(TEX_FILE_PLAYER_JUMP"beru_jump_00.tga");
 	mJumpTex[1]->load(TEX_FILE_PLAYER_JUMP"beru_jump_01.tga");
