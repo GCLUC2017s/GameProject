@@ -25,8 +25,9 @@ CLoadEnemy01::CLoadEnemy01(){
 	for (int i = 0; i < 10; i++)
 	{
 		mDie_tex[i] = new CTexture();
+	}
+	for (int i = 0; i < 16; i++){
 		mAttack_tex[i] = new CTexture();
-
 	}
 	/*テクスチャファイル読み込み*/
 	mStay_tex[0]->load(ENEMY01_STAY"enemy01_stay_00.tga");
@@ -52,7 +53,6 @@ CLoadEnemy01::CLoadEnemy01(){
 	mAttack_tex[6]->load(ENEMY01_ATTACK"enemy01_attack_06.tga");
 	mAttack_tex[7]->load(ENEMY01_ATTACK"enemy01_attack_07.tga");
 	mAttack_tex[8]->load(ENEMY01_ATTACK"enemy01_attack_08.tga");
-	mAttack_tex[9]->load(ENEMY01_ATTACK"enemy01_attack_09.tga");
 
 	mDie_tex[0]->load(ENEMY01_DIE"enemy01_die_00.tga");
 	mDie_tex[1]->load(ENEMY01_DIE"enemy01_die_01.tga");

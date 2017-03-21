@@ -47,6 +47,8 @@ public:
 	rect lŠp
 	*/
 	static void RectScaling(bool flag, float x, float y,float speed,CRectangle *rect);
+	/*ŠÔŒo‰ß‚ÅTRUE‚É‚·‚é time‚É‚©‚©‚éŠÔ‚ğ‘‚­*/
+	static bool FlagTime(float time,float fps);
 
 
 };

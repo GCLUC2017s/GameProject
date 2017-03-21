@@ -11,10 +11,13 @@
 
 
 #define ATTACK_PTT   (rulerR <2||rulerL <2)  // ターゲットとの距離が数値以下の時に攻撃をする。
+
 #define HATTACK_PTT  (rulerR<4||rulerR<4)
+
 #define ENEMY_VISI   (rulerR <6||rulerL <6)  // エネミーの視界を６に設定。
 #define ENEMY_ESCAPE   (rulerR >5||rulerL >5)  //一定距離近づいた時に逃げる距離
-
+#define DOWNAXIS	(getAxis-2)
+#define UPAXIS		(getAxis+2)
 #define NO_ATTACK_PTT   (rulerR >3 || rulerL >3)  // ターゲットが当たり判定外の時の判定
 
 	/*変数が変化する場合はこちらで判断*/

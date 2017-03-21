@@ -50,14 +50,14 @@ CLoadBoss::CLoadBoss(){
 	mAttack_tex[3]->load(BOSS_ATTACK"BOSS_Attack_03.tga");
 	mAttack_tex[4]->load(BOSS_ATTACK"BOSS_Attack_04.tga");
 	mAttack_tex[5]->load(BOSS_ATTACK"BOSS_Attack_05.tga");
-
-
+	/*–¢ŽÀ‘•*/
+/*
 	mHattack_tex[0]->load(BOSS_HATTACK"BOSS_HAttack_00.tga");
 	mHattack_tex[1]->load(BOSS_HATTACK"BOSS_HAttack_01.tga");
 	mHattack_tex[2]->load(BOSS_HATTACK"BOSS_HAttack_02.tga");
 	mHattack_tex[3]->load(BOSS_HATTACK"BOSS_HAttack_03.tga");
 	mHattack_tex[4]->load(BOSS_HATTACK"BOSS_HAttack_04.tga");
-	mHattack_tex[5]->load(BOSS_HATTACK"BOSS_HAttack_05.tga");
+	mHattack_tex[5]->load(BOSS_HATTACK"BOSS_HAttack_05.tga");*/
 
 
 	mDie_tex[0]->load(BOSS_DIE"BOSS_die_0.tga");

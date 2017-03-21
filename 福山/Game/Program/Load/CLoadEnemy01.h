@@ -1,8 +1,7 @@
 #include "../Graphic/CTexture.h"
 #include"../Define/define.h"
 #define FRAME_DIE 10
-#define FRAME_ATTACK 10
-
+#define FRAME_ATTACK 9
 
 class CLoadEnemy01
 {
