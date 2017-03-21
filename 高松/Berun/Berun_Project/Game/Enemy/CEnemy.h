@@ -24,7 +24,7 @@ public:
 	CEnemy(int type);
 	
 	~CEnemy();
-	
+
 //	void Update();
 	
 	void Draw();

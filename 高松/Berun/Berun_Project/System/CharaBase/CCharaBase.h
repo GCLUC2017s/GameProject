@@ -13,8 +13,7 @@
 #define ARRAY_SIZE(a)(sizeof(a)/sizeof(a[0]))
 #define CHARA_MOVE 4
 #define ANIM_REVISION 1
-#define HP_MAX 5
-#define SP_MAX 3
+
 
 struct T_AnimData {
 	int pattrn;
@@ -51,7 +50,7 @@ enum {
 	eStrawberry,//イチゴ地上
 	eVegetavelboss,//野菜ボス（ウサギ）
 	ePig,//豚
-	eBird,//鳥
+	eChick,//鳥
 	eMeatboss,//肉ボス（鶏）
 	eSquid,//イカ
 	eFish,//魚
@@ -82,8 +81,7 @@ protected:
 	ESTATE m_state;
 	CImage *m_chara;
 	CImage *m_enemyHp;
-	CImage *mp_hp[HP_MAX];
-	CImage *mp_sp[SP_MAX];
+	
 	const T_CharacterData  *mp_eData;
 	
 	int m_imgPtn;
@@ -130,10 +128,11 @@ protected:
 	bool m_dash;
 	//ジャンプ中かどうかを格納する変数(false = No,true = Yes)
 	bool m_jumpFlag;
+	bool m_attack;
 	virtual void Key();
 	void Move();
 	void Jump();
-	void HpBar();
+	void Attack();
 public:
 	CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio);
 	~CCharaBase();

@@ -1,16 +1,32 @@
 #include "CCharaBase.h"
+T_AnimData _playerMAnimData[] = {
+	{ 1,5 },
+	{ 6,5 },
+	{ 6,3 },
+	{ 6,10 },
+	{ 6,2 },
+};
+T_AnimData _playerWAnimData[] = {
+	{ 1,5 },
+	{ 6,5 },
+	{ 6,3 },
+	{ 6,10 },
+	{ 6,2 },
+};
 T_AnimData _carrotAnimData[] = {
 	{ 1,5 },
 	{ 6,5 },
 	{ 5,3 },
 	{ 5,10 },
+	
 };
  static const T_CharacterData g_characterData[] =
 {
 	//ID,レベル、最大HP,現在HP,最大SP,現在SP,攻撃力,防御力,取得経験値,必要経験値,移動速度,ジャンプ力,キャラクターの表示サイズ,キャラクターのアニメデータ,キャラクターの元画像での1サイズ,
-	{ "LittlePlayerM",0,5,0,0,0,0,0,0,0,1,1,0, {120,160} ,_carrotAnimData,{ 550,900 },{ 60,160 },CRect(-60,-160,60,0),eItemMax },
-	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,1,0, {256,256},_carrotAnimData,{ 500,900 },{ 60,160 },CRect(-60,-160,60,0),eItemMax },
-	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,{160,160} ,_carrotAnimData,{ 500,900 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "LittlePlayerM",0,5,5,5,3,3,0,0,0,1,1,0,{ 120,160 } ,_playerMAnimData,{ 550,900 },{ 60,160 },CRect(-60,-160,60,0),eItemMax },
+	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,1,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 360,180 },CRect(-180,-180,180,0),eItemMax },
+	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	//{ "Chick",2,5,0,0,0,0,0,0,0,1,0,0,{ 160,160 } ,_carrotAnimData,{ 240,224 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	//{ "Chick",3,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Rice",5,5,0,0,0,0,0,0,0,1,0,0,0 },
@@ -22,8 +38,7 @@ CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio)
 	m_state = eState_Move;
 	mp_eData = &g_characterData[type];
 	m_chara = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get(mp_eData->imageName));
-	for (int i = 0; i < HP_MAX; i++) mp_hp[i] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("HP"));
-	for (int j = 0; j < SP_MAX; j++) mp_sp[j] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("SP"));
+	
 	m_imgPtn = 0;
 	m_level= mp_eData->level;
 	m_maxHp = mp_eData->maxHp;
@@ -49,7 +64,7 @@ CCharaBase::CCharaBase(int type, unsigned int updatePrio, unsigned int drawPrio)
 	m_down = false;
 	m_dash = false;
 	m_jumpFlag = false;
-
+	m_attack = false;
 }
 CCharaBase::~CCharaBase() 
 {
@@ -68,6 +83,7 @@ void CCharaBase::Animation()
 	{
 		if(m_animLoop) m_animPaternX = 0;
 		else m_animPaternX = mp_eData->animData[m_animPaternY].pattrn - 1;
+		if (m_state == eState_Attack)	m_state = eState_Move;
 	}
 	m_chara->SetRect(mp_eData->texSize.x * m_animPaternX, mp_eData->texSize.y * m_animPaternY, mp_eData->texSize.x * (m_animPaternX + ANIM_REVISION), mp_eData->texSize.y * (m_animPaternY + ANIM_REVISION));
 }
@@ -89,6 +105,7 @@ void CCharaBase::Key()
 	m_left = false;
 	m_right = false; 
 	m_jump = false;
+	m_attack = false;
 }
 void CCharaBase::Move()
 {
@@ -114,6 +131,7 @@ void CCharaBase::Move()
  		m_jumpFlag = true;
 		m_state = eState_Jump;
 	}
+	if (m_attack)	m_state = eState_Attack;
 	if (m_up || m_down || m_left || m_right)
 	{
 		if (!m_dash)	ChangeAnimation(eAnim_Walk, true);
@@ -123,6 +141,8 @@ void CCharaBase::Move()
 	{
 		ChangeAnimation(eAnim_Idle, true);
 	}
+	//当たり判定用の矩形を計算
+	rect = CRect(m_pos.x + mp_eData->rect.m_left, m_pos.z + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right, m_pos.z + mp_eData->rect.m_bottom);
 }
 void CCharaBase::Jump()
 {
@@ -143,23 +163,19 @@ void CCharaBase::Jump()
 		m_state = eState_Move;
 	}
 }
+void CCharaBase::Attack()
+{
+	ChangeAnimation(eAnim_Attack, true);
+	if (m_charaDirection)	rect = CRect(m_pos.x + mp_eData->rect.m_left - 60, m_pos.z + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right, m_pos.z + mp_eData->rect.m_bottom);
+	else rect = CRect(m_pos.x + mp_eData->rect.m_left, m_pos.z + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right + 60, m_pos.z + mp_eData->rect.m_bottom);
+}
 void CCharaBase::HpBar()
 {
-	m_enemyHp = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Meter"));
-	m_enemyHp->SetPos(0, 0);
+
 }
 void CCharaBase::Update()
 {
-	for (int i = 0; i < HP_MAX; i++)
-	{
-		mp_hp[i]->SetPos(i * 75, 25);
-		mp_hp[i]->SetSize(75, 75);
-	}
-	for (int j = 0; j < SP_MAX; j++)
-	{
-		mp_sp[j]->SetPos(j * 75 + 300, 25);
-		mp_sp[j]->SetSize(75, 75);
-	}
+	
 	Key();
 	switch (m_state)
 	{
@@ -168,6 +184,9 @@ void CCharaBase::Update()
 		break;
 	case eState_Jump:
 		Jump();
+		break;
+	case eState_Attack:
+		Attack();
 		break;
 	}
 	m_gravitySpeed += GRAVITY;
@@ -182,14 +201,7 @@ void CCharaBase::Update()
 }
 void CCharaBase::Draw()
 {
-	for (int i = 0; i < HP_MAX; i++)
-	{
-		mp_hp[i]->Draw();
-	}
-	for (int j = 0; j < SP_MAX; j++)
-	{
-		mp_sp[j]->Draw();
-	}
+	
 		m_chara->SetCenter(mp_eData->senter.x, mp_eData->senter.y);
 		Animation();
 		m_chara->SetSize(mp_eData->size.x, mp_eData->size.y);

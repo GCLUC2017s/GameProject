@@ -15,14 +15,14 @@
 
 class CPlayer : public CCharaBase
 {
-
 	void Key();
-
+	CImage *mp_hp;
+	CImage *mp_sp;
 public:
 	CPlayer(int type);
 	~CPlayer();
 //	void Update();
-//	void Draw();
+	void Draw();
 };
 
 #endif // !CPLAYER_INCLUDE_GUARD

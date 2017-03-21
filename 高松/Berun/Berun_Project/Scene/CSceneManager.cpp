@@ -11,7 +11,7 @@ CSceneManager::CSceneManager() :
 	m_sceneNum(eNone),
 	mp_scene(nullptr)
 {
-	ChangeScene(eGame);
+	ChangeScene(eLogo);
 }
 
 
