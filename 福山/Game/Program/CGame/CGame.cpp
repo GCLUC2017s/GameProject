@@ -1,5 +1,28 @@
 #include "CGame.h"
-#include "../Task/CTaskManager.h"
+/*
+
+ブラッシュアップ時に直すこと
+
+関数を適切な場所に移動
+(例)
+CTask *CGame::getStatus(int number){
+CTask *t;
+t = CTaskManager::GetInstance()->mRoot;
+while (t != 0){
+if (t->mMyNumber == number){
+return t;
+}
+t = t->next;
+}
+この処理はCTaskManager内でなど
+
+スコア処理を適切に
+CGameに関数を追加する
+
+
+*/
+
+
 
 /* getPosition
 i:マップデータ配列の添字
@@ -12,7 +35,6 @@ CVector2 CGame::getPosition(const CVector2 &v) {
 CEnemy00 CGame::getEnemy(CEnemy00 &ene00){
 	return ene00;
 }
-
 
 CVector2 CGame::CameraPos(){
 	const float arealeft_x = character_limit_left + SIZE_PLAYER_X * 2;
@@ -48,7 +70,7 @@ CVector2 CGame::mGetPlayerPos() {
 	while (t != 0){
 		if (t->mMyNumber == E_PLAYER){
 			CPlayer *p;
-			p = (CPlayer*)t;
+			p = dynamic_cast<CPlayer*>(t);
 			return p->mPos;
 		}
 		t = t->next;
@@ -69,7 +91,7 @@ float CGame::GetPlayerAxis(){
 	while (t != 0){
 		if (t->mMyNumber == E_PLAYER){
 			CPlayer *p;
-			p = (CPlayer*)t;
+			p = dynamic_cast<CPlayer*>(t);
 			return p->mAxis;
 		}
 		t = t->next;
