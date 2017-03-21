@@ -54,6 +54,8 @@ void CCollisionManager::PlayerAttack(CBase *b){
 				/*•ßHUŒ‚*/
 				if (b->mHitPoint <= 0 && player->mEnabledEat){
 					player->mStamina += CAL_ENEMY00;
+					b->mEnabledEaten = true;
+
 				}
 			}
 		}

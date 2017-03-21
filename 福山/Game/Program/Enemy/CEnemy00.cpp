@@ -28,7 +28,7 @@
 #define WALK_SPEED 0.02f				//歩くスピード
 #define WALK_X 2						//歩くベクトルX
 #define WALK_Y 1						//歩くベクトルY
-#define AT_RANGE		mForward.x, 100, 100,10, mPos      	//攻撃範囲
+#define AT_RANGE		mForward.x, SIZE_ENEMY00_X, SIZE_ENEMY00_Y,10, mPos      	//攻撃範囲
 #define ENEMY00_STAY "../CG\\enemy00\\enemy00_stay\\"
 #define ENEMY00_WALK "../CG\\enemy00\\enemy00_walk\\"
 #define ENEMY00_ATTACK "../CG\\enemy00\\enemy00_attack\\"
@@ -113,14 +113,11 @@ void CEnemy00::AnimeScene(){
 	}
 }
 
-<<<<<<< HEAD
-void CEnemy00::Motion(){
-=======
 void CEnemy00::Walk(){
 
 	//（ターゲットが右にいる場合）
 	if (RIGHT_PTT) {
-		direction = 0;
+		mDirection = E_RIGHT;
 		mStatus = E_WALK_R;
 		mVelocity = WALK_SPEED;
 		mForward = CVector2(WALK_X, 0.0f);
@@ -129,7 +126,7 @@ void CEnemy00::Walk(){
 	
 	//（ターゲットが左にいる場合）
 	if (LEFT_PTT) {
-		direction = 1;
+		mDirection = E_LEFT;
 		mStatus = E_WALK_L;
 		mVelocity = WALK_SPEED;
 		mForward = CVector2(-WALK_X, 0.0f);
@@ -156,18 +153,7 @@ void CEnemy00::Walk(){
 
 
 }
-
-void CEnemy00::Update(){
-	assert(mAnimeFrame <= FLAME_LIMIT); //フレーム数が七を超えるとダメ
-	
-	mRect.position = mPos;
-	//mTargetPをplayerにする
-	InitRand();
->>>>>>> 97d02c8f7767f6aa041da256200778deabdb8b61
-
-
-
-
+void CEnemy00::Motion(){
 
 	switch (motion)
 	{
@@ -188,7 +174,6 @@ void CEnemy00::Update(){
 		break;
 	case EM_WALK://歩き	
 		Walk();
-		printf("%f,%f\n", rulerR, rulerL);
 		if (ATTACK_PTT){//攻撃モーションに変更
 			actionflag = false;
 			motion = EM_RANGE;
@@ -199,23 +184,23 @@ void CEnemy00::Update(){
 
 		if (!actionflag){
 			pattern = rand() % 3; //0~2の中でランダムでパターンを選択する。
-		
-		if (pattern == 0){
-			motion = EM_ATTCK;
-		}
-		else if (pattern == 1){
-			actionflag = true;
-			motion = EM_BACK_X;
-		}
-		else if (pattern == 2){
 
-			motion = EM_BACK_Y;
-		}
+			if (pattern == 0){
+				motion = EM_ATTCK;
+			}
+			else if (pattern == 1){
+				actionflag = true;
+				motion = EM_BACK_X;
+			}
+			else if (pattern == 2){
 
-		if (NO_ATTACK_PTT){
-			actionflag = false;
-			motion = EM_WALK;
-		}
+				motion = EM_BACK_Y;
+			}
+
+			if (NO_ATTACK_PTT){
+				actionflag = false;
+				motion = EM_WALK;
+			}
 		}
 		break;
 
@@ -278,12 +263,12 @@ void CEnemy00::Update(){
 		}
 
 	case EM_ATTCK:		//攻撃中
-		
-		if (RIGHT_PTT && !mEnabledAttack) {
+
+		if (RIGHT_PTT) {
 			mEnabledAttack = true;
 			mStatus = E_ATTACK_R;
 		}
-		else if (LEFT_PTT && !mEnabledAttack){
+		else if (LEFT_PTT){
 			mEnabledAttack = true;
 			mStatus = E_ATTACK_L;
 		}
@@ -291,7 +276,6 @@ void CEnemy00::Update(){
 
 		//攻撃範囲とあたり判定フラグ
 		Attack(AT_RANGE);
-			mEnabledAttack = true;
 
 		//差分で距離を詰める
 		if (rulerR > 2 || rulerL >2){
@@ -304,59 +288,7 @@ void CEnemy00::Update(){
 		break;
 	}
 
-	switch (mDirection)
-	{
-	case E_RIGHT:	//右向き
-		break;
-	case E_LEFT:	//左向き
-		break;
-	}
-
-
 }
-
-
-void CEnemy00::Walk(){
-
-	//（ターゲットが右にいる場合）
-	if (RIGHT_PTT) {
-		mDirection = E_RIGHT;
-		mStatus = E_WALK_R;
-		mVelocity = WALK_SPEED;
-		mForward = CVector2(WALK_X, 0.0f);
-		mPos += mForward * mVelocity;
-	}
-	
-	//（ターゲットが左にいる場合）
-	if (LEFT_PTT) {
-		mDirection = E_LEFT;
-		mStatus = E_WALK_L;
-		mVelocity = WALK_SPEED;
-		mForward = CVector2(-WALK_X, 0.0f);
-		mPos += mForward * mVelocity;
-	}
-
-
-	//（ターゲットが上にいる場合）
-	if ((CGame::GetPlayerAxis() + CGame::mGetPlayerPos().y) / 2 > mAxis) {
-		mVelocity = WALK_SPEED;
-		mForward = CVector2(0.0f, WALK_Y);
-		mPos += mForward * mVelocity;
-		mAxis += mForward.y * mVelocity;
-
-	}
-
-	//（ターゲットが下にいる場合）
-	if ((CGame::GetPlayerAxis() + CGame::mGetPlayerPos().y) / 2 < mAxis) {
-		mVelocity = WALK_SPEED;
-		mForward = CVector2(0.0f, -WALK_Y);
-		mPos += mForward * mVelocity;
-		mAxis += mForward.y * mVelocity;
-	}
-
-
-}
-
 
 void CEnemy00::Update(){
 	mRect.position = mPos;
@@ -373,6 +305,10 @@ void CEnemy00::Update(){
 	}
 	if (mHitPoint <= 0){
 		motion = EM_DIE;		//体力が０ならDIEする
+	}
+	if (mEnabledEaten){		//食べられたら消す
+		//演出加えてもいいかも(例)拡大縮小してif(サイズが0以下の時killFlagを立てるなど)
+		mKillFlag = true;
 	}
 	mAttackRange.position = mPos;
 
@@ -393,6 +329,7 @@ void CEnemy00::Update(){
 }
 
 void CEnemy00::Render(){
+
 	mShadow.Render();
 	mRect.Render();
 }

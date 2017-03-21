@@ -25,18 +25,15 @@
 #define V2_LEFT							 CVector2(-WALK_X, 0.0f)			//左の向き
 #define V2_TOP							 CVector2(0.0f, WALK_Y)				//上の向き
 #define V2_BOTTOM						 CVector2(0.0f, -WALK_Y)			//下の向き
-/*アニメの速さ*/
+/*アニメの速さ*///(FPSでわかるようにする)現在10が0.1秒
 #define ANIME_TIME_BASE						10								//アニメのループ時間 継続的なもの
-<<<<<<< HEAD
-#define ANIME_TIME_ATTACK					5								//アニメのループ時間 攻撃のもの
-#define ANIME_TIME_EAT						10
-=======
-#define ANIME_TIME_ATTACK					8								//アニメのループ時間 攻撃のもの
->>>>>>> 97d02c8f7767f6aa041da256200778deabdb8b61
+#define ANIME_TIME_ATTACK					3								//アニメのループ時間 攻撃のもの
+#define ANIME_TIME_EAT						10								//アニメのループ時間 食べる
 #define ANIME_TIME_BRAKE					7								//アニメのループ時間 BRAKE
 #define ANIME_TIME_JUMP						6								//アニメループ時間 ジャンプ
 #define ANIME_TIME_WALK						8 + mHungryStatus				//アニメループ時間　歩く
-#define ANIME_TIME_EX01						4
+#define ANIME_TIME_EX01						4								//アニメループ時間 必殺技振り
+
 #define ATTACK_A		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,2, mPos	//攻撃範囲A
 #define ATTACK_B		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,2, mPos	//攻撃範囲B
 #define ATTACK_C		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,3, mPos	//攻撃範囲C
@@ -118,10 +115,15 @@ void CPlayer::Jump(){ //ジャンプ処理メソッド
 	*/
 	if (CKey::push('C') && !mEnabledJump && !mEnabledAttack) {
 		mSpeedJump = JUMP_FIRST_SPEED;
+		mAnimeFrame = 0; //ジャンプ初めframe
 		mEnabledJump = true; //ジャンプしていないとき
 	}
 
 	if (mEnabledJump){
+		mAnimeFrame = 1; //ジャンプ中間frame
+		if (mSpeedJump <= 0){
+			mAnimeFrame = 2;
+		}
 		mPos.y = mPos.y + mSpeedJump; //飛ぶ処理
 		mSpeedJump -= gravity;//減速処理
 		DecisionRL(E_JUMP_R, E_JUMP_L);
@@ -193,11 +195,7 @@ void CPlayer::Brake(){
 	mPos += mForward * mVelocity;
 	mAxis += mForward.y * mVelocity;
 }
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 97d02c8f7767f6aa041da256200778deabdb8b61
 /*NormalAttackメソッド*/
 void CPlayer::PlayerAttack(){
 	//通常攻撃 アニメ切り替え
@@ -252,11 +250,8 @@ void CPlayer::PlayerAttack(){
 		break;
 	case E_EAT_R:
 	case E_EAT_L:
-<<<<<<< HEAD
-		if (mAnimeFrame != FRAME_EAT - 1){ mEnabledAttack = true; }
-=======
-		if (mAnimeFrame != FRAME_LIMIT - 1){ mEnabledAttack = true; }
->>>>>>> 97d02c8f7767f6aa041da256200778deabdb8b61
+
+		if (mAnimeFrame != FRAME_LIMIT3 - 1){ mEnabledAttack = true; }
 		else{ //アニメ最後が来たら
 			mEnabledAttack = false;
 			mEnabledEat = false;
@@ -335,7 +330,7 @@ void CPlayer::AnimeScene(){
 		mRect.SetUv(CLoadPlayer::GetInstance()->mWalkTex[mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_RUN_L:
-		AnimeFrame(true, ANIME_TIME_BASE);
+		AnimeFrame(true, ANIME_TIME_BASE,FRAME_LIMIT8);
 		mRect.SetUv(CLoadPlayer::GetInstance()->mRunTex[mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_NORMALATTACK_A_L:
@@ -351,11 +346,7 @@ void CPlayer::AnimeScene(){
 		mRect.SetUv(CLoadPlayer::GetInstance()->mNormalAttackTex[0][mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_EAT_L:
-<<<<<<< HEAD
-		AnimeFrame(false, ANIME_TIME_EAT,FRAME_EAT);
-=======
-		AnimeFrame(false, ANIME_TIME_ATTACK);
->>>>>>> 97d02c8f7767f6aa041da256200778deabdb8b61
+		AnimeFrame(false, ANIME_TIME_EAT, FRAME_LIMIT3);
 		mRect.SetUv(CLoadPlayer::GetInstance()->mEatTex[mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_EX01_L:
@@ -370,8 +361,7 @@ void CPlayer::AnimeScene(){
 		AnimeFrame(true, ANIME_TIME_BASE);
 		mRect.SetUv(CLoadPlayer::GetInstance()->mFlameTex[mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
 		break;
-	case E_JUMP_L:
-		AnimeFrame(false,ANIME_TIME_JUMP);
+	case E_JUMP_L://特殊なのでジャンプメソッドで処理
 		mRect.SetUv(CLoadPlayer::GetInstance()->mJumpTex[mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_BRAKE_L:
@@ -403,13 +393,9 @@ void CPlayer::AnimeScene(){
 		AnimeFrame(false, ANIME_TIME_ATTACK);
 		mRect.SetUv(CLoadPlayer::GetInstance()->mNormalAttackTex[0][mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
 		break;
-<<<<<<< HEAD
-	case E_EAT_R:		
-		AnimeFrame(false, ANIME_TIME_EAT, FRAME_EAT);
-=======
 	case E_EAT_R:
-		AnimeFrame(false, ANIME_TIME_ATTACK);
->>>>>>> 97d02c8f7767f6aa041da256200778deabdb8b61
+		AnimeFrame(false, ANIME_TIME_ATTACK,FRAME_LIMIT3);
+
 		mRect.SetUv(CLoadPlayer::GetInstance()->mEatTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_EX01_R:
@@ -424,8 +410,7 @@ void CPlayer::AnimeScene(){
 		AnimeFrame(true, ANIME_TIME_BASE);
 		mRect.SetUv(CLoadPlayer::GetInstance()->mFlameTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
 		break;
-	case E_JUMP_R:
-		AnimeFrame(false, ANIME_TIME_JUMP);
+	case E_JUMP_R://特殊なのでジャンプメソッドで処理
 		mRect.SetUv(CLoadPlayer::GetInstance()->mJumpTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_BRAKE_R:
@@ -435,8 +420,8 @@ void CPlayer::AnimeScene(){
 	};
 
 /*エフェクトなのでcaseなし*/
-if (mSaveForword.x == LEFT){ mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutFlyTex, 0, 0, SIZE_TEX_CUTFLY_X, SIZE_TEX_CUTFLY_Y); }//飛ぶ斬撃()
-if (mSaveForword.x == RIGHT){ mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutFlyTex, SIZE_TEX_CUTFLY_X, 0, 0, SIZE_TEX_CUTFLY_Y); }//飛ぶ斬撃()
+if (mSaveForword.x == RIGHT){ mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutFlyTex, 0, 0, SIZE_TEX_CUTFLY_X, SIZE_TEX_CUTFLY_Y); }//飛ぶ斬撃()
+if (mSaveForword.x == LEFT){ mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutFlyTex, SIZE_TEX_CUTFLY_X, 0, 0, SIZE_TEX_CUTFLY_Y); }//飛ぶ斬撃()
 }
 /*能力変化のメソッド*/
 void CPlayer::ChangeStatus(){

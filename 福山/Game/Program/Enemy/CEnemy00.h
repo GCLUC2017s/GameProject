@@ -11,9 +11,6 @@
 #include "../Define/define.h"
 #include"../Player/CPlayer.h"
 
-#define FLAME_LIMIT 6 //フレーム数の上限
-
-
 const	 CVector2 Enemy00_first_pos
 = CVector2(character_limit_left*0.55, (character_limit_top + character_limit_bottom) / 2);	//エネミーの初期位置
 //現在はマップ自体の左端を見て配置している。

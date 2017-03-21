@@ -4,12 +4,10 @@
 #include "../MyNumber/CMyNumber.h"
 #include "../Player/CPlayer.h"
 #include  "../CGame/CGame.h"
-#define FIRST_R_NO_BG -100 //背景のレンダー初期設定
-#define FIRST_U_NO_BG -100 //背景のアップデータ初期設定
 #define FILE_BG_GROUND		"../CG/background/ground/"
 #define FILE_BG_SKY			"../CG/background/sky/"
 #define FILE_BG_TREE		"../CG/background/tree/"
-<<<<<<< HEAD
+
 #define TEX_SIZE_TREE_X 3200
 #define TEX_SIZE_TREE_Y 2400
 
@@ -18,13 +16,10 @@
 
 #define TEX_SIZE_GROWND_X 1600
 #define TEX_SIZE_GROWND_Y 400
-=======
-#define BG_SIZE_X 1600
-#define BG_SIZE_Y 400
->>>>>>> 97d02c8f7767f6aa041da256200778deabdb8b61
+
 #define SC_SPEED 0.5f
 
-
+/*現在調整中*/
 
 void CMap::Init() {
 	mGroundTex = new CTexture;
@@ -33,7 +28,7 @@ void CMap::Init() {
 
 	mGroundTex->load(FILE_BG_GROUND"ground_background.tga");
 	mSkyTex->load(FILE_BG_SKY"sky_background.tga");
-	mTreeTex->load(FILE_BG_TREE"background_tree.tga");
+	mTreeTex->load(FILE_BG_TREE"tree_background.tga");
 
 	mGround.SetVertex(-DISP_X, 0, DISP_X*10,character_limit_bottom);
 	mGround.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -43,24 +38,22 @@ void CMap::Init() {
 	mSky.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 	mSky.SetUv(mSkyTex, 0, 0, TEX_SIZE_SKY_X, TEX_SIZE_SKY_X);
 	
-<<<<<<< HEAD
-	for (int i = 0; i < TREE_NUM; i++)
+
+	for (int i = 0; i < TREE_MAX; i++)
 	{
-		mTree[i].SetVertex(-DISP_X, DISP_Y, DISP_X, -0);
-		mTree[i].SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-		mTree[i].SetUv(mTreeTex, 0, 0, TEX_SIZE_TREE_X, TEX_SIZE_TREE_Y);
-		mTree[i].position.x = first_pos.x + (DISP_X * 2)* i;
-		printf("%f\n", mTree[i].position.x);
+		mTree[E_AFTER][i].SetVertex(-DISP_X, DISP_Y, DISP_X, -0);
+		mTree[E_AFTER][i].SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+		mTree[E_AFTER][i].SetUv(mTreeTex, 0, 0, TEX_SIZE_TREE_X, TEX_SIZE_TREE_Y);
+		mTree[E_AFTER][i].position.x = first_pos.x + (DISP_X * 2)* i;
+
+		mTree[E_BEFORE][i].SetVertex(-DISP_X, DISP_Y, DISP_X, -0);
+		mTree[E_BEFORE][i].SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+		mTree[E_BEFORE][i].SetUv(mTreeTex, 0, 0, TEX_SIZE_TREE_X, TEX_SIZE_TREE_Y);
+		mTree[E_BEFORE][i].position.x = first_pos.x + (DISP_X * 2)* i;
 
 	}
-=======
-	mTree.SetVertex(-DISP_X, DISP_Y, DISP_X*10, -0);
-	mTree.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-	mTree.SetUv(mTreeTex, 0, 0, BG_SIZE_X, BG_SIZE_Y);
->>>>>>> 97d02c8f7767f6aa041da256200778deabdb8b61
 
 	mGround.position.x = first_pos.x;
-	mTree.position.x = first_pos.x;
 	mSky.position.x = first_pos.x;
 
 }
@@ -108,7 +101,10 @@ void CMap::Update() { //雲を動かす処理
 
 void CMap::Render() {
 	mSky.Render();
-	mTree.Render();
+	for (int i = 0; i < TREE_MAX; i++){
+		mTree[E_AFTER][i].Render();
+		mTree[E_BEFORE][i].Render();
+	}
 	mGround.Render();
 
 }

@@ -81,7 +81,7 @@ float x , y , mAxis は攻撃範囲 ,Cvector2は　自分のposを入れる
 */
 
 void CBase::Attack(float Forword, float x, float y, float Axis, CVector2 &mPos){
-	mAttackRange.SetVertex(x, y, -x, -y);
+	mAttackRange.SetVertex(-x, y, x, -y);
 	mAttackRange.SetColor(1.0f, 1.0f, 1.0f, 1.0f);			 //デバッグ用
 	if (Forword >= 0){											//右
 		mAttackRange.position = CVector2(mPos.x+ x, mPos.y);

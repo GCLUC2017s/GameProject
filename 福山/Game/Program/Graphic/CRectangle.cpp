@@ -1,6 +1,5 @@
 #include "CRectangle.h"
 
-
 CRectangle::CRectangle(float left, float top, float right, float bottom, float r, float g, float b, float a)
 :	//三角形クラスのコンストラクタを呼ぶ
 triangle1(left, top, left, bottom, right, bottom, r, g, b, a),

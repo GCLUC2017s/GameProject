@@ -69,7 +69,7 @@ float CGame::GetPlayerAxis(){
 	while (t != 0){
 		if (t->mMyNumber == E_PLAYER){
 			CPlayer *p;
-			p = (CPlayer*)t;
+			p = dynamic_cast<CPlayer*>(t); //‚±‚Á‚¿‚ðŽg‚¤‚æ‚¤‚É
 			return p->mAxis;
 		}
 		t = t->next;
