@@ -5,10 +5,10 @@
 #include <stdio.h>
 #include<time.h>
 #include<iostream>
-#include "CEnemybasetest.h"
 #include "../Load/CLoadBoss.h"
 #include "../Load/CLoadPlayer.h"
 #include "../CGame/CGame.h"
+#include"CEnemybasetest.h"
 /*
 
 
@@ -37,9 +37,9 @@ CKeyを使っている条件文は今後別の処理になります。
 #define BOSS_HATTACK "../CG\\BOSS\\HAttack\\"
 #define BOSS_DIE	 "../CG\\BOSS\\die\\"
 
-#define LOW_AT		mForward.x, SIZE_BOSS_X, SIZE_BOSS_Y,1, mPos      	//攻撃範囲
-#define HIGH_AT		mForward.x, SIZE_BOSS_X, SIZE_BOSS_Y,3, mPos      	//攻撃範囲
-#define MOVE_AT		mForward.x, SIZE_BOSS_X, SIZE_BOSS_Y,1, mPos      	//攻撃範囲
+#define LOW_AT		mForward.x, SIZE_BOSS_X*1.5f, SIZE_BOSS_Y,1.445f, mPos      	//攻撃範囲
+#define HIGH_AT		mForward.x, SIZE_BOSS_X*2.5f, SIZE_BOSS_Y,2.5f, mPos      	//攻撃範囲
+#define MOVE_AT		mForward.x, SIZE_BOSS_X*1.25f, SIZE_BOSS_Y,1.345f, mPos      	//攻撃範囲
 
 inline void InitRand(){
 	srand((unsigned int)time(NULL));
@@ -56,7 +56,7 @@ void CBoss::Init(){
 	CBase::RandPos(SIZE_BOSS_X, SIZE_BOSS_Y,&mPos);
 	/*テクスチャを張る*/
 	mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
-	mRect.SetUv(CLoadBoss::GetInstance()->mStay_tex[0], 0, 0, SIZE_TEX_BOSS_STAY_X, SIZE_TEX_BOSS_STAY_Y);
+	mRect.SetUv(CLoadBoss::GetInstance()->mStay_tex[0], 0, 0, -SIZE_TEX_BOSS_STAY_X, SIZE_TEX_BOSS_STAY_Y);
 	mForward = CVector2(1.0f, 0.0f);
 
 }
@@ -72,7 +72,7 @@ CBoss::CBoss() : mVelocity(0), mFlameCount(0), actionflag(false), motion(0), dir
 	mStatus = E_STAY_L;
 
 	//四角形の頂点設定
-	mRect.SetVertex(-SIZE_BOSS_X, SIZE_BOSS_Y, SIZE_BOSS_X, -SIZE_BOSS_Y);
+	mRect.SetVertex(SIZE_BOSS_X, SIZE_BOSS_Y, -SIZE_BOSS_X, -SIZE_BOSS_Y);
 	mShadow.SetVertex(-SIZE_SHADOW_X, SIZE_SHADOW_Y, SIZE_SHADOW_X, -SIZE_SHADOW_Y);
 	//四角形の色を設定
 	mRect.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -102,21 +102,20 @@ void CBoss::AnimeScene(){
 		/*歩き中*/
 	case E_WALK_L:
 		AnimeFrame(true, ANIME_TIME_BASE);
-		if (motion != EM_BACK_X){//バックステップ×
-			mRect.SetUv(CLoadBoss::GetInstance()->mWalk_tex[mAnimeFrame], SIZE_TEX_BOSS_WALK_X, 0, 0, SIZE_TEX_BOSS_WALK_Y);//左向き　
-		}
-		else{//バックステップ○
-			mRect.SetUv(CLoadBoss::GetInstance()->mWalk_tex[mAnimeFrame], 0, 0, SIZE_TEX_BOSS_WALK_X, SIZE_TEX_BOSS_WALK_Y);//右向き
-		}
+			mRect.SetUv(CLoadBoss::GetInstance()->mWalk_tex[mAnimeFrame], SIZE_TEX_BOSS_WALK_X, 0, 0, SIZE_TEX_BOSS_WALK_Y);
 		break;
 	case E_WALK_R:
 		AnimeFrame(true, ANIME_TIME_BASE);
+<<<<<<< HEAD
+			mRect.SetUv(CLoadBoss::GetInstance()->mWalk_tex[mAnimeFrame], 0, 0, SIZE_TEX_BOSS_WALK_X, SIZE_TEX_BOSS_WALK_Y);
+=======
 		if (motion != EM_BACK_X){//バックステップ×
 			mRect.SetUv(CLoadBoss::GetInstance()->mWalk_tex[mAnimeFrame], 0, 0, SIZE_TEX_BOSS_WALK_X, SIZE_TEX_BOSS_WALK_Y);//左向き
 		}
 		else{//バックステップ○			
 			mRect.SetUv(CLoadBoss::GetInstance()->mWalk_tex[mAnimeFrame], SIZE_TEX_BOSS_WALK_X, 0, 0, SIZE_TEX_BOSS_WALK_Y);//右向き
 		}
+>>>>>>> 97d02c8f7767f6aa041da256200778deabdb8b61
 		break;
 		/*攻撃*/
 	case E_ATTACK_L:
@@ -193,6 +192,9 @@ void CBoss::Update(){
 	rulerR = mTargetP.x - mPos.x;	//プレイヤーとの距離を出す
 	rulerL = mPos.x - mTargetP.x;
 
+
+
+
 	if (rulerL < 0){				//絶対値にする
 		rulerL = rulerL * -1;
 	}
@@ -243,32 +245,27 @@ void CBoss::Update(){
 				actionflag = true;
 				motion = EM_BACK_X;
 			}
-			else if (pattern == 4){
-				motion = EM_HIGH_AT;
-			}
 			else{
 				motion = EM_ATTCK;
 			}
 		}
 
-		//強攻撃の範囲内
-		if (HATTACK_PTT){
-			if (!actionflag){
-				pattern = rand() % 3; //0~2の中でランダムでパターンを選択する。
-			}
-			if (pattern == 0){
-				motion = EM_HIGH_AT;
-			}
-			else if (pattern == 1){
-				actionflag = true;
-				motion = EM_BACK_X;
-			}
-			else if (pattern == 2){
-				motion = EM_ATTCK;
-			}
-		}
-
-
+		////強攻撃の範囲内
+		//if (HATTACK_PTT){
+		//	if (!actionflag){
+		//		pattern = rand() % 3; //0~2の中でランダムでパターンを選択する。
+		//	}
+		//	if (pattern == 0){
+		//		motion = EM_HIGH_AT;
+		//	}
+		//	else if (pattern == 1){
+		//		actionflag = true;
+		//		motion = EM_BACK_X;
+		//	}
+		//	else if (pattern == 2){
+		//		motion = EM_ATTCK;
+		//	}
+		//}
 		if (NO_ATTACK_PTT){
 			actionflag = false;
 			motion = EM_WALK;
@@ -314,18 +311,18 @@ void CBoss::Update(){
 		}
 		/*範囲*/
 		Attack(LOW_AT);
-		if (mAnimeFrame == FRAME_LIMIT - 1){	///パンチの最後にあたり判定
+	///パンチの最後にあたり判定
 			mEnabledAttack = true;//攻撃終了
 			/*範囲内に近づく*/
 			if (rulerR > 2 || rulerL > 2){
 				actionflag = false;
 				motion = EM_WALK;
 			}
-		}
 		else{
 			mEnabledAttack = false;
 		}
 		break;
+
 	case EM_HIGH_AT:
 		/*モーション設定*/
 		if (RIGHT_PTT) {
@@ -355,6 +352,7 @@ void CBoss::Update(){
 	AlertHPRect(&mRect, mHitPoint);	//アラートメソッド(HP変化によるもの)
 	/*軸の設定*/
 	mAxis = mPos.y - SIZE_BOSS_Y;
+	mAttackRange.position = mPos;
 	/*範囲外調整*/
 	LimitDisp(SIZE_BOSS_X, SIZE_BOSS_Y);
 	/*レンダー順番設定*/

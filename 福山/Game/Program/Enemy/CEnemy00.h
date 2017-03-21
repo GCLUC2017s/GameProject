@@ -34,17 +34,18 @@ private:
 		E_WALK_L, E_WALK_R,
 		E_RUN_L, E_RUN_R,
 		E_ATTACK_L, E_ATTACK_R,
-		E_DIE_L, E_DIE_R
+		E_DIE_L, E_DIE_R,
+		E_LEFT,E_RIGHT
 	};
 
 	//const int mStatus;
-	int AnimePattern;				//全体のアニメーションパターン
+	int mAnimePattern;				//全体のアニメーションパターン
 	int mSaveAnime; //直前のアニメが何か判断用
 	int mFlameCount;		//フレーム数カウント用
 
 	CVector2 mSuvePos;//元いた位置の保存
 
-	int direction;	//左右の簡易判断
+	int mDirection;	//左右の簡易判断
 
 	float rulerR; //エネミーとキャラクターの距離
 	float rulerL; //エネミーとキャラクターの距離
@@ -52,12 +53,16 @@ private:
 	bool actionflag; //アクションをしている時は立てる
 
 	float delay;	//行動後の再抽選ディレイ
-	
+	float getAxis;
+	float downAxis;
+	float upAxis;
+
 	int motion;		
 	int pattern;
 
 	void Walk();
 	void AnimeScene();
+	void Motion();
 
 public:
 	CEnemy00();

@@ -23,8 +23,10 @@ void CCollisionManager::EnemyAttack(CBase *pl){
 		case E_BOSS:
 			CBase *ene;
 			ene = (CBase*)task;
-			if (CCollision::Collision(*ene, *pl, ene->mAttackAxis) && ene->mEnabledAttack){
-				pl->mHitPoint -= ene->mAttackPoint;
+			if (ene->mEnabledAttack){
+				if (CCollision::Collision(*ene, *pl, ene->mAttackAxis)){
+					pl->mHitPoint -= ene->mAttackPoint;
+				}
 			}
 			break;
 		}

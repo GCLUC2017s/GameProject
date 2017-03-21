@@ -9,8 +9,19 @@
 #define FILE_BG_GROUND		"../CG/background/ground/"
 #define FILE_BG_SKY			"../CG/background/sky/"
 #define FILE_BG_TREE		"../CG/background/tree/"
+<<<<<<< HEAD
+#define TEX_SIZE_TREE_X 3200
+#define TEX_SIZE_TREE_Y 2400
+
+#define TEX_SIZE_SKY_X 1600
+#define TEX_SIZE_SKY_Y 800
+
+#define TEX_SIZE_GROWND_X 1600
+#define TEX_SIZE_GROWND_Y 400
+=======
 #define BG_SIZE_X 1600
 #define BG_SIZE_Y 400
+>>>>>>> 97d02c8f7767f6aa041da256200778deabdb8b61
 #define SC_SPEED 0.5f
 
 
@@ -26,15 +37,27 @@ void CMap::Init() {
 
 	mGround.SetVertex(-DISP_X, 0, DISP_X*10,character_limit_bottom);
 	mGround.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-	mGround.SetUv(mGroundTex, 0, 0, BG_SIZE_X, BG_SIZE_Y);
+	mGround.SetUv(mGroundTex, 0, 0, TEX_SIZE_GROWND_X, TEX_SIZE_GROWND_Y);
 
 	mSky.SetVertex(-DISP_X, DISP_Y, DISP_X*10, 0);
 	mSky.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-	mSky.SetUv(mSkyTex, 0, 0, BG_SIZE_X, BG_SIZE_Y);
+	mSky.SetUv(mSkyTex, 0, 0, TEX_SIZE_SKY_X, TEX_SIZE_SKY_X);
 	
+<<<<<<< HEAD
+	for (int i = 0; i < TREE_NUM; i++)
+	{
+		mTree[i].SetVertex(-DISP_X, DISP_Y, DISP_X, -0);
+		mTree[i].SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+		mTree[i].SetUv(mTreeTex, 0, 0, TEX_SIZE_TREE_X, TEX_SIZE_TREE_Y);
+		mTree[i].position.x = first_pos.x + (DISP_X * 2)* i;
+		printf("%f\n", mTree[i].position.x);
+
+	}
+=======
 	mTree.SetVertex(-DISP_X, DISP_Y, DISP_X*10, -0);
 	mTree.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 	mTree.SetUv(mTreeTex, 0, 0, BG_SIZE_X, BG_SIZE_Y);
+>>>>>>> 97d02c8f7767f6aa041da256200778deabdb8b61
 
 	mGround.position.x = first_pos.x;
 	mTree.position.x = first_pos.x;
@@ -47,7 +70,7 @@ CMap::~CMap() {
 	CGame::Delete(&mSkyTex);
 	CGame::Delete(&mTreeTex);
 }
-CMap::CMap() :mGroundTex(0),mFlagSc(false),mLeftSc(0),mRightSc(BG_SIZE_X){
+CMap::CMap() :mGroundTex(0), mFlagSc(false), mLeftSc(0), mRightSc(TEX_SIZE_GROWND_X){
 	
 		mPriorityR = E_BACKGROWND;		//レンダー順番の初期設定
 		mPriorityU = E_BACKGROWND;		//アップデータ順番の初期設定
@@ -57,26 +80,26 @@ CMap::CMap() :mGroundTex(0),mFlagSc(false),mLeftSc(0),mRightSc(BG_SIZE_X){
 
 
 
-void CMap::Update() {
+void CMap::Update() { //雲を動かす処理
 	if (mFlagSc){
 		mRightSc += SC_SPEED;
 		mLeftSc += SC_SPEED;
-		if (mRightSc >= BG_SIZE_X){
+		if (mRightSc >= TEX_SIZE_GROWND_X){
 			mLeftSc = 0;
-			mRightSc = BG_SIZE_X;
+			mRightSc = TEX_SIZE_GROWND_X;
 			mFlagSc = false;
 		}
 	}
 	else{
 		mRightSc += SC_SPEED;
 		mLeftSc += SC_SPEED;
-		if (mLeftSc >= BG_SIZE_X){
-			mLeftSc = BG_SIZE_X;
+		if (mLeftSc >= TEX_SIZE_GROWND_X){
+			mLeftSc = TEX_SIZE_GROWND_X;
 			mRightSc = 0;
 			mFlagSc = true;
 		}
 	}
-	mSky.SetUv(mSkyTex, mLeftSc, 0, mRightSc, BG_SIZE_Y);
+	mSky.SetUv(mSkyTex, mLeftSc, 0, mRightSc, TEX_SIZE_GROWND_Y);
 }
 
 /* render

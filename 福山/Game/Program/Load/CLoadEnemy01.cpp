@@ -21,8 +21,18 @@ CLoadEnemy01::CLoadEnemy01(){
 	{
 		mStay_tex[i] = new CTexture();		//テクスチャクラスのインスタンス作成
 		mFly_tex[i] = new CTexture();		//テクスチャクラスのインスタンス作成
+<<<<<<< HEAD
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		mDie_tex[i] = new CTexture();
+	}
+	for (int i = 0; i < 16; i++){
+		mAttack_tex[i] = new CTexture();
+=======
 		mAttack_tex[i] = new CTexture();
 		mDie_tex[i] = new CTexture();
+>>>>>>> 97d02c8f7767f6aa041da256200778deabdb8b61
 	}
 	/*テクスチャファイル読み込み*/
 	mStay_tex[0]->load(ENEMY01_STAY"enemy01_stay_00.tga");
@@ -39,12 +49,24 @@ CLoadEnemy01::CLoadEnemy01(){
 	mFly_tex[4]->load(ENEMY01_Fly"enemy01_flyR_04.tga");
 	mFly_tex[5]->load(ENEMY01_Fly"enemy01_flyR_05.tga");
 
+<<<<<<< HEAD
+	mAttack_tex[0]->load(ENEMY01_ATTACK"enemy01_attack_00.tga");
+	mAttack_tex[1]->load(ENEMY01_ATTACK"enemy01_attack_01.tga");
+	mAttack_tex[2]->load(ENEMY01_ATTACK"enemy01_attack_02.tga");
+	mAttack_tex[3]->load(ENEMY01_ATTACK"enemy01_attack_03.tga");
+	mAttack_tex[4]->load(ENEMY01_ATTACK"enemy01_attack_04.tga");
+	mAttack_tex[5]->load(ENEMY01_ATTACK"enemy01_attack_05.tga");
+	mAttack_tex[6]->load(ENEMY01_ATTACK"enemy01_attack_06.tga");
+	mAttack_tex[7]->load(ENEMY01_ATTACK"enemy01_attack_07.tga");
+	mAttack_tex[8]->load(ENEMY01_ATTACK"enemy01_attack_08.tga");
+=======
 	mAttack_tex[0]->load(ENEMY01_ATTACK"enemy01_attackR_00.tga");
 	mAttack_tex[1]->load(ENEMY01_ATTACK"enemy01_attackR_00.tga");
 	mAttack_tex[2]->load(ENEMY01_ATTACK"enemy01_attackR_00.tga");
 	mAttack_tex[3]->load(ENEMY01_ATTACK"enemy01_attackR_00.tga");
 	mAttack_tex[4]->load(ENEMY01_ATTACK"enemy01_attackR_00.tga");
 	mAttack_tex[5]->load(ENEMY01_ATTACK"enemy01_attackR_00.tga");
+>>>>>>> 97d02c8f7767f6aa041da256200778deabdb8b61
 
 	mDie_tex[0]->load(ENEMY01_DIE"enemy01_dieR_00.tga");
 	mDie_tex[1]->load(ENEMY01_DIE"enemy01_dieR_01.tga");

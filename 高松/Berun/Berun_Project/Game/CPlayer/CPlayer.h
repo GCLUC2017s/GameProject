@@ -15,7 +15,7 @@
 
 class CPlayer : public CCharaBase
 {
-	void Key();
+	void Contlol();
 	CImage *mp_hp;
 	CImage *mp_sp;
 public:
@@ -24,7 +24,6 @@ public:
 	~CPlayer();
 //	void Update();
 	void Draw();
-	void HitCallBack(CCollisionA * p);
 };
 
 #endif // !CPLAYER_INCLUDE_GUARD
