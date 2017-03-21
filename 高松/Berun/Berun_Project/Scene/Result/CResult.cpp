@@ -3,6 +3,7 @@
 
 static CFont *font = nullptr;
 
+//各画像サイズ、座標の設定
 static T_ResultData g_resultdata[eMax] =
 {
 	{ 1280.0f,768.0f,{ 0.0f,0.0f } },
@@ -69,6 +70,7 @@ CResult::CResult() : m_xSize(0.0f), m_ySize(0.0f), m_step(0), m_corsol(0)
 	mp_img[27] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Item15"));
 	mp_img[28] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Item16"));
 	CSound::GetInstance()->GetSound("RESULT_BGM")->Play();
+
 	for (int j = 0; j < eMax; j++)
 	{
 		mp_data = &g_resultdata[j];
@@ -90,6 +92,7 @@ void CResult::Update()
 	if (!font) font = new CFont(L"HG丸ゴシックM-PRO", 35);
 	mp_img[0]->SetColor(0.5, 0.5, 0.5, 1);
 	//CItem::GetInstance()->AddItem(eCarrotItem,0);
+	//各項目の選択処理
 	switch (m_corsol)
 	{
 	case 0:

@@ -1,8 +1,12 @@
 #include "CTaskManager.h"
+#include "../Game/CPlayer/CPlayer.h"
 
 CTaskManager* CTaskManager::mp_instance = nullptr;
+CPlayer* CPlayer::mp_player = nullptr;
+
 CTaskManager::CTaskManager() : mp_head(nullptr), mp_tail(nullptr)
 {
+	
 }
 CTaskManager::~CTaskManager()
 {
@@ -93,4 +97,18 @@ void CTaskManager::ClearInstance()
 {
 	//ƒƒ‚ƒŠƒŠ[ƒN‰ñ”ğ
 	if (mp_instance != nullptr) delete mp_instance;
+}
+
+CPlayer * CTaskManager::GetPlayerInstance()
+{
+	if (mp_player == nullptr)
+	{
+		mp_player = new CPlayer(g_tutorialNo);
+	}
+	return mp_player;
+}
+
+void CTaskManager::ClearPlayerInstance()
+{
+	if (mp_player != nullptr) delete mp_player;
 }
