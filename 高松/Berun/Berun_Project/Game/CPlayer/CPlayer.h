@@ -23,6 +23,7 @@ public:
 	~CPlayer();
 //	void Update();
 	void Draw();
+	void HitCallBack(CCollisionA * p);
 };
 
 #endif // !CPLAYER_INCLUDE_GUARD

@@ -81,6 +81,7 @@ protected:
 	ESTATE m_state;
 	CImage *m_chara;
 	CImage *m_enemyHp;
+	CImage *m_red;
 	
 	const T_CharacterData  *mp_eData;
 	
@@ -115,6 +116,7 @@ protected:
 	int m_animCounter;
 	//ダッシュする時のスピード
 	int m_dashSpeed;
+	CVector3D m_oldPos;
 
 	unsigned int m_anim;
 	//キャラクターの向きを格納するフラグ

@@ -3,7 +3,7 @@
 #include "../Game/Tutorial/CTutorial.h"
 #include "../Game/Map/CMap.h"
 #include "../Game/Enemy/CEnemy.h"
-#include "../Game/CollisionA/CCollisionA.h"
+#include "../Game/CollisionManager/CollisionManager.h"
 #include "../Scene/CSceneManager.h"
 #include"../Game/Enemy/CEnemyManager.h"
 
@@ -20,9 +20,8 @@ CGame::~CGame()
 {
 	CSound::GetInstance()->GetSound("AREA_M_BGM")->Stop();
 }
-void CGame::Update()
-{
-	
+void CGame::Update() 
+{	
 switch (m_step)
 	{
 	case 0:
@@ -41,7 +40,6 @@ switch (m_step)
 			mp_img[0]->SetSize(85, 100);
 			mp_img[1]->SetSize(690, 90);
 			mp_img[2]->SetSize(700, 100);
-			mp_img[1]->SetRect(0, 0, p.x / 1200.0f, 90);
 			m_step++;
 		}
 		break;
@@ -59,8 +57,10 @@ switch (m_step)
 	default:
 		break;
 	}
+CCollisionManager::GetInstance()->UnRegistAll();
+CTaskManager::GetInstance()->DestroyAppoint();
 	CTaskManager::GetInstance()->UpdateAll();
-	CTaskManager::GetInstance()->DestroyAppoint();
+	CCollisionManager::GetInstance()->CheckHitAll();
 }
 void CGame::Draw()
 {
@@ -72,7 +72,6 @@ void CGame::Draw()
 		if (m_screen.x > 5120) m_screen.x = 5120;
 		mp_player->SetScroal(m_screen);
 
-		CCollisionA::CheckHit(mp_player, mp_enemy);
 	}
 
 	if (mp_player)
