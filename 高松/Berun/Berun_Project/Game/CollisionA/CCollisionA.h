@@ -12,6 +12,8 @@
 class CCollisionA
 {
 protected:
+	//キャラクターのタイプ
+	int m_type;
 	CCollisionA *mp_prev;					//前のアドレスを格納するポインタ
 	CCollisionA *mp_next;					//次のアドレスを格納するポインタ
 public:
@@ -19,6 +21,7 @@ public:
 	~CCollisionA();
 	virtual bool CheckHit(CCollisionA *t)=0;
 	virtual void HitCallBack(CCollisionA * p)=0;
+	void SetType(int t) { m_type = t; }
 	friend class CCollisionManager;
 };
 #endif

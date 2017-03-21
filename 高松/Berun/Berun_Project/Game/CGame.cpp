@@ -78,5 +78,4 @@ void CGame::Draw()
 			mp_img[i]->Draw();
 		}
 	}
-	
 }

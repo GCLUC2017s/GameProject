@@ -21,9 +21,9 @@ CEnemy::CEnemy(int type):CCharaBase(type,eUDP_Enemy,eDWP_Enemy)
 CEnemy::~CEnemy() {
 
 }
-void CEnemy::Key() {
+void CEnemy::Contlol() {
 
-	CCharaBase::Key();
+	CCharaBase::ResetKey();
 	
 	m_enemyHp->SetPos(m_pos.x, m_pos.z);
 

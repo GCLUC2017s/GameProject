@@ -16,7 +16,7 @@
 class CEnemy:public CCharaBase {
 private:
 	//int m_enemytime;
-	void Key();
+	void Contlol();
 	int m_enemyAppears;
 	
 public:

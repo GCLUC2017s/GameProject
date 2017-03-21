@@ -29,8 +29,8 @@ void CPlayer::Draw()
 	}
 }
 
-void CPlayer::Key() {
-	CCharaBase::Key();
+void CPlayer::Contlol() {
+	CCharaBase::ResetKey();
 	//以下、上下左右のキーを入力すればそれに応じてフラグが切り替わる
 	if (HOLD_KEY_UP)	m_up = true;
 	if (HOLD_KEY_DOWN)	m_down = true;
@@ -49,9 +49,4 @@ void CPlayer::Key() {
 	//スペースキーを入力したら、状態をジャンプにする処理
 	if (PUSH_KEY_SPASE)		m_jump = true;
 	if (PUSH_KEY_ENTER)		m_attack = true;
-}
-
-void CPlayer::HitCallBack(CCollisionA * p)
-{
-	printf("当たりました。\n");
 }
