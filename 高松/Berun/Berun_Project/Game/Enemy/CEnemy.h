@@ -8,7 +8,7 @@
 #define CENEMY_GUARD
 #include"../Global.h"
 #include "../../System/CharaBase/CCharaBase.h"
-
+class CPlayer;
 
 
 
@@ -18,7 +18,7 @@ private:
 	//int m_enemytime;
 	void Key();
 	int m_enemyAppears;
-	
+	CPlayer *mp_player;
 public:
 		
 	CEnemy(int type);

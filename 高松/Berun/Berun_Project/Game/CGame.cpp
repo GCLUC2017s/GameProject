@@ -27,7 +27,7 @@ switch (m_step)
 	{
 		if (mp_tutorial->GetEnd())
 		{
-			mp_enemy = new CEnemy(eCarrot);
+			mp_enemy = new CEnemy(eChick);
 			mp_player = new CPlayer(g_tutorialNo);
 			m_step++;
 			mp_tutorial->SetDestroyFlag(true);

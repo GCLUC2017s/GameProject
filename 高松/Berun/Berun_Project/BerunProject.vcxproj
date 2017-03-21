@@ -92,6 +92,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CEnemyManger.h" />
     <ClInclude Include="Game\CGame.h" />
     <ClInclude Include="Game\CollisionA\CCollisionA.h" />
     <ClInclude Include="Game\CPlayer\CPlayer.h" />
@@ -114,6 +115,7 @@
     <ClInclude Include="System\TaskSystem\CTaskManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CEnemyManager.cpp" />
     <ClCompile Include="Game\CGame.cpp" />
     <ClCompile Include="Game\CollisionA\CCollisionA.cpp" />
     <ClCompile Include="Game\CPlayer\CPlayer.cpp" />
