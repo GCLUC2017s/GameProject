@@ -16,13 +16,14 @@ CEnemy::CEnemy(int type):CCharaBase(type,eUDP_Enemy,eDWP_Enemy)
 	m_enemyHp = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Meter"));
 	
 	m_enemyHp->SetColor(1, 0, 0, 1);
+
+	mp_player = CPlayer::mp_player;
 	
 }
 CEnemy::~CEnemy() {
 
 }
 void CEnemy::Contlol() {
-
 	CCharaBase::ResetKey();
 	
 	m_enemyHp->SetPos(m_pos.x, m_pos.z);

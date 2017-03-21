@@ -57,7 +57,7 @@ switch (m_step)
 	default:
 		break;
 	}
-CCollisionManager::GetInstance()->UnRegistAll();
+	CCollisionManager::GetInstance()->UnRegistAll();
 CTaskManager::GetInstance()->DestroyAppoint();
 	CTaskManager::GetInstance()->UpdateAll();
 	CCollisionManager::GetInstance()->CheckHitAll();

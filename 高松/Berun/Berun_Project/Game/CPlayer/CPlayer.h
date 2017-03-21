@@ -19,6 +19,7 @@ class CPlayer : public CCharaBase
 	CImage *mp_hp;
 	CImage *mp_sp;
 public:
+	static CPlayer* mp_player;
 	CPlayer(int type);
 	~CPlayer();
 //	void Update();

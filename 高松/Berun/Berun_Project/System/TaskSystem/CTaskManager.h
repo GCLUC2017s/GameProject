@@ -36,6 +36,8 @@ public:
 	static CTaskManager* GetInstance();
 	//Ši”[‚³‚ê‚Ä‚¢‚é‚à‚Ì‚ğíœ
 	static void ClearInstance();
+
+	void Number(int i);
 };
 
 #endif

@@ -24,12 +24,13 @@ T_AnimData _carrotAnimData[] = {
 };
  static const T_CharacterData g_characterData[] =
 {
-	//ID,レベル、最大HP,現在HP,最大SP,現在SP,攻撃力,防御力,取得経験値,必要経験値,移動速度,ジャンプ力,キャラのタイプ(0 = Player,1 = Enemy)キャラクターの表示サイズ,キャラクターのアニメデータ,キャラクターの元画像での1サイズ,
-	{ "LittlePlayerM",0,5,5,5,3,3,0,0,0,1,1,0,0,{ 120,160 } ,_playerMAnimData,{ 550,900 },{ 60,160 },CRect(-40,-160,40,0),eItemMax },
-	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,1,0,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 150,180 },CRect(-180,-180,180,0),eItemMax },
-	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,1,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
-	//{ "Chick",2,5,0,0,0,0,0,0,0,1,0,0,{ 160,160 } ,_carrotAnimData,{ 240,224 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
-	//{ "Chick",3,5,0,0,0,0,0,0,0,1,0,0,0 },
+{ "LittlePlayerM",0,5,5,5,3,3,0,0,0,1,1,0,{ 120,160 } ,_playerMAnimData,{ 550,900 },{ 60,160 },CRect(-40,-160,40,0),eItemMax },
+	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,1,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 150,180 },CRect(-180,-180,180,0),eItemMax },
+	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Chick",3,5,0,0,0,0,0,0,0,1,0,0,{ 160,160 } ,_chicntAnimData,{ 225,225 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,{ 160,160 } ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,{ 160,160 } ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	//{ "Pig",4,5,0,0,0,0,0,0,0,1,0,0,{ 160,160 } ,_chicntAnimData,{ 225,225 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	//{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Rice",5,5,0,0,0,0,0,0,0,1,0,0,0 },
 };
