@@ -57,6 +57,9 @@
     <ClCompile Include="Game\CollisionA\CCollisionA.cpp">
       <Filter>Game\CCollision</Filter>
     </ClCompile>
+    <ClCompile Include="Game\CollisionManager\CollisionManager.cpp">
+      <Filter>Game\CCollisionManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Global.h" />
@@ -77,6 +80,9 @@
     </ClInclude>
     <ClInclude Include="Scene\CharaSelect\CCharaSelect.h">
       <Filter>Scene\CharaSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\CScene.h">
+      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Scene\CSceneChangeAnimation.h">
       <Filter>Scene</Filter>
@@ -114,8 +120,8 @@
     <ClInclude Include="Game\CollisionA\CCollisionA.h">
       <Filter>Game\CCollision</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\CScene.h">
-      <Filter>Scene\Title</Filter>
+    <ClInclude Include="Game\CollisionManager\CollisionManager.h">
+      <Filter>Game\CCollisionManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +172,9 @@
     </Filter>
     <Filter Include="Game\CCollision">
       <UniqueIdentifier>{f821a886-4b42-465a-9dfe-6d68df4afed6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\CCollisionManager">
+      <UniqueIdentifier>{de6210b6-6005-4e9c-bd50-b373be9a168f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
