@@ -23,9 +23,10 @@ private:
 	int m_enemy;
 	int m_enemyType;
 	CPlayer *mp_player;
+	CImage *m_enemyHp;
 //	static CEnemyManager* m_instance;
 public:
-
+	
 	CEnemyManager();
 
 	~CEnemyManager();
