@@ -8,7 +8,6 @@ CTutorial::CTutorial(char * file) : CTask(0,0,0),
 									m_end(0), 
 									m_state(0)
 {
-	assert(0 <= g_tutorialNo && g_tutorialNo < ARRAY_SIZE(mp_img), "ARRAY_SIZE_ERROR");
 	file = g_tutorialDataPath[g_tutorialNo];
 	mp_img[0] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("PlayerM"));
 	mp_img[1] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("PlayerW"));
@@ -35,7 +34,6 @@ void CTutorial::Update()
 	//スペースキーでチュートリアルスキップ
 	if (CInput::GetState(0, CInput::ePush, CInput::eButton5)) m_end = TEXT_END;
 
-	assert(0 <= g_tutorialNo && g_tutorialNo < ARRAY_SIZE(mp_img),"ARRAY_SIZE_ERROR");
 	mp_img[g_tutorialNo]->SetSize(400, 800);
 	mp_img[g_tutorialNo]->SetPos(-50, 100);
 	mp_img[2]->SetSize(1000, 300);
