@@ -296,7 +296,7 @@ void CEnemy00::Update(){
 	mTargetP = CGame::mGetPlayerPos();
 	getAxis = CGame::GetPlayerAxis();
 	rulerR = mTargetP.x - mPos.x;	//プレイヤーとの距離を出す
-	rulerL = mPos.x- mTargetP.x;
+	rulerL = mPos.x - mTargetP.x;
 	if (rulerL<0){				//絶対値にする
 		rulerL = rulerL * -1;
 	}

@@ -1,3 +1,8 @@
+/*
+BossテクスチャLood(時間があればまとめます)クラス
+担当者 冨田健斗
+*/
+
 #include "../Graphic/CTexture.h"
 #include "../Define/define.h"
 

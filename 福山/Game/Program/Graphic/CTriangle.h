@@ -1,4 +1,7 @@
-
+/*
+三角形クラス
+担当者　 冨田健斗
+*/
 #ifndef TRIANLE_HPP
 #define TRIANLE_HPP
 #include "glut.h"	//OpenGLユーティリティのインクルード

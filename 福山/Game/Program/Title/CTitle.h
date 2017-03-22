@@ -1,3 +1,7 @@
+/*
+タイトルクラス
+担当者　高橋弘樹 && 冨田健斗
+*/
 #pragma once
 #include"../Base/CBase.h"
 #include"../Graphic/CRectangle.h"

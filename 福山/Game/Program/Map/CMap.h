@@ -1,4 +1,7 @@
-/**/
+/*
+マップクラス
+担当者　冨田健斗　
+*/
 #ifndef MAP_HPP
 #define MAP_HPP
 #include "../Define/define.h"

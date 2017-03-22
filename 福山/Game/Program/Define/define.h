@@ -1,6 +1,6 @@
 /*
 マクロ
-担当者　冨田健斗 
+担当者　冨田健斗
 */
 #ifndef DEFINE_HPP
 #define DEFINE_HPP
@@ -25,7 +25,7 @@ const float character_limit_top = 0;	    //進める上限(上)
 const float character_limit_right = DISP_X * 9;		 //進める上限(右)
 const float character_limit_bottom = -DISP_Y;		//進める上限(下)
 
-
+#define FPS 60
 #define UP_KEY VK_UP
 #define DOWN_KEY VK_DOWN
 #define RIGHT_KEY VK_RIGHT
