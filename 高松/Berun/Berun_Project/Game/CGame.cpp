@@ -42,7 +42,7 @@ switch (m_step)
 	case 1:
 	{
 		CVector3D p = mp_player->GetPos();
-		if (p.x > 5000.0f)
+		if (p.x > GOAL_POS)
 		{
 			CSceneManager::GetInstance()->Quit(60, eResult);
 			m_step++;
@@ -64,12 +64,12 @@ void CGame::Draw()
 	{
 		CVector3D m_playerPos = mp_player->GetPos();
 		CVector2D m_screen = CVector2D(m_playerPos.x - 640, 0);
-		float pos = m_playerPos.x / 1200.0f;
-		mp_img[0]->SetPos(pos * 700, 588);
-		mp_img[1]->SetPos(285, 625);
+		float pos = m_playerPos.x / GOAL_POS;
+		if(m_playerPos.x > 70 && m_playerPos.x < GOAL_POS) mp_img[0]->SetPos(pos * 650 + 250, 588);
+		mp_img[1]->SetPos(280, 625);
 		mp_img[2]->SetPos(294, 599);
 		mp_img[0]->SetSize(85, 100);
-		mp_img[1]->SetSize(pos * 690, 90);
+		mp_img[1]->SetSize(700, 90);
 		mp_img[2]->SetSize(700, 100);
 		if (m_screen.x < 0) m_screen.x = 0;
 		if (m_screen.x > 5120) m_screen.x = 5120;
