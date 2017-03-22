@@ -35,7 +35,7 @@ switch (m_step)
 		{	
 			mp_player = new CPlayer(g_tutorialNo);
 			new CEnemyManager();
-			mp_enemy = new CEnemy(eCarrot);
+			mp_enemy = new CEnemy(ePig);
 			mp_tutorial->SetDestroyFlag(true);
 			mp_img[0]->SetPos(280, 310);
 			mp_img[0]->SetSize(700, 150);
@@ -89,7 +89,7 @@ void CGame::Draw()
 			mp_img[0]->Draw();
 		}
 	}
-//	GameOver();
+//	if() GameOver();
 }
 void CGame::GameOver()
 {

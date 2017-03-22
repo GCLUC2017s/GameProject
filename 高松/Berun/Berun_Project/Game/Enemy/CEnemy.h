@@ -25,6 +25,7 @@ private:
 	int m_enemyTime;
 	int m_enemyPatarn;
 	int m_cont;
+	float m_chickTime;
 public:
 	
 	CEnemy(int type);
