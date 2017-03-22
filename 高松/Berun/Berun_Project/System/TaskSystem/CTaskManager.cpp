@@ -81,10 +81,13 @@ void CTaskManager::DrawAll()
 CTask* CTaskManager::GetTask(int id)
 {
 	CTask *p;
+	//引数があれば
 	while (id)
 	{
+		//idが一致していればそのタスクを返す
 		if (p->m_id == id) return p;
 	}
+	//以外ならnullを返す
 	return nullptr;
 }
 
@@ -92,10 +95,13 @@ int CTaskManager::GetCount(int id)
 {
 	int cnt = 0;
 	CTask *p;
+	//引数があれば
 	while (id)
 	{
+		//idが一致していればカウントアップ
 		if(p->m_id == id) cnt++;
 	}
+	//個数を返す
 	return cnt;
 }
 

@@ -1,7 +1,6 @@
 /**
 * @file		CSceneChangeAnimation.h
 * @brief	シーン切り替えアニメクラス
-*
 * @author	yuki yamaji
 */
 

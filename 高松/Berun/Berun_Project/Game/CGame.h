@@ -35,7 +35,6 @@ public:
 	void Update();
 	void Draw();
 	static CGame* GetInstance();
-	//Ši”[‚³‚ê‚Ä‚¢‚é‚à‚Ì‚ğíœ
 	static void ClearInstance();
 };
 

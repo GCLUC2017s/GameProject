@@ -31,7 +31,9 @@ public:
 	void UpdateAll();
 	//リスト描画関数
 	void DrawAll();
+	//タスク取得関数
 	CTask* GetTask(int id);
+	//タスクカウント関数
 	int GetCount(int id);
 	//CTaskManagerを生成して変数に格納
 	static CTaskManager* GetInstance();

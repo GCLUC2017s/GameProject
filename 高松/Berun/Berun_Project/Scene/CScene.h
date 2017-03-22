@@ -1,7 +1,6 @@
 /**
 * @file		CScene.h
 * @brief	シーン基底クラス
-*
 * @author	yuki yamaji
 */
 
