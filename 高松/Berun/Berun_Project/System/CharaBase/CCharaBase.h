@@ -14,6 +14,8 @@
 #define CHARA_MOVE 4
 #define ANIM_REVISION 1
 #define DAMAGE_TIME 2
+#define WINDOW_UP_LIMIT	600
+#define WINDOW_DOWN_LIMIT 100
 #define FLASH_INTERBAL MILLI_SECOUND(0.2f)
 
 
@@ -143,6 +145,7 @@ protected:
 	//ƒWƒƒƒ“ƒv’†‚©‚Ç‚¤‚©‚ğŠi”[‚·‚é•Ï”(false = No,true = Yes)
 	bool m_jumpFlag;
 	bool m_attack;
+	bool m_death;
 	void ResetKey();
 	virtual void Contlol();
 	void Move();
@@ -161,6 +164,10 @@ public:
 	CVector3D GetPos()
 	{
 		return m_pos;
+	}
+	bool GetDeath()
+	{
+		return m_death;
 	}
 
 };

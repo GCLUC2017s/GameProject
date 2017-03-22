@@ -88,8 +88,9 @@ void CGame::Draw()
 		{
 			mp_img[0]->Draw();
 		}
+		//死亡フラグが立っていれば、ゲームオーバーの処理
+		if (mp_player->GetDeath()) GameOver();
 	}
-//	if() GameOver();
 }
 void CGame::GameOver()
 {

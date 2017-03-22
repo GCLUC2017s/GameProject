@@ -37,24 +37,27 @@ void CPlayer::Draw()
 
 void CPlayer::Contlol() {
 	CCharaBase::ResetKey();
-	//以下、上下左右のキーを入力すればそれに応じてフラグが切り替わる
-	if (HOLD_KEY_UP)	m_up = true;
-	if (HOLD_KEY_DOWN)	m_down = true;
-	if (HOLD_KEY_LEFT)	m_left = true;
-	if (HOLD_KEY_RIGHT)	m_right = true;
-	//ジャンプ中、ダメージ中以外に何らかの移動キーを入力していれば、状態を歩きに設定する処理
-	if (m_state != eState_Jump && m_state != eState_Damage)
+	if (!m_death)
 	{
-		if (HOLD_KEY_UP || HOLD_KEY_DOWN || HOLD_KEY_LEFT || HOLD_KEY_RIGHT)	m_state = eState_Move;
+		//以下、上下左右のキーを入力すればそれに応じてフラグが切り替わる
+		if (HOLD_KEY_UP)	m_up = true;
+		if (HOLD_KEY_DOWN)	m_down = true;
+		if (HOLD_KEY_LEFT)	m_left = true;
+		if (HOLD_KEY_RIGHT)	m_right = true;
+		//ジャンプ中、ダメージ中以外に何らかの移動キーを入力していれば、状態を歩きに設定する処理
+		if (m_state != eState_Jump && m_state != eState_Damage)
+		{
+			if (HOLD_KEY_UP || HOLD_KEY_DOWN || HOLD_KEY_LEFT || HOLD_KEY_RIGHT)	m_state = eState_Move;
+		}
+		//シフトキーを入力していれば、状態をダッシュに設定する処理
+		if (HOLD_KEY_SHIFT)	m_dash = true;
+		else m_dash = false;
+		if (m_dash) m_dashSpeed = DASH_SPEED;
+		else m_dashSpeed = WALK_SPEED;
+		//スペースキーを入力したら、状態をジャンプにする処理
+		if (PUSH_KEY_SPASE)		m_jump = true;
+		if (PUSH_KEY_ENTER)		m_attack = true;
 	}
-	//シフトキーを入力していれば、状態をダッシュに設定する処理
-	if (HOLD_KEY_SHIFT)	m_dash = true;
-	else m_dash = false;
-	if (m_dash) m_dashSpeed = DASH_SPEED;
-	else m_dashSpeed = WALK_SPEED;
-	//スペースキーを入力したら、状態をジャンプにする処理
-	if (PUSH_KEY_SPASE)		m_jump = true;
-	if (PUSH_KEY_ENTER)		m_attack = true;
 }
 
 void CPlayer::HitCallBack(CCollisionA * p)
@@ -67,7 +70,11 @@ void CPlayer::HitCallBack(CCollisionA * p)
 		if (!m_damage)
 		{
 			m_hp--;
-			if (!m_hp);
+			if (!m_hp)
+			{
+				m_chara->SetAng(3.14 / 2);
+				m_death = true;
+			}
 			if (m_pos.x < tt->GetPos().x)	m_damageDirection = true;
 			if (m_pos.x > tt->GetPos().x)	m_damageDirection = false;
 		}

@@ -31,6 +31,13 @@ public:
 	void UpdateAll();
 	//リスト描画関数
 	void DrawAll();
+	//
+	//タスク入れ替え関数
+	void SwapTask(CTask **p, CTask **n);
+	//昇順ソート関数（更新用）
+	void SortAscUpdate();
+	//昇順ソート関数（描画用）
+	void SortAscDraw();
 	//タスク取得関数
 	CTask* GetTask(int id);
 	//タスクカウント関数
