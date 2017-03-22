@@ -20,7 +20,6 @@ class CPlayer : public CBase {
 private:
 
 	CRectangle	mAttackCollision[NORMALATTACK_PATTERN]; //あたり判定だけの四角形
-
 	/*
 	自分がどのアニメーションか判断用
 	enum文
@@ -52,7 +51,7 @@ private:
 	float mEx01Speed;				//必殺技の進むスピード
 	float mHungryPower;				//おなかが減る減らないの力の変化 += して使う(攻撃力)
 	float mHungrySSpp;				//おなかが減る減らないの力の変化 += して使う(スピード)
-	 
+
 	bool mEnabledJumpAttack;			//ジャンプATTACKフラグ
 
 	enum MyHungry
@@ -66,7 +65,8 @@ private:
 	CVector2 mTarget;
 	CVector2 mSuvePos;				//元いた位置の保存
 	
-	CVector2 mJumpAttackPos;			//攻撃範囲設定
+	CVector2 mJAttackPos;			//攻撃範囲設定ジャンプ攻撃
+	CVector2 mJAttackxy;			//攻撃範囲設定ジャンプ攻撃
 
 	/*移動処理*/
 	void Move();

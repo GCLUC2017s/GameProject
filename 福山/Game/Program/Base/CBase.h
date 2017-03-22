@@ -97,6 +97,7 @@ public:
 	CRectangle  mRect;				//画像用
 	CRectangle  mShadow;			//影
 	CRectangle mAttackRange;		//攻撃範囲の四角形
+	CRectangle mDummyEffect;			//Effectテクスチャ用
 
 	bool mEnabledEat;				//有効フラグ　食べる(プレイヤー)
 	bool mEnabledEaten;				//有効フラグ 食べられた(エネミー)
@@ -140,7 +141,10 @@ public:
 	0未満　が  左
 	float x , y , mAxis は攻撃範囲 ,Cvector2は　自分のposを入れる
 	*/
-	void Attack(float Forword, float x, float y,float mAxis, CVector2 &mPos);
+	void Attack(float Forword, float x, float y, float mAxis, CVector2 &mPos);
+	/*回転rect関数*/
+	void TurnRect(CRectangle *rect);
+	void JumpAttack(float Forword, float x, float y, float mAxis, CVector2 &mPos);
 	bool FrameTime(float time);
 	void RandPos(int x, int y, CVector2 *mPos);		//ポジションをランダムにする	サイズをx,yに当てはめる
 	/*HPによるアラート関数*/

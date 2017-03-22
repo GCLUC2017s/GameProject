@@ -79,15 +79,29 @@ float Forwordは現在の向きを入れる
 float x , y , mAxis は攻撃範囲 ,Cvector2は　自分のposを入れる
 
 */
+#define FRAME_EFFECT 3
+void CBase::TurnRect(CRectangle *rect){
+	rect->triangle1.x1 = rect->triangle1.x3;
+	rect->triangle1.y2 = rect->triangle1.y1;
+	rect->triangle1.x3 = rect->triangle1.x2;
+	rect->triangle2.x2 = rect->triangle2.x1;
+	rect->triangle2.y3 = rect->triangle2.y2;
+	rect->triangle2.x1 = rect->triangle2.x3;
+}
+
 
 void CBase::Attack(float Forword, float x, float y, float Axis, CVector2 &mPos){
 	mAttackRange.SetVertex(-x, y, x, -y);
-	mAttackRange.SetColor(1.0f, 1.0f, 1.0f, 1.0f);			 //デバッグ用
+	mDummyEffect.SetVertex(-x, y, x, -y);
+	mDummyEffect.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+	mAttackRange.SetColor(1.0f, 1.0f, 1.0f, 1.0f);		
 	if (Forword >= 0){											//右
 		mAttackRange.position = CVector2(mPos.x+ x, mPos.y);
+		mDummyEffect.position = mAttackRange.position;
 	}
 	else{														//左
 		mAttackRange.position = CVector2(mPos.x- x, mPos.y);
+		mDummyEffect.position = mAttackRange.position;
 	}
 	mAttackAxis = Axis;
 }
