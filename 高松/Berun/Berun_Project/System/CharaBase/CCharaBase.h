@@ -13,6 +13,8 @@
 #define ARRAY_SIZE(a)(sizeof(a)/sizeof(a[0]))
 #define CHARA_MOVE 4
 #define ANIM_REVISION 1
+#define DAMAGE_TIME 2
+#define FLASH_INTERBAL 0.2f
 
 
 struct T_AnimData {
@@ -69,7 +71,7 @@ protected:
 		eState_Jump,
 		eState_Move,
 		eState_Attack,
-		
+		eState_Damage,
 	};
 	enum EANIM {
 		eAnim_Idle,
@@ -117,10 +119,11 @@ protected:
 	int m_animCounter;
 	//ダッシュする時のスピード
 	int m_dashSpeed;
+	int m_flashTyming;
 	//ダメージを受けているかどうかを格納する変数
 	bool m_damage;
 	//ダメージを受けた後の無敵時間を格納する変数
-	//float m_damage;
+	float m_damageTime;
 	CVector3D m_oldPos;
 
 	unsigned int m_anim;

@@ -35,13 +35,15 @@ switch (m_step)
 			new CEnemyManager();
 			mp_enemy = new CEnemy(eChick);
 			mp_tutorial->SetDestroyFlag(true);
+			mp_img[0]->SetPos(280, 310);
+			mp_img[0]->SetSize(700, 150);
 			m_step++;
 		}
 		break;
 	}
 	case 1:
 	{
-		m_cnt++;
+	
 		CVector3D p = mp_player->GetPos();
 		if (p.x > GOAL_POS)
 		{
@@ -74,18 +76,18 @@ void CGame::Draw()
 		if (m_screen.x < 0) m_screen.x = 0;
 		if (m_screen.x > 5120) m_screen.x = 5120;
 		mp_player->SetScroal(m_screen);
+		m_cnt++;
 		for (int i = 1; i < IMG_ARRAY; i++)
 		{
 			mp_img[i]->Draw();
 		}
 		
-		if (mp_tutorial->GetEnd() && m_cnt < 60)
+		if (m_cnt < 60)
 		{
-			mp_img[0]->SetPos(280,310);
-			mp_img[0]->SetSize(700, 150);
 			mp_img[0]->Draw();
 		}
 	}
+
 }
 
 CGame * CGame::GetInstance()
