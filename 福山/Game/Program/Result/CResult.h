@@ -23,12 +23,16 @@ private:
 	CRectangle mRectMainLogo;	//ゲームオーバーかゲームクリア
 	CRectangle mRectLogo[LOGO_MAX];
 	CRectangle mRectFilter;
+	CRectangle mRectFrame;
+	CRectangle mRectStoryResult;
 
 	CTexture *mEvaluationT;
 	CTexture *mLogoTex[LOGO_MAX];
 	CTexture *mClearLoagoT;
 	CTexture *mGameOverLogoT;
 	CTexture *mFilterTex;
+	CTexture *mFrameTex;
+	CTexture *mStoryResultTex;
 	/*ロゴの名前*/
 	enum MyLogo
 	{

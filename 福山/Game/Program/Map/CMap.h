@@ -9,10 +9,11 @@
 #include <stdio.h>
 #include "../Base/CBase.h"
 #define TREE_MAX  10
+#define GROWND_MAX  10
 #define BEFORE_AND_AFTER 2 
 class CMap :public CTask{
 private:
-	CRectangle mGround;			//”wŒi‚Ì’n–Ê
+	CRectangle mGround[GROWND_MAX];			//”wŒi‚Ì’n–Ê
 	CRectangle mSky;		//‹ó
 	CRectangle mTree[BEFORE_AND_AFTER][TREE_MAX];		//–Ø
 	enum MyTree

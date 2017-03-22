@@ -31,6 +31,7 @@ private:
 		E_STAY_L, E_WALK_L,
 		E_RUN_L, E_NORMALATTACK_A_L,
 		E_NORMALATTACK_B_L, E_NORMALATTACK_C_L,
+		E_JUMPATTACK_L,
 		E_EAT_L, E_EX01_L,
 		E_EX02_L, E_FLAME_L,
 		E_JUMP_L, E_BRAKE_L,
@@ -38,6 +39,7 @@ private:
 		E_STAY_R, E_WALK_R,
 		E_RUN_R, E_NORMALATTACK_A_R,
 		E_NORMALATTACK_B_R, E_NORMALATTACK_C_R,
+		E_JUMPATTACK_R,
 		E_EAT_R, E_EX01_R,
 		E_EX02_R, E_FLAME_R,
 		E_JUMP_R, E_BRAKE_R,
@@ -50,6 +52,8 @@ private:
 	float mEx01Speed;				//必殺技の進むスピード
 	float mHungryPower;				//おなかが減る減らないの力の変化 += して使う(攻撃力)
 	float mHungrySSpp;				//おなかが減る減らないの力の変化 += して使う(スピード)
+	 
+	bool mEnabledJumpAttack;			//ジャンプATTACKフラグ
 
 	enum MyHungry
 	{
@@ -62,6 +66,7 @@ private:
 	CVector2 mTarget;
 	CVector2 mSuvePos;				//元いた位置の保存
 	
+	CVector2 mJumpAttackPos;			//攻撃範囲設定
 
 	/*移動処理*/
 	void Move();

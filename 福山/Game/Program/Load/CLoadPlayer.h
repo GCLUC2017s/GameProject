@@ -19,6 +19,7 @@ public:
 	CTexture	*mWalkTex[FRAME_LIMIT8];									//歩くテクスチャ
 	CTexture	*mRunTex[FRAME_LIMIT8];									//走るテクスチャ
 	CTexture	*mNormalAttackTex[NORMALATTACK_PATTERN][FRAME_LIMIT];	//通常攻撃テクスチャ
+	CTexture	*mJumpAttackTex[FRAME_LIMIT];
 
 	CTexture	*mEatTex[FRAME_LIMIT3];									//捕食テクスチャ
 	CTexture	*mEx01Tex[FRAME_LIMIT8];									//必殺技(消費)テクスチャ									

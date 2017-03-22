@@ -24,8 +24,9 @@
 
 #define PL_HP_X 2.0f //ゲージx　 //HPはこちらから使うように(初期値)
 #define PL_HP_Y 0.15f//ゲージy
-#define PL_ST_X 2.0f //ゲージx
-#define PL_ST_Y 0.15f//ゲージy
+#define PL_ST_X 4.5f //ゲージx
+#define PL_ST_Y 0.5f//ゲージy
+#define PL_ST_FR_Y 0.3f//ゲージy
 
 #define SIZE_PL_FRAME_X PL_HP_X //フレームＸ
 #define SIZE_PL_FRAME_Y 0.2f  //フレームY			
@@ -40,21 +41,22 @@
 #define SIZE_BOSS_FRAME_Y	0.2f			
 /*ＰＬＡＹＥＲの攻撃力*/
 #define PL_NORMAL_POWER 0.05f*0.5f
+#define PL_JUMP_AT_POWER 0.07f*0.5f
 #define PL_EAT_POWER	0.06f*0.5f
-#define PL_EX01_POWER	0.1f*0.5f
+#define PL_EX01_POWER	0.15f*0.5f
 /*エネミーの攻撃力*/
-#define ENE00_POWER		0.05f
-#define ENE01_POWER		0.05f
-#define BOSS_JAB_POWER	0.1f
-#define BOSS_HIGH_POWER	0.2f
+#define ENE00_POWER		0.0000000005f
+#define ENE01_POWER		0.0000000005f
+#define BOSS_JAB_POWER	0.001f
+#define BOSS_HIGH_POWER	0.002f
 /*ＰＯＩＮＴ*/
 #define POINT_00		(int)100
 #define POINT_01		(int)200
 #define POINT_BOSS		(int)1000
 #define POINT_PLAYER	(int)-2000
 /*エネミー数*/
-#define ENE00_LIMIT	5
-#define ENE01_LIMIT	5
+#define ENE00_LIMIT	3
+#define ENE01_LIMIT	3
 #define BOSS_LIMIT	1
 
 #define TEX_FILE_SHADOW		"../CG/shadow/"		//影のファイル場所
