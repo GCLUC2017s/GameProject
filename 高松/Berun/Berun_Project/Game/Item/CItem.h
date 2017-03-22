@@ -28,7 +28,6 @@ struct T_Item
 class CItem : public CBase
 {
 private:
-	static CItem* mp_instance;
 	int  m_itemArray[eItemMax];
 public:
 	CItem();
@@ -48,7 +47,6 @@ public:
 	{
 		return m_itemArray[type];
 	}
-	static CItem* GetInstance();
-	static void ClearInstance();
+	
 };
 #endif
