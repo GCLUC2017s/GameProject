@@ -44,12 +44,6 @@
     <ClCompile Include="System\CharaBase\CCharaBase.cpp">
       <Filter>System\CharaBase</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Tutorial\CTutorial.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\Test\CTest.cpp">
-      <Filter>Scene\Test</Filter>
-    </ClCompile>
     <ClCompile Include="Global.cpp" />
     <ClCompile Include="Game\Item\CItem.cpp">
       <Filter>Game\Item</Filter>
@@ -62,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="Game\Enemy\CEnemyManager.cpp">
       <Filter>Game\CEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Tutorial\CTutorial.cpp">
+      <Filter>Game\Tutorial</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -111,12 +108,6 @@
     <ClInclude Include="System\CharaBase\CCharaBase.h">
       <Filter>System\CharaBase</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Tutorial\CTutorial.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\Test\CTest.h">
-      <Filter>Scene\Test</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Item\CItem.h">
       <Filter>Game\Item</Filter>
     </ClInclude>
@@ -128,6 +119,9 @@
     </ClInclude>
     <ClInclude Include="Game\Enemy\CEnemyManager.h">
       <Filter>Game\CEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Tutorial\CTutorial.h">
+      <Filter>Game\Tutorial</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -170,9 +164,6 @@
     <Filter Include="System\CharaBase">
       <UniqueIdentifier>{33e74366-9285-4d17-8b40-1fbcc312084d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene\Test">
-      <UniqueIdentifier>{6a786dcd-2146-4b30-a76a-e38931379c80}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Item">
       <UniqueIdentifier>{cc267a3f-4e23-43fc-bff4-8fb6fd303cc0}</UniqueIdentifier>
     </Filter>
@@ -181,6 +172,9 @@
     </Filter>
     <Filter Include="Game\CCollisionManager">
       <UniqueIdentifier>{de6210b6-6005-4e9c-bd50-b373be9a168f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Tutorial">
+      <UniqueIdentifier>{79c4f91c-9102-45d3-bece-1338fe1b937e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

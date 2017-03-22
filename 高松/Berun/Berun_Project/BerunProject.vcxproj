@@ -108,7 +108,6 @@
     <ClInclude Include="Scene\CSceneManager.h" />
     <ClInclude Include="Scene\Logo\CLogo.h" />
     <ClInclude Include="Scene\Result\CResult.h" />
-    <ClInclude Include="Scene\Test\CTest.h" />
     <ClInclude Include="Scene\Title\CTitle.h" />
     <ClInclude Include="System\Base\CBase.h" />
     <ClInclude Include="System\CharaBase\CCharaBase.h" />
@@ -132,7 +131,6 @@
     <ClCompile Include="Scene\CSceneManager.cpp" />
     <ClCompile Include="Scene\Logo\CLogo.cpp" />
     <ClCompile Include="Scene\Result\CResult.cpp" />
-    <ClCompile Include="Scene\Test\CTest.cpp" />
     <ClCompile Include="Scene\Title\CTitle.cpp" />
     <ClCompile Include="System\Base\CBase.cpp" />
     <ClCompile Include="System\CharaBase\CCharaBase.cpp" />

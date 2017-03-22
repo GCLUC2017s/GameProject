@@ -8,7 +8,7 @@
 #define ITEM_GUARD
 
 #include "../Global.h"
-#include "Base\CBase.h"
+#include "Base/CBase.h"
 
 enum E_Item
 {
