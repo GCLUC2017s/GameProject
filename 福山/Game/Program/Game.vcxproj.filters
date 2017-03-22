@@ -66,7 +66,7 @@
     <Filter Include="GameScene">
       <UniqueIdentifier>{b4fa9412-6e8b-452f-a5f1-6804abcde9a8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Clear">
+    <Filter Include="Result">
       <UniqueIdentifier>{c4198125-4827-4e9a-8eda-175430a4ae6e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -137,9 +137,6 @@
     <ClCompile Include="Graphic\CStringtexture.cpp">
       <Filter>Graphic</Filter>
     </ClCompile>
-    <ClCompile Include="Clear\CClear.cpp">
-      <Filter>Clear</Filter>
-    </ClCompile>
     <ClCompile Include="Enemy\CBoss.cpp">
       <Filter>Enemey</Filter>
     </ClCompile>
@@ -151,6 +148,9 @@
     </ClCompile>
     <ClCompile Include="Load\CLoadPlayer.cpp">
       <Filter>Load</Filter>
+    </ClCompile>
+    <ClCompile Include="Result\CResult.cpp">
+      <Filter>Result</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -232,9 +232,6 @@
     <ClInclude Include="Graphic\CStringtexture.h">
       <Filter>Graphic</Filter>
     </ClInclude>
-    <ClInclude Include="Clear\CClear.h">
-      <Filter>Clear</Filter>
-    </ClInclude>
     <ClInclude Include="Enemy\CBoss.h">
       <Filter>Enemey</Filter>
     </ClInclude>
@@ -252,6 +249,9 @@
     </ClInclude>
     <ClInclude Include="Load\CLoadPlayer.h">
       <Filter>Load</Filter>
+    </ClInclude>
+    <ClInclude Include="Result\CResult.h">
+      <Filter>Result</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

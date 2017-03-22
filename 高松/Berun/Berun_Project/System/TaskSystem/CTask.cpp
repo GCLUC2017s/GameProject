@@ -7,6 +7,7 @@ CTask::CTask() :
 	m_pauseFlg(false),
 	m_updatePrio(eUDP_Null),
 	m_drawPrio(eDWP_Null),
+	m_id(0),
 	mp_prev(nullptr),
 	mp_next(nullptr)
 {
@@ -23,6 +24,7 @@ CTask::CTask(int id, unsigned int updatePrio, unsigned int drawPrio) :
 {
 	m_updatePrio = updatePrio;
 	m_drawPrio = drawPrio;
+	m_id = id;
 	//ƒ^ƒXƒNì¬ŒãAŽ©“®‚ÅManager‚É“o˜^
 	CTaskManager::GetInstance()->Add(this);
 }

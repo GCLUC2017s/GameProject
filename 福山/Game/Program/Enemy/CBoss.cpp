@@ -11,7 +11,6 @@
 #include"CEnemybasetest.h"
 /*
 
-
 CKeyを使っている条件文は今後別の処理になります。
 
 高橋弘樹
@@ -46,14 +45,13 @@ inline void InitRand(){
 }
 
 void CBoss::SetPos(){
-	mPos = first_pos;
+	mPos = Boss_first_pos;
 	mAxis = mPos.y;
 };
 
 
 void CBoss::Init(){
 	SetPos();
-	CBase::RandPos(SIZE_BOSS_X, SIZE_BOSS_Y,&mPos);
 	/*テクスチャを張る*/
 	mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
 	mRect.SetUv(CLoadBoss::GetInstance()->mStay_tex[0], 0, 0, -SIZE_TEX_BOSS_STAY_X, SIZE_TEX_BOSS_STAY_Y);
@@ -72,7 +70,7 @@ CBoss::CBoss() : mVelocity(0), mFlameCount(0), actionflag(false), motion(0), dir
 	mStatus = E_STAY_L;
 
 	//四角形の頂点設定
-	mRect.SetVertex(SIZE_BOSS_X, SIZE_BOSS_Y, -SIZE_BOSS_X, -SIZE_BOSS_Y);
+	mRect.SetVertex(-SIZE_BOSS_X, SIZE_BOSS_Y, SIZE_BOSS_X, -SIZE_BOSS_Y);
 	mShadow.SetVertex(-SIZE_SHADOW_X, SIZE_SHADOW_Y, SIZE_SHADOW_X, -SIZE_SHADOW_Y);
 	//四角形の色を設定
 	mRect.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -106,16 +104,7 @@ void CBoss::AnimeScene(){
 		break;
 	case E_WALK_R:
 		AnimeFrame(true, ANIME_TIME_BASE);
-<<<<<<< HEAD
 			mRect.SetUv(CLoadBoss::GetInstance()->mWalk_tex[mAnimeFrame], 0, 0, SIZE_TEX_BOSS_WALK_X, SIZE_TEX_BOSS_WALK_Y);
-=======
-		if (motion != EM_BACK_X){//バックステップ×
-			mRect.SetUv(CLoadBoss::GetInstance()->mWalk_tex[mAnimeFrame], 0, 0, SIZE_TEX_BOSS_WALK_X, SIZE_TEX_BOSS_WALK_Y);//左向き
-		}
-		else{//バックステップ○			
-			mRect.SetUv(CLoadBoss::GetInstance()->mWalk_tex[mAnimeFrame], SIZE_TEX_BOSS_WALK_X, 0, 0, SIZE_TEX_BOSS_WALK_Y);//右向き
-		}
->>>>>>> 97d02c8f7767f6aa041da256200778deabdb8b61
 		break;
 		/*攻撃*/
 	case E_ATTACK_L:
@@ -182,7 +171,6 @@ void CBoss::Walk(){
 }
 
 void CBoss::Update(){
-	assert(mAnimeFrame <= FLAME_LIMIT); //フレーム数が七を超えるとダメ
 	mRect.position = mPos;
 
 	InitRand();
@@ -205,7 +193,10 @@ void CBoss::Update(){
 	if (mHitPoint <= 0){
 		motion = EM_DIE;		//体力が０ならDIEする
 	}
-
+	if (mEnabledEaten){		//食べられたら消す
+		//演出加えてもいいかも(例)拡大縮小してif(サイズが0以下の時killFlagを立てるなど)
+		mKillFlag = true;
+	}
 	switch (motion)
 	{
 	case EM_STAY://待機
@@ -250,7 +241,7 @@ void CBoss::Update(){
 			}
 		}
 
-		////強攻撃の範囲内
+		////強攻撃の範囲内(未実装)ブラッシュアップ
 		//if (HATTACK_PTT){
 		//	if (!actionflag){
 		//		pattern = rand() % 3; //0~2の中でランダムでパターンを選択する。
@@ -312,15 +303,13 @@ void CBoss::Update(){
 		/*範囲*/
 		Attack(LOW_AT);
 	///パンチの最後にあたり判定
-			mEnabledAttack = true;//攻撃終了
+			mEnabledAttack = true;
 			/*範囲内に近づく*/
 			if (rulerR > 2 || rulerL > 2){
 				actionflag = false;
+				mEnabledAttack = false;
 				motion = EM_WALK;
 			}
-		else{
-			mEnabledAttack = false;
-		}
 		break;
 
 	case EM_HIGH_AT:
@@ -365,6 +354,7 @@ void CBoss::Update(){
 }
 
 void CBoss::Render(){
+
 	mShadow.Render();
 	mRect.Render();
 }

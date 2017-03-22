@@ -7,6 +7,7 @@
 #ifndef GAME_GUARD
 #define GAME_GUARD
 #define IMG_ARRAY 3
+#define GOAL_POS 5000.0f
 
 #include "../Scene/CScene.h"
 #include "CImage.h"
@@ -35,7 +36,6 @@ public:
 	void Update();
 	void Draw();
 	static CGame* GetInstance();
-	//Ši”[‚³‚ê‚Ä‚¢‚é‚à‚Ì‚ğíœ
 	static void ClearInstance();
 };
 

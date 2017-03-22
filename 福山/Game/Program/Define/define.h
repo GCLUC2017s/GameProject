@@ -11,11 +11,11 @@
 */
 
 //マクロ
-#define WINDOW_PIXEL_X	640					//ウィンドウ解像度：幅
-#define WINDOW_PIXEL_Y	480					//ウィンドウ解像度：高さ
+#define WINDOW_PIXEL_X	640.0f					//ウィンドウ解像度：幅
+#define WINDOW_PIXEL_Y	480.0f					//ウィンドウ解像度：高さ
 
-#define DISP_X	WINDOW_PIXEL_X * 0.012		//ウィンドウ解像度：幅
-#define DISP_Y	WINDOW_PIXEL_Y * 0.012		//ウィンドウ解像度：高さ
+#define DISP_X	WINDOW_PIXEL_X * 0.012f		//ウィンドウ解像度：幅
+#define DISP_Y	WINDOW_PIXEL_Y * 0.012f		//ウィンドウ解像度：高さ
 
 #define FRAME_LIMIT 6							//アニメのフレーム数(整数型)	
 #define NORMALATTACK_PATTERN 3 //通常攻撃のパターン

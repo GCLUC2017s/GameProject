@@ -48,7 +48,7 @@ extern int  g_tutorialNo;
 #define HOLD_KEY_RIGHT		CInput::GetState(0, CInput::eHold, CInput::eRight)			//右キーホールド
 #define PUSH_KEY_LEFT		CInput::GetState(0, CInput::ePush, CInput::eLeft)			//左キープッシュ
 #define HOLD_KEY_LEFT		CInput::GetState(0, CInput::eHold, CInput::eLeft)			//左キーホールド
-#define PUSH_KEY_NEXT       CInput::GetState(0, CInput::ePush, CInput::eButton5)
-#define PUSH_KEY_DECIDE     CInput::GetState(0, CInput::ePush, CInput::eButton10)
+#define PUSH_KEY_NEXT       CInput::GetState(0, CInput::ePush, CInput::eButton5)		//リザルト　次へ
+#define PUSH_KEY_DECIDE     CInput::GetState(0, CInput::ePush, CInput::eButton10)		//リザルト　決定
 
 

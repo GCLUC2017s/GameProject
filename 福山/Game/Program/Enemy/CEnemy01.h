@@ -10,7 +10,6 @@
 #include "../Task/CTaskManager.h"
 #include "../Define/define.h"
 
-#define FLAME_LIMIT 6 //ƒtƒŒ[ƒ€”‚ÌãŒÀ
 
 
 const	 CVector2 Enemy01_first_pos

@@ -9,9 +9,7 @@
 #include "../Load/CLoadEnemy01.h"
 #include "../Load/CLoadPlayer.h"
 /*
-
 ヒコースケーチ
-
 */
 
 /*
@@ -25,10 +23,10 @@ CKeyを使っている条件文は今後別の処理になります。
 
 #define FIRST_R_NO_PL 1						//初めのレンダーのポイント
 #define FIRST_U_NO_PL 1						//初めのアップデートのポイント
-#define SIZE_TEX_ENEMY00_STAY_X 800			//エネミーの待ち姿テクスチャサイズ X
-#define SIZE_TEX_ENEMY00_STAY_Y 800		//エネミーの待ち姿テクスチャサイズ Y
-#define SIZE_TEX_ENEMY00_WALK_X 800			//エネミーの歩くテクスチャサイズ Y
-#define SIZE_TEX_ENEMY00_WALK_Y 800			//エネミーの歩く姿テクスチャサイズ Y
+#define SIZE_TEX_ENEMY00_STAY_X 160			//エネミーの待ち姿テクスチャサイズ X
+#define SIZE_TEX_ENEMY00_STAY_Y 160		//エネミーの待ち姿テクスチャサイズ Y
+#define SIZE_TEX_ENEMY00_WALK_X 160			//エネミーの歩くテクスチャサイズ Y
+#define SIZE_TEX_ENEMY00_WALK_Y 160			//エネミーの歩く姿テクスチャサイズ Y
 #define SIZE_SHADOW							//影の表示
 #define WALK_SPEED 0.07		//テスト用にいじってる				//飛行スピード
 #define WALK_X 2							//飛行ベクトルX
@@ -40,7 +38,7 @@ CKeyを使っている条件文は今後別の処理になります。
 #define ENEMY01_STAY "../CG\\enemy01\\stay\\"
 #define ENEMY01_ATTACK "../CG\\enemy01\\attack\\"
 #define ENEMY01_DIE "../CG\\enemy01\\die\\"
-#define AT_RANGE01		mForward.x, 100, 100,10, mPos	//攻撃範囲A
+#define AT_RANGE01		mForward.x, SIZE_ENEMY01_X, SIZE_ENEMY01_X,10, mPos	//攻撃範囲A
 
 inline void InitRand(){
 	srand((unsigned int)time(NULL));
@@ -102,20 +100,20 @@ void CEnemy01::AnimeScene(){
 		break;
 		/*攻撃中*/
 	case E_ATTACK_R:
-		AnimeFrame(true, ANIME_TIME_ATTACK);
+		AnimeFrame(true, ANIME_TIME_ATTACK,FRAME_LIMIT9);
 		mRect.SetUv(CLoadEnemy01::GetInstance()->mAttack_tex[mAnimeFrame], SIZE_TEX_ENEMY00_STAY_X, 0, 0, SIZE_TEX_ENEMY00_STAY_Y);
 		break;
 	case E_ATTACK_L:
-		AnimeFrame(true, ANIME_TIME_ATTACK);
+		AnimeFrame(true, ANIME_TIME_ATTACK,FRAME_LIMIT9);
 		mRect.SetUv(CLoadEnemy01::GetInstance()->mAttack_tex[mAnimeFrame], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
 		break;
 		/*死亡*/
 	case E_DIE_R:
-		AnimeFrame(false, ANIME_TIME_BASE);
+		AnimeFrame(false, ANIME_TIME_BASE,FRAME_LIMIT11);
 		mRect.SetUv(CLoadEnemy01::GetInstance()->mDie_tex[mAnimeFrame], SIZE_TEX_ENEMY00_STAY_X, 0, 0, SIZE_TEX_ENEMY00_STAY_Y);
 		break;
 	case E_DIE_L:
-		AnimeFrame(false, ANIME_TIME_BASE);
+		AnimeFrame(false, ANIME_TIME_BASE, FRAME_LIMIT11);
 		mRect.SetUv(CLoadEnemy01::GetInstance()->mDie_tex[mAnimeFrame], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
 		break;
 
@@ -163,7 +161,6 @@ void CEnemy01::Fly(){
 
 }
 void CEnemy01::Update(){
-	assert(mAnimeFrame <= FLAME_LIMIT); //フレーム数が七を超えるとダメ
 
 	mRect.position = mPos;
 	InitRand();
@@ -183,7 +180,10 @@ void CEnemy01::Update(){
 	if (mHitPoint <= 0){
 		motion = EM_DIE;		//体力が０ならDIEする
 	}
-
+	if (mEnabledEaten){		//食べられたら消す
+		//演出加えてもいいかも(例)拡大縮小してif(サイズが0以下の時killFlagを立てるなど)
+		mKillFlag = true;
+	}
 	switch (motion)
 	{
 	case EM_STAY://待機

@@ -33,15 +33,15 @@
 #define ENE_HP_X 2.0f			//エネミーgauge　(初期値)
 #define ENE_HP_Y 0.2f			//エネミーgauge
 
-#define SIZE_EN_FRAME_X ENE_HP_X*0.8			//エネミーのフレーム
+#define SIZE_EN_FRAME_X ENE_HP_X*0.9			//エネミーのフレーム
 #define SIZE_EN_FRAME_Y 0.15f			//エネミーのフレーム
 
 #define SIZE_BOSS_FRAME_X	2.0f		
 #define SIZE_BOSS_FRAME_Y	0.2f			
 /*ＰＬＡＹＥＲの攻撃力*/
-#define PL_NORMAL_POWER 0.05f
-#define PL_EAT_POWER	0.06f
-#define PL_EX01_POWER	0.1f
+#define PL_NORMAL_POWER 0.05f*0.5f
+#define PL_EAT_POWER	0.06f*0.5f
+#define PL_EX01_POWER	0.1f*0.5f
 /*エネミーの攻撃力*/
 #define ENE00_POWER		0.05f
 #define ENE01_POWER		0.05f
@@ -51,6 +51,7 @@
 #define POINT_00		(int)100
 #define POINT_01		(int)200
 #define POINT_BOSS		(int)1000
+#define POINT_PLAYER	(int)-2000
 /*エネミー数*/
 #define ENE00_LIMIT	5
 #define ENE01_LIMIT	5
@@ -95,7 +96,8 @@ public:
 	CRectangle  mShadow;			//影
 	CRectangle mAttackRange;		//攻撃範囲の四角形
 
-	bool mEnabledEat;				//有効フラグ　食べる
+	bool mEnabledEat;				//有効フラグ　食べる(プレイヤー)
+	bool mEnabledEaten;				//有効フラグ 食べられた(エネミー)
 	bool mEnabledAttack;		    //攻撃しているか否か
 	bool mEnabledJump;				//ジャンプいている
 	bool mEnabledEx01;				//必殺技(消費)
@@ -115,7 +117,7 @@ public:
 
 	CVector2 mTargetP;  //プレイヤーポジションの取得用
 	
-	CBase() : mEnabledEat(false), mAxis(0), mHitPoint(0), mEnabledAttack(false), mAttackPoint(0.01f), mEnabledPoint(false), FlagAlertSetHp(false){
+	CBase() : mEnabledEat(false),mEnabledEaten(false),mAxis(0), mHitPoint(0), mEnabledAttack(false), mAttackPoint(0.01f), mEnabledPoint(false), FlagAlertSetHp(false){
 		mCharaFlag = true;
 		mShadow.SetColor(0.5f, 0.5f, 0.5f, 0.7f);
 		kazu += 1;

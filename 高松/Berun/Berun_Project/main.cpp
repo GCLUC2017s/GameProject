@@ -7,7 +7,6 @@
 
 #include "stdafx.h"
 #include "Global.h"
-#include "../System/TaskSystem/CTaskManager.h"
 #include "../Scene/CSceneManager.h"
 
 void display(void) {

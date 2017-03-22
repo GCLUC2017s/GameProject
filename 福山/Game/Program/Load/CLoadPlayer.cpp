@@ -33,27 +33,26 @@ CLoadPlayer::CLoadPlayer()
 	for (int i = 0; i < FRAME_LIMIT; i++)
 	{
 		mStayTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
-<<<<<<< HEAD
-=======
-		mRunTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
 		mEx01Tex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
->>>>>>> 97d02c8f7767f6aa041da256200778deabdb8b61
 		mEx02Tex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
-		mEatTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
 		mFlameTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
 		mBrakeTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
-		mJumpTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
 		for (int z = 0; z < NORMALATTACK_PATTERN; z++)
 		{
 			mNormalAttackTex[z][i] = new CTexture();	//テクスチャクラスのインスタンス作成
 		}
-		mEatTex[i] = new CTexture();
 
 	}
 	for (int i = 0; i < FRAME_LIMIT8; i++)
 	{
+		mRunTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
 		mWalkTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
 		mEx01Tex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
+	}
+	for (int i = 0; i < FRAME_LIMIT3; i++)
+	{
+		mJumpTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
+		mEatTex[i] = new CTexture();			//テクスチャクラスのインスタンス作成
 	}
 
 	mShadowTex = new CTexture();		//テクスチャクラスのインスタンス作成
@@ -90,27 +89,26 @@ CLoadPlayer::CLoadPlayer()
 	mNormalAttackTex[0][3]->load(TEX_FILE_PLAYER_NormalATTACK_A"beru_attackA_03.tga");
 	mNormalAttackTex[0][4]->load(TEX_FILE_PLAYER_NormalATTACK_A"beru_attackA_04.tga");
 	mNormalAttackTex[0][5]->load(TEX_FILE_PLAYER_NormalATTACK_A"beru_attackA_05.tga");
-	/*通常B*/
-	mNormalAttackTex[1][0]->load(TEX_FILE_PLAYER_NormalATTACK_B"beru_attackB_00.tga");
-	mNormalAttackTex[1][1]->load(TEX_FILE_PLAYER_NormalATTACK_B"beru_attackB_01.tga");
-	mNormalAttackTex[1][2]->load(TEX_FILE_PLAYER_NormalATTACK_B"beru_attackB_02.tga");
-	mNormalAttackTex[1][3]->load(TEX_FILE_PLAYER_NormalATTACK_B"beru_attackB_03.tga");
-	mNormalAttackTex[1][4]->load(TEX_FILE_PLAYER_NormalATTACK_B"beru_attackB_04.tga");
-	mNormalAttackTex[1][5]->load(TEX_FILE_PLAYER_NormalATTACK_B"beru_attackB_05.tga");
-	/*通常C*/
-	mNormalAttackTex[2][0]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_00.tga");
-	mNormalAttackTex[2][1]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_01.tga");
-	mNormalAttackTex[2][2]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_02.tga");
-	mNormalAttackTex[2][3]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_03.tga");
-	mNormalAttackTex[2][4]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_04.tga");
-	mNormalAttackTex[2][5]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_05.tga");
+	//
+	///*通常B*/
+	//mNormalAttackTex[1][0]->load(TEX_FILE_PLAYER_NormalATTACK_B"beru_attackB_00.tga");
+	//mNormalAttackTex[1][1]->load(TEX_FILE_PLAYER_NormalATTACK_B"beru_attackB_01.tga");
+	//mNormalAttackTex[1][2]->load(TEX_FILE_PLAYER_NormalATTACK_B"beru_attackB_02.tga");
+	//mNormalAttackTex[1][3]->load(TEX_FILE_PLAYER_NormalATTACK_B"beru_attackB_03.tga");
+	//mNormalAttackTex[1][4]->load(TEX_FILE_PLAYER_NormalATTACK_B"beru_attackB_04.tga");
+	//mNormalAttackTex[1][5]->load(TEX_FILE_PLAYER_NormalATTACK_B"beru_attackB_05.tga");
+	///*通常C*/
+	//mNormalAttackTex[2][0]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_00.tga");
+	//mNormalAttackTex[2][1]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_01.tga");
+	//mNormalAttackTex[2][2]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_02.tga");
+	//mNormalAttackTex[2][3]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_03.tga");
+	//mNormalAttackTex[2][4]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_04.tga");
+	//mNormalAttackTex[2][5]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_05.tga");
+	//
 	/*捕食*/
 	mEatTex[0]->load(TEX_FILE_PLAYER_EAT"beru_eat_00.tga");
 	mEatTex[1]->load(TEX_FILE_PLAYER_EAT"beru_eat_01.tga");
 	mEatTex[2]->load(TEX_FILE_PLAYER_EAT"beru_eat_02.tga");
-	mEatTex[3]->load(TEX_FILE_PLAYER_EAT"beru_eat_03.tga");
-	mEatTex[4]->load(TEX_FILE_PLAYER_EAT"beru_eat_04.tga");
-	mEatTex[5]->load(TEX_FILE_PLAYER_EAT"beru_eat_05.tga");
 	/*必殺技(消費)*/
 	mEx01Tex[0]->load(TEX_FILE_PLAYER_EX01"beru_EX01_00.tga");
 	mEx01Tex[1]->load(TEX_FILE_PLAYER_EX01"beru_EX01_01.tga");
@@ -124,9 +122,6 @@ CLoadPlayer::CLoadPlayer()
 	mJumpTex[0]->load(TEX_FILE_PLAYER_JUMP"beru_jump_00.tga");
 	mJumpTex[1]->load(TEX_FILE_PLAYER_JUMP"beru_jump_01.tga");
 	mJumpTex[2]->load(TEX_FILE_PLAYER_JUMP"beru_jump_02.tga");
-	mJumpTex[3]->load(TEX_FILE_PLAYER_JUMP"beru_jump_03.tga");
-	mJumpTex[4]->load(TEX_FILE_PLAYER_JUMP"beru_jump_04.tga");
-	mJumpTex[5]->load(TEX_FILE_PLAYER_JUMP"beru_jump_05.tga");
 	/*ブレーキ*/
 	mBrakeTex[0]->load(TEX_FILE_PLAYER_BRAKE"beru_brake_00.tga");
 	mBrakeTex[1]->load(TEX_FILE_PLAYER_BRAKE"beru_brake_01.tga");
@@ -144,22 +139,26 @@ CLoadPlayer::~CLoadPlayer()
 {
 
 	//テクスチャ読み込み
-	for (int i = 0; i < FRAME_LIMIT; i++)
+	for (int i = 0; i < FRAME_LIMIT8; i++)//8フレームのもの
 	{
-		CGame::Delete(&mStayTex[i]);
-		CGame::Delete(&mWalkTex[i]);
-		CGame::Delete(&mRunTex[i]);
-		CGame::Delete(&mEx01Tex[i]);
-		CGame::Delete(&mEx02Tex[i]);
-		CGame::Delete(&mEatTex[i]);
-		CGame::Delete(&mFlameTex[i]);
-		CGame::Delete(&mBrakeTex[i]);
-		CGame::Delete(&mJumpTex[i]);
-		for (int z = 0; z < NORMALATTACK_PATTERN; z++)
-		{
-			CGame::Delete(&mNormalAttackTex[z][i]);
+		if (i < FRAME_LIMIT3){ //3フレームのもの
+			CGame::Delete(&mJumpTex[i]);
+			CGame::Delete(&mEatTex[i]);
 		}
-		CGame::Delete(&mEatTex[i]);
+		if (i < FRAME_LIMIT){//6fフレームのもの
+			CGame::Delete(&mStayTex[i]);
+			CGame::Delete(&mEx02Tex[i]);
+			CGame::Delete(&mFlameTex[i]);
+			CGame::Delete(&mBrakeTex[i]);
+			for (int z = 0; z < NORMALATTACK_PATTERN; z++) //3段階のもの
+			{
+				CGame::Delete(&mNormalAttackTex[z][i]);
+			}
+		}
+		//ここから8
+		CGame::Delete(&mRunTex[i]);
+		CGame::Delete(&mWalkTex[i]);
+		CGame::Delete(&mEx01Tex[i]);
 	}
 	CGame::Delete(&mShadowTex);
 	CGame::Delete(&mCutFlyTex);
