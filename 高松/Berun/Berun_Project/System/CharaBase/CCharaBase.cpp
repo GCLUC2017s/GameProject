@@ -51,7 +51,7 @@ T_AnimData _pigAnimData[] = {
  static const T_CharacterData g_characterData[] =
 {
 	{ "LittlePlayerM",0,5,5,5,3,3,0,0,0,1,1,0,0,{ 120,160 } ,_playerMAnimData,{ 550,900 },{ 70,160 },CRect(-50,-160,30,0),eItemMax },
-	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,1,0,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 135,160 },CRect(-35,-160,45,0),eItemMax },
+	{ "LittlePlayerW",1,5,5,5,3,3,0,0,0,1,1,0,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 135,160 },CRect(-35,-160,45,0),eItemMax },
 	{ "Carrot",2,5,5,5,0,0,0,0,0,1,0,0,1,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	{ "Chick",3,5,0,0,0,0,0,0,0,1,0,0,1,{ 160,160 } ,_chickAnimData,{ 220,220 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,1,{ 160,160 } ,_fishAnimData,{ 200,200 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
@@ -97,6 +97,7 @@ CCharaBase::CCharaBase(int type, int id, unsigned int updatePrio, unsigned int d
 	m_up = false;
 	m_down = false;
 	m_dash = false;
+	m_death = false;
 	m_jumpFlag = false;
 	m_attack = false;
 }
@@ -167,9 +168,10 @@ void CCharaBase::Move()
 			m_charaDirection = false;
 
 		}
-		if (m_pos.z > 600 || m_pos.z < 100)
+		if (m_pos.z > WINDOW_UP_LIMIT || m_pos.z < WINDOW_DOWN_LIMIT)
 		{
 			m_pos.z = m_oldPos.z;
+
 		}
 	if (m_jump) {
 		m_gravitySpeed += 20;
@@ -289,7 +291,7 @@ bool CCharaBase::CheckHit(CCollisionA *t)
 void CCharaBase::HitCallBack(CCollisionA * p)
 {
 	CCharaBase* tt = dynamic_cast<CCharaBase*>(p);
-	if (tt->m_state == eState_Attack)	Damage();
+	if (tt->m_state == eState_Attack)	m_state = eState_Damage;
 }
 
 void CCharaBase::Damage()
