@@ -13,6 +13,7 @@
 #define T_SIZE_SUMEVAL		0.0f,0.0f,400.0f,100.0f						//総合評価
 #define T_SIZE_RANK			0.0f,0.0f,1200.0f,300.0f						
 #define T_SIZE_KILLS		0.0f,0.0f,300.0f,50.0f
+#define T_SIZE_FRAME		0.0f,0.0f,
 #define EVAL_1				300.0f		
 
 #define T_SIZE_S			0.0f,		0.0f,		EVAL_1,				300.0f
@@ -215,7 +216,7 @@ void CClear::Update(){
 	mNumber[E_KILLS].render(str[E_KILLS], KILLS_POS, STR_SIZE, CONF_KILLSNUM);
 	mNumber[E_SUM].render(str[E_SUM], SUM_POS, STR_SIZE, CONF_SUMNUM);
 
-	if (mFlagRect){ //フラグが立った時にフェード開始
+	//if (mFlagRect){ //フラグが立った時にフェード開始
 		if (mFlagDie){ mRectMainLogo.SetUv(mGameOverLogoT, T_SIZE_GAMEOVER); }
 		CGame::Fade(F_SPEEDBASE, &mRectMainLogo,1.0f);
 		if (FlagCrectA(mRectMainLogo)){					//CLEAR表示で
@@ -234,14 +235,14 @@ void CClear::Update(){
 		if (FlagCrectA(mRectEvaluation)){					//評価表示で
 			CGame::Fade(F_SPEEDBASE, &mRectLogo[E_RANK], 1.0f);
 		}
-	}
+	//}
 	
 }
 void CClear::Render(){
 	//文字列の描画 演出まだ　
 
 	mRectFilter.Render();
-	if (mFlagRect){
+	//if (mFlagRect){
 		if (FlagCrectA(mRectLogo[E_TIME]))mNumber[E_TIME].render(str[E_TIME], TIME_POS, STR_SIZE, CONF_TIMENUM);
 		if (FlagCrectA(mRectLogo[E_KILLS]))mNumber[E_KILLS].render(str[E_KILLS], KILLS_POS, STR_SIZE, CONF_KILLSNUM);
 		if (FlagCrectA(mRectLogo[E_SUM]))mNumber[E_SUM].render(str[E_SUM], SUM_POS, STR_SIZE, CONF_SUMNUM);
@@ -252,5 +253,5 @@ void CClear::Render(){
 		{
 				mRectLogo[i].Render(); 
 		}
-	}
+	//}
 }
