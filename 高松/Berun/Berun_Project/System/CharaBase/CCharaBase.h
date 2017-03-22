@@ -50,13 +50,13 @@ enum {
 	eCarrot,//ニンジン
 	eChick,//鳥
 	ePig,//豚
-	eFish,//魚
 	eBerry,//イチゴサングラス空中
 	ePapurika,//ピーマン
 	eStrawberry,//イチゴ地上
 	eVegetavelboss,//野菜ボス（ウサギ）
 	eMeatboss,//肉ボス（鶏）
 	eSquid,//イカ
+	eFish,//魚
 	eFishboss,//魚介ボス（鮫）
 	eRice,//米
 	eBread,//パン
@@ -120,8 +120,12 @@ protected:
 	//ダッシュする時のスピード
 	int m_dashSpeed;
 	int m_flashTyming;
+	//ダメージを受けているかどうかを格納する変数
+	bool m_damage;
 	//ダメージを関数の通過が初めてかどうかを格納する変数
 	bool m_damageFirst;
+	//ダメージをがどちら側から受けたかを格納する関数(false = 左,true = 右)
+	bool m_damageDirection;
 	//ダメージを受けた後の無敵時間を格納する変数
 	int m_damageTime;
 	CVector3D m_oldPos;
