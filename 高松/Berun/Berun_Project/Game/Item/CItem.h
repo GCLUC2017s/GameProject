@@ -19,6 +19,12 @@ enum E_Item
 	eItemMax,
 };
 
+struct T_Item
+{
+	int type;
+	int cnt;
+};
+
 class CItem : public CBase
 {
 private:
