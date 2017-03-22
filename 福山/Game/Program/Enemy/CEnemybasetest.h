@@ -1,3 +1,7 @@
+/*
+エネミーPATTERN表
+担当者  高橋弘樹
+*/
 #ifndef CENEMYBASETEST_HPP
 #define CENEMYBASETEST_HPP
 

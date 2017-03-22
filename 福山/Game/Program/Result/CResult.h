@@ -1,10 +1,14 @@
+/*
+Result画面
+担当者　冨田健斗(ClearResult)
+担当者　高橋弘樹(DieResult)
+*/
+
 #include  "../Graphic/CRectangle.h"
 #include  "../Task/CTask.h"
 #include "../Graphic/CStringtexture.h"
-#define _KILLS_	0
-#define _TIME_	1
-#define _SUM_	2
-#define _SABC_	3
+
+
 
 #define LOGO_MAX  4
 #define NUM_MAX 3
@@ -16,17 +20,20 @@ private:
 	CStringtexture mNumber[NUM_MAX];
 
 	CRectangle mRectEvaluation;
-	CRectangle mRectClearLogo;
+	CRectangle mRectMainLogo;	//ゲームオーバーかゲームクリア
 	CRectangle mRectLogo[LOGO_MAX];
 	CRectangle mRectFilter;
-	CRectangle mRectGameOver;
 
 	CTexture *mEvaluationT;
 	CTexture *mLogoTex[LOGO_MAX];
 	CTexture *mClearLoagoT;
 	CTexture *mGameOverLogoT;
 	CTexture *mFilterTex;
-
+	/*ロゴの名前*/
+	enum MyLogo
+	{
+		E_KILLS, E_TIME, E_SUM, E_RANK
+	};
 
 	char str[NUM_MAX][8];		//NUMBER数 と 格納数
 	float Time;					//計測用
@@ -36,7 +43,7 @@ private:
 	bool mFlagRect;				
 	bool mFlagDie;
 	bool *mFlagEval;			//評価フラグ管理
-	void SABC(int i);
+	void RankDecision(int i); //Clearのランクを決める
 	void Die(int i);
 	bool FlagCrectA(const CRectangle &rect); //
 

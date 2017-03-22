@@ -1,6 +1,6 @@
 #include "CCharaBase.h"
 #include "../Game/CollisionManager/CollisionManager.h"
-//#define HitCheck
+#define HitCheck
 T_AnimData _playerMAnimData[] = {
 	{ 1,5 },
 	{ 6,5 },
@@ -16,20 +16,51 @@ T_AnimData _playerWAnimData[] = {
 	{ 6,2 },
 };
 T_AnimData _carrotAnimData[] = {
+	{ 9,5 },
+	{ 2,5 },
+	{ 0,0 },
+	{ 0,0 },
+	{ 6,3 },
 	{ 1,5 },
-	{ 6,5 },
+	
+
+}; 
+T_AnimData _chickAnimData[] = {
+	{ 3,10 },
+	{ 4,20 },
+	{ 2,5 },
+	{ 0,0 },
+	{ 3,5 },
+	{ 1,3 },
+
+};
+
+T_AnimData _pigAnimData[] = {
+	{ 2,5 },
+	{ 1,5 },
+	{ 0,0 },
+	{ 0,0 },
+	{ 3,3 },
+	{ 6,10 },
+
+};
+T_AnimData _fishAnimData[] = {
+	{ 2,10 },
+	{ 2,5 },
+	{ 0,0 },
+	{ 0,0 },
 	{ 5,3 },
 	{ 5,10 },
-	
+
 };
  static const T_CharacterData g_characterData[] =
 {
-{ "LittlePlayerM",0,5,5,5,3,3,0,0,0,1,1,0,0,{ 120,160 } ,_playerMAnimData,{ 550,900 },{ 60,160 },CRect(-40,-160,40,0),eItemMax },
-	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,1,0,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 150,180 },CRect(-180,-180,180,0),eItemMax },
-	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,1,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
-	{ "Chick",3,5,0,0,0,0,0,0,0,1,0,0,1,{ 160,160 } ,_carrotAnimData,{ 225,225 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
-	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,1,{ 160,160 } ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
-	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,1,{ 160,160 } ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "LittlePlayerM",0,5,5,5,3,3,0,0,0,1,1,0,0,{ 120,160 } ,_playerMAnimData,{ 550,900 },{ 60,160 },CRect(-40,-160,40,0),eItemMax },
+	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,1,0,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 150,180 },CRect(-40,-180,40,0),eItemMax },
+	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,1,1,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Chick",3,5,0,0,0,0,0,0,0,1,0,1,1,{ 160,160 } ,_chickAnimData,{ 225,225 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Fish",4,5,0,0,0,0,0,0,0,1,0,1,1,{ 160,160 } ,_fishAnimData,{ 200,200 },{ 60,160 },CRect(-60,-160,60,0),eFishItem },
+	{ "Pig",5,5,0,0,0,0,0,0,0,1,0,1,1,{ 160,160 } ,_pigAnimData,{ 220,220 },{ 60,160 },CRect(-60,-160,60,0),eRiceItem },
 	//{ "Pig",4,5,0,0,0,0,0,0,0,1,0,0,{ 160,160 } ,_chicntAnimData,{ 225,225 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	//{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Rice",5,5,0,0,0,0,0,0,0,1,0,0,0 },
@@ -62,6 +93,8 @@ CCharaBase::CCharaBase(int type, int id, unsigned int updatePrio, unsigned int d
 	m_animCounter = 0;
 	m_dashSpeed = 1;
 	m_anim = 0;
+	m_damageFirst = false;
+	m_damageTime = 0;
 	m_charaDirection = false;
 	m_right = false;
 	m_left = false;
@@ -144,7 +177,6 @@ void CCharaBase::Move()
 		}
 	if (m_jump) {
 		m_gravitySpeed += 20;
- 		m_jumpFlag = true;
 		m_state = eState_Jump;
 	}
 	if (m_attack)	m_state = eState_Attack;
@@ -175,7 +207,6 @@ void CCharaBase::Jump()
 	}
 	if (m_pos.y <= 0 && m_gravitySpeed < 20)
 	{
-		m_jumpFlag = false;
 		m_state = eState_Move;
 	}
 }
@@ -199,6 +230,9 @@ void CCharaBase::Update()
 		break;
 	case eState_Attack:
 		Attack();
+		break;
+	case eState_Damage:
+		Damage();
 		break;
 	}
 	m_gravitySpeed += GRAVITY;
@@ -231,9 +265,9 @@ void CCharaBase::Draw()
 			if (m_charaDirection)
 			{
 				m_red->SetPos(GetScreenPos(CVector3D(rect.m_left - 60, rect.m_bottom, m_pos.z)));
-				m_red->SetSize(mp_eData->size.x + 60, -mp_eData->size.y);
+				m_red->SetSize(rect.m_right - rect.m_left + 60, -g_characterData[g_tutorialNo].size.y);
 			}
-			else m_red->SetSize(mp_eData->size.x + 60, -mp_eData->size.y);
+			else m_red->SetSize(rect.m_right - rect.m_left + 60, -g_characterData[g_tutorialNo].size.y);
 		}
 		m_red->Draw();
 #endif
@@ -262,5 +296,18 @@ void CCharaBase::HitCallBack(CCollisionA * p)
 
 void CCharaBase::Damage()
 {
-
+	if (!m_damageFirst) {
+		m_gravitySpeed += 20;
+		m_damageFirst = true;
+	}
+	m_damageTime += CHANGE_TIME(MILLI_SECOUND(DAMAGE_TIME));
+	if(m_damageTime % (int)FLASH_INTERBAL < 100)		m_chara->SetColor(RED_COLOR);
+	else m_chara->SetColor(NORMAL_COLOR);
+	if (m_damageTime > MILLI_SECOUND(DAMAGE_TIME))
+	{
+		m_damageTime = 0;
+		m_gravitySpeed = 0;
+		m_chara->SetColor(NORMAL_COLOR);
+		m_state = eState_Move;
+	}
 }

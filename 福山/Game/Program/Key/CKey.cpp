@@ -3,7 +3,12 @@
 bool CKey::flg[256];
 
 bool CKey::push(char k) {
-	return KEY(k);
+	
+	if (KEY(k)){
+		return true;
+	}
+	return false;
+	
 }
 
 bool CKey::once(char k) {

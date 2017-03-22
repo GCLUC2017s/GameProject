@@ -45,8 +45,8 @@ void CCollisionManager::PlayerAttack(CBase *b){
 	case E_ENEMY00:
 	case E_ENEMY01:
 	case E_BOSS:
-		if (player->mEnabledAttack){
-			if (CCollision::Collision(*(CBase*)player, *b, player->mAttackAxis)){
+		if (player != nullptr){
+			if (CCollision::Collision(*(CBase*)player, *b, player->mAttackAxis) &&player->mEnabledAttack){
 				b->mHitPoint -= player->mAttackPoint;
 				/*ヒットバック*/
 				if (player->mSaveForword.x >= 0){ b->mPos.x += PL_HITBUCK; }		//右向きの場合

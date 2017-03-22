@@ -13,6 +13,8 @@
 #define ARRAY_SIZE(a)(sizeof(a)/sizeof(a[0]))
 #define CHARA_MOVE 4
 #define ANIM_REVISION 1
+#define DAMAGE_TIME 2
+#define FLASH_INTERBAL MILLI_SECOUND(0.2f)
 
 
 struct T_AnimData {
@@ -48,13 +50,13 @@ enum {
 	eCarrot,//ニンジン
 	eChick,//鳥
 	ePig,//豚
+	eFish,//魚
 	eBerry,//イチゴサングラス空中
 	ePapurika,//ピーマン
 	eStrawberry,//イチゴ地上
 	eVegetavelboss,//野菜ボス（ウサギ）
 	eMeatboss,//肉ボス（鶏）
 	eSquid,//イカ
-	eFish,//魚
 	eFishboss,//魚介ボス（鮫）
 	eRice,//米
 	eBread,//パン
@@ -69,7 +71,7 @@ protected:
 		eState_Jump,
 		eState_Move,
 		eState_Attack,
-		
+		eState_Damage,
 	};
 	enum EANIM {
 		eAnim_Idle,
@@ -117,10 +119,11 @@ protected:
 	int m_animCounter;
 	//ダッシュする時のスピード
 	int m_dashSpeed;
-	//ダメージを受けているかどうかを格納する変数
-	bool m_damage;
+	int m_flashTyming;
+	//ダメージを関数の通過が初めてかどうかを格納する変数
+	bool m_damageFirst;
 	//ダメージを受けた後の無敵時間を格納する変数
-	//float m_damage;
+	int m_damageTime;
 	CVector3D m_oldPos;
 
 	unsigned int m_anim;
