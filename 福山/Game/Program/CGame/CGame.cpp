@@ -39,6 +39,7 @@ CTask *CGame::getStatus(int number){
 		}
 		t = t->next;
 	}
+	return nullptr;
 }
 
 CVector2 CGame::mGetPlayerPos() {
@@ -53,6 +54,7 @@ CVector2 CGame::mGetPlayerPos() {
 		}
 		t = t->next;
 	}
+	return CVector2(0,0);
 }
 
 void CGame::Delete(CTexture **t){
@@ -74,6 +76,7 @@ float CGame::GetPlayerAxis(){
 		}
 		t = t->next;
 	}
+	return 0;
 }
 
 /*フェード関数*/

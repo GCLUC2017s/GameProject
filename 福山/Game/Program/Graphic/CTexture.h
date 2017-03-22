@@ -1,3 +1,8 @@
+/*
+テクスチャを扱うクラス
+担当者 冨田健斗
+*/
+
 #ifndef TEXTURU_HPP
 #define TEXTURU_HPP
 #include <stdio.h>	//ファイルの入力に使用

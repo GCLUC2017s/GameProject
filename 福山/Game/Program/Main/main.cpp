@@ -1,3 +1,9 @@
+/*
+ウィンドウ設定場所
+担当者  冨田健斗
+
+*/
+
 #include "../Define/define.h"
 #include <Windows.h>
 #include "../SceneManager/CSceneManager.h"

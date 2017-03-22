@@ -1,4 +1,7 @@
-
+/*
+四角形のベースクラス()
+担当者 冨田健斗
+*/
 #ifndef RECTANGLE_HPP
 #define RECTANGLE_HPP
 #include "CTriangle.h"	//三角形クラスのヘッダをインクルードする

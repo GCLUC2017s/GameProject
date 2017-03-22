@@ -1,6 +1,6 @@
 #include "CCharaBase.h"
 #include "../Game/CollisionManager/CollisionManager.h"
-//#define HitCheck
+#define HitCheck
 T_AnimData _playerMAnimData[] = {
 	{ 1,5 },
 	{ 6,5 },
@@ -56,7 +56,7 @@ T_AnimData _fishAnimData[] = {
  static const T_CharacterData g_characterData[] =
 {
 	{ "LittlePlayerM",0,5,5,5,3,3,0,0,0,1,1,0,0,{ 120,160 } ,_playerMAnimData,{ 550,900 },{ 60,160 },CRect(-40,-160,40,0),eItemMax },
-	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,1,0,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 150,180 },CRect(-180,-180,180,0),eItemMax },
+	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,1,0,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 150,180 },CRect(-40,-180,40,0),eItemMax },
 	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,1,1,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	{ "Chick",3,5,0,0,0,0,0,0,0,1,0,1,1,{ 160,160 } ,_chickAnimData,{ 225,225 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	{ "Fish",4,5,0,0,0,0,0,0,0,1,0,1,1,{ 160,160 } ,_fishAnimData,{ 200,200 },{ 60,160 },CRect(-60,-160,60,0),eFishItem },
@@ -93,6 +93,8 @@ CCharaBase::CCharaBase(int type, int id, unsigned int updatePrio, unsigned int d
 	m_animCounter = 0;
 	m_dashSpeed = 1;
 	m_anim = 0;
+	m_damage = false;
+	m_damageTime = 0;
 	m_charaDirection = false;
 	m_right = false;
 	m_left = false;
@@ -223,6 +225,7 @@ void CCharaBase::Update()
 	switch (m_state)
 	{
 	case eState_Move:
+		Damage();
 		Move();
 		break;
 	case eState_Jump:
@@ -230,6 +233,9 @@ void CCharaBase::Update()
 		break;
 	case eState_Attack:
 		Attack();
+		break;
+	case eState_Damage:
+		Damage();
 		break;
 	}
 	m_gravitySpeed += GRAVITY;
@@ -262,9 +268,9 @@ void CCharaBase::Draw()
 			if (m_charaDirection)
 			{
 				m_red->SetPos(GetScreenPos(CVector3D(rect.m_left - 60, rect.m_bottom, m_pos.z)));
-				m_red->SetSize(mp_eData->size.x + 60, -mp_eData->size.y);
+				m_red->SetSize(rect.m_right - rect.m_left + 60, -g_characterData[g_tutorialNo].size.y);
 			}
-			else m_red->SetSize(mp_eData->size.x + 60, -mp_eData->size.y);
+			else m_red->SetSize(rect.m_right - rect.m_left + 60, -g_characterData[g_tutorialNo].size.y);
 		}
 		m_red->Draw();
 #endif
@@ -293,5 +299,9 @@ void CCharaBase::HitCallBack(CCollisionA * p)
 
 void CCharaBase::Damage()
 {
-
+	Move();
+	m_damageTime += CHANGE_TIME(DAMAGE_TIME);
+	if(m_damageTime < DAMAGE_TIME)		m_chara->SetColor(RED_COLOR);
+	else m_chara->SetColor(NORMAL_COLOR);
+	if (m_damageTime >= DAMAGE_TIME)	m_state == eState_Move;
 }
