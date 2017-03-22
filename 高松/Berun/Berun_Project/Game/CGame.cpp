@@ -15,13 +15,15 @@ CGame::CGame() : mp_player(nullptr),m_step(0),m_cnt(0)
 	mp_img[1] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Pos"));
 	mp_img[2] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("PosGauge"));
 	mp_img[3] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Gauge"));
+	mp_black = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Black"));
+	mp_wordGameOver = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("GameOver"));
 	new CMap(CMap::eStage1);
 	mp_tutorial=new CTutorial(g_tutorialDataPath[g_tutorialNo]);
-	//mp_game = this;
 }
 
 CGame::~CGame()
 {
+	
 }
 void CGame::Update() 
 {	
@@ -33,7 +35,7 @@ switch (m_step)
 		{	
 			mp_player = new CPlayer(g_tutorialNo);
 			new CEnemyManager();
-			mp_enemy = new CEnemy(eChick);
+			mp_enemy = new CEnemy(eCarrot);
 			mp_tutorial->SetDestroyFlag(true);
 			mp_img[0]->SetPos(280, 310);
 			mp_img[0]->SetSize(700, 150);
@@ -87,11 +89,24 @@ void CGame::Draw()
 			mp_img[0]->Draw();
 		}
 	}
-
+//	GameOver();
 }
-/*
+void CGame::GameOver()
+{
+	mp_black->SetColor(HALF_ALPHA);
+	mp_wordGameOver->SetPos(300, 300);
+	mp_wordGameOver->SetSize(700, 300);
+	mp_black->Draw();
+	mp_wordGameOver->Draw();
+	if(PUSH_KEY_ENTER)		CSceneManager::GetInstance()->Quit(60, eTitle);
+}
 CGame * CGame::GetInstance()
 {
+	if (mp_game == nullptr)
+	{
+		mp_game = new CGame();
+	}
+
 	return mp_game;
 }
 
@@ -99,4 +114,3 @@ void CGame::ClearInstance()
 {
 	if (mp_game != nullptr) delete mp_game;
 }
-*/

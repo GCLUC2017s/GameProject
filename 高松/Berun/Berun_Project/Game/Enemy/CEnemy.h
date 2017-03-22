@@ -9,7 +9,7 @@
 #include"../Global.h"
 #include "../../System/CharaBase/CCharaBase.h"
 class CPlayer;
-
+class CEnemyManager;
 
 
 
@@ -20,8 +20,11 @@ private:
 	void Contlol();
 	int m_enemyAppears;
 	CPlayer *mp_player;
+	CImage *m_img;
+	int m_enemyType;
 	int m_enemyTime;
-
+	int m_enemyPatarn;
+	int m_cont;
 public:
 	
 	CEnemy(int type);

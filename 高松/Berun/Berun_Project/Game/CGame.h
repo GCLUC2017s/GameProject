@@ -28,6 +28,8 @@ private:
 	CPlayer	  *mp_player;
 	CEnemy    *mp_enemy;
 	CImage    *mp_img[IMG_ARRAY];
+	CImage	  *mp_black;
+	CImage	  *mp_wordGameOver;
 	unsigned int m_step;
 	int m_cnt;
 public:
@@ -36,6 +38,7 @@ public:
 	~CGame();
 	void Update();
 	void Draw();
+	void GameOver();
 	static CGame* GetInstance();
 	static void ClearInstance();
 };
