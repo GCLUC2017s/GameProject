@@ -17,11 +17,11 @@ CGame::CGame() : mp_player(nullptr),m_step(0),m_cnt(0)
 	mp_img[3] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Gauge"));
 	new CMap(CMap::eStage1);
 	mp_tutorial=new CTutorial(g_tutorialDataPath[g_tutorialNo]);
+	//mp_game = this;
 }
 
 CGame::~CGame()
 {
-	
 }
 void CGame::Update() 
 {	
@@ -89,14 +89,9 @@ void CGame::Draw()
 	}
 
 }
-
+/*
 CGame * CGame::GetInstance()
 {
-	if (mp_game == nullptr)
-	{
-		mp_game = new CGame();
-	}
-
 	return mp_game;
 }
 
@@ -104,3 +99,4 @@ void CGame::ClearInstance()
 {
 	if (mp_game != nullptr) delete mp_game;
 }
+*/
