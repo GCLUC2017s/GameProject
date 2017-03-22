@@ -1,3 +1,8 @@
+/*
+プレイヤーテクスチャLood(時間があればまとめます)クラス
+担当者 冨田健斗
+*/
+
 #include "../Graphic/CTexture.h"
 #include "../Define/define.h"
 #define FRAME_LIMIT8 8//フレーム数が違うようになったので注意 8のもの (現在)walk run Ex01

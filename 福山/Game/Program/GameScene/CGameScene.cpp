@@ -19,8 +19,10 @@ void CGameScene::Init(){
 
 	CTaskManager::GetInstance()->Add(new CPlayer);
 	
-	CTaskManager::GetInstance()->Add(new CEnemy00);
-	
+	for (int i = 0; i < ENE00_LIMIT; i++)
+	{
+		CTaskManager::GetInstance()->Add(new CEnemy00);
+	}
 	for (int i = 0; i < ENE01_LIMIT; i++)
 	{
 		CTaskManager::GetInstance()->Add(new CEnemy01);

@@ -1,3 +1,9 @@
+/*
+X,Y座標をまとめたクラス
+
+担当者 冨田健斗
+*/
+
 #ifndef VECTOR2_HPP
 #define VECTOR2_HPP
 

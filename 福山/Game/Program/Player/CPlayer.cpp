@@ -34,11 +34,11 @@
 #define ANIME_TIME_WALK						8 + mHungryStatus				//アニメループ時間　歩く
 #define ANIME_TIME_EX01						4								//アニメループ時間 必殺技振り
 
-#define ATTACK_A		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,2, mPos	//攻撃範囲A
-#define ATTACK_B		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,2, mPos	//攻撃範囲B
-#define ATTACK_C		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,3, mPos	//攻撃範囲C
-#define EAT_ATTACK		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,1, mPos	//食べる攻撃
-#define EX01_ATTACK		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y + fabsf(mEx01Speed),3, CVector2(mPos.x+mEx01Speed,mPos.y) //必殺技範囲
+#define ATTACK_A		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,2, CVector2(mPos.x+mForward.x*0.1,mPos.y)			//攻撃範囲A
+#define ATTACK_B		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,2, CVector2(mPos.x+mForward.x*0.1,mPos.y)			//攻撃範囲B
+#define ATTACK_C		mForward.x, SIZE_PLAYER_X+0.5f, SIZE_PLAYER_Y,3, CVector2(mPos.x+mForward.x*0.1,mPos.y)	//攻撃範囲C
+#define EAT_ATTACK		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,1, CVector2()	//食べる攻撃
+#define EX01_ATTACK		mForward.x, SIZE_PLAYER_X+ fabsf(mEx01Speed), SIZE_PLAYER_Y + fabsf(mEx01Speed),3, CVector2(mPos.x+mEx01Speed,mPos.y) //必殺技範囲
 #define EX01_SPEED 0.1f														//必殺技が進むスピード
 #define INTERVAL		0.0f												//攻撃後のINTERVALキー入力待ち時間    未実装
 #define HUNGRY_SPEED	0.001f												//おなかが減るスピード
@@ -462,14 +462,16 @@ void CPlayer::Update() {
 	assert(mAnimeFrame <= FRAME_LIMIT8);				//フレーム数が七を超えるとダメ
 	//assert(E_STAY_L <= mStatus && mStatus <= E_BRAKE_R);       //テクスチャを正しく読み込めているかどうか
 	//四角形の位置を設定
-	mRect.position = mPos;
-	if (!mEnabledAttack){Move();}	//移動メソッド
-	Brake();						//ブレーキメソッド
-	PlayerAttack();					//アタックメソッド
-	Jump();							//ジャンプメソッド
-	ChangeStatus();					//能力変化メソッド
-	AnimeScene();					//アニメメソッド
-	AlertHPRect(&mRect, mHitPoint);	//アラートメソッド(HP変化によるもの)
+	if (mHitPoint > 0){ //HPがあるとき
+		mRect.position = mPos;
+		if (!mEnabledAttack){ Move(); }	//移動メソッド
+		Brake();						//ブレーキメソッド
+		PlayerAttack();					//アタックメソッド
+		Jump();							//ジャンプメソッド
+		ChangeStatus();					//能力変化メソッド
+		AnimeScene();					//アニメメソッド
+		AlertHPRect(&mRect, mHitPoint);	//アラートメソッド(HP変化によるもの)
+	}
 	if (!mEnabledInterval && mStatus != E_STAY_L && mStatus != E_STAY_R && mVelocity <= 0 && !mEnabledJump && !mEnabledAttack){
 		DecisionRL(E_STAY_R, E_STAY_L);
 	}
