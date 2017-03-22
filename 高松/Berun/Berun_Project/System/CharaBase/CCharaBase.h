@@ -158,7 +158,10 @@ public:
 	virtual void HitCallBack(CCollisionA * p);
 	bool CheckHit(CCollisionA *t);
 	void Damage();
-	int GetHp();
+	CVector3D GetPos()
+	{
+		return m_pos;
+	}
 
 };
 #endif
