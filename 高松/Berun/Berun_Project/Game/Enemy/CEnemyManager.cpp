@@ -29,7 +29,7 @@ void CEnemyManager::Update () {
 	CVector3D vec = mp_player->GetPos();//‰¼
 	
 	m_enemyType= rand() % 3;
-	if(vec.x>640){
+	if(vec.x>800){
 		//
 		if (m_enemy < ENEMY_MAX) {
 		m_enemyCont += ENEMY_COUNT;

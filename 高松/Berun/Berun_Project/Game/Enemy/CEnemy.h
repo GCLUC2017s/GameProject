@@ -20,7 +20,8 @@ private:
 	void Contlol();
 	int m_enemyAppears;
 	CPlayer *mp_player;
-	int m_z;
+	int m_enemyTime;
+
 public:
 	
 	CEnemy(int type);
