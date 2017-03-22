@@ -16,20 +16,51 @@ T_AnimData _playerWAnimData[] = {
 	{ 6,2 },
 };
 T_AnimData _carrotAnimData[] = {
+	{ 9,5 },
+	{ 2,5 },
+	{ 0,0 },
+	{ 0,0 },
+	{ 6,3 },
 	{ 1,5 },
-	{ 6,5 },
+	
+
+}; 
+T_AnimData _chickAnimData[] = {
+	{ 3,10 },
+	{ 4,20 },
+	{ 2,5 },
+	{ 0,0 },
+	{ 3,5 },
+	{ 1,3 },
+
+};
+
+T_AnimData _pigAnimData[] = {
+	{ 2,5 },
+	{ 1,5 },
+	{ 0,0 },
+	{ 0,0 },
+	{ 3,3 },
+	{ 6,10 },
+
+};
+T_AnimData _fishAnimData[] = {
+	{ 2,10 },
+	{ 2,5 },
+	{ 0,0 },
+	{ 0,0 },
 	{ 5,3 },
 	{ 5,10 },
-	
+
 };
  static const T_CharacterData g_characterData[] =
 {
-{ "LittlePlayerM",0,5,5,5,3,3,0,0,0,1,1,0,0,{ 120,160 } ,_playerMAnimData,{ 550,900 },{ 60,160 },CRect(-40,-160,40,0),eItemMax },
+	{ "LittlePlayerM",0,5,5,5,3,3,0,0,0,1,1,0,0,{ 120,160 } ,_playerMAnimData,{ 550,900 },{ 60,160 },CRect(-40,-160,40,0),eItemMax },
 	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,1,0,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 150,180 },CRect(-40,-180,40,0),eItemMax },
-	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,1,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
-	{ "Chick",3,5,0,0,0,0,0,0,0,1,0,0,1,{ 160,160 } ,_carrotAnimData,{ 225,225 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
-	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,1,{ 160,160 } ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
-	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,1,{ 160,160 } ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,1,1,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Chick",3,5,0,0,0,0,0,0,0,1,0,1,1,{ 160,160 } ,_chickAnimData,{ 225,225 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Fish",4,5,0,0,0,0,0,0,0,1,0,1,1,{ 160,160 } ,_fishAnimData,{ 200,200 },{ 60,160 },CRect(-60,-160,60,0),eFishItem },
+	{ "Pig",5,5,0,0,0,0,0,0,0,1,0,1,1,{ 160,160 } ,_pigAnimData,{ 220,220 },{ 60,160 },CRect(-60,-160,60,0),eRiceItem },
 	//{ "Pig",4,5,0,0,0,0,0,0,0,1,0,0,{ 160,160 } ,_chicntAnimData,{ 225,225 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	//{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Rice",5,5,0,0,0,0,0,0,0,1,0,0,0 },

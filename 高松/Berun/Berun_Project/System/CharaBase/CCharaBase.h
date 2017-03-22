@@ -50,13 +50,13 @@ enum {
 	eCarrot,//ニンジン
 	eChick,//鳥
 	ePig,//豚
+	eFish,//魚
 	eBerry,//イチゴサングラス空中
 	ePapurika,//ピーマン
 	eStrawberry,//イチゴ地上
 	eVegetavelboss,//野菜ボス（ウサギ）
 	eMeatboss,//肉ボス（鶏）
 	eSquid,//イカ
-	eFish,//魚
 	eFishboss,//魚介ボス（鮫）
 	eRice,//米
 	eBread,//パン

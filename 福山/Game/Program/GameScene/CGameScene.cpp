@@ -27,9 +27,8 @@ void CGameScene::Init(){
 	{
 		CTaskManager::GetInstance()->Add(new CEnemy01);
 	}
-	
+
 	CTaskManager::GetInstance()->Add(new CBoss);
-	
 	CTaskManager::GetInstance()->Add(new CClear);
 	CTaskManager::GetInstance()->Add(new CUserinterface);
 	
