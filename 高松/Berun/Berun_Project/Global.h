@@ -60,5 +60,7 @@ extern int  g_tutorialNo;
 #define GREEN_COLOR 0,1,0,1
 #define BLUE_COLOR 0,0,1,1
 #define NORMAL_COLOR 1,1,1,1
+#define HALF_RGB 0.5f,0.5f,0.5f,1
+#define HALF_ALPHA 1,1,1,0.5f
 
 
