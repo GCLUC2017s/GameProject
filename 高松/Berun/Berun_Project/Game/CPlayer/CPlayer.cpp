@@ -56,3 +56,19 @@ void CPlayer::Contlol() {
 	if (PUSH_KEY_SPASE)		m_jump = true;
 	if (PUSH_KEY_ENTER)		m_attack = true;
 }
+
+void CPlayer::HitCallBack(CCollisionA * p)
+{
+	CCharaBase::HitCallBack(p);
+	if (m_state != eState_Attack)
+	{
+		if (!m_damage)
+		{
+			m_hp--;
+			if (!m_hp);
+			if (m_pos.x < tt->m_pos.x)	m_damageDirection = true;
+			if (m_pos.x > tt->m_pos.x)	m_damageDirection = false;
+		}
+		m_damage = true;
+	}
+}

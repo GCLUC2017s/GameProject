@@ -25,6 +25,7 @@ public:
 	~CPlayer();
 //	void Update();
 	void Draw();
+	void HitCallBack();
 };
 
 #endif // !CPLAYER_INCLUDE_GUARD
