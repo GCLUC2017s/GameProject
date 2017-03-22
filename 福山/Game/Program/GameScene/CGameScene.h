@@ -1,3 +1,7 @@
+/*
+ゲームシーン管理
+担当者　冨田健斗
+*/
 #ifndef GAMEMAIN_HPP
 #define GAMEMAIN_HPP
 #include "../Scene/CScene.h"

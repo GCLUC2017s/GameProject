@@ -1,3 +1,7 @@
+/*
+キー入力判断クラス
+担当者　 冨田健斗
+*/
 #ifndef KEY_HPP
 #define KEY_HPP
 #include <windows.h>
