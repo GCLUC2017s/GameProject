@@ -15,16 +15,21 @@ CEnemy::CEnemy(int type):CCharaBase(type,eEnemy,eUDP_Enemy,eDWP_Enemy)
 	mp_player = CPlayer::mp_player;
 	CVector3D vec = mp_player->GetPos() - m_pos;
 	srand(time(nullptr));
-	
-	m_pos = CVector3D(5120/vec.x, 0 ,10+50);
-	
+	m_enemyAppears = rand() % 4;
+	m_pos = CVector3D(1000, 0 ,10+50*m_enemyAppears);
+	m_enemyType = type;
 	m_enemyTime = 0;
-	m_enemyHp->SetColor(1, 0, 0, 1);
+	//m_enemyHp->SetColor(1, 0, 0, 1);
 	
-	
-	
+		
+
 }
 CEnemy::~CEnemy() {
+
+}
+void CEnemy::Draw() {
+
+	CCharaBase::Draw();
 
 }
 void CEnemy::Contlol() {
@@ -37,19 +42,22 @@ void CEnemy::Contlol() {
 		m_cont = 0;
 		m_enemyPatarn = 0;
 	}
-	m_enemyTime++;
+	
 	CVector3D vec = mp_player->GetPos() - m_pos;
 	
-		if (m_enemyTime > 120 && m_enemyTime < 200) {
+
+		if (m_enemyTime > 120 && m_enemyTime < 130) {
 			m_left = true;
 		}
-		
-		if (m_enemyTime > 200) {
+		m_enemyTime++;
+		if (m_enemyTime > 130) {
 			m_left = true;
 			m_dash = true;
 			m_enemyTime = 250;
+			m_attack = false;
 			if (m_enemyPatarn == 0) {
 				if (vec.x < -100) {
+
 					m_pos.x -= 3;
 				}
 				if (vec.x > 100) {
@@ -77,23 +85,23 @@ void CEnemy::Contlol() {
 				}
 			}
 			if (m_enemyPatarn == 2) {
-				m_left = false;
-				m_dash = false;
-				m_attack = true;
-				if (vec.x < -100) {
+				m_enemyTime += 5;
+			//	m_attack = true;
+				if (vec.x < 0) {
 					m_pos.x -= 3;
 				}
-				if (vec.x > 100) {
+				if (vec.x > 0) {
 					m_pos.x += 3;
 				}
-				if (vec.z > -120) {
+				if (vec.z > 0) {
 					m_pos.z += 3;
 				}
-				if (vec.z < 120) {
+				if (vec.z < 0) {
 					m_pos.z -= 3;
 				}
 			}
 
+		
 		
 			
 		}
@@ -102,7 +110,7 @@ void CEnemy::Contlol() {
 	
 		
 	
-	m_enemyHp->SetPos(m_pos.x, m_pos.z);
+	//m_enemyHp->SetPos(m_pos.x, m_pos.z);
 
 	
 		
@@ -128,9 +136,5 @@ void CEnemy::Contlol() {
 	
 	
 }*/
-void CEnemy::Draw(){
 
-	CCharaBase::Draw();
-	//m_enemyHp->Draw();
-}
 
