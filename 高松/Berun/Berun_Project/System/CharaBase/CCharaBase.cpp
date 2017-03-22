@@ -270,13 +270,15 @@ void CCharaBase::HitCallBack(CCollisionA * p)
 		{
 			if (!m_damage)
 			{
+				m_hp--;
+				if (!m_hp)	;
 				if (m_pos.x < tt->m_pos.x)	m_damageDirection = true;
 				if (m_pos.x > tt->m_pos.x)	m_damageDirection = false;
 			}
 			m_damage = true;
 		}
 	}
-	if(tt->m_state==eState_Attack)	SetDestroyFlag(true);
+	if (tt->m_state == eState_Attack)	Damage();
 }
 
 void CCharaBase::Damage()
@@ -304,4 +306,7 @@ void CCharaBase::Damage()
 		m_state = eState_Move;
 	}
 	rect = CRect(m_pos.x + mp_eData->rect.m_left, m_pos.y + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right, m_pos.y + mp_eData->rect.m_bottom);
+}
+int CCharaBase::GetHp(){
+	return m_hp;
 }

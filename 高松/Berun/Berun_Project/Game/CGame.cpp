@@ -89,7 +89,7 @@ void CGame::Draw()
 			mp_img[0]->Draw();
 		}
 	}
-//	GameOver();
+//	if() GameOver();
 }
 void CGame::GameOver()
 {
