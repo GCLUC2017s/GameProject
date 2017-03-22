@@ -16,7 +16,7 @@ CEnemy::CEnemy(int type):CCharaBase(type,eEnemy,eUDP_Enemy,eDWP_Enemy)
 	CVector3D vec = mp_player->GetPos() - m_pos;
 	srand(time(nullptr));
 	m_enemyAppears = rand() % 4;
-	m_pos = CVector3D(1000, 0 ,10+50*m_enemyAppears);
+	m_pos = CVector3D(1200, 0 ,100+50*m_enemyAppears);
 	m_enemyType = type;
 	m_enemyTime = 0;
 	//m_enemyHp->SetColor(1, 0, 0, 1);
@@ -44,14 +44,19 @@ void CEnemy::Contlol() {
 	}
 	
 	CVector3D vec = mp_player->GetPos() - m_pos;
-	
+	if (m_enemyType == 6) {
+		m_chickTime += 0.5f;
+		if (m_chickTime > 80 && m_chickTime <= 400) {
+
+		}
+	}
 	if (m_enemyType == 3) {
 		m_chickTime+=0.5f;
-		if (m_chickTime>80&&m_chickTime <= 200) {
-			if (vec.x < 120) {
+		if (m_chickTime>80&&m_chickTime <= 400) {
+			if (vec.x < -120) {
 				m_pos.x -= 1;
 			}
-			if (vec.x > -120) {
+			if (vec.x > 120) {
 				m_pos.x += 1;
 			}
 			if (vec.z > 120) {
@@ -61,11 +66,12 @@ void CEnemy::Contlol() {
 				m_pos.z -= 1;
 			}
 		}
-		if (m_chickTime >= 200) {
+		if (m_chickTime >= 400) {
 			m_pos.z -= 2;
 			m_pos.x += 1;
 			if (m_pos.z<-400) {
-				m_chickTime = 0;
+				m_chickTime = 400;
+				
 			}
 		}
 	}
