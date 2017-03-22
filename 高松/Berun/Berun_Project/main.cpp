@@ -138,6 +138,7 @@ void init(void)
 	CResourceManager::GetInstance()->Add("Carrot", CImage::LoadImage("Enemy/Carrot.png"));
 	CResourceManager::GetInstance()->Add("Chick", CImage::LoadImage("Enemy/Chick.png"));
 	CResourceManager::GetInstance()->Add("Fish", CImage::LoadImage("Enemy/Fish.png"));
+	//CResourceManager::GetInstance()->Add("Boss", CImage::LoadImage("Enemy/Boss_C_01.png"));
 	CResourceManager::GetInstance()->Add("Pig", CImage::LoadImage("Enemy/Pig.png"));
 	CResourceManager::GetInstance()->Add("Meter", CImage::LoadImage("Enemy/Meter_01.png"));
 	CResourceManager::GetInstance()->Add("Pos", CImage::LoadImage("BackGround/Gauge01.png"));
@@ -161,8 +162,10 @@ void init(void)
 	CResourceManager::GetInstance()->Add("Item16", CImage::LoadImage("Item/Item_2/Item16.png"));
 	CResourceManager::GetInstance()->Add("HP", CImage::LoadImage("Player/Life1.png"));
 	CResourceManager::GetInstance()->Add("SP", CImage::LoadImage("Player/SP.png"));
+	CResourceManager::GetInstance()->Add("SHADOW", CImage::LoadImage("Player/Shadow.png"));
 	CResourceManager::GetInstance()->Add("RED", CImage::LoadImage("Player/Red.png"));
 	CResourceManager::GetInstance()->Add("GameStart", CImage::LoadImage("Title/Gamestart.png"));
+	CResourceManager::GetInstance()->Add("GameOver", CImage::LoadImage("Title/Gameover.png"));
 	//ƒTƒEƒ“ƒh“Ç‚Ýž‚Ý
 	CSound::GetInstance()->GetSound("TITLE_BGM")->Load("BGM/Title.wav", 1);
 	CSound::GetInstance()->GetSound("CHARASELECT_BGM")->Load("BGM/CharaSelect.wav", 1);

@@ -54,16 +54,13 @@ void CCollisionManager::UnRegistAll()
 }
 void CCollisionManager::CheckHitAll()
 {
-
-	//先頭から順にタスクを描画していく
 	CCollisionA *p = mp_head;
 	while (p)
 	{
-		CCollisionA *q = p->mp_next;
+		CCollisionA *q = mp_head;
 		while (q)
 		{
-			//pとqのタイプが違う時のみ当たり判定を行う処理
-			if(p->m_type != q->m_type)	p->CheckHit(q);
+			if(p != q) p->CheckHit(q);
 			q = q->mp_next;
 		}
 		p = p->mp_next;
