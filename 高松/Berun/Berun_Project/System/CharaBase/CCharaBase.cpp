@@ -62,7 +62,7 @@ CCharaBase::CCharaBase(int type, int id, unsigned int updatePrio, unsigned int d
 	m_animCounter = 0;
 	m_dashSpeed = 1;
 	m_anim = 0;
-	m_damage = false;
+	m_damageFirst = false;
 	m_damageTime = 0;
 	m_charaDirection = false;
 	m_right = false;
@@ -146,7 +146,6 @@ void CCharaBase::Move()
 		}
 	if (m_jump) {
 		m_gravitySpeed += 20;
- 		m_jumpFlag = true;
 		m_state = eState_Jump;
 	}
 	if (m_attack)	m_state = eState_Attack;
@@ -177,7 +176,6 @@ void CCharaBase::Jump()
 	}
 	if (m_pos.y <= 0 && m_gravitySpeed < 20)
 	{
-		m_jumpFlag = false;
 		m_state = eState_Move;
 	}
 }
@@ -194,7 +192,6 @@ void CCharaBase::Update()
 	switch (m_state)
 	{
 	case eState_Move:
-		Damage();
 		Move();
 		break;
 	case eState_Jump:
@@ -268,9 +265,18 @@ void CCharaBase::HitCallBack(CCollisionA * p)
 
 void CCharaBase::Damage()
 {
-	Move();
-	m_damageTime += CHANGE_TIME(DAMAGE_TIME);
-	if(m_damageTime < DAMAGE_TIME)		m_chara->SetColor(RED_COLOR);
+	if (!m_damageFirst) {
+		m_gravitySpeed += 20;
+		m_damageFirst = true;
+	}
+	m_damageTime += CHANGE_TIME(MILLI_SECOUND(DAMAGE_TIME));
+	if(m_damageTime % (int)FLASH_INTERBAL < 100)		m_chara->SetColor(RED_COLOR);
 	else m_chara->SetColor(NORMAL_COLOR);
-	if (m_damageTime >= DAMAGE_TIME)	m_state == eState_Move;
+	if (m_damageTime > MILLI_SECOUND(DAMAGE_TIME))
+	{
+		m_damageTime = 0;
+		m_gravitySpeed = 0;
+		m_chara->SetColor(NORMAL_COLOR);
+		m_state = eState_Move;
+	}
 }

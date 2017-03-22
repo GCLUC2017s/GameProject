@@ -14,7 +14,7 @@
 #define CHARA_MOVE 4
 #define ANIM_REVISION 1
 #define DAMAGE_TIME 2
-#define FLASH_INTERBAL 0.2f
+#define FLASH_INTERBAL MILLI_SECOUND(0.2f)
 
 
 struct T_AnimData {
@@ -120,10 +120,10 @@ protected:
 	//ダッシュする時のスピード
 	int m_dashSpeed;
 	int m_flashTyming;
-	//ダメージを受けているかどうかを格納する変数
-	bool m_damage;
+	//ダメージを関数の通過が初めてかどうかを格納する変数
+	bool m_damageFirst;
 	//ダメージを受けた後の無敵時間を格納する変数
-	float m_damageTime;
+	int m_damageTime;
 	CVector3D m_oldPos;
 
 	unsigned int m_anim;
