@@ -16,7 +16,8 @@
 #define GRAVITY	-0.98f
 #define ARRAY_SIZE(a)(sizeof(a)/sizeof(a[0]))
 #define FPS 60.0f
-#define CHANGE_TIME(b)(b/FPS)
+#define CHANGE_TIME(a)(a/FPS)
+#define MILLI_SECOUND(a)(a * 1000)
 #define TUTORIAL_MAX 2
 #define FILE_NAME 32
 

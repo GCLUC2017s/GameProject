@@ -51,4 +51,5 @@ void CPlayer::Contlol() {
 	//スペースキーを入力したら、状態をジャンプにする処理
 	if (PUSH_KEY_SPASE)		m_jump = true;
 	if (PUSH_KEY_ENTER)		m_attack = true;
+	if (CInput::GetState(0, CInput::ePush, CInput::eButton1))	m_state = eState_Damage;
 }
