@@ -18,9 +18,9 @@ T_AnimData _playerWAnimData[] = {
 T_AnimData _carrotAnimData[] = {
 	{ 9,5 },
 	{ 2,5 },
+	{ 2,5 },
 	{ 0,0 },
-	{ 0,0 },
-	{ 6,3 },
+	{ 5,3 },
 	{ 1,5 },
 	
 
@@ -38,7 +38,7 @@ T_AnimData _chickAnimData[] = {
 T_AnimData _pigAnimData[] = {
 	{ 2,5 },
 	{ 1,5 },
-	{ 0,0 },
+	{ 2,5 },
 	{ 0,0 },
 	{ 3,3 },
 	{ 6,10 },
@@ -47,7 +47,7 @@ T_AnimData _pigAnimData[] = {
 T_AnimData _fishAnimData[] = {
 	{ 2,10 },
 	{ 2,5 },
-	{ 0,0 },
+	{ 2,5 },
 	{ 0,0 },
 	{ 5,3 },
 	{ 5,10 },

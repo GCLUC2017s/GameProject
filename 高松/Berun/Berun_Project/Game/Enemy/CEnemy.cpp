@@ -12,13 +12,16 @@
 
 CEnemy::CEnemy(int type):CCharaBase(type,eEnemy,eUDP_Enemy,eDWP_Enemy)
 {
-
-	m_pos = CVector3D(1000, 0 ,300);
-	m_enemyHp = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Meter"));
+	mp_player = CPlayer::mp_player;
+	CVector3D vec = mp_player->GetPos() - m_pos;
+	srand(time(nullptr));
+	
+	m_pos = CVector3D(5120/vec.x, 0 ,10+50);
+	
 	m_enemyTime = 0;
 	m_enemyHp->SetColor(1, 0, 0, 1);
-
-	mp_player = CPlayer::mp_player;
+	
+	
 	
 }
 CEnemy::~CEnemy() {
@@ -26,21 +29,76 @@ CEnemy::~CEnemy() {
 }
 void CEnemy::Contlol() {
 	CCharaBase::ResetKey();
+	if (m_cont <= 100) {
+		srand(time(nullptr));
+		m_enemyPatarn = rand()%3;
+	}
+	if (m_cont >= 100) {
+		m_cont = 0;
+		m_enemyPatarn = 0;
+	}
 	m_enemyTime++;
-	CVector3D vec = mp_player->GetPos();
-	if (eChick) {
+	CVector3D vec = mp_player->GetPos() - m_pos;
+	
 		if (m_enemyTime > 120 && m_enemyTime < 200) {
 			m_left = true;
 		}
-		if (m_enemyTime > 200) {
 		
+		if (m_enemyTime > 200) {
+			m_left = true;
 			m_dash = true;
+			m_enemyTime = 250;
+			if (m_enemyPatarn == 0) {
+				if (vec.x < -100) {
+					m_pos.x -= 3;
+				}
+				if (vec.x > 100) {
+					m_pos.x += 3;
+				}
+				if (vec.z > -120) {
+					m_pos.z += 3;
+				}
+				if (vec.z < 120) {
+					m_pos.z -= 3;
+				}
+			}
+			if (m_enemyPatarn == 1) {
+				if (vec.x < 100) {
+					m_pos.x -= 1;
+				}
+				if (vec.x > -100) {
+					m_pos.x += 1;
+				}
+				if (vec.z > 120) {
+					m_pos.z += 1;
+				}
+				if (vec.z < -120) {
+					m_pos.z -= 1;
+				}
+			}
+			if (m_enemyPatarn == 2) {
+				m_left = false;
+				m_dash = false;
+				m_attack = true;
+				if (vec.x < -100) {
+					m_pos.x -= 3;
+				}
+				if (vec.x > 100) {
+					m_pos.x += 3;
+				}
+				if (vec.z > -120) {
+					m_pos.z += 3;
+				}
+				if (vec.z < 120) {
+					m_pos.z -= 3;
+				}
+			}
+
+		
 			
 		}
-		
-		
-//		if (m_enemyTime > 250) ChangeAnimation();
-	}
+	
+
 	
 		
 	
