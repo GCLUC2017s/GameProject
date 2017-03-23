@@ -237,6 +237,9 @@ void CCharaBase::Update()
 	case eState_Damage:
 		Damage();
 		break;
+	case eState_Down:
+		Down();
+		break;
 	}
 	m_gravitySpeed += GRAVITY;
 	m_pos.y += m_gravitySpeed;
@@ -278,27 +281,11 @@ void CCharaBase::Draw()
 }
 
 
-bool CCharaBase::CheckHit(CCollisionA *t)
-{
-	CCharaBase* tt = dynamic_cast<CCharaBase*>(t);
-	assert(tt);
-	CRect p_rect = GetRect();
-	CRect t_rect = tt->GetRect();
-	if (abs(m_pos.z - tt->m_pos.z) < 50 && p_rect.m_right > t_rect.m_left && p_rect.m_left < t_rect.m_right && p_rect.m_top < t_rect.m_bottom && p_rect.m_bottom > t_rect.m_top) {
-		HitCallBack(t);
-		t->HitCallBack(this);
-	}
-	else return false;
-}
 
-void CCharaBase::HitCallBack(CCollisionA * p)
-{
-	CCharaBase* tt = dynamic_cast<CCharaBase*>(p);
-	if (tt->m_state == eState_Attack)	m_state = eState_Damage;
-}
 
 void CCharaBase::Damage()
 {
+	if (m_death)	ChangeAnimation(eAnim_Down, true);
 	if (!m_damageFirst)
 	{
 		m_pos.y++;
@@ -319,7 +306,33 @@ void CCharaBase::Damage()
 		m_chara->SetColor(NORMAL_COLOR);
 		m_damage = false;
 		m_damageFirst = false;
-		m_state = eState_Move;
+		if(!m_death) m_state = eState_Move;
+		else m_state = eState_Down;
+
 	}
 	rect = CRect(m_pos.x + mp_eData->rect.m_left, m_pos.y + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right, m_pos.y + mp_eData->rect.m_bottom);
+}
+
+void CCharaBase::Down()
+{
+	ChangeAnimation(eAnim_Down, true);
+}
+
+bool CCharaBase::CheckHit(CCollisionA *t)
+{
+	CCharaBase* tt = dynamic_cast<CCharaBase*>(t);
+	assert(tt);
+	CRect p_rect = GetRect();
+	CRect t_rect = tt->GetRect();
+	if (!m_damage && abs(m_pos.z - tt->m_pos.z) < 50 && p_rect.m_right > t_rect.m_left && p_rect.m_left < t_rect.m_right && p_rect.m_top < t_rect.m_bottom && p_rect.m_bottom > t_rect.m_top) {
+		HitCallBack(t);
+		t->HitCallBack(this);
+	}
+	else return false;
+}
+
+void CCharaBase::HitCallBack(CCollisionA * p)
+{
+	CCharaBase* tt = dynamic_cast<CCharaBase*>(p);
+	if (tt->m_state == eState_Attack)	m_state = eState_Damage;
 }

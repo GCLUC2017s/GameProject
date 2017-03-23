@@ -170,7 +170,7 @@ public:
 	}
 	int GetAttack()
 	{
-		return m_attack;
+		return m_power;
 	}
 	bool GetDeath()
 	{
