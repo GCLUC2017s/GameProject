@@ -50,12 +50,12 @@ T_AnimData _pigAnimData[] = {
 };
  static const T_CharacterData g_characterData[] =
 {
-	{ "LittlePlayerM",0,5,10,10,3,3,0,0,0,1,5,0,0,{ 120,160 } ,_playerMAnimData,{ 550,900 },{ 70,160 },CRect(-50,-160,30,0),eItemMax },
+	{ "LittlePlayerM",0,5,10,10,3,3,0,0,0,1,5,0,0,{ 300,240 } ,_playerMAnimData,{ 500,400 },{ 70,160 },CRect(-50,-160,30,0),eItemMax },
 	{ "LittlePlayerW",1,5,10,10,3,3,0,0,0,1,4,0,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 135,160 },CRect(-35,-160,45,0),eItemMax },
-	{ "Carrot",2,5,5,5,0,0,0,0,0,1,3,0,1,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
-	{ "Chick",3,5,0,0,0,0,0,0,0,1,2,0,1,{ 160,160 } ,_chickAnimData,{ 220,220 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
-	{ "Fish",4,5,0,0,0,0,0,0,0,1,1,0,1,{ 160,160 } ,_fishAnimData,{ 200,200 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
-	{ "Pig",4,5,0,0,0,0,0,0,0,1,4,0,1,{ 160,160 } ,_pigAnimData,{ 220,220 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Carrot",2,5,5,5,0,0,1,0,0,1,3,0,1,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Chick",3,5,0,0,0,0,1,0,0,1,2,0,1,{ 160,160 } ,_chickAnimData,{ 220,220 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Fish",4,5,0,0,0,0,1,0,0,1,1,0,1,{ 160,160 } ,_fishAnimData,{ 200,200 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Pig",4,5,0,0,0,0,1,0,0,1,4,0,1,{ 160,160 } ,_pigAnimData,{ 220,220 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	//{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Rice",5,5,0,0,0,0,0,0,0,1,0,0,0 },
 };

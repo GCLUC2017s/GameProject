@@ -166,6 +166,10 @@ public:
 	{
 		return m_pos;
 	}
+	int GetAttack()
+	{
+		return m_attack;
+	}
 	bool GetDeath()
 	{
 		return m_death;

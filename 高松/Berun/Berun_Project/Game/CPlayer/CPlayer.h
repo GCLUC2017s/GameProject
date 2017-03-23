@@ -16,7 +16,12 @@
 class CPlayer : public CCharaBase
 {
 	void Contlol();
+
+	CImage *mp_hpBar;
 	CImage *mp_hp;
+	CImage *mp_wordHp;
+	CImage *mp_halfHp;
+	CImage *mp_noHp;
 	CImage *mp_sp;
 	CImage *mp_shadow;
 public:

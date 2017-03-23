@@ -5,7 +5,11 @@ CPlayer::CPlayer(int type) : CCharaBase(type, ePlayer, eUDP_Player,eDWP_Player)
 
 {
 	m_pos = CVector3D(100, 0, 400);
+	mp_hpBar = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("HPBar"));
 	mp_hp = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("HP"));
+	mp_wordHp = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("WordHP"));
+	mp_halfHp = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("HalfHP"));
+	mp_noHp = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("NoHP"));
 	mp_sp = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("SP"));
 	mp_shadow = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("SHADOW"));
 	mp_player = this;
@@ -17,11 +21,41 @@ CPlayer::~CPlayer()
 
 void CPlayer::Draw()
 {
-	for (int i = 0; i < m_hp / 2; i++)
+	mp_hpBar->SetColor(0,0,1,0.7f);
+	mp_hpBar->SetSize(600,110);
+	mp_hpBar->Draw();
+	//HPを表示するための繰り返し文(条件式はiの値がHPの半分(実際に表示する数)を超える、残りのHPが)
+	for (int i = 0; i < m_hp / 2 || (m_hp == 1 && i < m_hp) || (!m_hp && i == m_hp); i++)
 	{
-		mp_hp->SetPos(i * 75 + 10, 25);
-		mp_hp->SetSize(75, 75);
-		mp_hp->Draw();
+		//HPの表示処理
+		if (m_hp > 1)
+		{
+			mp_hp->SetPos(i * 75 + 150, 25);
+			mp_hp->SetSize(75, 75);
+			mp_hp->Draw();
+		}
+		if (m_hp % 2 || m_hp == 1)
+		{
+			mp_halfHp->SetPos(m_hp / 2 * 75 + 150, 25);
+			if(m_hp == 1)	mp_halfHp->SetPos((m_hp - 1) * 75 + 150, 25);
+			mp_halfHp->SetSize(75, 75);
+			mp_halfHp->Draw();
+		}
+		for (int j = m_maxHp - m_hp / 2; j > 0; j--)
+		{
+			if (m_hp != m_maxHp)
+			{
+				for (int k = j - m_maxHp / 2; k > 0; k--)
+				{
+					mp_noHp->SetPos((m_hp / 2 + (k - 1)) * 75 + 150, 25);
+					mp_noHp->SetSize(75, 75);
+					mp_noHp->Draw();
+				}
+			}
+		}
+		mp_wordHp->SetPos(-30, -5);
+		mp_wordHp->SetSize(200,130);
+		mp_wordHp->Draw();
 	}
 	mp_shadow->SetPos(GetScreenPos(CVector3D(m_pos.x, 0, m_pos.z)));
 	mp_shadow->SetCenter(35,15);
@@ -63,8 +97,9 @@ void CPlayer::HitCallBack(CCollisionA * p)
 	{
 		if (!m_damage)
 		{
-			//HPを
+			//HPを減らす処理
 			m_hp--;
+//			m_hp -= tt->GetAttack();
 			if (!m_hp)
 			{
 				m_chara->SetAng(3.14 / 2);
