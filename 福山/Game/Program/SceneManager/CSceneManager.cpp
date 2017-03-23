@@ -20,6 +20,10 @@ CSceneManager* CSceneManager::mSceneManager = 0;
 
 CScene* mScene=0;
 
+CSound mBGM;
+CSceneManager::CSceneManager(){
+	mBGM.load("../Music\\BGM.mp3");
+}
 //GetInstance
 CSceneManager* CSceneManager::GetInstance() {
 	if (mSceneManager == 0) {
@@ -40,10 +44,10 @@ void CSceneManager::ChangeScene(eSceneNo SceneNo) {
 	DeleteScene();		//KILL
 
 	switch (SceneNo) {
-
 		//タイトルの呼び出しを行う
 	case eSceneNo::E_TITLE:
 
+		mBGM.play();
 		mScene = new CTitleScene;
 		mScene->Init();
 
@@ -58,6 +62,8 @@ void CSceneManager::ChangeScene(eSceneNo SceneNo) {
 		//ゲームメインの呼び出しを行う
 
 	case eSceneNo::E_GAMEMAIN:
+
+		mBGM.play();
 		mScene = new CGameScene;
 		
 

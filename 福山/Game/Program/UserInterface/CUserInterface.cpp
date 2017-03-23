@@ -76,7 +76,7 @@ void CUserinterface::Init(){
 const float arealeft_x = character_limit_left + (DISP_X / 2) - SIZE_PLAYER_X * 2;
 const float arearifgt_x = character_limit_right - (DISP_X / 2) - SIZE_PLAYER_X * 3;
 
-CUserinterface::CUserinterface() : mFlagColar(false), mHungryC(1.0f), mFlagHP(true), mFlagST(true)
+CUserinterface::CUserinterface() : mFlagColar(false), mHungryC(1.0f), mFlagHP(true), mFlagST(true), task(0)
 {
 	mPriorityR = E_UI;
 	mPriorityU = E_UI;
@@ -111,9 +111,6 @@ CUserinterface::CUserinterface() : mFlagColar(false), mHungryC(1.0f), mFlagHP(tr
 			break;
 		}
 		t = t->next;
-	}
-	if (t == 0){
-		delete t;
 	}
 
 }
