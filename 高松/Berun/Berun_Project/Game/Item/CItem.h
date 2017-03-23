@@ -15,13 +15,25 @@
 #include "../Global.h"
 #include "Base/CBase.h"
 
-enum E_Item
+enum E_ItemImg
 {
-	eCarrotItem,
-	eChickItem,
-	eFishItem,
-	ePigItem,
-	eItemMax,
+	Udon,
+	Squid,
+	Oil,
+	Apple,
+	Egg,
+	Bread,
+	Rice,
+	Cheese,
+	Pork,
+	Meet,
+	Fish,
+	Chicken,
+	Paprika,
+	Milk,
+	Carrot,
+	Strawberry,
+	ItemMax,
 };
 
 struct T_ItemData
@@ -34,7 +46,8 @@ struct T_ItemData
 class CItem : public CBase
 {
 private:
-	int  m_itemArray[eItemMax];
+	CImage *m_imgArray[ItemMax];
+	int  m_itemArray[ItemMax];
 	int  m_count;
 public:
 	CItem();
@@ -45,11 +58,12 @@ public:
 	}
 	void ResetItem()
 	{
-		for (int i = 0; i < eItemMax; i++)
+		for (int i = 0; i < ItemMax; i++)
 		{
 			m_itemArray[i] = 0;
 		}
 	}
+	//ゲーム中に落とすアイテム
 	int GetItem(int type)
 	{
 		return m_itemArray[type];
