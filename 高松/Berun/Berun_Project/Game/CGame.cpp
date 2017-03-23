@@ -36,7 +36,7 @@ switch (m_step)
 			mp_player = new CPlayer(g_tutorialNo);
 			new CEnemyManager();
 			mp_enemy = new CEnemy(eFish);
-			mp_tutorial->SetDestroyFlag(true);
+			mp_tutorial->Kill();
 			mp_img[0]->SetPos(280, 310);
 			mp_img[0]->SetSize(700, 150);
 			m_step++;

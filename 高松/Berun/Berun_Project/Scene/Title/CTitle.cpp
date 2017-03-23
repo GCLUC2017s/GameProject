@@ -1,6 +1,6 @@
 #include "CTitle.h"
 #include "../CSceneManager.h"
-#include "../Game/Item/CItem.h"
+#include "../Game/CGameInfo.h"
 
 CTitle::CTitle()
 {
@@ -109,7 +109,7 @@ CTitle::CTitle()
 	m_firstMenu = false;
 	m_firstChara = false;
 	m_titleMenu = false;
-//	CItem::ClearInstance();
+	CGameInfo::ClearInstance();
 }
 CTitle::~CTitle()
 {

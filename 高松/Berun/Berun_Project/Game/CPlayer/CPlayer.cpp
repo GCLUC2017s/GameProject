@@ -31,8 +31,8 @@ void CPlayer::Draw()
 
 void CPlayer::Contlol() {
 	CCharaBase::ResetKey();
-	//もしキャラクターが死亡していれば(死亡フラグが立っていれば)、何もせずに抜ける処理
-	if (m_death)	return;
+	if (!m_death)
+	{
 		//以下、上下左右のキーを入力すればそれに応じてフラグが切り替わる
 		if (HOLD_KEY_UP)	m_up = true;
 		if (HOLD_KEY_DOWN)	m_down = true;
@@ -51,6 +51,7 @@ void CPlayer::Contlol() {
 		//スペースキーを入力したら、状態をジャンプにする処理
 		if (PUSH_KEY_SPASE)		m_jump = true;
 		if (PUSH_KEY_ENTER)		m_attack = true;
+	}
 }
 
 void CPlayer::HitCallBack(CCollisionA * p)
