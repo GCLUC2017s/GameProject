@@ -23,6 +23,7 @@ CGame::CGame() : mp_player(nullptr),m_step(0),m_cnt(0)
 
 CGame::~CGame()
 {
+	CCollisionManager::GetInstance()->UnRegistAll();
 	CTaskManager::GetInstance()->KillAll();
 }
 void CGame::Update() 
