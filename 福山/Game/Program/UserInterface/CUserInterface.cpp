@@ -12,7 +12,7 @@
 
 #define SIZE_TEX_PLAYER_HP_X 700
 #define SIZE_TEX_PLAYER_HP_Y 50
-#define SIZE_TEX_PLAYER_ST_X 1000
+#define SIZE_TEX_PLAYER_ST_X 600
 #define SIZE_TEX_PLAYER_ST_Y 100
 #define SIZE_TEX_BOSS_FRAME_X	  500
 #define SIZE_TEX_BOSS_FRAME_Y   100
@@ -29,7 +29,7 @@
 #define HP_POSX			player->mHitPoint -PL_HP_X+0.1f  //HP　pos 調整用 足す
 #define ENE_HP_POSX		base->mHitPoint +ENE_HP_X  //HP　pos 調整用引く
 
-#define T_ST_RIGHT		SIZE_TEX_PLAYER_ST_X  * (player->mStamina / PL_ST_X)
+#define T_ST_RIGHT		SIZE_TEX_PLAYER_ST_X  *( player->mStamina / PL_ST_X*0.6)
 #define SPEED_COLAR		0.05f
 
 void CUserinterface::Init(){
@@ -191,9 +191,9 @@ void CUserinterface::Update(){
 			CPlayer *player;
 			player = (CPlayer*)task;
 			mGaugePlayer[_HP_].position = CVector2(CGame::CameraPos().x - DISP_X + HP_POSX + SIZE_PL_FRAME_X, DISP_Y - SIZE_PL_FRAME_Y * 2);
-			mGaugePlayer[_ST_].position = CVector2(CGame::CameraPos().x - DISP_X + ST_POSX + SIZE_PL_FRAME_X, DISP_Y - SIZE_PL_FRAME_Y * 4);
-			mFramePlayer[_HP_].position = CVector2(CGame::CameraPos().x - DISP_X + SIZE_PL_FRAME_X, DISP_Y - SIZE_PL_FRAME_Y * 2);
-			mFramePlayer[_ST_].position = CVector2(CGame::CameraPos().x - DISP_X + SIZE_PL_FRAME_X, DISP_Y - SIZE_PL_FRAME_Y *4);
+			mGaugePlayer[_ST_].position = CVector2(CGame::CameraPos().x - DISP_X + ST_POSX + PL_ST_X, DISP_Y - PL_ST_Y * 2);
+			mFramePlayer[_HP_].position = CVector2(CGame::CameraPos().x - DISP_X + PL_ST_X, DISP_Y - SIZE_PL_FRAME_Y * 2);
+			mFramePlayer[_ST_].position = CVector2(CGame::CameraPos().x - DISP_X + PL_ST_X, DISP_Y - PL_ST_Y *2);
 			mGaugePlayer[_HP_].SetVertex(-player->mHitPoint, SIZE_PL_FRAME_Y, player->mHitPoint, -SIZE_PL_FRAME_Y); //四角作成
 			mGaugePlayer[_ST_].SetVertex(-player->mStamina, PL_ST_Y, player->mStamina, -PL_ST_Y); //四角作成
 			SetHungC(player);

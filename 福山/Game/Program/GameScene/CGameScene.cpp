@@ -50,11 +50,9 @@ void CGameScene::Update(){
 	case E_MAIN:
 
 		if (CGame::FlagTime(ADD_TIME, FPS, &mSaveTime)){
-			switch ((int)rand() % 3)
+			switch ((int)rand() % 10)
 			{
-				printf("%d\n", rand() % 3);
 			case E_ADD_ENE00:
-
 				CTaskManager::GetInstance()->Add(new CEnemy00);
 				break;
 			case E_ADD_ENE01:

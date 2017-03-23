@@ -10,6 +10,7 @@
 /*テクスチャサイズ*/
 #define SIZE_TEX_PLAYER_BASE_X			-160.0f								//プレイヤーの基本的なテクスチャサイズ X
 #define SIZE_TEX_PLAYER_AT_C_X			-180.0f								//プレイヤーのAttack_Cテクスチャサイズ X
+#define SIZE_TEX_EAT					-180.0f
 #define SIZE_TEX_PLAYER_BASE_Y			160.0f								//プレイヤーの基本的なテクスチャサイズ Y
 /*テクスチャ例外*/
 #define SIZE_TEX_CUTFLY_X				100.0f								//飛ぶ斬撃のテクスチャサイズX
@@ -42,7 +43,7 @@
 #define ATTACK_A		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,2, CVector2(mPos.x+mForward.x*0.1,mPos.y)			//攻撃範囲A
 #define ATTACK_B		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y/2,2, CVector2(mPos.x+mForward.x*0.1,mPos.y)			//攻撃範囲B
 #define ATTACK_C		mForward.x, SIZE_PLAYER_X+0.5f, SIZE_PLAYER_Y,3, CVector2(mPos.x+mForward.x*0.1,mPos.y)	//攻撃範囲C
-#define ATTACK_JUMP		mForward.x, SIZE_PLAYER_X*3 ,SIZE_PLAYER_Y*2,3,\
+#define ATTACK_JUMP		mForward.x, SIZE_PLAYER_X*2 ,SIZE_PLAYER_Y*2,3,\
 						CVector2(mPos.x  -mForward.x*1.7f, mPos.y)	//攻撃範囲ジャンプATTACK
 /*ジャンプ攻撃範囲*/
 #define FRAME_JUMPBOTTOM 3													//ジャンプ攻撃下の時のアニメーション
@@ -408,7 +409,7 @@ void CPlayer::AnimeScene(){
 		break;
 	case E_EAT_L:
 		AnimeFrame(false, ANIME_TIME_EAT, FRAME_LIMIT3);
-		mRect.SetUv(CLoadPlayer::GetInstance()->mEatTex[mAnimeFrame], SIZE_TEX_PLAYER_BASE_X, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
+		mRect.SetUv(CLoadPlayer::GetInstance()->mEatTex[mAnimeFrame], SIZE_TEX_EAT, 0, 0, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_EX01_L:
 		AnimeFrame(false, ANIME_TIME_EX01, FRAME_LIMIT8);
@@ -461,7 +462,7 @@ void CPlayer::AnimeScene(){
 	case E_EAT_R:
 		AnimeFrame(false, ANIME_TIME_ATTACK,FRAME_LIMIT3);
 
-		mRect.SetUv(CLoadPlayer::GetInstance()->mEatTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
+		mRect.SetUv(CLoadPlayer::GetInstance()->mEatTex[mAnimeFrame], 0, 0, SIZE_TEX_EAT, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_EX01_R:
 		AnimeFrame(false, ANIME_TIME_EX01, FRAME_LIMIT8);

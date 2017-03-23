@@ -350,7 +350,7 @@ void CBoss::Update(){
 
 	AlertHPRect(&mRect, mHitPoint);	//アラートメソッド(HP変化によるもの)
 	/*軸の設定*/
-	mAxis = mPos.y - SIZE_BOSS_Y;
+	mAxis = mPos.y - SIZE_BOSS_Y - SIZE_SHADOW_Y;
 	mAttackRange.position = mPos;
 	/*範囲外調整*/
 	LimitDisp(SIZE_BOSS_X, SIZE_BOSS_Y);

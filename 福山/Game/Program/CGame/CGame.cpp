@@ -113,10 +113,10 @@ void CGame::RectScaling(bool flag, float x, float y,float speed,CRectangle *rect
 }
 
 bool CGame::FlagTime(float time, float fps,float *save){
-	*save += time / fps;
+	*save += 1.0f / fps;
 	if (*save >= time){
-		return true;
 		*save = 0;
+		return true;
 	}
 	return false;
 }

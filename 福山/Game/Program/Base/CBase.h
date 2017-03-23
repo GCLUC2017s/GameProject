@@ -10,10 +10,10 @@
 
 #define SIZE_ENEMY00_Y 1  //エネミー00のサイズ_Y
 #define SIZE_ENEMY00_X 1 //エネミー00のサイズ_X
-#define SIZE_ENEMY01_Y 1  //エネミー01のサイズ_Y
+#define SIZE_ENEMY01_Y 1 //エネミー01のサイズ_Y
 #define SIZE_ENEMY01_X 1 //エネミー01のサイズ_X
-#define SIZE_BOSS_Y 3  //エネミー00のサイズ_Y
-#define SIZE_BOSS_X 3 //エネミー00のサイズ_X
+#define SIZE_BOSS_Y 3    //エネミー00のサイズ_Y
+#define SIZE_BOSS_X 3    //エネミー00のサイズ_X
 #define CAL_ENEMY00	0.2f  //エネミーのカロリー
 #define CAL_ENEMY01 0.3f
 #define CAL_BOSS	10
@@ -24,8 +24,8 @@
 
 #define PL_HP_X 4.0f //ゲージx　 //HPはこちらから使うように(初期値)
 #define PL_HP_Y 0.15f//ゲージy
-#define PL_ST_X PL_HP_X	 //ゲージx
-#define PL_ST_Y 0.5f//ゲージy
+#define PL_ST_X PL_HP_X*1.3	 //ゲージx
+#define PL_ST_Y 0.45f//ゲージy
 #define PL_ST_FR_Y 0.3f//ゲージy
 
 #define SIZE_PL_FRAME_X PL_HP_X //フレームＸ
