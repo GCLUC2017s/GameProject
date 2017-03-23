@@ -29,7 +29,9 @@
 #define WALK_SPEED 0.02f				//歩くスピード
 #define WALK_X 2						//歩くベクトルX
 #define WALK_Y 1						//歩くベクトルY
-#define AT_RANGE		mForward.x, SIZE_ENEMY00_X, SIZE_ENEMY00_Y,10, mPos      	//攻撃範囲
+
+#define AT_RANGE00		mForward.x, SIZE_ENEMY00_X*1.5, SIZE_ENEMY00_Y,2, CVector2(mPos.x+mForward.x*0.1,mPos.y) 
+
 #define ENEMY00_STAY "../CG\\enemy00\\enemy00_stay\\"
 #define ENEMY00_WALK "../CG\\enemy00\\enemy00_walk\\"
 #define ENEMY00_ATTACK "../CG\\enemy00\\enemy00_attack\\"
@@ -304,7 +306,7 @@ void CEnemy00::Motion(){
 			}
 		}
 		//攻撃範囲とあたり判定フラグ
-		Attack(AT_RANGE);
+
 		if (NO_ATTACK_PTTX){
 			actionflag = false;
 			motion = EM_WALK;
@@ -316,6 +318,7 @@ void CEnemy00::Motion(){
 			motion = EM_RANGE;
 			mEnabledAttack = false;
 		}
+		Attack(AT_RANGE00);
 		break;
 
 	case EM_Slanting:
@@ -393,7 +396,7 @@ void CEnemy00::Update(){
 
 	AlertHPRect(&mRect, mHitPoint);	//アラートメソッド(HP変化によるもの)
 	//軸の設定
-	mAxis = mPos.y - SIZE_ENEMY00_Y + SIZE_SHADOW_Y;
+	mAxis = mPos.y - SIZE_ENEMY00_Y;
 	//範囲外調整
 	LimitDisp(SIZE_ENEMY00_X, SIZE_ENEMY00_Y);
 	//レンダー順番設定

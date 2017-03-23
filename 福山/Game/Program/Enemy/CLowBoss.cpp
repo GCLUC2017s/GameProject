@@ -38,7 +38,7 @@
 
 void CLowBoss::SetPos(){
 	mPos = LowBoss_first_pos;
-	mAxis = mPos.y ;
+	mAxis = mPos.y;
 };
 
 void CLowBoss::Init(){
@@ -226,15 +226,16 @@ void CLowBoss::Motion(){
 	case EM_ATTACK:		//攻撃中
 		//モーション設定
 		if (RIGHT_PTT&&ENEMY_LIVE) {
+			mEnabledAttack = true;
 			mStatus = E_ATTACK_R;
 		}
 		else if (LEFT_PTT&&ENEMY_LIVE){
+			mEnabledAttack = true;
 			mStatus = E_ATTACK_L;
 		}
 		//範囲
 		Attack(LOW_AT);
 		///パンチの最後にあたり判定
-		mEnabledAttack = true;
 		/*範囲内に近づく*/
 		if (NO_ATTACK_BOSS){
 			actionflag = false;
@@ -287,7 +288,7 @@ void CLowBoss::Update(){
 
 	AlertHPRect(&mRect, mHitPoint);	//アラートメソッド(HP変化によるもの)
 	/*軸の設定*/
-	mAxis = mPos.y - SIZE_LOWBOSS_Y + SIZE_SHADOW_Y*2;
+	mAxis = mPos.y - SIZE_LOWBOSS_Y;
 	mAttackRange.position = mPos;
 	/*範囲外調整*/
 	LimitDisp(SIZE_LOWBOSS_X, SIZE_LOWBOSS_Y);

@@ -28,7 +28,7 @@ CKeyを使っている条件文は今後別の処理になります。
 #define SIZE_TEX_ENEMY00_WALK_X 160			//エネミーの歩くテクスチャサイズ Y
 #define SIZE_TEX_ENEMY00_WALK_Y 160			//エネミーの歩く姿テクスチャサイズ Y
 #define SIZE_SHADOW							//影の表示
-#define WALK_SPEED 0.055		//テスト用にいじってる				//飛行スピード
+#define WALK_SPEED 0.04		//テスト用にいじってる				//飛行スピード
 #define WALK_X 2							//飛行ベクトルX
 #define WALK_Y 1							//飛行ベクトルY
 #define ANIME_TIME_BASE						6
@@ -300,8 +300,6 @@ void CEnemy01::Motion(){
 
 		/*範囲*/
 		Attack(AT_RANGE01);
-
-			mEnabledAttack = true;
 		
 
 		/*攻撃範囲に距離を詰める*/
@@ -365,7 +363,7 @@ void CEnemy01::Update(){
 	
 	AlertHPRect(&mRect, mHitPoint);	//アラートメソッド(HP変化によるもの)
 	/*軸の設定*/
-	mAxis = mPos.y - SIZE_ENEMY01_Y+SIZE_SHADOW_Y;
+	mAxis = mPos.y - SIZE_ENEMY01_Y;
 	/*範囲外調整*/
 	LimitDisp(SIZE_ENEMY01_X, SIZE_ENEMY01_Y);
 	/*レンダー順番設定*/

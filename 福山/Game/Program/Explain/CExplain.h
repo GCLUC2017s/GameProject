@@ -12,6 +12,7 @@ public:
 	CRectangle mText2;
 	CRectangle mText3;
 	CRectangle mTextBox;
+	CRectangle mBackBlack;
 
 	CTexture	*mpTexture;
 
