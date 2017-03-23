@@ -15,14 +15,16 @@ CEnemy::CEnemy(int type):CCharaBase(type,eEnemy,eUDP_Enemy,eDWP_Enemy)
 	//CPlayer *p = dynamic_cast<CPlayer*>(CTaskManager::GetInstance()->GetTask(ePlayer));
 	//CVector3D vec = p->GetPos() - m_pos;
 	mp_player = CPlayer::mp_player;
-	
+	m_img= dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("CarrotShot"));
 	srand(time(nullptr));
 	m_enemyAppears = rand() % 4;
-	m_pos = CVector3D(1200+m_scroal.x, 0 ,200+50*m_enemyAppears);
+	m_pos = CVector3D(1000+m_scroal.x, 0 ,250+50*m_enemyAppears);
 	m_enemyType = type;
 	m_enemyTime = 0;
 	//m_enemyHp->SetColor(1, 0, 0, 1);
 	m_chickTime = 0;
+	m_rabittoCont=0;
+	m_rabittoCont2=0;
 	
 }
 CEnemy::~CEnemy() {
@@ -31,6 +33,7 @@ CEnemy::~CEnemy() {
 void CEnemy::Draw() {
 
 	CCharaBase::Draw();
+	
 
 }
 void CEnemy::Contlol() {
@@ -44,10 +47,54 @@ void CEnemy::Contlol() {
 	}
 
 	if (m_hp > 0) {
+		
 		if (m_enemyType == 6) {
+			
+			if (m_pos.x > 3840) {
+				m_pos.x = 3840;
+			}
+			m_rabittoCont = rand() % 2;
+			m_chickTime += CHICK_TIME;
+			
+			if(m_chickTime<100){
+				if (m_rabittoCont2 == 0) {
+					switch (m_rabittoCont)
+					{
+					case 0:
+						m_left = true;
+						m_up = true;
+						break;
+					case 1:
+						m_right = true;
+						m_down = true;
+						break;
+					case 2:
+						m_left = true;
+						m_down = true;
+						break;
+					case 4:
+						m_right = true;
+						m_up = true;
+						break;
+					}
+				}
+				}
+			
+			if (m_chickTime > 150) {
+				m_cont++;
+				m_rabittoCont2 += 1;
+			}
+			if (m_chickTime > 200&&m_cont==1 ) {
+				m_attack = true;  
+			}
+				if (m_chickTime > 250) {
+					m_chickTime = 0;
+					
+					m_rabittoCont2 = 0;
+					m_cont = 0;
+				}
+			
 
-			m_left = true;
-			m_jump = true;
 		}
 
 

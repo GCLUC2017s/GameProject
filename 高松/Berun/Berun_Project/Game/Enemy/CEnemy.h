@@ -26,6 +26,8 @@ private:
 	int m_enemyTime;
 	int m_enemyPatarn;
 	int m_cont;
+	int m_rabittoCont;
+	int m_rabittoCont2;
 	float m_chickTime;
 public:
 	
