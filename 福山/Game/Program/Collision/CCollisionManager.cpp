@@ -6,7 +6,7 @@
 #include "../Player/CPlayer.h"
 #include "../MyNumber/CMyNumber.h"
 #define		PL_HITBUCK	player->mAttackPoint*5.0f
-#define     ENE_HITBUCK ene->mAttackPoint * 0.2f
+#define     ENE_HITBUCK ene->mAttackPoint * 0.1f
 #define     ALPHA		 pl->mRect.triangle1.a
 CCollisionManager::CCollisionManager(){};
 CCollisionManager::~CCollisionManager(){};

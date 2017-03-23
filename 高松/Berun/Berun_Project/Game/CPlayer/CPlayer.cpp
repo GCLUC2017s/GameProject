@@ -100,12 +100,24 @@ void CPlayer::HitCallBack(CCollisionA * p)
 	{
 		if (!m_damage)
 		{
-			//HPを減らす処理
-			m_hp--;
-			//もしこの瞬間にキャラクターのHPが0ならキャラクターの死亡フラグを真にする処理
-			if (!m_hp)	m_death = true;
-			if (m_pos.x < tt->GetPos().x)	m_damageDirection = true;
-			if (m_pos.x > tt->GetPos().x)	m_damageDirection = false;
+			if (tt->CheckState() != eState_Attack)
+			{
+				//HPを減らす処理
+				m_hp--;
+				//もしこの瞬間にキャラクターのHPが0ならキャラクターの死亡フラグを真にする処理
+				if (!m_hp)	m_death = true;
+				if (m_pos.x < tt->GetPos().x)	m_damageDirection = true;
+				if (m_pos.x > tt->GetPos().x)	m_damageDirection = false;
+			}
+			else
+			{
+				//HPを減らす処理
+				m_hp -= tt->GetAttack();
+				//もしこの瞬間にキャラクターのHPが0ならキャラクターの死亡フラグを真にする処理
+				if (!m_hp)	m_death = true;
+				if (m_pos.x < tt->GetPos().x)	m_damageDirection = true;
+				if (m_pos.x > tt->GetPos().x)	m_damageDirection = false;
+			}
 		}
 		m_damage = true;
 	}

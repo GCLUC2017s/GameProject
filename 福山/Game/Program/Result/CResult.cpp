@@ -70,10 +70,16 @@
 #include "../SceneManager/CSceneManager.h"
 
 void CClear::Init(){
-
+	
 }
 
 CClear::CClear() : mTimePoint(TIMEMAX),mFlagRect(false),mFlagDie(false){
+
+	Time = 0;					//計測用
+	RectTime = 0;				//四角形のTime
+	mKillPolint = 0;			//倒した数のポイント	
+	mSaveTime = 0;
+
 	mMyNumber = E_CLEAR;
 	mPriorityR = E_CLEAR;
 	mPriorityU = E_CLEAR;
@@ -282,36 +288,29 @@ void CClear::Update(){
 		}
 		if (FlagCrectA(mRectEvaluation)){					//評価表示で
 			CGame::Fade(F_SPEEDBASE, &mRectLogo[E_RANK], 1.0f);
-			
+		}
 
 
+		if (CGame::FlagTime(3, FPS, &mSaveTime)){
 
+			if (FlagCrectA(mRectLogo[E_RANK])){
 
+				CGame::FadeOut(F_SPEEDBASE, &mRectFrame);
+				CGame::FadeOut(F_SPEEDBASE, &mRectStoryResult);
+				CGame::FadeOut(F_SPEEDBASE, &mRectMainLogo);
+				CGame::FadeOut(F_SPEEDBASE, &mRectEvaluation);
+				for (int i = 0; i < LOGO_MAX; i++)
+				{
+					CGame::FadeOut(F_SPEEDBASE, &mRectLogo[i]);
+				}
 
-
-
-
-
-			if (CGame::FlagTime(1, 1,&mSaveTime)){}
-			//if (FlagCrectA(mRectLogo[E_RANK])){
-
-			//	CGame::FadeOut(F_SPEEDBASE, &mRectFrame);
-			//	CGame::FadeOut(F_SPEEDBASE, &mRectStoryResult);
-			//	CGame::FadeOut(F_SPEEDBASE, &mRectMainLogo);
-			//	CGame::FadeOut(F_SPEEDBASE, &mRectEvaluation);
-			//	for (int i = 0; i < LOGO_MAX; i++)
-			//	{
-			//		CGame::FadeOut(F_SPEEDBASE, &mRectLogo[i]);
-			//	}
-			//	//エンターキーを押したときにシーンをセレクト画面に替える処理を行う。
-			//	if (CKey::push(VK_RETURN))
-			//	{
-
-			//		CTaskManager::GetInstance()->AllKill();
-			//		CSceneManager::GetInstance()->ChangeScene(eSceneNo::E_TITLE);
-			//	}
-			//}
-
+				//エンターキーを押したときにシーンをセレクト画面に替える処理を行う。
+				if (CKey::push(VK_RETURN))
+				{
+					CTaskManager::GetInstance()->mFlagAllkill = true;
+					CSceneManager::GetInstance()->ChangeScene(eSceneNo::E_TITLE);
+				}
+			}
 		}
 	}
 	
