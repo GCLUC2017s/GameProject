@@ -7,6 +7,8 @@
 
 #define SIZE_PLAYER_Y 1.0f							//プレイヤーのサイズ_Y
 #define SIZE_PLAYER_X 0.8f						//プレイヤーのサイズ_X
+#define SIZE_LOWBOSS_X 2.5f
+#define SIZE_LOWBOSS_Y 2.5f
 
 #define SIZE_ENEMY00_Y 1  //エネミー00のサイズ_Y
 #define SIZE_ENEMY00_X 1 //エネミー00のサイズ_X
@@ -22,7 +24,7 @@
 #define SHADOW_TEX_X			70.f				//影のテクスチャのX
 #define SHADOW_TEX_Y			20.f				//影のテクスチャのY
 
-#define PL_HP_X 4.0f //ゲージx　 //HPはこちらから使うように(初期値)
+#define PL_HP_X 2.0f //ゲージx　 //HPはこちらから使うように(初期値)
 #define PL_HP_Y 0.15f//ゲージy
 #define PL_ST_X PL_HP_X*1.3	 //ゲージx
 #define PL_ST_Y 0.45f//ゲージy

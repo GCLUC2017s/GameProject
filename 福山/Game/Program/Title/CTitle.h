@@ -11,6 +11,10 @@
 #define FRAME_BERU 9
 
 class CTitle :public CTask{
+private:
+	int mFrameCount;
+	float mSaveTime;
+	bool mEnabledTime;
 public:
 
 	CRectangle mTitleLogo;
@@ -20,7 +24,8 @@ public:
 	CTexture	*mpTitleLogo;
 	CTexture	*mpPleaseKey;
 	CTexture	*mTexBeru[FRAME_BERU];
-
+	int mAnimeFrame;
+	void AnimeFrame(int speed);
 	~CTitle();
 	CTitle();
 	void Init();

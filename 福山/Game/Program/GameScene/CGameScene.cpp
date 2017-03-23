@@ -10,7 +10,8 @@
 #include "../Enemy/CBoss.h"
 #include "../Result/CResult.h"
 #include "../CGame/CGame.h"
-#define ADD_TIME 10.0f//敵出現フラグ
+#include "../Enemy/CLowBoss.h"
+#define ADD_TIME 20.0f//敵出現フラグ
 
 CGameScene::CGameScene():status(E_INIT){}
 enum eAddEnemyNonber
@@ -33,7 +34,7 @@ void CGameScene::Init(){
 		CTaskManager::GetInstance()->Add(new CEnemy01);
 	}
 	CTaskManager::GetInstance()->Add(new CPlayer);
-	
+	CTaskManager::GetInstance()->Add(new CLowBoss);
 	
 	CTaskManager::GetInstance()->Add(new CBoss);
 	CTaskManager::GetInstance()->Add(new CClear);

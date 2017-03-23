@@ -40,15 +40,15 @@
 #define ANIME_TIME_WALK						8 + mHungryStatus				//ƒAƒjƒƒ‹[ƒvŽžŠÔ@•à‚­
 #define ANIME_TIME_EX01						4								//ƒAƒjƒƒ‹[ƒvŽžŠÔ •KŽE‹ZU‚è
 
-#define ATTACK_A		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,2, CVector2(mPos.x+mForward.x*0.1,mPos.y)			//UŒ‚”ÍˆÍA
-#define ATTACK_B		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y/2,2, CVector2(mPos.x+mForward.x*0.1,mPos.y)			//UŒ‚”ÍˆÍB
-#define ATTACK_C		mForward.x, SIZE_PLAYER_X+0.5f, SIZE_PLAYER_Y,3, CVector2(mPos.x+mForward.x*0.1,mPos.y)	//UŒ‚”ÍˆÍC
-#define ATTACK_JUMP		mForward.x, SIZE_PLAYER_X*2 ,SIZE_PLAYER_Y*2,3,\
+#define ATTACK_A		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,0.1, CVector2(mPos.x+mForward.x*0.1,mPos.y)			//UŒ‚”ÍˆÍA
+#define ATTACK_B		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,0.1, CVector2(mPos.x+mForward.x*0.1,mPos.y)			//UŒ‚”ÍˆÍB
+#define ATTACK_C		mForward.x, SIZE_PLAYER_X+0.5f, SIZE_PLAYER_Y,0.1, CVector2(mPos.x+mForward.x*0.1,mPos.y)	//UŒ‚”ÍˆÍC
+#define ATTACK_JUMP		mForward.x, SIZE_PLAYER_X*2 ,SIZE_PLAYER_Y,0.1,\
 						CVector2(mPos.x  -mForward.x*1.7f, mPos.y)	//UŒ‚”ÍˆÍƒWƒƒƒ“ƒvATTACK
 /*ƒWƒƒƒ“ƒvUŒ‚”ÍˆÍ*/
 #define FRAME_JUMPBOTTOM 3													//ƒWƒƒƒ“ƒvUŒ‚‰º‚ÌŽž‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-#define EAT_ATTACK		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,2,CVector2(mPos.x+mForward.x*0.1,mPos.y)	//H‚×‚éUŒ‚
-#define EX01_ATTACK		mForward.x, SIZE_PLAYER_X+ fabsf(mEx01Speed), SIZE_PLAYER_Y + fabsf(mEx01Speed),3, CVector2(mPos.x+mEx01Speed,mPos.y) //•KŽE‹Z”ÍˆÍ
+#define EAT_ATTACK		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,1,CVector2(mPos.x+mForward.x*0.1,mPos.y)	//H‚×‚éUŒ‚
+#define EX01_ATTACK		mForward.x, SIZE_PLAYER_X+ fabsf(mEx01Speed), SIZE_PLAYER_Y + fabsf(mEx01Speed),2, CVector2(mPos.x+mEx01Speed,mPos.y) //•KŽE‹Z”ÍˆÍ
 #define EX01_SPEED 0.1f														//•KŽE‹Z‚ªi‚ÞƒXƒs[ƒh
 #define INTERVAL		20.0f												//UŒ‚Œã‚ÌINTERVALƒL[“ü—Í‘Ò‚¿ŽžŠÔ  
 #define HUNGRY_SPEED	0.002f												//‚¨‚È‚©‚ªŒ¸‚éƒXƒs[ƒh
@@ -447,7 +447,7 @@ void CPlayer::AnimeScene(){
 		mRect.SetUv(CLoadPlayer::GetInstance()->mWalkTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_RUN_R:
-		AnimeFrame(true, ANIME_TIME_BASE);
+		AnimeFrame(true, ANIME_TIME_BASE, FRAME_LIMIT8);
 		mRect.SetUv(CLoadPlayer::GetInstance()->mRunTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_NORMALATTACK_A_R:

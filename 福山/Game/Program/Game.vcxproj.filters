@@ -72,6 +72,9 @@
     <Filter Include="Sound">
       <UniqueIdentifier>{73b69812-1010-4814-ab44-6a06ef4768cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Explain">
+      <UniqueIdentifier>{8a517767-1134-4bc5-8916-38b228418ca1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera\CCamera.cpp">
@@ -154,6 +157,12 @@
     </ClCompile>
     <ClCompile Include="Result\CResult.cpp">
       <Filter>Result</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\CLowBoss.cpp">
+      <Filter>Enemey</Filter>
+    </ClCompile>
+    <ClCompile Include="Explain\CExplain.cpp">
+      <Filter>Explain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -258,6 +267,12 @@
     </ClInclude>
     <ClInclude Include="Sound\CSound.h">
       <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\CLowBoss.h">
+      <Filter>Enemey</Filter>
+    </ClInclude>
+    <ClInclude Include="Explain\CExplain.h">
+      <Filter>Explain</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
