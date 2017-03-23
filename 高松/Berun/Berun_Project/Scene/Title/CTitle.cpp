@@ -109,7 +109,7 @@ CTitle::CTitle()
 	m_firstMenu = false;
 	m_firstChara = false;
 	m_titleMenu = false;
-	CItem::ClearInstance();
+//	CItem::ClearInstance();
 }
 CTitle::~CTitle()
 {
