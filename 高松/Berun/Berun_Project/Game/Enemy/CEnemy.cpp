@@ -39,119 +39,124 @@ void CEnemy::Contlol() {
 	CVector3D vec = mp_player->GetPos() - m_pos;
 	if (mp_player->GetDeath()) return;
 
-	if (m_enemyType == 5) {
-		m_chickTime += CHICK_TIME;
+	if (m_hp <= 0) {
+		m_death = true;
+	}
 
-		if (m_chickTime <= 120) {
-			if (vec.x < 20) {
-				m_left = true;
-			}
+	if (m_hp > 0) {
 
-			if (vec.x > -20) {
-				m_right = true;
-			}
-			m_attack = true;
-		}
-		if (m_chickTime >= 120 && m_chickTime <= 200) {
-			if (vec.x < 20) {
-				m_left = true;
-			}
-			
-			if (vec.x > -20) {
-				m_right = true;
-			}
-					if (vec.z > -20) {
-						m_up = true;
-					}
-					if (vec.z < 20) {
-						m_down = true;
-					}
+		if (m_enemyType == 5) {
+			m_chickTime += CHICK_TIME;
+
+			if (m_chickTime <= 120) {
+				if (vec.x < 20) {
+					m_left = true;
 				}
-		if (m_chickTime >= 200) {
-			m_chickTime = 0;
+
+				if (vec.x > -20) {
+					m_right = true;
+				}
+				m_attack = true;
+			}
+			if (m_chickTime >= 120 && m_chickTime <= 160) {
+				if (vec.x < 20) {
+					m_left = true;
+				}
+
+				if (vec.x > -20) {
+					m_right = true;
+				}
+				if (vec.z > -20) {
+					m_up = true;
+				}
+				if (vec.z < 20) {
+					m_down = true;
+				}
+			}
+			if (m_chickTime >= 250) {
+				m_chickTime = 0;
+			}
 
 		}
-			
+
+
+
+
+
+
+
+
+
+		if (m_enemyType == 4) {
+
+			m_chickTime += CHICK_TIME;
+			if (m_chickTime > 80 && m_chickTime <= 100) {
+				if (vec.x < 20) {
+					m_left = true;
+				}
+				if (vec.x > -20) {
+					m_right = true;
+
+				}
+				if (vec.z > -20) {
+					m_up = true;
+				}
+				if (vec.z < 20) {
+					m_down = true;
+				}
+
+			}
+			if (m_chickTime >= 100 && m_chickTime <= 120) {
+				if (vec.x < 20) {
+					m_left = true;
+				}
+				if (vec.x > -20) {
+					m_right = true;
+
+				}
+				m_jump = true;
+			}
+			if (m_chickTime >= 140) {
+				m_chickTime = 0;
+			}
+
 		}
-			
-			
-		
-			
-			
-
-		
 
 
-	if (m_enemyType == 4) {
 
-		m_chickTime += CHICK_TIME;
-		if (m_chickTime > 80 && m_chickTime <= 100) {
-			if (vec.x < 20) {
-				m_left = true;
+
+		if (m_enemyType == 3) {
+			m_chickTime += CHICK_TIME;
+
+			if (m_chickTime >= 80 && m_chickTime <= 400) {
+
+				if (vec.x < -110) {
+
+					m_left = true;
+				}
+				if (vec.x > 140) {
+					m_right = true;
+				}
+				if (vec.z > -100) {
+					m_up = true;
+				}
+				if (vec.z < 100) {
+					m_down = true;
+				}
 			}
-			if (vec.x > -20) {
-				m_right = true;
+			if (m_chickTime >= 400) {
+				if (vec.x < 0) {
+					m_right = true;
+				}
 
-			}
-			if (vec.z > -20) {
-				m_up = true;
-			}
-			if (vec.z < 20) {
-				m_down = true;
-			}
-			
-		}
-		if (m_chickTime >= 100 && m_chickTime <= 120) {
-			if (vec.x < 20) {
-				m_left = true;
-			}
-			if (vec.x > -20) {
-				m_right = true;
+				if (m_chickTime > 450) {
+					m_chickTime = 80;
 
-			}
-			m_jump = true;
-		}
-		if (m_chickTime >= 140) {
-			m_chickTime = 0;
-		}
-
-	}
-
-
-
-
-	if (m_enemyType == 3) {
-		m_chickTime += CHICK_TIME;
-		
-		if (m_chickTime >= 80 && m_chickTime <= 400) {
-			
-			if (vec.x < -110) {
-				
-				m_left = true;
-			}
-			if (vec.x > 140) {
-				m_right = true;
-			}
-			if (vec.z > -100) {
-				m_up = true;
-			}
-			if (vec.z < 100) {
-				m_down = true;
+				}
 			}
 		}
-		if (m_chickTime >= 400) {
-			if (vec.x < 0) {
-				m_right = true;
-			}
 
-			if (m_chickTime > 450) {
-				m_chickTime =80;
-
-			}
-		}
-	}
-
-		if(m_enemyType==2){
+		if (m_enemyType == 2) {
 
 			m_chickTime += CHICK_TIME;
 			if (m_chickTime >= 80 && m_chickTime <= 150) {
@@ -167,27 +172,46 @@ void CEnemy::Contlol() {
 				if (vec.z < 20) {
 					m_down = true;
 				}
-				}
-			if (m_chickTime >= 150&&m_chickTime<=170) {
+			}
+			if (m_chickTime >= 150 && m_chickTime <= 170) {
 				if (vec.x < 20) {
 					m_left = true;
 				}
 				if (vec.x > -20) {
 					m_right = true;
 				}
-				m_jump= true;
+				m_jump = true;
 			}
 			if (m_chickTime >= 170 && m_chickTime <= 190) {
 				m_right = true;
-				
+
 			}
 			if (m_chickTime >= 250) {
 				m_chickTime = 0;
 			}
-			}
 		}
+	}
+}
 	
 
+		void CEnemy::HitCallBack(CCollisionA * p)
+		{
+			CCharaBase::HitCallBack(p);
+			CCharaBase* tt = dynamic_cast<CCharaBase*>(p);
+
+			if (m_state != eState_Attack && tt)
+			{
+				if (!m_damage)
+				{
+					//HP‚ðŒ¸‚ç‚·ˆ—
+					m_hp--;
+					m_hp -= tt->GetAttack();
+					if (m_pos.x < tt->GetPos().x)	m_damageDirection = true;
+					if (m_pos.x > tt->GetPos().x)	m_damageDirection = false;
+				}
+				m_damage = true;
+			}
+		}
 	
 	
 		
