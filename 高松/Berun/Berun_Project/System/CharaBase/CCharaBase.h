@@ -11,7 +11,8 @@
 #include "../Game/Item/CItem.h"
 
 #define ARRAY_SIZE(a)(sizeof(a)/sizeof(a[0]))
-#define CHARA_MOVE 4
+#define NORMAL_SPEED 1
+#define DASH_SPEED 2
 #define ANIM_REVISION 1
 #define DAMAGE_TIME 2
 #define WINDOW_UP_LIMIT	600
