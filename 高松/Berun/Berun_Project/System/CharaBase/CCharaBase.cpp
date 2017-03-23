@@ -238,7 +238,6 @@ void CCharaBase::Update()
 		Damage();
 		break;
 	case eState_Down:
-		Down();
 		break;
 	}
 	m_gravitySpeed += GRAVITY;
@@ -311,11 +310,6 @@ void CCharaBase::Damage()
 
 	}
 	rect = CRect(m_pos.x + mp_eData->rect.m_left, m_pos.y + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right, m_pos.y + mp_eData->rect.m_bottom);
-}
-
-void CCharaBase::Down()
-{
-	ChangeAnimation(eAnim_Down, true);
 }
 
 bool CCharaBase::CheckHit(CCollisionA *t)
