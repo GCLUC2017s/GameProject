@@ -70,6 +70,7 @@ CBoss::CBoss() : mVelocity(0), mFrameCount(0), actionflag(false), motion(0), dir
 	mShadow.SetVertex(-SIZE_SHADOW_X, SIZE_SHADOW_Y, SIZE_SHADOW_X, -SIZE_SHADOW_Y);
 	//éläpå`ÇÃêFÇê›íË
 	mRect.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+
 }
 
 CBoss::~CBoss(){
@@ -394,7 +395,7 @@ void CBoss::Update(){
 	mPriorityR = -mAxis;
 	LimitDisp(SIZE_BOSS_X, SIZE_BOSS_Y);	//ìñÇΩÇËîªíË
 	AnimeScene();
-	mShadow.position = CVector2(mPos.x, mAxis);
+	mShadow.position = CVector2(mPos.x, mAxis+0.8f);
 
 	mRect.position = mPos;
 }

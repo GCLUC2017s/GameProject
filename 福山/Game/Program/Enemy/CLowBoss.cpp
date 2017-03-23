@@ -296,7 +296,7 @@ void CLowBoss::Update(){
 	mPriorityR = -mAxis;
 	LimitDisp(SIZE_LOWBOSS_X, SIZE_LOWBOSS_Y);	//“–‚½‚è”»’è
 	AnimeScene();
-	mShadow.position = CVector2(mPos.x, mAxis);
+	mShadow.position = CVector2(mPos.x, mAxis+0.8f);
 
 	mRect.position = mPos;
 }
