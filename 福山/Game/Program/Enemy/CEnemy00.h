@@ -38,24 +38,30 @@ private:
 	//const int mStatus;
 	int mAnimePattern;				//全体のアニメーションパターン
 	int mSaveAnime; //直前のアニメが何か判断用
-	int mFlameCount;		//フレーム数カウント用
+	int mFrameCount;		//フレーム数カウント用
 
-	CVector2 mSuvePos;//元いた位置の保存
+	CVector2 mSavePos;//元いた位置の保存
 
-	int mDirection;	//左右の簡易判断
+	int direction;	//左右の簡易判断
 
 	float rulerR; //エネミーとキャラクターの距離
 	float rulerL; //エネミーとキャラクターの距離
-	
+	float upruler; //エネミーとキャラクターの距離
+	float downruler; //エネミーとキャラクターの距離
+
+
+
 	bool actionflag; //アクションをしている時は立てる
 
-	float delay;	//行動後の再抽選ディレイ
 	float getAxis;
 	float downAxis;
 	float upAxis;
 
-	int motion;		
+	float escapetime;
+	float interval;
+	
 	int pattern;
+	int motion;	
 
 	void Walk();
 	void AnimeScene();

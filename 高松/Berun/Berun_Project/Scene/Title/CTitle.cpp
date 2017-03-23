@@ -1,7 +1,7 @@
 #include "CTitle.h"
 #include "../CSceneManager.h"
-#include "../Game/Item/CItem.h"
-
+#include "../Game/CGameInfo.h"
+#include "../System/TaskSystem/CTaskManager.h"
 CTitle::CTitle()
 {
 	m_black = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Black"));
@@ -109,11 +109,11 @@ CTitle::CTitle()
 	m_firstMenu = false;
 	m_firstChara = false;
 	m_titleMenu = false;
-//	CItem::ClearInstance();
+	CGameInfo::ClearInstance();
 }
 CTitle::~CTitle()
 {
-
+	CTaskManager::GetInstance()->KillAll();
 }
 void CTitle::Update()
 {

@@ -29,6 +29,7 @@ private:
 	/*エネミーのテクスチャ*/
 	CTexture  *mEnemyGageTex;
 	CTexture  *mEnemyFrameTex;
+	
 
 	CVector2 mPos;			//四角のポジジョン
 	float savex;			//PLAYERのgauge調整用

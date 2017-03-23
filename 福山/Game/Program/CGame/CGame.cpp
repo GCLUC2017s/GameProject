@@ -13,7 +13,6 @@ CEnemy00 CGame::getEnemy(CEnemy00 &ene00){
 	return ene00;
 }
 
-
 CVector2 CGame::CameraPos(){
 	const float arealeft_x = character_limit_left + SIZE_PLAYER_X * 2;
 	const float arearight_x = character_limit_right - (DISP_X / 2) - SIZE_PLAYER_X * 4;
@@ -111,4 +110,13 @@ void CGame::RectScaling(bool flag, float x, float y,float speed,CRectangle *rect
 	case false://k¬
 		break;
 	}
+}
+
+bool CGame::FlagTime(float time, float fps,float *save){
+	*save += 1.0f / fps;
+	if (*save >= time){
+		*save = 0;
+		return true;
+	}
+	return false;
 }

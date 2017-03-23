@@ -14,16 +14,13 @@ void CTaskManager::Add(CTask *p)
 	{
 		//追加されたタスクを先頭に
 		mp_head = p;
-		//mp_head->mp_prev = nullptr;
-		//mp_head->mp_next = p;
-		//mp_tail = p;
+		mp_head->mp_prev = nullptr;
+		mp_head->mp_next = p;
+		mp_tail = p;
 	}
 	//先頭が存在していれば
 	else
 	{
-		p->mp_prev = mp_tail;
-		mp_tail->mp_next = p;
-		/*
 		CTask temp;
 		CTask *t = &temp;
 		t->mp_next = mp_head;
@@ -32,19 +29,19 @@ void CTaskManager::Add(CTask *p)
 		{
 			t = t->mp_next;
 
-			if (t == mp_head && t->m_drawPrio > t->m_drawPrio) 
+			if (t == mp_head && t->m_drawPrio > p->m_drawPrio) 
 			{ 
-				mp_head = t;
+				mp_head = p;
 				mp_head->mp_prev = nullptr;
-				t->mp_prev = t;
+				t->mp_prev = p;
 				if (!t->mp_next) mp_tail = t;
 				break;
 			}
 			else if (t == mp_tail) 
 			{
-				t->mp_prev = mp_tail;
-				mp_tail->mp_next = t;
-				mp_tail = t;
+				p->mp_prev = mp_tail;
+				mp_tail->mp_next = p;
+				mp_tail = p;
 				mp_tail->mp_next = nullptr;
 				break;
 			}
@@ -56,14 +53,17 @@ void CTaskManager::Add(CTask *p)
 				t->mp_next = p;
 				break;
 			}
-		}*/
+		}
 	}
-	mp_tail = p;
 }
-CTask* CTaskManager::Destroy(CTask *p)
+CTask* CTaskManager::Kill(CTask *p)
 {
 	CTask *next = p->mp_next;
 	CTask *prev = p->mp_prev;
+	//タスクマネージャーの先頭を再設定
+	if (p == mp_head) mp_head = next;
+	//タスクマネージャーの末尾を再設定
+	if (p == mp_tail) mp_tail = prev;
 	//削除するタスクの「前タスクの次の位置」を削除するタスクの「次タスクの位置」に繋ぐ。
 	if(prev)prev->mp_next = next;
 	//削除するタスクの「次タスクの前の位置」を削除するタスクの「前タスクの位置」に繋ぐ。
@@ -72,24 +72,24 @@ CTask* CTaskManager::Destroy(CTask *p)
 	delete p;
 	return next;
 }
-void CTaskManager::DestroyAppoint()
+void CTaskManager::KillAppoint()
 {
 	//先頭から順に削除フラグが真のタスクを削除していく
 	CTask *p = mp_head;
 	while (p)
 	{
-		if (p->m_destroyFlg) p = Destroy(p);
+		if (p->m_destroyFlg) p = Kill(p);
 		else p = p->mp_next;
 	}
 }
 
-void CTaskManager::DestroyAll()
+void CTaskManager::KillAll()
 {
 	//先頭からタスクを削除していく
 	CTask *p = mp_head;
 	while (p)
 	{
-		p = Destroy(p);
+		p = Kill(p);
 	}
 }
 void CTaskManager::UpdateAll()
@@ -220,13 +220,13 @@ void CTaskManager::SortAscDraw()
 
 CTask* CTaskManager::GetTask(int id)
 {
-	CTask *p;
+	CTask *p = mp_head;
 	//引数があれば
-	while (p&&id)
+	while (p)
 	{
 		//idが一致していればそのタスクを返す
 		if (p->m_id == id) return p;
-		p = p->mp_next;
+		else p = p->mp_next;
 	}
 	
 	//以外ならnullを返す
@@ -236,12 +236,16 @@ CTask* CTaskManager::GetTask(int id)
 int CTaskManager::GetCount(int id)
 {
 	int cnt = 0;
-	CTask *p;
+	CTask *p = mp_head;
 	//引数があれば
-	while (id)
+	while (p)
 	{
 		//idが一致していればカウントアップ
-		if(p->m_id == id) cnt++;
+		if (p->m_id == id)
+		{
+			cnt++;
+			p = p->mp_next;
+		}
 	}
 	//個数を返す
 	return cnt;
