@@ -49,16 +49,16 @@ T_AnimData _pigAnimData[] = {
 	{ 2,5 },
 	{ 0,0 },
 	{ 2,8 },
-	{ 5,10 },
+	{ 6,10 },
 
 };
 T_AnimData _bossAnimData[] = {
-	{ 2,5 },
-	{ 2,5 },
-	{ 2,5 },
-	{ 2,5 },
+	{ 10,10 },
 	{ 2,8 },
-	{ 5,10 },
+	{ 0,0 },
+	{ 2,8 },
+	{ 6,8 },
+	{ 2,8 },
 
 };
  static const T_CharacterData g_characterData[] =
