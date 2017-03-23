@@ -43,7 +43,7 @@
 #define ATTACK_A		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,0.1, CVector2(mPos.x+mForward.x*0.1,mPos.y)			//UŒ‚”ÍˆÍA
 #define ATTACK_B		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,0.1, CVector2(mPos.x+mForward.x*0.1,mPos.y)			//UŒ‚”ÍˆÍB
 #define ATTACK_C		mForward.x, SIZE_PLAYER_X+0.5f, SIZE_PLAYER_Y,0.1, CVector2(mPos.x+mForward.x*0.1,mPos.y)	//UŒ‚”ÍˆÍC
-#define ATTACK_JUMP		mForward.x, SIZE_PLAYER_X*2 ,SIZE_PLAYER_Y*0.1,0.1,\
+#define ATTACK_JUMP		mForward.x, SIZE_PLAYER_X*2 ,SIZE_PLAYER_Y,0.1,\
 						CVector2(mPos.x  -mForward.x*1.7f, mPos.y)	//UŒ‚”ÍˆÍƒWƒƒƒ“ƒvATTACK
 /*ƒWƒƒƒ“ƒvUŒ‚”ÍˆÍ*/
 #define FRAME_JUMPBOTTOM 3													//ƒWƒƒƒ“ƒvUŒ‚‰º‚ÌŽž‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
@@ -447,7 +447,7 @@ void CPlayer::AnimeScene(){
 		mRect.SetUv(CLoadPlayer::GetInstance()->mWalkTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_RUN_R:
-		AnimeFrame(true, ANIME_TIME_BASE);
+		AnimeFrame(true, ANIME_TIME_BASE, FRAME_LIMIT8);
 		mRect.SetUv(CLoadPlayer::GetInstance()->mRunTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_NORMALATTACK_A_R:

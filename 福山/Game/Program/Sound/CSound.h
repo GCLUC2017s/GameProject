@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SOUND_HPP
+#define SOUND_HPP
 #include<Windows.h>
 #include<mmsystem.h>
 #include <stdio.h>
@@ -64,3 +65,4 @@ public:
 	}
 
 };
+#endif
