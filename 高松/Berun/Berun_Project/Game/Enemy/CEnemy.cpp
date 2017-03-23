@@ -1,6 +1,6 @@
 #include"CEnemy.h"
 #include "../CPlayer/CPlayer.h"
-
+#include"../System/TaskSystem/CTaskManager.h"
 
 
 /*T_EnemyData g_enemyData[] =
@@ -12,17 +12,18 @@
 
 CEnemy::CEnemy(int type):CCharaBase(type,eEnemy,eUDP_Enemy,eDWP_Enemy)
 {
+	//CPlayer *p = dynamic_cast<CPlayer*>(CTaskManager::GetInstance()->GetTask(ePlayer));
+	//CVector3D vec = p->GetPos() - m_pos;
 	mp_player = CPlayer::mp_player;
-	CVector3D vec = mp_player->GetPos() - m_pos;
+	
 	srand(time(nullptr));
 	m_enemyAppears = rand() % 4;
-	m_pos = CVector3D(1200, 0 ,200+50*m_enemyAppears);
+	m_pos = CVector3D(1200+m_scroal.x, 0 ,200+50*m_enemyAppears);
 	m_enemyType = type;
 	m_enemyTime = 0;
 	//m_enemyHp->SetColor(1, 0, 0, 1);
 	m_chickTime = 0;
-		
-
+	
 }
 CEnemy::~CEnemy() {
 
@@ -34,163 +35,160 @@ void CEnemy::Draw() {
 }
 void CEnemy::Contlol() {
 	CCharaBase::ResetKey();
-	
-	
-	CVector3D vec = mp_player->GetPos() - m_pos;
 
-	
+	CVector3D vec = mp_player->GetPos() - m_pos;
+	if (mp_player->GetDeath()) return;
+
 	if (m_enemyType == 5) {
-		m_chickTime += 0.5f;
+		m_chickTime += CHICK_TIME;
 
 		if (m_chickTime <= 120) {
+			if (vec.x < 20) {
+				m_left = true;
+			}
+
+			if (vec.x > -20) {
+				m_right = true;
+			}
 			m_attack = true;
 		}
-		if (m_chickTime >= 120 && m_chickTime <= 400) {
-			m_attack = false;
-			if (vec.x < -120) {
-				m_pos.x -= 3;
+		if (m_chickTime >= 120 && m_chickTime <= 200) {
+			if (vec.x < 20) {
+				m_left = true;
 			}
-			if (vec.x > 120) {
-				m_pos.x += 3;
+			
+			if (vec.x > -20) {
+				m_right = true;
 			}
-			if (vec.z > 120) {
-				m_pos.z += 3;
-			}
-			if (vec.z < -120) {
-				m_pos.z -= 3;
-			}
+					if (vec.z > -20) {
+						m_up = true;
+					}
+					if (vec.z < 20) {
+						m_down = true;
+					}
+				}
+		if (m_chickTime >= 200) {
+			m_chickTime = 0;
+
 		}
-	}
+			
+		}
+			
+			
+		
+			
+			
+
+		
+
+
 	if (m_enemyType == 4) {
-		m_chickTime += 0.5f;
+
+		m_chickTime += CHICK_TIME;
 		if (m_chickTime > 80 && m_chickTime <= 100) {
-			if (vec.x < -120) {
-				m_pos.x -= 4;
+			if (vec.x < 20) {
+				m_left = true;
 			}
-			if (vec.x > 120) {
-				m_pos.x += 4;
+			if (vec.x > -20) {
+				m_right = true;
+
 			}
-			if (vec.z > 120) {
-				m_pos.z += 4;
+			if (vec.z > -20) {
+				m_up = true;
 			}
-			if (vec.z < -120) {
-				m_pos.z -= 4;
+			if (vec.z < 20) {
+				m_down = true;
 			}
-			m_pos.y += 30;
+			
 		}
-		if (m_chickTime >= 100&&m_chickTime>=120) {
-			if (vec.x < -120) {
-				m_pos.x -= 4;
+		if (m_chickTime >= 100 && m_chickTime <= 120) {
+			if (vec.x < 20) {
+				m_left = true;
 			}
-			if (vec.x > 120) {
-				m_pos.x += 4;
+			if (vec.x > -20) {
+				m_right = true;
+
 			}
-			if (vec.z > 120) {
-				m_pos.z += 4;
-			}
-			if (vec.z < -120) {
-				m_pos.z -= 4;
-			}
-			m_pos.y -= 30;
+			m_jump = true;
 		}
-		if (m_chickTime > 120) {
-			m_chickTime = 80;
+		if (m_chickTime >= 140) {
+			m_chickTime = 0;
 		}
 
 	}
+
+
+
 
 	if (m_enemyType == 3) {
-		m_chickTime+=0.5f;
-		if (m_chickTime>80&&m_chickTime <= 400) {
-			if (vec.x < -120) {
-				m_pos.x -= 1;
+		m_chickTime += CHICK_TIME;
+		
+		if (m_chickTime >= 80 && m_chickTime <= 400) {
+			
+			if (vec.x < -110) {
+				
+				m_left = true;
 			}
-			if (vec.x > 120) {
-				m_pos.x += 1;
+			if (vec.x > 140) {
+				m_right = true;
 			}
-			if (vec.z > 120) {
-				m_pos.z += 1;
+			if (vec.z > -100) {
+				m_up = true;
 			}
-			if (vec.z < -120) {
-				m_pos.z -= 1;
+			if (vec.z < 100) {
+				m_down = true;
 			}
 		}
 		if (m_chickTime >= 400) {
-			m_pos.z -= 2;
-			m_pos.x += 1;
-			if (m_pos.z<-400) {
-				m_chickTime = 400;
-				
+			if (vec.x < 0) {
+				m_right = true;
+			}
+
+			if (m_chickTime > 450) {
+				m_chickTime =80;
+
 			}
 		}
 	}
-		if (m_enemyTime > 120 && m_enemyTime < 130) {
-			m_left = true;
-		}
-		m_enemyTime++;
-		if (m_enemyTime > 130) {
-			m_left = true;
-			m_dash = true;
-			m_enemyTime = 250;
-			m_attack = false;
 
-			if (m_cont <= 100) {
-				srand(time(nullptr));
-				m_enemyPatarn = rand() % 3;
+		if(m_enemyType==2){
+
+			m_chickTime += CHICK_TIME;
+			if (m_chickTime >= 80 && m_chickTime <= 150) {
+				if (vec.x < -120) {
+					m_left = true;
+				}
+				if (vec.x > 140) {
+					m_right = true;
+				}
+				if (vec.z > -20) {
+					m_up = true;
+				}
+				if (vec.z < 20) {
+					m_down = true;
+				}
+				}
+			if (m_chickTime >= 150&&m_chickTime<=170) {
+				if (vec.x < 20) {
+					m_left = true;
+				}
+				if (vec.x > -20) {
+					m_right = true;
+				}
+				m_jump= true;
 			}
-			if (m_cont >= 100) {
-				m_cont = 0;
-				m_enemyPatarn = 0;
+			if (m_chickTime >= 170 && m_chickTime <= 190) {
+				m_right = true;
+				
 			}
-			if (m_enemyType == 2) {
-				if (m_enemyPatarn == 0) {
-					if (vec.x < -120) {
-						m_pos.x -= 3;
-					}
-					if (vec.x > 120) {
-						m_pos.x += 3;
-					}
-					if (vec.z > -120) {
-						m_pos.z += 3;
-					}
-					if (vec.z < 120) {
-						m_pos.z -= 3;
-					}
-				}
-				if (m_enemyPatarn == 1) {
-					if (vec.x < 120) {
-						m_pos.x -= 1;
-					}
-					if (vec.x > -120) {
-						m_pos.x += 1;
-					}
-					if (vec.z > 120) {
-						m_pos.z += 1;
-					}
-					if (vec.z < -120) {
-						m_pos.z -= 1;
-					}
-				}
-				if (m_enemyPatarn == 2) {
-					m_enemyTime += 5;
-					//	m_attack = true;
-					if (vec.x < 120) {
-						m_pos.x -= 3;
-					}
-					if (vec.x > -120) {
-						m_pos.x += 3;
-					}
-					if (vec.z > 120) {
-						m_pos.z += 3;
-					}
-					if (vec.z < -120) {
-						m_pos.z -= 3;
-					}
-				}
+			if (m_chickTime >= 250) {
+				m_chickTime = 0;
+			}
 			}
 		}
 	
 
+	
 	
 		
 	
@@ -200,7 +198,7 @@ void CEnemy::Contlol() {
 		
 	
 	//if()
-}
+
 
 /*void CEnemy::Update() {
 	

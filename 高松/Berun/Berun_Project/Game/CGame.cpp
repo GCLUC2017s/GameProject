@@ -35,7 +35,7 @@ switch (m_step)
 		{	
 			mp_player = new CPlayer(g_tutorialNo);
 			new CEnemyManager();
-			mp_enemy = new CEnemy(eFish);
+			mp_enemy = new CEnemy(eCarrot);
 			mp_tutorial->SetDestroyFlag(true);
 			mp_img[0]->SetPos(280, 310);
 			mp_img[0]->SetSize(700, 150);
@@ -76,7 +76,7 @@ void CGame::Draw()
 		mp_img[2]->SetSize(700, 90);
 		mp_img[3]->SetSize(700, 100);
 		if (m_screen.x < 0) m_screen.x = 0;
-		if (m_screen.x > 5120) m_screen.x = 5120;
+		if (m_screen.x > 3840) m_screen.x = 3840;
 		mp_player->SetScroal(m_screen);
 		m_cnt++;
 		for (int i = 1; i < IMG_ARRAY; i++)

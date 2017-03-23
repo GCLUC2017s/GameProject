@@ -222,11 +222,13 @@ CTask* CTaskManager::GetTask(int id)
 {
 	CTask *p;
 	//引数があれば
-	while (id)
+	while (p&&id)
 	{
 		//idが一致していればそのタスクを返す
 		if (p->m_id == id) return p;
+		p = p->mp_next;
 	}
+	
 	//以外ならnullを返す
 	return nullptr;
 }
