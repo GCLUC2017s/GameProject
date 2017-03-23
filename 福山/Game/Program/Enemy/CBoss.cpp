@@ -44,7 +44,7 @@ CKeyを使っている条件文は今後別の処理になります。
 
 void CBoss::SetPos(){
 	mPos = Boss_first_pos;
-	mAxis = mPos.y;
+	mAxis = mPos.y ;
 };
 
 void CBoss::Init(){
@@ -386,7 +386,7 @@ void CBoss::Update(){
 
 	AlertHPRect(&mRect, mHitPoint);	//アラートメソッド(HP変化によるもの)
 	/*軸の設定*/
-	mAxis = mPos.y - SIZE_BOSS_Y;
+	mAxis = mPos.y - SIZE_BOSS_Y + SIZE_SHADOW_Y*2;
 	mAttackRange.position = mPos;
 	/*範囲外調整*/
 	LimitDisp(SIZE_BOSS_X, SIZE_BOSS_Y);

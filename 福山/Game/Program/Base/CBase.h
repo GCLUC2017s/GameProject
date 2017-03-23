@@ -20,7 +20,7 @@
 #define CAL_ENEMY01 0.3f
 #define CAL_BOSS	10
 #define SIZE_SHADOW_X *mRect.mRRight*0.5f						//影のサイズX
-#define SIZE_SHADOW_Y *mRect.mRLeft	*0.2f					//影のサイズY
+#define SIZE_SHADOW_Y *mRect.mRTop * 0.1f						//影のサイズY
 #define SHADOW_TEX_X			70.f				//影のテクスチャのX
 #define SHADOW_TEX_Y			20.f				//影のテクスチャのY
 

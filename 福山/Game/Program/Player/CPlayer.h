@@ -60,6 +60,7 @@ private:
 	};
 	MyHungry mHungryStatus = E_HIGH; //おなかの状態判断
 	bool mEnabledInterval;			//Interval中するとき
+	bool mEnabledRun;
 	
 	
 	CVector2 mTarget;
@@ -67,7 +68,7 @@ private:
 	
 	CVector2 mJAttackPos;			//攻撃範囲設定ジャンプ攻撃
 	CVector2 mJAttackxy;			//攻撃範囲設定ジャンプ攻撃
-
+	
 	/*移動処理*/
 	void Move();
 	/*走るか否か ※vは方向の値を入れる*/

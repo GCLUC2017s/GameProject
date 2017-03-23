@@ -393,7 +393,7 @@ void CEnemy00::Update(){
 
 	AlertHPRect(&mRect, mHitPoint);	//アラートメソッド(HP変化によるもの)
 	//軸の設定
-	mAxis = mPos.y - SIZE_ENEMY00_Y;
+	mAxis = mPos.y - SIZE_ENEMY00_Y + SIZE_SHADOW_Y;
 	//範囲外調整
 	LimitDisp(SIZE_ENEMY00_X, SIZE_ENEMY00_Y);
 	//レンダー順番設定

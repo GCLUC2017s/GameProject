@@ -38,7 +38,7 @@
 
 void CLowBoss::SetPos(){
 	mPos = LowBoss_first_pos;
-	mAxis = mPos.y;
+	mAxis = mPos.y ;
 };
 
 void CLowBoss::Init(){
@@ -287,7 +287,7 @@ void CLowBoss::Update(){
 
 	AlertHPRect(&mRect, mHitPoint);	//アラートメソッド(HP変化によるもの)
 	/*軸の設定*/
-	mAxis = mPos.y - SIZE_LOWBOSS_Y;
+	mAxis = mPos.y - SIZE_LOWBOSS_Y + SIZE_SHADOW_Y*2;
 	mAttackRange.position = mPos;
 	/*範囲外調整*/
 	LimitDisp(SIZE_LOWBOSS_X, SIZE_LOWBOSS_Y);
