@@ -38,9 +38,8 @@ public:
 	void Draw();
 	
 
-	/*void HitCallback(CBase *b);
-	static CEnemy* GetmainEnemy() { return mainEnemy; };
-	*/
+	void HitCallBack(CCollisionA * p);
+	
 };
 
 
