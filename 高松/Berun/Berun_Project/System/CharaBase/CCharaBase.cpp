@@ -1,6 +1,6 @@
 #include "CCharaBase.h"
 #include "../Game/CollisionManager/CollisionManager.h"
-//#define HitCheck
+#define HitCheck
 T_AnimData _playerMAnimData[] = {
 	{ 1,5 },
 	{ 6,5 },
@@ -65,7 +65,7 @@ T_AnimData _bossAnimData[] = {
 {
 	{ "LittlePlayerM",0,5,10,10,3,3,0,0,0,1,5,0,0,{ 300,240 } ,_playerMAnimData,{ 500,400 },{ 135,230 },CRect(-40,-160,40,0),eItemMax },
 	{ "LittlePlayerW",1,5,10,10,3,3,0,0,0,1,4,0,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 135,160 },CRect(-35,-160,45,0),eItemMax },
-	{ "Carrot",2,5,5,5,0,0,1,0,0,1,3,0,1,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Carrot",2,5,5,5,0,0,5,0,0,1,3,0,1,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	{ "Chick",3,5,1,1,0,0,1,0,0,1,2,0,1,{ 160,160 } ,_chickAnimData,{ 220,220 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	{ "Fish",4,5,1,1,0,0,1,0,0,1,1,0,1,{ 160,160 } ,_fishAnimData,{ 200,200 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	{ "Pig",4,5,1,1,0,0,1,0,0,1,4,0,1,{ 160,160 } ,_pigAnimData,{ 220,220 },{ 60,160 },CRect(-60,-130,60,0),eCarrotItem },
@@ -95,6 +95,7 @@ CCharaBase::CCharaBase(int type, int id, unsigned int updatePrio, unsigned int d
 	m_speed=mp_eData->speed;
 	m_jump=mp_eData->jump;
 	SetType(mp_eData->charaType);
+	m_type = mp_eData->charaType;
 	m_animPaternX = 0;
 	m_animPaternY = eAnim_Attack;
 	m_animLoop = false;
@@ -182,11 +183,8 @@ void CCharaBase::Move()
 			m_charaDirection = false;
 
 		}
-		if (m_pos.z > WINDOW_UP_LIMIT || m_pos.z < WINDOW_DOWN_LIMIT)
-		{
-			m_pos.z = m_oldPos.z;
-
-		}
+		if (m_pos.z > WINDOW_UP_LIMIT || m_pos.z < WINDOW_DOWN_LIMIT)	m_pos.z = m_oldPos.z;
+		if (m_pos.x < WINDOW_LEFT_LIMIT)	m_pos.x = m_oldPos.x;
 	if (m_jump) {
 		m_gravitySpeed += 20;
 		m_state = eState_Jump;
@@ -245,6 +243,7 @@ void CCharaBase::Update()
 		Damage();
 		break;
 	case eState_Down:
+		Down();
 		break;
 	}
 	//当たり判定用の矩形を計算
@@ -266,7 +265,6 @@ void CCharaBase::Update()
 }
 void CCharaBase::Draw()
 {
-	
 		m_chara->SetCenter(mp_eData->senter.x, mp_eData->senter.y);
 		Animation();
 		m_chara->SetSize(mp_eData->size.x, mp_eData->size.y);
@@ -313,17 +311,23 @@ void CCharaBase::Damage()
 		m_damageFirst = false;
 		if(!m_death) m_state = eState_Move;
 		else m_state = eState_Down;
-
 	}
+}
+
+void CCharaBase::Down()
+{
+	//派生先で定義する。
 }
 
 bool CCharaBase::CheckHit(CCollisionA *t)
 {
+	//自分が死んでいれば、何も値を返さない処理
+	if (m_death)	return false;
 	CCharaBase* tt = dynamic_cast<CCharaBase*>(t);
 	assert(tt);
 	CRect p_rect = GetRect();
 	CRect t_rect = tt->GetRect();
-	if (!m_damage && abs(m_pos.z - tt->m_pos.z) < 50 && p_rect.m_right > t_rect.m_left && p_rect.m_left < t_rect.m_right && p_rect.m_top > t_rect.m_bottom && p_rect.m_bottom < t_rect.m_top) {
+	if (!tt->m_death && !m_damage && abs(m_pos.z - tt->m_pos.z) < 50 && p_rect.m_right > t_rect.m_left && p_rect.m_left < t_rect.m_right && p_rect.m_top > t_rect.m_bottom && p_rect.m_bottom < t_rect.m_top) {
 		HitCallBack(t);
 		t->HitCallBack(this);
 	}

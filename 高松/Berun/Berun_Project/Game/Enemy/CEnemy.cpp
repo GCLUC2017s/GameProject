@@ -23,6 +23,7 @@ CEnemy::CEnemy(int type):CCharaBase(type,eEnemy,eUDP_Enemy,eDWP_Enemy)
 	m_enemyTime = 0;
 	//m_enemyHp->SetColor(1, 0, 0, 1);
 	m_chickTime = 0;
+	m_downCont = 0;
 	
 }
 CEnemy::~CEnemy() {
@@ -38,10 +39,6 @@ void CEnemy::Contlol() {
 
 	CVector3D vec = mp_player->GetPos() - m_pos;
 	if (mp_player->GetDeath()) return;
-
-	if (m_hp <= 0) {
-		m_death = true;
-	}
 
 	if (m_hp > 0) {
 		if (m_enemyType == 6) {
@@ -203,24 +200,29 @@ void CEnemy::Contlol() {
 }
 	
 
-		void CEnemy::HitCallBack(CCollisionA * p)
-		{
-			CCharaBase::HitCallBack(p);
-			CCharaBase* tt = dynamic_cast<CCharaBase*>(p);
+void CEnemy::HitCallBack(CCollisionA * p)
+{
+	CCharaBase::HitCallBack(p);
+	CCharaBase* tt = dynamic_cast<CCharaBase*>(p);
+	//もし敵同士が衝突したら
+	if (m_type == tt->CheckType())
+	{
+		printf("好きな処理 \n");
+	}
+	else if (tt->CheckState() == eState_Attack)
+	{
+		m_hp--;
+		if (!m_hp)	m_death = true;
+		m_damage = true;
+	}
+}
 
-			if (m_state != eState_Attack && tt)
-			{
-				if (!m_damage)
-				{
-					//HPを減らす処理
-					m_hp--;
-					m_hp -= tt->GetAttack();
-					if (m_pos.x < tt->GetPos().x)	m_damageDirection = true;
-					if (m_pos.x > tt->GetPos().x)	m_damageDirection = false;
-				}
-				m_damage = true;
-			}
-		}
+void CEnemy::Down()
+{
+	m_downCont += CHANGE_TIME(DOWN_TIME);
+	//キャラクターを削除する処理
+	if(m_downCont == DOWN_TIME) m_destroyFlg = true;
+}
 	
 	
 		

@@ -17,6 +17,7 @@
 #define DAMAGE_TIME 2
 #define WINDOW_UP_LIMIT	600
 #define WINDOW_DOWN_LIMIT 100
+#define WINDOW_LEFT_LIMIT 50
 #define FLASH_INTERBAL MILLI_SECOUND(0.2f)
 
 
@@ -132,6 +133,7 @@ protected:
 	bool m_damageDirection;
 	//ƒ_ƒ[ƒW‚ğó‚¯‚½Œã‚Ì–³“GŠÔ‚ğŠi”[‚·‚é•Ï”
 	int m_damageTime;
+	int m_type;
 	CVector3D m_oldPos;
 
 	unsigned int m_anim;
@@ -163,6 +165,7 @@ public:
 	virtual void HitCallBack(CCollisionA * p);
 	bool CheckHit(CCollisionA *t);
 	void Damage();
+	virtual void Down();
 	CVector3D GetPos()
 	{
 		return m_pos;
@@ -170,6 +173,14 @@ public:
 	int GetAttack()
 	{
 		return m_power;
+	}
+	int CheckType()
+	{
+		return m_type;
+	}
+	int CheckState()
+	{
+		return m_state;
 	}
 	bool GetDeath()
 	{
