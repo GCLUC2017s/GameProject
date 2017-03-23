@@ -5,7 +5,8 @@
 #include"../Enemy/CBoss.h"
 #include "../Player/CPlayer.h"
 #include "../MyNumber/CMyNumber.h"
-#define		PL_HITBUCK	player->mAttackPoint*10.0f
+#define		PL_HITBUCK	player->mAttackPoint*5.0f
+#define     ENE_HITBUCK ene->mAttackPoint * 0.2f
 #define     ALPHA		 pl->mRect.triangle1.a
 CCollisionManager::CCollisionManager(){};
 CCollisionManager::~CCollisionManager(){};
@@ -26,6 +27,8 @@ void CCollisionManager::EnemyAttack(CBase *pl){
 			if (ene->mEnabledAttack){
 				if (CCollision::Collision(*ene, *pl, ene->mAttackAxis)){
 					pl->mHitPoint -= ene->mAttackPoint;
+					if (ene->mForward.x >= 0){ pl->mPos.x += ENE_HITBUCK; }		//‰EŒü‚«‚Ìê‡
+					else{ pl->mPos.x -= ENE_HITBUCK; }									//¶Œü‚«‚Ìê‡
 				}
 			}
 			break;

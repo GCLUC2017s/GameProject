@@ -47,8 +47,10 @@ public:
 	rect 四角
 	*/
 	static void RectScaling(bool flag, float x, float y,float speed,CRectangle *rect);
-	/*時間経過でTRUEにする timeにかかる時間を書く*/
-	static bool FlagTime(float time,float fps);
+	/*時間経過でTRUEにする timeにかかる時間を書く saveは保存用 使うところ路各自管理する <-　使いにくいので直したいやり方がわからず*/
+	static bool FlagTime(float time,float fps,float *save);
+	/*ステージエネミー判断*/
+ 
 
 
 };

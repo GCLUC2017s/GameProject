@@ -67,6 +67,7 @@
     <ClInclude Include="Result\CResult.h" />
     <ClInclude Include="SceneManager\CSceneManager.h" />
     <ClInclude Include="Scene\CScene.h" />
+    <ClInclude Include="Sound\CSound.h" />
     <ClInclude Include="Task\CTask.h" />
     <ClInclude Include="Task\CTaskManager.h" />
     <ClInclude Include="Title\CTitle.h" />
@@ -117,6 +118,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

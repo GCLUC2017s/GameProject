@@ -34,7 +34,7 @@ void CTutorial::Update()
 	//スペースキーでチュートリアルスキップ
 	if (CInput::GetState(0, CInput::ePush, CInput::eButton5)) m_end = TEXT_END;
 
-	mp_img[g_tutorialNo]->SetSize(400, 800);
+	mp_img[g_tutorialNo]->SetSize(400, 730);
 	mp_img[g_tutorialNo]->SetPos(-50, 100);
 	mp_img[2]->SetSize(1000, 300);
 	mp_img[2]->SetPos(250, 400);

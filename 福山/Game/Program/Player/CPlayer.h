@@ -20,7 +20,6 @@ class CPlayer : public CBase {
 private:
 
 	CRectangle	mAttackCollision[NORMALATTACK_PATTERN]; //あたり判定だけの四角形
-
 	/*
 	自分がどのアニメーションか判断用
 	enum文
@@ -31,6 +30,7 @@ private:
 		E_STAY_L, E_WALK_L,
 		E_RUN_L, E_NORMALATTACK_A_L,
 		E_NORMALATTACK_B_L, E_NORMALATTACK_C_L,
+		E_JUMPATTACK_L,
 		E_EAT_L, E_EX01_L,
 		E_EX02_L, E_FLAME_L,
 		E_JUMP_L, E_BRAKE_L,
@@ -38,6 +38,7 @@ private:
 		E_STAY_R, E_WALK_R,
 		E_RUN_R, E_NORMALATTACK_A_R,
 		E_NORMALATTACK_B_R, E_NORMALATTACK_C_R,
+		E_JUMPATTACK_R,
 		E_EAT_R, E_EX01_R,
 		E_EX02_R, E_FLAME_R,
 		E_JUMP_R, E_BRAKE_R,
@@ -51,6 +52,8 @@ private:
 	float mHungryPower;				//おなかが減る減らないの力の変化 += して使う(攻撃力)
 	float mHungrySSpp;				//おなかが減る減らないの力の変化 += して使う(スピード)
 
+	bool mEnabledJumpAttack;			//ジャンプATTACKフラグ
+
 	enum MyHungry
 	{
 		E_LOW=-4,E_NORMAL =0,E_HIGH = 4
@@ -62,6 +65,8 @@ private:
 	CVector2 mTarget;
 	CVector2 mSuvePos;				//元いた位置の保存
 	
+	CVector2 mJAttackPos;			//攻撃範囲設定ジャンプ攻撃
+	CVector2 mJAttackxy;			//攻撃範囲設定ジャンプ攻撃
 
 	/*移動処理*/
 	void Move();
@@ -83,6 +88,8 @@ private:
 	void PlayerAttack();
 	/*アニメーションシーン*/
 	void AnimeScene();
+	/*ジャンプATTACK斬撃あにめ*/
+	void AtJumpAnime();
 	/*能力変化のメソッド*/
 	void ChangeStatus();
 public:

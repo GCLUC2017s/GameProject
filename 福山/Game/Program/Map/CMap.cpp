@@ -14,8 +14,8 @@
 #define TEX_SIZE_SKY_X 1600
 #define TEX_SIZE_SKY_Y 800
 
-#define TEX_SIZE_GROWND_X 1600
-#define TEX_SIZE_GROWND_Y 400
+#define TEX_SIZE_GROWND_X 800
+#define TEX_SIZE_GROWND_Y 200
 
 #define SC_SPEED 0.5f
 
@@ -30,10 +30,6 @@ void CMap::Init() {
 	mSkyTex->load(FILE_BG_SKY"sky_background.tga");
 	mTreeTex->load(FILE_BG_TREE"tree_background.tga");
 
-	mGround.SetVertex(-DISP_X, 0, DISP_X*10,character_limit_bottom);
-	mGround.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-	mGround.SetUv(mGroundTex, 0, 0, TEX_SIZE_GROWND_X, TEX_SIZE_GROWND_Y);
-
 	mSky.SetVertex(-DISP_X, DISP_Y, DISP_X*10, 0);
 	mSky.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 	mSky.SetUv(mSkyTex, 0, 0, TEX_SIZE_SKY_X, TEX_SIZE_SKY_X);
@@ -41,19 +37,19 @@ void CMap::Init() {
 
 	for (int i = 0; i < TREE_MAX; i++)
 	{
-		mTree[E_AFTER][i].SetVertex(-DISP_X, DISP_Y, DISP_X, -0);
-		mTree[E_AFTER][i].SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-		mTree[E_AFTER][i].SetUv(mTreeTex, 0, 0, TEX_SIZE_TREE_X, TEX_SIZE_TREE_Y);
-		mTree[E_AFTER][i].position.x = first_pos.x + (DISP_X * 2)* i;
 
-		mTree[E_BEFORE][i].SetVertex(-DISP_X, DISP_Y, DISP_X, -0);
-		mTree[E_BEFORE][i].SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-		mTree[E_BEFORE][i].SetUv(mTreeTex, 0, 0, TEX_SIZE_TREE_X, TEX_SIZE_TREE_Y);
-		mTree[E_BEFORE][i].position.x = first_pos.x + (DISP_X * 2)* i;
+		mGround[i].SetVertex(-DISP_X, 0, DISP_X, character_limit_bottom);
+		mGround[i].SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+		mGround[i].SetUv(mGroundTex, 0, 0, TEX_SIZE_GROWND_X, TEX_SIZE_GROWND_Y);
+		mGround[i].position.x = first_pos.x + (DISP_X * 2)* i;
+		mTree[i].SetVertex(-DISP_X, DISP_Y, DISP_X, -0);
+		mTree[i].SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+		mTree[i].SetUv(mTreeTex, 0, 0, TEX_SIZE_TREE_X, TEX_SIZE_TREE_Y);
+		mTree[i].position.x = first_pos.x + (DISP_X * 2)* i;
 
+		
 	}
 
-	mGround.position.x = first_pos.x;
 	mSky.position.x = first_pos.x;
 
 }
@@ -102,9 +98,10 @@ void CMap::Update() { //‰_‚ð“®‚©‚·ˆ—
 void CMap::Render() {
 	mSky.Render();
 	for (int i = 0; i < TREE_MAX; i++){
-		mTree[E_AFTER][i].Render();
-		mTree[E_BEFORE][i].Render();
+		mTree[i].Render();
+		mTree[i].Render();
+		mGround[i].Render();
+
 	}
-	mGround.Render();
 
 }

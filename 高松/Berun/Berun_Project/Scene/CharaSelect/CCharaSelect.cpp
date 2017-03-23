@@ -1,5 +1,6 @@
 #include "CCharaSelect.h"
 #include "../CSceneManager.h"
+#include "../System/TaskSystem/CTaskManager.h"
 CCharaSelect::CCharaSelect()
 {
 	m_black = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Black"));
@@ -133,6 +134,7 @@ CCharaSelect::CCharaSelect()
 CCharaSelect::~CCharaSelect()
 {
 	CSound::GetInstance()->GetSound("CHARASELECT_BGM")->Stop();
+	CTaskManager::GetInstance()->KillAll();
 }
 void CCharaSelect::Update()
 {

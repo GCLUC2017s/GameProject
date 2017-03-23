@@ -1,7 +1,7 @@
 #include "CLogo.h"
 #include "../CSceneManager.h"
 #include "../CScene.h"
-
+#include "../System/TaskSystem/CTaskManager.h"
 #define LOGO_END_POS 1600
 CLogo::CLogo()
 {
@@ -26,7 +26,7 @@ CLogo::CLogo()
 }
 CLogo::~CLogo()
 {
-
+	CTaskManager::GetInstance()->KillAll();
 }
 void CLogo::Update()
 {

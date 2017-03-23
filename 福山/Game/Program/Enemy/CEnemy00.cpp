@@ -7,6 +7,7 @@
 #include<iostream>
 #include "CEnemybasetest.h"
 #include "../Load/CLoadEnemy00.h"
+#include "../Base/CBase.h"
 /*
 
 高橋弘樹
@@ -14,16 +15,16 @@
 */
 #define FIRST_R_NO_ENEMY00 1						//初めのレンダーのポイント
 #define FIRST_U_NO_ENEMY00 1						//初めのアップデートのポイント
-#define SIZE_TEX_ENEMY00_STAY_X 80			//エネミーの待ち姿テクスチャサイズ X
-#define SIZE_TEX_ENEMY00_STAY_Y 80			//エネミーの待ち姿テクスチャサイズ Y
-#define SIZE_TEX_ENEMY00_WALK_X 80			//エネミーの歩くテクスチャサイズ Y
-#define SIZE_TEX_ENEMY00_WALK_Y 80			//エネミーの歩く姿テクスチャサイズ Y
+#define SIZE_TEX_ENEMY00_STAY_X 160			//エネミーの待ち姿テクスチャサイズ X
+#define SIZE_TEX_ENEMY00_STAY_Y 160		//エネミーの待ち姿テクスチャサイズ Y
+#define SIZE_TEX_ENEMY00_WALK_X 160		//エネミーの歩くテクスチャサイズ Y
+#define SIZE_TEX_ENEMY00_WALK_Y 160		//エネミーの歩く姿テクスチャサイズ Y
 #define SIZE_SHADOW							//影の表示
 #define PATTERN_R 1							//PATTERNの右
 #define PATTERN_L 2							//PATTERNの左
 
-#define ANIME_TIME_BASE						EM_ATTCK								//アニメのループ時間 継続的なもの
-#define ANIME_TIME_ATTACK					EM_ATTCK								//アニメのループ時間 攻撃のもの
+#define ANIME_TIME_BASE						6							//アニメのループ時間 継続的なもの
+#define ANIME_TIME_ATTACK					6							//アニメのループ時間 攻撃のもの
 
 #define WALK_SPEED 0.02f				//歩くスピード
 #define WALK_X 2						//歩くベクトルX
@@ -37,7 +38,7 @@
 
 
 void CEnemy00::Init(){
-	RandPos(SIZE_ENEMY00_X, SIZE_ENEMY00_Y, &mPos);
+	RandPos(SIZE_ENEMY00_X, SIZE_ENEMY00_Y, &mPos,DISP_X*3,DISP_X*10);
 	/*テクスチャを張る*/
 	mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
 	mRect.SetUv(CLoadEnemy00::GetInstance()->mStay_tex[0], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
@@ -50,7 +51,12 @@ void CEnemy00::Init(){
 
 
 //エネミー00描画
-CEnemy00::CEnemy00() : mVelocity(0), mFlameCount(0), actionflag(false), motion(EM_STAY), mDirection(1){
+CEnemy00::CEnemy00() : mVelocity(0), mFrameCount(0), actionflag(false), motion(EM_STAY), direction(E_LEFT), escapetime(0), interval(0) {
+	RandPos(SIZE_ENEMY00_X, SIZE_ENEMY00_Y, &mPos, DISP_X * 3, DISP_X * 10);
+	/*テクスチャを張る*/
+	mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
+	mRect.SetUv(CLoadEnemy00::GetInstance()->mStay_tex[0], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
+	mForward = CVector2(1.0f, 0.0f);
 
 	mPriorityR = E_ENEMY00;			//Renderのナンバー 
 	mPriorityU = E_ENEMY00;			//Updateのナンバー
@@ -91,6 +97,7 @@ void CEnemy00::AnimeScene(){
 	case E_WALK_R:
 		AnimeFrame(true, ANIME_TIME_BASE);
 			mRect.SetUv(CLoadEnemy00::GetInstance()->mWalk_tex[mAnimeFrame], SIZE_TEX_ENEMY00_WALK_X, 0, 0, SIZE_TEX_ENEMY00_WALK_Y);
+		break;
 		/*攻撃中*/
 	case E_ATTACK_R:
 		AnimeFrame(true, ANIME_TIME_ATTACK);
@@ -117,7 +124,7 @@ void CEnemy00::Walk(){
 
 	//（ターゲットが右にいる場合）
 	if (RIGHT_PTT) {
-		mDirection = E_RIGHT;
+		direction = E_RIGHT;
 		mStatus = E_WALK_R;
 		mVelocity = WALK_SPEED;
 		mForward = CVector2(WALK_X, 0.0f);
@@ -126,7 +133,7 @@ void CEnemy00::Walk(){
 	
 	//（ターゲットが左にいる場合）
 	if (LEFT_PTT) {
-		mDirection = E_LEFT;
+		direction = E_LEFT;
 		mStatus = E_WALK_L;
 		mVelocity = WALK_SPEED;
 		mForward = CVector2(-WALK_X, 0.0f);
@@ -153,15 +160,16 @@ void CEnemy00::Walk(){
 
 
 }
+
 void CEnemy00::Motion(){
 
 	switch (motion)
 	{
 	case EM_STAY://待機
-		if (mDirection == E_RIGHT){	//右向き
+		if (direction == E_RIGHT){	//右向き
 			mStatus = E_STAY_R;
 		}
-		else if (mDirection = E_LEFT){	//左向き
+		else if (direction = E_LEFT){	//左向き
 
 			mStatus = E_STAY_L;
 		}
@@ -174,7 +182,8 @@ void CEnemy00::Motion(){
 		break;
 	case EM_WALK://歩き	
 		Walk();
-		if (ATTACK_PTT){//攻撃モーションに変更
+
+		if (ATTACK_PTTX&&ATTACK_PTTY){//攻撃モーションに変更
 			actionflag = false;
 			motion = EM_RANGE;
 		}
@@ -185,8 +194,8 @@ void CEnemy00::Motion(){
 		if (!actionflag){
 			pattern = rand() % 3; //0~2の中でランダムでパターンを選択する。
 
-			if (pattern == 0){
-				motion = EM_ATTCK;
+			if (pattern == 0&&ATTACK_PTTY){
+				motion = EM_ATTACK;
 			}
 			else if (pattern == 1){
 				actionflag = true;
@@ -197,7 +206,7 @@ void CEnemy00::Motion(){
 				motion = EM_BACK_Y;
 			}
 
-			if (NO_ATTACK_PTT){
+			if (NO_ATTACK_PTTX&&NO_ATTACK_PTTY){
 				actionflag = false;
 				motion = EM_WALK;
 			}
@@ -205,33 +214,34 @@ void CEnemy00::Motion(){
 		break;
 
 	case EM_DIE://死亡
-		if (mDirection == E_RIGHT) {
+		if (direction == E_RIGHT) {
 			mStatus = E_DIE_R;
 		}
-		else if (mDirection == E_LEFT){
+		else if (direction == E_LEFT){
 			mStatus = E_DIE_L;
 		}
 		break;
 
 	case EM_BACK_X://後ろに逃げる。
+		escapetime += ESCAPE_TIME / FPS;
+		
 
-
-		if (mDirection == E_LEFT) {
-			mDirection = E_LEFT;
+		if (direction == E_LEFT) {
+			direction = E_LEFT;
 			mVelocity = WALK_SPEED * 3;
 			mForward = CVector2(WALK_X, 0.0f);
 			mPos += mForward * mVelocity;
 
 		}
-		else if (mDirection == E_RIGHT){
-			mDirection = E_RIGHT;
+		else if (direction == E_RIGHT){
+			direction = E_RIGHT;
 			mVelocity = -WALK_SPEED * 3;
 			mForward = CVector2(WALK_X, 0.0f);
 			mPos += mForward * mVelocity;
 		}
 
-		if (ENEMY_ESCAPE){	//一定距離離れると再度こちらに向かってくる
-			actionflag = false; //actionflagをfalseにする。
+		if (ENEMY_ESCAPE||escapetime>=ESCAPE_TIME){	//一定距離離れると再度こちらに向かってくる
+			escapetime = 0;
 			motion = EM_WALK;
 		}
 
@@ -244,7 +254,7 @@ void CEnemy00::Motion(){
 			mForward = CVector2(0.0f, -WALK_Y);
 			mPos += mForward * mVelocity;
 			mAxis += mForward.y * mVelocity;
-			if (mAxis == character_limit_bottom || mAxis == DOWNAXIS){
+			if (mAxis == character_limit_bottom){
 				motion = EM_WALK;
 				actionflag = false;
 				break;
@@ -255,20 +265,22 @@ void CEnemy00::Motion(){
 			mForward = CVector2(0.0f, WALK_Y);
 			mPos += mForward * mVelocity;
 			mAxis += mForward.y * mVelocity;
-			if (mAxis == character_limit_top || mAxis == UPAXIS){
+			if (mAxis == character_limit_top){
 				motion = EM_WALK;
 				actionflag = false;
 				break;
 			}
 		}
 
-	case EM_ATTCK:		//攻撃中
-
+	case EM_ATTACK:		//攻撃中
+		interval += ENEMY00_INTERVAL / FPS;
 		if (RIGHT_PTT) {
+			actionflag = true;
 			mEnabledAttack = true;
 			mStatus = E_ATTACK_R;
 		}
 		else if (LEFT_PTT){
+			actionflag = true;
 			mEnabledAttack = true;
 			mStatus = E_ATTACK_L;
 		}
@@ -276,11 +288,17 @@ void CEnemy00::Motion(){
 
 		//攻撃範囲とあたり判定フラグ
 		Attack(AT_RANGE);
-
 		//差分で距離を詰める
 		if (rulerR > 2 || rulerL >2){
 			actionflag = false;
 			motion = EM_WALK;
+			mEnabledAttack = false;
+		}
+
+		if (NO_ATTACK_PTTY||interval>=ENEMY00_INTERVAL){
+			interval = 0;
+			actionflag = false;
+			motion = EM_RANGE;
 			mEnabledAttack = false;
 		}
 
@@ -295,14 +313,25 @@ void CEnemy00::Update(){
 	//mTargetPをplayerにする
 	mTargetP = CGame::mGetPlayerPos();
 	getAxis = CGame::GetPlayerAxis();
+	
 	rulerR = mTargetP.x - mPos.x;	//プレイヤーとの距離を出す
-	rulerL = mPos.x - mTargetP.x;
+	rulerL = mPos.x- mTargetP.x;
 	if (rulerL<0){				//絶対値にする
 		rulerL = rulerL * -1;
 	}
 	if (rulerR<0){
 		rulerR = rulerR * -1;
 	}
+	
+	upruler = mTargetP.y-mPos.y;
+	downruler = mPos.y - mTargetP.y;
+	if (upruler<0){				//絶対値にする
+		upruler = upruler * -1;
+	}
+	if (downruler<0){
+		downruler = downruler * -1;
+	}
+
 	if (mHitPoint <= 0){
 		motion = EM_DIE;		//体力が０ならDIEする
 	}
@@ -310,6 +339,15 @@ void CEnemy00::Update(){
 		//演出加えてもいいかも(例)拡大縮小してif(サイズが0以下の時killFlagを立てるなど)
 		mKillFlag = true;
 	}
+
+	switch (direction)
+	{
+	case E_RIGHT:	//右向き
+		break;
+			case E_LEFT:	//左向き
+		break;
+	}
+
 	mAttackRange.position = mPos;
 
 	AlertHPRect(&mRect, mHitPoint);	//アラートメソッド(HP変化によるもの)

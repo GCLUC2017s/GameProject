@@ -10,8 +10,10 @@
 #include "../Task/CTaskManager.h"
 #include "../Camera/CCamera.h"
 
-#define SIZE_TEX_PLAYER_FRAME_X 1000
-#define SIZE_TEX_PLAYER_FRAME_Y 100
+#define SIZE_TEX_PLAYER_HP_X 700
+#define SIZE_TEX_PLAYER_HP_Y 50
+#define SIZE_TEX_PLAYER_ST_X 600
+#define SIZE_TEX_PLAYER_ST_Y 100
 #define SIZE_TEX_BOSS_FRAME_X	  500
 #define SIZE_TEX_BOSS_FRAME_Y   100
 #define SIZE_TEX_EN_FRAME_X     500
@@ -27,7 +29,7 @@
 #define HP_POSX			player->mHitPoint -PL_HP_X+0.1f  //HP　pos 調整用 足す
 #define ENE_HP_POSX		base->mHitPoint +ENE_HP_X  //HP　pos 調整用引く
 
-#define T_ST_RIGHT		SIZE_TEX_PLAYER_FRAME_X  * (player->mStamina / PL_ST_X)
+#define T_ST_RIGHT		SIZE_TEX_PLAYER_ST_X  *( player->mStamina / PL_ST_X*0.6)
 #define SPEED_COLAR		0.05f
 
 void CUserinterface::Init(){
@@ -45,8 +47,8 @@ void CUserinterface::Init(){
 	/*テクスチャ読み込み*/
 	/*プレイヤー*/
 	/*ヒットポイント*/
-	mPlayerGageTex[_HP_]->load(TEX_FILE"UI_player_HP_gauge.tga");
-	mPlayerFrameHpTex->load(TEX_FILE"UI_player_Frame.tga");
+	mPlayerGageTex[_HP_]->load(TEX_FILE"UI_player_HP_gauge .tga");
+	mPlayerFrameHpTex->load(TEX_FILE"UI_player_HP_Frame.tga");
 	/*スタミナ*/
 	mPlayerGageTex[_ST_]->load(TEX_FILE"UI_sutamina3.tga");
 	mPlayerFrameStTex[_HIGH_]->load(TEX_FILE"UI_sutamina2.tga");
@@ -59,10 +61,10 @@ void CUserinterface::Init(){
 	//
 	/*テクスチャを張る*/
 	/*PLAYER*/
-	mGaugePlayer[_HP_].SetUv(mPlayerGageTex[_HP_], 0, 0, SIZE_TEX_PLAYER_FRAME_X, SIZE_TEX_PLAYER_FRAME_Y);
-	mFramePlayer[_HP_].SetUv(mPlayerFrameHpTex, 0, 0, SIZE_TEX_PLAYER_FRAME_X, SIZE_TEX_PLAYER_FRAME_Y);
-	mGaugePlayer[_ST_].SetUv(mPlayerGageTex[_ST_], 0, 0, SIZE_TEX_PLAYER_FRAME_X, SIZE_TEX_PLAYER_FRAME_Y);
-	mFramePlayer[_ST_].SetUv(mPlayerFrameStTex[_HIGH_], 0, 0, SIZE_TEX_PLAYER_FRAME_X, SIZE_TEX_PLAYER_FRAME_Y);
+	mGaugePlayer[_HP_].SetUv(mPlayerGageTex[_HP_], 0, 0, SIZE_TEX_PLAYER_HP_X, SIZE_TEX_PLAYER_HP_Y);
+	mFramePlayer[_HP_].SetUv(mPlayerFrameHpTex, 0, 0, SIZE_TEX_PLAYER_HP_X, SIZE_TEX_PLAYER_HP_Y);
+	mGaugePlayer[_ST_].SetUv(mPlayerGageTex[_ST_], 0, 0, SIZE_TEX_PLAYER_ST_X, SIZE_TEX_PLAYER_ST_Y);
+	mFramePlayer[_ST_].SetUv(mPlayerFrameStTex[_HIGH_], 0, 0, SIZE_TEX_PLAYER_ST_X, SIZE_TEX_PLAYER_ST_Y);
 	//
 	/*エネミー*/
 	mGaugeEne.SetUv(mEnemyGageTex, 0, 0, SIZE_TEX_EN_FRAME_X, SIZE_TEX_EN_FRAME_Y);
@@ -81,9 +83,9 @@ CUserinterface::CUserinterface() : mFlagColar(false), mHungryC(1.0f), mFlagHP(tr
 	mMyNumber = E_UI;
 	/*四角作成*/
 	mFramePlayer[_HP_].SetVertex(-SIZE_PL_FRAME_X, SIZE_PL_FRAME_Y, SIZE_PL_FRAME_X, -SIZE_PL_FRAME_Y); //四角作成
-	mFramePlayer[_ST_].SetVertex(-SIZE_PL_FRAME_X, SIZE_PL_FRAME_Y, SIZE_PL_FRAME_X, -SIZE_PL_FRAME_Y); //四角作成
+	mFramePlayer[_ST_].SetVertex(-PL_ST_X, PL_ST_Y, PL_ST_X, -PL_ST_Y); //四角作成
 	/*カラーを決める*/
-	mGaugePlayer[_HP_].SetColor(1.0f, 1.0f, 1.0f, 1.0f); //色を決める
+	mGaugePlayer[_HP_].SetColor(0.4f, 1.0f, 0.4f, 1.0f); //色を決める
 	mFramePlayer[_HP_].SetColor(1.0f, 1.0f, 1.0f, 1.0f);//色を決める
 
 	mGaugePlayer[_ST_].SetColor(1.0f, 1.0f, 0.0f, 1.0f); //色を決める 
@@ -93,7 +95,7 @@ CUserinterface::CUserinterface() : mFlagColar(false), mHungryC(1.0f), mFlagHP(tr
 
 	mFrameEne.SetVertex(-SIZE_EN_FRAME_X, SIZE_EN_FRAME_Y, SIZE_EN_FRAME_X, -SIZE_EN_FRAME_Y); //四角作成
 
-	mGaugeEne.SetColor(0.0f, 1.0f, 1.0f, 1.0f); //色を決める
+	mGaugeEne.SetColor(1.0f, 1.0f, 1.0f, 1.0f); //色を決める
 	mFrameEne.SetColor(1.0f, 1.0f, 1.0f, 1.0f);//色を決める
 	savex = first_pos.x;
 
@@ -149,20 +151,19 @@ void CUserinterface::SetHungC(const CPlayer *player){
 	/*gauge切り替え*/
 	if (player->HUNGRY_S_HIGH_IF)		{//おなかいっぱいのUI
 		mGaugePlayer[_ST_].SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-		mGaugePlayer[_ST_].SetUv(mPlayerGageTex[_ST_], 0, 0, T_ST_RIGHT, SIZE_TEX_PLAYER_FRAME_Y);
-		mFramePlayer[_ST_].SetUv(mPlayerFrameStTex[_HIGH_], 0, 0, SIZE_TEX_PLAYER_FRAME_X, SIZE_TEX_PLAYER_FRAME_Y);
+		mGaugePlayer[_ST_].SetUv(mPlayerGageTex[_ST_], 0, 0, T_ST_RIGHT, SIZE_TEX_PLAYER_ST_Y);
+		mFramePlayer[_ST_].SetUv(mPlayerFrameStTex[_HIGH_], 0, 0, SIZE_TEX_PLAYER_ST_X, SIZE_TEX_PLAYER_ST_Y);
 
 	}
 	else if (player->HUNGRY_S_LOW_IF)	{//おなか減ったのUI
-		mGaugePlayer[_ST_].SetColor(mHungryC, 0.5f, 0.5f, 1.0f);
-		mFramePlayer[_ST_].SetColor(mHungryC, mHungryC, mHungryC, 1.0f);
-		mGaugePlayer[_ST_].SetUv(mPlayerGageTex[_ST_], 0, 0, T_ST_RIGHT, SIZE_TEX_PLAYER_FRAME_Y);
-		mFramePlayer[_ST_].SetUv(mPlayerFrameStTex[_LOW_], 0, 0, SIZE_TEX_PLAYER_FRAME_X, SIZE_TEX_PLAYER_FRAME_Y);
+		mFramePlayer[_ST_].SetColor(mHungryC, mHungryC, mHungryC, mHungryC + 0.5f);
+		mGaugePlayer[_ST_].SetUv(mPlayerGageTex[_ST_], 0, 0, T_ST_RIGHT, SIZE_TEX_PLAYER_ST_Y);
+		mFramePlayer[_ST_].SetUv(mPlayerFrameStTex[_LOW_], 0, 0, SIZE_TEX_PLAYER_ST_X, SIZE_TEX_PLAYER_ST_Y);
 	}
 	else								{//普通の状態
 		mGaugePlayer[_ST_].SetColor(0.8f, 0.8f, 0.8f, 1.0f);
-		mGaugePlayer[_ST_].SetUv(mPlayerGageTex[_ST_], 0, 0, T_ST_RIGHT, SIZE_TEX_PLAYER_FRAME_Y);
-		mFramePlayer[_ST_].SetUv(mPlayerFrameStTex[_HIGH_], 0, 0, SIZE_TEX_PLAYER_FRAME_X, SIZE_TEX_PLAYER_FRAME_Y);
+		mGaugePlayer[_ST_].SetUv(mPlayerGageTex[_ST_], 0, 0, T_ST_RIGHT, SIZE_TEX_PLAYER_ST_Y);
+		mFramePlayer[_ST_].SetUv(mPlayerFrameStTex[_NORM_], 0, 0, SIZE_TEX_PLAYER_ST_X, SIZE_TEX_PLAYER_ST_Y);
 	}
 	if (player->mStamina <= 0){ //おなかが減ってHPが削れる状態
 		mFlagST = false;		//ついでにレンダー表示消しておく
@@ -189,12 +190,12 @@ void CUserinterface::Update(){
 		case E_PLAYER:
 			CPlayer *player;
 			player = (CPlayer*)task;
-			mGaugePlayer[_HP_].position = CVector2(CGame::CameraPos().x - DISP_X + HP_POSX + SIZE_PL_FRAME_X,			DISP_Y - PL_ST_Y * 2);
-			mGaugePlayer[_ST_].position = CVector2(CGame::CameraPos().x - DISP_X + ST_POSX + SIZE_PL_FRAME_X,			DISP_Y - PL_ST_Y * 4);
-			mFramePlayer[_HP_].position = CVector2(CGame::CameraPos().x - DISP_X + SIZE_PL_FRAME_X,						DISP_Y - PL_ST_Y * 2);
-			mFramePlayer[_ST_].position = CVector2(CGame::CameraPos().x - DISP_X + SIZE_PL_FRAME_X,						DISP_Y - PL_ST_Y * 4);
+			mGaugePlayer[_HP_].position = CVector2(CGame::CameraPos().x - DISP_X + HP_POSX + SIZE_PL_FRAME_X, DISP_Y - SIZE_PL_FRAME_Y * 2);
+			mGaugePlayer[_ST_].position = CVector2(CGame::CameraPos().x - DISP_X + ST_POSX + PL_ST_X, DISP_Y - PL_ST_Y * 2);
+			mFramePlayer[_HP_].position = CVector2(CGame::CameraPos().x - DISP_X + PL_ST_X, DISP_Y - SIZE_PL_FRAME_Y * 2);
+			mFramePlayer[_ST_].position = CVector2(CGame::CameraPos().x - DISP_X + PL_ST_X, DISP_Y - PL_ST_Y *2);
 			mGaugePlayer[_HP_].SetVertex(-player->mHitPoint, SIZE_PL_FRAME_Y, player->mHitPoint, -SIZE_PL_FRAME_Y); //四角作成
-			mGaugePlayer[_ST_].SetVertex(-player->mStamina, SIZE_PL_FRAME_Y, player->mStamina, -SIZE_PL_FRAME_Y); //四角作成
+			mGaugePlayer[_ST_].SetVertex(-player->mStamina, PL_ST_Y, player->mStamina, -PL_ST_Y); //四角作成
 			SetHungC(player);
 			
 			break;
@@ -231,8 +232,8 @@ void CUserinterface::Render(){
 			}
 		}
 		else{
-			mGaugeEne.Render();
 			mFrameEne.Render();
+			mGaugeEne.Render();
 		}
 	}
 }

@@ -3,7 +3,8 @@
 #include "../Define/define.h"
 #include "../Player/CPlayer.h"  
 #include "../SceneManager/CSceneManager.h"
-
+#include "../CGame/CGame.h"
+#include "../MyNumber/CMyNumber.h"
 
 
 CCamera::CCamera(){
@@ -12,6 +13,26 @@ CCamera::CCamera(){
 	mMyNumber = E_CAMERA;
 	mCamerax = first_pos.x;
 };
+void Search(){
+	CTask *t;
+
+	t = CTaskManager::GetInstance()->mRoot;
+
+	while (t != 0)
+	{
+		if (t->mCharaFlag){
+			switch (t->mMyNumber){
+			case E_ENEMY00:
+			case E_ENEMY01:
+			case E_BOSS:
+				break;
+			};
+
+		}
+	}
+}
+
+
 
 void CCamera::Update(){
 	//‰æ–Ê‚ÌÀ•WŒn‚ğİ’è
