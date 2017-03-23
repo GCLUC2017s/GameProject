@@ -307,6 +307,7 @@ void CClear::Update(){
 				//エンターキーを押したときにシーンをセレクト画面に替える処理を行う。
 				if (CKey::push(VK_RETURN))
 				{
+					CTaskManager::GetInstance()->mFlagAllkill = true;
 					CSceneManager::GetInstance()->ChangeScene(eSceneNo::E_TITLE);
 				}
 			}
