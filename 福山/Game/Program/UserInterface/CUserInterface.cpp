@@ -71,6 +71,19 @@ void CUserinterface::Init(){
 	mFrameEne.SetUv(mEnemyFrameTex, 0, 0, SIZE_TEX_EN_FRAME_X, SIZE_TEX_EN_FRAME_Y);
 
 
+	/*追加したときにキャラクターがいれば && UIがついていない場合UIをつける*/
+	CTask *t; //探索用
+	t = CTaskManager::GetInstance()->mRoot;
+	while (t != 0)
+	{
+		if (t->mCharaFlag && !t->mUiFlag){
+			t->mUiFlag = true;
+			task = t;
+			CTaskManager::GetInstance()->Add(new CUserinterface);
+			break;
+		}
+		t = t->next;
+	}
 }
 
 const float arealeft_x = character_limit_left + (DISP_X / 2) - SIZE_PLAYER_X * 2;

@@ -22,7 +22,7 @@
 
 #define SLOW_DOWN						 0.005f								//移動の減速スピード
 #define WALK_SPEED						 0.05f								//歩くスピード
-#define RUN_SPEED						 0.1f								//走るスピード
+#define RUN_SPEED						 0.075f								//走るスピード
 #define WALK_X							 1.0f								//歩くベクトルX
 #define WALK_Y							 0.5f								//歩くベクトルY
 #define PATTERN_R						 1.0f								//PATTERNの右
@@ -142,7 +142,7 @@ void CPlayer::Jump(){ //ジャンプ処理メソッド
 		mSpeedJump -= gravity;//減速処理
 		
 		if (mPos.y < mAxis + SIZE_PLAYER_Y){//現在の軸に足がついたとき
-			mPos.y = mAxis + SIZE_PLAYER_Y; //元いた地面の"Y"に戻す
+			mPos.y = mAxis - SIZE_PLAYER_Y; //元いた地面の"Y"に戻す
 			mEnabledJump = false; //終了
 		}
 	}

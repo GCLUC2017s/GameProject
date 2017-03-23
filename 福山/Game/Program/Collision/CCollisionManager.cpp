@@ -22,6 +22,7 @@ void CCollisionManager::EnemyAttack(CBase *pl){
 		case E_ENEMY00:
 		case E_ENEMY01:
 		case E_BOSS:
+		case  E_LOWBOSS:
 			CBase *ene;
 			ene = (CBase*)task;
 			if (ene->mEnabledAttack){
@@ -48,6 +49,8 @@ void CCollisionManager::PlayerAttack(CBase *b){
 	case E_ENEMY00:
 	case E_ENEMY01:
 	case E_BOSS:
+	case  E_LOWBOSS:
+
 		if (player != nullptr){
 			if (CCollision::Collision(*(CBase*)player, *b, player->mAttackAxis) &&player->mEnabledAttack){
 				b->mHitPoint -= player->mAttackPoint;
