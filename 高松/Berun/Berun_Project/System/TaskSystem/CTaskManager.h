@@ -22,11 +22,11 @@ public:
 	//リスト追加関数
 	void Add(CTask *p);
 	//リスト内削除関数
-	CTask* Destroy(CTask *p);
+	CTask* Kill(CTask *p);
 	//リスト内指定削除関数
-	void DestroyAppoint();
+	void KillAppoint();
 	//リスト内全削除関数
-	void DestroyAll();
+	void KillAll();
 	//リスト更新関数
 	void UpdateAll();
 	//リスト描画関数

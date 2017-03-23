@@ -19,19 +19,26 @@ void CCollisionManager::Regist(CCollisionA *p)
 	{
 		//追加されたタスクを先頭に
 		mp_head = p;
+		mp_head->mp_prev = nullptr;
+		mp_head->mp_next = p;
+		mp_tail = p;
 	}
 	//先頭が存在していれば
 	else
 	{
 		p->mp_prev = mp_tail;
 		mp_tail->mp_next = p;
+		p->mp_next = nullptr;
+		mp_tail = p;
 	}
-	mp_tail = p;
 }
+
 CCollisionA *CCollisionManager::UnRegist(CCollisionA *p)
 {
 	CCollisionA *next = p->mp_next;
 	CCollisionA *prev = p->mp_prev;
+	if (p == mp_head) mp_head = next;
+	if (p == mp_tail) mp_tail = prev;
 	//削除するタスクの「前タスクの次の位置」を削除するタスクの「次タスクの位置」に繋ぐ。
 	if (prev)prev->mp_next = next;
 	//削除するタスクの「次タスクの前の位置」を削除するタスクの「前タスクの位置」に繋ぐ。

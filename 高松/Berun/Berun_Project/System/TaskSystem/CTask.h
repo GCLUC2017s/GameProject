@@ -71,7 +71,7 @@ public:
 	{
 		m_drawPrio = drawPrio;
 	}
-	void Kill() 
+	void SetKill() 
 	{
 		m_destroyFlg = true;
 	}
