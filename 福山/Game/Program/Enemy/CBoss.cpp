@@ -19,8 +19,8 @@ CKeyを使っている条件文は今後別の処理になります。
 
 #define FIRST_R_NO_BOSS 1						//初めのレンダーのポイント
 #define FIRST_U_NO_BOSS 1						//初めのアップデートのポイント
-#define SIZE_TEX_BOSS_STAY_X 800			//エネミーの待ち姿テクスチャサイズ X
-#define SIZE_TEX_BOSS_STAY_Y 800			//エネミーの待ち姿テクスチャサイズ Y
+#define SIZE_TEX_BOSS_STAY_X 360			//エネミーの待ち姿テクスチャサイズ X
+#define SIZE_TEX_BOSS_STAY_Y 360			//エネミーの待ち姿テクスチャサイズ Y
 #define SIZE_TEX_BOSS_WALK_X 800			//エネミーの歩くテクスチャサイズ Y
 #define SIZE_TEX_BOSS_WALK_Y 800			//エネミーの歩く姿テクスチャサイズ Y
 #define SIZE_SHADOW							//影の表示
@@ -28,7 +28,8 @@ CKeyを使っている条件文は今後別の処理になります。
 #define WALK_X 2							//歩くベクトルX
 #define WALK_Y 1							//歩くベクトルY
 
-#define ANIME_TIME_BASE 6
+#define ANIME_TIME_BASE				 6
+#define ANIME_TIME_HATTACK			12
 
 #define BOSS_STAY 	 "../CG\\BOSS\\stay\\"
 #define BOSS_WALK	 "../CG\\BOSS\\walk\\"
@@ -40,15 +41,11 @@ CKeyを使っている条件文は今後別の処理になります。
 #define HIGH_AT		mForward.x, SIZE_BOSS_X*2.5f, SIZE_BOSS_Y,2.5f, mPos      	//攻撃範囲
 #define MOVE_AT		mForward.x, SIZE_BOSS_X*1.25f, SIZE_BOSS_Y,1.345f, mPos      	//攻撃範囲
 
-inline void InitRand(){
-	srand((unsigned int)time(NULL));
-}
 
 void CBoss::SetPos(){
 	mPos = Boss_first_pos;
 	mAxis = mPos.y;
 };
-
 
 void CBoss::Init(){
 	SetPos();
@@ -59,10 +56,13 @@ void CBoss::Init(){
 
 }
 
-
 //BOSS描画
-CBoss::CBoss() : mVelocity(0), mFlameCount(0), actionflag(false), motion(0), direction(1){
+CBoss::CBoss() : mVelocity(0), mFrameCount(0), actionflag(false), motion(0), direction(0){
 
+	/*テクスチャを張る*/
+	mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
+	mRect.SetUv(CLoadBoss::GetInstance()->mStay_tex[0], 0, 0, -SIZE_TEX_BOSS_STAY_X, SIZE_TEX_BOSS_STAY_Y);
+	mForward = CVector2(1.0f, 0.0f);
 	mPriorityR = E_BOSS;			//Renderのナンバー 
 	mPriorityU = E_BOSS;			//Updateのナンバー
 	mHitPoint = ENE_HP_X;		//ＨＰ
@@ -77,9 +77,6 @@ CBoss::CBoss() : mVelocity(0), mFlameCount(0), actionflag(false), motion(0), dir
 }
 
 CBoss::~CBoss(){
-
-	
-
 
 
 }
@@ -117,11 +114,11 @@ void CBoss::AnimeScene(){
 		break;
 		/*強攻撃*/
 	case E_HATTACK_L:
-		AnimeFrame(false, ANIME_TIME_BASE);
+		AnimeFrame(false, ANIME_TIME_HATTACK);
 		mRect.SetUv(CLoadBoss::GetInstance()->mHattack_tex[mAnimeFrame], 0, 0, SIZE_TEX_BOSS_WALK_X, SIZE_TEX_BOSS_WALK_Y);
 		break;
 	case E_HATTACK_R:
-		AnimeFrame(false, ANIME_TIME_BASE);
+		AnimeFrame(false, ANIME_TIME_HATTACK);
 		mRect.SetUv(CLoadBoss::GetInstance()->mHattack_tex[mAnimeFrame], SIZE_TEX_BOSS_WALK_X, 0, 0, SIZE_TEX_BOSS_WALK_Y);
 		break;
 		/*死亡*/
@@ -170,33 +167,8 @@ void CBoss::Walk(){
 	}
 }
 
-void CBoss::Update(){
-	mRect.position = mPos;
+void CBoss::Motion(){
 
-	InitRand();
-	mTargetP = CGame::mGetPlayerPos();
-	float getAxis = CGame::GetPlayerAxis();
-
-	rulerR = mTargetP.x - mPos.x;	//プレイヤーとの距離を出す
-	rulerL = mPos.x - mTargetP.x;
-
-
-
-
-	if (rulerL < 0){				//絶対値にする
-		rulerL = rulerL * -1;
-	}
-	if (rulerR < 0){
-		rulerR = rulerR * -1;
-	}
-
-	if (mHitPoint <= 0){
-		motion = EM_DIE;		//体力が０ならDIEする
-	}
-	if (mEnabledEaten){		//食べられたら消す
-		//演出加えてもいいかも(例)拡大縮小してif(サイズが0以下の時killFlagを立てるなど)
-		mKillFlag = true;
-	}
 	switch (motion)
 	{
 	case EM_STAY://待機
@@ -214,7 +186,7 @@ void CBoss::Update(){
 		break;
 	case EM_WALK://歩き	
 		Walk();
-		if (ATTACK_PTT){//攻撃モーションに変更
+		if (ATTACK_PTTX){//攻撃モーションに変更
 			actionflag = false;
 			motion = EM_RANGE;
 		}
@@ -225,19 +197,19 @@ void CBoss::Update(){
 
 		break;
 	case EM_RANGE://攻撃範囲内に入った時
-		if (ATTACK_PTT){
+		if (ATTACK_PTTX){
 			if (!actionflag){
 				pattern = rand() % 6; //0~2の中でランダムでパターンを選択する。
 			}
 			if (pattern == 0){
-				motion = EM_ATTCK;
+				motion = EM_ATTACK;
 			}
 			else if (pattern == 1){
 				actionflag = true;
 				motion = EM_BACK_X;
 			}
 			else{
-				motion = EM_ATTCK;
+				motion = EM_ATTACK;
 			}
 		}
 
@@ -257,7 +229,7 @@ void CBoss::Update(){
 		//		motion = EM_ATTCK;
 		//	}
 		//}
-		if (NO_ATTACK_PTT){
+		if (NO_ATTACK_PTTX){
 			actionflag = false;
 			motion = EM_WALK;
 		}
@@ -292,7 +264,7 @@ void CBoss::Update(){
 		}
 
 		break;
-	case EM_ATTCK:		//攻撃中
+	case EM_ATTACK:		//攻撃中
 		/*モーション設定*/
 		if (RIGHT_PTT) {
 			mStatus = E_ATTACK_R;
@@ -302,14 +274,14 @@ void CBoss::Update(){
 		}
 		/*範囲*/
 		Attack(LOW_AT);
-	///パンチの最後にあたり判定
-			mEnabledAttack = true;
-			/*範囲内に近づく*/
-			if (rulerR > 2 || rulerL > 2){
-				actionflag = false;
-				mEnabledAttack = false;
-				motion = EM_WALK;
-			}
+		///パンチの最後にあたり判定
+		mEnabledAttack = true;
+		/*範囲内に近づく*/
+		if (rulerR > 2 || rulerL > 2){
+			actionflag = false;
+			mEnabledAttack = false;
+			motion = EM_WALK;
+		}
 		break;
 
 	case EM_HIGH_AT:
@@ -324,23 +296,61 @@ void CBoss::Update(){
 		Attack(HIGH_AT);
 		if (mAnimeFrame == FRAME_LIMIT - 1){	//パンチの最後にあたり判定
 			mEnabledAttack = true;//攻撃終了
-			motion  =  EM_RANGE;				//索敵
+			motion = EM_RANGE;				//索敵
 		}
 		else{
 			mEnabledAttack = false;
 		}
 		break;
+
+
 	}
+}
+
+void CBoss::Update(){
+	mRect.position = mPos;
+
+	mTargetP = CGame::mGetPlayerPos();
+	getAxis = CGame::GetPlayerAxis();
+
+	rulerR = mTargetP.x - mPos.x;	//プレイヤーとの距離を出す
+	rulerL = mPos.x - mTargetP.x;
+	if (rulerL<0){				//絶対値にする
+		rulerL = rulerL * -1;
+	}
+	if (rulerR<0){
+		rulerR = rulerR * -1;
+	}
+
+	upruler = mTargetP.y - mPos.y;
+	downruler = mPos.y - mTargetP.y;
+	if (upruler<0){				//絶対値にする
+		upruler = upruler * -1;
+	}
+	if (downruler<0){
+		downruler = downruler * -1;
+	}
+
+	if (mHitPoint <= 0){
+		motion = EM_DIE;		//体力が０ならDIEする
+	}
+	if (mEnabledEaten){		//食べられたら消す
+		//演出加えてもいいかも(例)拡大縮小してif(サイズが0以下の時killFlagを立てるなど)
+		mKillFlag = true;
+	}
+
 	switch (direction)
 	{
-	case 0:	//右向き
+	case E_RIGHT:	//右向き
 		break;
-	case 1:	//左向き
+	case E_LEFT:	//左向き
 		break;
 	}
+	Motion();
+
 	AlertHPRect(&mRect, mHitPoint);	//アラートメソッド(HP変化によるもの)
 	/*軸の設定*/
-	mAxis = mPos.y - SIZE_BOSS_Y;
+	mAxis = mPos.y - SIZE_BOSS_Y - SIZE_SHADOW_Y;
 	mAttackRange.position = mPos;
 	/*範囲外調整*/
 	LimitDisp(SIZE_BOSS_X, SIZE_BOSS_Y);

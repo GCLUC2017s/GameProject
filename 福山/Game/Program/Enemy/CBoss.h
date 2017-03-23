@@ -31,23 +31,29 @@ private:
 		E_RUN_L, E_RUN_R,
 		E_ATTACK_L, E_ATTACK_R,
 		E_HATTACK_L, E_HATTACK_R,
-		E_DIE_L, E_DIE_R
+		E_DIE_L, E_DIE_R,
+		E_LEFT,E_RIGHT
 	};
 
 	int AnimePattern;
 	int mSaveAnime; //直前のアニメが何か判断用
-	int mFlameCount;		//フレーム数カウント用
+	int mFrameCount;		//フレーム数カウント用
 	
 	int direction;//左右判定
 
 	float rulerR; //エネミーとキャラクターの距離
 	float rulerL; //エネミーとキャラクターの距離
+	float upruler;
+	float downruler; 
+	float getAxis;
+
 
 	int motion;
 	bool actionflag;
 	
 	int pattern;//ランダム用
 
+	void Motion();
 	void Walk();
 	void AnimeScene();
 	void SetPos();

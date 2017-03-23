@@ -9,6 +9,8 @@
 #define JUMP_FIRST_SPEED 0.2
 
 class CGameScene :public CScene{
+private:
+	float mSaveTime;
 public:
 
 	enum EStatus{
