@@ -54,10 +54,10 @@ enum {
 	eChick,//鳥
 	eFish,//魚
 	ePig,//豚
+	eVegetavelboss,//野菜ボス（ウサギ）
 	eBerry,//イチゴサングラス空中
 	ePapurika,//ピーマン
 	eStrawberry,//イチゴ地上
-	eVegetavelboss,//野菜ボス（ウサギ）
 	eMeatboss,//肉ボス（鶏）
 	eSquid,//イカ
 	eFishboss,//魚介ボス（鮫）

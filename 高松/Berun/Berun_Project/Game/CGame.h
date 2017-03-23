@@ -9,6 +9,7 @@
 #define IMG_ARRAY 4
 #define GOAL_POS 5000.0f
 
+
 #include "../Scene/CScene.h"
 #include "CImage.h"
 
@@ -32,8 +33,9 @@ private:
 	CImage	  *mp_wordGameOver;
 	unsigned int m_step;
 	int m_cnt;
+	
 public:
-
+	bool m_stopScrol;
 	CGame();
 	~CGame();
 	void Update();

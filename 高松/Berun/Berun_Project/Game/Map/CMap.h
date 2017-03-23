@@ -36,16 +36,9 @@ public:
 private:
 	CImage *m_backGround[MAP_DATA];
 	CImage *m_ground[MAP_GROUND];
-
-
-
 	float m_mapTime;//“§–¾“x
 	E_Stage m_stage;//¡‚Ì
 	E_Stage m_newstage;//Ÿ‚Ì
-	
-
-	
-	
 	int m_cont;
 public:
 	CMap(E_Stage type);

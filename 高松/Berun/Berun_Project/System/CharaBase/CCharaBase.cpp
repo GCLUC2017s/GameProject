@@ -23,6 +23,7 @@ T_AnimData _carrotAnimData[] = {
 	{ 2,5 },
 	{ 2,5 },
 	{ 5,10 },
+	{ 2,5 },
 	
 };
 T_AnimData _chickAnimData[] = {
