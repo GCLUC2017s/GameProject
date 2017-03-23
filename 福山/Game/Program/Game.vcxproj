@@ -19,6 +19,8 @@
     <ClCompile Include="Enemy\CBoss.cpp" />
     <ClCompile Include="Enemy\CEnemy00.cpp" />
     <ClCompile Include="Enemy\CEnemy01.cpp" />
+    <ClCompile Include="Enemy\CLowBoss.cpp" />
+    <ClCompile Include="Explain\CExplain.cpp" />
     <ClCompile Include="GameScene\CGameScene.cpp" />
     <ClCompile Include="Graphic\CRectangle.cpp" />
     <ClCompile Include="Graphic\CStringtexture.cpp" />
@@ -51,6 +53,8 @@
     <ClInclude Include="Enemy\CEnemy01.h" />
     <ClInclude Include="Enemy\CEnemybasetest.h" />
     <ClInclude Include="Enemy\cenemypattern.h" />
+    <ClInclude Include="Enemy\CLowBoss.h" />
+    <ClInclude Include="Explain\CExplain.h" />
     <ClInclude Include="GameScene\CGameScene.h" />
     <ClInclude Include="Graphic\CRectangle.h" />
     <ClInclude Include="Graphic\CStringtexture.h" />

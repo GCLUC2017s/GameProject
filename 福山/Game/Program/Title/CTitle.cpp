@@ -13,28 +13,16 @@
 #define T_BERU_Y 800
 
 //TitleSceneで表示されるテクスチャの設定。
-void CBase::AnimeFrame(bool roop, int speed){
-	if (roop){
+void CTitle::AnimeFrame(int speed){
+	
 		mFrameCount++;
 		if (mFrameCount % speed == 0){
 			mAnimeFrame++;
 
 		}
-		if (mAnimeFrame >= FRAME_LIMIT || mSaveAnime != mStatus){
+		if (mAnimeFrame >= FRAME_BERU){
 			mAnimeFrame = 0;
 		}
-	}
-	else{
-		mFrameCount++;
-		if (mFrameCount % speed == 0){
-			mAnimeFrame++;
-		}
-		if (mAnimeFrame >= FRAME_LIMIT){
-			mAnimeFrame = FRAME_LIMIT - 1; //テクスチャの最大値 = FRAME_LIMITなので ー１
-		}
-	}
-
-	mSaveAnime = mStatus;
 }
 void CTitle::Init(){
 
@@ -61,6 +49,7 @@ void CTitle::Init(){
 	mTexBeru[6]->load(FILE_BERU"title_logo_beru_06.tga");
 	mTexBeru[7]->load(FILE_BERU"title_logo_beru_07.tga");
 	mTexBeru[8]->load(FILE_BERU"title_logo_beru_08.tga");
+
 	mBeru.SetUv(mTexBeru[0], 0, 0, T_BERU_X, T_BERU_Y);
 	
 
@@ -89,8 +78,10 @@ CTitle::CTitle() : mpTexture(0){
 	mBeru.SetVertex(-5.0f, 5.0f, 5.0f, -5.0f);//表示範囲
 
 }
+#define TIME5 12  
 void CTitle::Update(){
-
+	AnimeFrame(TIME5);
+	mBeru.SetUv(mTexBeru[mAnimeFrame], 0, 0, T_BERU_X, T_BERU_Y);
 };
 void CTitle::Render(CVector2 pos) {
 
@@ -101,7 +92,7 @@ void CTitle::Render(CVector2 pos) {
 	mPleaseKey.position = pos;
 	mPleaseKey.position.y = DISP_Y / 20;
 
-	mBeru.position = CVector2(pos.x +3,pos.y+2.5f);
+	mBeru.position = CVector2(pos.x + 3, pos.y + 2.5f);
 
 	mBeru.Render();
 	mTitleLogo.Render();

@@ -1,71 +1,66 @@
 #pragma once
 #include<Windows.h>
 #include<mmsystem.h>
+#include <stdio.h>
 #pragma comment(lib,"winmm.lib")
 
 
 class CSound{
 public:
-	wchar_t	file[100];
-		int result;
+	char	file[100];
+	int result;
 
-		CSound()
-		{
-			result = 0;
+	CSound()
+	{
+		result = 0;
 
-		}
+	}
 
-		void sendstring(wchar_t*w){
+	void sendstring(char *w){
 
-			wchar_t		buf[100];
-			wsprintf(buf, w, file);
-			result = mciSendString(buf, NULL, 0, NULL);
+		//wchar_t		buf[100];
+		char		buf[100];
+		//wsprintf((LPSTR)buf, (LPCSTR)w, file);
+		sprintf(buf, w, file);
+		result = mciSendString((LPSTR)buf, NULL, 0, NULL);
 
-		}
+	}
 
-		void load(wchar_t*filename)
-		{
-			wcscpy(file, filename);
-			sendstring(L"close %s");
-			sendstring(L"open %s");
-
-
-		}
-
-
-		void play()
-		{
-			sendstring(L"play %s from 0");
-		}
-
-		void repeat()
-		{
-			sendstring(L"play %s from 0 repeat");
-		}
+	void load(char *filename)
+	{
+		//			wcscpy(file, filename);
+		strcpy(file, filename);
+		sendstring("close %s");
+		sendstring("open %s");
+	}
 
 
-		void stop()
-		{
-			sendstring(L"stop %s");
-		}
+	void play()
+	{
+		sendstring("play %s from 0");
+	}
 
-		void close()
-		{
-			sendstring(L"close %s");
-
-		}
-
-		~CSound()
-		{
-			stop();
-			close();
-
-		}
+	void repeat()
+	{
+		sendstring("play %s from 0 repeat");
+	}
 
 
+	void stop()
+	{
+		sendstring("stop %s");
+	}
 
+	void close()
+	{
+		sendstring("close %s");
 
+	}
 
-
+	~CSound()
+	{
+		stop();
+		close();
+	}
 
 };
