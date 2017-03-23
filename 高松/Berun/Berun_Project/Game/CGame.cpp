@@ -38,7 +38,7 @@ switch (m_step)
 		{	
 			mp_player = new CPlayer(g_tutorialNo);
 			new CEnemyManager();
-			mp_enemy = new CEnemy(eVegetavelboss);
+			mp_enemy = new CEnemy(eCarrot);
 			mp_tutorial->SetKill();
 			mp_img[0]->SetPos(280, 310);
 			mp_img[0]->SetSize(700, 150);

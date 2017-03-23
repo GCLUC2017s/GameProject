@@ -25,7 +25,7 @@ CMap::CMap(E_Stage type) : CBase(eMap,eUDP_Map, eDWP_Map) {
 	}
 	m_ground[0] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("BackGroundMoning2"));
 	m_ground[1] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("BackGroundMoning3"));
-	//	m_mapRight= dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Back_03"));
+	
 	m_stage = type;
 
 	m_newstage = static_cast<E_Stage>(m_stage + 1);

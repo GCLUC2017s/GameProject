@@ -231,6 +231,8 @@ void CUserinterface::Update(){
 		case E_ENEMY01:
 		case E_LOWBOSS:
 
+		
+
 			CBase *base;
 			base = (CBase*)task;
 			mGaugeEne.position = CVector2(base->mPos.x - ENE_HP_POSX, base->mPos.y + base->mRect.triangle1.y1);
