@@ -15,7 +15,7 @@ public:
 	void DeleteScene();			//KILL
 	void SceneMain();
 	CSceneManager();
-
+	~CSceneManager();
 
 };
 #endif

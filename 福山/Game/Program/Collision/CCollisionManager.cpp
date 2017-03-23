@@ -8,8 +8,12 @@
 #define		PL_HITBUCK	player->mAttackPoint*5.0f
 #define     ENE_HITBUCK ene->mAttackPoint * 0.1f
 #define     ALPHA		 pl->mRect.triangle1.a
-CCollisionManager::CCollisionManager(){};
-CCollisionManager::~CCollisionManager(){};
+
+CCollisionManager::CCollisionManager(){
+};
+CCollisionManager::~CCollisionManager(){
+};
+
 
 void CCollisionManager::EnemyAttack(CBase *pl){
 	CTask *task;
@@ -55,7 +59,7 @@ void CCollisionManager::PlayerAttack(CBase *b){
 			if (CCollision::Collision(*(CBase*)player, *b, player->mAttackAxis) &&player->mEnabledAttack){
 				b->mHitPoint -= player->mAttackPoint;
 				/*ヒットバック*/
-				if (player->mSaveForword.x >= 0){ b->mPos.x += PL_HITBUCK; }		//右向きの場合
+				if (player->mSaveForward.x >= 0){ b->mPos.x += PL_HITBUCK; }		//右向きの場合
 				else{ b->mPos.x -= PL_HITBUCK; }									//左向きの場合
 				/*捕食攻撃*/
 				if (b->mHitPoint <= 0 && player->mEnabledEat){

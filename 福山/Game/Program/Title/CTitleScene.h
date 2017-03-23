@@ -16,17 +16,27 @@ private:
 	CMap mMap;
 	CTitle mTitle;
 	CExplain mExplain;
-	
-	float count;	//スクロール演出のため
+	CRectangle mRectFilter;
+	CTexture *mFilterTex;
+
+	float mCount;	//スクロール演出のため
 
 	int status = E_TITLE_SCENE;		//ステータス
 
-	float FirstX;	//画面スクロール時の移動に使います。
+	float mFirstX;	//画面スクロール時の移動に使います。
 
-	float Save;		//保存用です。
+	float mSave;		//保存用です。
 
-	float alpha;	//アルファチャンネルに使います 
 
+	float	mLeftSc;		//左スクロール用
+	float	mRightSc;	//右スクロール用
+
+	/*フェード,フェードアウト,しない簡易シーン管理する*/
+	enum MyFade
+	{
+		E_FADE,E_FADEOUT,E_NOFADE
+	};
+	MyFade mStarusFade = E_NOFADE;
 	enum MyEnum
 	{
 		E_TITLE_SCENE,
@@ -34,8 +44,6 @@ private:
 
 	};
 
-
-	//void FadeDisp(); //フェードインで読み込みを綺麗にする為に使用　alphaを徐々に下げる。
 
 	void Init();
 	void Update();

@@ -43,7 +43,7 @@ CKeyを使っている条件文は今後別の処理になります。
 
 
 void CEnemy01::Init(){
-	RandPos(SIZE_ENEMY01_X, SIZE_ENEMY01_Y, &mPos,-DISP_X,DISP_X*10);
+	RandPos(SIZE_ENEMY01_X, SIZE_ENEMY01_Y, &mPos,DISP_X*6,DISP_X*7);
 	/*テクスチャを張る*/
 	mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
 	mRect.SetUv(CLoadEnemy01::GetInstance()->mStay_tex[0], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
@@ -58,6 +58,7 @@ CEnemy01::~CEnemy01(){
 
 //エネミー01描画
 CEnemy01::CEnemy01() : mVelocity(0), mFrameCount(0), actionflag(false), motion(EM_STAY), direction(E_LEFT){
+	Init();
 	mPriorityR = E_ENEMY01;			//Renderのナンバー 
 	mPriorityU = E_ENEMY01;			//Updateのナンバー
 	mHitPoint = ENE_HP_X;		//ＨＰ

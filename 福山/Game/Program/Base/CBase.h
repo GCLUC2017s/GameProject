@@ -88,11 +88,11 @@ private:
 	float mFrameTime;				//bool 関数	 FrameTie計算用
 	int mFrameCount;				//現在のフレーム数
 	/*アラート関数用*/
-	float mSaveAlertHitoPoint;		//アラート用
 	float mAlertCount;				//アラートカウント
 	bool FlagAlertSetHp;			//アラートHPの初期設定用
 
 public:
+	float mSaveAlertHitoPoint;		//アラート 用
 	CTexture	*mShadowTex;		//影テクスチャチャ
 	CVector2 mPos;					//位置
 	CVector2 mForward;				//向き

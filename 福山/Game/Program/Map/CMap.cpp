@@ -4,9 +4,9 @@
 #include "../MyNumber/CMyNumber.h"
 #include "../Player/CPlayer.h"
 #include  "../CGame/CGame.h"
-#define FILE_BG_GROUND		"../CG/background/ground/"
-#define FILE_BG_SKY			"../CG/background/sky/"
-#define FILE_BG_TREE		"../CG/background/tree/"
+#define FILE_BG_GROUND		"../CG\\background\\ground\\"
+#define FILE_BG_SKY			"../CG\\background\\sky\\"
+#define FILE_BG_TREE		"../CG\\background/tree\\"
 
 #define TEX_SIZE_TREE_X 3200
 #define TEX_SIZE_TREE_Y 2400
@@ -28,7 +28,7 @@ void CMap::Init() {
 	mSkyTex = new CTexture();
 	mTreeTex = new CTexture();
 
-	mGroundTex->load(FILE_BG_GROUND"");
+	mGroundTex->load(FILE_BG_GROUND"ground_background.tga");
 	mSkyTex->load(FILE_BG_SKY"sky_background.tga");
 	mTreeTex->load(FILE_BG_TREE"tree_background.tga");
 

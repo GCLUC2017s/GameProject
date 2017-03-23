@@ -58,7 +58,7 @@ void CBoss::Init(){
 
 //BOSS描画
 CBoss::CBoss() : mVelocity(0), mFrameCount(0), actionflag(false), motion(0), direction(E_LEFT){
-
+	Init();
 	mPriorityR = E_BOSS;			//Renderのナンバー 
 	mPriorityU = E_BOSS;			//Updateのナンバー
 	mHitPoint = ENE_HP_X;		//ＨＰ
@@ -70,6 +70,7 @@ CBoss::CBoss() : mVelocity(0), mFrameCount(0), actionflag(false), motion(0), dir
 	mShadow.SetVertex(-SIZE_SHADOW_X, SIZE_SHADOW_Y, SIZE_SHADOW_X, -SIZE_SHADOW_Y);
 	//四角形の色を設定
 	mRect.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+
 }
 
 CBoss::~CBoss(){

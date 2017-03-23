@@ -91,6 +91,7 @@ const float arearifgt_x = character_limit_right - (DISP_X / 2) - SIZE_PLAYER_X *
 
 CUserinterface::CUserinterface() : mFlagColar(false), mHungryC(1.0f), mFlagHP(true), mFlagST(true), task(0)
 {
+	Init();
 	mPriorityR = E_UI;
 	mPriorityU = E_UI;
 	mMyNumber = E_UI;
@@ -159,19 +160,19 @@ void CUserinterface::SetHungC(const CPlayer *player){
 	}
 
 	/*gaugeØ‚è‘Ö‚¦*/
-	if (player->HUNGRY_S_HIGH_IF)		{//‚¨‚È‚©‚¢‚Á‚Ï‚¢‚ÌUI
+	if (player->mStamina >= HUNGRY_EX01)		{//•KE‹Z‚ªg‚¦‚é‚Æ‚«‚ÌSTGage
 		mGaugePlayer[_ST_].SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 		mGaugePlayer[_ST_].SetUv(mPlayerGageTex[_ST_], 0, 0, T_ST_RIGHT, SIZE_TEX_PLAYER_ST_Y);
 		mFramePlayer[_ST_].SetUv(mPlayerFrameStTex[_HIGH_], 0, 0, SIZE_TEX_PLAYER_ST_X, SIZE_TEX_PLAYER_ST_Y);
 
 	}
-	else if (player->HUNGRY_S_LOW_IF)	{//‚¨‚È‚©Œ¸‚Á‚½‚ÌUI
+	else if (player->HUNGRY_S_LOW_IF)	{//‚¨‚È‚©Œ¸‚Á‚½‚ÌSTGage
 		mFramePlayer[_ST_].SetColor(mHungryC, mHungryC, mHungryC, mHungryC + 0.5f);
 		mGaugePlayer[_ST_].SetUv(mPlayerGageTex[_ST_], 0, 0, T_ST_RIGHT, SIZE_TEX_PLAYER_ST_Y);
 		mFramePlayer[_ST_].SetUv(mPlayerFrameStTex[_LOW_], 0, 0, SIZE_TEX_PLAYER_ST_X, SIZE_TEX_PLAYER_ST_Y);
 	}
-	else								{//•’Ê‚Ìó‘Ô
-		mGaugePlayer[_ST_].SetColor(0.8f, 0.8f, 0.8f, 1.0f);
+	else								{//•KE‹Z‚ªg‚¦‚È‚¢‚Æ‚«
+		mGaugePlayer[_ST_].SetColor(0.4f, 0.4f, 0.4f, 1.0f);
 		mGaugePlayer[_ST_].SetUv(mPlayerGageTex[_ST_], 0, 0, T_ST_RIGHT, SIZE_TEX_PLAYER_ST_Y);
 		mFramePlayer[_ST_].SetUv(mPlayerFrameStTex[_NORM_], 0, 0, SIZE_TEX_PLAYER_ST_X, SIZE_TEX_PLAYER_ST_Y);
 	}
@@ -192,6 +193,21 @@ void CUserinterface::SetHungC(const CPlayer *player){
 
 
 void CUserinterface::Update(){
+	/*’Ç‰Á‚µ‚½‚Æ‚«‚ÉƒLƒƒƒ‰ƒNƒ^[‚ª‚¢‚ê‚Î && UI‚ª‚Â‚¢‚Ä‚¢‚È‚¢ê‡UI‚ğ‚Â‚¯‚é*/
+	CTask *t; //’Tõ—p
+	t = CTaskManager::GetInstance()->mRoot;
+	while (t != 0)
+	{
+		if (t->mCharaFlag && !t->mUiFlag){
+			t->mUiFlag = true;
+			CUserinterface *SaveUI = new CUserinterface;
+			CTaskManager::GetInstance()->Add(SaveUI);
+			SaveUI->task = t;
+			break;
+		}
+		t = t->next;
+	}
+
 	if (task != 0){
 		mPriorityR = task->mPriorityR;
 		switch (task->mMyNumber)

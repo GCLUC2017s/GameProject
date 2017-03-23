@@ -40,7 +40,7 @@
 
 
 void CEnemy00::Init(){
-	RandPos(SIZE_ENEMY00_X, SIZE_ENEMY00_Y, &mPos,  DISP_X*3, DISP_X * 10);
+	RandPos(SIZE_ENEMY00_X, SIZE_ENEMY00_Y, &mPos,  DISP_X*4, DISP_X*6);
 	/*テクスチャを張る*/
 	mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
 	mRect.SetUv(CLoadEnemy00::GetInstance()->mStay_tex[0], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
@@ -54,7 +54,7 @@ void CEnemy00::Init(){
 
 //エネミー00描画
 CEnemy00::CEnemy00() : mVelocity(0), mFrameCount(0), actionflag(false), motion(EM_STAY), direction(E_LEFT), escapetime(0), attacktime(0) {
-
+	Init();
 	mPriorityR = E_ENEMY00;			//Renderのナンバー 
 	mPriorityU = E_ENEMY00;			//Updateのナンバー
 	mHitPoint = ENE_HP_X;		//ＨＰ
