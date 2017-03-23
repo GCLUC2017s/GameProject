@@ -71,8 +71,9 @@ public:
 	{
 		m_drawPrio = drawPrio;
 	}
-	void SetDestroyFlag(bool f) {
-		m_destroyFlg = f;
+	void Kill() 
+	{
+		m_destroyFlg = true;
 	}
 	friend class CTaskManager;
 };

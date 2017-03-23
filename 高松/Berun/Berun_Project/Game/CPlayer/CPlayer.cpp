@@ -17,17 +17,11 @@ CPlayer::~CPlayer()
 
 void CPlayer::Draw()
 {
-	for (int i = 0; i < m_hp; i++)
+	for (int i = 0; i < m_hp / 2; i++)
 	{
 		mp_hp->SetPos(i * 75 + 10, 25);
 		mp_hp->SetSize(75, 75);
 		mp_hp->Draw();
-	}
-	for (int j = 0; j < m_sp; j++)
-	{
-		mp_sp->SetPos(j * 75 + 400, 25);
-		mp_sp->SetSize(75, 75);
-		mp_sp->Draw();
 	}
 	mp_shadow->SetPos(GetScreenPos(CVector3D(m_pos.x, 0, m_pos.z)));
 	mp_shadow->SetCenter(35,15);
@@ -37,8 +31,8 @@ void CPlayer::Draw()
 
 void CPlayer::Contlol() {
 	CCharaBase::ResetKey();
-	//もしキャラクターが死亡していれば(死亡フラグが立っていれば)、何もせずに抜ける処理
-	if (m_death)	return;
+	if (!m_death)
+	{
 		//以下、上下左右のキーを入力すればそれに応じてフラグが切り替わる
 		if (HOLD_KEY_UP)	m_up = true;
 		if (HOLD_KEY_DOWN)	m_down = true;
@@ -57,6 +51,7 @@ void CPlayer::Contlol() {
 		//スペースキーを入力したら、状態をジャンプにする処理
 		if (PUSH_KEY_SPASE)		m_jump = true;
 		if (PUSH_KEY_ENTER)		m_attack = true;
+	}
 }
 
 void CPlayer::HitCallBack(CCollisionA * p)
@@ -68,6 +63,7 @@ void CPlayer::HitCallBack(CCollisionA * p)
 	{
 		if (!m_damage)
 		{
+			//HPを
 			m_hp--;
 			if (!m_hp)
 			{

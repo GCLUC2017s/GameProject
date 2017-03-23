@@ -216,12 +216,13 @@ void CTaskManager::SortAscDraw()
 
 CTask* CTaskManager::GetTask(int id)
 {
-	CTask *p;
+	CTask *p = mp_head;
 	//引数があれば
-	while (id)
+	while (p && id)
 	{
 		//idが一致していればそのタスクを返す
 		if (p->m_id == id) return p;
+		else p = p->mp_next;
 	}
 	//以外ならnullを返す
 	return nullptr;
@@ -230,12 +231,13 @@ CTask* CTaskManager::GetTask(int id)
 int CTaskManager::GetCount(int id)
 {
 	int cnt = 0;
-	CTask *p;
+	CTask *p = mp_head;
 	//引数があれば
-	while (id)
+	while (p && id)
 	{
 		//idが一致していればカウントアップ
 		if(p->m_id == id) cnt++;
+		else p = p->mp_next;
 	}
 	//個数を返す
 	return cnt;
