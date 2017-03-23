@@ -18,12 +18,14 @@ class CPlayer : public CCharaBase
 	void Contlol();
 	CImage *mp_hp;
 	CImage *mp_sp;
+	CImage *mp_shadow;
 public:
 	static CPlayer* mp_player;
 	CPlayer(int type);
 	~CPlayer();
 //	void Update();
 	void Draw();
+	void HitCallBack(CCollisionA * p);
 };
 
 #endif // !CPLAYER_INCLUDE_GUARD

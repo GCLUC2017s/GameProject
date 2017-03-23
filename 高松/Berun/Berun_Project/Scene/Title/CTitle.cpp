@@ -109,7 +109,7 @@ CTitle::CTitle()
 	m_firstMenu = false;
 	m_firstChara = false;
 	m_titleMenu = false;
-	CItem::ClearInstance();
+//	CItem::ClearInstance();
 }
 CTitle::~CTitle()
 {
@@ -212,10 +212,12 @@ void CTitle::Draw()
 	{
 		if (!m_titleMenu)
 		{
-			m_start->SetPos(m_startPos.x,m_startPos.y + 10);
+			m_start->SetPos(m_startPos.x,m_startPos.y);
 			m_start->SetSize(m_startSize);
+			m_start->SetColor(NORMAL_COLOR);
 			m_exit->SetPos(m_exitPos);
 			m_exit->SetSize(m_exitSize);
+			m_exit->SetColor(HALF_RGB);
 
 			if (CInput::GetState(0, CInput::ePush, CInput::eButton10))   CSceneManager::GetInstance()->Quit(0,eCharaSelect);
 		}
@@ -223,8 +225,10 @@ void CTitle::Draw()
 		{
 			m_start->SetPos(m_startPos);
 			m_start->SetSize(m_startSize);
-			m_exit->SetPos(m_exitPos.x,m_exitPos.y + 10);
+			m_start->SetColor(HALF_RGB);
+			m_exit->SetPos(m_exitPos.x,m_exitPos.y);
 			m_exit->SetSize(m_exitSize);
+			m_exit->SetColor(NORMAL_COLOR);
 			if (CInput::GetState(0, CInput::ePush, CInput::eButton10))	exit(0);
 		}
 		m_start->Draw();

@@ -16,7 +16,8 @@
 #define GRAVITY	-0.98f
 #define ARRAY_SIZE(a)(sizeof(a)/sizeof(a[0]))
 #define FPS 60.0f
-#define CHANGE_TIME(b)(b/FPS)
+#define CHANGE_TIME(a)(a/FPS)
+#define MILLI_SECOUND(a)(a * 1000)
 #define TUTORIAL_MAX 2
 #define FILE_NAME 32
 
@@ -59,5 +60,7 @@ extern int  g_tutorialNo;
 #define GREEN_COLOR 0,1,0,1
 #define BLUE_COLOR 0,0,1,1
 #define NORMAL_COLOR 1,1,1,1
+#define HALF_RGB 0.5f,0.5f,0.5f,1
+#define HALF_ALPHA 1,1,1,0.5f
 
 

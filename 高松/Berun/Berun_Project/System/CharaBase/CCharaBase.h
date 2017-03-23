@@ -14,7 +14,9 @@
 #define CHARA_MOVE 4
 #define ANIM_REVISION 1
 #define DAMAGE_TIME 2
-#define FLASH_INTERBAL 0.2f
+#define WINDOW_UP_LIMIT	600
+#define WINDOW_DOWN_LIMIT 100
+#define FLASH_INTERBAL MILLI_SECOUND(0.2f)
 
 
 struct T_AnimData {
@@ -49,6 +51,7 @@ enum {
 	ePlayerWoman,//プレイヤー女
 	eCarrot,//ニンジン
 	eChick,//鳥
+	eFish,//魚
 	ePig,//豚
 	eBerry,//イチゴサングラス空中
 	ePapurika,//ピーマン
@@ -56,7 +59,6 @@ enum {
 	eVegetavelboss,//野菜ボス（ウサギ）
 	eMeatboss,//肉ボス（鶏）
 	eSquid,//イカ
-	eFish,//魚
 	eFishboss,//魚介ボス（鮫）
 	eRice,//米
 	eBread,//パン
@@ -122,8 +124,12 @@ protected:
 	int m_flashTyming;
 	//ダメージを受けているかどうかを格納する変数
 	bool m_damage;
+	//ダメージを関数の通過が初めてかどうかを格納する変数
+	bool m_damageFirst;
+	//ダメージをがどちら側から受けたかを格納する関数(false = 左,true = 右)
+	bool m_damageDirection;
 	//ダメージを受けた後の無敵時間を格納する変数
-	float m_damageTime;
+	int m_damageTime;
 	CVector3D m_oldPos;
 
 	unsigned int m_anim;
@@ -139,6 +145,7 @@ protected:
 	//ジャンプ中かどうかを格納する変数(false = No,true = Yes)
 	bool m_jumpFlag;
 	bool m_attack;
+	bool m_death;
 	void ResetKey();
 	virtual void Contlol();
 	void Move();
@@ -154,5 +161,14 @@ public:
 	virtual void HitCallBack(CCollisionA * p);
 	bool CheckHit(CCollisionA *t);
 	void Damage();
+	CVector3D GetPos()
+	{
+		return m_pos;
+	}
+	bool GetDeath()
+	{
+		return m_death;
+	}
+
 };
 #endif

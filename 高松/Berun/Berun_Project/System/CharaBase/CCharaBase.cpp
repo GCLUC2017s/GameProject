@@ -16,21 +16,46 @@ T_AnimData _playerWAnimData[] = {
 	{ 6,2 },
 };
 T_AnimData _carrotAnimData[] = {
-	{ 1,5 },
-	{ 6,5 },
-	{ 5,3 },
+	{ 9,5 },
+	{ 2,5 },
+	{ 2,5 },
 	{ 5,10 },
 	
 };
+T_AnimData _chickAnimData[] = {
+	{ 3,5 },
+	{ 5,15 },
+	{ 2,15 },
+	{ 0,0 },
+	{ 2,5 },
+	{ 2,5 },
+};
+T_AnimData _fishAnimData[] = {
+	{ 2,8 },
+	{ 2,8 },
+	{ 2,8 },
+	{ 0,0 },
+	{ 4,5 },
+	{ 4,5 },
+
+};
+T_AnimData _pigAnimData[] = {
+	{ 2,5 },
+	{ 2,5 },
+	{ 2,5 },
+	{ 0,0 },
+	{ 2,5 },
+	{ 5,10 },
+
+};
  static const T_CharacterData g_characterData[] =
 {
-{ "LittlePlayerM",0,5,5,5,3,3,0,0,0,1,1,0,0,{ 120,160 } ,_playerMAnimData,{ 550,900 },{ 60,160 },CRect(-40,-160,40,0),eItemMax },
-	{ "LittlePlayerW",1,5,0,0,0,0,0,0,0,1,1,0,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 150,180 },CRect(-40,-180,40,0),eItemMax },
-	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,1,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
-	{ "Chick",3,5,0,0,0,0,0,0,0,1,0,0,1,{ 160,160 } ,_carrotAnimData,{ 225,225 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
-	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,1,{ 160,160 } ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
-	{ "Carrot",2,5,0,0,0,0,0,0,0,1,0,0,1,{ 160,160 } ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
-	//{ "Pig",4,5,0,0,0,0,0,0,0,1,0,0,{ 160,160 } ,_chicntAnimData,{ 225,225 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "LittlePlayerM",0,5,5,5,3,3,0,0,0,1,1,0,0,{ 120,160 } ,_playerMAnimData,{ 550,900 },{ 70,160 },CRect(-50,-160,30,0),eItemMax },
+	{ "LittlePlayerW",1,5,5,5,3,3,0,0,0,1,1,0,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 135,160 },CRect(-35,-160,45,0),eItemMax },
+	{ "Carrot",2,5,5,5,0,0,0,0,0,1,0,0,1,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Chick",3,5,0,0,0,0,0,0,0,1,0,0,1,{ 160,160 } ,_chickAnimData,{ 220,220 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,1,{ 160,160 } ,_fishAnimData,{ 200,200 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Pig",4,5,0,0,0,0,0,0,0,1,0,0,1,{ 160,160 } ,_pigAnimData,{ 220,220 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	//{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Rice",5,5,0,0,0,0,0,0,0,1,0,0,0 },
 };
@@ -63,6 +88,8 @@ CCharaBase::CCharaBase(int type, int id, unsigned int updatePrio, unsigned int d
 	m_dashSpeed = 1;
 	m_anim = 0;
 	m_damage = false;
+	m_damageFirst = false;
+	m_damageDirection = false;
 	m_damageTime = 0;
 	m_charaDirection = false;
 	m_right = false;
@@ -70,6 +97,7 @@ CCharaBase::CCharaBase(int type, int id, unsigned int updatePrio, unsigned int d
 	m_up = false;
 	m_down = false;
 	m_dash = false;
+	m_death = false;
 	m_jumpFlag = false;
 	m_attack = false;
 }
@@ -140,16 +168,17 @@ void CCharaBase::Move()
 			m_charaDirection = false;
 
 		}
-		if (m_pos.z > 600 || m_pos.z < 100)
+		if (m_pos.z > WINDOW_UP_LIMIT || m_pos.z < WINDOW_DOWN_LIMIT)
 		{
 			m_pos.z = m_oldPos.z;
+
 		}
 	if (m_jump) {
 		m_gravitySpeed += 20;
- 		m_jumpFlag = true;
 		m_state = eState_Jump;
 	}
 	if (m_attack)	m_state = eState_Attack;
+	if (m_damage)	m_state = eState_Damage;
 	if (m_up || m_down || m_left || m_right)
 	{
 		if (!m_dash)	ChangeAnimation(eAnim_Walk, true);
@@ -165,6 +194,7 @@ void CCharaBase::Move()
 void CCharaBase::Jump()
 {
 	ChangeAnimation(eAnim_Jump, true);
+//	if (m_damage)	m_state = eState_Damage;
 	if (m_left)
 	{
 		m_pos.x += -CHARA_MOVE * m_dashSpeed;
@@ -177,7 +207,6 @@ void CCharaBase::Jump()
 	}
 	if (m_pos.y <= 0 && m_gravitySpeed < 20)
 	{
-		m_jumpFlag = false;
 		m_state = eState_Move;
 	}
 }
@@ -194,7 +223,6 @@ void CCharaBase::Update()
 	switch (m_state)
 	{
 	case eState_Move:
-		Damage();
 		Move();
 		break;
 	case eState_Jump:
@@ -263,14 +291,32 @@ bool CCharaBase::CheckHit(CCollisionA *t)
 void CCharaBase::HitCallBack(CCollisionA * p)
 {
 	CCharaBase* tt = dynamic_cast<CCharaBase*>(p);
- if(tt->m_state==eState_Attack)	SetDestroyFlag(true);
+	if (tt->m_state == eState_Attack)	m_state = eState_Damage;
 }
 
 void CCharaBase::Damage()
 {
-	Move();
-	m_damageTime += CHANGE_TIME(DAMAGE_TIME);
-	if(m_damageTime < DAMAGE_TIME)		m_chara->SetColor(RED_COLOR);
-	else m_chara->SetColor(NORMAL_COLOR);
-	if (m_damageTime >= DAMAGE_TIME)	m_state == eState_Move;
+	if (!m_damageFirst)
+	{
+		m_pos.y++;
+		m_gravitySpeed += 15;
+		m_damageFirst = true;
+	}
+	if (m_pos.y > 0)
+	{
+		if(m_damageDirection)	m_pos.x -= 5;
+		else m_pos.x += 5;
+		m_damageTime += CHANGE_TIME(MILLI_SECOUND(DAMAGE_TIME));
+		if (m_damageTime % (int)FLASH_INTERBAL < 100)		m_chara->SetColor(RED_COLOR);
+		else m_chara->SetColor(NORMAL_COLOR);
+	}
+	else
+	{
+		m_damageTime = 0;
+		m_chara->SetColor(NORMAL_COLOR);
+		m_damage = false;
+		m_damageFirst = false;
+		m_state = eState_Move;
+	}
+	rect = CRect(m_pos.x + mp_eData->rect.m_left, m_pos.y + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right, m_pos.y + mp_eData->rect.m_bottom);
 }

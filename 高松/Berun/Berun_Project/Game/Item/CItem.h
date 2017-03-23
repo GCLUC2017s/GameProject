@@ -19,10 +19,15 @@ enum E_Item
 	eItemMax,
 };
 
+struct T_Item
+{
+	int type;
+	int cnt;
+};
+
 class CItem : public CBase
 {
 private:
-	static CItem* mp_instance;
 	int  m_itemArray[eItemMax];
 public:
 	CItem();
@@ -42,7 +47,6 @@ public:
 	{
 		return m_itemArray[type];
 	}
-	static CItem* GetInstance();
-	static void ClearInstance();
+	
 };
 #endif
