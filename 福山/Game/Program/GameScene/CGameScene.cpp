@@ -36,7 +36,7 @@ void CGameScene::Init(){
 	CTaskManager::GetInstance()->Add(new CPlayer);
 	CTaskManager::GetInstance()->Add(new CLowBoss);
 	
-	CTaskManager::GetInstance()->Add(new CBoss);
+	//CTaskManager::GetInstance()->Add(new CBoss);
 	CTaskManager::GetInstance()->Add(new CClear);
 	CTaskManager::GetInstance()->Add(new CUserinterface);
 	

@@ -42,16 +42,23 @@ void CLowBoss::SetPos(){
 };
 
 void CLowBoss::Init(){
+	//SetPos();
+	///*テクスチャを張る*/
+	//mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
+	//mRect.SetUv(CLoadBoss::GetInstance()->mStay_tex[0], 0, 0, -SIZE_TEX_BOSS_STAY_X, SIZE_TEX_BOSS_STAY_Y);
+	//mForward = CVector2(1.0f, 0.0f);
+
+}
+
+//中ボス
+CLowBoss::CLowBoss() : mVelocity(0), mFrameCount(0), actionflag(false), motion(0), direction(E_LEFT){
+
 	SetPos();
 	/*テクスチャを張る*/
 	mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
 	mRect.SetUv(CLoadBoss::GetInstance()->mStay_tex[0], 0, 0, -SIZE_TEX_BOSS_STAY_X, SIZE_TEX_BOSS_STAY_Y);
 	mForward = CVector2(1.0f, 0.0f);
 
-}
-
-//中ボス
-CLowBoss::CLowBoss() : mVelocity(0), mFrameCount(0), actionflag(false), motion(0), direction(E_LEFT){
 
 	mPriorityR = E_LOWBOSS;			//Renderのナンバー 
 	mPriorityU = E_LOWBOSS;			//Updateのナンバー
