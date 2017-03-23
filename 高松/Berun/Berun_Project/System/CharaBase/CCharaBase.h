@@ -75,6 +75,7 @@ protected:
 		eState_Move,
 		eState_Attack,
 		eState_Damage,
+		eState_Down
 	};
 	enum EANIM {
 		eAnim_Idle,
@@ -152,6 +153,7 @@ protected:
 	void Move();
 	void Jump();
 	void Attack();
+	void Down();
 public:
 	CCharaBase(int type, int id, unsigned int updatePrio, unsigned int drawPrio);
 	~CCharaBase();
@@ -168,7 +170,7 @@ public:
 	}
 	int GetAttack()
 	{
-		return m_attack;
+		return m_power;
 	}
 	bool GetDeath()
 	{

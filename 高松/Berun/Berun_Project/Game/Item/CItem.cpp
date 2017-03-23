@@ -1,13 +1,15 @@
 #include "CItem.h"
 
 
-/*
-static const T_Item g_itmeData[] =
+static const T_ItemData g_itmeData[] =
 {
-	{ eCarrotItem, 0},
-	{ eChickItem,  0},
+	//ナンバー、タイプ、所持数
+	{ NOT, NOT, 0},
+	{ eCarrotItem, VEGETABLE, 0},
+	{ eChickItem, MEET, 0},
+	{ eFishItem, FISH, 0 },
+	{ ePigItem, MEET, 0 },
 };
-*/
 
 CItem::CItem()
 {
