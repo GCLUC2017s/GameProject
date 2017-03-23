@@ -293,24 +293,24 @@ void CClear::Update(){
 
 
 			if (CGame::FlagTime(1, 1,&mSaveTime)){}
-			if (FlagCrectA(mRectLogo[E_RANK])){
+			//if (FlagCrectA(mRectLogo[E_RANK])){
 
-				CGame::FadeOut(F_SPEEDBASE, &mRectFrame);
-				CGame::FadeOut(F_SPEEDBASE, &mRectStoryResult);
-				CGame::FadeOut(F_SPEEDBASE, &mRectMainLogo);
-				CGame::FadeOut(F_SPEEDBASE, &mRectEvaluation);
-				for (int i = 0; i < LOGO_MAX; i++)
-				{
-					CGame::FadeOut(F_SPEEDBASE, &mRectLogo[i]);
-				}
-				//エンターキーを押したときにシーンをセレクト画面に替える処理を行う。
-				if (CKey::push(VK_RETURN))
-				{
+			//	CGame::FadeOut(F_SPEEDBASE, &mRectFrame);
+			//	CGame::FadeOut(F_SPEEDBASE, &mRectStoryResult);
+			//	CGame::FadeOut(F_SPEEDBASE, &mRectMainLogo);
+			//	CGame::FadeOut(F_SPEEDBASE, &mRectEvaluation);
+			//	for (int i = 0; i < LOGO_MAX; i++)
+			//	{
+			//		CGame::FadeOut(F_SPEEDBASE, &mRectLogo[i]);
+			//	}
+			//	//エンターキーを押したときにシーンをセレクト画面に替える処理を行う。
+			//	if (CKey::push(VK_RETURN))
+			//	{
 
-					CTaskManager::GetInstance()->AllKill();
-					CSceneManager::GetInstance()->ChangeScene(eSceneNo::E_TITLE);
-				}
-			}
+			//		CTaskManager::GetInstance()->AllKill();
+			//		CSceneManager::GetInstance()->ChangeScene(eSceneNo::E_TITLE);
+			//	}
+			//}
 
 		}
 	}

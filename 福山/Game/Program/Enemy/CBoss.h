@@ -32,7 +32,8 @@ private:
 		E_ATTACK_L, E_ATTACK_R,
 		E_HATTACK_L, E_HATTACK_R,
 		E_DIE_L, E_DIE_R,
-		E_LEFT,E_RIGHT
+		E_LEFT,E_RIGHT,
+		E_WALKATTACKL,E_WALKATTACKR
 	};
 
 	int AnimePattern;

@@ -53,15 +53,19 @@ private:
 
 	bool actionflag; //アクションをしている時は立てる
 
-	float getAxis;
-	float downAxis;
-	float upAxis;
+	float getAxis;	//プレイヤーの接地点取得用
+	float downAxis;//下軸移動用
+	float upAxis;	//上軸移動用
 
-	float escapetime;
-	float interval;
 	
-	int pattern;
-	int motion;	
+	float escapetime;//逃走時間
+	float attacktime;//攻撃時間
+	float delay;	//ディレイ
+
+	int pattern;	//パターンの決定ランダムで使用
+	
+	int motion;		//モーションの種類
+
 
 	void Walk();
 	void AnimeScene();

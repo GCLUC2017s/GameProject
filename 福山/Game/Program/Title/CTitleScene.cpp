@@ -5,6 +5,7 @@
 #include"../Map/CMap.h"
 #include "../Player/CPlayer.h"
 
+
 //CScene eSceneNo TITLE
 
 //CTitleScene::CTitleScene(){}
@@ -15,18 +16,26 @@ void CTitleScene::Init() {
 	FirstX = first_pos.x;
 	mMap.Init();
 	mTitle.Init();
+	mExplain.Init();
 
 }
 
 void CTitleScene::Update() {
-
 	//Updateする
 
 	mMap.Update();
 	mMap.Render();
 
-	
-	mTitle.Render(CVector2(FirstX,0));
+	switch (status)
+	{
+  case	E_TITLE_SCENE:
+	  mTitle.Update();
+	  mTitle.Render(CVector2(FirstX, 0));
+		break;
+  case E_EXPLAIN_SCENE:
+		mExplain.Render(CVector2(FirstX, 0));
+		break;
+	}
 
 	FirstX += 0.02f;
 
@@ -46,7 +55,12 @@ void CTitleScene::Update() {
 
 
 	//エンターキーを押したときにシーンをセレクト画面に替える処理を行う。
-	if (CKey::push(VK_RETURN)) 
+	if (CKey::push(VK_RETURN))
+	{
+		status = E_EXPLAIN_SCENE;
+	}
+
+	if (CKey::push(VK_RETURN) && mExplain.patternflag==true)
 	{
 		CSceneManager::GetInstance()->ChangeScene(eSceneNo::E_GAMEMAIN);
 	}

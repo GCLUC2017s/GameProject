@@ -14,6 +14,7 @@
 #include"CSceneManager.h"
 #include "../GameScene/CGameScene.h" 
 #include "../Key/CKey.h"
+#include "../Sound/CSound.h"
 
 CSceneManager* CSceneManager::mSceneManager = 0;
 
@@ -42,6 +43,7 @@ void CSceneManager::ChangeScene(eSceneNo SceneNo) {
 
 		//タイトルの呼び出しを行う
 	case eSceneNo::E_TITLE:
+
 		mScene = new CTitleScene;
 		mScene->Init();
 

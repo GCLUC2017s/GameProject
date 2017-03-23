@@ -52,6 +52,7 @@ private:
 	float getAxis;
 
 	float escapetime;
+	float attacktime;
 
 	void Fly();
 	void Motion();
