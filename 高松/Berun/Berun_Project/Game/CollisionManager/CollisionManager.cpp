@@ -19,8 +19,6 @@ void CCollisionManager::Regist(CCollisionA *p)
 	{
 		//’Ç‰Á‚³‚ê‚½ƒ^ƒXƒN‚ğæ“ª‚É
 		mp_head = p;
-		mp_head->mp_prev = nullptr;
-		mp_head->mp_next = p;
 		mp_tail = p;
 	}
 	//æ“ª‚ª‘¶İ‚µ‚Ä‚¢‚ê‚Î

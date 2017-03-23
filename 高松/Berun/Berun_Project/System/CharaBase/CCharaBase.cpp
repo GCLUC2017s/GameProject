@@ -1,6 +1,6 @@
 #include "CCharaBase.h"
 #include "../Game/CollisionManager/CollisionManager.h"
-#define HitCheck
+//#define HitCheck
 T_AnimData _playerMAnimData[] = {
 	{ 1,5 },
 	{ 6,5 },
@@ -68,7 +68,7 @@ T_AnimData _bossAnimData[] = {
 	{ "Carrot",2,5,5,5,0,0,1,0,0,1,3,0,1,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	{ "Chick",3,5,1,1,0,0,1,0,0,1,2,0,1,{ 160,160 } ,_chickAnimData,{ 220,220 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	{ "Fish",4,5,1,1,0,0,1,0,0,1,1,0,1,{ 160,160 } ,_fishAnimData,{ 200,200 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
-	{ "Pig",4,5,1,1,0,0,1,0,0,1,4,0,1,{ 160,160 } ,_pigAnimData,{ 220,220 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Pig",4,5,1,1,0,0,1,0,0,1,4,0,1,{ 160,160 } ,_pigAnimData,{ 220,220 },{ 60,160 },CRect(-60,-130,60,0),eCarrotItem },
 	{ "Boss",4,5,1,1,0,0,1,0,0,1,4,0,1,{ 160,160 } ,_bossAnimData,{ 400,400 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	//{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Rice",5,5,0,0,0,0,0,0,0,1,0,0,0 },
@@ -202,13 +202,11 @@ void CCharaBase::Move()
 	{
 		ChangeAnimation(eAnim_Idle, true);
 	}
-	//当たり判定用の矩形を計算
-	rect = CRect(m_pos.x + mp_eData->rect.m_left, m_pos.y + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right, m_pos.y + mp_eData->rect.m_bottom);
+
 }
 void CCharaBase::Jump()
 {
 	ChangeAnimation(eAnim_Jump, true);
-//	if (m_damage)	m_state = eState_Damage;
 	if (m_left)
 	{
 		m_pos.x += -mp_eData->speed * m_dashSpeed;
@@ -227,12 +225,10 @@ void CCharaBase::Jump()
 void CCharaBase::Attack()
 {
 	ChangeAnimation(eAnim_Attack, true);
-	if (m_charaDirection)	rect = CRect(m_pos.x + mp_eData->rect.m_left - 60, m_pos.y + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right, m_pos.y + mp_eData->rect.m_bottom);
-	else rect = CRect(m_pos.x + mp_eData->rect.m_left, m_pos.y + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right + 60, m_pos.y + mp_eData->rect.m_bottom);
 }
 void CCharaBase::Update()
 {
-	
+
 	Contlol();
 	switch (m_state)
 	{
@@ -249,8 +245,15 @@ void CCharaBase::Update()
 		Damage();
 		break;
 	case eState_Down:
-		Down();
 		break;
+	}
+	//当たり判定用の矩形を計算
+	if(m_state != eState_Attack)rect = CRect(m_pos.x + mp_eData->rect.m_left, m_pos.y - mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right, m_pos.y - mp_eData->rect.m_bottom);
+	else
+	{
+		if (m_charaDirection)	rect = CRect(m_pos.x + mp_eData->rect.m_left - 60, m_pos.y - mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right, m_pos.y - mp_eData->rect.m_bottom);
+		else rect = CRect(m_pos.x + mp_eData->rect.m_left, m_pos.y - mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right + 60, m_pos.y - mp_eData->rect.m_bottom);
+
 	}
 	m_gravitySpeed += GRAVITY;
 	m_pos.y += m_gravitySpeed;
@@ -276,16 +279,7 @@ void CCharaBase::Draw()
 #ifdef HitCheck 
 		m_red->SetPos(GetScreenPos(CVector3D(rect.m_left, rect.m_bottom, m_pos.z)));
 		m_red->SetCenter(0,0);
-		m_red->SetSize(rect.m_right - rect.m_left, -g_characterData[g_tutorialNo].size.y);
-		if (m_state == eState_Attack)
-		{
-			if (m_charaDirection)
-			{
-				m_red->SetPos(GetScreenPos(CVector3D(rect.m_left - 60, rect.m_bottom, m_pos.z)));
-				m_red->SetSize(rect.m_right - rect.m_left + 60, -g_characterData[g_tutorialNo].size.y);
-			}
-			else m_red->SetSize(rect.m_right - rect.m_left + 60, -g_characterData[g_tutorialNo].size.y);
-		}
+		m_red->SetSize(rect.m_right - rect.m_left, -rect.m_top);
 		m_red->Draw();
 #endif
 	//	m_enemyHp->Draw();
@@ -321,12 +315,6 @@ void CCharaBase::Damage()
 		else m_state = eState_Down;
 
 	}
-	rect = CRect(m_pos.x + mp_eData->rect.m_left, m_pos.y + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right, m_pos.y + mp_eData->rect.m_bottom);
-}
-
-void CCharaBase::Down()
-{
-	ChangeAnimation(eAnim_Down, true);
 }
 
 bool CCharaBase::CheckHit(CCollisionA *t)
@@ -335,7 +323,7 @@ bool CCharaBase::CheckHit(CCollisionA *t)
 	assert(tt);
 	CRect p_rect = GetRect();
 	CRect t_rect = tt->GetRect();
-	if (!m_damage && abs(m_pos.z - tt->m_pos.z) < 50 && p_rect.m_right > t_rect.m_left && p_rect.m_left < t_rect.m_right && p_rect.m_top < t_rect.m_bottom && p_rect.m_bottom > t_rect.m_top) {
+	if (!m_damage && abs(m_pos.z - tt->m_pos.z) < 50 && p_rect.m_right > t_rect.m_left && p_rect.m_left < t_rect.m_right && p_rect.m_top > t_rect.m_bottom && p_rect.m_bottom < t_rect.m_top) {
 		HitCallBack(t);
 		t->HitCallBack(this);
 	}

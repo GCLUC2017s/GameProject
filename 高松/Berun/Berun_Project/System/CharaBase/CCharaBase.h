@@ -153,7 +153,6 @@ protected:
 	void Move();
 	void Jump();
 	void Attack();
-	void Down();
 public:
 	CCharaBase(int type, int id, unsigned int updatePrio, unsigned int drawPrio);
 	~CCharaBase();
