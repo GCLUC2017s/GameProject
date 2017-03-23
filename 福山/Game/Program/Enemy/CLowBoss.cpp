@@ -226,15 +226,16 @@ void CLowBoss::Motion(){
 	case EM_ATTACK:		//攻撃中
 		//モーション設定
 		if (RIGHT_PTT&&ENEMY_LIVE) {
+			mEnabledAttack = true;
 			mStatus = E_ATTACK_R;
 		}
 		else if (LEFT_PTT&&ENEMY_LIVE){
+			mEnabledAttack = true;
 			mStatus = E_ATTACK_L;
 		}
 		//範囲
 		Attack(LOW_AT);
 		///パンチの最後にあたり判定
-		mEnabledAttack = true;
 		/*範囲内に近づく*/
 		if (NO_ATTACK_BOSS){
 			actionflag = false;
