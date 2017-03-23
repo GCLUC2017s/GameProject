@@ -24,6 +24,7 @@
 #define ENEMY_CONTTWO		450
 #define ENEMY_CONTTHREE		550
 #define ENEMY_CONTFOUR		790
+#define ENEMY_HP			1
 class CPlayer;
 class CEnemyManager;
 
@@ -41,7 +42,7 @@ private:
 	int m_enemyType;
 	int m_enemyTime;
 	int m_enemyPatarn;
-	bool m_cont;
+	int m_cont;
 	int m_rabittoCont;
 	int m_rabittoCont2;
 	float m_downCont;

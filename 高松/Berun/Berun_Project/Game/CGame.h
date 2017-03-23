@@ -7,7 +7,7 @@
 #ifndef GAME_GUARD
 #define GAME_GUARD
 #define IMG_ARRAY 4
-#define GOAL_POS 5000.0f
+#define GOAL_POS 5200.0f
 
 
 #include "../Scene/CScene.h"
