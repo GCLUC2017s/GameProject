@@ -17,6 +17,7 @@
 #define DAMAGE_TIME 2
 #define WINDOW_UP_LIMIT	600
 #define WINDOW_DOWN_LIMIT 100
+#define WINDOW_LEFT_LIMIT 50
 #define FLASH_INTERBAL MILLI_SECOUND(0.2f)
 
 
@@ -54,10 +55,10 @@ enum {
 	eChick,//鳥
 	eFish,//魚
 	ePig,//豚
+	eVegetavelboss,//野菜ボス（ウサギ）
 	eBerry,//イチゴサングラス空中
 	ePapurika,//ピーマン
 	eStrawberry,//イチゴ地上
-	eVegetavelboss,//野菜ボス（ウサギ）
 	eMeatboss,//肉ボス（鶏）
 	eSquid,//イカ
 	eFishboss,//魚介ボス（鮫）
@@ -132,6 +133,7 @@ protected:
 	bool m_damageDirection;
 	//ダメージを受けた後の無敵時間を格納する変数
 	int m_damageTime;
+	int m_type;
 	CVector3D m_oldPos;
 
 	unsigned int m_anim;
@@ -163,6 +165,7 @@ public:
 	virtual void HitCallBack(CCollisionA * p);
 	bool CheckHit(CCollisionA *t);
 	void Damage();
+	virtual void Down();
 	CVector3D GetPos()
 	{
 		return m_pos;
@@ -170,6 +173,14 @@ public:
 	int GetAttack()
 	{
 		return m_power;
+	}
+	int CheckType()
+	{
+		return m_type;
+	}
+	int CheckState()
+	{
+		return m_state;
 	}
 	bool GetDeath()
 	{

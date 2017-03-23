@@ -98,6 +98,7 @@ void CTaskManager::UpdateAll()
 	CTask *p = mp_head;
 	while (p)
 	{
+		//SortAscUpdate();
 		p->Update();
 		p = p->mp_next;
 	}
@@ -108,6 +109,7 @@ void CTaskManager::DrawAll()
 	CTask *p = mp_head;
 	while (p)
 	{
+		//SortAscDraw();
 		p->Draw();
 		p = p->mp_next;
 	}

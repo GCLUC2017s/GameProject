@@ -9,6 +9,7 @@
 //更新順序
 enum E_UpdatePrio
 {
+	eUDP_Tutorial,
 	eUDP_Player,
 	eUDP_Camera,
 	eUDP_Enemy,
@@ -21,6 +22,7 @@ enum E_DrawPrio
 	eDWP_Map,
 	eDWP_Player,
 	eDWP_Enemy,
+	eDWP_Tutorial,
 	eDWP_Null,
 };
 
@@ -64,12 +66,16 @@ public:
 	//更新順位変更
 	void ChangeUpdatePrio(unsigned int updatePrio)
 	{
+		unsigned int prio = m_updatePrio;
 		m_updatePrio = updatePrio;
+		updatePrio = prio;
 	}
 	//描画順位変更
 	void ChangeDrawPriority(unsigned int drawPrio)
 	{
+		unsigned int prio = m_drawPrio;
 		m_drawPrio = drawPrio;
+		drawPrio = prio;
 	}
 	void SetKill() 
 	{

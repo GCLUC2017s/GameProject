@@ -9,6 +9,7 @@
 #include"../Global.h"
 #include "../../System/CharaBase/CCharaBase.h"
 #define CHICK_TIME (0.5f)
+#define DOWN_TIME 5.0f
 class CPlayer;
 class CEnemyManager;
 
@@ -26,6 +27,7 @@ private:
 	int m_enemyTime;
 	int m_enemyPatarn;
 	int m_cont;
+	float m_downCont;
 	float m_chickTime;
 public:
 	
@@ -36,6 +38,7 @@ public:
 //	void Update();
 	
 	void Draw();
+	void Down();
 	
 
 	void HitCallBack(CCollisionA * p);

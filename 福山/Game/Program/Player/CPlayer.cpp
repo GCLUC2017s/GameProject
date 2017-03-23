@@ -4,6 +4,7 @@
 #include "../CGame/CGame.h"
 #include "../Load/CLoadPlayer.h"
 #include <math.h>
+#include "../Sound/CSound.h"
 #define JUMP_FIRST_SPEED				0.2f								//ジャンプのジャンプ力
 #define FIRST_R_NO_PL					0.0f								//初めのレンダーのポイント
 #define FIRST_U_NO_PL					0.0f								//初めのアップデートのポイント
@@ -40,15 +41,15 @@
 #define ANIME_TIME_WALK						8 + mHungryStatus				//アニメループ時間　歩く
 #define ANIME_TIME_EX01						4								//アニメループ時間 必殺技振り
 
-#define ATTACK_A		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,0.1, CVector2(mPos.x+mForward.x*0.1,mPos.y)			//攻撃範囲A
-#define ATTACK_B		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,0.1, CVector2(mPos.x+mForward.x*0.1,mPos.y)			//攻撃範囲B
-#define ATTACK_C		mForward.x, SIZE_PLAYER_X+0.5f, SIZE_PLAYER_Y,0.1, CVector2(mPos.x+mForward.x*0.1,mPos.y)	//攻撃範囲C
-#define ATTACK_JUMP		mForward.x, SIZE_PLAYER_X*2 ,SIZE_PLAYER_Y,0.1,\
+#define ATTACK_A		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,0.2, CVector2(mPos.x+mForward.x*0.1,mPos.y)			//攻撃範囲A
+#define ATTACK_B		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,0.2, CVector2(mPos.x+mForward.x*0.1,mPos.y)			//攻撃範囲B
+#define ATTACK_C		mForward.x, SIZE_PLAYER_X+0.5f, SIZE_PLAYER_Y,0.2, CVector2(mPos.x+mForward.x*0.1,mPos.y)	//攻撃範囲C
+#define ATTACK_JUMP		mForward.x, SIZE_PLAYER_X*2 ,SIZE_PLAYER_Y,0.2,\
 						CVector2(mPos.x  -mForward.x*1.7f, mPos.y)	//攻撃範囲ジャンプATTACK
 /*ジャンプ攻撃範囲*/
 #define FRAME_JUMPBOTTOM 3													//ジャンプ攻撃下の時のアニメーション
 #define EAT_ATTACK		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,1,CVector2(mPos.x+mForward.x*0.1,mPos.y)	//食べる攻撃
-#define EX01_ATTACK		mForward.x, SIZE_PLAYER_X+ fabsf(mEx01Speed), SIZE_PLAYER_Y + fabsf(mEx01Speed),2, CVector2(mPos.x+mEx01Speed,mPos.y) //必殺技範囲
+#define EX01_ATTACK		mForward.x, SIZE_PLAYER_X+ fabsf(mEx01Speed), SIZE_PLAYER_Y + fabsf(mEx01Speed),10, CVector2(mPos.x+mEx01Speed,mPos.y) //必殺技範囲
 #define EX01_SPEED 0.1f														//必殺技が進むスピード
 #define INTERVAL		20.0f												//攻撃後のINTERVALキー入力待ち時間  
 #define HUNGRY_SPEED	0.002f												//おなかが減るスピード
@@ -90,15 +91,15 @@ CPlayer::~CPlayer() {
 
 
 }
-
+CSound mAttackSE;
 //プレイヤー描画
-CPlayer::CPlayer() : mVelocity(0), mSpeedJump(JUMP_FIRST_SPEED),mEnabledInterval(false){
+CPlayer::CPlayer() : mVelocity(0), mSpeedJump(JUMP_FIRST_SPEED), mEnabledInterval(false), mEnabledRun(false){
 
 	
 	mCharaFlag = true;
 	mPriorityR = E_PLAYER;			//Renderのナンバー 
 	mPriorityU = E_PLAYER;			//Updateのナンバー
-	mHitPoint = PL_HP_X;		//ＨＰ
+	mHitPoint = PL_HP_X*10;		//ＨＰ
 	mStamina = PL_ST_X;			//ST
 	mMyNumber = E_PLAYER;
 	mStatus = E_STAY_R,
@@ -107,14 +108,13 @@ CPlayer::CPlayer() : mVelocity(0), mSpeedJump(JUMP_FIRST_SPEED),mEnabledInterval
 	mShadow.SetVertex(-SIZE_SHADOW_X, SIZE_SHADOW_Y, SIZE_SHADOW_X, -SIZE_SHADOW_Y);
 	//四角形の色を設定
 	mRect.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-
+	
 }
 /*左右判断*/
 void CPlayer::DecisionRL(int R, int L){
 	
 		if (mSaveForword.x == RIGHT || mSaveForword.x == 0){ mStatus = R; }
 		if (mSaveForword.x == LEFT){ mStatus = L; }
-	
 }
 /*ジャンプメソッド*/
 void CPlayer::Jump(){ //ジャンプ処理メソッド
@@ -152,6 +152,7 @@ void CPlayer::RunWalk(CVector2 v){
 	if (CKey::push(VK_CONTROL)){ //走る時
 		mVelocity = RUN_SPEED;
 		if(!mEnabledJump)DecisionRL(E_RUN_R, E_RUN_L);
+		mEnabledRun = true;
 	}
 	else{				//歩くとき
 		mVelocity = WALK_SPEED;
@@ -208,7 +209,7 @@ void CPlayer::Brake(){
 	if (!CKey::push(VK_DOWN) && !CKey::push(VK_UP) && !CKey::push(VK_LEFT) && !CKey::push(VK_RIGHT) && mVelocity > 0 
 		&& !mEnabledJump && mVelocity != 0 && !mEnabledAttack){
 		mVelocity -= SLOW_DOWN;
-		DecisionRL(E_BRAKE_R, E_BRAKE_L);
+		if (mEnabledRun)DecisionRL(E_BRAKE_R, E_BRAKE_L);
 	}
 	else if (mVelocity <= 0){
 		mVelocity = 0;
@@ -447,7 +448,7 @@ void CPlayer::AnimeScene(){
 		mRect.SetUv(CLoadPlayer::GetInstance()->mWalkTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_RUN_R:
-		AnimeFrame(true, ANIME_TIME_BASE);
+		AnimeFrame(true, ANIME_TIME_BASE, FRAME_LIMIT8);
 		mRect.SetUv(CLoadPlayer::GetInstance()->mRunTex[mAnimeFrame], 0, 0, SIZE_TEX_PLAYER_BASE_X, SIZE_TEX_PLAYER_BASE_Y);
 		break;
 	case E_NORMALATTACK_A_R:
@@ -519,7 +520,8 @@ void CPlayer::ChangeStatus(){
 			mHungryStatus = E_LOW;
 		}
 		else{									 //中間 変化なし
-			mHungryPower = 0; mHungrySSpp = 0;
+			mHungryPower = 0;
+			mHungrySSpp  = 0;
 			mHungryStatus = E_NORMAL;
 		}
 		/*ステータス変化終了*/
@@ -553,15 +555,17 @@ void CPlayer::Update() {
 	}
 	if (!mEnabledInterval && mStatus != E_STAY_L && mStatus != E_STAY_R && mVelocity <= 0 && !mEnabledJump && !mEnabledAttack){
 		DecisionRL(E_STAY_R, E_STAY_L);
+		mEnabledRun = false;
 	}
 
 	LimitDisp(SIZE_PLAYER_X, SIZE_PLAYER_Y);
+
 
 	mPriorityR = -mAxis;
 	camera_x = mPos.x;
 	camera_y = mPos.y;
 	mRect.position = mPos;
-	mShadow.position = CVector2(mPos.x, mAxis);
+	mShadow.position = CVector2(mPos.x, mAxis+SIZE_SHADOW_Y);
 
 	const float fade_speed = 0.01f;
 	if (mHitPoint <= 0) {

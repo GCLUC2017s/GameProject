@@ -19,10 +19,12 @@ CGame::CGame() : mp_player(nullptr),m_step(0),m_cnt(0)
 	mp_wordGameOver = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("GameOver"));
 	new CMap(CMap::eStage1);
 	mp_tutorial=new CTutorial(g_tutorialDataPath[g_tutorialNo]);
+	m_stopScrol = false;
 }
 
 CGame::~CGame()
 {
+	CCollisionManager::GetInstance()->UnRegistAll();
 	CTaskManager::GetInstance()->KillAll();
 }
 void CGame::Update() 
@@ -35,7 +37,7 @@ switch (m_step)
 		{	
 			mp_player = new CPlayer(g_tutorialNo);
 			new CEnemyManager();
-			mp_enemy = new CEnemy(ePig);
+			mp_enemy = new CEnemy(eVegetavelboss);
 			mp_tutorial->SetKill();
 			mp_img[0]->SetPos(280, 310);
 			mp_img[0]->SetSize(700, 150);
@@ -75,9 +77,12 @@ void CGame::Draw()
 		mp_img[1]->SetSize(85, 100);
 		mp_img[2]->SetSize(700, 90);
 		mp_img[3]->SetSize(700, 100);
-		if (m_screen.x < 0) m_screen.x = 0;
-		if (m_screen.x > 3840) m_screen.x = 3840;
-		mp_player->SetScroal(m_screen);
+
+		if (m_stopScrol == false) {
+			if (m_screen.x < 0) m_screen.x = 0;
+			if (m_screen.x > 3840) m_screen.x = 3840;
+			mp_player->SetScroal(m_screen);
+		}
 		m_cnt++;
 		for (int i = 1; i < IMG_ARRAY; i++)
 		{

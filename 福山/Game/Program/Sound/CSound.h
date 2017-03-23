@@ -22,7 +22,7 @@ public:
 		//wchar_t		buf[100];
 		char		buf[100];
 		//wsprintf((LPSTR)buf, (LPCSTR)w, file);
-		sprintf(buf, w, file);
+		sprintf_s(buf,sizeof(buf), w, file);
 		result = mciSendString((LPSTR)buf, NULL, 0, NULL);
 
 	}
@@ -30,7 +30,7 @@ public:
 	void load(char *filename)
 	{
 		//			wcscpy(file, filename);
-		strcpy(file, filename);
+		strcpy_s(file, filename);
 		sendstring("close %s");
 		sendstring("open %s");
 	}
