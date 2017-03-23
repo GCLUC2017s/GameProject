@@ -8,6 +8,7 @@
 #define CENEMY_GUARD
 #include"../Global.h"
 #include "../../System/CharaBase/CCharaBase.h"
+#define CHICK_TIME (0.5f)
 class CPlayer;
 class CEnemyManager;
 

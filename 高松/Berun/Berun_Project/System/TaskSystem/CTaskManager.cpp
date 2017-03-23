@@ -228,6 +228,7 @@ CTask* CTaskManager::GetTask(int id)
 		if (p->m_id == id) return p;
 		else p = p->mp_next;
 	}
+	
 	//ˆÈŠO‚È‚çnull‚ð•Ô‚·
 	return nullptr;
 }
