@@ -43,7 +43,7 @@
 #define ATTACK_A		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,0.1, CVector2(mPos.x+mForward.x*0.1,mPos.y)			//攻撃範囲A
 #define ATTACK_B		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,0.1, CVector2(mPos.x+mForward.x*0.1,mPos.y)			//攻撃範囲B
 #define ATTACK_C		mForward.x, SIZE_PLAYER_X+0.5f, SIZE_PLAYER_Y,0.1, CVector2(mPos.x+mForward.x*0.1,mPos.y)	//攻撃範囲C
-#define ATTACK_JUMP		mForward.x, SIZE_PLAYER_X*2 ,SIZE_PLAYER_Y*0.1,0.1,\
+#define ATTACK_JUMP		mForward.x, SIZE_PLAYER_X*2 ,SIZE_PLAYER_Y,0.1,\
 						CVector2(mPos.x  -mForward.x*1.7f, mPos.y)	//攻撃範囲ジャンプATTACK
 /*ジャンプ攻撃範囲*/
 #define FRAME_JUMPBOTTOM 3													//ジャンプ攻撃下の時のアニメーション

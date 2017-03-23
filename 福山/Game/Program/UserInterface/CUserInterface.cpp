@@ -26,7 +26,7 @@
 #define _NORM_ 1
 #define _LOW_ 2
 #define ST_POSX			player->mStamina - PL_ST_X //ＳＴ　pos 調整用 足す
-#define HP_POSX			player->mHitPoint -PL_HP_X+0.1f  //HP　pos 調整用 足す
+#define HP_POSX			player->mHitPoint -PL_HP_X  //HP　pos 調整用 足す
 #define ENE_HP_POSX		base->mHitPoint +ENE_HP_X  //HP　pos 調整用引く
 
 #define T_ST_RIGHT		SIZE_TEX_PLAYER_ST_X  *( player->mStamina / PL_ST_X*0.6)
@@ -192,7 +192,7 @@ void CUserinterface::Update(){
 			player = (CPlayer*)task;
 			mGaugePlayer[_HP_].position = CVector2(CGame::CameraPos().x - DISP_X + HP_POSX + SIZE_PL_FRAME_X, DISP_Y - SIZE_PL_FRAME_Y * 2);
 			mGaugePlayer[_ST_].position = CVector2(CGame::CameraPos().x - DISP_X + ST_POSX + PL_ST_X, DISP_Y - PL_ST_Y * 2);
-			mFramePlayer[_HP_].position = CVector2(CGame::CameraPos().x - DISP_X + PL_ST_X, DISP_Y - SIZE_PL_FRAME_Y * 2);
+			mFramePlayer[_HP_].position = CVector2(CGame::CameraPos().x - DISP_X + PL_HP_X, DISP_Y - SIZE_PL_FRAME_Y * 2);
 			mFramePlayer[_ST_].position = CVector2(CGame::CameraPos().x - DISP_X + PL_ST_X, DISP_Y - PL_ST_Y *2);
 			mGaugePlayer[_HP_].SetVertex(-player->mHitPoint, SIZE_PL_FRAME_Y, player->mHitPoint, -SIZE_PL_FRAME_Y); //四角作成
 			mGaugePlayer[_ST_].SetVertex(-player->mStamina, PL_ST_Y, player->mStamina, -PL_ST_Y); //四角作成
