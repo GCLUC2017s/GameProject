@@ -7,6 +7,7 @@ T_AnimData _playerMAnimData[] = {
 	{ 6,3 },
 	{ 6,10 },
 	{ 6,2 },
+	{ 1,5 },
 };
 T_AnimData _playerWAnimData[] = {
 	{ 1,5 },
@@ -14,6 +15,7 @@ T_AnimData _playerWAnimData[] = {
 	{ 6,3 },
 	{ 6,10 },
 	{ 6,2 },
+	{ 1,5 },
 };
 T_AnimData _carrotAnimData[] = {
 	{ 9,5 },
@@ -49,14 +51,24 @@ T_AnimData _pigAnimData[] = {
 	{ 5,10 },
 
 };
+T_AnimData _bossAnimData[] = {
+	{ 2,5 },
+	{ 2,5 },
+	{ 2,5 },
+	{ 2,5 },
+	{ 2,8 },
+	{ 5,10 },
+
+};
  static const T_CharacterData g_characterData[] =
 {
-	{ "LittlePlayerM",0,5,10,10,3,3,0,0,0,1,5,0,0,{ 300,240 } ,_playerMAnimData,{ 500,400 },{ 70,160 },CRect(-50,-160,30,0),eItemMax },
+	{ "LittlePlayerM",0,5,10,10,3,3,0,0,0,1,5,0,0,{ 300,240 } ,_playerMAnimData,{ 500,400 },{ 135,230 },CRect(-40,-160,40,0),eItemMax },
 	{ "LittlePlayerW",1,5,10,10,3,3,0,0,0,1,4,0,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 135,160 },CRect(-35,-160,45,0),eItemMax },
 	{ "Carrot",2,5,5,5,0,0,1,0,0,1,3,0,1,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
-	{ "Chick",3,5,0,0,0,0,1,0,0,1,2,0,1,{ 160,160 } ,_chickAnimData,{ 220,220 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
-	{ "Fish",4,5,0,0,0,0,1,0,0,1,1,0,1,{ 160,160 } ,_fishAnimData,{ 200,200 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
-	{ "Pig",4,5,0,0,0,0,1,0,0,1,4,0,1,{ 160,160 } ,_pigAnimData,{ 220,220 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Chick",3,5,1,1,0,0,1,0,0,1,2,0,1,{ 160,160 } ,_chickAnimData,{ 220,220 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Fish",4,5,1,1,0,0,1,0,0,1,1,0,1,{ 160,160 } ,_fishAnimData,{ 200,200 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Pig",4,5,1,1,0,0,1,0,0,1,4,0,1,{ 160,160 } ,_pigAnimData,{ 220,220 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
+	{ "Boss",4,5,1,1,0,0,1,0,0,1,4,0,1,{ 160,160 } ,_bossAnimData,{ 400,400 },{ 60,160 },CRect(-60,-160,60,0),eCarrotItem },
 	//{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Rice",5,5,0,0,0,0,0,0,0,1,0,0,0 },
 };
@@ -235,6 +247,8 @@ void CCharaBase::Update()
 	case eState_Damage:
 		Damage();
 		break;
+	case eState_Down:
+		break;
 	}
 	m_gravitySpeed += GRAVITY;
 	m_pos.y += m_gravitySpeed;
@@ -276,27 +290,11 @@ void CCharaBase::Draw()
 }
 
 
-bool CCharaBase::CheckHit(CCollisionA *t)
-{
-	CCharaBase* tt = dynamic_cast<CCharaBase*>(t);
-	assert(tt);
-	CRect p_rect = GetRect();
-	CRect t_rect = tt->GetRect();
-	if (abs(m_pos.z - tt->m_pos.z) < 50 && p_rect.m_right > t_rect.m_left && p_rect.m_left < t_rect.m_right && p_rect.m_top < t_rect.m_bottom && p_rect.m_bottom > t_rect.m_top) {
-		HitCallBack(t);
-		t->HitCallBack(this);
-	}
-	else return false;
-}
 
-void CCharaBase::HitCallBack(CCollisionA * p)
-{
-	CCharaBase* tt = dynamic_cast<CCharaBase*>(p);
-	if (tt->m_state == eState_Attack)	m_state = eState_Damage;
-}
 
 void CCharaBase::Damage()
 {
+	if (m_death)	ChangeAnimation(eAnim_Down, true);
 	if (!m_damageFirst)
 	{
 		m_pos.y++;
@@ -317,7 +315,28 @@ void CCharaBase::Damage()
 		m_chara->SetColor(NORMAL_COLOR);
 		m_damage = false;
 		m_damageFirst = false;
-		m_state = eState_Move;
+		if(!m_death) m_state = eState_Move;
+		else m_state = eState_Down;
+
 	}
 	rect = CRect(m_pos.x + mp_eData->rect.m_left, m_pos.y + mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right, m_pos.y + mp_eData->rect.m_bottom);
+}
+
+bool CCharaBase::CheckHit(CCollisionA *t)
+{
+	CCharaBase* tt = dynamic_cast<CCharaBase*>(t);
+	assert(tt);
+	CRect p_rect = GetRect();
+	CRect t_rect = tt->GetRect();
+	if (!m_damage && abs(m_pos.z - tt->m_pos.z) < 50 && p_rect.m_right > t_rect.m_left && p_rect.m_left < t_rect.m_right && p_rect.m_top < t_rect.m_bottom && p_rect.m_bottom > t_rect.m_top) {
+		HitCallBack(t);
+		t->HitCallBack(this);
+	}
+	else return false;
+}
+
+void CCharaBase::HitCallBack(CCollisionA * p)
+{
+	CCharaBase* tt = dynamic_cast<CCharaBase*>(p);
+	if (tt->m_state == eState_Attack)	m_state = eState_Damage;
 }

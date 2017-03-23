@@ -7,6 +7,11 @@
 #ifndef ITEM_GUARD
 #define ITEM_GUARD
 
+#define NOT -1
+#define VEGETABLE 0
+#define MEET 1
+#define FISH 2
+
 #include "../Global.h"
 #include "Base/CBase.h"
 
@@ -15,12 +20,13 @@ enum E_Item
 	eCarrotItem,
 	eChickItem,
 	eFishItem,
-	eRiceItem,
+	ePigItem,
 	eItemMax,
 };
 
-struct T_Item
+struct T_ItemData
 {
+	int no;
 	int type;
 	int cnt;
 };
@@ -29,6 +35,7 @@ class CItem : public CBase
 {
 private:
 	int  m_itemArray[eItemMax];
+	int  m_count;
 public:
 	CItem();
 	~CItem();

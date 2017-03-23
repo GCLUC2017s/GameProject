@@ -57,9 +57,12 @@ void CPlayer::Draw()
 		mp_wordHp->SetSize(200,130);
 		mp_wordHp->Draw();
 	}
-	mp_shadow->SetPos(GetScreenPos(CVector3D(m_pos.x, 0, m_pos.z)));
-	mp_shadow->SetCenter(35,15);
-	mp_shadow->Draw();
+	if (m_state != eState_Down)
+	{
+		mp_shadow->SetPos(GetScreenPos(CVector3D(m_pos.x, 0, m_pos.z)));
+		mp_shadow->SetCenter(35, 15);
+		mp_shadow->Draw();
+	}
 	CCharaBase::Draw();
 }
 
@@ -99,12 +102,8 @@ void CPlayer::HitCallBack(CCollisionA * p)
 		{
 			//HPを減らす処理
 			m_hp--;
-//			m_hp -= tt->GetAttack();
-			if (!m_hp)
-			{
-				m_chara->SetAng(3.14 / 2);
-				m_death = true;
-			}
+			//もしこの瞬間にキャラクターのHPが0ならキャラクターの死亡フラグを真にする処理
+			if (!m_hp)	m_death = true;
 			if (m_pos.x < tt->GetPos().x)	m_damageDirection = true;
 			if (m_pos.x > tt->GetPos().x)	m_damageDirection = false;
 		}

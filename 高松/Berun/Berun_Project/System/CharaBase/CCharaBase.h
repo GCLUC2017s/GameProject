@@ -75,6 +75,7 @@ protected:
 		eState_Move,
 		eState_Attack,
 		eState_Damage,
+		eState_Down
 	};
 	enum EANIM {
 		eAnim_Idle,
@@ -168,7 +169,7 @@ public:
 	}
 	int GetAttack()
 	{
-		return m_attack;
+		return m_power;
 	}
 	bool GetDeath()
 	{

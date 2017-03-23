@@ -31,7 +31,7 @@ void CEnemyManager::Update () {
 	m_enemyType= rand() % 4;
 	if(vec.x>1000){
 		//
-		if (m_enemy < ENEMY_MAXONE) {
+		if (m_enemy < ENEMY_MAX) {
 		m_enemyCont += ENEMY_COUNT;
 		if (m_enemyCont > ENEMY_TIME) {
 			m_enemyCont = 0;
@@ -40,6 +40,13 @@ void CEnemyManager::Update () {
 			Add(m_enemyType+2);
 		}
 	}
-
+	}
+	if (vec.x > 3000) {
+		if (m_enemyCont == 0) {
+			m_enemyType = 0;
+			Add(m_enemyType + 6);
+			m_enemyCont++;
+			
+		}
 	}
 }

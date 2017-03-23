@@ -60,8 +60,7 @@ public:
 		@param	y		[in] cˆÊ’u
 		@retval	–³‚µ
 	**/
-	void SetCenter(float x,float y) {
-		m_vCenter.x = x; m_vCenter.y = y;
+	void SetCenter(float x,float y) {		m_vCenter.x = x; m_vCenter.y = y;
 	}
 	void SetCenter(CVector2D p) {
 		m_vCenter = p;
