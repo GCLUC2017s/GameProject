@@ -16,8 +16,8 @@
 
 //クラスのプロトタイプ宣言
 class CMap;
-class CTutorial;
 class CPlayer;
+class CTutorial;
 class CEnemy;
 
 class CGame : public CScene
@@ -26,8 +26,8 @@ private:
 	static CGame* mp_game;
 	CMap	  *mp_map;
 	CTutorial *mp_tutorial;
-	CPlayer	  *mp_player;
-	CEnemy    *mp_enemy;
+	CPlayer   *mp_player;
+  	CEnemy    *mp_enemy;
 	CImage    *mp_img[IMG_ARRAY];
 	CImage	  *mp_black;
 	CImage	  *mp_wordGameOver;

@@ -46,7 +46,6 @@ struct T_CharacterData {
 	SVector2D texSize;
 	SVector2D senter;	//キャラクターの中心点
 	CRect rect;			//キャラクターの矩形
-	E_Item item;
 };
 enum {
 	ePlayerMan,	//プレイヤー男

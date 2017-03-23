@@ -15,3 +15,8 @@ void CGameInfo::ClearInstance()
 {
 	if (mp_instance != nullptr) delete mp_instance;
 }
+
+void CGameInfo::CntUpItem(int type)
+{
+	m_itemCnt[type]++;;
+}
