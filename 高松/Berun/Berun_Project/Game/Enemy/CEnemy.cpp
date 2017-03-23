@@ -44,6 +44,13 @@ void CEnemy::Contlol() {
 	}
 
 	if (m_hp > 0) {
+		if (m_enemyType == 6) {
+
+			m_left = true;
+			m_jump = true;
+		}
+
+
 
 		if (m_enemyType == 5) {
 			m_chickTime += CHICK_TIME;
@@ -51,12 +58,14 @@ void CEnemy::Contlol() {
 			if (m_chickTime <= 120) {
 				if (vec.x < 20) {
 					m_left = true;
+					m_attack = true;
 				}
 
 				if (vec.x > -20) {
 					m_right = true;
+					m_attack = true;
 				}
-				m_attack = true;
+				
 			}
 			if (m_chickTime >= 120 && m_chickTime <= 160) {
 				if (vec.x < 20) {

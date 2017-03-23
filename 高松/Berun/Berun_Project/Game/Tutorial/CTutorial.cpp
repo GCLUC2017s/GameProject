@@ -2,7 +2,7 @@
 
 static CFont *font = nullptr;
 
-CTutorial::CTutorial(char * file) : CTask(0,0,0), 
+CTutorial::CTutorial(char * file) : CTask(0, eUDP_Tutorial, eDWP_Tutorial),
 									mp_file(nullptr),
 									m_face(0),
 									m_end(0), 
