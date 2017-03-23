@@ -256,6 +256,9 @@
     <ClInclude Include="Result\CResult.h">
       <Filter>Result</Filter>
     </ClInclude>
+    <ClInclude Include="Sound\CSound.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\CG\beru\beru_flame\beru_flame_00.tga" />

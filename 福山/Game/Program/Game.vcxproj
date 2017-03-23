@@ -67,6 +67,7 @@
     <ClInclude Include="Result\CResult.h" />
     <ClInclude Include="SceneManager\CSceneManager.h" />
     <ClInclude Include="Scene\CScene.h" />
+    <ClInclude Include="Sound\CSound.h" />
     <ClInclude Include="Task\CTask.h" />
     <ClInclude Include="Task\CTaskManager.h" />
     <ClInclude Include="Title\CTitle.h" />

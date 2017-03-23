@@ -15,6 +15,7 @@
 #define T_SIZE_KILLS		0.0f,0.0f,300.0f,50.0f
 #define T_SIZE_FRAME		0.0f,0.0f,500.0f,300.0f
 #define T_SIZE_STORYRESULT  0.0f,0.0f,400.0f,150.0f
+#define T_SIZE_TITLERETURN  0.0f,0.0f,400.0f,150.0f
 #define EVAL_1				300.0f		
 
 #define T_SIZE_S			0.0f,		0.0f,		EVAL_1,				300.0f
@@ -31,6 +32,8 @@
 #define R_SIZE_FILTER		-DISP_X,DISP_Y,DISP_X,-DISP_Y
 #define R_SIZE_FRAME		-DISP_X,DISP_Y,DISP_X,-DISP_Y
 #define R_SIZE_STORYRESULT  -2.0f,0.5f,2.0f,-0.5f
+#define R_SIZE_TITLERETURN  -2.0f,0.5f,2.0f,-0.5f
+
 #define DOWN_POINT		(int)100
 #define TIME_POS		CVector2(CGame::CameraPos().x - DISP_X / 3, DISP_Y / 3 - 1.0f)
 #define KILLS_POS		CVector2(CGame::CameraPos().x - DISP_X / 3, - 1.0f)
@@ -133,7 +136,11 @@ CClear::CClear() : mTimePoint(TIMEMAX),mFlagRect(false),mFlagDie(false){
 	mRectStoryResult.SetVertex(R_SIZE_STORYRESULT);
 	mRectStoryResult.SetColor(COLLAR4_FIRST);
 	mRectStoryResult.SetUv(mStoryResultTex, T_SIZE_STORYRESULT);
+	
 
+	mRectTitleReturn.SetVertex(R_SIZE_TITLERETURN);
+	mRectTitleReturn.SetColor(COLLAR4_FIRST);
+	mRectTitleReturn.SetUv(mStoryResultTex, T_SIZE_TITLERETURN);
 	
 }
 
@@ -147,7 +154,10 @@ CClear::~CClear(){
 		CGame::Delete(&mLogoTex[i]);
 	}
 	CGame::Delete(&mFilterTex);
+	CGame::Delete(&mFrameTex);
+	CGame::Delete(&mStoryResultTex);
 }
+
 
 void CClear::RankDecision(int i){ //bossを倒す前に関数を呼ぶ
 	if (!mFlagRect){
@@ -272,12 +282,34 @@ void CClear::Update(){
 		}
 		if (FlagCrectA(mRectEvaluation)){					//評価表示で
 			CGame::Fade(F_SPEEDBASE, &mRectLogo[E_RANK], 1.0f);
+			
 
-			//エンターキーを押したときにシーンをセレクト画面に替える処理を行う。
-			if (CKey::push(VK_RETURN))
-			{
-				CTaskManager::GetInstance()->AllKill();
-				CSceneManager::GetInstance()->ChangeScene(eSceneNo::E_TITLE);
+
+
+
+
+
+
+
+
+			if (CGame::FlagTime(1, 1,&mSaveTime)){}
+			if (FlagCrectA(mRectLogo[E_RANK])){
+
+				CGame::FadeOut(F_SPEEDBASE, &mRectFrame);
+				CGame::FadeOut(F_SPEEDBASE, &mRectStoryResult);
+				CGame::FadeOut(F_SPEEDBASE, &mRectMainLogo);
+				CGame::FadeOut(F_SPEEDBASE, &mRectEvaluation);
+				for (int i = 0; i < LOGO_MAX; i++)
+				{
+					CGame::FadeOut(F_SPEEDBASE, &mRectLogo[i]);
+				}
+				//エンターキーを押したときにシーンをセレクト画面に替える処理を行う。
+				if (CKey::push(VK_RETURN))
+				{
+
+					CTaskManager::GetInstance()->AllKill();
+					CSceneManager::GetInstance()->ChangeScene(eSceneNo::E_TITLE);
+				}
 			}
 
 		}

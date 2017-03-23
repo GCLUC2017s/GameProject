@@ -166,6 +166,12 @@ void CPlayer::RunWalk(CVector2 v){
 void CPlayer::Move(){
 	CVector2 SavemPos = mPos;		//位置保存
 	float  SavemAxis = mAxis;		//位置保存
+
+	//同時にキーを押したとき
+	if (CKey::push(RIGHT_KEY) && CKey::push(LEFT_KEY)){
+		mForward = CVector2(0, 0);
+	}
+	else{
 	// 右移動
 	if (CKey::push(RIGHT_KEY)) {
 		if (!mEnabledJump)mStatus = E_WALK_R;
@@ -177,6 +183,7 @@ void CPlayer::Move(){
 		if (!mEnabledJump)mStatus = E_WALK_L;
 		RunWalk(V2_LEFT);
 		mSaveForword = V2_LEFT;
+	}
 	}
 	//上移動
 	if (CKey::push(UP_KEY)) { 

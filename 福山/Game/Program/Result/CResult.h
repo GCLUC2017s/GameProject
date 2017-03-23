@@ -17,6 +17,8 @@ Result‰æ–Ê
 
 class CClear  : public CTask{
 private:
+	float mSaveTime;
+
 	CStringtexture mNumber[NUM_MAX];
 
 	CRectangle mRectEvaluation;
@@ -25,7 +27,7 @@ private:
 	CRectangle mRectFilter;
 	CRectangle mRectFrame;
 	CRectangle mRectStoryResult;
-	CRectangle mRect;
+	CRectangle mRectTitleReturn;
 
 	CTexture *mEvaluationT;
 	CTexture *mLogoTex[LOGO_MAX];
