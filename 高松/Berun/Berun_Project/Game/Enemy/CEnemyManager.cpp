@@ -27,24 +27,31 @@ void CEnemyManager::Add(int type) {
 
 void CEnemyManager::Update () {
 	CVector3D vec = mp_player->GetPos();//‰¼
-	
-	m_enemyType= rand() % 4;
-	if(vec.x>800&&vec.x<1200){
-	
+	m_enemyType = 0;
+
+
 		if (m_enemy < ENEMY_MAXONE) {
-		m_enemyCont += ENEMY_COUNT;
-		if (m_enemyCont > ENEMY_TIME) {
-			m_enemyCont = 0;
+			if (vec.x > 400&&vec.x<1200) {
+
 			
-			m_enemy++;
-			Add(m_enemyType+2);
+					m_enemyCont += ENEMY_COUNT;
+					if (m_enemyCont > ENEMY_TIME) {
+						m_enemyCont = 0;
+						m_enemy++;
+						Add(m_enemyType + 2 + m_enemy);
+						
+						
+					}
+				
+			}
 		}
-	}
-	}
-	if (vec.x > 1250 && vec.x < 1400) {
+	
+	
+	if (vec.x > 1200 && vec.x < 1700) {
 		m_enemy = 0;
+		m_enemyType = 0;
 	}
-	if (vec.x>1500&&vec.x>2400) {
+	if (vec.x>1700&&m_enemyType<2200) {
 		
 		if (m_enemy < ENEMY_MAXTWO) {
 			m_enemyCont += ENEMY_COUNT;
@@ -52,16 +59,19 @@ void CEnemyManager::Update () {
 				m_enemyCont = 0;
 
 				m_enemy++;
-				Add(m_enemyType + 2);
+				Add(m_enemyType + 3+m_enemy);
 			}
 		}
 	}
-	if (vec.x > 4200) {
-		if (m_enemyCont == 0) {
-			m_enemyType = 6;
-			Add(m_enemyType);
-			m_enemyCont+=1;
+	if (vec.x > 2200 && vec.x < 2200) {
+		m_enemy = 0;
+		m_enemyType = 0;
+	}
+	if (vec.x > 3700) {
+		if (m_enemy < ENEMY_MAX) {
+			m_enemy++;
 			
+			Add(m_enemyType + 4+m_enemy);
 		}
 	}
 }
