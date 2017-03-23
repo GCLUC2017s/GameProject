@@ -17,17 +17,11 @@ CPlayer::~CPlayer()
 
 void CPlayer::Draw()
 {
-	for (int i = 0; i < m_hp; i++)
+	for (int i = 0; i < m_hp / 2; i++)
 	{
 		mp_hp->SetPos(i * 75 + 10, 25);
 		mp_hp->SetSize(75, 75);
 		mp_hp->Draw();
-	}
-	for (int j = 0; j < m_sp; j++)
-	{
-		mp_sp->SetPos(j * 75 + 400, 25);
-		mp_sp->SetSize(75, 75);
-		mp_sp->Draw();
 	}
 	mp_shadow->SetPos(GetScreenPos(CVector3D(m_pos.x, 0, m_pos.z)));
 	mp_shadow->SetCenter(35,15);
@@ -68,6 +62,7 @@ void CPlayer::HitCallBack(CCollisionA * p)
 	{
 		if (!m_damage)
 		{
+			//HP‚ð
 			m_hp--;
 			if (!m_hp)
 			{
