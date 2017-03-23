@@ -14,16 +14,13 @@ void CTaskManager::Add(CTask *p)
 	{
 		//’Ç‰Á‚³‚ê‚½ƒ^ƒXƒN‚ðæ“ª‚É
 		mp_head = p;
-		//mp_head->mp_prev = nullptr;
-		//mp_head->mp_next = p;
-		//mp_tail = p;
+		mp_head->mp_prev = nullptr;
+		mp_head->mp_next = p;
+		mp_tail = p;
 	}
 	//æ“ª‚ª‘¶Ý‚µ‚Ä‚¢‚ê‚Î
 	else
 	{
-		p->mp_prev = mp_tail;
-		mp_tail->mp_next = p;
-		/*
 		CTask temp;
 		CTask *t = &temp;
 		t->mp_next = mp_head;
@@ -32,19 +29,19 @@ void CTaskManager::Add(CTask *p)
 		{
 			t = t->mp_next;
 
-			if (t == mp_head && t->m_drawPrio > t->m_drawPrio) 
+			if (t == mp_head && t->m_drawPrio > p->m_drawPrio) 
 			{ 
-				mp_head = t;
+				mp_head = p;
 				mp_head->mp_prev = nullptr;
-				t->mp_prev = t;
+				t->mp_prev = p;
 				if (!t->mp_next) mp_tail = t;
 				break;
 			}
 			else if (t == mp_tail) 
 			{
-				t->mp_prev = mp_tail;
-				mp_tail->mp_next = t;
-				mp_tail = t;
+				p->mp_prev = mp_tail;
+				mp_tail->mp_next = p;
+				mp_tail = p;
 				mp_tail->mp_next = nullptr;
 				break;
 			}
@@ -56,9 +53,8 @@ void CTaskManager::Add(CTask *p)
 				t->mp_next = p;
 				break;
 			}
-		}*/
+		}
 	}
-	mp_tail = p;
 }
 CTask* CTaskManager::Destroy(CTask *p)
 {
