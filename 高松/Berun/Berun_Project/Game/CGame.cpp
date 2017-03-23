@@ -23,7 +23,7 @@ CGame::CGame() : mp_player(nullptr),m_step(0),m_cnt(0)
 
 CGame::~CGame()
 {
-	
+	CTaskManager::GetInstance()->KillAll();
 }
 void CGame::Update() 
 {	
@@ -36,7 +36,7 @@ switch (m_step)
 			mp_player = new CPlayer(g_tutorialNo);
 			new CEnemyManager();
 			mp_enemy = new CEnemy(eFish);
-			mp_tutorial->Kill();
+			mp_tutorial->SetKill();
 			mp_img[0]->SetPos(280, 310);
 			mp_img[0]->SetSize(700, 150);
 			m_step++;
@@ -57,7 +57,7 @@ switch (m_step)
 		break;
 	}
 	CCollisionManager::GetInstance()->UnRegistAll();
-	CTaskManager::GetInstance()->DestroyAppoint();
+	CTaskManager::GetInstance()->KillAppoint();
 	CTaskManager::GetInstance()->UpdateAll();
 	CCollisionManager::GetInstance()->CheckHitAll();
 }
