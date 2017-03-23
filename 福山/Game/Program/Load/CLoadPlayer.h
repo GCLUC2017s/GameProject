@@ -7,6 +7,7 @@
 #include "../Define/define.h"
 #define FRAME_LIMIT8 8//フレーム数が違うようになったので注意 8のもの (現在)walk run Ex01
 #define FRAME_LIMIT3 3//フレーム数が違うようになったので注意 3のもの (現在)Eat Jump
+#define FRAME_LIMIT2 2//フレーム数が違うようになったので注意 2のもの (現在)break
 
 class CLoadPlayer
 {
@@ -29,7 +30,8 @@ public:
 	CTexture	*mBrakeTex[FRAME_LIMIT];								//ブレーキテクスチャ
 	CTexture	*mJumpTex[FRAME_LIMIT3];												//ジャンプテクスチャ
 	CTexture	*mShadowTex;											//影テクスチャチャ
-	CTexture    *mCutFlyTex;												//飛ぶ斬撃
+	CTexture    *mCutFlyTex;												//斬撃横
+	CTexture	*mCutJumpTex;											//斬撃ジャンプ
 
 	CLoadPlayer();
 	~CLoadPlayer();

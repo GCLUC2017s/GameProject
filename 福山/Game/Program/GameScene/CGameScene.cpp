@@ -9,8 +9,16 @@
 #include "../Enemy/CEnemy01.h"
 #include "../Enemy/CBoss.h"
 #include "../Result/CResult.h"
+#include "../CGame/CGame.h"
+#define ADD_TIME 10.0f//“GoŒ»ƒtƒ‰ƒO
 
 CGameScene::CGameScene():status(E_INIT){}
+enum eAddEnemyNonber
+{
+	E_ADD_ENE00,
+	E_ADD_ENE01,
+	E_ADD_BOSS
+};
 
 void CGameScene::Init(){
 	CTaskManager::GetInstance()->Add(new CMap);
@@ -19,16 +27,12 @@ void CGameScene::Init(){
 
 	CTaskManager::GetInstance()->Add(new CPlayer);
 	
-	//for (int i = 0; i < ENE00_LIMIT; i++)
-	//{
-	//	CTaskManager::GetInstance()->Add(new CEnemy00);
-	//}
-	//for (int i = 0; i < ENE01_LIMIT; i++)
-	//{
-	//	CTaskManager::GetInstance()->Add(new CEnemy01);
-	//}
 
-	//CTaskManager::GetInstance()->Add(new CBoss);
+	CTaskManager::GetInstance()->Add(new CEnemy00);
+	
+	CTaskManager::GetInstance()->Add(new CEnemy01);
+	
+	CTaskManager::GetInstance()->Add(new CBoss);
 	CTaskManager::GetInstance()->Add(new CClear);
 	CTaskManager::GetInstance()->Add(new CUserinterface);
 	
@@ -44,6 +48,25 @@ void CGameScene::Update(){
 		status = E_MAIN;
 		break;
 	case E_MAIN:
+
+		if (CGame::FlagTime(ADD_TIME, FPS, &mSaveTime)){
+			switch ((int)rand() % 3)
+			{
+				printf("%d\n", rand() % 3);
+			case E_ADD_ENE00:
+
+				CTaskManager::GetInstance()->Add(new CEnemy00);
+				break;
+			case E_ADD_ENE01:
+
+				CTaskManager::GetInstance()->Add(new CEnemy01);
+				break;
+			case E_ADD_BOSS:
+
+				CTaskManager::GetInstance()->Add(new CBoss);
+				break;
+			}
+		}
 		CTaskManager::GetInstance()->AllUpdate();
 		CTaskManager::GetInstance()->AllRender();
 		break;

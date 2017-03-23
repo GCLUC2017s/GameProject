@@ -14,17 +14,17 @@
 #define SIZE_ENEMY01_X 1 //エネミー01のサイズ_X
 #define SIZE_BOSS_Y 3  //エネミー00のサイズ_Y
 #define SIZE_BOSS_X 3 //エネミー00のサイズ_X
-#define CAL_ENEMY00	2  //エネミーのカロリー
-#define CAL_ENEMY01 3
-#define CAL_BOSS	100
-#define SIZE_SHADOW_X *mRect.mRRight*0.8f						//影のサイズX
-#define SIZE_SHADOW_Y *mRect.mRLeft	*0.5f					//影のサイズY
+#define CAL_ENEMY00	0.2f  //エネミーのカロリー
+#define CAL_ENEMY01 0.3f
+#define CAL_BOSS	10
+#define SIZE_SHADOW_X *mRect.mRRight*0.5f						//影のサイズX
+#define SIZE_SHADOW_Y *mRect.mRLeft	*0.2f					//影のサイズY
 #define SHADOW_TEX_X			70.f				//影のテクスチャのX
 #define SHADOW_TEX_Y			20.f				//影のテクスチャのY
 
-#define PL_HP_X 2.0f //ゲージx　 //HPはこちらから使うように(初期値)
+#define PL_HP_X 4.0f //ゲージx　 //HPはこちらから使うように(初期値)
 #define PL_HP_Y 0.15f//ゲージy
-#define PL_ST_X 4.5f //ゲージx
+#define PL_ST_X PL_HP_X	 //ゲージx
 #define PL_ST_Y 0.5f//ゲージy
 #define PL_ST_FR_Y 0.3f//ゲージy
 
@@ -40,10 +40,10 @@
 #define SIZE_BOSS_FRAME_X	2.0f		
 #define SIZE_BOSS_FRAME_Y	0.2f			
 /*ＰＬＡＹＥＲの攻撃力*/
-#define PL_NORMAL_POWER 0.05f*0.5f
-#define PL_JUMP_AT_POWER 0.07f*0.5f
-#define PL_EAT_POWER	0.06f*0.5f
-#define PL_EX01_POWER	0.15f*0.5f
+#define PL_NORMAL_POWER 0.05f
+#define PL_JUMP_AT_POWER 0.07f
+#define PL_EAT_POWER	0.06f
+#define PL_EX01_POWER	0.15f
 /*エネミーの攻撃力*/
 #define ENE00_POWER		0.0000000005f
 #define ENE01_POWER		0.0000000005f
@@ -97,7 +97,6 @@ public:
 	CRectangle  mRect;				//画像用
 	CRectangle  mShadow;			//影
 	CRectangle mAttackRange;		//攻撃範囲の四角形
-	CRectangle mDummyEffect;			//Effectテクスチャ用
 
 	bool mEnabledEat;				//有効フラグ　食べる(プレイヤー)
 	bool mEnabledEaten;				//有効フラグ 食べられた(エネミー)
@@ -122,7 +121,7 @@ public:
 	
 	CBase() : mEnabledEat(false),mEnabledEaten(false),mAxis(0), mHitPoint(0), mEnabledAttack(false), mAttackPoint(0.01f), mEnabledPoint(false), FlagAlertSetHp(false){
 		mCharaFlag = true;
-		mShadow.SetColor(0.5f, 0.5f, 0.5f, 0.7f);
+		mShadow.SetColor(0.5f, 0.5f, 0.5f, 0.4f);
 		kazu += 1;
 		srand(time(NULL));
 	}
@@ -133,6 +132,8 @@ public:
 	void AnimeFrame(bool roop, int speed,int frame);
 	/*使い方 sizex,sizeyに画像のサイズを入れる*/
 	void LimitDisp(int sizex, int sizey);
+	/*ランダムpos制御*/
+	void RandLimitDisp(int sizex, int sizey,int limitleft,int limitright);
 	/*
 	攻撃範囲を決める
 	ベースにある変数を使う
@@ -146,7 +147,7 @@ public:
 	void TurnRect(CRectangle *rect);
 	void JumpAttack(float Forword, float x, float y, float mAxis, CVector2 &mPos);
 	bool FrameTime(float time);
-	void RandPos(int x, int y, CVector2 *mPos);		//ポジションをランダムにする	サイズをx,yに当てはめる
+	void RandPos(int x, int y, CVector2 *mPos,int limitleft ,int limitright);		//ポジションをランダムにする	サイズをx,yに当てはめる
 	/*HPによるアラート関数*/
 	void AlertHPRect(CRectangle *rect,float &Hp);
 

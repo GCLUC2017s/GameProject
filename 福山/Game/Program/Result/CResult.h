@@ -25,6 +25,7 @@ private:
 	CRectangle mRectFilter;
 	CRectangle mRectFrame;
 	CRectangle mRectStoryResult;
+	CRectangle mRect;
 
 	CTexture *mEvaluationT;
 	CTexture *mLogoTex[LOGO_MAX];
@@ -44,6 +45,7 @@ private:
 	float RectTime;				//四角形のTime
 	int mKillPolint;			//倒した数のポイント
 	int mTimePoint;				//時間によるPOINT
+
 	bool mFlagRect;				
 	bool mFlagDie;
 	bool *mFlagEval;			//評価フラグ管理
@@ -54,7 +56,7 @@ private:
 public:
 	void Update();
 	void Render();
-
+	void Init();
 	CClear();
 	~CClear();
 

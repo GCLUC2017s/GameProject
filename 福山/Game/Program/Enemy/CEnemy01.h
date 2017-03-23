@@ -32,18 +32,29 @@ private:
 		E_FLY_L, E_FLY_R,
 		E_RUN_L, E_RUN_R,
 		E_ATTACK_L, E_ATTACK_R,
-		E_DIE_L, E_DIE_R
+		E_DIE_L, E_DIE_R,
+		E_LEFT,E_RIGHT,
+
 	};
 	//const int mStatus;
-
-	int mFlameCount;		//フレーム数カウント用
-	int direction;	//左右の簡易判断
-	float rulerR; //エネミーとキャラクターの距離
-	float rulerL; 
-	bool actionflag;
 	int motion;
 	int pattern;
+	int moveptt;
+	int mFrameCount;		//フレーム数カウント用
+	int direction;	//左右の簡易判断
+	bool actionflag;
+
+	float rulerR; //エネミーとキャラクターの距離
+	float rulerL; //エネミーとキャラクターの距離
+	float upruler; //エネミーとキャラクターの距離
+	float downruler; //エネミーとキャラクターの距離
+
+	float getAxis;
+
+	float escapetime;
+
 	void Fly();
+	void Motion();
 	void AnimeScene();
 
 public:

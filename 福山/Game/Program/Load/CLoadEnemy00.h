@@ -20,5 +20,4 @@ public:
 	CTexture	*mAttack_tex[FRAME_LIMIT];
 	CTexture	*mDie_tex[FRAME_LIMIT];
 
-
 };

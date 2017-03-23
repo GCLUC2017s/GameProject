@@ -25,7 +25,6 @@ public:
 	CTexture	*mAttack_tex[FRAME_LIMIT9];
 	CTexture	*mDie_tex[FRAME_LIMIT11];
 
-
 };
 
 

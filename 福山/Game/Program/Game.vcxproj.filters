@@ -69,6 +69,9 @@
     <Filter Include="Result">
       <UniqueIdentifier>{c4198125-4827-4e9a-8eda-175430a4ae6e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{73b69812-1010-4814-ab44-6a06ef4768cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera\CCamera.cpp">

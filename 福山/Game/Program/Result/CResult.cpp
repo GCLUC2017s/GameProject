@@ -7,7 +7,7 @@
 #define CONF_SUMNUM		 1.0f, 1.0f, 1.0f, mRectLogo[E_SUM].triangle1.a		//NUMBERの大きさと色設定(E_SUM)
 /*TEXサイズ*/
 #define T_SIZE_CLEAR		0.0f,0.0f,700.0f,70.0f
-#define T_SIZE_GAMEOVER		0.0f,0.0f,700.0f,130.0f			//ゲームオーバー
+#define T_SIZE_GAMEOVER		0.0f,0.0f,750.0f,150.0f			//ゲームオーバー
 #define T_SIZE_SCORE_SUM	0.0f,0.0f,250.0f,50.0f
 #define T_SIZE_CLEARTIME	0.0f,0.0f,250.0f,50.0f
 #define T_SIZE_SUMEVAL		0.0f,0.0f,400.0f,100.0f						//総合評価
@@ -63,6 +63,12 @@
 #define DOWNSCORE_TIME 10 //10秒に一回スコアをダウンさせる
 #define FILE_TEX "../CG\\GameScreen\\"
 #include "../Player/CPlayer.h"
+#include "../Key/CKey.h"
+#include "../SceneManager/CSceneManager.h"
+
+void CClear::Init(){
+
+}
 
 CClear::CClear() : mTimePoint(TIMEMAX),mFlagRect(false),mFlagDie(false){
 	mMyNumber = E_CLEAR;
@@ -240,7 +246,9 @@ void CClear::Update(){
 	mNumber[E_SUM].render(str[E_SUM], SUM_POS, STR_SIZE, CONF_SUMNUM);
 
 	if (mFlagRect){ //フラグが立った時にフェード開始
-		if (mFlagDie){ mRectMainLogo.SetUv(mGameOverLogoT, T_SIZE_GAMEOVER); }
+		if (mFlagDie){
+			mRectMainLogo.SetUv(mGameOverLogoT, T_SIZE_GAMEOVER); 
+		}
 		CGame::Fade(F_SPEEDBASE, &mRectMainLogo, 1.0f);
 		if (FlagCrectA(mRectMainLogo)){					//CLEAR表示で
 			if (mFlagDie){
@@ -264,6 +272,14 @@ void CClear::Update(){
 		}
 		if (FlagCrectA(mRectEvaluation)){					//評価表示で
 			CGame::Fade(F_SPEEDBASE, &mRectLogo[E_RANK], 1.0f);
+
+			//エンターキーを押したときにシーンをセレクト画面に替える処理を行う。
+			if (CKey::push(VK_RETURN))
+			{
+				CTaskManager::GetInstance()->AllKill();
+				CSceneManager::GetInstance()->ChangeScene(eSceneNo::E_TITLE);
+			}
+
 		}
 	}
 	

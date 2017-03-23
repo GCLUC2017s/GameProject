@@ -15,7 +15,7 @@ class CMap :public CTask{
 private:
 	CRectangle mGround[GROWND_MAX];			//”wŒi‚Ì’n–Ê
 	CRectangle mSky;		//‹ó
-	CRectangle mTree[BEFORE_AND_AFTER][TREE_MAX];		//–Ø
+	CRectangle mTree[TREE_MAX];		//–Ø
 	enum MyTree
 	{
 		E_BEFORE,E_AFTER

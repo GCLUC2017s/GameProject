@@ -88,6 +88,8 @@ private:
 	void PlayerAttack();
 	/*アニメーションシーン*/
 	void AnimeScene();
+	/*ジャンプATTACK斬撃あにめ*/
+	void AtJumpAnime();
 	/*能力変化のメソッド*/
 	void ChangeStatus();
 public:

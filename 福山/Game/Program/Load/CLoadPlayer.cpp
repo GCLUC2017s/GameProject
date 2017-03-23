@@ -6,7 +6,7 @@
 #define TEX_FILE_PLAYER_NormalATTACK_A	 "../CG\\beru\\beru_attackA\\"		//プレイヤーのファイル場所　通常攻撃A
 #define TEX_FILE_PLAYER_NormalATTACK_B	 "../CG\\beru\\beru_attackB\\"		//プレイヤーのファイル場所　通常攻撃B
 #define TEX_FILE_PLAYER_NormalATTACK_C	 "../CG\\beru\\beru_attackC\\"		//プレイヤーのファイル場所　通常攻撃C
-#define TEX_FILE_PLAYER_JUMPATTACK	 "../CG\\beru\\beru_attackJ\\"		//プレイヤーのファイル場所　ジャンプ攻撃
+#define TEX_FILE_PLAYER_JUMPATTACK	     "../CG\\beru\\beru_attackJ\\"		//プレイヤーのファイル場所　ジャンプ攻撃
 #define TEX_FILE_PLAYER_EX01			 "../CG\\beru\\beru_EX01\\"			//プレイヤーのファイル場所　消費
 #define TEX_FILE_PLAYER_EX02			 "../CG\\beru\\beru_EX02\\"			//プレイヤーのファイル場所　継続
 #define TEX_FILE_PLAYER_EAT				 "../CG\\beru\\beru_eat\\"			//プレイヤーのファイル場所　捕食
@@ -58,6 +58,8 @@ CLoadPlayer::CLoadPlayer()
 
 	mShadowTex = new CTexture();		//テクスチャクラスのインスタンス作成
 	mCutFlyTex = new CTexture();
+	mCutJumpTex = new CTexture();
+
 	/*テクスチャファイル読み込み*/
 	/*待ち*/
 	mStayTex[0]->load(TEX_FILE_PLAYER_STAY"beru_stay_00.tga");
@@ -99,13 +101,13 @@ CLoadPlayer::CLoadPlayer()
 	mNormalAttackTex[1][4]->load(TEX_FILE_PLAYER_NormalATTACK_B"beru_attackB_04.tga");
 	mNormalAttackTex[1][5]->load(TEX_FILE_PLAYER_NormalATTACK_B"beru_attackB_05.tga");
 	/*通常C*/
-	//mNormalAttackTex[2][0]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_00.tga");
-	//mNormalAttackTex[2][1]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_01.tga");
-	//mNormalAttackTex[2][2]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_02.tga");
-	//mNormalAttackTex[2][3]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_03.tga");
-	//mNormalAttackTex[2][4]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_04.tga");
-	//mNormalAttackTex[2][5]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_05.tga");
-	//
+	mNormalAttackTex[2][0]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_00.tga");
+	mNormalAttackTex[2][1]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_01.tga");
+	mNormalAttackTex[2][2]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_02.tga");
+	mNormalAttackTex[2][3]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_03.tga");
+	mNormalAttackTex[2][4]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_04.tga");
+	mNormalAttackTex[2][5]->load(TEX_FILE_PLAYER_NormalATTACK_C"beru_attackC_05.tga");
+	
 	/*ジャンプATTACK*/
 	mJumpAttackTex[0]->load(TEX_FILE_PLAYER_JUMPATTACK"beru_attackJ_00.tga");
 	mJumpAttackTex[1]->load(TEX_FILE_PLAYER_JUMPATTACK"beru_attackJ_01.tga");
@@ -133,14 +135,11 @@ CLoadPlayer::CLoadPlayer()
 	/*ブレーキ*/
 	mBrakeTex[0]->load(TEX_FILE_PLAYER_BRAKE"beru_brake_00.tga");
 	mBrakeTex[1]->load(TEX_FILE_PLAYER_BRAKE"beru_brake_01.tga");
-	mBrakeTex[2]->load(TEX_FILE_PLAYER_BRAKE"beru_brake_02.tga");
-	mBrakeTex[3]->load(TEX_FILE_PLAYER_BRAKE"beru_brake_03.tga");
-	mBrakeTex[4]->load(TEX_FILE_PLAYER_BRAKE"beru_brake_04.tga");
-	mBrakeTex[5]->load(TEX_FILE_PLAYER_BRAKE"beru_brake_05.tga");
 	/*影*/
 	mShadowTex->load(TEX_FILE_SHADOW"shadow.tga");
 	/*飛ぶ斬撃*/
 	mCutFlyTex->load(TEX_FILE_CUTFLY"CutFlyEffect.tga");
+	mCutJumpTex->load(TEX_FILE_CUTFLY"CutJumpEffect.tga");
 }
 
 CLoadPlayer::~CLoadPlayer()
@@ -171,4 +170,5 @@ CLoadPlayer::~CLoadPlayer()
 	}
 	CGame::Delete(&mShadowTex);
 	CGame::Delete(&mCutFlyTex);
+	CGame::Delete(&mCutJumpTex);
 }

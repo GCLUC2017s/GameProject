@@ -156,15 +156,14 @@ void CUserinterface::SetHungC(const CPlayer *player){
 
 	}
 	else if (player->HUNGRY_S_LOW_IF)	{//‚¨‚È‚©Œ¸‚Á‚½‚ÌUI
-		mGaugePlayer[_ST_].SetColor(mHungryC, 0.5f, 0.5f, 1.0f);
-		mFramePlayer[_ST_].SetColor(mHungryC, mHungryC, mHungryC, 1.0f);
+		mFramePlayer[_ST_].SetColor(mHungryC, mHungryC, mHungryC, mHungryC + 0.5f);
 		mGaugePlayer[_ST_].SetUv(mPlayerGageTex[_ST_], 0, 0, T_ST_RIGHT, SIZE_TEX_PLAYER_ST_Y);
 		mFramePlayer[_ST_].SetUv(mPlayerFrameStTex[_LOW_], 0, 0, SIZE_TEX_PLAYER_ST_X, SIZE_TEX_PLAYER_ST_Y);
 	}
 	else								{//•’Ê‚Ìó‘Ô
 		mGaugePlayer[_ST_].SetColor(0.8f, 0.8f, 0.8f, 1.0f);
 		mGaugePlayer[_ST_].SetUv(mPlayerGageTex[_ST_], 0, 0, T_ST_RIGHT, SIZE_TEX_PLAYER_ST_Y);
-		mFramePlayer[_ST_].SetUv(mPlayerFrameStTex[_HIGH_], 0, 0, SIZE_TEX_PLAYER_ST_X, SIZE_TEX_PLAYER_ST_Y);
+		mFramePlayer[_ST_].SetUv(mPlayerFrameStTex[_NORM_], 0, 0, SIZE_TEX_PLAYER_ST_X, SIZE_TEX_PLAYER_ST_Y);
 	}
 	if (player->mStamina <= 0){ //‚¨‚È‚©‚ªŒ¸‚Á‚ÄHP‚ªí‚ê‚éó‘Ô
 		mFlagST = false;		//‚Â‚¢‚Å‚ÉƒŒƒ“ƒ_[•\Ž¦Á‚µ‚Ä‚¨‚­

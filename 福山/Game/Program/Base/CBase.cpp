@@ -70,6 +70,25 @@ void CBase::LimitDisp(int sizex, int sizey){
 	/*あたり判定終了*/
 }
 
+void CBase::RandLimitDisp(int sizex, int sizey,int limitleft,int limitright){
+	/*あたり判定*/
+	if (mAxis > character_limit_top - sizey && !mEnabledJump){  //マップ外に出ると元の位置に戻す(軸)
+		mPos.y = character_limit_top;
+		mAxis = mPos.y - sizey; //軸をもとに戻す
+	}
+	if (mAxis + sizey < character_limit_bottom + sizey && !mEnabledJump){  //マップ外に出ると元の位置に戻す(軸)
+		mPos.y = character_limit_bottom + sizey;
+		mAxis = mPos.y - sizey; //軸をもとに戻す
+	}
+
+	if (mPos.x > limitright - sizex){ //マップ外に出ると元の位置に戻す(X)
+		mPos.x = limitright - sizex;
+	}
+	if (mPos.x < limitleft  + sizex){
+		mPos.x = limitleft  + sizex;
+	}
+	/*あたり判定終了*/
+}
 /*
 攻撃範囲を決める
 ベースにある変数を使う 
@@ -79,29 +98,16 @@ float Forwordは現在の向きを入れる
 float x , y , mAxis は攻撃範囲 ,Cvector2は　自分のposを入れる
 
 */
-#define FRAME_EFFECT 3
-void CBase::TurnRect(CRectangle *rect){
-	rect->triangle1.x1 = rect->triangle1.x3;
-	rect->triangle1.y2 = rect->triangle1.y1;
-	rect->triangle1.x3 = rect->triangle1.x2;
-	rect->triangle2.x2 = rect->triangle2.x1;
-	rect->triangle2.y3 = rect->triangle2.y2;
-	rect->triangle2.x1 = rect->triangle2.x3;
-}
 
 
 void CBase::Attack(float Forword, float x, float y, float Axis, CVector2 &mPos){
 	mAttackRange.SetVertex(-x, y, x, -y);
-	mDummyEffect.SetVertex(-x, y, x, -y);
-	mDummyEffect.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 	mAttackRange.SetColor(1.0f, 1.0f, 1.0f, 1.0f);		
 	if (Forword >= 0){											//右
 		mAttackRange.position = CVector2(mPos.x+ x, mPos.y);
-		mDummyEffect.position = mAttackRange.position;
 	}
 	else{														//左
 		mAttackRange.position = CVector2(mPos.x- x, mPos.y);
-		mDummyEffect.position = mAttackRange.position;
 	}
 	mAttackAxis = Axis;
 }
@@ -141,17 +147,16 @@ bool CBase::FrameTime(float t){
 
 /*
 [使い方]
-ランダムでポジションを決める
+ランダムでポジションを決める場所をある程度絞れる
 サイズx,サイズy,&自分のポジション
 */
-void CBase::RandPos(int x,int y,CVector2 *mPos){
+void CBase::RandPos(int x,int y,CVector2 *mPos,int limitleft,int limitright){
 	while (true)
 	{
 		mPos->x = (rand() - rand()) % (int)(character_limit_left + character_limit_right);
 		mPos->y = (rand() - rand()) % (int)(character_limit_top + character_limit_bottom);
-
 		mAxis = mPos->y - y;
-		LimitDisp(mPos->x, mPos->y);
+		RandLimitDisp(mPos->x, mPos->y,limitleft,limitright);
 
 		if (mPos->x != 0 || mPos->y != 0){
 			break;

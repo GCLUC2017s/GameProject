@@ -33,9 +33,7 @@ CLoadEnemy00* CLoadEnemy00::GetInstance() {
 	}
 	return mLoadEnemy00;
 }
-
-CLoadEnemy00::CLoadEnemy00()
-{
+CLoadEnemy00::CLoadEnemy00(){
 
 	/*テクスチャ読み込み*/
 	for (int i = 0; i < FRAME_LIMIT; i++)
@@ -75,8 +73,9 @@ CLoadEnemy00::CLoadEnemy00()
 	mDie_tex[4]->load(ENEMY00_DIE"enemy00_die_04.tga");
 	mDie_tex[5]->load(ENEMY00_DIE"enemy00_die_05.tga");
 
-
 }
+
+
 
 CLoadEnemy00::~CLoadEnemy00()
 {

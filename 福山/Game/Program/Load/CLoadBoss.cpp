@@ -17,7 +17,6 @@ CLoadBoss* CLoadBoss::GetInstance() {
 	return mLoadBoss;
 }
 
-
 CLoadBoss::CLoadBoss(){
 	/*テクスチャ読み込み*/
 	for (int i = 0; i < FRAME_LIMIT; i++)
@@ -51,7 +50,7 @@ CLoadBoss::CLoadBoss(){
 	mAttack_tex[4]->load(BOSS_ATTACK"BOSS_Attack_04.tga");
 	mAttack_tex[5]->load(BOSS_ATTACK"BOSS_Attack_05.tga");
 	/*未実装*/
-/*
+	/*
 	mHattack_tex[0]->load(BOSS_HATTACK"BOSS_HAttack_00.tga");
 	mHattack_tex[1]->load(BOSS_HATTACK"BOSS_HAttack_01.tga");
 	mHattack_tex[2]->load(BOSS_HATTACK"BOSS_HAttack_02.tga");
@@ -66,6 +65,7 @@ CLoadBoss::CLoadBoss(){
 	mDie_tex[3]->load(BOSS_DIE"BOSS_die_3.tga");
 	mDie_tex[4]->load(BOSS_DIE"BOSS_die_4.tga");
 	mDie_tex[5]->load(BOSS_DIE"BOSS_die_5.tga");
+
 
 }
 CLoadBoss::~CLoadBoss(){
