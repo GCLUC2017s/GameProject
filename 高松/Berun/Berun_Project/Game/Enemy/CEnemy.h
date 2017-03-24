@@ -19,7 +19,7 @@
 #define RABITTO_X			4800//ƒ{ƒXXŽ²ŒÀŠE’l
 
 #define ENEMY_X				4680
-#define ENEMY_Z				800
+#define ENEMY_Z				599
 #define ENEMY_CONTONE		260
 #define ENEMY_CONTTWO		430
 #define ENEMY_CONTTHREE		530

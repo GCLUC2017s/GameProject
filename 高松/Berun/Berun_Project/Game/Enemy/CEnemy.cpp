@@ -43,18 +43,18 @@ void CEnemy::Contlol() {
 
 		if (m_enemyType == 6) {
 		
-				m_pos = CVector3D(5000, 0, 800);
+				m_pos = CVector3D(5000, 0, ENEMY_Z);
 			
 			
 		}
 		if (m_enemyType == 7) {
 			
-				m_pos = CVector3D(4500, 0, 800);
+				m_pos = CVector3D(4500, 0, ENEMY_Z);
 			
 		}
 		if (m_enemyType == 8) {
 			
-				m_pos = CVector3D(4600, 0, 800);
+				m_pos = CVector3D(4600, 0, ENEMY_Z);
 		
 		}
 		
