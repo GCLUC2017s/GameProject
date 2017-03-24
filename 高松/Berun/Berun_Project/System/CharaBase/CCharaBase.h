@@ -15,6 +15,7 @@
 #define DASH_SPEED 2
 #define ANIM_REVISION 1
 #define DAMAGE_TIME 2
+#define ENEMY_TYPE 1
 #define WINDOW_UP_LIMIT	600
 #define WINDOW_DOWN_LIMIT 100
 #define WINDOW_LEFT_LIMIT 50
@@ -40,6 +41,7 @@ struct T_CharacterData {
 	int exp;		//必要経験値
 	float speed;	//移動速度
 	float jump;		//ジャンプ力
+	int m_attackFlame; //攻撃判定を行うフレーム
 	int charaType;	//キャラのタイプ
 	SVector2D size;
 	T_AnimData *animData;
@@ -132,6 +134,7 @@ protected:
 	bool m_damageDirection;
 	//ダメージを受けた後の無敵時間を格納する変数
 	int m_damageTime;
+
 	int m_type;
 	float m_noDamageTime;
 	CVector3D m_oldPos;
@@ -149,6 +152,7 @@ protected:
 	//ジャンプ中かどうかを格納する変数(false = No,true = Yes)
 	bool m_jumpFlag;
 	bool m_attack;
+	bool m_attackCollision;
 	bool m_death;
 	void ResetKey();
 	virtual void Contlol();
@@ -165,6 +169,7 @@ public:
 	virtual void HitCallBack(CCollisionA * p);
 	bool CheckHit(CCollisionA *t);
 	void Damage();
+	bool CheckEndAnim();
 	virtual void Down();
 	CVector3D GetPos()
 	{

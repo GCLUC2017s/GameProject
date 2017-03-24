@@ -49,7 +49,7 @@ T_AnimData _pigAnimData[] = {
 	{ 2,5 },
 	{ 2,5 },
 	{ 0,0 },
-	{ 2,8 },
+	{ 3,8 },
 	{ 6,10 },
 
 };
@@ -89,17 +89,17 @@ T_AnimData _papurikaAnimData[] = {
 };
  static const T_CharacterData g_characterData[] =
 {
-	{ "LittlePlayerM",0,5,10,10,3,3,0,0,0,1,5,0,0,{ 300,240 } ,_playerMAnimData,{ 500,400 },{ 135,230 },CRect(-40,-160,40,0) },
-	{ "LittlePlayerW",1,5,10,10,3,3,0,0,0,1,4,0,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 135,160 },CRect(-35,-160,45,0) },
-	{ "Carrot",2,5,3,3,0,0,5,0,0,1,3,0,1,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0) },
-	{ "Chick",3,5,3,3,0,0,1,0,0,1,2,0,1,{ 160,160 } ,_chickAnimData,{ 220,220 },{ 60,160 },CRect(-60,-160,60,0) },
-	{ "Fish",4,5,3,3,0,0,1,0,0,1,1,0,1,{ 160,160 } ,_fishAnimData,{ 200,200 },{ 60,160 },CRect(-60,-160,60,0)},
-	{ "Pig",5,5,3,3,0,0,1,0,0,1,4,0,1,{ 160,160 } ,_pigAnimData,{ 220,220 },{ 60,160 },CRect(-60,-130,60,0)},
-	{ "Rice",6,5,1,1,0,0,5,0,0,1,3,0,1,{ 160,160 } ,_riceAnimData,{ 145,145 },{ 60,160 },CRect(-60,-160,60,0) },
-	{ "Squid",7,5,1,1,0,0,5,0,0,1,3,0,1,{ 160,160 } ,_squidAnimData,{ 250,250 },{ 60,160 },CRect(-60,-160,60,0) },
-	{ "Paprika",8,5,1,1,0,0,5,0,0,1,3,0,1,{ 160,160 } ,_papurikaAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0) },
-	{ "Boss",9,5,10,10,0,0,1,0,0,1,4,0,1,{ 240,240 } ,_bossAnimData,{ 500,500 },{ 120,200 },CRect(-60,-160,60,0) },
-	{ "Carrottwo",10,5,5,5,0,0,5,0,0,1,3,0,1,{ 160,160 } ,_bosscarrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0) },
+	{ "LittlePlayerM",0,5,10,10,3,3,0,0,0,1,5,0,4,0,{ 300,240 } ,_playerMAnimData,{ 500,400 },{ 135,230 },CRect(-40,-160,40,0) },
+	{ "LittlePlayerW",1,5,10,10,3,3,0,0,0,1,4,0,4,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 135,160 },CRect(-35,-160,45,0) },
+	{ "Carrot",2,5,3,3,0,0,5,0,0,1,3,0,1,1,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0) },
+	{ "Chick",3,5,3,3,0,0,1,0,0,1,2,0,2,1,{ 160,160 } ,_chickAnimData,{ 220,220 },{ 60,160 },CRect(-60,-160,60,0) },
+	{ "Fish",4,5,3,3,0,0,1,0,0,1,1,0,2,1,{ 160,160 } ,_fishAnimData,{ 200,200 },{ 60,160 },CRect(-60,-160,60,0)},
+	{ "Pig",5,5,3,3,0,0,1,0,0,1,4,0,3,1,{ 160,160 } ,_pigAnimData,{ 220,220 },{ 60,160 },CRect(-60,-130,60,0)},
+	{ "Rice",6,5,1,1,0,0,5,0,0,1,3,0,2,1,{ 160,160 } ,_riceAnimData,{ 145,145 },{ 60,160 },CRect(-60,-160,60,0) },
+	{ "Squid",7,5,1,1,0,0,5,0,0,1,3,0,2,1,{ 160,160 } ,_squidAnimData,{ 250,250 },{ 60,160 },CRect(-60,-160,60,0) },
+	{ "Paprika",8,5,1,1,0,0,5,0,0,1,3,0,2,1,{ 160,160 } ,_papurikaAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0) },
+	{ "Boss",9,5,20,20,0,0,1,0,0,1,4,0,2,1,{ 240,240 } ,_bossAnimData,{ 500,500 },{ 120,200 },CRect(-60,-160,60,0) },
+	{ "Carrottwo",10,5,5,5,0,0,5,0,0,1,3,0,2,1,{ 160,160 } ,_bosscarrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0) },
 	
 	//{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Rice",5,5,0,0,0,0,0,0,0,1,0,0,0 },
@@ -147,6 +147,7 @@ CCharaBase::CCharaBase(int type, int id, unsigned int updatePrio, unsigned int d
 	m_death = false;
 	m_jumpFlag = false;
 	m_attack = false;
+	m_attackCollision = false;
 }
 CCharaBase::~CCharaBase() 
 {
@@ -165,7 +166,6 @@ void CCharaBase::Animation()
 	{
 		if(m_animLoop) m_animPaternX = 0;
 		else m_animPaternX = mp_eData->animData[m_animPaternY].pattrn - 1;
-		if (m_state == eState_Attack)	m_state = eState_Move;
 	}
 	m_chara->SetRect(mp_eData->texSize.x * m_animPaternX, mp_eData->texSize.y * m_animPaternY, mp_eData->texSize.x * (m_animPaternX + ANIM_REVISION), mp_eData->texSize.y * (m_animPaternY + ANIM_REVISION));
 }
@@ -254,12 +254,16 @@ void CCharaBase::Jump()
 }
 void CCharaBase::Attack()
 {
-	ChangeAnimation(eAnim_Attack, true);
+	ChangeAnimation(eAnim_Attack, false);
+	if (m_animPaternX == mp_eData->m_attackFlame)	m_attackCollision = true;
+	if (CheckEndAnim())
+		m_state = eState_Move;
 }
 void CCharaBase::Update()
 {
 	float zPos = m_pos.z;
 	Contlol();
+	m_attackCollision = false;
 	switch (m_state)
 	{
 	case eState_Move:
@@ -279,7 +283,7 @@ void CCharaBase::Update()
 		break;
 	}
 	//“–‚½‚è”»’è—p‚Ì‹éŒ`‚ðŒvŽZ
-	if(m_state != eState_Attack)rect = CRect(m_pos.x + mp_eData->rect.m_left, m_pos.y - mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right, m_pos.y - mp_eData->rect.m_bottom);
+	if(!m_attackCollision)rect = CRect(m_pos.x + mp_eData->rect.m_left, m_pos.y - mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right, m_pos.y - mp_eData->rect.m_bottom);
 	else
 	{
 		if (m_charaDirection)	rect = CRect(m_pos.x + mp_eData->rect.m_left - 60, m_pos.y - mp_eData->rect.m_top, m_pos.x + mp_eData->rect.m_right, m_pos.y - mp_eData->rect.m_bottom);
@@ -339,7 +343,7 @@ void CCharaBase::Damage()
 	else
 	{
 		m_noDamageTime += CHANGE_TIME(DAMAGE_TIME);
-		if (m_noDamageTime >= DAMAGE_TIME)
+		if (m_noDamageTime >= DAMAGE_TIME || m_type == ENEMY_TYPE)
 		{
 			m_damageTime = 0;
 			m_noDamageTime = 0;
@@ -357,6 +361,11 @@ void CCharaBase::Damage()
 			else m_chara->SetColor(NORMAL_COLOR);
 		}
 	}
+}
+bool CCharaBase::CheckEndAnim()
+{
+	if(m_animPaternX >= mp_eData->animData[m_animPaternY].pattrn - 1) return true;
+	else return false;
 }
 
 void CCharaBase::Down()
