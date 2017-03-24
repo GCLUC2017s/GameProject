@@ -21,9 +21,9 @@
 #define ENEMY_X				4680
 #define ENEMY_Z				800
 #define ENEMY_CONTONE		260
-#define ENEMY_CONTTWO		410
-#define ENEMY_CONTTHREE		510
-#define ENEMY_CONTFOUR		750
+#define ENEMY_CONTTWO		430
+#define ENEMY_CONTTHREE		530
+#define ENEMY_CONTFOUR		770
 #define ENEMY_HP			1
 class CPlayer;
 class CEnemyManager;
