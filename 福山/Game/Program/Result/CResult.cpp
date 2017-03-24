@@ -12,7 +12,7 @@
 #define T_SIZE_CLEARTIME	0.0f,0.0f,250.0f,50.0f
 #define T_SIZE_SUMEVAL		0.0f,0.0f,400.0f,100.0f						//総合評価
 #define T_SIZE_RANK			0.0f,0.0f,1200.0f,300.0f						
-#define T_SIZE_KILLS		0.0f,0.0f,300.0f,50.0f
+#define T_SIZE_KILLS		0.0f,0.0f,250.0f,50.0f
 #define T_SIZE_FRAME		0.0f,0.0f,500.0f,300.0f
 #define T_SIZE_STORYRESULT  0.0f,0.0f,400.0f,150.0f
 #define T_SIZE_TITLERETURN  0.0f,0.0f,400.0f,150.0f
@@ -24,8 +24,7 @@
 #define T_SIZE_C			EVAL_1*3,	0.0f,		EVAL_1*4.0f,		300.0f
 /*四角サイズ*/
 #define R_SIZE_STR4			-1.5f,0.5f,1.5f,-0.5f
-#define R_SIZE_STR5			-1.0f,0.2f,1.0f,-0.2f
-#define R_SIZE_STR6			-1.0f,0.2f,1.2f,-0.2f
+#define R_SIZE_STR5			-1.0f,0.3f,1.0f,-0.3f
 #define R_SIZE_RANK			-2.0f,2.0f,2.0f,-2.0f
 #define R_SIZE_CLEAR		-5.0f,0.5f,5.0f,-0.5f
 #define R_SIZE_GAMEOVER		-5.0f,0.5f,5.0f,-0.5f
@@ -35,9 +34,10 @@
 #define R_SIZE_TITLERETURN  -2.0f,0.5f,2.0f,-0.5f
 
 #define DOWN_POINT		(int)100
-#define TIME_POS		CVector2(CGame::CameraPos().x - DISP_X / 3, DISP_Y / 3 - 1.0f)
-#define KILLS_POS		CVector2(CGame::CameraPos().x - DISP_X / 3, - 1.0f)
-#define SUM_POS			CVector2(CGame::CameraPos().x- DISP_X / 3,- DISP_Y / 3- 1.0f)
+/*ポジションせってい*/
+#define TIME_POS			CVector2(CGame::CameraPos().x - DISP_X / 3, DISP_Y / 3 - 1.0f)
+#define KILLS_POS			CVector2(CGame::CameraPos().x - DISP_X / 3, - 1.0f)
+#define SUM_POS				CVector2(CGame::CameraPos().x- DISP_X / 3,- DISP_Y / 3-  1.0f)
 
 
 /*四角のポジション*/
@@ -122,7 +122,7 @@ CResult::CResult() : mTimePoint(TIMEMAX), mFlagDie(false){
 	mRectLogo[E_TIME].SetColor(COLLAR4_FIRST);
 	mRectLogo[E_TIME].SetUv(mLogoTex[E_TIME],T_SIZE_CLEARTIME);
 
-	mRectLogo[E_KILLS].SetVertex(R_SIZE_STR6);
+	mRectLogo[E_KILLS].SetVertex(R_SIZE_STR5);
 	mRectLogo[E_KILLS].SetColor(COLLAR4_FIRST);
 	mRectLogo[E_KILLS].SetUv(mLogoTex[E_KILLS], T_SIZE_KILLS);
 
@@ -182,9 +182,11 @@ void CResult::RankDecision(int i){ //bossを倒す前に関数を呼ぶ
 		else{
 			mRectLogo[E_RANK].SetUv(mLogoTex[E_RANK], T_SIZE_C);
 		}
-		sprintf_s(str[E_TIME], "%d", mTimePoint);
-		sprintf_s(str[E_KILLS], "%d", mKillPolint);
-		sprintf_s(str[E_SUM], "%d", (mKillPolint + mTimePoint));
+
+			sprintf_s(str[E_TIME], "%d", mTimePoint);
+			sprintf_s(str[E_KILLS], "%d", mKillPolint);
+			sprintf_s(str[E_SUM], "%d", (mKillPolint + mTimePoint));
+		
 		CPlayer *pl;
 		pl = dynamic_cast<CPlayer*>(CGame::getStatus(E_PLAYER));
 		mSaveResultHP = pl->mHitPoint;
@@ -243,6 +245,8 @@ void CResult::Update(){
 				mKillPolint += POINT_PLAYER;
 				b->mEnabledPoint = true;
 				mFlagDie = true;
+				mKillPolint *= 0.1f;
+				mTimePoint *= 0.1f;
 				RankDecision((mKillPolint + mTimePoint));
 			}
 
@@ -266,6 +270,33 @@ void CResult::Update(){
 	mNumber[E_TIME].render(str[E_TIME], TIME_POS, STR_SIZE, CONF_TIMENUM);
 	mNumber[E_KILLS].render(str[E_KILLS], KILLS_POS, STR_SIZE, CONF_KILLSNUM);
 	mNumber[E_SUM].render(str[E_SUM], SUM_POS, STR_SIZE, CONF_SUMNUM);
+
+
+
+
+
+	//switch (mStarusFade)
+	//{
+	//case E_FADE:
+	//	CGame::Fade(F_SPEEDBASE, &mRectFilter, F_ALFMAX);
+	//	if (FlagRectA(mRectFilter, true)){
+	//		mStarusFade = E_FADEOUT;
+	//		mFirstX = first_pos.x;
+	//	}
+	//	break;
+	//case E_FADEOUT:
+	//	CGame::FadeOut(F_SPEEDBASE, &mRectFilter);
+	//	if (FlagRectA(mRectFilter, false)){
+	//		mStarusFade = E_NOFADE;
+	//	}
+	//	break;
+	//case E_NOFADE:
+	//	mFirstX += SC_SPEED;
+	//	if (mFirstX >= arearight_x){
+	//		mStarusFade = E_FADE;
+	//	}
+	//	break;
+	//}
 
 	if (mFlagRect){ //フラグが立った時にフェード開始
 		if (mFlagDie){
@@ -313,9 +344,9 @@ void CResult::Update(){
 				//エンターキーを押したときにシーンをセレクト画面に替える処理を行う。
 				if (CKey::push(VK_RETURN))
 				{
-					CTaskManager::GetInstance()->mFlagAllkill = true;
-					CSceneManager::GetInstance()->ChangeScene(eSceneNo::E_TITLE);
+					CSceneManager::GetInstance()->ChangeScene(eSceneNo::E_GAMEOVER);
 				}
+
 			}
 		}
 	}

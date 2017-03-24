@@ -15,6 +15,7 @@
 #include "../GameScene/CGameScene.h" 
 #include "../Key/CKey.h"
 #include "../Sound/CSound.h"
+#include "../Task/CTaskManager.h"
 
 CSceneManager* CSceneManager::mSceneManager = 0;
 
@@ -79,7 +80,8 @@ void CSceneManager::ChangeScene(eSceneNo SceneNo) {
 		//ゲームオーバー画面の呼び出しを行う
 
 	case eSceneNo::E_GAMEOVER:
-
+		CTaskManager::GetInstance()->AllKill();
+		CSceneManager::GetInstance()->ChangeScene(eSceneNo::E_TITLE);
 		break;
 
 

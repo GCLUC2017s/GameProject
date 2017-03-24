@@ -38,9 +38,9 @@ switch (m_step)
 	{
 		if (mp_tutorial->GetEnd())
 		{	
-			mp_player = new CPlayer(g_tutorialNo);
+			mp_player = new CPlayer(g_tutorialNo,CVector3D(100, 0, 400));
 			new CEnemyManager();
-			mp_enemy = new CEnemy(eCarrot);
+			//mp_enemy = new CEnemy(eCarrot);
 			mp_tutorial->SetKill();
 			mp_img[0]->SetPos(280, 310);
 			mp_img[0]->SetSize(700, 150);

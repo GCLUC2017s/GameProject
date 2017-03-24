@@ -1,9 +1,9 @@
 #include"CStringtexture.h"
 #include "../CGame/CGame.h"
-#define NUM_X 100		//NUMBERのテクスチャ横幅
-#define NUM_Y 200		//NUMBERのテクスチャ縦幅
-#define NUM_SX 1000
-#define NUM_SY 200
+#define NUM_X 25		//NUMBERのテクスチャ横幅
+#define NUM_Y 50		//NUMBERのテクスチャ縦幅
+#define NUM_SX 250
+#define NUM_SY 50
 #define NUM_FILE "../CG/GameScreen/"
 
 CStringtexture::CStringtexture(){

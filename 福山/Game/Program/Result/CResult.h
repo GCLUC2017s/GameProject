@@ -35,6 +35,13 @@ private:
 	CTexture *mFilterTex;
 	CTexture *mFrameTex;
 	CTexture *mStoryResultTex;
+
+	///*フェード,フェードアウト,しない簡易シーン管理する*/
+	//enum MyFade
+	//{
+	//	E_FADE, E_FADEOUT, E_NOFADE
+	//};
+	//MyFade mStarusFade = E_NOFADE;
 	/*ロゴの名前*/
 	enum MyLogo
 	{

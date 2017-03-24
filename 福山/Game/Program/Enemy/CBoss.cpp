@@ -78,6 +78,7 @@ CBoss::CBoss() : mVelocity(0), mFrameCount(0), actionflag(false), motion(0), dir
 	mRect.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 }
+
 CBoss::~CBoss(){
 
 
@@ -147,7 +148,7 @@ void CBoss::Walk(){
 	}
 	//（ターゲットが左にいる場合）
 	if (LEFT_PTT&&mHitPoint>0) {
-		direction = 1;
+		direction = E_LEFT;
 		mStatus = E_WALK_L;
 		mVelocity = WALK_SPEED;
 		mForward = CVector2(-WALK_X, 0.0f);
@@ -388,7 +389,17 @@ void CBoss::Update(){
 	}
 
 	if (mHitPoint <= 0){
-		motion = EM_DIE;		//体力が０ならDIEする
+
+		motion = EM_DIE;
+
+		if (direction == E_RIGHT) {
+			mStatus = E_DIE_R;
+			mEnabledAttack = false;
+		}
+		else if (direction == E_LEFT){
+			mStatus = E_DIE_L;
+			mEnabledAttack = false;
+		}
 	}
 	if (mEnabledEaten){		//食べられたら消す
 		//演出加えてもいいかも(例)拡大縮小してif(サイズが0以下の時killFlagを立てるなど)

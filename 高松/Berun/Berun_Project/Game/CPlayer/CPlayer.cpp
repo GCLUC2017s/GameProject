@@ -1,10 +1,10 @@
 #include "CPlayer.h"
 
 CPlayer* CPlayer::mp_player=nullptr;
-CPlayer::CPlayer(int type) : CCharaBase(type, ePlayer, eUDP_Player,eDWP_Player)
+CPlayer::CPlayer(int type, CVector3D pos) : CCharaBase(type, ePlayer, eUDP_Player, 600 - pos.z)
 
 {
-	m_pos = CVector3D(100, 0, 400);
+	m_pos = pos;
 	mp_hpBar = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("HPBar"));
 	mp_hp = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("HP"));
 	mp_wordHp = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("WordHP"));
@@ -75,11 +75,6 @@ void CPlayer::Contlol() {
 		if (HOLD_KEY_DOWN)	m_down = true;
 		if (HOLD_KEY_LEFT)	m_left = true;
 		if (HOLD_KEY_RIGHT)	m_right = true;
-		//ジャンプ中、ダメージ中以外に何らかの移動キーを入力していれば、状態を歩きに設定する処理
-		if (m_state != eState_Jump && m_state != eState_Damage)
-		{
-			if (HOLD_KEY_UP || HOLD_KEY_DOWN || HOLD_KEY_LEFT || HOLD_KEY_RIGHT)	m_state = eState_Move;
-		}
 		//シフトキーを入力していれば、状態をダッシュに設定する処理
 		if (HOLD_KEY_SHIFT)	m_dash = true;
 		else m_dash = false;
