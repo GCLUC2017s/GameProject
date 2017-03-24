@@ -26,7 +26,7 @@ class CPlayer : public CCharaBase
 	CImage *mp_shadow;
 public:
 	static CPlayer* mp_player;
-	CPlayer(int type);
+	CPlayer(int type,CVector3D pos);
 	~CPlayer();
 //	void Update();
 	void Draw();

@@ -9,14 +9,13 @@
 	{ 0,0,0,0,0,0,0.0f },
 };*/
 
-CEnemy::CEnemy(int type) :CCharaBase(type, eEnemy, eUDP_Enemy, eDWP_Enemy)
+CEnemy::CEnemy(int type, CVector3D pos) :CCharaBase(type, eEnemy, eUDP_Enemy, 600 - pos.z)
 {
 	//CPlayer *p = dynamic_cast<CPlayer*>(CTaskManager::GetInstance()->GetTask(ePlayer));
 	//CVector3D vec = p->GetPos() - m_pos;
 	mp_player = CPlayer::mp_player;
+	m_pos = pos;
 	srand(time(nullptr));
-	m_enemyAppears = rand() % 4;
-	m_pos = CVector3D(1100 + m_scroal.x, 0, 250 + 50 * m_enemyAppears);
 	m_enemyType = type;
 	m_enemyTime = 0;
 	//m_enemyHp->SetColor(1, 0, 0, 1);

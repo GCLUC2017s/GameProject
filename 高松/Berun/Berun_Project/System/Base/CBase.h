@@ -35,10 +35,10 @@ protected:
 	CRect rect;
 	static CVector2D m_scroal;
 public:
-	CVector2D GetScroal() {
+	static CVector2D GetScroal() {
 		return m_scroal;
 	}
-	void SetScroal(CVector2D scroal) {
+	static void SetScroal(CVector2D scroal) {
 		m_scroal = scroal;
 	}
 

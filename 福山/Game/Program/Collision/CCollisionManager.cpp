@@ -6,7 +6,7 @@
 #include "../Player/CPlayer.h"
 #include "../MyNumber/CMyNumber.h"
 #define		PL_HITBUCK	player->mAttackPoint*5.0f
-#define     ENE_HITBUCK ene->mAttackPoint * 0.1f
+#define     ENE_HITBUCK 0
 #define     ALPHA		 pl->mRect.triangle1.a
 
 CCollisionManager::CCollisionManager(){
@@ -53,11 +53,11 @@ void CCollisionManager::PlayerAttack(CBase *b){
 	case E_ENEMY00:
 	case E_ENEMY01:
 	case E_BOSS:
-
     case E_LOWBOSS:
 		if (player != nullptr){
 			if (CCollision::Collision(*(CBase*)player, *b, player->mAttackAxis) &&player->mEnabledAttack){
-				b->mHitPoint -= player->mAttackPoint;
+				if (b->mMyNumber != E_BOSS)b->mHitPoint -= player->mAttackPoint;
+				if (b->mMyNumber == E_BOSS)b->mHitPoint -= player->mAttackPoint*0.05f;
 				/*ヒットバック*/
 				if (player->mSaveForward.x >= 0){ b->mPos.x += PL_HITBUCK; }		//右向きの場合
 				else{ b->mPos.x -= PL_HITBUCK; }									//左向きの場合
