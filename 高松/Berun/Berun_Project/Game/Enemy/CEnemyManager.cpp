@@ -12,6 +12,7 @@ CEnemyManager::CEnemyManager() :CTask(0, 0, 0) {
 
 
 	m_step = 0;
+	srand(time(nullptr));
 }
 CEnemyManager::~CEnemyManager() {
 

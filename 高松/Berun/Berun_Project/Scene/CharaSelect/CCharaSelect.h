@@ -28,6 +28,7 @@ class CCharaSelect : public CScene
 	CImage *m_playerMShadow;
 	CImage *m_playerWShadow;
 
+
 	//以下、キャラセレクト画面のロゴ座標を格納する変数
 	int m_charaSelectLogoX;
 	int m_charaSelectLogoY;
