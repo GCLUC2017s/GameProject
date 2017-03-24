@@ -11,19 +11,19 @@
 #define CHICK_TIME			(0.5f)
 #define DOWN_TIME			 5.0f
 
-#define RABITTO_CONT		80//ボスカウント1
-#define RABITTO_CONTTWO		160//ボスカウント2
-#define RABITTO_CONTTHREE	430//ボスカウント3
-#define RABITTO_CONTFOUR	480//ボスカウント4
-#define RABITTO_CONTFIVE	600//ボスカウント5
-#define RABITTO_X			4700//ボスX軸限界値
+#define RABITTO_CONT		60//ボスカウント1
+#define RABITTO_CONTTWO		140//ボスカウント2
+#define RABITTO_CONTTHREE	410//ボスカウント3
+#define RABITTO_CONTFOUR	460//ボスカウント4
+#define RABITTO_CONTFIVE	580//ボスカウント5
+#define RABITTO_X			5000//ボスX軸限界値
 
-#define ENEMY_X				4580
+#define ENEMY_X				4880
 #define ENEMY_Z				800
-#define ENEMY_CONTONE		300
-#define ENEMY_CONTTWO		450
-#define ENEMY_CONTTHREE		550
-#define ENEMY_CONTFOUR		790
+#define ENEMY_CONTONE		280
+#define ENEMY_CONTTWO		430
+#define ENEMY_CONTTHREE		530
+#define ENEMY_CONTFOUR		770
 #define ENEMY_HP			1
 class CPlayer;
 class CEnemyManager;
@@ -47,6 +47,7 @@ private:
 	int m_rabittoCont2;
 	float m_downCont;
 	float m_chickTime;
+
 public:
 	
 	CEnemy(int type);
