@@ -275,28 +275,28 @@ void CResult::Update(){
 
 
 
-	//switch (mStarusFade)
-	//{
-	//case E_FADE:
-	//	CGame::Fade(F_SPEEDBASE, &mRectFilter, F_ALFMAX);
-	//	if (FlagRectA(mRectFilter, true)){
-	//		mStarusFade = E_FADEOUT;
-	//		mFirstX = first_pos.x;
-	//	}
-	//	break;
-	//case E_FADEOUT:
-	//	CGame::FadeOut(F_SPEEDBASE, &mRectFilter);
-	//	if (FlagRectA(mRectFilter, false)){
-	//		mStarusFade = E_NOFADE;
-	//	}
-	//	break;
-	//case E_NOFADE:
-	//	mFirstX += SC_SPEED;
-	//	if (mFirstX >= arearight_x){
-	//		mStarusFade = E_FADE;
-	//	}
-	//	break;
-	//}
+	/*switch (mStarusFade)
+	{
+	case E_FADE:
+		CGame::Fade(F_SPEEDBASE, &mRectFilter, F_ALFMAX);
+		if (FlagRectA(mRectFilter, true)){
+			mStarusFade = E_FADEOUT;
+			mFirstX = first_pos.x;
+		}
+		break;
+	case E_FADEOUT:
+		CGame::FadeOut(F_SPEEDBASE, &mRectFilter);b
+		if (FlagRectA(mRectFilter, false)){
+			mStarusFade = E_NOFADE;
+		}
+		break;
+	case E_NOFADE:
+		mFirstX += SC_SPEED;
+		if (mFirstX >= arearight_x){
+			mStarusFade = E_FADE;
+		}
+		break;
+	}*/
 
 	if (mFlagRect){ //フラグが立った時にフェード開始
 		if (mFlagDie){
