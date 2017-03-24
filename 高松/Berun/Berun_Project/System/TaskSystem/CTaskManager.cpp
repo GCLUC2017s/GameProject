@@ -1,236 +1,202 @@
 #include "CTaskManager.h"
+#include "CTask.h"
+#include "CTaskLinker.h"
+
 
 CTaskManager* CTaskManager::mp_instance = nullptr;
-CTaskManager::CTaskManager() : mp_head(nullptr), mp_tail(nullptr)
+
+CTaskManager::CTaskManager()
+		:	mp_updHead(nullptr)
+		,	mp_updTail(nullptr)
+		,	mp_drwHead(nullptr)
+		,	mp_drwTail(nullptr)
 {
 }
 CTaskManager::~CTaskManager()
 {
 }
-void CTaskManager::Add(CTask *p)
+
+// リスト追加内部処理 
+void CTaskManager::AddTaskInner( CTaskLinker *p, CTaskLinker **pHead, CTaskLinker **pTail )
 {
 	//先頭が存在しなければ
-	if (!mp_head)
+	if ( (*pHead) == nullptr )
 	{
 		//追加されたタスクを先頭に
-		mp_head = p;
-		mp_head->mp_prev = nullptr;
-		mp_head->mp_next = p;
-		mp_tail = p;
+		*pHead = p;
+		p->mp_prev = nullptr;
+		p->mp_next = nullptr;
+		*pTail = p;
 	}
 	//先頭が存在していれば
 	else
 	{
-		CTask temp;
-		CTask *t = &temp;
-		t->mp_next = mp_head;
+		CTaskLinker *t = (*pHead);
 
-		while (t != mp_tail)
+		while ( t != nullptr )
 		{
-			t = t->mp_next;
-
-			if (t == mp_head && t->m_drawPrio > p->m_drawPrio) 
-			{ 
-				mp_head = p;
-				mp_head->mp_prev = nullptr;
+			// 挿入すべき優先度を探す 
+			if ( p->GetPriority() < t->GetPriority() ) {
+				// 挿入 
+				CTaskLinker	*prev = t->mp_prev;
+				if ( prev != nullptr ) prev->mp_next = p;
 				t->mp_prev = p;
-				if (!t->mp_next) mp_tail = t;
-				break;
+				p->mp_prev = prev;
+				p->mp_next = t;
+				// 先頭の場合 
+				if ( t == *pHead ) *pHead = p;
+				return;
 			}
-			else if (t == mp_tail) 
-			{
-				p->mp_prev = mp_tail;
-				mp_tail->mp_next = p;
-				mp_tail = p;
-				mp_tail->mp_next = nullptr;
-				break;
-			}
-			else if (t->m_drawPrio <= p->m_drawPrio && p->m_drawPrio <= t->mp_next->m_drawPrio) 
-			{ 
-				p->mp_next = t->mp_next;
-				p->mp_prev = t;
-				t->mp_next->mp_prev = p;
-				t->mp_next = p;
-				break;
-			}
+			// 次へ 
+			t = t->mp_next;
 		}
+		// 末尾に追加  
+		CTaskLinker* prev = *pTail;
+		if ( prev != nullptr ) prev->mp_next = p;
+		p->mp_prev = prev;
+		p->mp_next = nullptr;
+		(*pTail)->mp_next = p;
+		(*pTail) = p;
 	}
 }
+
+
+void CTaskManager::Add(CTask *p)
+{
+	// Update用リストに追加 
+	AddTaskInner( &(p->m_updLinker), &mp_updHead, &mp_updTail );
+
+	// Draw用リストに追加 
+	AddTaskInner( &(p->m_drwLinker), &mp_drwHead, &mp_drwTail );
+
+}
+
+
+// リストから外す 
+void CTaskManager::RemoveTaskLinker( CTaskLinker *p, CTaskLinker **pHead, CTaskLinker **pTail )
+{
+	// 前後を繋ぎ直し 
+	CTaskLinker *prev = p->mp_prev;
+	CTaskLinker *next = p->mp_next;
+	if ( prev != nullptr ) prev->mp_next = next;
+	if ( next != nullptr ) next->mp_prev = prev;
+
+	// 自身のリンクをクリア 
+	p->mp_prev = nullptr;
+	p->mp_next = nullptr;
+
+	// 先頭を再設定 
+	if ( *pHead == p ) *pHead = next;
+	// 終端を再設定 
+	if ( *pTail == p ) *pTail = prev;
+}
+
+
+
 CTask* CTaskManager::Kill(CTask *p)
 {
-	CTask *next = p->mp_next;
-	CTask *prev = p->mp_prev;
-	//タスクマネージャーの先頭を再設定
-	if (p == mp_head) mp_head = next;
-	//タスクマネージャーの末尾を再設定
-	if (p == mp_tail) mp_tail = prev;
-	//削除するタスクの「前タスクの次の位置」を削除するタスクの「次タスクの位置」に繋ぐ。
-	if(prev)prev->mp_next = next;
-	//削除するタスクの「次タスクの前の位置」を削除するタスクの「前タスクの位置」に繋ぐ。
-	if(next)next->mp_prev = prev;
-	//その後、指定した特定のタスクを削除し、次のタスクを返す。
+	CTask *next = nullptr;
+	if ( p->m_updLinker.mp_next != nullptr ) next = p->m_updLinker.mp_next->mp_task;
+
+	// リストから外す 
+	RemoveTaskLinker( &(p->m_updLinker), &mp_updHead, &mp_updTail );
+	RemoveTaskLinker( &(p->m_drwLinker), &mp_drwHead, &mp_drwTail );
+
+	// 削除 
 	delete p;
+
+	// 後続を返す 
 	return next;
+
 }
+
 void CTaskManager::KillAppoint()
 {
 	//先頭から順に削除フラグが真のタスクを削除していく
-	CTask *p = mp_head;
+	CTaskLinker *p = mp_updHead;
 	while (p)
 	{
-		if (p->m_destroyFlg) p = Kill(p);
-		else p = p->mp_next;
+		CTaskLinker	*next = p->mp_next;
+		if ( p->mp_task->m_destroyFlg ) Kill(p->mp_task);
+		p = next;
 	}
+
 }
 
 void CTaskManager::KillAll()
 {
 	//先頭からタスクを削除していく
-	CTask *p = mp_head;
-	while (p)
+	CTaskLinker *p = mp_updHead;
+	while ( p )
 	{
-		p = Kill(p);
+		CTaskLinker *next = p->mp_next;
+		Kill( p->mp_task );
+		p = next;
 	}
 }
+
 void CTaskManager::UpdateAll()
 {
 	//先頭から順にタスクを更新していく
-	CTask *p = mp_head;
-	while (p)
+	CTaskLinker *p = mp_updHead;
+	while ( p )
 	{
-		//SortAscUpdate();
-		p->Update();
+		p->mp_task->Update();
 		p = p->mp_next;
 	}
 }
+
 void CTaskManager::DrawAll()
 {
 	//先頭から順にタスクを描画していく
-	CTask *p = mp_head;
-	while (p)
+	CTaskLinker *p = mp_drwHead;
+	while ( p )
 	{
-		//SortAscDraw();
-		p->Draw();
+		p->mp_task->Draw();
 		p = p->mp_next;
 	}
 }
 
-void CTaskManager::SwapTask(CTask **p, CTask **n)
+
+// 更新優先度を変更 
+void CTaskManager::ChangeUpdatePrio(CTask *p, int prio)
 {
-	CTask *t = *n;
-	*n = *p;
-	*p = t;
+	// リンクから除外する 
+	RemoveTaskLinker( &(p->m_updLinker), &mp_updHead, &mp_updTail );
+
+	// プライオリティーを設定 
+	p->m_updLinker.SetPriority(prio);
+
+	// Update用リストに追加 
+	AddTaskInner( &(p->m_updLinker), &mp_updHead, &mp_updTail );
+
 }
 
-void CTaskManager::SortAscUpdate()
+// 描画優先度を変更 
+void CTaskManager::ChangeDrawPrio(CTask *p, int prio)
 {
-	CTask temp;
-	CTask *p = &temp;
-	CTask *n = &temp;
+	// リンクから除外する 
+	RemoveTaskLinker( &(p->m_drwLinker), &mp_drwHead, &mp_drwTail );
 
-	//それぞれの次のタスクを先頭に設定
-	p->mp_next = mp_head;
-	n->mp_next = mp_head;
+	// プライオリティーを設定 
+	p->m_drwLinker.SetPriority(prio);
 
-	//pの次のタスクが末尾で無ければ
-	while (p->mp_next != mp_tail)
-	{
-		//pの次のタスクをpに代入
-		p = p->mp_next;
-		//変更した後のpの次のタスクをnに代入
-		n = p->mp_next;
-
-		//更新順序の比較
-		if (p->m_updatePrio > n->m_updatePrio)
-		{
-			//避難用変数
-			CTask tp;
-			CTask tn;
-			//入れ替え
-			SwapTask(&p, &n);
-			//タスク避難
-			tp.mp_prev = p->mp_prev;
-			tp.mp_next = p->mp_next;
-			tn.mp_prev = n->mp_prev;
-			tn.mp_next = n->mp_next;
-			//順序入れ替え
-			p->mp_prev = tn.mp_prev;
-			p->mp_next = tp.mp_prev;
-			n->mp_next = tp.mp_next;
-			n->mp_prev = tn.mp_next;
-
-			if (!p->mp_prev) mp_head = p;
-			if (!n->mp_next) mp_tail = n;
-			if (p->mp_prev) p->mp_prev->mp_next = p;
-			if (p->mp_next) p->mp_next->mp_prev = p;
-			if (n->mp_prev) n->mp_prev->mp_next = n;
-			if (n->mp_next) n->mp_next->mp_prev = n;
-			
-			p = mp_head;
-		}
-	}
+	// Update用リストに追加 
+	AddTaskInner( &(p->m_drwLinker), &mp_drwHead, &mp_drwTail );
 }
 
-void CTaskManager::SortAscDraw()
-{
-	CTask temp;
-	CTask *p = &temp;
-	CTask *n = &temp;
 
-	//それぞれの次のタスクを先頭に設定
-	p->mp_next = mp_head;
-	n->mp_next = mp_head;
 
-	//pの次のタスクが末尾で無ければ
-	while (p->mp_next != mp_tail)
-	{
-		//pの次のタスクをpに代入
-		p = p->mp_next;
-		//変更した後のpの次のタスクをnに代入
-		n = p->mp_next;
-
-		//更新順序の比較
-		if (p->m_drawPrio > n->m_drawPrio)
-		{
-			//避難用変数
-			CTask tp;
-			CTask tn;
-			//入れ替え
-			SwapTask(&p, &n);
-			//タスク避難
-			tp.mp_prev = p->mp_prev;
-			tp.mp_next = p->mp_next;
-			tn.mp_prev = n->mp_prev;
-			tn.mp_next = n->mp_next;
-			//順序入れ替え
-			p->mp_prev = tn.mp_prev;
-			p->mp_next = tp.mp_prev;
-			n->mp_next = tp.mp_next;
-			n->mp_prev = tn.mp_next;
-
-			if (!p->mp_prev) mp_head = p;
-			if (!n->mp_next) mp_tail = n;
-			if (p->mp_prev) p->mp_prev->mp_next = p;
-			if (p->mp_next) p->mp_next->mp_prev = p;
-			if (n->mp_prev) n->mp_prev->mp_next = n;
-			if (n->mp_next) n->mp_next->mp_prev = n;
-
-			p = mp_head;
-		}
-	}
-}
 
 CTask* CTaskManager::GetTask(int id)
 {
-	CTask *p = mp_head;
-	//引数があれば
-	while (p)
+	CTaskLinker *p = mp_updHead;
+	while ( p )
 	{
-		//idが一致していればそのタスクを返す
-		if (p->m_id == id) return p;
-		else p = p->mp_next;
+		if ( p->mp_task->m_id == id ) return p->mp_task;
+		p = p->mp_next;
 	}
-	
+
 	//以外ならnullを返す
 	return nullptr;
 }
@@ -238,17 +204,14 @@ CTask* CTaskManager::GetTask(int id)
 int CTaskManager::GetCount(int id)
 {
 	int cnt = 0;
-	CTask *p = mp_head;
-	//引数があれば
-	while (p)
+
+	CTaskLinker *p = mp_updHead;
+	while ( p )
 	{
-		//idが一致していればカウントアップ
-		if (p->m_id == id)
-		{
-			cnt++;
-			p = p->mp_next;
-		}
+		if ( p->mp_task->m_id == id ) cnt ++;
+		p = p->mp_next;
 	}
+
 	//個数を返す
 	return cnt;
 }
