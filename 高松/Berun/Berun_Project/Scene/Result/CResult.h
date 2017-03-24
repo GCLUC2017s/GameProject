@@ -7,6 +7,7 @@
 #ifndef RESULT_GUARD
 #define RESULT_GUARD
 
+
 #include "CImage.h"
 #include "../CScene.h"
 #include "../Game/Item/CItem.h"
@@ -20,11 +21,6 @@ enum E_ResultData
 {
 	eResultBackGround,
 	eClear,
-	eRankA,
-	eRankB,
-	eRankC,
-	eRankS,
-	eRank,
 	eSelect,
 	eItem,
 	eArrow,
@@ -33,7 +29,6 @@ enum E_ResultData
 	eSelectStart,
 
 	eCraft = eSelectStart,
-	eResultTitle,
 	eItem1,
 	eItem2,
 	eItem3,
@@ -51,37 +46,25 @@ enum E_ResultData
 	eItem15,
 	eItem16,
 
-	eSelectEnd,
+	eSelectEnd = eItem16,
 
-	eMax = eSelectEnd,
-};
-//選択データ
-enum E_SelectData
-{
-	eSelectTitle,
-	eSelectCraft,
-	eSelectUdon,
-	eSelectBread,
-	eSelectRice,
-	eSelectMeet,
-	eSelectCheese,
-	eSelectChicken,
-	eSelectPork,
-	eSelectEgg,
-	eSelectOil,
-	eSelectMilk,
-	eSelectCarrot,
-	eSelectStrawberry,
-	eSelectApple,
-	eSelectPaprika,
-	eSelectFish,
-	eSelectSquid,
-	eFull,
+	eRankDraw,
+
+	eRankA = eRankDraw,
+	eRankB,
+	eRankC,
+	eRankS,
+	eRank,
+	eRankEnd = eRank,
+
+	eResultTitle,
+
+	eMax,
 };
 
-struct T_ResultData 
+struct T_ResultData
 {
-	float xSize;	
+	float xSize;
 	float ySize;
 	CVector2D pos;
 };
@@ -94,14 +77,15 @@ private:
 	float  m_xSize;
 	float  m_ySize;
 	int    m_corsol;
-	//E_Item m_box[BAG_MAX];
+	int    m_box[BAG_MAX];
+	bool   m_imgFlg;
 public:
 	CResult();
 	~CResult();
 	void Update();
 	void Draw();
 	void DarkenColor();
-	//void SelectItem(int box,E_Item &item);
+	void SelectItem(int box, T_ItemData &item);
 };
 
 #endif
