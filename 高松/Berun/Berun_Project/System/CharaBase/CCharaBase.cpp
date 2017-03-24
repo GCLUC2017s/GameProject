@@ -81,7 +81,7 @@ T_AnimData _bosscarrotAnimData[] = {
 	{ "Chick",3,5,3,3,0,0,1,0,0,1,2,0,2,1,{ 160,160 } ,_chickAnimData,{ 220,220 },{ 60,160 },CRect(-60,-160,60,0) },
 	{ "Fish",4,5,2,2,0,0,1,0,0,1,1,0,2,1,{ 160,160 } ,_fishAnimData,{ 200,200 },{ 60,160 },CRect(-60,-160,60,0)},
 	{ "Pig",5,5,3,3,0,0,1,0,0,1,4,0,3,1,{ 160,160 } ,_pigAnimData,{ 220,220 },{ 60,160 },CRect(-60,-130,60,0)},
-	{ "Boss",6,5,8,8,0,0,1,0,0,1,4,0,2,1,{ 240,240 } ,_bossAnimData,{ 500,500 },{ 120,200 },CRect(-60,-160,60,0) },
+	{ "Boss",6,5,7,7,0,0,1,0,0,1,4,0,2,1,{ 360,360 } ,_bossAnimData,{ 500,500 },{ 150,260 },CRect(-60,-160,60,0) },
 	//{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Rice",5,5,0,0,0,0,0,0,0,1,0,0,0 },
 };
@@ -283,6 +283,8 @@ void CCharaBase::Update()
 }
 void CCharaBase::Draw()
 {
+		if (m_damageTime % (int)FLASH_INTERBAL < 100 && m_damage)		m_chara->SetColor(RED_COLOR);
+		else m_chara->SetColor(NORMAL_COLOR);
 		m_chara->SetCenter(mp_eData->senter.x, mp_eData->senter.y);
 		Animation();
 		m_chara->SetSize(mp_eData->size.x, mp_eData->size.y);
@@ -318,8 +320,6 @@ void CCharaBase::Damage()
 		if(m_damageDirection)	m_pos.x -= 5;
 		else m_pos.x += 5;
 		m_damageTime += CHANGE_TIME(MILLI_SECOUND(DAMAGE_TIME));
-		if (m_damageTime % (int)FLASH_INTERBAL < 100)		m_chara->SetColor(RED_COLOR);
-		else m_chara->SetColor(NORMAL_COLOR);
 	}
 	else
 	{

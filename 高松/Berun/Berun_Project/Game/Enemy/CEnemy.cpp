@@ -55,19 +55,19 @@ void CEnemy::Contlol() {
 
 					
 					if(m_chickTime>=RABBIT_CONTTWO&&m_chickTime<=RABBIT_CONTTHREE)
-						if (vec.x < 20) {
+						if (vec.x <VEC_XZ) {
 							m_left = true;
 							m_dash = true;
 						}
 
-						if (vec.x > -20) {
+						if (vec.x > VEC_XXZZ) {
 							m_right = true;
 							m_dash = true;
 						}
-						if (vec.z > -20) {
+						if (vec.z > VEC_XXZZ) {
 							m_up = true;
 						}
-						if (vec.z < 20) {
+						if (vec.z < VEC_XZ) {
 							m_down = true;
 						}
 					
@@ -89,29 +89,29 @@ void CEnemy::Contlol() {
 				m_chickTime += CHICK_TIME;
 
 				if (m_chickTime <= 120) {
-					if (vec.x < 20) {
+					if (vec.x < VEC_XZ) {
 						m_left = true;
 						m_attack = true;
 					}
 
-					if (vec.x > -20) {
+					if (vec.x > VEC_XXZZ) {
 						m_right = true;
 						m_attack = true;
 					}
 
 				}
 				if (m_chickTime >= 120 && m_chickTime <= 160) {
-					if (vec.x < 20) {
+					if (vec.x <VEC_XZ) {
 						m_left = true;
 					}
 
-					if (vec.x > -20) {
+					if (vec.x > VEC_XXZZ) {
 						m_right = true;
 					}
-					if (vec.z > -20) {
+					if (vec.z > VEC_XXZZ) {
 						m_up = true;
 					}
-					if (vec.z < 20) {
+					if (vec.z < VEC_XZ) {
 						m_down = true;
 					}
 				}
@@ -134,29 +134,29 @@ void CEnemy::Contlol() {
 			//魚行動パターン
 			m_chickTime += CHICK_TIME;
 			if (m_chickTime > 60 && m_chickTime <= 80) {
-				if (vec.x < 20) {
+				if (vec.x < VEC_XZ) {
 					m_dash = true;
 					m_left = true;
 				}
-				if (vec.x > -20) {
+				if (vec.x > VEC_XXZZ) {
 					m_dash = true;
 					m_right = true;
 
 				}
-				if (vec.z > -20) {
+				if (vec.z >VEC_XXZZ) {
 					m_up = true;
 				}
-				if (vec.z < 20) {
+				if (vec.z < VEC_XZ) {
 					m_down = true;
 				}
 
 			}
 			if (m_chickTime >= 100 && m_chickTime <= 120) {
-				if (vec.x < 20) {
+				if (vec.x < VEC_XZ) {
 					m_dash = true;
 					m_left = true;
 				}
-				if (vec.x > -20) {
+				if (vec.x > VEC_XXZZ) {
 					m_dash = true;
 					m_right = true;
 
@@ -213,18 +213,18 @@ void CEnemy::Contlol() {
 				if (vec.x > 140) {
 					m_right = true;
 				}
-				if (vec.z > -20) {
+				if (vec.z > VEC_XXZZ) {
 					m_up = true;
 				}
-				if (vec.z < 20) {
+				if (vec.z < VEC_XZ) {
 					m_down = true;
 				}
 			}
 			if (m_chickTime >= 150 && m_chickTime <= 170) {
-				if (vec.x < 20) {
+				if (vec.x < VEC_XZ) {
 					m_left = true;
 				}
-				if (vec.x > -20) {
+				if (vec.x > VEC_XXZZ) {
 					m_right = true;
 				}
 				m_jump = true;
@@ -257,6 +257,7 @@ void CEnemy::HitCallBack(CCollisionA * p)
 		m_hp-=ENEMY_HP;
 		if (!m_hp)	m_death = true;
 		m_damage = true;
+		m_state = eState_Damage;
 	}
 }
 
