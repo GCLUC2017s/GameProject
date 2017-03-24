@@ -12,7 +12,7 @@
 #define T_SIZE_CLEARTIME	0.0f,0.0f,250.0f,50.0f
 #define T_SIZE_SUMEVAL		0.0f,0.0f,400.0f,100.0f						//総合評価
 #define T_SIZE_RANK			0.0f,0.0f,1200.0f,300.0f						
-#define T_SIZE_KILLS		0.0f,0.0f,300.0f,50.0f
+#define T_SIZE_KILLS		0.0f,0.0f,250.0f,50.0f
 #define T_SIZE_FRAME		0.0f,0.0f,500.0f,300.0f
 #define T_SIZE_STORYRESULT  0.0f,0.0f,400.0f,150.0f
 #define T_SIZE_TITLERETURN  0.0f,0.0f,400.0f,150.0f
@@ -314,12 +314,12 @@ void CResult::Update(){
 					CGame::FadeOut(F_SPEEDBASE, &mRectLogo[i]);
 				}
 
-				//エンターキーを押したときにシーンをセレクト画面に替える処理を行う。
-				if (CKey::push(VK_RETURN))
-				{
-					CTaskManager::GetInstance()->mFlagAllkill = true;
-					CSceneManager::GetInstance()->ChangeScene(eSceneNo::E_TITLE);
-				}
+				////エンターキーを押したときにシーンをセレクト画面に替える処理を行う。
+				//if (CKey::push(VK_RETURN))
+				//{
+				//	CTaskManager::GetInstance()->mFlagAllkill = true;
+				//	CSceneManager::GetInstance()->ChangeScene(eSceneNo::E_TITLE);
+				//}
 			}
 		}
 	}
