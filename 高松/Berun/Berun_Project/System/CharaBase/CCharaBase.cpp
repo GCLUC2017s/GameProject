@@ -283,6 +283,8 @@ void CCharaBase::Update()
 }
 void CCharaBase::Draw()
 {
+		if (m_damageTime % (int)FLASH_INTERBAL < 100 && m_damage)		m_chara->SetColor(RED_COLOR);
+		else m_chara->SetColor(NORMAL_COLOR);
 		m_chara->SetCenter(mp_eData->senter.x, mp_eData->senter.y);
 		Animation();
 		m_chara->SetSize(mp_eData->size.x, mp_eData->size.y);
@@ -318,8 +320,6 @@ void CCharaBase::Damage()
 		if(m_damageDirection)	m_pos.x -= 5;
 		else m_pos.x += 5;
 		m_damageTime += CHANGE_TIME(MILLI_SECOUND(DAMAGE_TIME));
-		if (m_damageTime % (int)FLASH_INTERBAL < 100)		m_chara->SetColor(RED_COLOR);
-		else m_chara->SetColor(NORMAL_COLOR);
 	}
 	else
 	{
