@@ -17,7 +17,7 @@ CSceneManager::CSceneManager() :
 	m_nextNum(eNone),
 	mp_scene(nullptr)
 {
-	ChangeScene(eResult);
+	ChangeScene(eLogo);
 }
 
 
