@@ -48,7 +48,7 @@ T_AnimData _pigAnimData[] = {
 	{ 2,5 },
 	{ 2,5 },
 	{ 0,0 },
-	{ 2,8 },
+	{ 3,20 },
 	{ 5,10 },
 
 };
@@ -327,7 +327,7 @@ bool CCharaBase::CheckHit(CCollisionA *t)
 	assert(tt);
 	CRect p_rect = GetRect();
 	CRect t_rect = tt->GetRect();
-	if (!tt->m_death && !m_damage && abs(m_pos.z - tt->m_pos.z) < 50 && p_rect.m_right > t_rect.m_left && p_rect.m_left < t_rect.m_right && p_rect.m_top > t_rect.m_bottom && p_rect.m_bottom < t_rect.m_top) {
+	if (!tt->m_death && !m_damage && abs(m_pos.z - tt->m_pos.z) < 100 && p_rect.m_right > t_rect.m_left && p_rect.m_left < t_rect.m_right && p_rect.m_top > t_rect.m_bottom && p_rect.m_bottom < t_rect.m_top) {
 		HitCallBack(t);
 		t->HitCallBack(this);
 	}
