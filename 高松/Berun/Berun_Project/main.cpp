@@ -136,9 +136,6 @@ void init(void)
 	CResourceManager::GetInstance()->Add("BackGround", CImage::LoadImage("BackGround/Back/Back_02.png"));
 	CResourceManager::GetInstance()->Add("BackGround2", CImage::LoadImage("BackGround/Back/Back_02.png"));
 	CResourceManager::GetInstance()->Add("Carrot", CImage::LoadImage("Enemy/Carrot.png"));
-	CResourceManager::GetInstance()->Add("Paprika", CImage::LoadImage("Enemy/Paprika.png"));
-	CResourceManager::GetInstance()->Add("Rice", CImage::LoadImage("Enemy/Rice.png"));
-	CResourceManager::GetInstance()->Add("Squid", CImage::LoadImage("Enemy/Squid.png"));
 	CResourceManager::GetInstance()->Add("Carrottwo", CImage::LoadImage("Enemy/Carrot.png"));
 	CResourceManager::GetInstance()->Add("Chick", CImage::LoadImage("Enemy/Chick.png"));
 	CResourceManager::GetInstance()->Add("Fish", CImage::LoadImage("Enemy/Fish.png"));

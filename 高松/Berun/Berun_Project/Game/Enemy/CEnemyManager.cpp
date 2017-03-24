@@ -36,12 +36,12 @@ void CEnemyManager::Update () {
 	
 
 		if (m_enemy < ENEMY_MAXONE) {
-			if (vec.x > 400&&vec.x<1200) {
+			if (vec.x >-300&&vec.x<1200) {
 					m_enemyCont += ENEMY_COUNT;
 					if (m_enemyCont > ENEMY_TIME) {
 						m_enemyCont = 0;
 						m_enemy++;
-						Add(m_enemyType + 2 + m_enemy);
+						Add(m_enemyType + 1 + m_enemy);
 						
 						
 					}
@@ -74,7 +74,7 @@ void CEnemyManager::Update () {
 		if (m_enemy < ENEMY_MAX) {
 			m_enemy++;
 			
-			Add(m_enemyType + 4+m_enemy);
+			Add(m_enemyType + 5+m_enemy);
 		}
 	}
 }
