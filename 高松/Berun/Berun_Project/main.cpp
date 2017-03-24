@@ -8,6 +8,7 @@
 #include "stdafx.h"
 #include "Global.h"
 #include "../Scene/CSceneManager.h"
+#include "../System/TaskSystem/CTaskManager.h"
 
 void display(void) {
 	//各バッファーをクリア
@@ -267,7 +268,7 @@ int __main(int* argcp, char** argv) {
 	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	glutInit(argcp, argv);
 
-
+	CTaskManager::ClearInstance();
 
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH);
 
@@ -341,6 +342,7 @@ INT WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR argv, INT argc)
 int main(int argc, char** argv)
 {
 	return __main(&argc, argv);
+	
 }
 
 void DrawSphere(CVector3D &p, float radius, CVector4D &color) {
