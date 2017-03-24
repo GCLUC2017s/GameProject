@@ -11,19 +11,13 @@
 #define CHICK_TIME			(0.5f)
 #define DOWN_TIME			 5.0f
 
-#define RABITTO_CONT		60//ボスカウント1
-#define RABITTO_CONTTWO		140//ボスカウント2
-#define RABITTO_CONTTHREE	410//ボスカウント3
-#define RABITTO_CONTFOUR	460//ボスカウント4
-#define RABITTO_CONTFIVE	580//ボスカウント5
-#define RABITTO_X			4800//ボスX軸限界値
+#define RABBIT_CONT		60//ボスカウント1
+#define RABBIT_CONTTWO		80//ボスカウント2
+#define RABBIT_CONTTHREE	100//ボスカウント3
+#define RABBIT_CONTFOUR		160//ボスカウント４
+#define RABBIT_X			4800//ボスX軸限界値
 
-#define ENEMY_X				4680
-#define ENEMY_Z				800
-#define ENEMY_CONTONE		260
-#define ENEMY_CONTTWO		430
-#define ENEMY_CONTTHREE		530
-#define ENEMY_CONTFOUR		770
+
 #define ENEMY_HP			1
 class CPlayer;
 class CEnemyManager;
