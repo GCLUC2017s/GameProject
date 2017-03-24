@@ -7,12 +7,14 @@
 
 #ifndef CENEMYMANAGER_GURAD
 #define CENEMYMANAGER_GUARD
-#define ENEMY_MAX 6//“G‚ÌÅ‘å”
-#define ENEMY_MAXONE 2//“G‚ÌÅ‘å”2
+#define ENEMY_MAX 1//“G‚ÌÅ‘å”
+#define ENEMY_MAXONE 5//“G‚ÌÅ‘å”2
 #define ENEMY_MAXTWO 3//“G‚ÌÅ‘å”3
 #define ENEMY_DATA 0//“G‚ÌŒ»İ”
 #define ENEMY_TIME 200//“G¶¬ˆ—
 #define ENEMY_COUNT 1
+#define ENEMY_POS 1100
+
 
 #include"../System/TaskSystem/CTaskManager.h"
 #include"../Global.h"
@@ -21,11 +23,13 @@
 class CPlayer;
 class CEnemyManager  : public CTask{
 private:
+	int m_cont;
 	int m_enemyCont;
 	int m_enemy;
 	int m_enemyType;
 	CPlayer *mp_player;
 	CImage *m_enemyHp;
+	int m_step;
 //	static CEnemyManager* m_instance;
 public:
 	

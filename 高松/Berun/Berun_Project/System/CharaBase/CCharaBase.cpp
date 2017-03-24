@@ -1,7 +1,7 @@
 #include "CCharaBase.h"
 #include "../Game/CollisionManager/CollisionManager.h"
 #include "../TaskSystem/CTaskManager.h"
-#define HitCheck
+//#define HitCheck
 T_AnimData _playerMAnimData[] = {
 	{ 1,5 },
 	{ 6,5 },
@@ -73,34 +73,15 @@ T_AnimData _bosscarrotAnimData[] = {
 
 
 };
-T_AnimData _riceAnimData[] = {
-	{ 3,8 },
-	{ 2,8 },
-	
-};
-T_AnimData _squidAnimData[] = {
-	{ 3,8 },
-	{ 2,8 },
-};
-T_AnimData _papurikaAnimData[] = {
-	{ 4,8 },
-	{ 3,8 },
-
-};
  static const T_CharacterData g_characterData[] =
 {
 	{ "LittlePlayerM",0,5,10,10,3,3,0,0,0,1,5,0,4,0,{ 300,240 } ,_playerMAnimData,{ 500,400 },{ 135,230 },CRect(-40,-160,40,0) },
 	{ "LittlePlayerW",1,5,10,10,3,3,0,0,0,1,4,0,4,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 135,160 },CRect(-35,-160,45,0) },
-	{ "Carrot",2,5,3,3,0,0,5,0,0,1,3,0,1,1,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0) },
+	{ "Carrot",2,5,2,2,0,0,5,0,0,1,3,0,1,1,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0) },
 	{ "Chick",3,5,3,3,0,0,1,0,0,1,2,0,2,1,{ 160,160 } ,_chickAnimData,{ 220,220 },{ 60,160 },CRect(-60,-160,60,0) },
-	{ "Fish",4,5,3,3,0,0,1,0,0,1,1,0,2,1,{ 160,160 } ,_fishAnimData,{ 200,200 },{ 60,160 },CRect(-60,-160,60,0)},
+	{ "Fish",4,5,2,2,0,0,1,0,0,1,1,0,2,1,{ 160,160 } ,_fishAnimData,{ 200,200 },{ 60,160 },CRect(-60,-160,60,0)},
 	{ "Pig",5,5,3,3,0,0,1,0,0,1,4,0,3,1,{ 160,160 } ,_pigAnimData,{ 220,220 },{ 60,160 },CRect(-60,-130,60,0)},
-	{ "Rice",6,5,1,1,0,0,5,0,0,1,3,0,2,1,{ 160,160 } ,_riceAnimData,{ 145,145 },{ 60,160 },CRect(-60,-160,60,0) },
-	{ "Squid",7,5,1,1,0,0,5,0,0,1,3,0,2,1,{ 160,160 } ,_squidAnimData,{ 250,250 },{ 60,160 },CRect(-60,-160,60,0) },
-	{ "Paprika",8,5,1,1,0,0,5,0,0,1,3,0,2,1,{ 160,160 } ,_papurikaAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0) },
-	{ "Boss",9,5,20,20,0,0,1,0,0,1,4,0,2,1,{ 240,240 } ,_bossAnimData,{ 500,500 },{ 120,200 },CRect(-60,-160,60,0) },
-	{ "Carrottwo",10,5,5,5,0,0,5,0,0,1,3,0,2,1,{ 160,160 } ,_bosscarrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0) },
-	
+	{ "Boss",6,5,7,7,0,0,1,0,0,1,4,0,2,1,{ 360,360 } ,_bossAnimData,{ 500,500 },{ 150,260 },CRect(-60,-160,60,0) },
 	//{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Rice",5,5,0,0,0,0,0,0,0,1,0,0,0 },
 };
@@ -302,6 +283,8 @@ void CCharaBase::Update()
 }
 void CCharaBase::Draw()
 {
+		if (m_damageTime % (int)FLASH_INTERBAL < 100 && m_damage)		m_chara->SetColor(RED_COLOR);
+		else m_chara->SetColor(NORMAL_COLOR);
 		m_chara->SetCenter(mp_eData->senter.x, mp_eData->senter.y);
 		Animation();
 		m_chara->SetSize(mp_eData->size.x, mp_eData->size.y);
@@ -337,8 +320,6 @@ void CCharaBase::Damage()
 		if(m_damageDirection)	m_pos.x -= 5;
 		else m_pos.x += 5;
 		m_damageTime += CHANGE_TIME(MILLI_SECOUND(DAMAGE_TIME));
-		if (m_damageTime % (int)FLASH_INTERBAL < 100)		m_chara->SetColor(RED_COLOR);
-		else m_chara->SetColor(NORMAL_COLOR);
 	}
 	else
 	{

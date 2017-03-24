@@ -8,6 +8,7 @@
 #include "stdafx.h"
 #include "Global.h"
 #include "../Scene/CSceneManager.h"
+#include "../System/TaskSystem/CTaskManager.h"
 
 void display(void) {
 	//各バッファーをクリア
@@ -135,9 +136,6 @@ void init(void)
 	CResourceManager::GetInstance()->Add("BackGround", CImage::LoadImage("BackGround/Back/Back_02.png"));
 	CResourceManager::GetInstance()->Add("BackGround2", CImage::LoadImage("BackGround/Back/Back_02.png"));
 	CResourceManager::GetInstance()->Add("Carrot", CImage::LoadImage("Enemy/Carrot.png"));
-	CResourceManager::GetInstance()->Add("Paprika", CImage::LoadImage("Enemy/Paprika.png"));
-	CResourceManager::GetInstance()->Add("Rice", CImage::LoadImage("Enemy/Rice.png"));
-	CResourceManager::GetInstance()->Add("Squid", CImage::LoadImage("Enemy/Squid.png"));
 	CResourceManager::GetInstance()->Add("Carrottwo", CImage::LoadImage("Enemy/Carrot.png"));
 	CResourceManager::GetInstance()->Add("Chick", CImage::LoadImage("Enemy/Chick.png"));
 	CResourceManager::GetInstance()->Add("Fish", CImage::LoadImage("Enemy/Fish.png"));
@@ -270,7 +268,7 @@ int __main(int* argcp, char** argv) {
 	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	glutInit(argcp, argv);
 
-
+	CTaskManager::ClearInstance();
 
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH);
 
@@ -344,6 +342,7 @@ INT WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR argv, INT argc)
 int main(int argc, char** argv)
 {
 	return __main(&argc, argv);
+	
 }
 
 void DrawSphere(CVector3D &p, float radius, CVector4D &color) {

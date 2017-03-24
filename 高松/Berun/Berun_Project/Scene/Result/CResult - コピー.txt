@@ -62,9 +62,9 @@ enum E_ResultData
 	eMax,
 };
 
-struct T_ResultData
+struct T_ResultData 
 {
-	float xSize;
+	float xSize;	
 	float ySize;
 	CVector2D pos;
 };
@@ -85,7 +85,7 @@ public:
 	void Update();
 	void Draw();
 	void DarkenColor();
-	void SelectItem(int box, T_ItemData &item);
+	void SelectItem(int box,T_ItemData &item);
 };
 
 #endif
