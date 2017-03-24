@@ -24,7 +24,7 @@ CEnemy::CEnemy(int type) :CCharaBase(type, eEnemy, eUDP_Enemy, eDWP_Enemy)
 	m_rabittoCont = 0;
 	m_rabittoCont2 = 0;
 	m_cont =0;
-
+	m_downCont = 0;
 }
 CEnemy::~CEnemy() {
 
@@ -44,18 +44,18 @@ void CEnemy::Contlol() {
 
 		if (m_enemyType == 6) {
 		
-				m_pos = CVector3D(5000, 0, 600);
+				m_pos = CVector3D(5000, 0, 800);
 			
 			
 		}
 		if (m_enemyType == 7) {
 			
-				m_pos = CVector3D(5000, 0, 400);
+				m_pos = CVector3D(4500, 0, 800);
 			
 		}
 		if (m_enemyType == 8) {
 			
-				m_pos = CVector3D(5000, 0, 200);
+				m_pos = CVector3D(4600, 0, 800);
 		
 		}
 		
@@ -98,7 +98,7 @@ void CEnemy::Contlol() {
 				if (m_cont <= 2) {
 					
 					if (m_rabittoCont < 100) {
-						m_pos = CVector3D(RABITTO_X, 0, 300);
+						m_pos = CVector3D(RABITTO_X-200, 0, 300);
 					}
 					if (m_pos.x > RABITTO_X) {
 						m_pos.x = RABITTO_X;
@@ -127,10 +127,11 @@ void CEnemy::Contlol() {
 				}
 			}
 			if (m_enemyType == 10) {
-				if (m_hp <= 1) {
-					m_hp -= ENEMY_HP;
+				if (m_cont >= 2) {
+					m_cont = 3;
+					
 				}
-				if (m_hp >= 1) {
+				if (m_cont<=2) {
 					//ƒjƒ“ƒWƒ“‚Ìs“®
 					if (m_rabittoCont > 0 && m_rabittoCont < 100) {
 						m_pos = CVector3D(ENEMY_X, 0, ENEMY_Z);
@@ -166,7 +167,7 @@ void CEnemy::Contlol() {
 					}
 					if (m_rabittoCont > ENEMY_CONTFOUR) {
 						m_rabittoCont = 200;
-
+						m_cont++;
 					}
 				}
 			}
@@ -329,7 +330,7 @@ void CEnemy::Contlol() {
 
 void CEnemy::HitCallBack(CCollisionA * p)
 {
-	CCharaBase::HitCallBack(p);
+	
 	CCharaBase* tt = dynamic_cast<CCharaBase*>(p);
 	//‚à‚µ“G“¯Žm‚ªÕ“Ë‚µ‚½‚ç
 	if (m_type == tt->CheckType())
@@ -338,6 +339,8 @@ void CEnemy::HitCallBack(CCollisionA * p)
 	}
 	else if (tt->CheckState() == eState_Attack)
 	{
+		if(m_pos.x < tt->GetPos().x)	m_damageDirection = true;
+		if (m_pos.x > tt->GetPos().x)	m_damageDirection = false;
 		m_hp--;
 		if (!m_hp)	m_death = true;
 		m_damage = true;

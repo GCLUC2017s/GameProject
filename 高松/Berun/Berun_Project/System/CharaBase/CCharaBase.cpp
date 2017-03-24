@@ -91,14 +91,14 @@ T_AnimData _papurikaAnimData[] = {
 	{ "LittlePlayerM",0,5,10,10,3,3,0,0,0,1,5,0,0,{ 300,240 } ,_playerMAnimData,{ 500,400 },{ 135,230 },CRect(-40,-160,40,0) },
 	{ "LittlePlayerW",1,5,10,10,3,3,0,0,0,1,4,0,0,{ 360,180 },_playerWAnimData,{ 600,300 },{ 135,160 },CRect(-35,-160,45,0) },
 	{ "Carrot",2,5,3,3,0,0,5,0,0,1,3,0,1,{160,160} ,_carrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0) },
-	{ "Chick",3,5,2,2,0,0,1,0,0,1,2,0,1,{ 160,160 } ,_chickAnimData,{ 220,220 },{ 60,160 },CRect(-60,-160,60,0) },
+	{ "Chick",3,5,3,3,0,0,1,0,0,1,2,0,1,{ 160,160 } ,_chickAnimData,{ 220,220 },{ 60,160 },CRect(-60,-160,60,0) },
 	{ "Fish",4,5,3,3,0,0,1,0,0,1,1,0,1,{ 160,160 } ,_fishAnimData,{ 200,200 },{ 60,160 },CRect(-60,-160,60,0)},
 	{ "Pig",5,5,3,3,0,0,1,0,0,1,4,0,1,{ 160,160 } ,_pigAnimData,{ 220,220 },{ 60,160 },CRect(-60,-130,60,0)},
 	{ "Rice",6,5,1,1,0,0,5,0,0,1,3,0,1,{ 160,160 } ,_riceAnimData,{ 145,145 },{ 60,160 },CRect(-60,-160,60,0) },
 	{ "Squid",7,5,1,1,0,0,5,0,0,1,3,0,1,{ 160,160 } ,_squidAnimData,{ 250,250 },{ 60,160 },CRect(-60,-160,60,0) },
 	{ "Paprika",8,5,1,1,0,0,5,0,0,1,3,0,1,{ 160,160 } ,_papurikaAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0) },
-	{ "Boss",9,5,10,10,0,0,1,0,0,1,4,0,1,{ 240,240 } ,_bossAnimData,{ 500,500 },{ 120,200 },CRect(-60,-160,60,0) },
-	{ "Carrottwo",10,5,3,3,0,0,5,0,0,1,3,0,1,{ 160,160 } ,_bosscarrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0) },
+	{ "Boss",9,5,20,20,0,0,1,0,0,1,4,0,1,{ 240,240 } ,_bossAnimData,{ 500,500 },{ 120,200 },CRect(-60,-160,60,0) },
+	{ "Carrottwo",10,5,5,5,0,0,5,0,0,1,3,0,1,{ 160,160 } ,_bosscarrotAnimData,{ 160,160 },{ 60,160 },CRect(-60,-160,60,0) },
 	
 	//{ "Fish",4,5,0,0,0,0,0,0,0,1,0,0,0 },
 	//{ "Rice",5,5,0,0,0,0,0,0,0,1,0,0,0 },
@@ -357,7 +357,7 @@ bool CCharaBase::CheckHit(CCollisionA *t)
 	assert(tt);
 	CRect p_rect = GetRect();
 	CRect t_rect = tt->GetRect();
-	if (!tt->m_death && !m_damage && abs(m_pos.z - tt->m_pos.z) < 50 && p_rect.m_right > t_rect.m_left && p_rect.m_left < t_rect.m_right && p_rect.m_top > t_rect.m_bottom && p_rect.m_bottom < t_rect.m_top) {
+	if (!tt->m_death && !m_damage && abs(m_pos.z - tt->m_pos.z) < 100 && p_rect.m_right > t_rect.m_left && p_rect.m_left < t_rect.m_right && p_rect.m_top > t_rect.m_bottom && p_rect.m_bottom < t_rect.m_top) {
 		HitCallBack(t);
 		t->HitCallBack(this);
 	}
