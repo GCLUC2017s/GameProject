@@ -93,7 +93,6 @@ void CPlayer::Contlol() {
 
 void CPlayer::HitCallBack(CCollisionA * p)
 {
-	CCharaBase::HitCallBack(p);
 	CCharaBase* tt = dynamic_cast<CCharaBase*>(p);
 
 	if (m_state != eState_Attack && tt)
@@ -109,7 +108,7 @@ void CPlayer::HitCallBack(CCollisionA * p)
 				if (m_pos.x < tt->GetPos().x)	m_damageDirection = true;
 				if (m_pos.x > tt->GetPos().x)	m_damageDirection = false;
 			}
-			else
+			else if (m_state != eState_Attack)
 			{
 				//HP‚ðŒ¸‚ç‚·ˆ—
 				m_hp -= tt->GetAttack();
