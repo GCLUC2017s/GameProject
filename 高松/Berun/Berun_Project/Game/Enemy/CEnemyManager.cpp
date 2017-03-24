@@ -18,8 +18,11 @@ CEnemyManager::~CEnemyManager() {
 }
 
 void CEnemyManager::Add(int type) {
-	new CEnemy(type);
-
+	
+	int enemyAppears = rand() % 4;
+	CVector2D sPos = CBase::GetScroal();
+	CVector3D pos = CVector3D(1100 + sPos.x, 0, 250 + 50 * enemyAppears);
+	new CEnemy(type,pos);
 }
 /*CEnemy* CEnemyManager::Destory(CEnemy *p) {
 	delete p;

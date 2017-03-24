@@ -1,10 +1,10 @@
 #include "CPlayer.h"
 
 CPlayer* CPlayer::mp_player=nullptr;
-CPlayer::CPlayer(int type) : CCharaBase(type, ePlayer, eUDP_Player,eDWP_Player)
+CPlayer::CPlayer(int type, CVector3D pos) : CCharaBase(type, ePlayer, eUDP_Player, 600 - pos.z)
 
 {
-	m_pos = CVector3D(100, 0, 400);
+	m_pos = pos;
 	mp_hpBar = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("HPBar"));
 	mp_hp = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("HP"));
 	mp_wordHp = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("WordHP"));

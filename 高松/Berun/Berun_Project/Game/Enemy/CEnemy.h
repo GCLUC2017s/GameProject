@@ -50,7 +50,7 @@ private:
 
 public:
 	
-	CEnemy(int type);
+	CEnemy(int type,CVector3D pos);
 	
 	~CEnemy();
 
