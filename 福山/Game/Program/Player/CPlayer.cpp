@@ -42,14 +42,14 @@
 #define ANIME_TIME_WALK						8 + mHungryStatus				//アニメループ時間　歩く
 #define ANIME_TIME_EX01						4								//アニメループ時間 必殺技振り
 
-#define ATTACK_A		mSaveForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,0.2, CVector2(mPos.x,mPos.y)			//攻撃範囲A
-#define ATTACK_B		mSaveForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,0.2, CVector2(mPos.x,mPos.y)			//攻撃範囲B
-#define ATTACK_C		mSaveForward.x, SIZE_PLAYER_X+0.5f, SIZE_PLAYER_Y,0.2, CVector2(mPos.x,mPos.y)	//攻撃範囲C
+#define ATTACK_A		mSaveForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,1, CVector2(mPos.x,mPos.y)			//攻撃範囲A
+#define ATTACK_B		mSaveForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,1, CVector2(mPos.x,mPos.y)			//攻撃範囲B
+#define ATTACK_C		mSaveForward.x, SIZE_PLAYER_X+0.5f, SIZE_PLAYER_Y,1, CVector2(mPos.x,mPos.y)	//攻撃範囲C
 #define ATTACK_JUMP		mSaveForward.x, SIZE_PLAYER_X*2 ,SIZE_PLAYER_Y,0.2,\
 						CVector2(mPos.x - mSaveForward.x*1.7f, mPos.y)	//攻撃範囲ジャンプATTACK
 /*ジャンプ攻撃範囲*/
 #define FRAME_JUMPBOTTOM 3													//ジャンプ攻撃下の時のアニメーション
-#define EAT_ATTACK		mSaveForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,1,CVector2(mPos.x,mPos.y)	//食べる攻撃
+#define EAT_ATTACK		mSaveForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,0.2,CVector2(mPos.x,mPos.y)	//食べる攻撃
 #define EX01_ATTACK		mSaveForward.x, SIZE_PLAYER_X+ fabsf(mEx01Speed), SIZE_PLAYER_Y + fabsf(mEx01Speed),10,\
 						CVector2(mPos.x+	mEx01Speed	,	mPos.y) //必殺技範囲
 #define EX01_SPEED 0.1f														//必殺技が進むスピード

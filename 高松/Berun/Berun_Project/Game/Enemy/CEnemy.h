@@ -16,14 +16,14 @@
 #define RABITTO_CONTTHREE	410//ボスカウント3
 #define RABITTO_CONTFOUR	460//ボスカウント4
 #define RABITTO_CONTFIVE	580//ボスカウント5
-#define RABITTO_X			5000//ボスX軸限界値
+#define RABITTO_X			4800//ボスX軸限界値
 
-#define ENEMY_X				4880
+#define ENEMY_X				4680
 #define ENEMY_Z				800
-#define ENEMY_CONTONE		280
-#define ENEMY_CONTTWO		430
-#define ENEMY_CONTTHREE		530
-#define ENEMY_CONTFOUR		770
+#define ENEMY_CONTONE		260
+#define ENEMY_CONTTWO		410
+#define ENEMY_CONTTHREE		510
+#define ENEMY_CONTFOUR		750
 #define ENEMY_HP			1
 class CPlayer;
 class CEnemyManager;
@@ -50,7 +50,7 @@ private:
 
 public:
 	
-	CEnemy(int type);
+	CEnemy(int type,CVector3D pos);
 	
 	~CEnemy();
 

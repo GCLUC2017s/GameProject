@@ -1,5 +1,6 @@
 #include "CCharaBase.h"
 #include "../Game/CollisionManager/CollisionManager.h"
+#include "../TaskSystem/CTaskManager.h"
 #define HitCheck
 T_AnimData _playerMAnimData[] = {
 	{ 1,5 },
@@ -260,7 +261,7 @@ void CCharaBase::Attack()
 }
 void CCharaBase::Update()
 {
-
+	float zPos = m_pos.z;
 	Contlol();
 	m_attackCollision = false;
 	switch (m_state)
@@ -297,6 +298,7 @@ void CCharaBase::Update()
 		m_gravitySpeed = 0;
 	}
 	CCollisionManager::GetInstance()->Regist(this);
+	if (m_pos.z >= zPos) CTaskManager::GetInstance()->ChangeDrawPrio(this, 600 - m_pos.z);
 }
 void CCharaBase::Draw()
 {

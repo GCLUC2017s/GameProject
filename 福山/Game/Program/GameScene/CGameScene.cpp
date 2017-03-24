@@ -38,7 +38,6 @@ void CGameScene::Init(){
 	
 	CTaskManager::GetInstance()->Add(new CBoss);
 	CTaskManager::GetInstance()->Add(new CResult);
-	//CTaskManager::GetInstance()->Add(new CBoss);
 	CTaskManager::GetInstance()->Add(new CUserinterface);
 	
 }
@@ -61,11 +60,10 @@ void CGameScene::Update(){
 				CTaskManager::GetInstance()->Add(new CEnemy00);
 				break;
 			case E_ADD_ENE01:
-
 				CTaskManager::GetInstance()->Add(new CEnemy01);
 				break;
 			case E_LOWBOSS:
-				CTaskManager::GetInstance()->Add(new CBoss);
+				CTaskManager::GetInstance()->Add(new CLowBoss);
 				break;
 			}
 		}

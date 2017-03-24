@@ -78,6 +78,7 @@ CBoss::CBoss() : mVelocity(0), mFrameCount(0), actionflag(false), motion(0), dir
 	mRect.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 }
+
 CBoss::~CBoss(){
 
 
@@ -388,7 +389,17 @@ void CBoss::Update(){
 	}
 
 	if (mHitPoint <= 0){
-		motion = EM_DIE;		//‘Ì—Í‚ª‚O‚È‚çDIE‚·‚é
+
+		motion = EM_DIE;
+
+		if (direction == E_RIGHT) {
+			mStatus = E_DIE_R;
+			mEnabledAttack = false;
+		}
+		else if (direction == E_LEFT){
+			mStatus = E_DIE_L;
+			mEnabledAttack = false;
+		}
 	}
 	if (mEnabledEaten){		//H‚×‚ç‚ê‚½‚çÁ‚·
 		//‰‰o‰Á‚¦‚Ä‚à‚¢‚¢‚©‚à(—á)Šg‘åk¬‚µ‚Äif(ƒTƒCƒY‚ª0ˆÈ‰º‚ÌŽžkillFlag‚ð—§‚Ä‚é‚È‚Ç)
