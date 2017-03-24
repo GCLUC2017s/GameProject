@@ -24,8 +24,7 @@
 #define T_SIZE_C			EVAL_1*3,	0.0f,		EVAL_1*4.0f,		300.0f
 /*四角サイズ*/
 #define R_SIZE_STR4			-1.5f,0.5f,1.5f,-0.5f
-#define R_SIZE_STR5			-1.0f,0.2f,1.0f,-0.2f
-#define R_SIZE_STR6			-1.0f,0.2f,1.2f,-0.2f
+#define R_SIZE_STR5			-1.0f,0.3f,1.0f,-0.3f
 #define R_SIZE_RANK			-2.0f,2.0f,2.0f,-2.0f
 #define R_SIZE_CLEAR		-5.0f,0.5f,5.0f,-0.5f
 #define R_SIZE_GAMEOVER		-5.0f,0.5f,5.0f,-0.5f
@@ -35,9 +34,10 @@
 #define R_SIZE_TITLERETURN  -2.0f,0.5f,2.0f,-0.5f
 
 #define DOWN_POINT		(int)100
-#define TIME_POS		CVector2(CGame::CameraPos().x - DISP_X / 3, DISP_Y / 3 - 1.0f)
-#define KILLS_POS		CVector2(CGame::CameraPos().x - DISP_X / 3, - 1.0f)
-#define SUM_POS			CVector2(CGame::CameraPos().x- DISP_X / 3,- DISP_Y / 3- 1.0f)
+/*ポジションせってい*/
+#define TIME_POS			CVector2(CGame::CameraPos().x - DISP_X / 3, DISP_Y / 3 - 1.0f)
+#define KILLS_POS			CVector2(CGame::CameraPos().x - DISP_X / 3, - 1.0f)
+#define SUM_POS				CVector2(CGame::CameraPos().x- DISP_X / 3,- DISP_Y / 3-  1.0f)
 
 
 /*四角のポジション*/
@@ -122,7 +122,7 @@ CResult::CResult() : mTimePoint(TIMEMAX), mFlagDie(false){
 	mRectLogo[E_TIME].SetColor(COLLAR4_FIRST);
 	mRectLogo[E_TIME].SetUv(mLogoTex[E_TIME],T_SIZE_CLEARTIME);
 
-	mRectLogo[E_KILLS].SetVertex(R_SIZE_STR6);
+	mRectLogo[E_KILLS].SetVertex(R_SIZE_STR5);
 	mRectLogo[E_KILLS].SetColor(COLLAR4_FIRST);
 	mRectLogo[E_KILLS].SetUv(mLogoTex[E_KILLS], T_SIZE_KILLS);
 
@@ -182,9 +182,11 @@ void CResult::RankDecision(int i){ //bossを倒す前に関数を呼ぶ
 		else{
 			mRectLogo[E_RANK].SetUv(mLogoTex[E_RANK], T_SIZE_C);
 		}
-		sprintf_s(str[E_TIME], "%d", mTimePoint);
-		sprintf_s(str[E_KILLS], "%d", mKillPolint);
-		sprintf_s(str[E_SUM], "%d", (mKillPolint + mTimePoint));
+
+			sprintf_s(str[E_TIME], "%d", mTimePoint);
+			sprintf_s(str[E_KILLS], "%d", mKillPolint);
+			sprintf_s(str[E_SUM], "%d", (mKillPolint + mTimePoint));
+		
 		CPlayer *pl;
 		pl = dynamic_cast<CPlayer*>(CGame::getStatus(E_PLAYER));
 		mSaveResultHP = pl->mHitPoint;
@@ -243,6 +245,8 @@ void CResult::Update(){
 				mKillPolint += POINT_PLAYER;
 				b->mEnabledPoint = true;
 				mFlagDie = true;
+				mKillPolint *= 0.1f;
+				mTimePoint *= 0.1f;
 				RankDecision((mKillPolint + mTimePoint));
 			}
 

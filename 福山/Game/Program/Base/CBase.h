@@ -25,16 +25,19 @@
 #define SHADOW_TEX_Y			20.f				//影のテクスチャのY
 
 #define PL_HP_X 2.0f //ゲージx　 //HPはこちらから使うように(初期値)
-#define PL_HP_Y 0.15f//ゲージy
+#define PL_HP_Y 0.15f * 3//ゲージy
 #define PL_ST_X PL_HP_X*1.3	 //ゲージx
 #define PL_ST_Y 0.45f//ゲージy
 #define PL_ST_FR_Y 0.3f//ゲージy
 
 #define SIZE_PL_FRAME_X PL_HP_X //フレームＸ
-#define SIZE_PL_FRAME_Y 0.2f  //フレームY			
+#define SIZE_PL_FRAME_Y PL_HP_Y  //フレームY			
 
 #define ENE_HP_X 1.0f			//エネミーgauge　(初期値)
 #define ENE_HP_Y 0.2f			//エネミーgauge
+
+
+
 
 #define SIZE_EN_FRAME_X ENE_HP_X*0.9			//エネミーのフレーム
 #define SIZE_EN_FRAME_Y 0.15f			//エネミーのフレーム
@@ -42,9 +45,9 @@
 #define SIZE_BOSS_FRAME_X	2.0f		
 #define SIZE_BOSS_FRAME_Y	0.2f			
 /*ＰＬＡＹＥＲの攻撃力*/
-#define PL_NORMAL_POWER 0.05f
-#define PL_JUMP_AT_POWER 0.07f
-#define PL_EAT_POWER	0.06f
+#define PL_NORMAL_POWER 0.04f
+#define PL_JUMP_AT_POWER 0.03f
+#define PL_EAT_POWER	0.003f
 #define PL_EX01_POWER	0.15f
 /*エネミーの攻撃力*/
 #define ENE00_POWER		0.0000000005f

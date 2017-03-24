@@ -216,9 +216,9 @@ void CUserinterface::Update(){
 		case E_PLAYER:
 			CPlayer *player;
 			player = (CPlayer*)task;
-			mGaugePlayer[_HP_].position = CVector2(CGame::CameraPos().x - DISP_X + HP_POSX + SIZE_PL_FRAME_X, DISP_Y - SIZE_PL_FRAME_Y * 2);
+			mGaugePlayer[_HP_].position = CVector2(CGame::CameraPos().x - DISP_X + HP_POSX + SIZE_PL_FRAME_X, DISP_Y - SIZE_PL_FRAME_Y*0.5);
 			mGaugePlayer[_ST_].position = CVector2(CGame::CameraPos().x - DISP_X + ST_POSX + PL_ST_X, DISP_Y - PL_ST_Y * 2);
-			mFramePlayer[_HP_].position = CVector2(CGame::CameraPos().x - DISP_X + PL_HP_X, DISP_Y - SIZE_PL_FRAME_Y * 2);
+			mFramePlayer[_HP_].position = CVector2(CGame::CameraPos().x - DISP_X + PL_HP_X, DISP_Y - SIZE_PL_FRAME_Y*0.5 );
 			mFramePlayer[_ST_].position = CVector2(CGame::CameraPos().x - DISP_X + PL_ST_X, DISP_Y - PL_ST_Y *2);
 			mGaugePlayer[_HP_].SetVertex(-player->mHitPoint/10, SIZE_PL_FRAME_Y, player->mHitPoint/10, -SIZE_PL_FRAME_Y); //éläpçÏê¨
 			mGaugePlayer[_ST_].SetVertex(-player->mStamina, PL_ST_Y, player->mStamina, -PL_ST_Y); //éläpçÏê¨
@@ -230,8 +230,6 @@ void CUserinterface::Update(){
 		case E_BOSS:
 		case E_ENEMY01:
 		case E_LOWBOSS:
-
-		
 
 			CBase *base;
 			base = (CBase*)task;

@@ -33,7 +33,7 @@
 #define BOSS_HATTACK "../CG\\BOSS\\HAttack\\"
 #define BOSS_DIE	 "../CG\\BOSS\\die\\"
 
-#define LOW_AT		mForward.x, SIZE_BOSS_X*2.5f, SIZE_BOSS_Y,1.445f, mPos      	//攻撃範囲
+#define LOW_AT		mForward.x, SIZE_BOSS_X*1.5f, SIZE_BOSS_Y,2.445f, mPos      	//攻撃範囲
 
 
 void CLowBoss::SetPos(){
@@ -132,14 +132,14 @@ void CLowBoss::Walk(){
 	}
 	//（ターゲットが左にいる場合）
 	if (LEFT_PTT) {
-		direction = 1;
+		direction = E_LEFT;
 		mStatus = E_WALK_L;
 		mVelocity = WALK_SPEED;
 		mForward = CVector2(-WALK_X, 0.0f);
 		mPos += mForward * mVelocity;
 	}
 	//（ターゲットが上にいる場合）
-	if ((CGame::GetPlayerAxis() + CGame::mGetPlayerPos().y) / 2 > mAxis) {
+	if (getAxis-1.5f > mAxis) {
 		mVelocity = WALK_SPEED;
 		mForward = CVector2(0.0f, WALK_Y);
 		mPos += mForward * mVelocity;
@@ -173,7 +173,7 @@ void CLowBoss::Motion(){
 		break;
 	case EM_WALK://歩き	
 		Walk();
-		if (ATTACK_PTTX){//攻撃モーションに変更
+		if (ATTACK_PTTX&&ATTACK_BOSS_Y){//攻撃モーションに変更
 			actionflag = false;
 			motion = EM_RANGE;
 		}
@@ -202,9 +202,13 @@ void CLowBoss::Motion(){
 		break;
 	case EM_DIE://死亡
 		if (direction == E_RIGHT) {
+			mEnabledAttack = true;
+			mEnabledAttack = false;
 			mStatus = E_DIE_R;
 		}
 		else if (direction == E_LEFT){
+			mEnabledAttack = true;
+			mEnabledAttack = false;
 			mStatus = E_DIE_L;
 		}
 		break;
@@ -277,7 +281,16 @@ void CLowBoss::Update(){
 	}
 
 	if (mHitPoint <= 0){
-		motion = EM_DIE;		//体力が０ならDIEする
+
+		motion = EM_DIE;
+		if (direction == E_RIGHT) {
+			mStatus = E_DIE_R;
+		
+		}
+		else if (direction == E_LEFT){
+			mStatus = E_DIE_L;
+			
+		}
 	}
 	if (mEnabledEaten){		//食べられたら消す
 		//演出加えてもいいかも(例)拡大縮小してif(サイズが0以下の時killFlagを立てるなど)
@@ -303,10 +316,7 @@ void CLowBoss::Update(){
 	mPriorityR = -mAxis;
 	LimitDisp(SIZE_LOWBOSS_X, SIZE_LOWBOSS_Y);	//当たり判定
 	AnimeScene();
-
-	mShadow.position = CVector2(mPos.x, mAxis + 0.8f);
 	mShadow.position = CVector2(mPos.x, mAxis+0.8f);
-
 
 	mRect.position = mPos;
 }
