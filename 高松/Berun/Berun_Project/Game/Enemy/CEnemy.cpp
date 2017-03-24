@@ -68,8 +68,8 @@ void CEnemy::Contlol() {
 
 			if (m_enemyType == 9) {
 				//ボス行動パターン
-				if (m_cont >= 2) {
-					m_cont = 3;
+				if (m_cont >= 1) {
+					m_cont = 2;
 					m_chickTime += CHICK_TIME;
 
 					if (m_chickTime >= 60 && m_chickTime <= 80) {
@@ -95,10 +95,10 @@ void CEnemy::Contlol() {
 				}
 
 
-				if (m_cont <= 2) {
+				if (m_cont <= 1) {
 					
 					if (m_rabittoCont < 100) {
-						m_pos = CVector3D(RABITTO_X-200, 0, 300);
+						m_pos = CVector3D(RABITTO_X, 0, 300);
 					}
 					if (m_pos.x > RABITTO_X) {
 						m_pos.x = RABITTO_X;
@@ -127,11 +127,11 @@ void CEnemy::Contlol() {
 				}
 			}
 			if (m_enemyType == 10) {
-				if (m_cont >= 2) {
-					m_cont = 3;
+				if (m_cont >= 1) {
+					m_cont = 2;
 					
 				}
-				if (m_cont<=2) {
+				if (m_cont<=1) {
 					//ニンジンの行動
 					if (m_rabittoCont > 0 && m_rabittoCont < 100) {
 						m_pos = CVector3D(ENEMY_X, 0, ENEMY_Z);
