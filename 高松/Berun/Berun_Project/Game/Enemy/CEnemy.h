@@ -13,10 +13,11 @@
 
 #define RABBIT_CONT		60//ボスカウント1
 #define RABBIT_CONTTWO		80//ボスカウント2
-#define RABBIT_CONTTHREE	100//ボスカウント3
+#define RABBIT_CONTTHREE	90//ボスカウント3
 #define RABBIT_CONTFOUR		160//ボスカウント４
 #define RABBIT_X			4800//ボスX軸限界値
-
+#define VEC_XZ				20
+#define VEC_XXZZ			-20
 
 #define ENEMY_HP			1
 class CPlayer;
@@ -41,7 +42,7 @@ private:
 	int m_rabittoCont2;
 	float m_downCont;
 	float m_chickTime;
-
+	
 public:
 	
 	CEnemy(int type,CVector3D pos);
