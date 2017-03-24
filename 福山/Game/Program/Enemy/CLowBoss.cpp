@@ -18,10 +18,10 @@
 
 #define FIRST_R_NO_LOWBOSS 1						//初めのレンダーのポイント
 #define FIRST_U_NO_LOWBOSS 1						//初めのアップデートのポイント
-#define SIZE_TEX_BOSS_STAY_X 360			//エネミーの待ち姿テクスチャサイズ X
-#define SIZE_TEX_BOSS_STAY_Y 360			//エネミーの待ち姿テクスチャサイズ Y
-#define SIZE_TEX_BOSS_WALK_X 800			//エネミーの歩くテクスチャサイズ Y
-#define SIZE_TEX_BOSS_WALK_Y 800			//エネミーの歩く姿テクスチャサイズ Y
+#define SIZE_TEX_BOSS_STAY_X 320			//エネミーの待ち姿テクスチャサイズ X
+#define SIZE_TEX_BOSS_STAY_Y 320			//エネミーの待ち姿テクスチャサイズ Y
+#define SIZE_TEX_BOSS_WALK_X 320			//エネミーの歩くテクスチャサイズ Y
+#define SIZE_TEX_BOSS_WALK_Y 320			//エネミーの歩く姿テクスチャサイズ Y
 #define SIZE_SHADOW							//影の表示
 #define WALK_SPEED 0.04						//歩くスピード
 #define WALK_X 2							//歩くベクトルX
@@ -303,7 +303,10 @@ void CLowBoss::Update(){
 	mPriorityR = -mAxis;
 	LimitDisp(SIZE_LOWBOSS_X, SIZE_LOWBOSS_Y);	//当たり判定
 	AnimeScene();
+
+	mShadow.position = CVector2(mPos.x, mAxis + 0.8f);
 	mShadow.position = CVector2(mPos.x, mAxis+0.8f);
+
 
 	mRect.position = mPos;
 }

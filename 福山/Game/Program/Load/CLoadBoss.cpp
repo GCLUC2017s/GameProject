@@ -21,8 +21,8 @@ CLoadBoss::CLoadBoss(){
 	/*テクスチャ読み込み*/
 	for (int i = 0; i < FRAME_LIMIT; i++)
 	{
-		mStay_tex[i] = new CTexture();		//テクスチャクラスのインスタンス作成
-		mWalk_tex[i] = new CTexture();		//テクスチャクラスのインスタンス作成
+		mStay_tex[i]   = new CTexture();		//テクスチャクラスのインスタンス作成
+		mWalk_tex[i]   = new CTexture();		//テクスチャクラスのインスタンス作成
 		mAttack_tex[i] = new CTexture();
 		mHattack_tex[i] = new CTexture();
 		mDie_tex[i] = new CTexture();

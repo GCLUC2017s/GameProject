@@ -24,6 +24,10 @@ CSound mBGM;
 CSceneManager::CSceneManager(){
 	mBGM.load("../Music\\BGM.mp3");
 }
+CSceneManager::~CSceneManager(){
+	mBGM.close();
+}
+
 //GetInstance
 CSceneManager* CSceneManager::GetInstance() {
 	if (mSceneManager == 0) {
@@ -47,7 +51,7 @@ void CSceneManager::ChangeScene(eSceneNo SceneNo) {
 		//タイトルの呼び出しを行う
 	case eSceneNo::E_TITLE:
 
-		mBGM.play();
+		mBGM.repeat();
 		mScene = new CTitleScene;
 		mScene->Init();
 
@@ -63,7 +67,6 @@ void CSceneManager::ChangeScene(eSceneNo SceneNo) {
 
 	case eSceneNo::E_GAMEMAIN:
 
-		mBGM.play();
 		mScene = new CGameScene;
 		
 

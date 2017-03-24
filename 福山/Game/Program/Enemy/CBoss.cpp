@@ -19,10 +19,10 @@ CKeyを使っている条件文は今後別の処理になります。
 
 #define FIRST_R_NO_BOSS 1						//初めのレンダーのポイント
 #define FIRST_U_NO_BOSS 1						//初めのアップデートのポイント
-#define SIZE_TEX_BOSS_STAY_X 360			//エネミーの待ち姿テクスチャサイズ X
-#define SIZE_TEX_BOSS_STAY_Y 360			//エネミーの待ち姿テクスチャサイズ Y
-#define SIZE_TEX_BOSS_WALK_X 800			//エネミーの歩くテクスチャサイズ Y
-#define SIZE_TEX_BOSS_WALK_Y 800			//エネミーの歩く姿テクスチャサイズ Y
+#define SIZE_TEX_BOSS_STAY_X 320			//BOSSの待ち姿テクスチャサイズ X
+#define SIZE_TEX_BOSS_STAY_Y 320			//BOSSの待ち姿テクスチャサイズ Y
+#define SIZE_TEX_BOSS_WALK_X 320			//BOSSの歩くテクスチャサイズ Y
+#define SIZE_TEX_BOSS_WALK_Y 320			//BOSSの歩く姿テクスチャサイズ Y
 #define SIZE_SHADOW							//影の表示
 #define WALK_SPEED 0.04						//歩くスピード
 #define WALK_X 2							//歩くベクトルX
@@ -37,8 +37,8 @@ CKeyを使っている条件文は今後別の処理になります。
 #define BOSS_HATTACK "../CG\\BOSS\\HAttack\\"
 #define BOSS_DIE	 "../CG\\BOSS\\die\\"
 
-#define LOW_AT		mForward.x, SIZE_BOSS_X*3.5f, SIZE_BOSS_Y,1.445f, mPos      	//攻撃範囲
-#define HIGH_AT		mForward.x, SIZE_BOSS_X*2.5f, SIZE_BOSS_Y,2.5f, mPos      	//攻撃範囲
+#define LOW_AT		mForward.x, SIZE_BOSS_X*1.5f, SIZE_BOSS_Y,2.1f, mPos      	//攻撃範囲
+#define HIGH_AT		mForward.x, SIZE_BOSS_X*1.5f, SIZE_BOSS_Y,1.5f, mPos      	//攻撃範囲
 #define MOVE_AT		mForward.x, SIZE_BOSS_X*1.25f, SIZE_BOSS_Y,1.345f, mPos      	//攻撃範囲
 
 
@@ -78,7 +78,6 @@ CBoss::CBoss() : mVelocity(0), mFrameCount(0), actionflag(false), motion(0), dir
 	mRect.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 }
-
 CBoss::~CBoss(){
 
 
@@ -139,7 +138,7 @@ void CBoss::AnimeScene(){
 
 void CBoss::Walk(){
 	//（ターゲットが右にいる場合）
-	if (RIGHT_PTT) {
+	if (RIGHT_PTT&&mHitPoint>0) {
 		direction = E_RIGHT;
 		mStatus = E_WALK_R;
 		mVelocity = WALK_SPEED;
@@ -147,7 +146,7 @@ void CBoss::Walk(){
 		mPos += mForward * mVelocity;
 	}
 	//（ターゲットが左にいる場合）
-	if (LEFT_PTT) {
+	if (LEFT_PTT&&mHitPoint>0) {
 		direction = 1;
 		mStatus = E_WALK_L;
 		mVelocity = WALK_SPEED;
@@ -155,14 +154,14 @@ void CBoss::Walk(){
 		mPos += mForward * mVelocity;
 	}
 	//（ターゲットが上にいる場合）
-	if ((CGame::GetPlayerAxis() + CGame::mGetPlayerPos().y) / 2 > mAxis) {
+	if ((getAxis > mAxis)&&mHitPoint>0) {
 		mVelocity = WALK_SPEED;
 		mForward = CVector2(0.0f, WALK_Y);
 		mPos += mForward * mVelocity;
 		mAxis += mForward.y * mVelocity;
 	}
 	//（ターゲットが下にいる場合）
-	if ((CGame::GetPlayerAxis() + CGame::mGetPlayerPos().y) / 2 < mAxis) {
+	if (((CGame::GetPlayerAxis() + CGame::mGetPlayerPos().y) / 2 < mAxis) && mHitPoint>0) {
 		mVelocity = WALK_SPEED;
 		mForward = CVector2(0.0f, -WALK_Y);
 		mPos += mForward * mVelocity;
@@ -182,20 +181,30 @@ void CBoss::Motion(){
 
 			mStatus = E_STAY_L;
 		}
-		if (ENEMY_VISI)		//視界内にとらえたら追ってくる
+
+		if (ENEMY_VISI&&mHitPoint > 0)		//視界内にとらえたら追ってくる
 		{
 			motion = EM_WALK;
 		}
+
 		break;
 	case EM_WALK://歩き	
+
 		Walk();
-		if (ATTACK_BOSS&&mHitPoint > mHitPoint*0.5f){//攻撃モーションに変更
+
+		if (ATTACK_BOSS&& ATTACK_BOSS_Y){//攻撃モーションに変更
 			actionflag = false;
 			motion = EM_RANGE;
 		}
 
-		if (RIGHT_PTT && (mHitPoint <= (ENE_HP_X*0.5f)) && RUSH_BOSS)
+		if (mHitPoint <= 0){
+			motion = EM_DIE;		//体力が０ならDIEする
+		}
+
+
+		if (RIGHT_PTT &&mHitPoint > 0 && (mHitPoint <= (ENE_HP_X*0.5f)) && ATTACK_BOSS_Y)
 		{
+			actionflag = true;
 			mStatus = E_ATTACK_R;
 			mVelocity = WALK_SPEED;
 			mForward = CVector2(WALK_X, 0.0f);
@@ -204,8 +213,9 @@ void CBoss::Motion(){
 				motion = EM_DIE;		//体力が０ならDIEする
 			}
 		}
-		else if (LEFT_PTT && (mHitPoint <= (ENE_HP_X*0.5f)) && RUSH_BOSS)
+		else if (LEFT_PTT &&mHitPoint > 0 && (mHitPoint <= (ENE_HP_X*0.5f)) && ATTACK_BOSS_Y)
 		{
+			actionflag = true;
 			mStatus = E_ATTACK_L;
 			mVelocity = -WALK_SPEED;
 			mForward = CVector2(WALK_X, 0.0f);
@@ -215,6 +225,7 @@ void CBoss::Motion(){
 			}
 		}
 
+
 		/*if (HATTACK_PTT){
 			actionflag = false;
 			motion = EM_RANGE;
@@ -222,27 +233,25 @@ void CBoss::Motion(){
 
 		break;
 	case EM_RANGE://攻撃範囲内に入った時
-
+		actionflag = false;
 			if (!actionflag){
-				pattern = rand() % 6; //0~2の中でランダムでパターンを選択する。
+				pattern = rand() % 4; //0~2の中でランダムでパターンを選択する。
 			}
 			if (pattern == 0){
+				actionflag = true;
 				motion = EM_ATTACK;
 			}
 			else if (pattern == 1){
 				actionflag = true;
 				motion = EM_BACK_X;
 			}
-			else if (pattern == 1){
+			else if (pattern == 2){
 				actionflag = true;
-				motion = EM_BACK_X;
-			}
-			else if (pattern == 1){
-				actionflag = true;
-				motion = EM_BACK_X;
-			}
-			else{
 				motion = EM_ATTACK;
+			}
+			else if (pattern == 3){
+				actionflag = true;
+				motion = EM_BACK_X;
 			}
 			/*
 		//強攻撃の範囲内(未実装)ブラッシュアップ
@@ -272,19 +281,22 @@ void CBoss::Motion(){
 	case EM_DIE://死亡
 		if (direction == E_RIGHT) {
 			mStatus = E_DIE_R;
+			mEnabledAttack = false;
 		}
 		else if (direction == E_LEFT){
 			mStatus = E_DIE_L;
+			mEnabledAttack = false;
 		}
 		break;
 
+
 	case EM_BACK_X://後ろに逃げる。
+		escapetime += ESCAPE_TIME_BOSS / FPS;
 		if (direction == E_LEFT) {
 			direction = E_LEFT;
 			mVelocity = WALK_SPEED *1.5f;
 			mForward = CVector2(WALK_X, 0.0f);
 			mPos += mForward * mVelocity;
-
 		}
 		else if (direction == E_RIGHT){
 			direction = E_RIGHT;
@@ -293,28 +305,31 @@ void CBoss::Motion(){
 			mPos += mForward * mVelocity;
 		}
 
-		if (ENEMY_ESCAPE){	//一定距離離れると再度こちらに向かってくる
+		if (escapetime>= ESCAPE_TIME_BOSS){	//一定距離離れると再度こちらに向かってくる
 			actionflag = false; //actionflagをfalseにする。
 			motion = EM_WALK;
 		}
 
 		break;
+
 	case EM_ATTACK:		//攻撃中
-		//モーション設定
-		if (RIGHT_PTT&&ENEMY_LIVE) {
-			mStatus = E_ATTACK_R;
-		}
-		else if (LEFT_PTT&&ENEMY_LIVE){
-			mStatus = E_ATTACK_L;
+
+		if (attacktime < ENEMY00_INTERVAL){
+			//モーション設定
+			if (RIGHT_PTT&&mHitPoint>0) {
+				actionflag = true;
+				mEnabledAttack = true;
+				mStatus = E_ATTACK_R;
+			}
+			else if (LEFT_PTT&&mHitPoint > 0){
+				actionflag = true;
+				mEnabledAttack = true;
+				mStatus = E_ATTACK_L;
+			}
 		}
 
-	
-		
-		
 		//範囲
 		Attack(LOW_AT);
-		///パンチの最後にあたり判定
-		mEnabledAttack = true;
 		/*範囲内に近づく*/
 		if (NO_ATTACK_BOSS){
 			actionflag = false;
@@ -322,6 +337,7 @@ void CBoss::Motion(){
 			motion = EM_WALK;
 		}
 		break;
+
 		/*
 	case EM_HIGH_AT:
 		//モーション設定
@@ -343,14 +359,11 @@ void CBoss::Motion(){
 		break;
 
 		*/
-		
-
 
 	}
 }
 
 void CBoss::Update(){
-	printf("%f\n", mHitPoint*0.5f);
 	mRect.position = mPos;
 
 	mTargetP = CGame::mGetPlayerPos();
@@ -365,8 +378,8 @@ void CBoss::Update(){
 		rulerR = rulerR * -1;
 	}
 
-	upruler = mTargetP.y - mPos.y;
-	downruler = mPos.y - mTargetP.y;
+	upruler = getAxis - mAxis;
+	downruler = mAxis - getAxis;
 	if (upruler<0){				//絶対値にする
 		upruler = upruler * -1;
 	}

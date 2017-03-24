@@ -47,7 +47,8 @@ private:
 	float upruler;
 	float downruler; 
 	float getAxis;
-
+	float attacktime;
+	float escapetime;
 
 	int motion;
 	bool actionflag;

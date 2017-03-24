@@ -15,7 +15,7 @@ Result画面
 
 
 
-class CClear  : public CTask{
+class CResult : public CTask{
 private:
 
 	CStringtexture mNumber[NUM_MAX];
@@ -46,7 +46,6 @@ private:
 	float RectTime;				//四角形のTime
 	int mKillPolint;			//倒した数のポイント
 	int mTimePoint;				//時間によるPOINT
-	bool mFlagRect;				
 	bool mFlagDie;
 	float mSaveTime;
 
@@ -55,10 +54,12 @@ private:
 	bool FlagCrectA(const CRectangle &rect); //
 
 public:
+	static bool mFlagRect; //Resultフラグ
+	static float mSaveResultHP;//Result時 HP save
 	void Update();
 	void Render();
 	void Init();
-	CClear();
-	~CClear();
+	CResult();
+	~CResult();
 
 };
