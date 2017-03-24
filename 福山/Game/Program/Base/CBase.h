@@ -46,7 +46,7 @@
 #define SIZE_BOSS_FRAME_Y	0.2f			
 /*‚o‚k‚`‚x‚d‚q‚ÌUŒ‚—Í*/
 #define PL_NORMAL_POWER 0.04f
-#define PL_JUMP_AT_POWER 0.03f
+#define PL_JUMP_AT_POWER 0.05f
 #define PL_EAT_POWER	0.003f
 #define PL_EX01_POWER	0.15f
 /*ƒGƒlƒ~[‚ÌUŒ‚—Í*/
