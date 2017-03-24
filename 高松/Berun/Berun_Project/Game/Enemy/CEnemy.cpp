@@ -9,7 +9,6 @@
 	{ 0,0,0,0,0,0,0.0f },
 };*/
 
-
 CEnemy::CEnemy(int type) :CCharaBase(type, eEnemy, eUDP_Enemy, eDWP_Enemy)
 {
 	//CPlayer *p = dynamic_cast<CPlayer*>(CTaskManager::GetInstance()->GetTask(ePlayer));
@@ -25,6 +24,7 @@ CEnemy::CEnemy(int type) :CCharaBase(type, eEnemy, eUDP_Enemy, eDWP_Enemy)
 	m_rabittoCont = 0;
 	m_rabittoCont2 = 0;
 	m_cont =0;
+
 }
 CEnemy::~CEnemy() {
 
@@ -67,8 +67,9 @@ void CEnemy::Contlol() {
 			}
 
 			if (m_enemyType == 9) {
-				if (m_cont >= 3) {
-					m_cont = 4;
+				//ボス行動パターン
+				if (m_cont >= 2) {
+					m_cont = 3;
 					m_chickTime += CHICK_TIME;
 
 					if (m_chickTime >= 60 && m_chickTime <= 80) {
@@ -94,7 +95,8 @@ void CEnemy::Contlol() {
 				}
 
 
-				if (m_cont <= 3) {
+				if (m_cont <= 2) {
+					
 					if (m_rabittoCont < 100) {
 						m_pos = CVector3D(RABITTO_X, 0, 300);
 					}
@@ -126,32 +128,38 @@ void CEnemy::Contlol() {
 			}
 			if (m_enemyType == 10) {
 				if (m_hp <= 1) {
-					m_left = true;
+					m_hp -= ENEMY_HP;
 				}
 				if (m_hp >= 1) {
+					//ニンジンの行動
 					if (m_rabittoCont > 0 && m_rabittoCont < 100) {
 						m_pos = CVector3D(ENEMY_X, 0, ENEMY_Z);
 					}
+					//ニンジンZ軸限界値
 					if (m_pos.z > ENEMY_Z) {
 						m_pos.z = ENEMY_Z;
 					}
+					//ニンジンX軸限界値
 					if (m_pos.x > ENEMY_X) {
 						m_pos.x = ENEMY_X;
 					}
+					//ニンジン弾準備
 					if (m_rabittoCont > ENEMY_CONTONE && m_rabittoCont < ENEMY_CONTTWO) {
 						m_dash = true;
 						m_pos.z -= 3;
 					}
-
+					//ニンジン弾発射
 					if (m_rabittoCont > ENEMY_CONTTWO && m_rabittoCont < ENEMY_CONTTHREE) {
 						m_left = true;
 						m_dash = true;
 
 					}
+					//ニンジン弾着地
 					if (m_rabittoCont == ENEMY_CONTTHREE) {
 						m_dash = false;
 						m_hp -= ENEMY_HP;
 					}
+					//ニンジン定位置に戻る
 					if (m_rabittoCont > 550 && m_rabittoCont < ENEMY_CONTFOUR) {
 						m_pos.z += 3;
 						m_right = true;
@@ -167,7 +175,7 @@ void CEnemy::Contlol() {
 		
 
 		if (m_enemyType == 5) {
-			
+			//豚行動パターン
 				m_chickTime += CHICK_TIME;
 
 				if (m_chickTime <= 120) {
@@ -213,7 +221,7 @@ void CEnemy::Contlol() {
 
 
 		if (m_enemyType == 4) {
-
+			//魚行動パターン
 			m_chickTime += CHICK_TIME;
 			if (m_chickTime > 60 && m_chickTime <= 80) {
 				if (vec.x < 20) {
@@ -252,7 +260,7 @@ void CEnemy::Contlol() {
 
 		if (m_enemyType == 3) {
 			m_chickTime += CHICK_TIME;
-
+			//ひよこ行動パターン
 			if (m_chickTime >= 40 && m_chickTime <= 400) {
 
 				if (vec.x < -110) {
@@ -282,7 +290,7 @@ void CEnemy::Contlol() {
 		}
 
 		if (m_enemyType == 2) {
-
+			//ニンジン行動パターン
 			m_chickTime += CHICK_TIME;
 			if (m_chickTime >= 80 && m_chickTime <= 150) {
 				if (vec.x < -120) {
