@@ -10,21 +10,21 @@
 };*/
 
 
-CEnemy::CEnemy(int type):CCharaBase(type,eEnemy,eUDP_Enemy,eDWP_Enemy)
+CEnemy::CEnemy(int type) :CCharaBase(type, eEnemy, eUDP_Enemy, eDWP_Enemy)
 {
 	//CPlayer *p = dynamic_cast<CPlayer*>(CTaskManager::GetInstance()->GetTask(ePlayer));
 	//CVector3D vec = p->GetPos() - m_pos;
 	mp_player = CPlayer::mp_player;
-	
 	srand(time(nullptr));
 	m_enemyAppears = rand() % 4;
-	m_pos = CVector3D(1200+m_scroal.x, 0 ,200+50*m_enemyAppears);
+	m_pos = CVector3D(1100 + m_scroal.x, 0, 250 + 50 * m_enemyAppears);
 	m_enemyType = type;
 	m_enemyTime = 0;
 	//m_enemyHp->SetColor(1, 0, 0, 1);
 	m_chickTime = 0;
-	m_downCont = 0;
-	
+	m_rabittoCont = 0;
+	m_rabittoCont2 = 0;
+	m_cont =0;
 }
 CEnemy::~CEnemy() {
 
@@ -32,7 +32,7 @@ CEnemy::~CEnemy() {
 void CEnemy::Draw() {
 
 	CCharaBase::Draw();
-
+	
 }
 void CEnemy::Contlol() {
 	CCharaBase::ResetKey();
@@ -41,49 +41,168 @@ void CEnemy::Contlol() {
 	if (mp_player->GetDeath()) return;
 
 	if (m_hp > 0) {
+
 		if (m_enemyType == 6) {
-
-			m_left = true;
-			m_jump = true;
+		
+				m_pos = CVector3D(5000, 0, 600);
+			
+			
 		}
+		if (m_enemyType == 7) {
+			
+				m_pos = CVector3D(5000, 0, 400);
+			
+		}
+		if (m_enemyType == 8) {
+			
+				m_pos = CVector3D(5000, 0, 200);
+		
+		}
+		
+
+		if (m_rabittoCont > -1) {
+
+			if (m_hp > 0) {
+				m_rabittoCont++;
+			}
+
+			if (m_enemyType == 9) {
+				if (m_cont >= 3) {
+					m_cont = 4;
+					m_chickTime += CHICK_TIME;
+
+					if (m_chickTime >= 60 && m_chickTime <= 80) {
+						if (vec.x < 20) {
+							m_left = true;
+							m_dash = true;
+						}
+
+						if (vec.x > -20) {
+							m_right = true;
+							m_dash = true;
+						}
+						if (vec.z > -20) {
+							m_up = true;
+						}
+						if (vec.z < 20) {
+							m_down = true;
+						}
+					}
+					if (m_chickTime >= 150) {
+						m_chickTime = 0;
+					}
+				}
 
 
+				if (m_cont <= 3) {
+					if (m_rabittoCont < 100) {
+						m_pos = CVector3D(RABITTO_X, 0, 300);
+					}
+					if (m_pos.x > RABITTO_X) {
+						m_pos.x = RABITTO_X;
+					}
+					if (m_rabittoCont > 100 && m_rabittoCont < 400) {
+						m_rabittoCont2++;
+						if (m_rabittoCont2 < RABITTO_CONT) {
+							m_up = true;
+						}
+						if (m_rabittoCont2 > RABITTO_CONT && m_rabittoCont2 < RABITTO_CONTTWO) {
+							m_down = true;
+						}
+						if (m_rabittoCont2 > RABITTO_CONTTWO) {
+							m_rabittoCont2 = 0;
+						}
+					}
+					if (m_rabittoCont > RABITTO_CONTTHREE && m_rabittoCont < RABITTO_CONTFOUR) {
+						m_attack = true;
+
+					}
+					if (m_rabittoCont > RABITTO_CONTFIVE) {
+						m_rabittoCont = 10;
+						m_cont++;
+						m_attack = false;
+					}
+				}
+			}
+			if (m_enemyType == 10) {
+				if (m_hp <= 1) {
+					m_left = true;
+				}
+				if (m_hp >= 1) {
+					if (m_rabittoCont > 0 && m_rabittoCont < 100) {
+						m_pos = CVector3D(ENEMY_X, 0, ENEMY_Z);
+					}
+					if (m_pos.z > ENEMY_Z) {
+						m_pos.z = ENEMY_Z;
+					}
+					if (m_pos.x > ENEMY_X) {
+						m_pos.x = ENEMY_X;
+					}
+					if (m_rabittoCont > ENEMY_CONTONE && m_rabittoCont < ENEMY_CONTTWO) {
+						m_dash = true;
+						m_pos.z -= 3;
+					}
+
+					if (m_rabittoCont > ENEMY_CONTTWO && m_rabittoCont < ENEMY_CONTTHREE) {
+						m_left = true;
+						m_dash = true;
+
+					}
+					if (m_rabittoCont == ENEMY_CONTTHREE) {
+						m_dash = false;
+						m_hp -= ENEMY_HP;
+					}
+					if (m_rabittoCont > 550 && m_rabittoCont < ENEMY_CONTFOUR) {
+						m_pos.z += 3;
+						m_right = true;
+					}
+					if (m_rabittoCont > ENEMY_CONTFOUR) {
+						m_rabittoCont = 200;
+
+					}
+				}
+			}
+		}
+		
+		
 
 		if (m_enemyType == 5) {
-			m_chickTime += CHICK_TIME;
+			
+				m_chickTime += CHICK_TIME;
 
-			if (m_chickTime <= 120) {
-				if (vec.x < 20) {
-					m_left = true;
-					m_attack = true;
+				if (m_chickTime <= 120) {
+					if (vec.x < 20) {
+						m_left = true;
+						m_attack = true;
+					}
+
+					if (vec.x > -20) {
+						m_right = true;
+						m_attack = true;
+					}
+
+				}
+				if (m_chickTime >= 120 && m_chickTime <= 160) {
+					if (vec.x < 20) {
+						m_left = true;
+					}
+
+					if (vec.x > -20) {
+						m_right = true;
+					}
+					if (vec.z > -20) {
+						m_up = true;
+					}
+					if (vec.z < 20) {
+						m_down = true;
+					}
+				}
+				if (m_chickTime >= 250) {
+					m_chickTime = 0;
 				}
 
-				if (vec.x > -20) {
-					m_right = true;
-					m_attack = true;
-				}
-				
 			}
-			if (m_chickTime >= 120 && m_chickTime <= 160) {
-				if (vec.x < 20) {
-					m_left = true;
-				}
-
-				if (vec.x > -20) {
-					m_right = true;
-				}
-				if (vec.z > -20) {
-					m_up = true;
-				}
-				if (vec.z < 20) {
-					m_down = true;
-				}
-			}
-			if (m_chickTime >= 250) {
-				m_chickTime = 0;
-			}
-
-		}
+		
 
 
 
@@ -96,7 +215,7 @@ void CEnemy::Contlol() {
 		if (m_enemyType == 4) {
 
 			m_chickTime += CHICK_TIME;
-			if (m_chickTime > 80 && m_chickTime <= 100) {
+			if (m_chickTime > 60 && m_chickTime <= 80) {
 				if (vec.x < 20) {
 					m_left = true;
 				}
@@ -112,7 +231,7 @@ void CEnemy::Contlol() {
 				}
 
 			}
-			if (m_chickTime >= 100 && m_chickTime <= 120) {
+			if (m_chickTime >= 80 && m_chickTime <= 100) {
 				if (vec.x < 20) {
 					m_left = true;
 				}
@@ -122,7 +241,7 @@ void CEnemy::Contlol() {
 				}
 				m_jump = true;
 			}
-			if (m_chickTime >= 140) {
+			if (m_chickTime >= 120) {
 				m_chickTime = 0;
 			}
 
@@ -134,7 +253,7 @@ void CEnemy::Contlol() {
 		if (m_enemyType == 3) {
 			m_chickTime += CHICK_TIME;
 
-			if (m_chickTime >= 80 && m_chickTime <= 400) {
+			if (m_chickTime >= 40 && m_chickTime <= 400) {
 
 				if (vec.x < -110) {
 

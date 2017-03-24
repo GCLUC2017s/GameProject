@@ -134,11 +134,14 @@ void init(void)
 	CResourceManager::GetInstance()->Add("BackGroundMoningBack2", CImage::LoadImage("BackGround/Back/Background_ M_2.png"));
 	CResourceManager::GetInstance()->Add("BackGround", CImage::LoadImage("BackGround/Back/Back_02.png"));
 	CResourceManager::GetInstance()->Add("BackGround2", CImage::LoadImage("BackGround/Back/Back_02.png"));
-	CResourceManager::GetInstance()->Add("Back_03", CImage::LoadImage("BackGround/Back/Back_03.png"));
 	CResourceManager::GetInstance()->Add("Carrot", CImage::LoadImage("Enemy/Carrot.png"));
+	CResourceManager::GetInstance()->Add("Paprika", CImage::LoadImage("Enemy/Paprika.png"));
+	CResourceManager::GetInstance()->Add("Rice", CImage::LoadImage("Enemy/Rice.png"));
+	CResourceManager::GetInstance()->Add("Squid", CImage::LoadImage("Enemy/Squid.png"));
+	CResourceManager::GetInstance()->Add("Carrottwo", CImage::LoadImage("Enemy/Carrot.png"));
 	CResourceManager::GetInstance()->Add("Chick", CImage::LoadImage("Enemy/Chick.png"));
 	CResourceManager::GetInstance()->Add("Fish", CImage::LoadImage("Enemy/Fish.png"));
-	CResourceManager::GetInstance()->Add("Boss", CImage::LoadImage("Enemy/Boss_R_01.png"));
+	CResourceManager::GetInstance()->Add("Boss", CImage::LoadImage("Enemy/Boss_B_01.png"));
 	CResourceManager::GetInstance()->Add("Pig", CImage::LoadImage("Enemy/Pig.png"));
 	CResourceManager::GetInstance()->Add("Meter", CImage::LoadImage("Enemy/Meter_01.png"));
 	CResourceManager::GetInstance()->Add("Pos", CImage::LoadImage("BackGround/Gauge01.png"));

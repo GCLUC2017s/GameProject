@@ -143,6 +143,15 @@
     <ClCompile Include="Graphic\CStringtexture.cpp">
       <Filter>Graphic</Filter>
     </ClCompile>
+    <ClCompile Include="Load\CLoadPlayer.cpp">
+      <Filter>Load</Filter>
+    </ClCompile>
+    <ClCompile Include="Result\CResult.cpp">
+      <Filter>Result</Filter>
+    </ClCompile>
+    <ClCompile Include="Explain\CExplain.cpp">
+      <Filter>Explain</Filter>
+    </ClCompile>
     <ClCompile Include="Enemy\CBoss.cpp">
       <Filter>Enemey</Filter>
     </ClCompile>
@@ -152,17 +161,8 @@
     <ClCompile Include="Enemy\CEnemy01.cpp">
       <Filter>Enemey</Filter>
     </ClCompile>
-    <ClCompile Include="Load\CLoadPlayer.cpp">
-      <Filter>Load</Filter>
-    </ClCompile>
-    <ClCompile Include="Result\CResult.cpp">
-      <Filter>Result</Filter>
-    </ClCompile>
     <ClCompile Include="Enemy\CLowBoss.cpp">
       <Filter>Enemey</Filter>
-    </ClCompile>
-    <ClCompile Include="Explain\CExplain.cpp">
-      <Filter>Explain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +244,18 @@
     <ClInclude Include="Graphic\CStringtexture.h">
       <Filter>Graphic</Filter>
     </ClInclude>
+    <ClInclude Include="Load\CLoadPlayer.h">
+      <Filter>Load</Filter>
+    </ClInclude>
+    <ClInclude Include="Result\CResult.h">
+      <Filter>Result</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound\CSound.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Explain\CExplain.h">
+      <Filter>Explain</Filter>
+    </ClInclude>
     <ClInclude Include="Enemy\CBoss.h">
       <Filter>Enemey</Filter>
     </ClInclude>
@@ -259,20 +271,8 @@
     <ClInclude Include="Enemy\cenemypattern.h">
       <Filter>Enemey</Filter>
     </ClInclude>
-    <ClInclude Include="Load\CLoadPlayer.h">
-      <Filter>Load</Filter>
-    </ClInclude>
-    <ClInclude Include="Result\CResult.h">
-      <Filter>Result</Filter>
-    </ClInclude>
-    <ClInclude Include="Sound\CSound.h">
-      <Filter>Sound</Filter>
-    </ClInclude>
     <ClInclude Include="Enemy\CLowBoss.h">
       <Filter>Enemey</Filter>
-    </ClInclude>
-    <ClInclude Include="Explain\CExplain.h">
-      <Filter>Explain</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

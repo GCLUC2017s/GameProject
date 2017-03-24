@@ -92,6 +92,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\サンプル\CTask.h" />
+    <ClInclude Include="..\..\サンプル\CTaskLinker.h" />
+    <ClInclude Include="..\..\サンプル\CTaskManager.h" />
     <ClInclude Include="Game\CGame.h" />
     <ClInclude Include="Game\CGameInfo.h" />
     <ClInclude Include="Game\CollisionA\CCollisionA.h" />
@@ -112,10 +115,11 @@
     <ClInclude Include="Scene\Title\CTitle.h" />
     <ClInclude Include="System\Base\CBase.h" />
     <ClInclude Include="System\CharaBase\CCharaBase.h" />
-    <ClInclude Include="System\TaskSystem\CTask.h" />
-    <ClInclude Include="System\TaskSystem\CTaskManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\サンプル\CTask.cpp" />
+    <ClCompile Include="..\..\サンプル\CTaskLinker.cpp" />
+    <ClCompile Include="..\..\サンプル\CTaskManager.cpp" />
     <ClCompile Include="Game\CGame.cpp" />
     <ClCompile Include="Game\CGameInfo.cpp" />
     <ClCompile Include="Game\CollisionA\CCollisionA.cpp" />
@@ -136,8 +140,6 @@
     <ClCompile Include="Scene\Title\CTitle.cpp" />
     <ClCompile Include="System\Base\CBase.cpp" />
     <ClCompile Include="System\CharaBase\CCharaBase.cpp" />
-    <ClCompile Include="System\TaskSystem\CTask.cpp" />
-    <ClCompile Include="System\TaskSystem\CTaskManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

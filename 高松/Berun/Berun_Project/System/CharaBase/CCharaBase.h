@@ -46,7 +46,6 @@ struct T_CharacterData {
 	SVector2D texSize;
 	SVector2D senter;	//キャラクターの中心点
 	CRect rect;			//キャラクターの矩形
-	E_Item item;
 };
 enum {
 	ePlayerMan,	//プレイヤー男
@@ -56,13 +55,13 @@ enum {
 	eFish,//魚
 	ePig,//豚
 	eVegetavelboss,//野菜ボス（ウサギ）
-	eBerry,//イチゴサングラス空中
+	eCarrottwo,//ニンジン
+	eRice,//米
+	eSquid,//イカ
 	ePapurika,//ピーマン
 	eStrawberry,//イチゴ地上
 	eMeatboss,//肉ボス（鶏）
-	eSquid,//イカ
 	eFishboss,//魚介ボス（鮫）
-	eRice,//米
 	eBread,//パン
 	eGrainboss,//穀物ボス（茶碗武士）
 	eCharacterMax

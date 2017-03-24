@@ -28,7 +28,7 @@ CKeyを使っている条件文は今後別の処理になります。
 #define SIZE_TEX_ENEMY00_WALK_X 160			//エネミーの歩くテクスチャサイズ Y
 #define SIZE_TEX_ENEMY00_WALK_Y 160			//エネミーの歩く姿テクスチャサイズ Y
 #define SIZE_SHADOW							//影の表示
-#define WALK_SPEED 0.055		//テスト用にいじってる				//飛行スピード
+#define WALK_SPEED 0.04		//テスト用にいじってる				//飛行スピード
 #define WALK_X 2							//飛行ベクトルX
 #define WALK_Y 1							//飛行ベクトルY
 #define ANIME_TIME_BASE						6
@@ -43,11 +43,16 @@ CKeyを使っている条件文は今後別の処理になります。
 
 
 void CEnemy01::Init(){
-	RandPos(SIZE_ENEMY01_X, SIZE_ENEMY01_Y, &mPos,-DISP_X,DISP_X*10);
+	RandPos(SIZE_ENEMY01_X, SIZE_ENEMY01_Y, &mPos,DISP_X*6,DISP_X*7);
 	/*テクスチャを張る*/
 	mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
 	mRect.SetUv(CLoadEnemy01::GetInstance()->mStay_tex[0], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
 	mForward = CVector2(1.0f, 0.0f);
+	//RandPos(SIZE_ENEMY01_X, SIZE_ENEMY01_Y, &mPos,-DISP_X,DISP_X*10);
+	///*テクスチャを張る*/
+	//mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
+	//mRect.SetUv(CLoadEnemy01::GetInstance()->mStay_tex[0], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
+	//mForward = CVector2(1.0f, 0.0f);
 
 }
 
@@ -58,6 +63,13 @@ CEnemy01::~CEnemy01(){
 
 //エネミー01描画
 CEnemy01::CEnemy01() : mVelocity(0), mFrameCount(0), actionflag(false), motion(EM_STAY), direction(E_LEFT){
+	Init();
+
+	RandPos(SIZE_ENEMY01_X, SIZE_ENEMY01_Y, &mPos, -DISP_X, DISP_X * 10);
+	/*テクスチャを張る*/
+	mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
+	mRect.SetUv(CLoadEnemy01::GetInstance()->mStay_tex[0], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
+	mForward = CVector2(1.0f, 0.0f);
 	mPriorityR = E_ENEMY01;			//Renderのナンバー 
 	mPriorityU = E_ENEMY01;			//Updateのナンバー
 	mHitPoint = ENE_HP_X;		//ＨＰ
@@ -300,8 +312,6 @@ void CEnemy01::Motion(){
 
 		/*範囲*/
 		Attack(AT_RANGE01);
-
-			mEnabledAttack = true;
 		
 
 		/*攻撃範囲に距離を詰める*/

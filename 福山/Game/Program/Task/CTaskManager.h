@@ -18,7 +18,7 @@ private:
 public:
 	CTask *mRoot;
 	CTask *mTail;
-
+	bool mFlagAllkill;
 	static CTaskManager *GetInstance(); //GetInstance
 
 	~CTaskManager();

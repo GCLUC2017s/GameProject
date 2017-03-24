@@ -4,6 +4,8 @@
 #include "../CGame/CGame.h"
 #include "../Load/CLoadPlayer.h"
 #include <math.h>
+#include "../Sound/CSound.h"
+#include "../Result/CResult.h"
 #define JUMP_FIRST_SPEED				0.2f								//ジャンプのジャンプ力
 #define FIRST_R_NO_PL					0.0f								//初めのレンダーのポイント
 #define FIRST_U_NO_PL					0.0f								//初めのアップデートのポイント
@@ -20,8 +22,8 @@
 #define SIZE_TEX_CUTJUMP_Y				160.0f								//飛ぶ斬撃のテクスチャサイズY
 
 #define SLOW_DOWN						 0.005f								//移動の減速スピード
-#define WALK_SPEED						 0.05f								//歩くスピード
-#define RUN_SPEED						 0.1f								//走るスピード
+#define WALK_SPEED						 0.04f								//歩くスピード
+#define RUN_SPEED						 0.075f								//走るスピード
 #define WALK_X							 1.0f								//歩くベクトルX
 #define WALK_Y							 0.5f								//歩くベクトルY
 #define PATTERN_R						 1.0f								//PATTERNの右
@@ -40,15 +42,16 @@
 #define ANIME_TIME_WALK						8 + mHungryStatus				//アニメループ時間　歩く
 #define ANIME_TIME_EX01						4								//アニメループ時間 必殺技振り
 
-#define ATTACK_A		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,0.1, CVector2(mPos.x+mForward.x*0.1,mPos.y)			//攻撃範囲A
-#define ATTACK_B		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,0.1, CVector2(mPos.x+mForward.x*0.1,mPos.y)			//攻撃範囲B
-#define ATTACK_C		mForward.x, SIZE_PLAYER_X+0.5f, SIZE_PLAYER_Y,0.1, CVector2(mPos.x+mForward.x*0.1,mPos.y)	//攻撃範囲C
-#define ATTACK_JUMP		mForward.x, SIZE_PLAYER_X*2 ,SIZE_PLAYER_Y,0.1,\
-						CVector2(mPos.x  -mForward.x*1.7f, mPos.y)	//攻撃範囲ジャンプATTACK
+#define ATTACK_A		mSaveForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,0.2, CVector2(mPos.x,mPos.y)			//攻撃範囲A
+#define ATTACK_B		mSaveForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,0.2, CVector2(mPos.x,mPos.y)			//攻撃範囲B
+#define ATTACK_C		mSaveForward.x, SIZE_PLAYER_X+0.5f, SIZE_PLAYER_Y,0.2, CVector2(mPos.x,mPos.y)	//攻撃範囲C
+#define ATTACK_JUMP		mSaveForward.x, SIZE_PLAYER_X*2 ,SIZE_PLAYER_Y,0.2,\
+						CVector2(mPos.x - mSaveForward.x*1.7f, mPos.y)	//攻撃範囲ジャンプATTACK
 /*ジャンプ攻撃範囲*/
 #define FRAME_JUMPBOTTOM 3													//ジャンプ攻撃下の時のアニメーション
-#define EAT_ATTACK		mForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,1,CVector2(mPos.x+mForward.x*0.1,mPos.y)	//食べる攻撃
-#define EX01_ATTACK		mForward.x, SIZE_PLAYER_X+ fabsf(mEx01Speed), SIZE_PLAYER_Y + fabsf(mEx01Speed),2, CVector2(mPos.x+mEx01Speed,mPos.y) //必殺技範囲
+#define EAT_ATTACK		mSaveForward.x, SIZE_PLAYER_X, SIZE_PLAYER_Y,1,CVector2(mPos.x,mPos.y)	//食べる攻撃
+#define EX01_ATTACK		mSaveForward.x, SIZE_PLAYER_X+ fabsf(mEx01Speed), SIZE_PLAYER_Y + fabsf(mEx01Speed),10,\
+						CVector2(mPos.x+	mEx01Speed	,	mPos.y) //必殺技範囲
 #define EX01_SPEED 0.1f														//必殺技が進むスピード
 #define INTERVAL		20.0f												//攻撃後のINTERVALキー入力待ち時間  
 #define HUNGRY_SPEED	0.002f												//おなかが減るスピード
@@ -62,7 +65,7 @@
 float CPlayer::camera_x;
 float CPlayer::camera_y;
 
-
+CSound SE_PL;
 void CPlayer::SetPos(){
 	mPos = first_pos;
 	mAxis = mPos.y - SIZE_PLAYER_Y;
@@ -81,24 +84,23 @@ void CPlayer::Init() {
 	mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
 	mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutFlyTex, 0, 0, SIZE_TEX_CUTFLY_X, SIZE_TEX_CUTFLY_Y);
 	mForward = CVector2(RIGHT, 0.0f);
+	mSaveForward = mForward;
 }
 
 
 
 CPlayer::~CPlayer() {
-	
-
-
+	SE_PL.close();
 }
-
+CSound mAttackSE;
 //プレイヤー描画
-CPlayer::CPlayer() : mVelocity(0), mSpeedJump(JUMP_FIRST_SPEED),mEnabledInterval(false){
+CPlayer::CPlayer() : mVelocity(0), mSpeedJump(JUMP_FIRST_SPEED), mEnabledInterval(false), mEnabledRun(false){
 
-	
+	SE_PL.load("../Music\\SECut1.mp3");
 	mCharaFlag = true;
 	mPriorityR = E_PLAYER;			//Renderのナンバー 
 	mPriorityU = E_PLAYER;			//Updateのナンバー
-	mHitPoint = PL_HP_X;		//ＨＰ
+	mHitPoint = PL_HP_X*10;		//ＨＰ
 	mStamina = PL_ST_X;			//ST
 	mMyNumber = E_PLAYER;
 	mStatus = E_STAY_R,
@@ -107,14 +109,13 @@ CPlayer::CPlayer() : mVelocity(0), mSpeedJump(JUMP_FIRST_SPEED),mEnabledInterval
 	mShadow.SetVertex(-SIZE_SHADOW_X, SIZE_SHADOW_Y, SIZE_SHADOW_X, -SIZE_SHADOW_Y);
 	//四角形の色を設定
 	mRect.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
-
+	
 }
 /*左右判断*/
 void CPlayer::DecisionRL(int R, int L){
 	
-		if (mSaveForword.x == RIGHT || mSaveForword.x == 0){ mStatus = R; }
-		if (mSaveForword.x == LEFT){ mStatus = L; }
-	
+		if (mSaveForward.x == RIGHT || mSaveForward.x == 0){ mStatus = R; }
+		if (mSaveForward.x == LEFT){ mStatus = L; }
 }
 /*ジャンプメソッド*/
 void CPlayer::Jump(){ //ジャンプ処理メソッド
@@ -143,6 +144,7 @@ void CPlayer::Jump(){ //ジャンプ処理メソッド
 		
 		if (mPos.y < mAxis + SIZE_PLAYER_Y){//現在の軸に足がついたとき
 			mPos.y = mAxis + SIZE_PLAYER_Y; //元いた地面の"Y"に戻す
+			mAxis = mPos.y - SIZE_PLAYER_Y;
 			mEnabledJump = false; //終了
 		}
 	}
@@ -152,6 +154,7 @@ void CPlayer::RunWalk(CVector2 v){
 	if (CKey::push(VK_CONTROL)){ //走る時
 		mVelocity = RUN_SPEED;
 		if(!mEnabledJump)DecisionRL(E_RUN_R, E_RUN_L);
+		mEnabledRun = true;
 	}
 	else{				//歩くとき
 		mVelocity = WALK_SPEED;
@@ -176,13 +179,13 @@ void CPlayer::Move(){
 	if (CKey::push(RIGHT_KEY)) {
 		if (!mEnabledJump)mStatus = E_WALK_R;
 		RunWalk(V2_RIGHT);
-		mSaveForword = V2_RIGHT;
+		mSaveForward = V2_RIGHT;
 	}
 	//左移動
 	if (CKey::push(LEFT_KEY)) {
 		if (!mEnabledJump)mStatus = E_WALK_L;
 		RunWalk(V2_LEFT);
-		mSaveForword = V2_LEFT;
+		mSaveForward = V2_LEFT;
 	}
 	}
 	//上移動
@@ -208,7 +211,7 @@ void CPlayer::Brake(){
 	if (!CKey::push(VK_DOWN) && !CKey::push(VK_UP) && !CKey::push(VK_LEFT) && !CKey::push(VK_RIGHT) && mVelocity > 0 
 		&& !mEnabledJump && mVelocity != 0 && !mEnabledAttack){
 		mVelocity -= SLOW_DOWN;
-		DecisionRL(E_BRAKE_R, E_BRAKE_L);
+		if (mEnabledRun)DecisionRL(E_BRAKE_R, E_BRAKE_L);
 	}
 	else if (mVelocity <= 0){
 		mVelocity = 0;
@@ -298,8 +301,8 @@ void CPlayer::PlayerAttack(){
 	case E_EX01_L:
 	case E_EX01_R:
 		
-		if (mSaveForword.x == RIGHT || mSaveForword.x == 0){ mEx01Speed += EX01_SPEED; }
-		if (mSaveForword.x == LEFT){ mEx01Speed -= EX01_SPEED; }
+		if (mSaveForward.x == RIGHT || mSaveForward.x == 0){ mEx01Speed += EX01_SPEED; }
+		if (mSaveForward.x == LEFT){ mEx01Speed -= EX01_SPEED; }
 		if (mAnimeFrame != FRAME_LIMIT8 - 1){ mEnabledAttack = true; }
 		else{ //アニメ最後が来たら
 			mEx01Speed = 0;
@@ -314,6 +317,8 @@ void CPlayer::PlayerAttack(){
 		if (mStatus != E_BRAKE_R && mStatus != E_BRAKE_L){ //ブレーキがかかっていないとき
 			/*通常攻撃 攻撃力の設定 フラグを真に*/
 			if (CKey::once('X') && !mEnabledAttack){
+				SE_PL.play();
+
 
 					mAttackPoint = PL_NORMAL_POWER;
 					mAnimeFrame = 0;
@@ -333,6 +338,8 @@ void CPlayer::PlayerAttack(){
 			}
 			/*捕食攻撃 攻撃力の設定 フラグを真に*/
 			if (CKey::once('Z') && !mEnabledAttack){
+				SE_PL.play();
+
 				mAttackPoint = PL_EAT_POWER;		
 				mAnimeFrame = 0;
 				mAttackPoint = mAttackPoint *mHungryPower;
@@ -341,10 +348,11 @@ void CPlayer::PlayerAttack(){
 				DecisionRL(E_EAT_R, E_EAT_L);
 			}
 			/*必殺技(消費)*/
-			if (CKey::once('A') && mStamina >= PL_ST_X *0.1){
+			if (CKey::once('A') && mStamina >= HUNGRY_EX01 && !mEnabledAttack){
+				SE_PL.play();
 				mAnimeFrame = 0;
 				mAttackPoint = PL_EX01_POWER;
-				mStamina -= PL_ST_X*0.1f;
+				mStamina -= HUNGRY_EX01;
 				mAttackPoint = mAttackPoint *mHungryPower;
 				mEnabledAttack = true;
 				mEnabledEx01 = true;
@@ -367,16 +375,16 @@ FLERM
 
 void CPlayer::AtJumpAnime(){
 	if (mAnimeFrame == FRAME_CUTDOWN){
-		if (mForward.x == LEFT){ mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutJumpTex, SIZE_TEX_CUTJUMP_X, 0, 0, SIZE_TEX_CUTJUMP_Y); }//斬撃()
-		if (mForward.x == RIGHT){ mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutJumpTex, 0, 0, SIZE_TEX_CUTJUMP_X, SIZE_TEX_CUTJUMP_Y); }//斬撃()
+		if (mSaveForward.x == LEFT){ mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutJumpTex, SIZE_TEX_CUTJUMP_X, 0, 0, SIZE_TEX_CUTJUMP_Y); }//斬撃()
+		if (mSaveForward.x == RIGHT){ mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutJumpTex, 0, 0, SIZE_TEX_CUTJUMP_X, SIZE_TEX_CUTJUMP_Y); }//斬撃()
 	}
 	if (mAnimeFrame == FRAME_CUTRETURN){
-		if (mForward.x == RIGHT){ mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutJumpTex, SIZE_TEX_CUTJUMP_X, 0, 0, SIZE_TEX_CUTJUMP_Y); }//斬撃()
-		if (mForward.x == LEFT){ mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutJumpTex, 0, 0, SIZE_TEX_CUTJUMP_X, SIZE_TEX_CUTJUMP_Y); }//斬撃()
+		if (mSaveForward.x == RIGHT){ mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutJumpTex, SIZE_TEX_CUTJUMP_X, 0, 0, SIZE_TEX_CUTJUMP_Y); }//斬撃()
+		if (mSaveForward.x == LEFT){ mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutJumpTex, 0, 0, SIZE_TEX_CUTJUMP_X, SIZE_TEX_CUTJUMP_Y); }//斬撃()
 	}
 	if (mAnimeFrame == FRAME_CUTUP){
-		if (mForward.x == RIGHT){ mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutJumpTex, SIZE_TEX_CUTJUMP_X, SIZE_TEX_CUTJUMP_Y,0 , 0); }//斬撃()
-		if (mForward.x == LEFT){ mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutJumpTex, 0, SIZE_TEX_CUTJUMP_Y, SIZE_TEX_CUTJUMP_X, 0); }//斬撃()
+		if (mSaveForward.x == RIGHT){ mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutJumpTex, SIZE_TEX_CUTJUMP_X, SIZE_TEX_CUTJUMP_Y, 0, 0); }//斬撃()
+		if (mSaveForward.x == LEFT){ mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutJumpTex, 0, SIZE_TEX_CUTJUMP_Y, SIZE_TEX_CUTJUMP_X, 0); }//斬撃()
 	}
 }
 /*アニメーションシーン*/
@@ -493,8 +501,8 @@ void CPlayer::AnimeScene(){
 	};
 	
 	if (!mEnabledJumpAttack){
-		if (mForward.x == LEFT){ mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutFlyTex, SIZE_TEX_CUTFLY_X, 0, 0, SIZE_TEX_CUTFLY_Y); }//斬撃()
-		if (mForward.x == RIGHT){ mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutFlyTex, 0, 0, SIZE_TEX_CUTFLY_X, SIZE_TEX_CUTFLY_Y); }//斬撃()
+		if (mSaveForward.x == LEFT){ mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutFlyTex, SIZE_TEX_CUTFLY_X, 0, 0, SIZE_TEX_CUTFLY_Y); }//斬撃()
+		if (mSaveForward.x == RIGHT){ mAttackRange.SetUv(CLoadPlayer::GetInstance()->mCutFlyTex, 0, 0, SIZE_TEX_CUTFLY_X, SIZE_TEX_CUTFLY_Y); }//斬撃()
 	}
 }
 /*能力変化のメソッド*/
@@ -512,14 +520,17 @@ void CPlayer::ChangeStatus(){
 		} 
 		else if (HUNGRY_S_LOW_IF){ 
 			mHungryPower = HUNGRY_POWER_HIGH; mHungrySSpp = HUNGRY_SSPP_HIGH;//おなかすいた上昇
-			mRect.triangle1.r = 0.4f;
-			mRect.triangle2.r = 0.4f;
-			mRect.triangle1.g = 0.4f;
-			mRect.triangle2.g = 0.4f;
+			if (mHitPoint == mSaveAlertHitoPoint){
+				mRect.triangle1.r = 0.4f;
+				mRect.triangle2.r = 0.4f;
+				mRect.triangle1.g = 0.4f;
+				mRect.triangle2.g = 0.4f;
+			}
 			mHungryStatus = E_LOW;
 		}
 		else{									 //中間 変化なし
-			mHungryPower = 0; mHungrySSpp = 0;
+			mHungryPower = 0;
+			mHungrySSpp  = 0;
 			mHungryStatus = E_NORMAL;
 		}
 		/*ステータス変化終了*/
@@ -541,6 +552,9 @@ void CPlayer::Update() {
 	//assert(E_STAY_L <= mStatus && mStatus <= E_BRAKE_R);       //テクスチャを正しく読み込めているかどうか
 	//四角形の位置を設定
 	mAttackRange.position = mPos;
+	if (CResult::mFlagRect){
+		mHitPoint = CResult::mSaveResultHP;
+	}
 	if (mHitPoint > 0){ //HPがあるとき
 		mRect.position = mPos;
 		if (!mEnabledAttack){ Move(); }	//移動メソッド
@@ -553,15 +567,20 @@ void CPlayer::Update() {
 	}
 	if (!mEnabledInterval && mStatus != E_STAY_L && mStatus != E_STAY_R && mVelocity <= 0 && !mEnabledJump && !mEnabledAttack){
 		DecisionRL(E_STAY_R, E_STAY_L);
+		mEnabledRun = false;
+	}
+
+	//同時にキーを押したとき(攻撃中ジャンプ中には作用しない)
+	if (!mEnabledJump && !mEnabledAttack && CKey::push(RIGHT_KEY) && CKey::push(LEFT_KEY)){
+		DecisionRL(E_STAY_R, E_STAY_L);
 	}
 
 	LimitDisp(SIZE_PLAYER_X, SIZE_PLAYER_Y);
-
 	mPriorityR = -mAxis;
 	camera_x = mPos.x;
 	camera_y = mPos.y;
 	mRect.position = mPos;
-	mShadow.position = CVector2(mPos.x, mAxis);
+	mShadow.position = CVector2(mPos.x, mAxis+SIZE_SHADOW_Y);
 
 	const float fade_speed = 0.01f;
 	if (mHitPoint <= 0) {

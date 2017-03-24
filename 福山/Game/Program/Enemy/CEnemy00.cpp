@@ -29,7 +29,9 @@
 #define WALK_SPEED 0.02f				//歩くスピード
 #define WALK_X 2						//歩くベクトルX
 #define WALK_Y 1						//歩くベクトルY
-#define AT_RANGE		mForward.x, SIZE_ENEMY00_X, SIZE_ENEMY00_Y,10, mPos      	//攻撃範囲
+
+#define AT_RANGE00		mForward.x, SIZE_ENEMY00_X*1.5, SIZE_ENEMY00_Y,2, CVector2(mPos.x+mForward.x*0.1,mPos.y) 
+
 #define ENEMY00_STAY "../CG\\enemy00\\enemy00_stay\\"
 #define ENEMY00_WALK "../CG\\enemy00\\enemy00_walk\\"
 #define ENEMY00_ATTACK "../CG\\enemy00\\enemy00_attack\\"
@@ -38,13 +40,18 @@
 
 
 void CEnemy00::Init(){
-	RandPos(SIZE_ENEMY00_X, SIZE_ENEMY00_Y, &mPos,  DISP_X*3, DISP_X * 10);
+	RandPos(SIZE_ENEMY00_X, SIZE_ENEMY00_Y, &mPos,  DISP_X*4, DISP_X*6);
 	/*テクスチャを張る*/
 	mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
 	mRect.SetUv(CLoadEnemy00::GetInstance()->mStay_tex[0], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
 	mForward = CVector2(1.0f, 0.0f);
+	//RandPos(SIZE_ENEMY00_X, SIZE_ENEMY00_Y, &mPos,  DISP_X*3, DISP_X * 10);
+	///*テクスチャを張る*/
+	//mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
+	//mRect.SetUv(CLoadEnemy00::GetInstance()->mStay_tex[0], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
+	//mForward = CVector2(1.0f, 0.0f);
 
-	srand((unsigned int)time(NULL));
+	//srand((unsigned int)time(NULL));
 
 }
 
@@ -52,6 +59,16 @@ void CEnemy00::Init(){
 
 //エネミー00描画
 CEnemy00::CEnemy00() : mVelocity(0), mFrameCount(0), actionflag(false), motion(EM_STAY), direction(E_LEFT), escapetime(0), attacktime(0) {
+
+	Init();
+
+	RandPos(SIZE_ENEMY00_X, SIZE_ENEMY00_Y, &mPos, DISP_X * 3, DISP_X * 10);
+	/*テクスチャを張る*/
+	mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
+	mRect.SetUv(CLoadEnemy00::GetInstance()->mStay_tex[0], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
+	mForward = CVector2(1.0f, 0.0f);
+
+	srand((unsigned int)time(NULL));
 
 	mPriorityR = E_ENEMY00;			//Renderのナンバー 
 	mPriorityU = E_ENEMY00;			//Updateのナンバー
@@ -232,9 +249,11 @@ void CEnemy00::Motion(){
 	case EM_DIE://死亡
 		if (direction == E_RIGHT) {
 			mStatus = E_DIE_R;
+			mEnabledAttack = false;
 		}
 		else if (direction == E_LEFT){
 			mStatus = E_DIE_L;
+			mEnabledAttack = false;
 		}
 		break;
 
@@ -292,19 +311,19 @@ void CEnemy00::Motion(){
 		attacktime += ENEMY00_INTERVAL / FPS;
 
 		if (attacktime < ENEMY00_INTERVAL){
-			if (RIGHT_PTT) {
+			if (RIGHT_PTT&&mHitPoint>0) {
 				actionflag = true;
 				mEnabledAttack = true;
 				mStatus = E_ATTACK_R;
 			}
-			else if (LEFT_PTT){
+			else if (LEFT_PTT&&mHitPoint>0){
 				actionflag = true;
 				mEnabledAttack = true;
 				mStatus = E_ATTACK_L;
 			}
 		}
 		//攻撃範囲とあたり判定フラグ
-		Attack(AT_RANGE);
+
 		if (NO_ATTACK_PTTX){
 			actionflag = false;
 			motion = EM_WALK;
@@ -316,6 +335,7 @@ void CEnemy00::Motion(){
 			motion = EM_RANGE;
 			mEnabledAttack = false;
 		}
+		Attack(AT_RANGE00);
 		break;
 
 	case EM_Slanting:
@@ -374,7 +394,8 @@ void CEnemy00::Update(){
 	}
 
 	if (mHitPoint <= 0){
-		motion = EM_DIE;		//体力が０ならDIEする
+		motion = EM_DIE;
+		mEnabledAttack = false;		//体力が０ならDIEする
 	}
 	if (mEnabledEaten){		//食べられたら消す
 		//演出加えてもいいかも(例)拡大縮小してif(サイズが0以下の時killFlagを立てるなど)

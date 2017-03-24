@@ -7,7 +7,7 @@
 
 #ifndef CENEMYMANAGER_GURAD
 #define CENEMYMANAGER_GUARD
-#define ENEMY_MAX 4//УGВћН≈СеРФ
+#define ENEMY_MAX 6//УGВћН≈СеРФ
 #define ENEMY_MAXONE 2//УGВћН≈СеРФ2
 #define ENEMY_MAXTWO 3//УGВћН≈СеРФ3
 #define ENEMY_DATA 0//УGВћМїНЁРФ

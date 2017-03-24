@@ -6,10 +6,12 @@
 #include "../Game/CollisionManager/CollisionManager.h"
 #include "../Scene/CSceneManager.h"
 #include"../Game/Enemy/CEnemyManager.h"
+#include "../System/TaskSystem/CTaskManager.h"
+#include "../System/TaskSystem/CTask.h"
 
 CGame* CGame::mp_game = nullptr;
 
-CGame::CGame() : mp_player(nullptr),m_step(0),m_cnt(0)
+CGame::CGame() : mp_map(nullptr),mp_player(nullptr),mp_enemy(nullptr),m_step(0),m_cnt(0)
 {
 	mp_img[0] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("GameStart"));
 	mp_img[1] = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Pos"));
@@ -20,6 +22,7 @@ CGame::CGame() : mp_player(nullptr),m_step(0),m_cnt(0)
 	new CMap(CMap::eStage1);
 	mp_tutorial=new CTutorial(g_tutorialDataPath[g_tutorialNo]);
 	m_stopScrol = false;
+	
 }
 
 CGame::~CGame()
@@ -37,7 +40,7 @@ switch (m_step)
 		{	
 			mp_player = new CPlayer(g_tutorialNo);
 			new CEnemyManager();
-			mp_enemy = new CEnemy(eVegetavelboss);
+			mp_enemy = new CEnemy(eCarrot);
 			mp_tutorial->SetKill();
 			mp_img[0]->SetPos(280, 310);
 			mp_img[0]->SetSize(700, 150);
@@ -47,9 +50,8 @@ switch (m_step)
 	}
 	case 1:
 	{
-	
-		CVector3D p = mp_player->GetPos();
-		if (p.x > GOAL_POS)
+		CVector3D pos = mp_player->GetPos();
+		if (pos.x > GOAL_POS)
 		{
 			CSceneManager::GetInstance()->Quit(60, eResult);
 		}

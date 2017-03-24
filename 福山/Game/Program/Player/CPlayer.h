@@ -11,6 +11,7 @@
 #include "../Define/define.h"
 #define HUNGRY_S_HIGH_IF mStamina >= PL_ST_X*0.7f	//おなかがいっぱいステータス
 #define HUNGRY_S_LOW_IF mStamina <= PL_ST_X*0.3f		//おなかが減ったステータス
+#define HUNGRY_EX01		PL_ST_X *0.4f
 const float gravity = 0.01;	 //重力
 
 const	 CVector2 first_pos
@@ -60,6 +61,7 @@ private:
 	};
 	MyHungry mHungryStatus = E_HIGH; //おなかの状態判断
 	bool mEnabledInterval;			//Interval中するとき
+	bool mEnabledRun;
 	
 	
 	CVector2 mTarget;
@@ -67,7 +69,7 @@ private:
 	
 	CVector2 mJAttackPos;			//攻撃範囲設定ジャンプ攻撃
 	CVector2 mJAttackxy;			//攻撃範囲設定ジャンプ攻撃
-
+	
 	/*移動処理*/
 	void Move();
 	/*走るか否か ※vは方向の値を入れる*/
@@ -97,9 +99,10 @@ public:
 	CCameraで使うXY
 	*/
 	float mVelocity; //移動するときに使う
+	float mSaveVelocity; ///直前の向きの力判断
 	static float camera_x;
 	static float camera_y;
-	CVector2 mSaveForword;			//前の右左判断
+	CVector2 mSaveForward;			//前の右左判断
 	CPlayer();
 	~CPlayer();
 	void Init();

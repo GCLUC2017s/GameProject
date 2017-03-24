@@ -20,7 +20,7 @@
 #define CAL_ENEMY01 0.3f
 #define CAL_BOSS	10
 #define SIZE_SHADOW_X *mRect.mRRight*0.5f						//影のサイズX
-#define SIZE_SHADOW_Y *mRect.mRLeft	*0.2f					//影のサイズY
+#define SIZE_SHADOW_Y *mRect.mRTop * 0.1f						//影のサイズY
 #define SHADOW_TEX_X			70.f				//影のテクスチャのX
 #define SHADOW_TEX_Y			20.f				//影のテクスチャのY
 
@@ -33,7 +33,7 @@
 #define SIZE_PL_FRAME_X PL_HP_X //フレームＸ
 #define SIZE_PL_FRAME_Y 0.2f  //フレームY			
 
-#define ENE_HP_X 2.0f			//エネミーgauge　(初期値)
+#define ENE_HP_X 1.0f			//エネミーgauge　(初期値)
 #define ENE_HP_Y 0.2f			//エネミーgauge
 
 #define SIZE_EN_FRAME_X ENE_HP_X*0.9			//エネミーのフレーム
@@ -88,11 +88,11 @@ private:
 	float mFrameTime;				//bool 関数	 FrameTie計算用
 	int mFrameCount;				//現在のフレーム数
 	/*アラート関数用*/
-	float mSaveAlertHitoPoint;		//アラート用
 	float mAlertCount;				//アラートカウント
 	bool FlagAlertSetHp;			//アラートHPの初期設定用
 
 public:
+	float mSaveAlertHitoPoint;		//アラート 用
 	CTexture	*mShadowTex;		//影テクスチャチャ
 	CVector2 mPos;					//位置
 	CVector2 mForward;				//向き

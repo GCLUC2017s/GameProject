@@ -69,11 +69,20 @@
 #include "../Key/CKey.h"
 #include "../SceneManager/CSceneManager.h"
 
-void CClear::Init(){
+bool CResult::mFlagRect;
+float CResult::mSaveResultHP;
 
+void CResult::Init(){
+	
 }
 
-CClear::CClear() : mTimePoint(TIMEMAX),mFlagRect(false),mFlagDie(false){
+CResult::CResult() : mTimePoint(TIMEMAX), mFlagDie(false){
+	mFlagRect = false;
+	Time = 0;					//計測用
+	RectTime = 0;				//四角形のTime
+	mKillPolint = 0;			//倒した数のポイント	
+	mSaveTime = 0;
+
 	mMyNumber = E_CLEAR;
 	mPriorityR = E_CLEAR;
 	mPriorityU = E_CLEAR;
@@ -144,7 +153,7 @@ CClear::CClear() : mTimePoint(TIMEMAX),mFlagRect(false),mFlagDie(false){
 	
 }
 
-CClear::~CClear(){
+CResult::~CResult(){
 	
 	CGame::Delete(&mEvaluationT);
 	CGame::Delete(&mClearLoagoT);
@@ -159,7 +168,7 @@ CClear::~CClear(){
 }
 
 
-void CClear::RankDecision(int i){ //bossを倒す前に関数を呼ぶ
+void CResult::RankDecision(int i){ //bossを倒す前に関数を呼ぶ
 	if (!mFlagRect){
 		if (RANK_MAX * 0.7 <= i){
 			mRectLogo[E_RANK].SetUv(mLogoTex[E_RANK], T_SIZE_S);
@@ -176,18 +185,21 @@ void CClear::RankDecision(int i){ //bossを倒す前に関数を呼ぶ
 		sprintf_s(str[E_TIME], "%d", mTimePoint);
 		sprintf_s(str[E_KILLS], "%d", mKillPolint);
 		sprintf_s(str[E_SUM], "%d", (mKillPolint + mTimePoint));
+		CPlayer *pl;
+		pl = dynamic_cast<CPlayer*>(CGame::getStatus(E_PLAYER));
+		mSaveResultHP = pl->mHitPoint;
 	}
 	mFlagRect = true;
 }
 
-bool CClear::FlagCrectA(const CRectangle &rect){
+bool CResult::FlagCrectA(const CRectangle &rect){
 	if (rect.triangle1.a >= 1.0f){
 		return true;
 	}
 	return false;
 }
 
-void CClear::Update(){
+void CResult::Update(){
 	/*時間がたつにつれ得点減点*/
 	Time  += DOWNSCORE_TIME / FPS;
 	if (Time >= DOWNSCORE_TIME){
@@ -282,46 +294,38 @@ void CClear::Update(){
 		}
 		if (FlagCrectA(mRectEvaluation)){					//評価表示で
 			CGame::Fade(F_SPEEDBASE, &mRectLogo[E_RANK], 1.0f);
-			
+		}
 
 
+		if (CGame::FlagTime(3, FPS, &mSaveTime)){
 
+			if (FlagCrectA(mRectLogo[E_RANK])){
 
+				CGame::FadeOut(F_SPEEDBASE, &mRectFrame);
+				CGame::FadeOut(F_SPEEDBASE, &mRectStoryResult);
+				CGame::FadeOut(F_SPEEDBASE, &mRectMainLogo);
+				CGame::FadeOut(F_SPEEDBASE, &mRectEvaluation);
+				for (int i = 0; i < LOGO_MAX; i++)
+				{
+					CGame::FadeOut(F_SPEEDBASE, &mRectLogo[i]);
+				}
 
-
-
-
-
-			if (CGame::FlagTime(1, 1,&mSaveTime)){}
-			//if (FlagCrectA(mRectLogo[E_RANK])){
-
-			//	CGame::FadeOut(F_SPEEDBASE, &mRectFrame);
-			//	CGame::FadeOut(F_SPEEDBASE, &mRectStoryResult);
-			//	CGame::FadeOut(F_SPEEDBASE, &mRectMainLogo);
-			//	CGame::FadeOut(F_SPEEDBASE, &mRectEvaluation);
-			//	for (int i = 0; i < LOGO_MAX; i++)
-			//	{
-			//		CGame::FadeOut(F_SPEEDBASE, &mRectLogo[i]);
-			//	}
-			//	//エンターキーを押したときにシーンをセレクト画面に替える処理を行う。
-			//	if (CKey::push(VK_RETURN))
-			//	{
-
-			//		CTaskManager::GetInstance()->AllKill();
-			//		CSceneManager::GetInstance()->ChangeScene(eSceneNo::E_TITLE);
-			//	}
-			//}
-
+				//エンターキーを押したときにシーンをセレクト画面に替える処理を行う。
+				if (CKey::push(VK_RETURN))
+				{
+					CTaskManager::GetInstance()->mFlagAllkill = true;
+					CSceneManager::GetInstance()->ChangeScene(eSceneNo::E_TITLE);
+				}
+			}
 		}
 	}
 	
 }
-void CClear::Render(){
+void CResult::Render(){
 	//文字列の描画 演出まだ　
 
 	mRectFilter.Render();
 	if (mFlagRect){
-	
 		if (FlagCrectA(mRectLogo[E_TIME]))mNumber[E_TIME].render(str[E_TIME], TIME_POS, STR_SIZE, CONF_TIMENUM);
 		if (FlagCrectA(mRectLogo[E_KILLS]))mNumber[E_KILLS].render(str[E_KILLS], KILLS_POS, STR_SIZE, CONF_KILLSNUM);
 		if (FlagCrectA(mRectLogo[E_SUM]))mNumber[E_SUM].render(str[E_SUM], SUM_POS, STR_SIZE, CONF_SUMNUM);

@@ -13,7 +13,7 @@ CTaskManager* CTaskManager::GetInstance() {
 
 
 
-CTaskManager::CTaskManager():mRoot(0),mTail(0){}
+CTaskManager::CTaskManager() :mRoot(0), mTail(0), mFlagAllkill(false){}
 
 
 CTaskManager::~CTaskManager(){

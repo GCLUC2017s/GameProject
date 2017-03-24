@@ -26,7 +26,7 @@
 #define _NORM_ 1
 #define _LOW_ 2
 #define ST_POSX			player->mStamina - PL_ST_X //ＳＴ　pos 調整用 足す
-#define HP_POSX			player->mHitPoint -PL_HP_X  //HP　pos 調整用 足す
+#define HP_POSX			player->mHitPoint/10 -PL_HP_X  //HP　pos 調整用 足す
 #define ENE_HP_POSX		base->mHitPoint +ENE_HP_X  //HP　pos 調整用引く
 
 #define T_ST_RIGHT		SIZE_TEX_PLAYER_ST_X  *( player->mStamina / PL_ST_X*0.6)
@@ -52,7 +52,7 @@ void CUserinterface::Init(){
 	/*スタミナ*/
 	mPlayerGageTex[_ST_]->load(TEX_FILE"UI_sutamina3.tga");
 	mPlayerFrameStTex[_HIGH_]->load(TEX_FILE"UI_sutamina2.tga");
-	mPlayerFrameStTex[_NORM_]->load(TEX_FILE"UI_sutamina2.tga");
+	mPlayerFrameStTex[_NORM_]->load(TEX_FILE"UI_sutamina1.tga");
 	mPlayerFrameStTex[_LOW_]->load(TEX_FILE"UI_sutamina1.tga");
 	//
 	/*エネミー*/
@@ -71,6 +71,19 @@ void CUserinterface::Init(){
 	mFrameEne.SetUv(mEnemyFrameTex, 0, 0, SIZE_TEX_EN_FRAME_X, SIZE_TEX_EN_FRAME_Y);
 
 
+	/*追加したときにキャラクターがいれば && UIがついていない場合UIをつける*/
+	CTask *t; //探索用
+	t = CTaskManager::GetInstance()->mRoot;
+	while (t != 0)
+	{
+		if (t->mCharaFlag && !t->mUiFlag){
+			t->mUiFlag = true;
+			task = t;
+			CTaskManager::GetInstance()->Add(new CUserinterface);
+			break;
+		}
+		t = t->next;
+		}
 }
 
 const float arealeft_x = character_limit_left + (DISP_X / 2) - SIZE_PLAYER_X * 2;
@@ -78,6 +91,7 @@ const float arearifgt_x = character_limit_right - (DISP_X / 2) - SIZE_PLAYER_X *
 
 CUserinterface::CUserinterface() : mFlagColar(false), mHungryC(1.0f), mFlagHP(true), mFlagST(true), task(0)
 {
+	Init();
 	mPriorityR = E_UI;
 	mPriorityU = E_UI;
 	mMyNumber = E_UI;
@@ -146,19 +160,19 @@ void CUserinterface::SetHungC(const CPlayer *player){
 	}
 
 	/*gauge切り替え*/
-	if (player->HUNGRY_S_HIGH_IF)		{//おなかいっぱいのUI
+	if (player->mStamina >= HUNGRY_EX01)		{//必殺技が使えるときのSTGage
 		mGaugePlayer[_ST_].SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 		mGaugePlayer[_ST_].SetUv(mPlayerGageTex[_ST_], 0, 0, T_ST_RIGHT, SIZE_TEX_PLAYER_ST_Y);
 		mFramePlayer[_ST_].SetUv(mPlayerFrameStTex[_HIGH_], 0, 0, SIZE_TEX_PLAYER_ST_X, SIZE_TEX_PLAYER_ST_Y);
 
 	}
-	else if (player->HUNGRY_S_LOW_IF)	{//おなか減ったのUI
+	else if (player->HUNGRY_S_LOW_IF)	{//おなか減ったのSTGage
 		mFramePlayer[_ST_].SetColor(mHungryC, mHungryC, mHungryC, mHungryC + 0.5f);
 		mGaugePlayer[_ST_].SetUv(mPlayerGageTex[_ST_], 0, 0, T_ST_RIGHT, SIZE_TEX_PLAYER_ST_Y);
 		mFramePlayer[_ST_].SetUv(mPlayerFrameStTex[_LOW_], 0, 0, SIZE_TEX_PLAYER_ST_X, SIZE_TEX_PLAYER_ST_Y);
 	}
-	else								{//普通の状態
-		mGaugePlayer[_ST_].SetColor(0.8f, 0.8f, 0.8f, 1.0f);
+	else								{//必殺技が使えないとき
+		mGaugePlayer[_ST_].SetColor(0.4f, 0.4f, 0.4f, 1.0f);
 		mGaugePlayer[_ST_].SetUv(mPlayerGageTex[_ST_], 0, 0, T_ST_RIGHT, SIZE_TEX_PLAYER_ST_Y);
 		mFramePlayer[_ST_].SetUv(mPlayerFrameStTex[_NORM_], 0, 0, SIZE_TEX_PLAYER_ST_X, SIZE_TEX_PLAYER_ST_Y);
 	}
@@ -179,6 +193,21 @@ void CUserinterface::SetHungC(const CPlayer *player){
 
 
 void CUserinterface::Update(){
+	/*追加したときにキャラクターがいれば && UIがついていない場合UIをつける*/
+	CTask *t; //探索用
+	t = CTaskManager::GetInstance()->mRoot;
+	while (t != 0)
+	{
+		if (t->mCharaFlag && !t->mUiFlag){
+			t->mUiFlag = true;
+			CUserinterface *SaveUI = new CUserinterface;
+			CTaskManager::GetInstance()->Add(SaveUI);
+			SaveUI->task = t;
+			break;
+		}
+		t = t->next;
+	}
+
 	if (task != 0){
 		mPriorityR = task->mPriorityR;
 		switch (task->mMyNumber)
@@ -191,7 +220,7 @@ void CUserinterface::Update(){
 			mGaugePlayer[_ST_].position = CVector2(CGame::CameraPos().x - DISP_X + ST_POSX + PL_ST_X, DISP_Y - PL_ST_Y * 2);
 			mFramePlayer[_HP_].position = CVector2(CGame::CameraPos().x - DISP_X + PL_HP_X, DISP_Y - SIZE_PL_FRAME_Y * 2);
 			mFramePlayer[_ST_].position = CVector2(CGame::CameraPos().x - DISP_X + PL_ST_X, DISP_Y - PL_ST_Y *2);
-			mGaugePlayer[_HP_].SetVertex(-player->mHitPoint, SIZE_PL_FRAME_Y, player->mHitPoint, -SIZE_PL_FRAME_Y); //四角作成
+			mGaugePlayer[_HP_].SetVertex(-player->mHitPoint/10, SIZE_PL_FRAME_Y, player->mHitPoint/10, -SIZE_PL_FRAME_Y); //四角作成
 			mGaugePlayer[_ST_].SetVertex(-player->mStamina, PL_ST_Y, player->mStamina, -PL_ST_Y); //四角作成
 			SetHungC(player);
 			
@@ -200,6 +229,9 @@ void CUserinterface::Update(){
 		case E_ENEMY00:
 		case E_BOSS:
 		case E_ENEMY01:
+		case E_LOWBOSS:
+
+		
 
 			CBase *base;
 			base = (CBase*)task;

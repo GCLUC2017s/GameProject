@@ -11,7 +11,7 @@
 #include "../Result/CResult.h"
 #include "../CGame/CGame.h"
 #include "../Enemy/CLowBoss.h"
-#define ADD_TIME 20.0f//敵出現フラグ
+#define ADD_TIME 2.0f//敵出現フラグ
 
 CGameScene::CGameScene():status(E_INIT){}
 enum eAddEnemyNonber
@@ -37,7 +37,8 @@ void CGameScene::Init(){
 	CTaskManager::GetInstance()->Add(new CLowBoss);
 	
 	CTaskManager::GetInstance()->Add(new CBoss);
-	CTaskManager::GetInstance()->Add(new CClear);
+	CTaskManager::GetInstance()->Add(new CResult);
+	//CTaskManager::GetInstance()->Add(new CBoss);
 	CTaskManager::GetInstance()->Add(new CUserinterface);
 	
 }
@@ -54,7 +55,7 @@ void CGameScene::Update(){
 	case E_MAIN:
 
 		if (CGame::FlagTime(ADD_TIME, FPS, &mSaveTime)){
-			switch ((int)rand() % 10)
+			switch ((int)rand() % 6) //ランダムに増やし漏れを出すことによりランダム性を上げる
 			{
 			case E_ADD_ENE00:
 				CTaskManager::GetInstance()->Add(new CEnemy00);
@@ -63,8 +64,7 @@ void CGameScene::Update(){
 
 				CTaskManager::GetInstance()->Add(new CEnemy01);
 				break;
-			case E_ADD_BOSS:
-
+			case E_LOWBOSS:
 				CTaskManager::GetInstance()->Add(new CBoss);
 				break;
 			}

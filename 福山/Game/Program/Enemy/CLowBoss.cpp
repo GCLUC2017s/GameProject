@@ -18,10 +18,10 @@
 
 #define FIRST_R_NO_LOWBOSS 1						//初めのレンダーのポイント
 #define FIRST_U_NO_LOWBOSS 1						//初めのアップデートのポイント
-#define SIZE_TEX_BOSS_STAY_X 360			//エネミーの待ち姿テクスチャサイズ X
-#define SIZE_TEX_BOSS_STAY_Y 360			//エネミーの待ち姿テクスチャサイズ Y
-#define SIZE_TEX_BOSS_WALK_X 800			//エネミーの歩くテクスチャサイズ Y
-#define SIZE_TEX_BOSS_WALK_Y 800			//エネミーの歩く姿テクスチャサイズ Y
+#define SIZE_TEX_BOSS_STAY_X 320			//エネミーの待ち姿テクスチャサイズ X
+#define SIZE_TEX_BOSS_STAY_Y 320			//エネミーの待ち姿テクスチャサイズ Y
+#define SIZE_TEX_BOSS_WALK_X 320			//エネミーの歩くテクスチャサイズ Y
+#define SIZE_TEX_BOSS_WALK_Y 320			//エネミーの歩く姿テクスチャサイズ Y
 #define SIZE_SHADOW							//影の表示
 #define WALK_SPEED 0.04						//歩くスピード
 #define WALK_X 2							//歩くベクトルX
@@ -42,16 +42,23 @@ void CLowBoss::SetPos(){
 };
 
 void CLowBoss::Init(){
+	//SetPos();
+	///*テクスチャを張る*/
+	//mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
+	//mRect.SetUv(CLoadBoss::GetInstance()->mStay_tex[0], 0, 0, -SIZE_TEX_BOSS_STAY_X, SIZE_TEX_BOSS_STAY_Y);
+	//mForward = CVector2(1.0f, 0.0f);
+
+}
+
+//中ボス
+CLowBoss::CLowBoss() : mVelocity(0), mFrameCount(0), actionflag(false), motion(0), direction(E_LEFT){
+
 	SetPos();
 	/*テクスチャを張る*/
 	mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
 	mRect.SetUv(CLoadBoss::GetInstance()->mStay_tex[0], 0, 0, -SIZE_TEX_BOSS_STAY_X, SIZE_TEX_BOSS_STAY_Y);
 	mForward = CVector2(1.0f, 0.0f);
 
-}
-
-//中ボス
-CLowBoss::CLowBoss() : mVelocity(0), mFrameCount(0), actionflag(false), motion(0), direction(E_LEFT){
 
 	mPriorityR = E_LOWBOSS;			//Renderのナンバー 
 	mPriorityU = E_LOWBOSS;			//Updateのナンバー
@@ -226,15 +233,16 @@ void CLowBoss::Motion(){
 	case EM_ATTACK:		//攻撃中
 		//モーション設定
 		if (RIGHT_PTT&&ENEMY_LIVE) {
+			mEnabledAttack = true;
 			mStatus = E_ATTACK_R;
 		}
 		else if (LEFT_PTT&&ENEMY_LIVE){
+			mEnabledAttack = true;
 			mStatus = E_ATTACK_L;
 		}
 		//範囲
 		Attack(LOW_AT);
 		///パンチの最後にあたり判定
-		mEnabledAttack = true;
 		/*範囲内に近づく*/
 		if (NO_ATTACK_BOSS){
 			actionflag = false;
@@ -295,7 +303,10 @@ void CLowBoss::Update(){
 	mPriorityR = -mAxis;
 	LimitDisp(SIZE_LOWBOSS_X, SIZE_LOWBOSS_Y);	//当たり判定
 	AnimeScene();
-	mShadow.position = CVector2(mPos.x, mAxis);
+
+	mShadow.position = CVector2(mPos.x, mAxis + 0.8f);
+	mShadow.position = CVector2(mPos.x, mAxis+0.8f);
+
 
 	mRect.position = mPos;
 }
