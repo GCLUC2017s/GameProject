@@ -1,7 +1,7 @@
 #include "CCharaBase.h"
 #include "../Game/CollisionManager/CollisionManager.h"
 #include "../TaskSystem/CTaskManager.h"
-#define HitCheck
+//#define HitCheck
 T_AnimData _playerMAnimData[] = {
 	{ 1,5 },
 	{ 6,5 },
