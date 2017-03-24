@@ -220,7 +220,7 @@ void CUserinterface::Update(){
 			mGaugePlayer[_ST_].position = CVector2(CGame::CameraPos().x - DISP_X + ST_POSX + PL_ST_X, DISP_Y - PL_ST_Y * 2);
 			mFramePlayer[_HP_].position = CVector2(CGame::CameraPos().x - DISP_X + PL_HP_X, DISP_Y - SIZE_PL_FRAME_Y*0.5 );
 			mFramePlayer[_ST_].position = CVector2(CGame::CameraPos().x - DISP_X + PL_ST_X, DISP_Y - PL_ST_Y *2);
-			mGaugePlayer[_HP_].SetVertex(-player->mHitPoint/10, SIZE_PL_FRAME_Y, player->mHitPoint/10, -SIZE_PL_FRAME_Y); //lŠpì¬
+			mGaugePlayer[_HP_].SetVertex(-player->mHitPoint*0.1f, SIZE_PL_FRAME_Y, player->mHitPoint*0.1f, -SIZE_PL_FRAME_Y); //lŠpì¬
 			mGaugePlayer[_ST_].SetVertex(-player->mStamina, PL_ST_Y, player->mStamina, -PL_ST_Y); //lŠpì¬
 			SetHungC(player);
 			

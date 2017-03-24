@@ -271,6 +271,33 @@ void CResult::Update(){
 	mNumber[E_KILLS].render(str[E_KILLS], KILLS_POS, STR_SIZE, CONF_KILLSNUM);
 	mNumber[E_SUM].render(str[E_SUM], SUM_POS, STR_SIZE, CONF_SUMNUM);
 
+
+
+
+
+	//switch (mStarusFade)
+	//{
+	//case E_FADE:
+	//	CGame::Fade(F_SPEEDBASE, &mRectFilter, F_ALFMAX);
+	//	if (FlagRectA(mRectFilter, true)){
+	//		mStarusFade = E_FADEOUT;
+	//		mFirstX = first_pos.x;
+	//	}
+	//	break;
+	//case E_FADEOUT:
+	//	CGame::FadeOut(F_SPEEDBASE, &mRectFilter);
+	//	if (FlagRectA(mRectFilter, false)){
+	//		mStarusFade = E_NOFADE;
+	//	}
+	//	break;
+	//case E_NOFADE:
+	//	mFirstX += SC_SPEED;
+	//	if (mFirstX >= arearight_x){
+	//		mStarusFade = E_FADE;
+	//	}
+	//	break;
+	//}
+
 	if (mFlagRect){ //フラグが立った時にフェード開始
 		if (mFlagDie){
 			mRectMainLogo.SetUv(mGameOverLogoT, T_SIZE_GAMEOVER); 
@@ -315,7 +342,6 @@ void CResult::Update(){
 				}
 
 				//エンターキーを押したときにシーンをセレクト画面に替える処理を行う。
-				
 				if (CKey::push(VK_RETURN))
 				{
 					CSceneManager::GetInstance()->ChangeScene(eSceneNo::E_GAMEOVER);
