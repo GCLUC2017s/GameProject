@@ -11,7 +11,7 @@
 #define ENEMY_MAXONE 5//“G‚ÌÅ‘å”2
 #define ENEMY_MAXTWO 3//“G‚ÌÅ‘å”3
 #define ENEMY_DATA 0//“G‚ÌŒ»İ”
-#define ENEMY_TIME 120//“G¶¬ˆ—
+#define ENEMY_TIME 200//“G¶¬ˆ—
 #define ENEMY_COUNT 1
 #define ENEMY_POS 1100
 
