@@ -6,6 +6,8 @@
 #include "../Game/CollisionManager/CollisionManager.h"
 #include "../Scene/CSceneManager.h"
 #include"../Game/Enemy/CEnemyManager.h"
+#include "../System/TaskSystem/CTaskManager.h"
+#include "../System/TaskSystem/CTask.h"
 
 CGame* CGame::mp_game = nullptr;
 

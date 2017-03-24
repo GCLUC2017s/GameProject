@@ -5,12 +5,6 @@
     <ClCompile Include="System\Base\CBase.cpp">
       <Filter>System\Base</Filter>
     </ClCompile>
-    <ClCompile Include="System\TaskSystem\CTask.cpp">
-      <Filter>System\TaskSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="System\TaskSystem\CTaskManager.cpp">
-      <Filter>System\TaskSystem</Filter>
-    </ClCompile>
     <ClCompile Include="Scene\Title\CTitle.cpp">
       <Filter>Scene\Title</Filter>
     </ClCompile>
@@ -63,17 +57,20 @@
     <ClCompile Include="Game\CGameInfo.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\サンプル\CTaskLinker.cpp">
+      <Filter>System\TaskSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\サンプル\CTask.cpp">
+      <Filter>System\TaskSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\サンプル\CTaskManager.cpp">
+      <Filter>System\TaskSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Global.h" />
     <ClInclude Include="System\Base\CBase.h">
       <Filter>System\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="System\TaskSystem\CTask.h">
-      <Filter>System\TaskSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="System\TaskSystem\CTaskManager.h">
-      <Filter>System\TaskSystem</Filter>
     </ClInclude>
     <ClInclude Include="Scene\Title\CTitle.h">
       <Filter>Scene\Title</Filter>
@@ -128,6 +125,15 @@
     </ClInclude>
     <ClInclude Include="Game\CGameInfo.h">
       <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\サンプル\CTaskLinker.h">
+      <Filter>System\TaskSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\サンプル\CTask.h">
+      <Filter>System\TaskSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\サンプル\CTaskManager.h">
+      <Filter>System\TaskSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

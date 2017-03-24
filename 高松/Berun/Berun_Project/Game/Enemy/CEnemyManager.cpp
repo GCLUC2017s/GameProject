@@ -9,7 +9,8 @@ CEnemyManager::CEnemyManager() :CTask(0, 0, 0) {
 	m_enemyCont = 0;
 	m_enemy = 0;
 	mp_player = CPlayer::mp_player;
-	//m_enemyHp = dynamic_cast<CImage*>(CResourceManager::GetInstance()->Get("Meter"));
+
+	
 	
 }
 CEnemyManager::~CEnemyManager() {
@@ -26,14 +27,13 @@ void CEnemyManager::Add(int type) {
 
 
 void CEnemyManager::Update () {
-	CVector3D vec = mp_player->GetPos();//‰¼
+	CVector3D vec = mp_player->GetPos();
 	m_enemyType = 0;
-
+	
+	
 
 		if (m_enemy < ENEMY_MAXONE) {
 			if (vec.x > 400&&vec.x<1200) {
-
-			
 					m_enemyCont += ENEMY_COUNT;
 					if (m_enemyCont > ENEMY_TIME) {
 						m_enemyCont = 0;

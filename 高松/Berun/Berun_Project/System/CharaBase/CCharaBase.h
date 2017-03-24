@@ -133,6 +133,7 @@ protected:
 	//ƒ_ƒ[ƒW‚ğó‚¯‚½Œã‚Ì–³“GŠÔ‚ğŠi”[‚·‚é•Ï”
 	int m_damageTime;
 	int m_type;
+	float m_noDamageTime;
 	CVector3D m_oldPos;
 
 	unsigned int m_anim;

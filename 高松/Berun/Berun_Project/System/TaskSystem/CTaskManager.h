@@ -7,15 +7,23 @@
 #ifndef TASKMANAGER_GUARD
 #define TASKMANAGER_GUARD
 
-#include "CTask.h"
+//#include "CTask.h"
+
+class CTaskLinker;
+class CTask;
+
 
 class CTaskManager
 {
 private:
 	static CTaskManager* mp_instance;	//シングルトン化のためのポインタ
 protected:
-	CTask *mp_head;		//先頭要素を指すポインタ
-	CTask *mp_tail;		//末尾要素を指すポインタ
+	CTaskLinker *mp_updHead;		// Update用 先頭要素を指すポインタ
+	CTaskLinker *mp_updTail;		// Update用 末尾要素を指すポインタ
+
+	CTaskLinker *mp_drwHead;		// Draw用 先頭要素を指すポインタ
+	CTaskLinker *mp_drwTail;		// Draw用 末尾要素を指すポインタ
+
 public:
 	CTaskManager();
 	~CTaskManager();
@@ -31,23 +39,29 @@ public:
 	void UpdateAll();
 	//リスト描画関数
 	void DrawAll();
-	//
-	//タスク入れ替え関数
-	void SwapTask(CTask **p, CTask **n);
-	//昇順ソート関数（更新用）
-	void SortAscUpdate();
-	//昇順ソート関数（描画用）
-	void SortAscDraw();
+
+	// 更新優先度を変更 
+	void ChangeUpdatePrio(CTask *p, int prio);
+	// 描画優先度を変更 
+	void ChangeDrawPrio(CTask *p, int prio);
+
 	//タスク取得関数
 	CTask* GetTask(int id);
 	//タスクカウント関数
 	int GetCount(int id);
+
 	//CTaskManagerを生成して変数に格納
 	static CTaskManager* GetInstance();
 	//格納されているものを削除
 	static void ClearInstance();
 
-	//void Number(int i);
+private:
+	// リスト追加内部処理 
+	void AddTaskInner( CTaskLinker *p, CTaskLinker **pHead, CTaskLinker **pTail );
+
+	// リストから外す 
+	void RemoveTaskLinker( CTaskLinker *p, CTaskLinker **pHead, CTaskLinker **pTail );
+
 };
 
 #endif
