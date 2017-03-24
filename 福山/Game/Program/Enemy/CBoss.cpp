@@ -148,7 +148,7 @@ void CBoss::Walk(){
 	}
 	//（ターゲットが左にいる場合）
 	if (LEFT_PTT&&mHitPoint>0) {
-		direction = 1;
+		direction = E_LEFT;
 		mStatus = E_WALK_L;
 		mVelocity = WALK_SPEED;
 		mForward = CVector2(-WALK_X, 0.0f);

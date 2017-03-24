@@ -5,7 +5,7 @@
 #include"../Map/CMap.h"
 #include "../Player/CPlayer.h"
 #include "../CGame/CGame.h"
-#define SC_SPEED 0.05f
+#define SC_SPEED 0.025f
 #define FILE_TEX "../CG\\GameScreen\\"
 #define R_SIZE_FILTER		-DISP_X-2.0f,DISP_Y,DISP_X,-DISP_Y
 #define F_SPEEDBASE	0.01f //フェードのスピード
