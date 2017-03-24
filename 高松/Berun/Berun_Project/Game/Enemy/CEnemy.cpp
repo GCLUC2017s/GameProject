@@ -257,6 +257,7 @@ void CEnemy::HitCallBack(CCollisionA * p)
 		m_hp-=ENEMY_HP;
 		if (!m_hp)	m_death = true;
 		m_damage = true;
+		m_state = eState_Damage;
 	}
 }
 

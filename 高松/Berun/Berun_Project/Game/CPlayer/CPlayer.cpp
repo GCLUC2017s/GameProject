@@ -114,5 +114,6 @@ void CPlayer::HitCallBack(CCollisionA * p)
 			}
 		}
 		m_damage = true;
+		m_state = eState_Damage;
 	}
 }
