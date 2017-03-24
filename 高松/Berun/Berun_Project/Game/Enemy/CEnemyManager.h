@@ -7,8 +7,8 @@
 
 #ifndef CENEMYMANAGER_GURAD
 #define CENEMYMANAGER_GUARD
-#define ENEMY_MAX 6//“G‚ÌÅ‘å”
-#define ENEMY_MAXONE 2//“G‚ÌÅ‘å”2
+#define ENEMY_MAX 1//“G‚ÌÅ‘å”
+#define ENEMY_MAXONE 3//“G‚ÌÅ‘å”2
 #define ENEMY_MAXTWO 3//“G‚ÌÅ‘å”3
 #define ENEMY_DATA 0//“G‚ÌŒ»İ”
 #define ENEMY_TIME 200//“G¶¬ˆ—
