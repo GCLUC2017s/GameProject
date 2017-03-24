@@ -352,7 +352,7 @@ void CPlayer::PlayerAttack(){
 				SE_PL.play();
 				mAnimeFrame = 0;
 				mAttackPoint = PL_EX01_POWER;
-				mStamina -= PL_ST_X*0.1f;
+				mStamina -= HUNGRY_EX01;
 				mAttackPoint = mAttackPoint *mHungryPower;
 				mEnabledAttack = true;
 				mEnabledEx01 = true;

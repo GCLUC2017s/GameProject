@@ -38,6 +38,7 @@ void CGameScene::Init(){
 	
 	CTaskManager::GetInstance()->Add(new CBoss);
 	CTaskManager::GetInstance()->Add(new CResult);
+	//CTaskManager::GetInstance()->Add(new CBoss);
 	CTaskManager::GetInstance()->Add(new CUserinterface);
 	
 }

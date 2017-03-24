@@ -48,6 +48,11 @@ void CEnemy01::Init(){
 	mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
 	mRect.SetUv(CLoadEnemy01::GetInstance()->mStay_tex[0], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
 	mForward = CVector2(1.0f, 0.0f);
+	//RandPos(SIZE_ENEMY01_X, SIZE_ENEMY01_Y, &mPos,-DISP_X,DISP_X*10);
+	///*テクスチャを張る*/
+	//mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
+	//mRect.SetUv(CLoadEnemy01::GetInstance()->mStay_tex[0], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
+	//mForward = CVector2(1.0f, 0.0f);
 
 }
 
@@ -59,6 +64,12 @@ CEnemy01::~CEnemy01(){
 //エネミー01描画
 CEnemy01::CEnemy01() : mVelocity(0), mFrameCount(0), actionflag(false), motion(EM_STAY), direction(E_LEFT){
 	Init();
+
+	RandPos(SIZE_ENEMY01_X, SIZE_ENEMY01_Y, &mPos, -DISP_X, DISP_X * 10);
+	/*テクスチャを張る*/
+	mShadow.SetUv(CLoadPlayer::GetInstance()->mShadowTex, 0, 0, SHADOW_TEX_X, SHADOW_TEX_Y);
+	mRect.SetUv(CLoadEnemy01::GetInstance()->mStay_tex[0], 0, 0, SIZE_TEX_ENEMY00_STAY_X, SIZE_TEX_ENEMY00_STAY_Y);
+	mForward = CVector2(1.0f, 0.0f);
 	mPriorityR = E_ENEMY01;			//Renderのナンバー 
 	mPriorityU = E_ENEMY01;			//Updateのナンバー
 	mHitPoint = ENE_HP_X;		//ＨＰ

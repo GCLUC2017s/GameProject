@@ -52,7 +52,7 @@ void CUserinterface::Init(){
 	/*スタミナ*/
 	mPlayerGageTex[_ST_]->load(TEX_FILE"UI_sutamina3.tga");
 	mPlayerFrameStTex[_HIGH_]->load(TEX_FILE"UI_sutamina2.tga");
-	mPlayerFrameStTex[_NORM_]->load(TEX_FILE"UI_sutamina2.tga");
+	mPlayerFrameStTex[_NORM_]->load(TEX_FILE"UI_sutamina1.tga");
 	mPlayerFrameStTex[_LOW_]->load(TEX_FILE"UI_sutamina1.tga");
 	//
 	/*エネミー*/
@@ -83,7 +83,7 @@ void CUserinterface::Init(){
 			break;
 		}
 		t = t->next;
-	}
+		}
 }
 
 const float arealeft_x = character_limit_left + (DISP_X / 2) - SIZE_PLAYER_X * 2;
