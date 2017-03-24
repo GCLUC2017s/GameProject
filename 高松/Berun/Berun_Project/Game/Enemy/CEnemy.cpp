@@ -43,18 +43,18 @@ void CEnemy::Contlol() {
 
 		if (m_enemyType == 6) {
 		
-				m_pos = CVector3D(5000, 0, 800);
+				m_pos = CVector3D(5000, 0, ENEMY_Z);
 			
 			
 		}
 		if (m_enemyType == 7) {
 			
-				m_pos = CVector3D(4500, 0, 800);
+				m_pos = CVector3D(4500, 0, ENEMY_Z);
 			
 		}
 		if (m_enemyType == 8) {
 			
-				m_pos = CVector3D(4600, 0, 800);
+				m_pos = CVector3D(4600, 0, ENEMY_Z);
 		
 		}
 		
@@ -223,11 +223,13 @@ void CEnemy::Contlol() {
 		if (m_enemyType == 4) {
 			//魚行動パターン
 			m_chickTime += CHICK_TIME;
-			if (m_chickTime > 60 && m_chickTime <= 80) {
+			if (m_chickTime > 60 && m_chickTime <= 100) {
 				if (vec.x < 20) {
+					m_dash = true;
 					m_left = true;
 				}
 				if (vec.x > -20) {
+					m_dash = true;
 					m_right = true;
 
 				}
@@ -239,17 +241,19 @@ void CEnemy::Contlol() {
 				}
 
 			}
-			if (m_chickTime >= 80 && m_chickTime <= 100) {
+			if (m_chickTime >= 100 && m_chickTime <= 140) {
 				if (vec.x < 20) {
+					m_dash = true;
 					m_left = true;
 				}
 				if (vec.x > -20) {
+					m_dash = true;
 					m_right = true;
 
 				}
 				m_jump = true;
 			}
-			if (m_chickTime >= 120) {
+			if (m_chickTime >= 160) {
 				m_chickTime = 0;
 			}
 
@@ -340,7 +344,7 @@ void CEnemy::HitCallBack(CCollisionA * p)
 	{
 		if(m_pos.x < tt->GetPos().x)	m_damageDirection = true;
 		if (m_pos.x > tt->GetPos().x)	m_damageDirection = false;
-		m_hp--;
+		m_hp-=ENEMY_HP;
 		if (!m_hp)	m_death = true;
 		m_damage = true;
 	}

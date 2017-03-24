@@ -379,9 +379,12 @@ bool CCharaBase::CheckHit(CCollisionA *t)
 	if (m_death)	return false;
 	CCharaBase* tt = dynamic_cast<CCharaBase*>(t);
 	assert(tt);
+	if (tt->m_death)	return false;
+	if (tt->m_damage) 	return false;
+	if (m_damage) 	return false;
 	CRect p_rect = GetRect();
 	CRect t_rect = tt->GetRect();
-	if (!tt->m_death && !m_damage && abs(m_pos.z - tt->m_pos.z) < 100 && p_rect.m_right > t_rect.m_left && p_rect.m_left < t_rect.m_right && p_rect.m_top > t_rect.m_bottom && p_rect.m_bottom < t_rect.m_top) {
+	if (abs(m_pos.z - tt->m_pos.z) < 100 && p_rect.m_right > t_rect.m_left && p_rect.m_left < t_rect.m_right && p_rect.m_top > t_rect.m_bottom && p_rect.m_bottom < t_rect.m_top) {
 		HitCallBack(t);
 		t->HitCallBack(this);
 	}
